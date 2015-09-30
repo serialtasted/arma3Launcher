@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EFA4D267-61E0-4BBC-B212-0E4A9394C4CD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>arma3Launcher</RootNamespace>
+    <AssemblyName>arma3Launcher</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>false</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.14.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ptrangers.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Deploy|AnyCPU'">
+    <OutputPath>bin\Release Deploy\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Deploy|x64'">
+    <OutputPath>bin\x64\Release Deploy\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>DBB530B52CAB10B33E98C8C4FE6C619BA1B1A4CC</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>Internet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>arma3Launcher.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\PackBlock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PackBlock.Designer.cs">
+      <DependentUpon>PackBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewsBlock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NewsBlock.Designer.cs">
+      <DependentUpon>NewsBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SplitButton.cs">
+      <SubType>component</SubType>
+    </Compile>
+    <Compile Include="Controls\Windows7ProgressBar.cs">
+      <SubType>component</SubType>
+    </Compile>
+    <Compile Include="Controls\Windows7Taskbar.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\GlobalValues.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalValues.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgramInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\SystemResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SystemResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\COMTypes.cs" />
+    <Compile Include="Windows\AddonsFolderSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\AddonsFolderSetup.Designer.cs">
+      <DependentUpon>AddonsFolderSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LegacyTransporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\LegacyTransporter.Designer.cs">
+      <DependentUpon>LegacyTransporter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PackInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\PackInfo.Designer.cs">
+      <DependentUpon>PackInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Splash.Designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Workers\AddonsLooker.cs" />
+    <Compile Include="Workers\EmailReporter.cs" />
+    <Compile Include="Workers\Packs.cs" />
+    <Compile Include="Workers\Feed.cs" />
+    <Compile Include="Workers\LaunchCore.cs" />
+    <Compile Include="Workers\ModSetCheck.cs" />
+    <Compile Include="Workers\SingleInstance.cs" />
+    <Compile Include="Workers\WinApi.cs" />
+    <Compile Include="Workers\zCheckUpdate.cs" />
+    <Compile Include="Workers\zSync.cs" />
+    <EmbeddedResource Include="Controls\PackBlock.resx">
+      <DependentUpon>PackBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NewsBlock.resx">
+      <DependentUpon>NewsBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\GlobalValues.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalValues.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Properties\SystemResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SystemResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\AddonsFolderSetup.resx">
+      <DependentUpon>AddonsFolderSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\LegacyTransporter.resx">
+      <DependentUpon>LegacyTransporter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\PackInfo.resx">
+      <DependentUpon>PackInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgMainWindow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgclose1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgclose2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgclose3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgclose4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgminimize1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgminimize2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgminimize3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgminimize4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trollface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bgBottom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clipboard_copy_icon&amp;16.png" />
+    <None Include="Resources\bg-addon.png" />
+    <None Include="Resources\bg-map.png" />
+    <None Include="Resources\bg-player.png" />
+    <None Include="Resources\bg-updav.png" />
+    <None Include="Resources\bg-wiki.png" />
+    <None Include="Resources\bg-launcher.png" />
+    <None Include="Resources\bg-warning.png" />
+    <None Include="Resources\arrow-circle-315-left.png" />
+    <None Include="Resources\301.gif" />
+    <None Include="Resources\bg-mission.png" />
+    <None Include="Resources\optionalAddons.fw.png" />
+    <None Include="Resources\clippy.png" />
+    <None Include="Resources\clippy1.png" />
+    <None Include="Resources\loop.png" />
+    <None Include="Resources\rocket.png" />
+    <None Include="Resources\rocket_launch.png" />
+    <None Include="Resources\browse.png" />
+    <None Include="Resources\circle-with-cross.png" />
+    <None Include="Resources\facebook.png" />
+    <None Include="Resources\mail.png" />
+    <None Include="Resources\twitter.png" />
+    <None Include="Resources\twitch.png" />
+    <None Include="Resources\youtube.png" />
+    <None Include="Resources\checkbox-checked.png" />
+    <None Include="Resources\checkbox-unchecked.png" />
+    <None Include="Resources\download3.png" />
+    <None Include="Resources\reload.png" />
+    <None Include="Resources\TrollFace1.png" />
+    <None Include="Resources\folder-open.png" />
+    <None Include="Resources\bgmore1.fw.png" />
+    <None Include="Resources\bgmore2.fw.png" />
+    <None Include="Resources\bgmore3.fw.png" />
+    <None Include="Resources\bgmore4.fw.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\info1.png" />
+    <None Include="Resources\bg.png" />
+    <None Include="Resources\bg_bottom.png" />
+    <None Include="Resources\puzzle-piece.png" />
+    <None Include="Resources\splash_spn.jpg" />
+    <None Include="Resources\keyboard-arrow-left.png" />
+    <None Include="Resources\keyboard-arrow-right.png" />
+    <None Include="Resources\transfer.png" />
+    <None Include="Resources\eye.png" />
+    <None Include="Resources\flash-on.png" />
+    <None Include="Resources\git-square.png" />
+    <None Include="Resources\useThis_active.jpg" />
+    <None Include="Resources\useThis_hover.jpg" />
+    <None Include="Resources\useThis_inactive.jpg" />
+    <None Include="Resources\useThis_active.png" />
+    <None Include="Resources\useThis_hover.png" />
+    <None Include="Resources\useThis_inactive.png" />
+    <None Include="Resources\check-circle.png" />
+    <None Include="Resources\times-circle-o.png" />
+    <None Include="Resources\check-circle1.png" />
+    <None Include="Resources\archive_hover.png" />
+    <None Include="Resources\equalizer.png" />
+    <Content Include="ptrangers.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

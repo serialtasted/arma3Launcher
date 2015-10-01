@@ -2275,5 +2275,11 @@ namespace arma3Launcher
 
             btn_downloadConfigs.Enabled = false;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Downloader downloader = new Downloader(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_progressStatus);
+            downloader.beginDownload(modsUrl, false);
+        }
     }
 }

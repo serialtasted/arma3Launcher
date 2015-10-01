@@ -11,6 +11,8 @@
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]eleases/
+[Rr]elease/
+[Bb]in/
 x64/
 x86/
 build/

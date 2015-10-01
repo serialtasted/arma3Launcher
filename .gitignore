@@ -58,6 +58,9 @@ dlldata.c
 *.pidb
 *.svclog
 *.scc
+*.exe.config
+*.exe.manifest
+*.vshost.exe
 
 # Chutzpah Test files
 _Chutzpah*

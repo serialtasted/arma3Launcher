@@ -95,9 +95,6 @@
     <Setting Name="cModsFolder_value" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="runLegacy" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="lastAddonPack" Type="System.String" Scope="User">
       <Value Profile="(Default)">spn_lite</Value>
     </Setting>

@@ -23,21 +23,26 @@ namespace arma3Launcher.Windows
             txt_content.Text = Content;
 
             setsize();
-            this.Opacity = 0;
 
             effectIn.Interval = 10;
             effectOut.Interval = 10;
 
             effectIn.Tick += EffectIn_Tick;
             effectOut.Tick += EffectOut_Tick;
+        }
 
+        private void PackInfo_Shown(object sender, EventArgs e)
+        {
             effectIn.Start();
         }
 
         private void EffectIn_Tick(object sender, EventArgs e)
         {
             if (this.Opacity < 1)
-            { this.Opacity = this.Opacity + 0.1; }
+            {
+                this.Opacity = this.Opacity + 0.1;
+                this.Location = new Point(this.Location.X, this.Location.Y - 1);
+            }
             else
             { effectIn.Stop(); }
         }
@@ -45,7 +50,10 @@ namespace arma3Launcher.Windows
         private void EffectOut_Tick(object sender, EventArgs e)
         {
             if (this.Opacity > 0)
-            { this.Opacity = this.Opacity - 0.1; }
+            {
+                this.Opacity = this.Opacity - 0.1;
+                this.Location = new Point(this.Location.X, this.Location.Y + 1);
+            }
             else
             { effectOut.Stop(); this.Close(); }
         }
@@ -63,12 +71,12 @@ namespace arma3Launcher.Windows
 
         private void btn_close_MouseHover(object sender, EventArgs e)
         {
-            btn_close.Image = Properties.Resources.close_hover;
+            btn_close.Image = Properties.Resources.arrow_down_hover;
         }
 
         private void btn_close_MouseLeave(object sender, EventArgs e)
         {
-            btn_close.Image = Properties.Resources.close;
+            btn_close.Image = Properties.Resources.arrow_down;
         }
     }
 }

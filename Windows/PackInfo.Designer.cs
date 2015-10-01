@@ -65,7 +65,7 @@
             // 
             // btn_close
             // 
-            this.btn_close.Image = global::arma3Launcher.Properties.Resources.close;
+            this.btn_close.Image = global::arma3Launcher.Properties.Resources.arrow_down;
             this.btn_close.Location = new System.Drawing.Point(287, 11);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(16, 16);
@@ -119,8 +119,10 @@
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PackInfo";
+            this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "PackInfo";
+            this.Shown += new System.EventHandler(this.PackInfo_Shown);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);

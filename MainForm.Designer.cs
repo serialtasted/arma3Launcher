@@ -2014,7 +2014,7 @@
             this.btn_reinstallTFRPlugins,
             this.btn_downloadConfigs});
             this.menu_moreOptions.Name = "menu_moreOptions";
-            this.menu_moreOptions.Size = new System.Drawing.Size(209, 92);
+            this.menu_moreOptions.Size = new System.Drawing.Size(209, 114);
             // 
             // menu_RemoteSettings
             // 
@@ -2056,6 +2056,8 @@
             // 
             // pref_startGameAfterDownloadsAreCompleted
             // 
+            this.pref_startGameAfterDownloadsAreCompleted.Checked = true;
+            this.pref_startGameAfterDownloadsAreCompleted.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_startGameAfterDownloadsAreCompleted.Name = "pref_startGameAfterDownloadsAreCompleted";
             this.pref_startGameAfterDownloadsAreCompleted.Size = new System.Drawing.Size(231, 22);
             this.pref_startGameAfterDownloadsAreCompleted.Text = "Start game when ready";
@@ -2063,6 +2065,7 @@
             // pref_runLauncherOnStartup
             // 
             this.pref_runLauncherOnStartup.Checked = true;
+            this.pref_runLauncherOnStartup.CheckOnClick = true;
             this.pref_runLauncherOnStartup.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_runLauncherOnStartup.Name = "pref_runLauncherOnStartup";
             this.pref_runLauncherOnStartup.Size = new System.Drawing.Size(231, 22);
@@ -2072,6 +2075,7 @@
             // pref_allowNotifications
             // 
             this.pref_allowNotifications.Checked = true;
+            this.pref_allowNotifications.CheckOnClick = true;
             this.pref_allowNotifications.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_allowNotifications.Name = "pref_allowNotifications";
             this.pref_allowNotifications.Size = new System.Drawing.Size(231, 22);
@@ -2081,6 +2085,7 @@
             // pref_autoDownload
             // 
             this.pref_autoDownload.Checked = true;
+            this.pref_autoDownload.CheckOnClick = true;
             this.pref_autoDownload.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_autoDownload.Name = "pref_autoDownload";
             this.pref_autoDownload.Size = new System.Drawing.Size(231, 22);

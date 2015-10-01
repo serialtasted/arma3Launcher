@@ -397,18 +397,6 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool runLegacy {
-            get {
-                return ((bool)(this["runLegacy"]));
-            }
-            set {
-                this["runLegacy"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("spn_lite")]
         public string lastAddonPack {
             get {

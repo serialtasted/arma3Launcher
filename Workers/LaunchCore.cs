@@ -300,6 +300,7 @@ namespace arma3Launcher.Workers
                 mainForm.Cursor = Cursors.Default;
                 waitEndGame.RunWorkerAsync();
 
+                Application.Exit();
                 //MessageBox.Show("Iniciou");
             }
             catch (Exception ex)

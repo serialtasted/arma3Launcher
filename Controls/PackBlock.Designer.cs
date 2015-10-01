@@ -76,7 +76,7 @@
             // 
             // btn_showAddons
             // 
-            this.btn_showAddons.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_showAddons.Cursor = System.Windows.Forms.Cursors.Default;
             this.btn_showAddons.Image = global::arma3Launcher.Properties.Resources.archive_w;
             this.btn_showAddons.Location = new System.Drawing.Point(724, 139);
             this.btn_showAddons.Name = "btn_showAddons";

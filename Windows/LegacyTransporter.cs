@@ -247,8 +247,6 @@ namespace arma3Launcher.Windows
 
         private void btn_close_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.runLegacy = false;
-            Properties.Settings.Default.Save();
             this.Close();
         }
 

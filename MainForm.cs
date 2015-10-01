@@ -28,6 +28,8 @@ namespace arma3Launcher
         private EmailReporter eReport;
         private AddonsLooker aLooker;
 
+        private Windows.Splash loadingSplash;
+
         private Version aLocal = null;
         private Version aRemote = null;
 
@@ -102,6 +104,8 @@ namespace arma3Launcher
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
+        private System.Windows.Forms.Timer effectIn = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer effectOut = new System.Windows.Forms.Timer();
 
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
         {
@@ -159,12 +163,18 @@ namespace arma3Launcher
             fetchAddonPacks = new Packs (FeedContentPanel);
             eReport = new EmailReporter();
             aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_jsrs, chb_blastcore);
+            loadingSplash = new Windows.Splash();
+
+            effectIn.Interval = 10;
+            effectOut.Interval = 10;
+
+            effectIn.Tick += EffectIn_Tick;
+            effectOut.Tick += EffectOut_Tick;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Form Splash = new Windows.Splash();
-            Splash.Show();
+            loadingSplash.Show();
 
             this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                           (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
@@ -214,7 +224,7 @@ namespace arma3Launcher
             if (Properties.Settings.Default.Arma3Folder == "" && Properties.Settings.Default.TS3Folder == "")
                 GetDirectories();
 
-            if (Properties.Settings.Default.AddonsFolder == "")
+            if (String.IsNullOrEmpty(Properties.Settings.Default.AddonsFolder) || Properties.Settings.Default.AddonsFolder == "\\")
             {
                 using (var form = new Windows.AddonsFolderSetup())
                 {
@@ -224,14 +234,6 @@ namespace arma3Launcher
                     {
                         txtb_modsDirectory.Text = form.AddonsFolder;
                     }
-                }
-            }
-
-            if (Properties.Settings.Default.runLegacy)
-            {
-                using (var form = new Windows.LegacyTransporter())
-                {
-                    var result = form.ShowDialog();
                 }
             }
 
@@ -248,12 +250,13 @@ namespace arma3Launcher
             else
                 btn_reinstallTFRPlugins.Enabled = false;
 
-            Splash.Close();
+            loadingSplash.Close();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            this.Opacity = 1;
+            effectIn.Start();
+
             FeedContentPanel.Focus();
 
             if (Properties.Settings.Default.downloadQueue != "" && panelMenu.Visible == true)
@@ -301,6 +304,28 @@ namespace arma3Launcher
             SaveSettings();
             SaveDownloadQueue();
             GC.Collect();
+        }
+
+        private void EffectIn_Tick(object sender, EventArgs e)
+        {
+            if (this.Opacity < 1)
+            {
+                this.Opacity = this.Opacity + 0.1;
+                this.Location = new Point(this.Location.X, this.Location.Y - 1);
+            }
+            else
+            { effectIn.Stop(); }
+        }
+
+        private void EffectOut_Tick(object sender, EventArgs e)
+        {
+            if (this.Opacity > 0)
+            {
+                this.Opacity = this.Opacity - 0.1;
+                this.Location = new Point(this.Location.X, this.Location.Y + 1);
+            }
+            else
+            { effectOut.Stop(); this.Close(); }
         }
 
         public void GetAddons()
@@ -439,7 +464,7 @@ namespace arma3Launcher
                     lstb_activeAddons.Items.Add(s);
             }
 
-            pref_startGameAfterDownloadsAreCompleted.Checked = Properties.Settings.Default.startGameAfterDownload;
+            pref_startGameAfterDownloadsAreCompleted.Checked = true/*Properties.Settings.Default.startGameAfterDownload*/;
             pref_runLauncherOnStartup.Checked = Properties.Settings.Default.runLauncherOnStartup;
             pref_allowNotifications.Checked = Properties.Settings.Default.allowNotifications;
             pref_allowNotifications.Checked = Properties.Settings.Default.autoDownload;
@@ -704,7 +729,7 @@ namespace arma3Launcher
 
         private void sysbtn_close_Click(object sender, EventArgs e)
         {
-            this.Close();
+            effectOut.Start();
         }
 
         private void sysbtn_minimize_Click(object sender, EventArgs e)
@@ -1099,7 +1124,7 @@ namespace arma3Launcher
         {
             StartUpdator();
             Thread.Sleep(500);
-            this.Close();
+            effectOut.Start();
         }
 
         void StartUpdator()
@@ -1420,6 +1445,7 @@ namespace arma3Launcher
                     ftpRequest = (FtpWebRequest)WebRequest.Create(modsUrl[0]);
                     ftpRequest.UseBinary = true;
                     ftpRequest.UsePassive = true;
+                    ftpRequest.KeepAlive = false;
                     ftpRequest.Method = WebRequestMethods.Ftp.GetFileSize;
                     ftpRequest.Credentials = networkCredential;
 
@@ -1489,6 +1515,7 @@ namespace arma3Launcher
                     ftpRequest = (FtpWebRequest)WebRequest.Create(url);
                     ftpRequest.UseBinary = true;
                     ftpRequest.UsePassive = true;
+                    ftpRequest.KeepAlive = false;
                     ftpRequest.Method = WebRequestMethods.Ftp.GetFileSize;
                     ftpRequest.Credentials = networkCredential;
 

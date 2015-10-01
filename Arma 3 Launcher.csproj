@@ -322,6 +322,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\arrow-down-hover.png" />
+    <None Include="Resources\arrow-down.png" />
     <None Include="Resources\clipboard_copy_icon&amp;16.png" />
     <None Include="Resources\bg-addon.png" />
     <None Include="Resources\bg-map.png" />

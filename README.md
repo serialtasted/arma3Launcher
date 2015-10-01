@@ -5,7 +5,6 @@ This launcher is used by the PTrangers community. The launcher enables us to lau
 [![GitHub release](https://img.shields.io/github/release/serialtasted/arma3Launcher.svg?label=Download&color=blue)](https://github.com/serialtasted/arma3Launcher/releases)
 [![GitHub source](https://img.shields.io/badge/Source-Download%20ZIP-orange.svg)](https://github.com/serialtasted/arma3Launcher/archive/master.zip)
 [![GitHub issues](https://img.shields.io/github/issues/serialtasted/arma3Launcher.svg?label=Issues)](https://github.com/serialtasted/arma3Launcher/issues)
-[![AppVeyor](https://img.shields.io/appveyor/ci/serialtasted/arma3Launcher.svg?label=Build)](https://ci.appveyor.com/project/serialtasted/arma3Launcher)
 
 ###Features
 * Multiple addon packs

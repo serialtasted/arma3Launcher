@@ -49,21 +49,6 @@ namespace arma3Launcher
 
         private string activePack = "";
 
-        private string[] serverInfo = new string[3];
-        private string[] tsInfo = new string[4];
-
-        /* 
-        Array content list:
-            serverInfo[0]: server ip
-            serverInfo[1]: server port
-            serverInfo[2]: server password
-
-            tsInfo[0]: server ip
-            tsInfo[1]: server port
-            tsInfo[2]: server password
-            tsInfo[3]: default channel
-        */
-
         private bool isBlastcoreAllowed = false;
         private bool isJSRSAllowed = false;
         private bool isOptionalAllowed = false;
@@ -576,17 +561,6 @@ namespace arma3Launcher
 
                 if (String.IsNullOrEmpty(activePack))
                 { Properties.Settings.Default.lastAddonPack = activePack = firstPack; }
-
-                //TeamSpeak server Info
-                tsInfo[0] = RemoteXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//TeamSpeak").Attributes["ip"].Value;
-                tsInfo[1] = RemoteXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//TeamSpeak").Attributes["port"].Value;
-                tsInfo[2] = RemoteXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//TeamSpeak").Attributes["password"].Value;
-                tsInfo[3] = RemoteXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//TeamSpeak").Attributes["channel"].Value;
-
-                //ModSet Files
-                serverInfo[0] = RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + activePack).Attributes["ip"].Value;
-                serverInfo[1] = RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + activePack).Attributes["port"].Value;
-                serverInfo[2] = RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + activePack).Attributes["password"].Value;
 
                 isBlastcoreAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + activePack).Attributes["blastcore"].Value);
                 isJSRSAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + activePack).Attributes["jsrs"].Value);
@@ -2041,22 +2015,22 @@ namespace arma3Launcher
 
         private void btn_goTwitter_Click(object sender, EventArgs e)
         {
-            Process.Start("https://twitter.com/serialtasted");
+            Process.Start(Properties.GlobalValues.Link_Twitter);
         }
 
         private void btn_goTwitch_Click(object sender, EventArgs e)
         {
-            Process.Start("http://www.twitch.tv/serialtasted");
+            Process.Start(Properties.GlobalValues.Link_Twitch);
         }
 
         private void btn_goYoutube_Click(object sender, EventArgs e)
         {
-            Process.Start("https://www.youtube.com/serialtasted");
+            Process.Start(Properties.GlobalValues.Link_Youtube);
         }
 
         private void btn_goGit_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/serialtasted/spNLauncher");
+            Process.Start(Properties.GlobalValues.Link_Gihub);
         }
 
         private void btn_downloadJSRS_Click(object sender, EventArgs e)

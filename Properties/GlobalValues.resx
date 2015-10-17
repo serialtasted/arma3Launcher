@@ -117,25 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FP_FeedUrl" xml:space="preserve">
-    <value>https://dl.dropbox.com/u/3609589/spNLauncher/Xml/feed.xml</value>
-  </data>
-  <data name="FP_RulesUrl" xml:space="preserve">
-    <value>https://dl.dropbox.com/u/3609589/spNLauncher/Xml/rules.xml</value>
-  </data>
   <data name="FTP_Password" xml:space="preserve">
     <value>spnlauncher</value>
   </data>
   <data name="FTP_Username" xml:space="preserve">
     <value>spnlauncher</value>
   </data>
+  <data name="Link_Gihub" xml:space="preserve">
+    <value>https://github.com/serialtasted/arma3Launcher</value>
+  </data>
+  <data name="Link_Twitch" xml:space="preserve">
+    <value>http://www.twitch.tv/serialtasted</value>
+  </data>
+  <data name="Link_Twitter" xml:space="preserve">
+    <value>https://twitter.com/serialtasted</value>
+  </data>
+  <data name="Link_Youtube" xml:space="preserve">
+    <value>https://www.youtube.com/serialtasted</value>
+  </data>
+  <data name="S_RepoXML" xml:space="preserve">
+    <value>https://dl.dropbox.com/u/3609589/arma3Launcher/Xml/repo.xml</value>
+  </data>
   <data name="S_UpdateUrl" xml:space="preserve">
-    <value>https://dl.dropbox.com/u/3609589/spNLauncher/Releases/zUpdator.exe</value>
+    <value>https://dl.dropbox.com/u/3609589/arma3Launcher/Releases/zUpdator.exe</value>
   </data>
   <data name="S_VersionTag" xml:space="preserve">
     <value />
   </data>
   <data name="S_VersionXML" xml:space="preserve">
-    <value>https://dl.dropbox.com/u/3609589/spNLauncher/Xml/version.xml</value>
+    <value>https://dl.dropbox.com/u/3609589/arma3Launcher/Xml/config.xml</value>
   </data>
 </root>

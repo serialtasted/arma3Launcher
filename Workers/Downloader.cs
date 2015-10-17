@@ -82,10 +82,12 @@ namespace arma3Launcher.Workers
             this.progressAll = progressAll;
             this.progressText = progressText;
 
-            // define ftp client data
+            // define ftp client
             this.ftpClient = new FtpClient();
             this.ftpClient.Username = Properties.GlobalValues.FTP_Username;
             this.ftpClient.Password = Properties.GlobalValues.FTP_Password;
+            this.ftpClient.BinaryMode = true;
+            this.ftpClient.Server = "spnlauncher.serveftp.com";
 
             // define background workers
             this.downloadQueue = new BackgroundWorker();
@@ -152,9 +154,6 @@ namespace arma3Launcher.Workers
             this.urlsList = urlsList;
             this.isConfig = isConfig;
 
-            // define ftp server
-            this.ftpClient.Server = "spnlauncher.serveftp.com";
-
             // determine if there's space for conection
             this.downloadQueue.RunWorkerAsync();
         }
@@ -164,8 +163,7 @@ namespace arma3Launcher.Workers
         /// </summary>
         private void Download ()
         {
-            ftpClient.Close();
-            progressStatusText("Lalala");
+            
         }
     }
 }

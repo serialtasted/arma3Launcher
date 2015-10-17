@@ -212,10 +212,10 @@
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
     <Compile Include="Workers\AddonsLooker.cs" />
+    <Compile Include="Workers\RemoteReader.cs" />
     <Compile Include="Workers\Downloader.cs" />
     <Compile Include="Workers\EmailReporter.cs" />
     <Compile Include="Workers\FtpClient.cs" />
-    <Compile Include="Workers\Installer.cs" />
     <Compile Include="Workers\Packs.cs" />
     <Compile Include="Workers\Feed.cs" />
     <Compile Include="Workers\LaunchCore.cs" />

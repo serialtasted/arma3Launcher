@@ -282,8 +282,8 @@ namespace arma3Launcher.Workers
             {
                 var fass = new ProcessStartInfo();
                 fass.WorkingDirectory = GameFolder;
-                fass.FileName = "arma3.exe";
-                fass.Arguments = aux_Arguments;
+                fass.FileName = "arma3battleye.exe";
+                fass.Arguments = "2 1 " + aux_Arguments;
 
                 var process = new Process();
                 process.StartInfo = fass;
@@ -301,7 +301,6 @@ namespace arma3Launcher.Workers
                 waitEndGame.RunWorkerAsync();
 
                 Application.Exit();
-                //MessageBox.Show("Iniciou");
             }
             catch (Exception ex)
             {

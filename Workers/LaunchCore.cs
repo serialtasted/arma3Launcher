@@ -231,82 +231,95 @@ namespace arma3Launcher.Workers
 
             if (serverInfo[0] != "" && serverInfo[2] != "")
             {
-                PingReply pingresult = ping.Send(serverInfo[0]);
+                /*PingReply pingresult = ping.Send(serverInfo[0]);
                 if (pingresult.Status == IPStatus.Success)
-                {
+                {*/
                     if (serverInfo[2] != "")
                         aux_Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" " + Arguments;
                     else
                         aux_Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " " + Arguments;
-                }
+                /*}
                 else
                 {
                     aux_Arguments = Arguments;
-                }
+                }*/
             }
             else
                 aux_Arguments = Arguments;
 
-            //Clipboard.SetText(aux_Arguments);
+            Clipboard.SetText(aux_Arguments);
 
             if (Process.GetProcessesByName("ts3client_win64").Length <= 0 && Process.GetProcessesByName("ts3client_win32").Length <= 0)
+            {
+                if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")))
+                {
+                    try
+                    {
+                        var fass = new ProcessStartInfo();
+                        fass.WorkingDirectory = TSFolder;
+
+                        if (tsInfo[0] != "" && tsInfo[2] != "")
+                            fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&channel=" + tsInfo[3] + "\"";
+                        else if (tsInfo[0] != "")
+                            fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&password=" + tsInfo[2] + "&channel=" + tsInfo[3] + "\"";
+
+                        if (File.Exists(TSFolder + "ts3client_win64.exe"))
+                            fass.FileName = "ts3client_win64.exe";
+
+                        if (File.Exists(TSFolder + "ts3client_win32.exe"))
+                            fass.FileName = "ts3client_win32.exe";
+
+                        var process = new Process();
+                        process.StartInfo = fass;
+
+                        process.Start();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                    MessageBox.Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (Directory.Exists(GameFolder) && File.Exists(GameFolder + "arma3battleye.exe"))
             {
                 try
                 {
                     var fass = new ProcessStartInfo();
-                    fass.WorkingDirectory = TSFolder;
-
-                    if (tsInfo[0] != "" && tsInfo[2] != "")
-                        fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&channel=" + tsInfo[3] + "\"";
-                    else if (tsInfo[0] != "")
-                        fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&password=" + tsInfo[2] + "&channel=" + tsInfo[3] + "\"";
-
-                    if (File.Exists(TSFolder + "ts3client_win64.exe"))
-                        fass.FileName = "ts3client_win64.exe";
-
-                    if (File.Exists(TSFolder + "ts3client_win32.exe"))
-                        fass.FileName = "ts3client_win32.exe";
+                    fass.WorkingDirectory = GameFolder;
+                    fass.FileName = "arma3battleye.exe";
+                    fass.Arguments = "2 1 " + aux_Arguments;
 
                     var process = new Process();
                     process.StartInfo = fass;
-
+                    auxProcess = process;
                     process.Start();
+
+                    Thread.Sleep(500);
+
+                    GC.Collect();
+
+                    Status.Text = "Game running...";
+                    mainForm.WindowState = FormWindowState.Minimized;
+                    waitEndGame.RunWorkerAsync();
+
+                    Application.Exit();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    Application.Exit();
                 }
             }
-
-            try
+            else
             {
-                var fass = new ProcessStartInfo();
-                fass.WorkingDirectory = GameFolder;
-                fass.FileName = "arma3battleye.exe";
-                fass.Arguments = "2 1 " + aux_Arguments;
-
-                var process = new Process();
-                process.StartInfo = fass;
-                auxProcess = process;
-                process.Start();
-
-                Thread.Sleep(500);
-
-                GC.Collect();
-
-                Status.Text = "Game running...";
-                Launch.Enabled = false;
-                mainForm.WindowState = FormWindowState.Minimized;
-                mainForm.Cursor = Cursors.Default;
-                waitEndGame.RunWorkerAsync();
-
-                Application.Exit();
+                MessageBox.Show("Game directory doesn't exist or executable not there. Please check your Arma 3 directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Launch.Enabled = true;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Application.Exit();
-            }
+
+            mainForm.Cursor = Cursors.Default;
         }
 
         private void WaitEndGame_DoWork(object sender, DoWorkEventArgs e)

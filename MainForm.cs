@@ -1221,6 +1221,8 @@ namespace arma3Launcher
 
         private void btn_Launch_Click(object sender, EventArgs e)
         {
+            btn_Launch.Focus();
+
             FetchRemoteSettings();
             GetAddons();
             isLaunch = true;
@@ -1315,6 +1317,22 @@ namespace arma3Launcher
         private void txtb_armaDirectory_TextChanged(object sender, EventArgs e)
         {
             getMalloc();
+        }
+
+        private void txtb_armaDirectory_Leave(object sender, EventArgs e)
+        {
+            if(txtb_armaDirectory.Text.EndsWith(@"\"))
+            {
+                txtb_armaDirectory.Text = txtb_armaDirectory.Text.Remove(txtb_armaDirectory.Text.Length - 1);
+            }
+        }
+
+        private void txtb_tsDirectory_Leave(object sender, EventArgs e)
+        {
+            if (txtb_tsDirectory.Text.EndsWith(@"\"))
+            {
+                txtb_tsDirectory.Text = txtb_tsDirectory.Text.Remove(txtb_tsDirectory.Text.Length - 1);
+            }
         }
 
         private void btn_ereaseArmaDirectory_Click(object sender, EventArgs e)

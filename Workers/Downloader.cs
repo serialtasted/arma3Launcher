@@ -8,6 +8,7 @@ using System.ComponentModel;
 using arma3Launcher.Workers;
 using arma3Launcher.Controls;
 using System.Threading;
+using CG.Web.MegaApiClient;
 
 namespace arma3Launcher.Workers
 {

@@ -19,10 +19,10 @@ namespace arma3Launcher.Workers
 
         public AddonsLooker(ListBox lBox_detectedAddons, ListBox lBox_activeAddons, ToolStripMenuItem cBox_JSRS, ToolStripMenuItem cBox_BlastCore)
         {
-            lstb_detectedAddons = lBox_detectedAddons;
-            lstb_activeAddons = lBox_activeAddons;
-            chb_jsrs = cBox_JSRS;
-            chb_blastcore = cBox_BlastCore;
+            this.lstb_detectedAddons = lBox_detectedAddons;
+            this.lstb_activeAddons = lBox_activeAddons;
+            this.chb_jsrs = cBox_JSRS;
+            this.chb_blastcore = cBox_BlastCore;
         }
 
         public void getAddons(bool isJSRSAllowed, bool isBlastcoreAllowed, List<string> modsName)

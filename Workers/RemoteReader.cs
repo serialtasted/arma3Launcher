@@ -26,7 +26,7 @@ namespace arma3Launcher.Workers
         /// tsInfo[2]: server password
         /// tsInfo[3]: default channel
         /// </returns>
-        public object TeamSpeakInfo()
+        public string[] TeamSpeakInfo()
         {
             string[] tsInfo = new string[4];
 
@@ -47,7 +47,7 @@ namespace arma3Launcher.Workers
         /// serverInfo[1]: server port
         /// serverInfo[2]: server password
         /// </returns>
-        public object ServerInfo(string activePack)
+        public string[] ServerInfo(string activePack)
         {
             string[] serverInfo = new string[3];
 
@@ -75,7 +75,7 @@ namespace arma3Launcher.Workers
         /// <returns>
         /// 
         /// </returns>
-        public object GetAddons(string activePack)
+        public string[,] GetAddons(string activePack)
         {
             string[,] addonPack = new string[254, 2];
             int ap = 0;
@@ -87,6 +87,7 @@ namespace arma3Launcher.Workers
                 {
                     addonPack[ap, 0] = xn.Attributes["name"].Value;
                     addonPack[ap, 1] = xn.Attributes["version"].Value;
+                    ap++;
                 }
             }
 
@@ -101,15 +102,6 @@ namespace arma3Launcher.Workers
         public bool CompareAddons (string activePack)
         {
             return false;
-        }
-
-        /// <summary>
-        /// Get FTP server address
-        /// </summary>
-        /// <returns></returns>
-        public string GetFtpServer ()
-        {
-            return "spnlauncher.serveftp.com";
         }
     }
 }

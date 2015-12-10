@@ -154,7 +154,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelLaunch = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_progressStatus = new System.Windows.Forms.Label();
             this.btn_Launch = new System.Windows.Forms.PictureBox();
@@ -167,10 +166,7 @@
             this.WindowTitle = new System.Windows.Forms.Label();
             this.WindowVersionStatus = new System.Windows.Forms.Label();
             this.dlg_folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-            this.backgroundInstaller = new System.ComponentModel.BackgroundWorker();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
-            this.delayLaunch = new System.Windows.Forms.Timer(this.components);
             this.sysbtn_moreOptions = new System.Windows.Forms.PictureBox();
             this.backgroundFetchNews = new System.ComponentModel.BackgroundWorker();
             this.delayFecthNews = new System.Windows.Forms.Timer(this.components);
@@ -186,7 +182,7 @@
             this.btn_reinstallTFRPlugins = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
-            this.downloadQueue = new System.ComponentModel.BackgroundWorker();
+            this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
@@ -313,6 +309,7 @@
             this.panel_recommendedAddons.Name = "panel_recommendedAddons";
             this.panel_recommendedAddons.Size = new System.Drawing.Size(382, 104);
             this.panel_recommendedAddons.TabIndex = 4;
+            this.panel_recommendedAddons.Visible = false;
             // 
             // panel10
             // 
@@ -454,6 +451,7 @@
             this.panel_optionalAddons.Name = "panel_optionalAddons";
             this.panel_optionalAddons.Size = new System.Drawing.Size(498, 104);
             this.panel_optionalAddons.TabIndex = 3;
+            this.panel_optionalAddons.Visible = false;
             // 
             // panel_Optional
             // 
@@ -1805,7 +1803,6 @@
             // 
             this.panelLaunch.BackColor = System.Drawing.Color.Transparent;
             this.panelLaunch.BackgroundImage = global::arma3Launcher.Properties.Resources.bgBottom;
-            this.panelLaunch.Controls.Add(this.button2);
             this.panelLaunch.Controls.Add(this.prb_progressBar_All);
             this.panelLaunch.Controls.Add(this.txt_progressStatus);
             this.panelLaunch.Controls.Add(this.btn_Launch);
@@ -1817,16 +1814,6 @@
             this.panelLaunch.Name = "panelLaunch";
             this.panelLaunch.Size = new System.Drawing.Size(906, 100);
             this.panelLaunch.TabIndex = 0;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(515, 21);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // prb_progressBar_All
             // 
@@ -1956,21 +1943,6 @@
             // 
             this.dlg_folderBrowser.RootFolder = System.Environment.SpecialFolder.MyComputer;
             this.dlg_folderBrowser.ShowNewFolderButton = false;
-            // 
-            // backgroundInstaller
-            // 
-            this.backgroundInstaller.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundInstaller_DoWork);
-            this.backgroundInstaller.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundInstaller_RunWorkerCompleted);
-            // 
-            // backgroundBlinker
-            // 
-            this.backgroundBlinker.WorkerSupportsCancellation = true;
-            this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
-            // 
-            // delayLaunch
-            // 
-            this.delayLaunch.Interval = 1500;
-            this.delayLaunch.Tick += new System.EventHandler(this.delayLaunch_Tick);
             // 
             // sysbtn_moreOptions
             // 
@@ -2107,10 +2079,9 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // downloadQueue
+            // backgroundBlinker
             // 
-            this.downloadQueue.DoWork += new System.ComponentModel.DoWorkEventHandler(this.downloadQueue_DoWork);
-            this.downloadQueue.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.downloadQueue_RunWorkerCompleted);
+            this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
             // MainForm
             // 
@@ -2300,13 +2271,10 @@
         private System.Windows.Forms.Button btn_ereaseTSDirectory;
         private System.Windows.Forms.Button btn_ereaseArmaDirectory;
         private System.Windows.Forms.Label txt_percentageStatus;
-        private System.ComponentModel.BackgroundWorker backgroundInstaller;
         private System.Windows.Forms.PictureBox btn_copyLaunchOptions;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.ComponentModel.BackgroundWorker backgroundBlinker;
         private System.Windows.Forms.ComboBox txtb_malloc;
         private System.Windows.Forms.Label txt_curFile;
-        private System.Windows.Forms.Timer delayLaunch;
         private System.Windows.Forms.FlowLayoutPanel FeedContentPanel;
         private System.Windows.Forms.CheckBox chb_noBenchmark;
         private System.Windows.Forms.PictureBox btn_reloadAddons;
@@ -2355,7 +2323,6 @@
         private System.Windows.Forms.ListBox lstb_activeAddons;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.ComponentModel.BackgroundWorker downloadQueue;
         private System.Windows.Forms.ToolStripMenuItem btn_downloadConfigs;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pref_startGameAfterDownloadsAreCompleted;
@@ -2363,6 +2330,6 @@
         private System.Windows.Forms.ToolStripMenuItem pref_allowNotifications;
         private System.Windows.Forms.ToolStripMenuItem pref_autoDownload;
         private Controls.Windows7ProgressBar prb_progressBar_All;
-        private System.Windows.Forms.Button button2;
+        private System.ComponentModel.BackgroundWorker backgroundBlinker;
     }
 }

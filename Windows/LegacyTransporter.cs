@@ -60,7 +60,7 @@ namespace arma3Launcher.Windows
                 XmlDocument RemoteXmlInfo = new XmlDocument();
                 RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
 
-                XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//spN_Launcher//ModSetInfo//Mods//mod");
+                XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSetInfo//Mods//mod");
                 foreach (XmlNode xn in xnl)
                 {
                     if (xn.Attributes["type"].Value == "mod")

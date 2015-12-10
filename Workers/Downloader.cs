@@ -9,6 +9,8 @@ using arma3Launcher.Workers;
 using arma3Launcher.Controls;
 using System.Threading;
 using CG.Web.MegaApiClient;
+using System.Diagnostics;
+using System.IO;
 
 namespace arma3Launcher.Workers
 {
@@ -19,20 +21,38 @@ namespace arma3Launcher.Workers
         private Windows7ProgressBar progressAll;
         private Label progressText;
         private Label progressDetails;
-        private FtpClient ftpClient;
+        private PictureBox launcherButton;
+        private MegaApiClient megaClient;
 
         // forms
         private MainForm mainForm;
 
         // background workers
-        private BackgroundWorker downloadQueue;
+        private BackgroundWorker downloadFiles = new BackgroundWorker();
         
         // download stuff
-        private IEnumerable<string> urlsList;
-        private bool isConfig;
+        private Queue<string> downloadUrls = new Queue<string>();
+
+        // folder paths
+        private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
+
+        // paramters
+        private bool isConfig = false;
+        private bool isLaunch = false;
+
+        // controllers
+        private bool downloadRunning = false;
+        private int totalDownloads = 0;
+        private int parsedDownloads = 0;
 
         // error report
         private EmailReporter reportError;
+
+        // converter
+        static double ConvertBytesToMegabytes(long bytes)
+        {
+            return (bytes / 1024) / 1024;
+        }
 
         // callbacks
         delegate void stringCallBack(string text);
@@ -65,83 +85,180 @@ namespace arma3Launcher.Workers
             }
         }
 
+        private void progressBarFileValue(int prbValue)
+        {
+            if (this.progressFile.InvokeRequired)
+            {
+                intCallBack d = new intCallBack(progressBarFileValue);
+                this.mainForm.Invoke(d, new object[] { prbValue });
+            }
+            else
+            {
+                this.progressFile.Value = prbValue;
+            }
+        }
+
+        private void progressBarAllValue(int prbValue)
+        {
+            if (this.progressAll.InvokeRequired)
+            {
+                intCallBack d = new intCallBack(progressBarAllValue);
+                this.mainForm.Invoke(d, new object[] { prbValue });
+            }
+            else
+            {
+                this.progressAll.Value = prbValue;
+            }
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="mainForm"></param>
         /// <param name="progressFile"></param>
         /// <param name="progressAll"></param>
         /// <param name="progressText"></param>
-        public Downloader (MainForm mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails)
+        /// <param name="progressDetails"></param>
+        /// <param name="launcherButton"></param>
+        public Downloader (MainForm mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, PictureBox launcherButton)
         {
             this.mainForm = mainForm;
 
+            this.megaClient = new MegaApiClient();
+
             // construct error report
-            reportError = new EmailReporter();
+            this.reportError = new EmailReporter();
 
             // define controls
             this.progressFile = progressFile;
             this.progressAll = progressAll;
             this.progressText = progressText;
+            this.progressDetails = progressDetails;
+            this.launcherButton = launcherButton;
 
-            // define ftp client
-            this.ftpClient = new FtpClient();
-            this.ftpClient.Username = Properties.GlobalValues.FTP_Username;
-            this.ftpClient.Password = Properties.GlobalValues.FTP_Password;
-            this.ftpClient.BinaryMode = true;
-            this.ftpClient.Server = "spnlauncher.serveftp.com";
-
-            // define background workers
-            this.downloadQueue = new BackgroundWorker();
-            this.downloadQueue.DoWork += DownloadQueue_DoWork;
-            this.downloadQueue.RunWorkerCompleted += DownloadQueue_RunWorkerCompleted;
+            // define background worker
+            this.downloadFiles.DoWork += DownloadFiles_DoWork;
+            this.downloadFiles.RunWorkerCompleted += DownloadFiles_RunWorkerCompleted;
         }
 
         /// <summary>
-        /// Define download queue process
+        /// Download background worker
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DownloadQueue_DoWork(object sender, DoWorkEventArgs e)
+        private void DownloadFiles_DoWork(object sender, DoWorkEventArgs e)
         {
-            int i = 0;
-            bool EndedWithError = false;
+            // specify the URL of the file to download
+            var url = this.downloadUrls.Peek();
 
-            do
+            // specify the output file name
+            string outputFile = "ace.zip";
+
+            // create output directory (if necessary)
+            string outputFolder = this.TempFolder;
+            if (!Directory.Exists(outputFolder))
+                Directory.CreateDirectory(outputFolder);
+
+            // auxiliary variables
+            string outputComplete = outputFolder + outputFile;
+            string downloadSpeed = "";
+            int progressPercentage = 0;
+
+
+            // download the file and write it to disk
+            using (Stream webStream = megaClient.Download(new Uri(url)))
+            using (FileStream fileStream = new FileStream(outputComplete, FileMode.Create))
             {
-                try { this.ftpClient.Login(); break; }
-                catch (Exception ex)
+                var buffer = new byte[32768];
+                int bytesRead;
+                Int64 bytesReadComplete = 0;  // use Int64 for files larger than 2 gb
+
+                // get the size of the file to download
+                Int64 bytesTotal = Convert.ToInt64(webStream.Length);
+
+                // start a new StartWatch for measuring download time
+                Stopwatch sw = Stopwatch.StartNew();
+
+                // download file in chunks
+                while ((bytesRead = webStream.Read(buffer, 0, buffer.Length)) > 0)
                 {
-                    if (ex.Message == "421")
-                    {
-                        progressStatusText("Download queue full. Retrying... ");
-                        progressDetailsText("Attempts made: " + i);
-                    }
+                    bytesReadComplete += bytesRead;
+                    fileStream.Write(buffer, 0, bytesRead);
+
+                    progressPercentage = Convert.ToInt32(((double)bytesReadComplete / bytesTotal) * 100);
+
+                    if ((bytesReadComplete / 1024d / sw.Elapsed.TotalSeconds) > 999)
+                        downloadSpeed = String.Format("{0:F1} mb/s", bytesReadComplete / 1048576d / sw.Elapsed.TotalSeconds);
                     else
-                    {
-                        progressStatusText(ex.Message);
-                        this.reportError.sendReport("Ftp Exception\n\n" + ex.Message);
-                        EndedWithError = true;
-                        break;
-                    }
+                        downloadSpeed = String.Format("{0:F1} kb/s", bytesReadComplete / 1024d / sw.Elapsed.TotalSeconds);
+
+                    progressBarFileValue(progressPercentage);
+                    progressStatusText(String.Format("Downloading ({0:F0}/{1:F0}) {2}... {3:F0}%", this.parsedDownloads, this.totalDownloads, outputFile, progressPercentage));
+                    progressDetailsText(String.Format("{0:0}MB of {1:0}MB / {2}", ConvertBytesToMegabytes(bytesReadComplete), ConvertBytesToMegabytes(bytesTotal), downloadSpeed));
                 }
 
-                i++;
-                Thread.Sleep(10000);
-            } while (true);
+                sw.Stop();
+            }
+        }
 
-            if (EndedWithError)
-                e.Cancel = true;
+        private void DownloadFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.downloadUrls.Dequeue();
+            this.SaveDownloadQueue();
+
+            this.parsedDownloads++;
+            progressBarAllValue((this.parsedDownloads / this.totalDownloads) * 100);
+
+            if (this.downloadUrls.Count > 0)
+                this.downloadFiles.RunWorkerAsync();
+            else
+            {
+                this.downloadRunning = false;
+                this.megaClient.Logout();
+                this.mainForm.runInstaller(this.isLaunch);
+            }
         }
 
         /// <summary>
-        /// Define download queue after process
+        /// Saves download queue to allow download resume after crash or failure
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DownloadQueue_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        public void SaveDownloadQueue()
         {
-            if(!e.Cancelled)
-                this.Download();
+            if (this.downloadUrls.Count != 0)
+            {
+                string aux_downloadQueue = "";
+                foreach (var item in this.downloadUrls)
+                {
+                    if (aux_downloadQueue == "")
+                        aux_downloadQueue = item + ",";
+                    else
+                        aux_downloadQueue = aux_downloadQueue + item + ",";
+                }
+                Properties.Settings.Default.downloadQueue = aux_downloadQueue;
+            }
+            else
+            { Properties.Settings.Default.downloadQueue = ""; }
+
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Checks if there are downloads running
+        /// </summary>
+        /// <returns> downloadRunning </returns>
+        public bool isDownloading()
+        {
+            return this.downloadRunning;
+        }
+
+        /// <summary>
+        /// Enqueue link into an already active download queue
+        /// </summary>
+        /// <param name="urlLink"></param>
+        public void enqueueUrl(string urlLink)
+        {
+            this.downloadUrls.Enqueue(urlLink);
+            this.totalDownloads++;
         }
 
         /// <summary>
@@ -149,22 +266,32 @@ namespace arma3Launcher.Workers
         /// </summary>
         /// <param name="urlsList"></param>
         /// <param name="isConfig"></param>
-        public void beginDownload(IEnumerable<string> urlsList, bool isConfig)
+        public void beginDownload(IEnumerable<string> urlsList, bool isConfig, bool isLaunch)
         {
+            // lock controls
+            this.launcherButton.Enabled = false;
+
+            // report status
+            this.progressStatusText("Connecting to the host...");
+
             // define paramters
-            this.urlsList = urlsList;
             this.isConfig = isConfig;
+            this.isLaunch = isLaunch;
 
-            // determine if there's space for conection
-            this.downloadQueue.RunWorkerAsync();
-        }
+            // define urls
+            foreach (var url in urlsList)
+            {
+                this.downloadUrls.Enqueue(url);
+            }
 
-        /// <summary>
-        /// Download the files
-        /// </summary>
-        private void Download ()
-        {
-            
+            // restart counters
+            this.totalDownloads = downloadUrls.Count;
+            this.parsedDownloads = 0;
+
+            // begin download
+            this.downloadRunning = true;
+            this.megaClient.LoginAnonymous();
+            this.downloadFiles.RunWorkerAsync();
         }
     }
 }

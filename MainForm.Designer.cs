@@ -309,7 +309,6 @@
             this.panel_recommendedAddons.Name = "panel_recommendedAddons";
             this.panel_recommendedAddons.Size = new System.Drawing.Size(382, 104);
             this.panel_recommendedAddons.TabIndex = 4;
-            this.panel_recommendedAddons.Visible = false;
             // 
             // panel10
             // 
@@ -451,7 +450,6 @@
             this.panel_optionalAddons.Name = "panel_optionalAddons";
             this.panel_optionalAddons.Size = new System.Drawing.Size(498, 104);
             this.panel_optionalAddons.TabIndex = 3;
-            this.panel_optionalAddons.Visible = false;
             // 
             // panel_Optional
             // 
@@ -652,10 +650,12 @@
             // txtb_modsDirectory
             // 
             this.txtb_modsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_modsDirectory.ForeColor = System.Drawing.Color.DarkGray;
             this.txtb_modsDirectory.Location = new System.Drawing.Point(398, 33);
             this.txtb_modsDirectory.Name = "txtb_modsDirectory";
             this.txtb_modsDirectory.Size = new System.Drawing.Size(435, 22);
             this.txtb_modsDirectory.TabIndex = 4;
+            this.txtb_modsDirectory.Text = "Set directory ->";
             this.txtb_modsDirectory.TextChanged += new System.EventHandler(this.txtb_modsDirectory_TextChanged);
             // 
             // tableLayoutPanel2
@@ -1705,7 +1705,6 @@
             this.btn_browseTS3.TabStop = false;
             this.toolTip.SetToolTip(this.btn_browseTS3, "Double-click for manual browse");
             this.btn_browseTS3.Click += new System.EventHandler(this.btn_browseTS3_Click);
-            this.btn_browseTS3.DoubleClick += new System.EventHandler(this.btn_browseTS3_DoubleClick);
             // 
             // btn_browseA3
             // 
@@ -1718,7 +1717,6 @@
             this.btn_browseA3.TabStop = false;
             this.toolTip.SetToolTip(this.btn_browseA3, "Double-click for manual browse");
             this.btn_browseA3.Click += new System.EventHandler(this.btn_browseA3_Click);
-            this.btn_browseA3.DoubleClick += new System.EventHandler(this.btn_browseA3_DoubleClick);
             // 
             // btn_ereaseTSDirectory
             // 
@@ -1758,26 +1756,27 @@
             // 
             this.txtb_armaDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtb_armaDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_armaDirectory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_armaDirectory.ForeColor = System.Drawing.Color.DarkGray;
             this.txtb_armaDirectory.Location = new System.Drawing.Point(185, 14);
             this.txtb_armaDirectory.Name = "txtb_armaDirectory";
             this.txtb_armaDirectory.Size = new System.Drawing.Size(666, 25);
             this.txtb_armaDirectory.TabIndex = 3;
             this.txtb_armaDirectory.TabStop = false;
+            this.txtb_armaDirectory.Text = "Set directory ->";
             this.txtb_armaDirectory.TextChanged += new System.EventHandler(this.txtb_armaDirectory_TextChanged);
-            this.txtb_armaDirectory.Leave += new System.EventHandler(this.txtb_armaDirectory_Leave);
             // 
             // txtb_tsDirectory
             // 
             this.txtb_tsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtb_tsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_tsDirectory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_tsDirectory.ForeColor = System.Drawing.Color.DarkGray;
             this.txtb_tsDirectory.Location = new System.Drawing.Point(185, 50);
             this.txtb_tsDirectory.Name = "txtb_tsDirectory";
             this.txtb_tsDirectory.Size = new System.Drawing.Size(666, 25);
             this.txtb_tsDirectory.TabIndex = 2;
             this.txtb_tsDirectory.TabStop = false;
-            this.txtb_tsDirectory.Leave += new System.EventHandler(this.txtb_tsDirectory_Leave);
+            this.txtb_tsDirectory.Text = "Set directory ->";
+            this.txtb_tsDirectory.TextChanged += new System.EventHandler(this.txtb_tsDirectory_TextChanged);
             // 
             // label2
             // 
@@ -2019,6 +2018,7 @@
             // pref_startGameAfterDownloadsAreCompleted
             // 
             this.pref_startGameAfterDownloadsAreCompleted.Checked = true;
+            this.pref_startGameAfterDownloadsAreCompleted.CheckOnClick = true;
             this.pref_startGameAfterDownloadsAreCompleted.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_startGameAfterDownloadsAreCompleted.Name = "pref_startGameAfterDownloadsAreCompleted";
             this.pref_startGameAfterDownloadsAreCompleted.Size = new System.Drawing.Size(231, 22);

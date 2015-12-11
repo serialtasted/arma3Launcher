@@ -19,10 +19,12 @@ namespace arma3Launcher.Workers
         // controls
         private Windows7ProgressBar progressFile;
         private Windows7ProgressBar progressAll;
+        private Label progressCurFile;
         private Label progressText;
         private Label progressDetails;
         private PictureBox launcherButton;
         private MegaApiClient megaClient;
+        private Installer installer;
 
         // forms
         private MainForm mainForm;
@@ -37,8 +39,9 @@ namespace arma3Launcher.Workers
         private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
 
         // paramters
-        private bool isConfig = false;
         private bool isLaunch = false;
+        private string configUrl = "";
+        private string activePack = "";
 
         // controllers
         private bool downloadRunning = false;
@@ -59,6 +62,24 @@ namespace arma3Launcher.Workers
         delegate void intCallBack(int number);
 
         // invokes
+        private void progressBarFileStyle(ProgressBarStyle prbStyle)
+        {
+            this.progressFile.Style = prbStyle;
+        }
+
+        private void currentFileText(string text)
+        {
+            if (this.progressCurFile.InvokeRequired)
+            {
+                stringCallBack d = new stringCallBack(currentFileText);
+                this.mainForm.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.progressCurFile.Text = text;
+            }
+        }
+
         private void progressStatusText(string text)
         {
             if (this.progressText.InvokeRequired)
@@ -120,16 +141,17 @@ namespace arma3Launcher.Workers
         /// <param name="progressText"></param>
         /// <param name="progressDetails"></param>
         /// <param name="launcherButton"></param>
-        public Downloader (MainForm mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, PictureBox launcherButton)
+        public Downloader (MainForm mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton)
         {
             this.mainForm = mainForm;
-
+            this.installer = installerWorker;
             this.megaClient = new MegaApiClient();
 
             // construct error report
             this.reportError = new EmailReporter();
 
             // define controls
+            this.progressCurFile = progressCurFile;
             this.progressFile = progressFile;
             this.progressAll = progressAll;
             this.progressText = progressText;
@@ -139,6 +161,22 @@ namespace arma3Launcher.Workers
             // define background worker
             this.downloadFiles.DoWork += DownloadFiles_DoWork;
             this.downloadFiles.RunWorkerCompleted += DownloadFiles_RunWorkerCompleted;
+
+            // define event for text change
+            this.progressText.TextChanged += ProgressText_TextChanged;
+        }
+
+        /// <summary>
+        /// Update progress bar style
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProgressText_TextChanged(object sender, EventArgs e)
+        {
+            if(progressText.Text.StartsWith("Downloading"))
+            {
+                this.progressBarFileStyle(ProgressBarStyle.Continuous);
+            }
         }
 
         /// <summary>
@@ -149,10 +187,10 @@ namespace arma3Launcher.Workers
         private void DownloadFiles_DoWork(object sender, DoWorkEventArgs e)
         {
             // specify the URL of the file to download
-            var url = this.downloadUrls.Peek();
+            string url = this.downloadUrls.Peek();
 
             // specify the output file name
-            string outputFile = "ace.zip";
+            string outputFile = url.Split('!')[1] + ".zip";
 
             // create output directory (if necessary)
             string outputFolder = this.TempFolder;
@@ -192,9 +230,9 @@ namespace arma3Launcher.Workers
                     else
                         downloadSpeed = String.Format("{0:F1} kb/s", bytesReadComplete / 1024d / sw.Elapsed.TotalSeconds);
 
-                    progressBarFileValue(progressPercentage);
-                    progressStatusText(String.Format("Downloading ({0:F0}/{1:F0}) {2}... {3:F0}%", this.parsedDownloads, this.totalDownloads, outputFile, progressPercentage));
-                    progressDetailsText(String.Format("{0:0}MB of {1:0}MB / {2}", ConvertBytesToMegabytes(bytesReadComplete), ConvertBytesToMegabytes(bytesTotal), downloadSpeed));
+                    this.progressBarFileValue(progressPercentage);
+                    this.progressStatusText(String.Format("Downloading ({0:F0}/{1:F0}) {2}... {3:F0}%", this.parsedDownloads, this.totalDownloads, outputFile, progressPercentage));
+                    this.progressDetailsText(String.Format("{0:0}MB of {1:0}MB / {2}", ConvertBytesToMegabytes(bytesReadComplete), ConvertBytesToMegabytes(bytesTotal), downloadSpeed));
                 }
 
                 sw.Stop();
@@ -213,9 +251,11 @@ namespace arma3Launcher.Workers
                 this.downloadFiles.RunWorkerAsync();
             else
             {
+                this.progressDetailsText("");
+                this.currentFileText("");
                 this.downloadRunning = false;
                 this.megaClient.Logout();
-                this.mainForm.runInstaller(this.isLaunch);
+                installer.beginInstall(this.isLaunch, this.configUrl, this.activePack);
             }
         }
 
@@ -266,17 +306,20 @@ namespace arma3Launcher.Workers
         /// </summary>
         /// <param name="urlsList"></param>
         /// <param name="isConfig"></param>
-        public void beginDownload(IEnumerable<string> urlsList, bool isConfig, bool isLaunch)
+        public void beginDownload(IEnumerable<string> urlsList, bool isLaunch, string activePack, string configUrl)
         {
             // lock controls
             this.launcherButton.Enabled = false;
 
             // report status
             this.progressStatusText("Connecting to the host...");
+            this.currentFileText("Download server: MEGA (mega.nz)");
+            this.progressBarFileStyle(ProgressBarStyle.Marquee);
 
             // define paramters
-            this.isConfig = isConfig;
             this.isLaunch = isLaunch;
+            this.activePack = activePack;
+            this.configUrl = configUrl;
 
             // define urls
             foreach (var url in urlsList)
@@ -286,7 +329,7 @@ namespace arma3Launcher.Workers
 
             // restart counters
             this.totalDownloads = downloadUrls.Count;
-            this.parsedDownloads = 0;
+            this.parsedDownloads = 1;
 
             // begin download
             this.downloadRunning = true;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -280,6 +281,27 @@ namespace arma3Launcher.Workers
                     MessageBox.Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            Process[] pname = Process.GetProcessesByName("steam");
+            if (pname.Length == 0)
+            {
+                try
+                {
+                    Status.Text = "Starting Steam...";
+
+                    var fass = new ProcessStartInfo();
+                    fass.WorkingDirectory = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString().Replace(@"/", @"\") + @"\";
+                    fass.FileName = "steam.exe";
+                    fass.Arguments = Arguments;
+
+                    var process = new Process();
+                    process.StartInfo = fass;
+                    process.Start();
+                    Thread.SpinWait(2000);
+                    Thread.Sleep(2000);
+                }
+                catch { }
+            }
+
             if (Directory.Exists(GameFolder) && File.Exists(GameFolder + "arma3battleye.exe"))
             {
                 try
@@ -303,9 +325,6 @@ namespace arma3Launcher.Workers
                     mainForm.WindowState = FormWindowState.Minimized;
                     mainForm.Cursor = Cursors.Default;
                     waitEndGame.RunWorkerAsync();
-
-                    Application.Exit();
-                    //MessageBox.Show("Iniciou");
                 }
                 catch (Exception ex)
                 {

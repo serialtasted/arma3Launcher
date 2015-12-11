@@ -57,6 +57,7 @@ namespace arma3Launcher.Workers
         private bool isLaunch = false;
 
         // controllers
+        private string configFile = "";
         private string activePack = "";
         private bool installationRunning = false;
         private bool isJSRS = false;
@@ -203,10 +204,13 @@ namespace arma3Launcher.Workers
         /// Begins the process of installation
         /// </summary>
         /// <param name="isConfig"></param>
-        public void beginInstall(bool isLaunch, string activePack)
+        public void beginInstall(bool isLaunch, string configFile, string activePack)
         {
             // report status
             this.progressStatusText("Preparing the installation process...");
+
+            // define config file name
+            this.configFile = configFile;
 
             // reset progress bars
             this.progressFile.Value = 0;
@@ -222,6 +226,10 @@ namespace arma3Launcher.Workers
             this.GameFolder = Properties.Settings.Default.Arma3Folder;
             this.TS3Folder = Properties.Settings.Default.TS3Folder;
             this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
+
+            // create addons folder
+            if (!Directory.Exists(AddonsFolder))
+                Directory.CreateDirectory(AddonsFolder);
 
             // lock directory fields
             this.gamePathBox.Enabled = false;
@@ -277,7 +285,7 @@ namespace arma3Launcher.Workers
                             string filePath = "";
                             int nFile = 0;
 
-                            if (zipFile.Contains(activePack))
+                            if (zipFile.Contains(this.configFile))
                                 aux_ModsFolder = GameFolder;
                             else
                                 aux_ModsFolder = AddonsFolder;
@@ -491,6 +499,17 @@ namespace arma3Launcher.Workers
             this.addonsPathBox.Enabled = true;
             this.addonsPathErase.Enabled = true;
             this.addonsPathFind.Enabled = true;
+
+            this.installationRunning = false;
+        }
+
+        /// <summary>
+        /// Check if is installing addons
+        /// </summary>
+        /// <returns></returns>
+        public bool isInstalling()
+        {
+            return this.installationRunning;
         }
 
         /// <summary>
@@ -500,6 +519,7 @@ namespace arma3Launcher.Workers
         /// <param name="e"></param>
         private void DelayLaunch_Tick(object sender, EventArgs e)
         {
+            this.delayLaunch.Stop();
             this.mainForm.runGame();
         }
 

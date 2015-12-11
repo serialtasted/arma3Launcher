@@ -1,19 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
 using System.IO;
-using System.IO.Compression;
 using System.Net;
 using System.Diagnostics;
 using System.Xml;
 using System.Collections.Generic;
-
-using arma3Launcher.Controls;
 using arma3Launcher.Workers;
 
 namespace arma3Launcher
@@ -39,10 +35,13 @@ namespace arma3Launcher
         private Button activeButton;
         private int aux_Blinker = 0;
 
+        private string armaDir_previousDir = "";
+        private string tsDir_previousDir = "";
         private string modsDir_previousDir = "";
 
         private string activePack = "";
         private string GameFolder = "";
+        private string TSFolder = "";
         private string AddonsFolder = "";
 
         private bool isBlastcoreAllowed = false;
@@ -128,8 +127,8 @@ namespace arma3Launcher
             QuickUpdateMethod = new zCheckUpdate(WindowVersionStatus);
             UpdateMethod = new zCheckUpdate(btn_update, txt_curversion, txt_latestversion, busy);
 
-            downloader = new Downloader(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, btn_Launch);
             installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadJSRS, btn_downloadBlastcore);
+            downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_Launch);
             remoteReader = new RemoteReader();
             fetchAddonPacks = new Packs(FeedContentPanel);
             eReport = new EmailReporter();
@@ -182,7 +181,6 @@ namespace arma3Launcher
             {
                 menuSelected = 3;
                 HideUnhide(menuSelected);
-                GetDirectories();
             }
             else
             {
@@ -191,9 +189,6 @@ namespace arma3Launcher
             }
 
             FetchSettings();
-
-            if (Properties.Settings.Default.Arma3Folder == "" && Properties.Settings.Default.TS3Folder == "")
-                GetDirectories();
 
             if (String.IsNullOrEmpty(Properties.Settings.Default.AddonsFolder) || Properties.Settings.Default.AddonsFolder == "\\")
             {
@@ -209,11 +204,8 @@ namespace arma3Launcher
             }
 
             FetchRemoteSettings();
-
             GetAddons();
-
             getMalloc();
-
             UpdateMethod.CheckUpdates();
 
             if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
@@ -251,7 +243,7 @@ namespace arma3Launcher
                         }
                     }
 
-                    downloader.beginDownload(modsUrl, false, false);
+                    downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
                 }
                 else
                 {
@@ -266,9 +258,19 @@ namespace arma3Launcher
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveSettings();
-            downloader.SaveDownloadQueue();
-            GC.Collect();
+            if (!installer.isInstalling())
+            {
+                SaveSettings();
+                downloader.SaveDownloadQueue();
+                GC.Collect();
+            }
+            else
+            {
+                if (MessageBox.Show("The launcher is installing the addons. Do you want to cancel the process and leave?", "Installing addons", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                    e.Cancel = true;
+                else
+                { SaveSettings(); GC.Collect(); }
+            }
         }
 
         private void EffectIn_Tick(object sender, EventArgs e)
@@ -298,92 +300,22 @@ namespace arma3Launcher
             aLooker.getAddons(isJSRSAllowed, isBlastcoreAllowed, modsName);
         }
 
-        void GetDirectories()
-        {
-            string aux_pathError = "";
-
-            try
-            {
-                string a3Key = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\bohemia interactive\arma 3", "main", "") + @"\";
-                Properties.Settings.Default.Arma3Folder = a3Key;
-
-                if (a3Key == null)
-                    throw new Exception();
-            }
-            catch
-            {
-                aux_pathError = "Arma 3 directory";
-            }
-
-            try
-            {
-                string tsKey = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\TeamSpeak 3 Client", "", "");
-                if (tsKey == null)
-                {
-                    RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey(@"SOFTWARE\TeamSpeak 3 Client");
-                    Properties.Settings.Default.TS3Folder = (string)key.GetValue("") + @"\";
-                }
-                else
-                    Properties.Settings.Default.TS3Folder = tsKey;
-
-                if (tsKey == null)
-                    throw new Exception();
-            }
-            catch
-            {
-                try
-                {
-                    string tsKey = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\TeamSpeak 3 Client", "", "");
-                    if (tsKey == null)
-                    {
-                        RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64).OpenSubKey(@"Software\TeamSpeak 3 Client");
-                        Properties.Settings.Default.TS3Folder = (string)key.GetValue("") + @"\";
-                    }
-                    else
-                        Properties.Settings.Default.TS3Folder = tsKey;
-
-                    if (tsKey == null)
-                        throw new Exception();
-                }
-                catch
-                {
-                    if (aux_pathError != "")
-                        aux_pathError = "Arma 3 and TeamSpeak 3 directories";
-                    else
-                        aux_pathError = "TeamSpeak 3 directory";
-                }
-            }
-
-            if (aux_pathError != "")
-                txt_progressStatus.Text = "Unable to get " + aux_pathError;
-
-            Properties.Settings.Default.firstLaunch = false;
-            Properties.Settings.Default.Save();
-
-            if (Properties.Settings.Default.Arma3Folder != "")
-            {
-                txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64); txtb_armaDirectory.Text = Properties.Settings.Default.Arma3Folder.Remove(Properties.Settings.Default.Arma3Folder.Length - 1);
-            }
-            else
-            { txtb_armaDirectory.ForeColor = Color.DarkGray; txtb_armaDirectory.Text = "Set directory ->"; }
-
-            if (Properties.Settings.Default.TS3Folder != "")
-            { txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64); txtb_tsDirectory.Text = Properties.Settings.Default.TS3Folder.Remove(Properties.Settings.Default.TS3Folder.Length - 1); }
-            else
-            { txtb_tsDirectory.ForeColor = Color.DarkGray; txtb_tsDirectory.Text = "Set directory ->"; }
-        }
-
         void FetchSettings()
         {
             if (Properties.Settings.Default.Arma3Folder != "")
-            { txtb_armaDirectory.Text = Properties.Settings.Default.Arma3Folder.Remove(Properties.Settings.Default.Arma3Folder.Length - 1); GameFolder = Properties.Settings.Default.Arma3Folder; }
+            { txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64); GameFolder = txtb_armaDirectory.Text = Properties.Settings.Default.Arma3Folder; }
             else
             { txtb_armaDirectory.ForeColor = Color.DarkGray; txtb_armaDirectory.Text = "Set directory ->"; }
 
             if (Properties.Settings.Default.TS3Folder != "")
-            { txtb_tsDirectory.Text = Properties.Settings.Default.TS3Folder.Remove(Properties.Settings.Default.TS3Folder.Length - 1); }
+            { txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64); TSFolder = txtb_tsDirectory.Text = Properties.Settings.Default.TS3Folder; }
             else
             { txtb_tsDirectory.ForeColor = Color.DarkGray; txtb_tsDirectory.Text = "Set directory ->"; }
+
+            if (Properties.Settings.Default.AddonsFolder != "")
+            { txtb_modsDirectory.ForeColor = Color.FromArgb(64, 64, 64); AddonsFolder = txtb_modsDirectory.Text = Properties.Settings.Default.AddonsFolder; }
+            else
+            { txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->"; }
 
             chb_noLogs.Checked = Properties.Settings.Default.noLogs;
             chb_noPause.Checked = Properties.Settings.Default.noPause;
@@ -416,10 +348,6 @@ namespace arma3Launcher
 
             chb_jsrs.Checked = Properties.Settings.Default.JSRS;
             chb_blastcore.Checked = Properties.Settings.Default.BlastCore;
-
-            AddonsFolder = Properties.Settings.Default.AddonsFolder;
-
-            txtb_modsDirectory.Text = Properties.Settings.Default.AddonsFolder;
 
             lstb_activeAddons.Items.Clear();
             string[] aux_activeMods = Properties.Settings.Default.activeMods.Split(',');
@@ -622,8 +550,8 @@ namespace arma3Launcher
                     }
                 }
 
-                /*if (modsUrl.Count > 0)
-                    modsUrl.Insert(0,cfgUrl);*/
+                if (modsUrl.Count > 0)
+                    modsUrl.Insert(0, cfgUrl);
             }
             catch (Exception ex)
             {
@@ -756,150 +684,60 @@ namespace arma3Launcher
 
         private void btn_browseA3_Click(object sender, EventArgs e)
         {
-            /* try
-             {
-                 Properties.Settings.Default.Arma3Folder = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\bohemia interactive\arma 3", "main", "") + @"\";
-                 Properties.Settings.Default.Save();
-
-                 if (Properties.Settings.Default.Arma3Folder != "")
-                 { txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64); txtb_armaDirectory.Text = Properties.Settings.Default.Arma3Folder.Remove(Properties.Settings.Default.Arma3Folder.Length - 1); }
-                 else
-                 { txtb_armaDirectory.ForeColor = Color.DarkGray; txtb_armaDirectory.Text = "Set directory ->"; }
-             }
-             catch
-             {*/
-            #region Arma Directory Validation
-            if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
-            {
-                string auxA3Folder = dlg_folderBrowser.SelectedPath;
-                bool auxIsFolder = false;
-
-                try
-                {
-                    foreach (string f in Directory.GetFiles(auxA3Folder))
-                    {
-                        if (f.Contains("arma3.exe")) { auxIsFolder = true; break; }
-                        else { continue; }
-                    }
-                }
-                catch
-                { }
-                finally
-                {
-                    if (auxIsFolder)
-                    {
-                        txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64);
-                        Properties.Settings.Default.Arma3Folder = auxA3Folder + @"\";
-                        Properties.Settings.Default.Save();
-                        txtb_armaDirectory.Text = auxA3Folder;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Arma3 application found on that folder.\nMake sure that's the root folder.", "Not the correct folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                #endregion
-                //}
-
-            }
-        }
-
-        private void btn_browseA3_DoubleClick(object sender, EventArgs e)
-        {
-            #region Arma Directory Validation
-            if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
-            {
-                string auxA3Folder = dlg_folderBrowser.SelectedPath;
-                bool auxIsFolder = false;
-
-                try
-                {
-                    foreach (string f in Directory.GetFiles(auxA3Folder))
-                    {
-                        if (f.Contains("arma3.exe")) { auxIsFolder = true; break; }
-                        else { continue; }
-                    }
-                }
-                catch
-                { }
-                finally
-                {
-                    if (auxIsFolder)
-                    {
-                        txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64);
-                        Properties.Settings.Default.Arma3Folder = auxA3Folder + @"\";
-                        Properties.Settings.Default.Save();
-                        txtb_armaDirectory.Text = auxA3Folder;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Arma3 application found on that folder.\nMake sure that's the root folder.", "Not the correct folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            #endregion
+            this.browseGameFolder();
         }
 
         private void btn_browseTS3_Click(object sender, EventArgs e)
         {
-            /*try
-            {
-                string tsKey = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\TeamSpeak 3 Client", "", "");
-                if (tsKey == null)
-                {
-                    RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey(@"SOFTWARE\TeamSpeak 3 Client");
-                    Properties.Settings.Default.TS3Folder = (string)key.GetValue("") + @"\";
-                }
-                else
-                    Properties.Settings.Default.TS3Folder = tsKey;
-
-                Properties.Settings.Default.Save();
-
-                if (Properties.Settings.Default.TS3Folder != "")
-                { txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64); txtb_tsDirectory.Text = Properties.Settings.Default.TS3Folder.Remove(Properties.Settings.Default.TS3Folder.Length - 1); }
-                else
-                { txtb_tsDirectory.ForeColor = Color.DarkGray; txtb_tsDirectory.Text = "Set directory ->"; }
-            }
-            catch
-            {*/
-            #region TS Directory Validation
-            if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
-            {
-                string auxTS3Folder = dlg_folderBrowser.SelectedPath;
-                bool auxIsFolder = false;
-
-                try
-                {
-                    foreach (string f in Directory.GetFiles(auxTS3Folder))
-                    {
-                        if (f.Contains("ts3client_win64.exe") || f.Contains("ts3client_win32.exe")) { auxIsFolder = true; break; }
-                        else { continue; }
-                    }
-                }
-                catch
-                { }
-                finally
-                {
-                    if (auxIsFolder)
-                    {
-                        txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
-                        Properties.Settings.Default.TS3Folder = auxTS3Folder + @"\";
-                        Properties.Settings.Default.Save();
-                        txtb_tsDirectory.Text = auxTS3Folder;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No TeamSpeak 3 application found on that folder.\nMake sure that's the root folder.", "Not the correct folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            #endregion
-            //}
+            this.browseTSFolder();
         }
 
-        private void btn_browseTS3_DoubleClick(object sender, EventArgs e)
+        private void browseGameFolder()
         {
-            #region TS Directory Validation
+            dlg_folderBrowser.Description = "Select Arma 3 root folder.";
+            if (Directory.Exists(txtb_armaDirectory.Text))
+                dlg_folderBrowser.SelectedPath = txtb_armaDirectory.Text;
+
+            if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                string auxA3Folder = dlg_folderBrowser.SelectedPath;
+                bool auxIsFolder = false;
+
+                try
+                {
+                    foreach (string f in Directory.GetFiles(auxA3Folder))
+                    {
+                        if (f.Contains("arma3battleye.exe")) { auxIsFolder = true; break; }
+                        else { continue; }
+                    }
+                }
+                catch
+                { }
+                finally
+                {
+                    if (auxIsFolder)
+                    {
+                        txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64);
+                        GameFolder = Properties.Settings.Default.Arma3Folder = auxA3Folder + @"\";
+                        Properties.Settings.Default.Save();
+                        txtb_armaDirectory.Text = auxA3Folder;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Game executable not there. Please check your Arma 3 directory and try again.", "Missing file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+            dlg_folderBrowser.SelectedPath = "";
+        }
+
+        private void browseTSFolder()
+        {
+            dlg_folderBrowser.Description = "Select TeamSpeak 3 root folder.";
+            if (Directory.Exists(txtb_tsDirectory.Text))
+                dlg_folderBrowser.SelectedPath = txtb_tsDirectory.Text;
+
             if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
             {
                 string auxTS3Folder = dlg_folderBrowser.SelectedPath;
@@ -920,17 +758,45 @@ namespace arma3Launcher
                     if (auxIsFolder)
                     {
                         txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
-                        Properties.Settings.Default.TS3Folder = auxTS3Folder + @"\";
+                        TSFolder = Properties.Settings.Default.TS3Folder = auxTS3Folder + @"\";
                         Properties.Settings.Default.Save();
                         txtb_tsDirectory.Text = auxTS3Folder;
                     }
                     else
                     {
-                        MessageBox.Show("No TeamSpeak 3 application found on that folder.\nMake sure that's the root folder.", "Not the correct folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("TeamSpeak executable not there. Please check your TeamSpeak directory and try again.", "Missing file", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-            #endregion
+
+            dlg_folderBrowser.SelectedPath = "";
+        }
+
+        private void browseAddonsFolder()
+        {
+            dlg_folderBrowser.ShowNewFolderButton = true;
+            dlg_folderBrowser.Description = "Select the Addons folder or create a new one.\n⚠ It can't be the same as the Game folder.";
+            if (Directory.Exists(txtb_modsDirectory.Text))
+                dlg_folderBrowser.SelectedPath = txtb_modsDirectory.Text;
+
+            if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                if (dlg_folderBrowser.SelectedPath != GameFolder)
+                {
+                    AddonsFolder = Properties.Settings.Default.AddonsFolder = dlg_folderBrowser.SelectedPath + @"\";
+                    Properties.Settings.Default.Save();
+                    txtb_modsDirectory.Text = dlg_folderBrowser.SelectedPath;
+                    GetAddons();
+                }
+                else
+                {
+                    MessageBox.Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.browseAddonsFolder();
+                }
+            }
+
+            dlg_folderBrowser.SelectedPath = "";
+            dlg_folderBrowser.ShowNewFolderButton = false;
         }
 
         /*-----------------------------------
@@ -1194,114 +1060,162 @@ namespace arma3Launcher
         {
             btn_Launch.Focus();
 
-            FetchRemoteSettings();
-            GetAddons();
-
-            Process[] pname = Process.GetProcessesByName("steam");
-            if (pname.Length == 0)
+            if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")))
             {
-                try
+                if (Directory.Exists(GameFolder) && File.Exists(GameFolder + "arma3battleye.exe"))
                 {
-                    txt_progressStatus.Text = "Starting Steam...";
+                    if (AddonsFolder != "")
+                    {
+                        FetchRemoteSettings();
+                        GetAddons();
 
-                    var fass = new ProcessStartInfo();
-                    fass.WorkingDirectory = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString().Replace(@"/", @"\") + @"\";
-                    fass.FileName = "steam.exe";
-                    fass.Arguments = Arguments;
+                        btn_Launch.Enabled = false;
 
-                    var process = new Process();
-                    process.StartInfo = fass;
-                    process.Start();
-                    Thread.SpinWait(2000);
-                    Thread.Sleep(2000);
+                        PrepareLaunch = new LaunchCore(chb_noLogs.Checked,
+                            chb_noPause.Checked,
+                            chb_noSplash.Checked,
+                            chb_noCB.Checked,
+                            chb_enableHT.Checked,
+                            chb_skipIntro.Checked,
+                            chb_window.Checked,
+                            chb_winxp.Checked,
+                            chb_showScriptErrors.Checked,
+                            chb_noBenchmark.Checked,
+                            chb_world.Checked,
+                            txtb_world.Text,
+                            chb_maxMem.Checked,
+                            txtb_maxMem.Text,
+                            chb_malloc.Checked,
+                            txtb_malloc.Text,
+                            chb_maxVRAM.Checked,
+                            txtb_maxVRAM.Text,
+                            chb_exThreads.Checked,
+                            txtb_exThreads.Text,
+                            chb_cpuCount.Checked,
+                            txtb_cpuCount.Text,
+                            chb_jsrs.Checked,
+                            chb_jsrs.Tag.ToString(),
+                            chb_blastcore.Checked,
+                            chb_blastcore.Tag.ToString(),
+                            lstb_activeAddons,
+                            modsName);
+
+                        Arguments = PrepareLaunch.GetArguments();
+                        SaveSettings();
+
+                        if (PrepareLaunch.isModPackInstalled(modsName, modsUrl))
+                            runGame();
+                        else
+                            downloader.beginDownload(modsUrl, true, activePack, cfgUrl.Split('!')[1]);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Addons directory doesn't exist. Please check your Addons directory and try again.", "Missing directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.browseAddonsFolder();
+                    }
                 }
-                catch { }
+                else
+                {
+                    MessageBox.Show("Game directory doesn't exist or executable not there. Please check your Arma 3 directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.browseGameFolder();
+                }
             }
-
-            btn_Launch.Enabled = false;
-
-            string aux_error = "";
-            string aux_errors = "";
-
-            if (Properties.Settings.Default.Arma3Folder == "")
-                aux_error = "Arma 3";
-
-            if (Properties.Settings.Default.TS3Folder == "")
-                if (aux_error != "")
-                { aux_errors = aux_error + ", TeamSpeak 3"; aux_error = ""; }
-                else
-                { aux_error = "TeamSpeak 3"; }
-
-            if (Properties.Settings.Default.AddonsFolder == "")
-                if (aux_error != "")
-                { aux_errors = aux_error + ", Addons"; aux_error = ""; }
-                else
-                { aux_error = "Addons"; }
-
-
-            if (aux_error != "")
-                MessageBox.Show("The " + aux_error + " folder is not selected!\nCheck the \"Help\" tab for more info on how to use the launcher.", "Missing directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (aux_errors != "")
-                MessageBox.Show("The following folders are missing: " + aux_errors + "\nCheck the \"Help\" tab for more info on how to use the launcher.", "Missing directories", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
-                PrepareLaunch = new LaunchCore(chb_noLogs.Checked,
-                    chb_noPause.Checked,
-                    chb_noSplash.Checked,
-                    chb_noCB.Checked,
-                    chb_enableHT.Checked,
-                    chb_skipIntro.Checked,
-                    chb_window.Checked,
-                    chb_winxp.Checked,
-                    chb_showScriptErrors.Checked,
-                    chb_noBenchmark.Checked,
-                    chb_world.Checked,
-                    txtb_world.Text,
-                    chb_maxMem.Checked,
-                    txtb_maxMem.Text,
-                    chb_malloc.Checked,
-                    txtb_malloc.Text,
-                    chb_maxVRAM.Checked,
-                    txtb_maxVRAM.Text,
-                    chb_exThreads.Checked,
-                    txtb_exThreads.Text,
-                    chb_cpuCount.Checked,
-                    txtb_cpuCount.Text,
-                    chb_jsrs.Checked,
-                    chb_jsrs.Tag.ToString(),
-                    chb_blastcore.Checked,
-                    chb_blastcore.Tag.ToString(),
-                    lstb_activeAddons,
-                    modsName);
-
-                Arguments = PrepareLaunch.GetArguments();
-                SaveSettings();
-
-                if (PrepareLaunch.isModPackInstalled(modsName, modsUrl))
-                    PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo());
-                else
-                    downloader.beginDownload(modsUrl, false, true);
+                MessageBox.Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.browseTSFolder();
             }
         }
 
         private void txtb_armaDirectory_TextChanged(object sender, EventArgs e)
         {
-            getMalloc();
-        }
-
-        private void txtb_armaDirectory_Leave(object sender, EventArgs e)
-        {
-            if (txtb_armaDirectory.Text.EndsWith(@"\"))
+            if (txtb_armaDirectory.Text != "Set directory ->")
             {
-                txtb_armaDirectory.Text = txtb_armaDirectory.Text.Remove(txtb_armaDirectory.Text.Length - 1);
+                txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64);
+
+                if (txtb_armaDirectory.Text.EndsWith("\\"))
+                    txtb_armaDirectory.Text = txtb_armaDirectory.Text.Remove(txtb_armaDirectory.Text.Length - 1);
+
+                if (txtb_armaDirectory.Text.EndsWith("/"))
+                    txtb_armaDirectory.Text = txtb_armaDirectory.Text.Remove(txtb_armaDirectory.Text.Length - 1).Replace("/", "\\");
+
+                if (Directory.Exists(txtb_armaDirectory.Text) && File.Exists(txtb_armaDirectory.Text + @"\arma3battleye.exe"))
+                {
+                    GameFolder = Properties.Settings.Default.Arma3Folder = txtb_armaDirectory.Text + @"\";
+                    Properties.Settings.Default.Save();
+
+                    getMalloc();
+                    armaDir_previousDir = txtb_armaDirectory.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Game executable not there. Please check your Arma 3 directory and try again.", "Missing file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (String.IsNullOrEmpty(armaDir_previousDir))
+                        this.browseGameFolder();
+                    else
+                        txtb_armaDirectory.Text = armaDir_previousDir;
+                }
             }
         }
 
-        private void txtb_tsDirectory_Leave(object sender, EventArgs e)
+        private void txtb_tsDirectory_TextChanged(object sender, EventArgs e)
         {
-            if (txtb_tsDirectory.Text.EndsWith(@"\"))
+            if (txtb_tsDirectory.Text != "Set directory ->")
             {
-                txtb_tsDirectory.Text = txtb_tsDirectory.Text.Remove(txtb_tsDirectory.Text.Length - 1);
+                txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
+
+                if (txtb_tsDirectory.Text.EndsWith("\\"))
+                    txtb_tsDirectory.Text = txtb_tsDirectory.Text.Remove(txtb_tsDirectory.Text.Length - 1);
+
+                if (txtb_tsDirectory.Text.EndsWith("/"))
+                    txtb_tsDirectory.Text = txtb_tsDirectory.Text.Remove(txtb_tsDirectory.Text.Length - 1).Replace("/", "\\");
+
+                if (Directory.Exists(txtb_tsDirectory.Text) && (File.Exists(txtb_tsDirectory.Text + @"\ts3client_win64.exe") || File.Exists(txtb_tsDirectory.Text + @"\ts3client_win32.exe")))
+                {
+                    TSFolder = Properties.Settings.Default.TS3Folder = txtb_tsDirectory.Text + @"\";
+                    Properties.Settings.Default.Save();
+
+                    tsDir_previousDir = txtb_tsDirectory.Text;
+                }
+                else
+                {
+                    MessageBox.Show("TeamSpeak executable not there. Please check your TeamSpeak directory and try again.", "Missing file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (String.IsNullOrEmpty(tsDir_previousDir))
+                        this.browseTSFolder();
+                    else
+                        txtb_tsDirectory.Text = tsDir_previousDir;
+                }
+            }
+        }
+
+        private void txtb_modsDirectory_TextChanged(object sender, EventArgs e)
+        {
+            if (txtb_modsDirectory.Text != "Set directory ->")
+            {
+                txtb_modsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
+
+                if (txtb_modsDirectory.Text.EndsWith("\\"))
+                    txtb_modsDirectory.Text = txtb_modsDirectory.Text.Remove(txtb_modsDirectory.Text.Length - 1);
+
+                if (txtb_modsDirectory.Text.EndsWith("/"))
+                    txtb_modsDirectory.Text = txtb_modsDirectory.Text.Remove(txtb_modsDirectory.Text.Length - 1).Replace("/", "\\");
+
+                if (txtb_modsDirectory.Text != txtb_armaDirectory.Text && !File.Exists(txtb_modsDirectory.Text + "\\arma3.exe"))
+                {
+                    AddonsFolder = Properties.Settings.Default.AddonsFolder = txtb_modsDirectory.Text + @"\";
+                    Properties.Settings.Default.Save();
+
+                    GetAddons();
+                    modsDir_previousDir = txtb_modsDirectory.Text;
+                }
+                else
+                {
+                    MessageBox.Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (String.IsNullOrEmpty(modsDir_previousDir))
+                        this.browseAddonsFolder();
+                    else
+                        txtb_modsDirectory.Text = modsDir_previousDir;
+                }
             }
         }
 
@@ -1460,7 +1374,7 @@ namespace arma3Launcher
             {
                 modsUrl.Clear();
                 modsUrl.Add(jsrsUrl);
-                downloader.beginDownload(modsUrl, false, false);
+                downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
             }
             else
                 downloader.enqueueUrl(jsrsUrl);
@@ -1474,7 +1388,7 @@ namespace arma3Launcher
             {
                 modsUrl.Clear();
                 modsUrl.Add(blastcoreUrl);
-                downloader.beginDownload(modsUrl, false, false);
+                downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
             }
             else
                 downloader.enqueueUrl(blastcoreUrl);
@@ -1488,7 +1402,7 @@ namespace arma3Launcher
             {
                 modsUrl.Clear();
                 modsUrl.Add(cfgUrl);
-                downloader.beginDownload(modsUrl, true, false);
+                downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
             }
 
             btn_downloadConfigs.Enabled = false;
@@ -1496,50 +1410,15 @@ namespace arma3Launcher
 
         private void btn_ereaseModsDirectory_Click(object sender, EventArgs e)
         {
-            txtb_modsDirectory.Text = "";
+            Properties.Settings.Default.AddonsFolder = "";
+            Properties.Settings.Default.Save();
+
+            txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->";
         }
 
         private void btn_browseModsDirectory_Click(object sender, EventArgs e)
         {
-            dlg_folderBrowser.ShowNewFolderButton = true;
-
-            if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
-            {
-                if (dlg_folderBrowser.SelectedPath != GameFolder)
-                {
-                    Properties.Settings.Default.AddonsFolder = dlg_folderBrowser.SelectedPath + @"\";
-                    Properties.Settings.Default.Save();
-                    txtb_modsDirectory.Text = dlg_folderBrowser.SelectedPath;
-                    GetAddons();
-                }
-                else
-                    MessageBox.Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            dlg_folderBrowser.ShowNewFolderButton = false;
-        }
-
-        private void txtb_modsDirectory_TextChanged(object sender, EventArgs e)
-        {
-            if (txtb_modsDirectory.Text.EndsWith("\\"))
-                txtb_modsDirectory.Text = txtb_modsDirectory.Text.Remove(txtb_modsDirectory.Text.Length - 1);
-
-            if (txtb_modsDirectory.Text.EndsWith("/"))
-                txtb_modsDirectory.Text = txtb_modsDirectory.Text.Remove(txtb_modsDirectory.Text.Length - 1).Replace("/", "\\");
-
-            if (txtb_modsDirectory.Text != txtb_armaDirectory.Text && !File.Exists(txtb_modsDirectory.Text + "\\arma3.exe"))
-            {
-                Properties.Settings.Default.AddonsFolder = txtb_modsDirectory.Text + @"\";
-                Properties.Settings.Default.Save();
-
-                GetAddons();
-                modsDir_previousDir = txtb_modsDirectory.Text;
-            }
-            else
-            {
-                txtb_modsDirectory.Text = modsDir_previousDir;
-                MessageBox.Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            this.browseAddonsFolder();
         }
 
         private void btn_openA3_Click(object sender, EventArgs e)
@@ -1603,7 +1482,7 @@ namespace arma3Launcher
         { installer.installTeamSpeakPlugin(); }
 
         public void runInstaller(bool isLaunch)
-        { installer.beginInstall(isLaunch, this.activePack); }
+        { installer.beginInstall(isLaunch, cfgUrl.Split('!')[1], activePack); }
 
         public void runGame()
         { PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo()); }

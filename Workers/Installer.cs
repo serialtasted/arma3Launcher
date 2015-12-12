@@ -73,12 +73,26 @@ namespace arma3Launcher.Workers
         // invokes
         private void progressBarFileStyle(ProgressBarStyle prbStyle)
         {
-            this.progressFile.Style = prbStyle;
+            if (this.progressFile.InvokeRequired)
+            {
+                this.progressFile.Invoke(new MethodInvoker(delegate { this.progressFile.Style = prbStyle; }));
+            }
+            else
+            {
+                this.progressFile.Style = prbStyle;
+            }
         }
 
         private void progressBarFileState(ProgressBarState prbState)
         {
-            this.progressFile.State = prbState;
+            if (this.progressFile.InvokeRequired)
+            {
+                this.progressFile.Invoke(new MethodInvoker(delegate { this.progressFile.State = prbState; }));
+            }
+            else
+            {
+                this.progressFile.State = prbState;
+            }
         }
 
         private void currentFileText(string text)
@@ -254,7 +268,7 @@ namespace arma3Launcher.Workers
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void InstallFiles_DoWork(object sender, DoWorkEventArgs e)
+        private void InstallFiles_DoWork(object sender, DoWorkEventArgs e)
         {
             bool isTFR = false;
             bool isRHS_AFRF = false;
@@ -271,15 +285,6 @@ namespace arma3Launcher.Workers
                     if (zipFile != null)
                         using (ZipArchive archive = ZipFile.OpenRead(zipFile))
                         {
-                            if (zipFile.Contains("task_force_radio"))
-                                isTFR = true;
-
-                            if (zipFile.Contains("RHSAFRF"))
-                                isRHS_AFRF = true;
-
-                            if (zipFile.Contains("RHSUSF"))
-                                isRHS_USF = true;
-
                             this.progressStatusText("Extracting new files...");
 
                             string filePath = "";
@@ -292,6 +297,15 @@ namespace arma3Launcher.Workers
 
                             foreach (ZipArchiveEntry entry in archive.Entries)
                             {
+                                if (entry.FullName.Contains("task_force_radio") && !isTFR)
+                                    isTFR = true;
+
+                                if (entry.FullName.Contains("RHSAFRF") && !isRHS_AFRF)
+                                    isRHS_AFRF = true;
+
+                                if (entry.FullName.Contains("RHSUSF") && !isRHS_USF)
+                                    isRHS_USF = true;
+
                                 try
                                 {
                                     filePath = Path.Combine(aux_ModsFolder, entry.FullName).Replace(@"/", @"\\").Replace(@"\\", @"\");
@@ -332,7 +346,7 @@ namespace arma3Launcher.Workers
                                 catch (Exception ex)
                                 { MessageBox.Show(ex.Message); }
 
-                                this.progressBarFileValue((nFile++ / archive.Entries.Count) * 100);
+                                this.progressBarFileValue(Convert.ToInt32(((double)nFile++ / archive.Entries.Count) * 100));
                             }
 
                             this.currentFileText("");
@@ -340,7 +354,7 @@ namespace arma3Launcher.Workers
                     else
                         break;
 
-                    this.progressBarAllValue((nAll++ / (Directory.GetFiles(this.TempFolder).Length + 1)) * 100);
+                    this.progressBarAllValue(Convert.ToInt32(((double)nAll++ / (Directory.GetFiles(this.TempFolder).Length + 1)) * 100));
                 }
 
                 #region isTFR

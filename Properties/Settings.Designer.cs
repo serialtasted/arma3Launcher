@@ -433,7 +433,7 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool runLauncherOnStartup {
             get {
                 return ((bool)(this["runLauncherOnStartup"]));
@@ -469,7 +469,7 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool allowErrorReport {
             get {
                 return ((bool)(this["allowErrorReport"]));

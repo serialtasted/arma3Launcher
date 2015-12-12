@@ -302,6 +302,7 @@ namespace arma3Launcher
 
         void FetchSettings()
         {
+            // directories
             if (Properties.Settings.Default.Arma3Folder != "")
             { txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64); GameFolder = txtb_armaDirectory.Text = Properties.Settings.Default.Arma3Folder; }
             else
@@ -317,6 +318,7 @@ namespace arma3Launcher
             else
             { txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->"; }
 
+            // launch options
             chb_noLogs.Checked = Properties.Settings.Default.noLogs;
             chb_noPause.Checked = Properties.Settings.Default.noPause;
             chb_noSplash.Checked = Properties.Settings.Default.noSplash;
@@ -349,6 +351,7 @@ namespace arma3Launcher
             chb_jsrs.Checked = Properties.Settings.Default.JSRS;
             chb_blastcore.Checked = Properties.Settings.Default.BlastCore;
 
+            // optional addons
             lstb_activeAddons.Items.Clear();
             string[] aux_activeMods = Properties.Settings.Default.activeMods.Split(',');
             foreach (string s in aux_activeMods)
@@ -357,7 +360,8 @@ namespace arma3Launcher
                     lstb_activeAddons.Items.Add(s);
             }
 
-            pref_startGameAfterDownloadsAreCompleted.Checked = true/*Properties.Settings.Default.startGameAfterDownload*/;
+            // preferences
+            pref_startGameAfterDownloadsAreCompleted.Checked = Properties.Settings.Default.startGameAfterDownload;
             pref_runLauncherOnStartup.Checked = Properties.Settings.Default.runLauncherOnStartup;
             pref_allowNotifications.Checked = Properties.Settings.Default.allowNotifications;
             pref_allowNotifications.Checked = Properties.Settings.Default.autoDownload;
@@ -365,6 +369,7 @@ namespace arma3Launcher
 
         void SaveSettings()
         {
+            // launch options
             Properties.Settings.Default.noLogs = chb_noLogs.Checked;
             Properties.Settings.Default.noPause = chb_noPause.Checked;
             Properties.Settings.Default.noSplash = chb_noSplash.Checked;
@@ -397,8 +402,7 @@ namespace arma3Launcher
             Properties.Settings.Default.JSRS = chb_jsrs.Checked;
             Properties.Settings.Default.BlastCore = chb_blastcore.Checked;
 
-            Properties.Settings.Default.AddonsFolder = txtb_modsDirectory.Text + @"\";
-
+            // optional addons
             string aux_activeMods = "";
             foreach (var item in lstb_activeAddons.Items)
             {
@@ -409,6 +413,7 @@ namespace arma3Launcher
             }
             Properties.Settings.Default.activeMods = aux_activeMods;
 
+            // preferences
             Properties.Settings.Default.startGameAfterDownload = pref_startGameAfterDownloadsAreCompleted.Checked;
             Properties.Settings.Default.runLauncherOnStartup = pref_runLauncherOnStartup.Checked;
             Properties.Settings.Default.allowNotifications = pref_allowNotifications.Checked;
@@ -538,7 +543,7 @@ namespace arma3Launcher
                                     }
                                     catch (Exception ex)
                                     {
-                                        MessageBox.Show(ex.Message);
+                                        //MessageBox.Show(ex.Message);
                                     }
                                 }
                                 else { isInstalled = false; continue; }
@@ -1498,5 +1503,38 @@ namespace arma3Launcher
 
         public bool autoDownloadUpdates()
         { return pref_autoDownload.Checked; }
+
+        private void txtb_armaDirectory_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (txtb_armaDirectory.Text == "Set directory ->")
+                txtb_armaDirectory.SelectAll();
+        }
+
+        private void txtb_armaDirectory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            txtb_armaDirectory.SelectAll();
+        }
+
+        private void txtb_tsDirectory_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (txtb_tsDirectory.Text == "Set directory ->")
+                txtb_tsDirectory.SelectAll();
+        }
+
+        private void txtb_tsDirectory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            txtb_tsDirectory.SelectAll();
+        }
+
+        private void txtb_modsDirectory_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (txtb_modsDirectory.Text == "Set directory ->")
+                txtb_modsDirectory.SelectAll();
+        }
+
+        private void txtb_modsDirectory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            txtb_modsDirectory.SelectAll();
+        }
     }
 }

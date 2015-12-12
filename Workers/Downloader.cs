@@ -30,10 +30,12 @@ namespace arma3Launcher.Workers
         private MainForm mainForm;
 
         // background workers
+        private BackgroundWorker calculateFiles = new BackgroundWorker();
         private BackgroundWorker downloadFiles = new BackgroundWorker();
         
         // download stuff
         private Queue<string> downloadUrls = new Queue<string>();
+        private IEnumerable<string> listUrls = new List<string>();
 
         // folder paths
         private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
@@ -47,6 +49,8 @@ namespace arma3Launcher.Workers
         private bool downloadRunning = false;
         private int totalDownloads = 0;
         private int parsedDownloads = 0;
+        private Int64 parsedBytes;
+        private Int64 totalBytes;
 
         // error report
         private EmailReporter reportError;
@@ -64,7 +68,26 @@ namespace arma3Launcher.Workers
         // invokes
         private void progressBarFileStyle(ProgressBarStyle prbStyle)
         {
-            this.progressFile.Style = prbStyle;
+            if (this.progressFile.InvokeRequired)
+            {
+                this.progressFile.Invoke(new MethodInvoker(delegate { this.progressFile.Style = prbStyle; }));
+            }
+            else
+            {
+                this.progressFile.Style = prbStyle;
+            }
+        }
+
+        private void progressBarFileState(ProgressBarState prbState)
+        {
+            if (this.progressFile.InvokeRequired)
+            {
+                this.progressFile.Invoke(new MethodInvoker(delegate { this.progressFile.State = prbState; }));
+            }
+            else
+            {
+                this.progressFile.State = prbState;
+            }
         }
 
         private void currentFileText(string text)
@@ -158,25 +181,31 @@ namespace arma3Launcher.Workers
             this.progressDetails = progressDetails;
             this.launcherButton = launcherButton;
 
-            // define background worker
+            // define calculate worker
+            this.calculateFiles.DoWork += CalculateFiles_DoWork;
+            this.calculateFiles.RunWorkerCompleted += CalculateFiles_RunWorkerCompleted;
+
+            // define download worker
             this.downloadFiles.DoWork += DownloadFiles_DoWork;
             this.downloadFiles.RunWorkerCompleted += DownloadFiles_RunWorkerCompleted;
-
-            // define event for text change
-            this.progressText.TextChanged += ProgressText_TextChanged;
         }
 
-        /// <summary>
-        /// Update progress bar style
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ProgressText_TextChanged(object sender, EventArgs e)
+        private void CalculateFiles_DoWork(object sender, DoWorkEventArgs e)
         {
-            if(progressText.Text.StartsWith("Downloading"))
+            // reset variables
+            this.parsedBytes = 0;
+            this.totalBytes = 0;
+
+            foreach (var url in listUrls)
             {
-                this.progressBarFileStyle(ProgressBarStyle.Continuous);
+                using (Stream webStream = megaClient.Download(new Uri(url)))
+                    this.totalBytes += Convert.ToInt64(webStream.Length);
             }
+        }
+
+        private void CalculateFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.downloadFiles.RunWorkerAsync();
         }
 
         /// <summary>
@@ -221,16 +250,19 @@ namespace arma3Launcher.Workers
                 while ((bytesRead = webStream.Read(buffer, 0, buffer.Length)) > 0)
                 {
                     bytesReadComplete += bytesRead;
+                    parsedBytes += bytesRead;
                     fileStream.Write(buffer, 0, bytesRead);
-
-                    progressPercentage = Convert.ToInt32(((double)bytesReadComplete / bytesTotal) * 100);
 
                     if ((bytesReadComplete / 1024d / sw.Elapsed.TotalSeconds) > 999)
                         downloadSpeed = String.Format("{0:F1} mb/s", bytesReadComplete / 1048576d / sw.Elapsed.TotalSeconds);
                     else
                         downloadSpeed = String.Format("{0:F1} kb/s", bytesReadComplete / 1024d / sw.Elapsed.TotalSeconds);
 
+                    progressPercentage = Convert.ToInt32(((double)bytesReadComplete / bytesTotal) * 100);
+
+                    this.progressBarFileStyle(ProgressBarStyle.Continuous);
                     this.progressBarFileValue(progressPercentage);
+                    this.progressBarAllValue(Convert.ToInt32(((double)parsedBytes / totalBytes) * 100));
                     this.progressStatusText(String.Format("Downloading ({0:F0}/{1:F0}) {2}... {3:F0}%", this.parsedDownloads, this.totalDownloads, outputFile, progressPercentage));
                     this.progressDetailsText(String.Format("{0:0}MB of {1:0}MB / {2}", ConvertBytesToMegabytes(bytesReadComplete), ConvertBytesToMegabytes(bytesTotal), downloadSpeed));
                 }
@@ -244,8 +276,8 @@ namespace arma3Launcher.Workers
             this.downloadUrls.Dequeue();
             this.SaveDownloadQueue();
 
-            this.parsedDownloads++;
-            progressBarAllValue((this.parsedDownloads / this.totalDownloads) * 100);
+            if (this.parsedDownloads < this.totalDownloads)
+                this.parsedDownloads++;
 
             if (this.downloadUrls.Count > 0)
                 this.downloadFiles.RunWorkerAsync();
@@ -306,7 +338,7 @@ namespace arma3Launcher.Workers
         /// </summary>
         /// <param name="urlsList"></param>
         /// <param name="isConfig"></param>
-        public void beginDownload(IEnumerable<string> urlsList, bool isLaunch, string activePack, string configUrl)
+        public void beginDownload(IEnumerable<string> listUrls, bool isLaunch, string activePack, string configUrl)
         {
             // lock controls
             this.launcherButton.Enabled = false;
@@ -321,8 +353,11 @@ namespace arma3Launcher.Workers
             this.activePack = activePack;
             this.configUrl = configUrl;
 
+            // fill urls list
+            this.listUrls = listUrls;
+
             // define urls
-            foreach (var url in urlsList)
+            foreach (var url in listUrls)
             {
                 this.downloadUrls.Enqueue(url);
             }
@@ -334,7 +369,7 @@ namespace arma3Launcher.Workers
             // begin download
             this.downloadRunning = true;
             this.megaClient.LoginAnonymous();
-            this.downloadFiles.RunWorkerAsync();
+            this.calculateFiles.RunWorkerAsync();
         }
     }
 }

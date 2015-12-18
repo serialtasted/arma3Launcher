@@ -57,10 +57,10 @@ namespace arma3Launcher.Workers
                     XmlDocument NewUpdateXmlInfo = new XmlDocument();
                     NewUpdateXmlInfo.Load(urlversionxml);
 
-                    int new_versionmajor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//Version").Attributes["major"].Value);
-                    int new_versionminor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//Version").Attributes["minor"].Value);
-                    int new_versionbuild = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//Version").Attributes["build"].Value);
-                    string new_versiontag = NewUpdateXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//Version").Attributes["tag"].Value;
+                    int new_versionmajor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["major"].Value);
+                    int new_versionminor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["minor"].Value);
+                    int new_versionbuild = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["build"].Value);
+                    string new_versiontag = NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["tag"].Value;
 
                     NewVersion = new Version(new_versionmajor, new_versionminor, new_versionbuild);
                     #endregion
@@ -153,10 +153,10 @@ namespace arma3Launcher.Workers
                     XmlDocument NewUpdateXmlInfo = new XmlDocument();
                     NewUpdateXmlInfo.Load(urlversionxml);
 
-                    int new_versionmajor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//Version").Attributes["major"].Value);
-                    int new_versionminor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//Version").Attributes["minor"].Value);
-                    int new_versionbuild = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//Version").Attributes["build"].Value);
-                    string new_versiontag = NewUpdateXmlInfo.SelectSingleNode("//spN_Launcher//LauncherInfo//Version").Attributes["tag"].Value;
+                    int new_versionmajor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["major"].Value);
+                    int new_versionminor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["minor"].Value);
+                    int new_versionbuild = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["build"].Value);
+                    string new_versiontag = NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["tag"].Value;
 
                     NewVersion = new Version(new_versionmajor, new_versionminor, new_versionbuild);
                     #endregion

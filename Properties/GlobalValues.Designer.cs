@@ -61,24 +61,6 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/spNLauncher/Xml/feed.xml.
-        /// </summary>
-        internal static string FP_FeedUrl {
-            get {
-                return ResourceManager.GetString("FP_FeedUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/spNLauncher/Xml/rules.xml.
-        /// </summary>
-        internal static string FP_RulesUrl {
-            get {
-                return ResourceManager.GetString("FP_RulesUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to spnlauncher.
         /// </summary>
         internal static string FTP_Password {
@@ -97,7 +79,52 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/spNLauncher/Releases/zUpdator.exe.
+        ///   Looks up a localized string similar to https://github.com/serialtasted/arma3Launcher.
+        /// </summary>
+        internal static string Link_Gihub {
+            get {
+                return ResourceManager.GetString("Link_Gihub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.twitch.tv/serialtasted.
+        /// </summary>
+        internal static string Link_Twitch {
+            get {
+                return ResourceManager.GetString("Link_Twitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://twitter.com/serialtasted.
+        /// </summary>
+        internal static string Link_Twitter {
+            get {
+                return ResourceManager.GetString("Link_Twitter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://www.youtube.com/serialtasted.
+        /// </summary>
+        internal static string Link_Youtube {
+            get {
+                return ResourceManager.GetString("Link_Youtube", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/arma3Launcher/Xml/repo.xml.
+        /// </summary>
+        internal static string S_RepoXML {
+            get {
+                return ResourceManager.GetString("S_RepoXML", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/arma3Launcher/Releases/zUpdator.exe.
         /// </summary>
         internal static string S_UpdateUrl {
             get {
@@ -115,7 +142,7 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/spNLauncher/Xml/version.xml.
+        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/arma3Launcher/Xml/config.xml.
         /// </summary>
         internal static string S_VersionXML {
             get {

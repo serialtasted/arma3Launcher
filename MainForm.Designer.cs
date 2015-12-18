@@ -99,12 +99,10 @@
             this.panel_about = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
-            this.txt_contactEmail = new System.Windows.Forms.Label();
             this.btn_goGit = new System.Windows.Forms.PictureBox();
             this.btn_goYoutube = new System.Windows.Forms.PictureBox();
             this.btn_goTwitch = new System.Windows.Forms.PictureBox();
             this.btn_goTwitter = new System.Windows.Forms.PictureBox();
-            this.img_email = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label27 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -164,10 +162,7 @@
             this.WindowTitle = new System.Windows.Forms.Label();
             this.WindowVersionStatus = new System.Windows.Forms.Label();
             this.dlg_folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-            this.backgroundInstaller = new System.ComponentModel.BackgroundWorker();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
-            this.delayLaunch = new System.Windows.Forms.Timer(this.components);
             this.sysbtn_moreOptions = new System.Windows.Forms.PictureBox();
             this.backgroundFetchNews = new System.ComponentModel.BackgroundWorker();
             this.delayFecthNews = new System.Windows.Forms.Timer(this.components);
@@ -183,7 +178,7 @@
             this.btn_reinstallTFRPlugins = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
-            this.downloadQueue = new System.ComponentModel.BackgroundWorker();
+            this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
             this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
             this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
@@ -219,7 +214,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_goYoutube)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_goTwitch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_goTwitter)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.img_email)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -627,11 +621,15 @@
             // txtb_modsDirectory
             // 
             this.txtb_modsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_modsDirectory.ForeColor = System.Drawing.Color.DarkGray;
             this.txtb_modsDirectory.Location = new System.Drawing.Point(398, 33);
             this.txtb_modsDirectory.Name = "txtb_modsDirectory";
             this.txtb_modsDirectory.Size = new System.Drawing.Size(435, 22);
             this.txtb_modsDirectory.TabIndex = 4;
+            this.txtb_modsDirectory.Text = "Set directory ->";
+            this.txtb_modsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_modsDirectory_MouseClick);
             this.txtb_modsDirectory.TextChanged += new System.EventHandler(this.txtb_modsDirectory_TextChanged);
+            this.txtb_modsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_modsDirectory_MouseDoubleClick);
             // 
             // tableLayoutPanel2
             // 
@@ -1054,12 +1052,10 @@
             // panel12
             // 
             this.panel12.Controls.Add(this.label21);
-            this.panel12.Controls.Add(this.txt_contactEmail);
             this.panel12.Controls.Add(this.btn_goGit);
             this.panel12.Controls.Add(this.btn_goYoutube);
             this.panel12.Controls.Add(this.btn_goTwitch);
             this.panel12.Controls.Add(this.btn_goTwitter);
-            this.panel12.Controls.Add(this.img_email);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(10, 161);
             this.panel12.Name = "panel12";
@@ -1075,15 +1071,6 @@
             this.label21.Size = new System.Drawing.Size(14, 21);
             this.label21.TabIndex = 10;
             this.label21.Text = "|";
-            // 
-            // txt_contactEmail
-            // 
-            this.txt_contactEmail.AutoSize = true;
-            this.txt_contactEmail.Location = new System.Drawing.Point(590, 13);
-            this.txt_contactEmail.Name = "txt_contactEmail";
-            this.txt_contactEmail.Size = new System.Drawing.Size(173, 13);
-            this.txt_contactEmail.TabIndex = 9;
-            this.txt_contactEmail.Text = "rodrigo.taveira.levy@gmail.com";
             // 
             // btn_goGit
             // 
@@ -1128,16 +1115,6 @@
             this.btn_goTwitter.TabIndex = 2;
             this.btn_goTwitter.TabStop = false;
             this.btn_goTwitter.Click += new System.EventHandler(this.btn_goTwitter_Click);
-            // 
-            // img_email
-            // 
-            this.img_email.Cursor = System.Windows.Forms.Cursors.Default;
-            this.img_email.Image = global::arma3Launcher.Properties.Resources.mail;
-            this.img_email.Location = new System.Drawing.Point(574, 13);
-            this.img_email.Name = "img_email";
-            this.img_email.Size = new System.Drawing.Size(16, 16);
-            this.img_email.TabIndex = 0;
-            this.img_email.TabStop = false;
             // 
             // tableLayoutPanel3
             // 
@@ -1502,7 +1479,7 @@
             this.label12.Location = new System.Drawing.Point(10, 15);
             this.label12.MaximumSize = new System.Drawing.Size(890, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(879, 285);
+            this.label12.Size = new System.Drawing.Size(884, 285);
             this.label12.TabIndex = 1;
             this.label12.Text = resources.GetString("label12.Text");
             this.label12.UseMnemonic = false;
@@ -1701,7 +1678,6 @@
             this.btn_browseTS3.TabStop = false;
             this.toolTip.SetToolTip(this.btn_browseTS3, "Double-click for manual browse");
             this.btn_browseTS3.Click += new System.EventHandler(this.btn_browseTS3_Click);
-            this.btn_browseTS3.DoubleClick += new System.EventHandler(this.btn_browseTS3_DoubleClick);
             // 
             // btn_browseA3
             // 
@@ -1714,7 +1690,6 @@
             this.btn_browseA3.TabStop = false;
             this.toolTip.SetToolTip(this.btn_browseA3, "Double-click for manual browse");
             this.btn_browseA3.Click += new System.EventHandler(this.btn_browseA3_Click);
-            this.btn_browseA3.DoubleClick += new System.EventHandler(this.btn_browseA3_DoubleClick);
             // 
             // btn_ereaseTSDirectory
             // 
@@ -1754,26 +1729,31 @@
             // 
             this.txtb_armaDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtb_armaDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_armaDirectory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_armaDirectory.ForeColor = System.Drawing.Color.DarkGray;
             this.txtb_armaDirectory.Location = new System.Drawing.Point(185, 14);
             this.txtb_armaDirectory.Name = "txtb_armaDirectory";
             this.txtb_armaDirectory.Size = new System.Drawing.Size(666, 25);
             this.txtb_armaDirectory.TabIndex = 3;
             this.txtb_armaDirectory.TabStop = false;
+            this.txtb_armaDirectory.Text = "Set directory ->";
+            this.txtb_armaDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_armaDirectory_MouseClick);
             this.txtb_armaDirectory.TextChanged += new System.EventHandler(this.txtb_armaDirectory_TextChanged);
-            this.txtb_armaDirectory.Leave += new System.EventHandler(this.txtb_armaDirectory_Leave);
+            this.txtb_armaDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_armaDirectory_MouseDoubleClick);
             // 
             // txtb_tsDirectory
             // 
             this.txtb_tsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtb_tsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_tsDirectory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_tsDirectory.ForeColor = System.Drawing.Color.DarkGray;
             this.txtb_tsDirectory.Location = new System.Drawing.Point(185, 50);
             this.txtb_tsDirectory.Name = "txtb_tsDirectory";
             this.txtb_tsDirectory.Size = new System.Drawing.Size(666, 25);
             this.txtb_tsDirectory.TabIndex = 2;
             this.txtb_tsDirectory.TabStop = false;
-            this.txtb_tsDirectory.Leave += new System.EventHandler(this.txtb_tsDirectory_Leave);
+            this.txtb_tsDirectory.Text = "Set directory ->";
+            this.txtb_tsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseClick);
+            this.txtb_tsDirectory.TextChanged += new System.EventHandler(this.txtb_tsDirectory_TextChanged);
+            this.txtb_tsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseDoubleClick);
             // 
             // label2
             // 
@@ -1816,8 +1796,10 @@
             this.txt_progressStatus.AutoSize = true;
             this.txt_progressStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.txt_progressStatus.Location = new System.Drawing.Point(19, 28);
+            this.txt_progressStatus.MaximumSize = new System.Drawing.Size(450, 0);
+            this.txt_progressStatus.MinimumSize = new System.Drawing.Size(450, 0);
             this.txt_progressStatus.Name = "txt_progressStatus";
-            this.txt_progressStatus.Size = new System.Drawing.Size(123, 19);
+            this.txt_progressStatus.Size = new System.Drawing.Size(450, 19);
             this.txt_progressStatus.TabIndex = 6;
             this.txt_progressStatus.Text = "Waiting for orders";
             // 
@@ -1920,21 +1902,6 @@
             this.dlg_folderBrowser.RootFolder = System.Environment.SpecialFolder.MyComputer;
             this.dlg_folderBrowser.ShowNewFolderButton = false;
             // 
-            // backgroundInstaller
-            // 
-            this.backgroundInstaller.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundInstaller_DoWork);
-            this.backgroundInstaller.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundInstaller_RunWorkerCompleted);
-            // 
-            // backgroundBlinker
-            // 
-            this.backgroundBlinker.WorkerSupportsCancellation = true;
-            this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
-            // 
-            // delayLaunch
-            // 
-            this.delayLaunch.Interval = 1500;
-            this.delayLaunch.Tick += new System.EventHandler(this.delayLaunch_Tick);
-            // 
             // sysbtn_moreOptions
             // 
             this.sysbtn_moreOptions.BackColor = System.Drawing.Color.Transparent;
@@ -2010,6 +1977,7 @@
             // pref_startGameAfterDownloadsAreCompleted
             // 
             this.pref_startGameAfterDownloadsAreCompleted.Checked = true;
+            this.pref_startGameAfterDownloadsAreCompleted.CheckOnClick = true;
             this.pref_startGameAfterDownloadsAreCompleted.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_startGameAfterDownloadsAreCompleted.Name = "pref_startGameAfterDownloadsAreCompleted";
             this.pref_startGameAfterDownloadsAreCompleted.Size = new System.Drawing.Size(231, 22);
@@ -2070,10 +2038,9 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // downloadQueue
+            // backgroundBlinker
             // 
-            this.downloadQueue.DoWork += new System.ComponentModel.DoWorkEventHandler(this.downloadQueue_DoWork);
-            this.downloadQueue.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.downloadQueue_RunWorkerCompleted);
+            this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
             // splitButton1
             // 
@@ -2118,7 +2085,6 @@
             this.prb_progressBar_File.ContainerControl = this;
             this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
             this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.ShowInTaskbar = true;
             this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
             this.prb_progressBar_File.TabIndex = 10;
             // 
@@ -2185,7 +2151,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_goYoutube)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_goTwitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_goTwitter)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.img_email)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -2311,26 +2276,21 @@
         private System.Windows.Forms.Button btn_ereaseTSDirectory;
         private System.Windows.Forms.Button btn_ereaseArmaDirectory;
         private System.Windows.Forms.Label txt_percentageStatus;
-        private System.ComponentModel.BackgroundWorker backgroundInstaller;
         private System.Windows.Forms.PictureBox btn_copyLaunchOptions;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.ComponentModel.BackgroundWorker backgroundBlinker;
         private System.Windows.Forms.ComboBox txtb_malloc;
         private System.Windows.Forms.Label txt_curFile;
-        private System.Windows.Forms.Timer delayLaunch;
         private System.Windows.Forms.FlowLayoutPanel FeedContentPanel;
         private System.Windows.Forms.CheckBox chb_noBenchmark;
         private System.Windows.Forms.PictureBox btn_reloadAddons;
         private System.Windows.Forms.PictureBox btn_Launch;
         private System.Windows.Forms.PictureBox btn_browseTS3;
         private System.Windows.Forms.PictureBox btn_browseA3;
-        private System.Windows.Forms.PictureBox img_email;
         private System.Windows.Forms.PictureBox btn_goGit;
         private System.Windows.Forms.PictureBox btn_goYoutube;
         private System.Windows.Forms.PictureBox btn_goTwitch;
         private System.Windows.Forms.PictureBox btn_goTwitter;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label txt_contactEmail;
         private System.Windows.Forms.ContextMenuStrip menu_jsrs;
         private System.Windows.Forms.ContextMenuStrip menu_blastcore;
         private System.Windows.Forms.ToolStripMenuItem btn_downloadJSRS;
@@ -2368,7 +2328,6 @@
         private System.Windows.Forms.ListBox lstb_activeAddons;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.ComponentModel.BackgroundWorker downloadQueue;
         private System.Windows.Forms.ToolStripMenuItem btn_downloadConfigs;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pref_startGameAfterDownloadsAreCompleted;
@@ -2376,5 +2335,6 @@
         private System.Windows.Forms.ToolStripMenuItem pref_allowNotifications;
         private System.Windows.Forms.ToolStripMenuItem pref_autoDownload;
         private Controls.Windows7ProgressBar prb_progressBar_All;
+        private System.ComponentModel.BackgroundWorker backgroundBlinker;
     }
 }

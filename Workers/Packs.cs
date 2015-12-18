@@ -34,17 +34,17 @@ namespace arma3Launcher.Workers
                 XmlDocument RemoteXmlInfo = new XmlDocument();
                 RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
 
-                XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//spN_Launcher//ModSets//pack");
+                XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSets//pack");
                 foreach (XmlNode xn in xnl)
                 {
                     title = xn.Attributes["name"].Value;
                     id = xn.Attributes["id"].Value;
                     description = xn.Attributes["description"].Value;
-                    cfgUrl = RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + id).Attributes["cfgfile"].Value;
+                    cfgUrl = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["cfgfile"].Value;
                     addons = "";
                     
 
-                    XmlNodeList xnl2 = RemoteXmlInfo.SelectNodes("//spN_Launcher//ModSetInfo//" + id + "//mod");
+                    XmlNodeList xnl2 = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSetInfo//" + id + "//mod");
                     foreach (XmlNode xn2 in xnl2)
                     {
                         if (xn2.Attributes["type"].Value == "mod")
@@ -64,9 +64,9 @@ namespace arma3Launcher.Workers
                         description, 
                         addons, 
                         gflowpacks, 
-                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + id).Attributes["blastcore"].Value), 
-                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + id).Attributes["jsrs"].Value), 
-                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//spN_Launcher//ModSetInfo//" + id).Attributes["optional"].Value));
+                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["blastcore"].Value), 
+                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["jsrs"].Value), 
+                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["optional"].Value));
                     auxPack.Tag = id;
 
                     if (id == Properties.Settings.Default.lastAddonPack)

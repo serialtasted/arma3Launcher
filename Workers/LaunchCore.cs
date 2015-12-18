@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net.NetworkInformation;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace arma3Launcher.Workers
@@ -227,11 +225,11 @@ namespace arma3Launcher.Workers
             auxStatus = Status;
 
             string aux_Arguments = "";
-            Ping ping = new Ping();
+            /*Ping ping = new Ping();
 
             if (serverInfo[0] != "" && serverInfo[2] != "")
             {
-                /*PingReply pingresult = ping.Send(serverInfo[0]);
+                PingReply pingresult = ping.Send(serverInfo[0]);
                 if (pingresult.Status == IPStatus.Success)
                 {*/
                     if (serverInfo[2] != "")
@@ -242,12 +240,12 @@ namespace arma3Launcher.Workers
                 else
                 {
                     aux_Arguments = Arguments;
-                }*/
+                }
             }
             else
-                aux_Arguments = Arguments;
+                aux_Arguments = Arguments;*/
 
-            Clipboard.SetText(aux_Arguments);
+            //Clipboard.SetText(aux_Arguments);
 
             if (Process.GetProcessesByName("ts3client_win64").Length <= 0 && Process.GetProcessesByName("ts3client_win32").Length <= 0)
             {
@@ -283,6 +281,27 @@ namespace arma3Launcher.Workers
                     MessageBox.Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            Process[] pname = Process.GetProcessesByName("steam");
+            if (pname.Length == 0)
+            {
+                try
+                {
+                    Status.Text = "Starting Steam...";
+
+                    var fass = new ProcessStartInfo();
+                    fass.WorkingDirectory = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString().Replace(@"/", @"\") + @"\";
+                    fass.FileName = "steam.exe";
+                    fass.Arguments = Arguments;
+
+                    var process = new Process();
+                    process.StartInfo = fass;
+                    process.Start();
+                    Thread.SpinWait(2000);
+                    Thread.Sleep(2000);
+                }
+                catch { }
+            }
+
             if (Directory.Exists(GameFolder) && File.Exists(GameFolder + "arma3battleye.exe"))
             {
                 try
@@ -302,10 +321,10 @@ namespace arma3Launcher.Workers
                     GC.Collect();
 
                     Status.Text = "Game running...";
+                    Launch.Enabled = false;
                     mainForm.WindowState = FormWindowState.Minimized;
+                    mainForm.Cursor = Cursors.Default;
                     waitEndGame.RunWorkerAsync();
-
-                    Application.Exit();
                 }
                 catch (Exception ex)
                 {
@@ -318,8 +337,6 @@ namespace arma3Launcher.Workers
                 MessageBox.Show("Game directory doesn't exist or executable not there. Please check your Arma 3 directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Launch.Enabled = true;
             }
-
-            mainForm.Cursor = Cursors.Default;
         }
 
         private void WaitEndGame_DoWork(object sender, DoWorkEventArgs e)

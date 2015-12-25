@@ -297,14 +297,14 @@ namespace arma3Launcher.Workers
 
                             foreach (ZipArchiveEntry entry in archive.Entries)
                             {
-                                if (entry.FullName.Contains("task_force_radio") && !isTFR)
-                                    isTFR = true;
+                                if (entry.FullName.Contains("@task_force_radio") && !isTFR)
+                                { isTFR = true; }
 
-                                if (entry.FullName.Contains("RHSAFRF") && !isRHS_AFRF)
-                                    isRHS_AFRF = true;
+                                if (entry.FullName.Contains("@RHSAFRF") && !isRHS_AFRF)
+                                { isRHS_AFRF = true; }
 
-                                if (entry.FullName.Contains("RHSUSF") && !isRHS_USF)
-                                    isRHS_USF = true;
+                                if (entry.FullName.Contains("@RHSUSF") && !isRHS_USF)
+                                { isRHS_USF = true; }
 
                                 try
                                 {

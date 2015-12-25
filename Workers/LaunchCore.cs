@@ -201,7 +201,7 @@ namespace arma3Launcher.Workers
             else return false;
         }
 
-        public void LaunchGame(string Arguments, Form mainForm, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo)
+        public void LaunchGame(string Arguments, Form mainForm, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo, bool autoJoin)
         {
             /* 
             Array content list:
@@ -225,11 +225,11 @@ namespace arma3Launcher.Workers
             auxStatus = Status;
 
             string aux_Arguments = "";
-            /*Ping ping = new Ping();
+            Ping ping = new Ping();
 
-            if (serverInfo[0] != "" && serverInfo[2] != "")
+            if ((serverInfo[0] != "" && serverInfo[2] != "") && autoJoin)
             {
-                PingReply pingresult = ping.Send(serverInfo[0]);
+                /*PingReply pingresult = ping.Send(serverInfo[0]);
                 if (pingresult.Status == IPStatus.Success)
                 {*/
                     if (serverInfo[2] != "")
@@ -240,10 +240,10 @@ namespace arma3Launcher.Workers
                 else
                 {
                     aux_Arguments = Arguments;
-                }
+                }*/
             }
             else
-                aux_Arguments = Arguments;*/
+                aux_Arguments = Arguments;
 
             //Clipboard.SetText(aux_Arguments);
 

@@ -14,7 +14,6 @@ namespace arma3Launcher.Workers
         public RemoteReader()
         {
             RemoteXmlInfo = new XmlDocument();
-            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
         }
 
         /// <summary>
@@ -28,6 +27,7 @@ namespace arma3Launcher.Workers
         /// </returns>
         public string[] TeamSpeakInfo()
         {
+            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
             string[] tsInfo = new string[4];
 
             tsInfo[0] = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//TeamSpeak").Attributes["ip"].Value;
@@ -49,6 +49,7 @@ namespace arma3Launcher.Workers
         /// </returns>
         public string[] ServerInfo(string activePack)
         {
+            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
             string[] serverInfo = new string[3];
 
             serverInfo[0] = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["ip"].Value;
@@ -77,6 +78,7 @@ namespace arma3Launcher.Workers
         /// </returns>
         public string[,] GetAddons(string activePack)
         {
+            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
             string[,] addonPack = new string[254, 2];
             int ap = 0;
 

@@ -365,6 +365,7 @@ namespace arma3Launcher
             pref_runLauncherOnStartup.Checked = Properties.Settings.Default.runLauncherOnStartup;
             pref_allowNotifications.Checked = Properties.Settings.Default.allowNotifications;
             pref_allowNotifications.Checked = Properties.Settings.Default.autoDownload;
+            pref_joinServerAuto.Checked = Properties.Settings.Default.joinServerAutomatically;
         }
 
         void SaveSettings()
@@ -418,6 +419,7 @@ namespace arma3Launcher
             Properties.Settings.Default.runLauncherOnStartup = pref_runLauncherOnStartup.Checked;
             Properties.Settings.Default.allowNotifications = pref_allowNotifications.Checked;
             Properties.Settings.Default.autoDownload = pref_allowNotifications.Checked;
+            Properties.Settings.Default.joinServerAutomatically = pref_joinServerAuto.Checked;
 
             Properties.Settings.Default.Save();
         }
@@ -1490,7 +1492,7 @@ namespace arma3Launcher
         { installer.beginInstall(isLaunch, cfgUrl.Split('!')[1], activePack); }
 
         public void runGame()
-        { PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo()); }
+        { PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked); }
 
         public bool startGameAfterDownload()
         { return pref_startGameAfterDownloadsAreCompleted.Checked; }

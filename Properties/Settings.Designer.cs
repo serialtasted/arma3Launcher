@@ -478,5 +478,17 @@ namespace arma3Launcher.Properties {
                 this["allowErrorReport"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool joinServerAutomatically {
+            get {
+                return ((bool)(this["joinServerAutomatically"]));
+            }
+            set {
+                this["joinServerAutomatically"] = value;
+            }
+        }
     }
 }

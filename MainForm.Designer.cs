@@ -1981,7 +1981,7 @@
             this.btn_reinstallTFRPlugins,
             this.btn_downloadConfigs});
             this.menu_moreOptions.Name = "menu_moreOptions";
-            this.menu_moreOptions.Size = new System.Drawing.Size(209, 92);
+            this.menu_moreOptions.Size = new System.Drawing.Size(209, 114);
             // 
             // menu_RemoteSettings
             // 
@@ -2034,6 +2034,7 @@
             // pref_joinServerAuto
             // 
             this.pref_joinServerAuto.Checked = true;
+            this.pref_joinServerAuto.CheckOnClick = true;
             this.pref_joinServerAuto.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_joinServerAuto.Name = "pref_joinServerAuto";
             this.pref_joinServerAuto.Size = new System.Drawing.Size(231, 22);

@@ -6,6 +6,7 @@ using System.Xml;
 using System.IO;
 using System.Collections.Generic;
 using arma3Launcher.Windows;
+using System.Threading.Tasks;
 
 namespace arma3Launcher.Controls
 {
@@ -225,13 +226,23 @@ namespace arma3Launcher.Controls
             btn_downloadpack.Image = Properties.Resources.cloud_download;
         }
 
-        private void btn_cancelDownload_Click(object sender, EventArgs e)
-        {
-            if(GlobalVar.isDownloading) { downloader.cancelDownload(); this.hidePanel(); };
-            if(GlobalVar.isInstalling) { MessageBox.Show("One does not simply cancel the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); };
-        }
-
         public void hidePanel()
         { panelIO.hidePanel(); }
+
+        private void btn_cancelDownload_Click_1(object sender, EventArgs e)
+        {
+            if (GlobalVar.isDownloading) { downloader.cancelDownload(); this.hidePanel(); };
+            if (GlobalVar.isInstalling) { MessageBox.Show("One does not simply cancel the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); };
+        }
+
+        private void btn_cancelDownload_MouseHover(object sender, EventArgs e)
+        {
+            btn_cancelDownload.Image = Properties.Resources.cloud_off_hover;
+        }
+
+        private void btn_cancelDownload_MouseLeave(object sender, EventArgs e)
+        {
+            btn_cancelDownload.Image = Properties.Resources.cloud_off;
+        }
     }
 }

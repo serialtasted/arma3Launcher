@@ -185,10 +185,12 @@ namespace arma3Launcher.Workers
             // define calculate worker
             this.calculateFiles.DoWork += CalculateFiles_DoWork;
             this.calculateFiles.RunWorkerCompleted += CalculateFiles_RunWorkerCompleted;
+            this.calculateFiles.WorkerSupportsCancellation = true;
 
             // define download worker
             this.downloadFiles.DoWork += DownloadFiles_DoWork;
             this.downloadFiles.RunWorkerCompleted += DownloadFiles_RunWorkerCompleted;
+            this.downloadFiles.WorkerSupportsCancellation = true;
         }
 
         /// <summary>
@@ -224,10 +226,12 @@ namespace arma3Launcher.Workers
             // define calculate worker
             this.calculateFiles.DoWork += CalculateFiles_DoWork;
             this.calculateFiles.RunWorkerCompleted += CalculateFiles_RunWorkerCompleted;
+            this.calculateFiles.WorkerSupportsCancellation = true;
 
             // define download worker
             this.downloadFiles.DoWork += DownloadFiles_DoWork;
             this.downloadFiles.RunWorkerCompleted += DownloadFiles_RunWorkerCompleted;
+            this.downloadFiles.WorkerSupportsCancellation = true;
         }
 
         private void CalculateFiles_DoWork(object sender, DoWorkEventArgs e)
@@ -238,6 +242,9 @@ namespace arma3Launcher.Workers
 
             foreach (var url in listUrls)
             {
+                if (calculateFiles.CancellationPending)
+                { e.Cancel = true; return; }
+
                 using (Stream webStream = megaClient.Download(new Uri(url)))
                     this.totalBytes += Convert.ToInt64(webStream.Length);
             }
@@ -289,6 +296,9 @@ namespace arma3Launcher.Workers
                 // download file in chunks
                 while ((bytesRead = webStream.Read(buffer, 0, buffer.Length)) > 0)
                 {
+                    if (downloadFiles.CancellationPending)
+                    { e.Cancel = true; return; }
+
                     bytesReadComplete += bytesRead;
                     parsedBytes += bytesRead;
                     fileStream.Write(buffer, 0, bytesRead);
@@ -313,22 +323,42 @@ namespace arma3Launcher.Workers
 
         private void DownloadFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.downloadUrls.Dequeue();
-            this.SaveDownloadQueue();
+            if (!e.Cancelled)
+            {
+                this.downloadUrls.Dequeue();
+                this.SaveDownloadQueue();
 
-            if (this.parsedDownloads < this.totalDownloads)
-                this.parsedDownloads++;
+                if (this.parsedDownloads < this.totalDownloads)
+                    this.parsedDownloads++;
 
-            if (this.downloadUrls.Count > 0)
-                this.downloadFiles.RunWorkerAsync();
+                if (this.downloadUrls.Count > 0)
+                    this.downloadFiles.RunWorkerAsync();
+                else
+                {
+                    this.progressDetailsText("");
+                    this.currentFileText("");
+
+                    this.megaClient.Logout();
+                    this.downloadRunning = false;
+                    GlobalVar.isDownloading = false;
+
+                    installer.beginInstall(this.isLaunch, this.configUrl, this.activePack);
+                }
+            }
             else
             {
+                this.progressStatusText("Download cancelled");
                 this.progressDetailsText("");
                 this.currentFileText("");
+
+                this.megaClient.Logout();
                 this.downloadRunning = false;
                 GlobalVar.isDownloading = false;
-                this.megaClient.Logout();
-                installer.beginInstall(this.isLaunch, this.configUrl, this.activePack);
+
+                Directory.Delete(this.TempFolder, true);
+                this.ClearDownloadQueue();
+
+                this.launcherButton.Enabled = true;
             }
         }
 
@@ -429,9 +459,12 @@ namespace arma3Launcher.Workers
         /// </summary>
         public void cancelDownload()
         {
-            this.ClearDownloadQueue();
+            this.progressStatusText("Cancelling download...");
+            this.progressDetailsText("");
+            this.currentFileText("");
+
+            this.calculateFiles.CancelAsync();
             this.downloadFiles.CancelAsync();
-            Directory.Delete(this.TempFolder, true);
         }
     }
 }

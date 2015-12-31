@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Xml;
 using System.Collections.Generic;
 using arma3Launcher.Workers;
+using arma3Launcher.Effects;
 
 namespace arma3Launcher
 {
@@ -26,6 +27,7 @@ namespace arma3Launcher
         private Downloader downloader;
         private Installer installer;
         private RemoteReader remoteReader;
+        private WindowIO windowIO;
 
         private Windows.Splash loadingSplash;
 
@@ -69,9 +71,6 @@ namespace arma3Launcher
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
-
-        private System.Windows.Forms.Timer effectIn = new System.Windows.Forms.Timer();
-        private System.Windows.Forms.Timer effectOut = new System.Windows.Forms.Timer();
 
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
         {
@@ -134,12 +133,7 @@ namespace arma3Launcher
             eReport = new EmailReporter();
             aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_jsrs, chb_blastcore);
             loadingSplash = new Windows.Splash();
-
-            effectIn.Interval = 10;
-            effectOut.Interval = 10;
-
-            effectIn.Tick += EffectIn_Tick;
-            effectOut.Tick += EffectOut_Tick;
+            windowIO = new WindowIO(this);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -218,7 +212,7 @@ namespace arma3Launcher
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            effectIn.Start();
+            windowIO.windowIn();
 
             FeedContentPanel.Focus();
 
@@ -271,28 +265,6 @@ namespace arma3Launcher
                 else
                 { SaveSettings(); GC.Collect(); }
             }
-        }
-
-        private void EffectIn_Tick(object sender, EventArgs e)
-        {
-            if (this.Opacity < 1)
-            {
-                this.Opacity = this.Opacity + 0.1;
-                this.Location = new Point(this.Location.X, this.Location.Y - 1);
-            }
-            else
-            { effectIn.Stop(); }
-        }
-
-        private void EffectOut_Tick(object sender, EventArgs e)
-        {
-            if (this.Opacity > 0)
-            {
-                this.Opacity = this.Opacity - 0.1;
-                this.Location = new Point(this.Location.X, this.Location.Y + 1);
-            }
-            else
-            { effectOut.Stop(); this.Close(); }
         }
 
         public void GetAddons()
@@ -482,7 +454,7 @@ namespace arma3Launcher
                 isOptionalAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["optional"].Value);
 
                 cfgFile = activePack;
-                cfgUrl = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["cfgfile"].Value;
+                cfgUrl = remoteReader.GetPackConfigFile(activePack);
 
                 if (isBlastcoreAllowed)
                 { chb_blastcore.Enabled = true; }
@@ -622,7 +594,7 @@ namespace arma3Launcher
         #region System Buttons
         private void sysbtn_close_Click(object sender, EventArgs e)
         {
-            effectOut.Start();
+            windowIO.windowOut();
         }
 
         private void sysbtn_minimize_Click(object sender, EventArgs e)
@@ -963,7 +935,7 @@ namespace arma3Launcher
         {
             StartUpdator();
             Thread.Sleep(500);
-            effectOut.Start();
+            windowIO.windowOut();
         }
 
         void StartUpdator()
@@ -1113,7 +1085,12 @@ namespace arma3Launcher
                         if (PrepareLaunch.isModPackInstalled(modsName, modsUrl))
                             runGame();
                         else
-                            downloader.beginDownload(modsUrl, true, activePack, cfgUrl.Split('!')[1]);
+                        {
+                            if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
+                                downloader.beginDownload(modsUrl, true, activePack, cfgUrl.Split('!')[1]);
+                            else
+                                MessageBox.Show("There's a download already in progress. Please wait for it to finish.", "Download already in progress", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
@@ -1377,7 +1354,7 @@ namespace arma3Launcher
 
         private void btn_downloadJSRS_Click(object sender, EventArgs e)
         {
-            if (!downloader.isDownloading())
+            if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
             {
                 modsUrl.Clear();
                 modsUrl.Add(jsrsUrl);
@@ -1391,7 +1368,7 @@ namespace arma3Launcher
 
         private void btn_downloadBlastcore_Click(object sender, EventArgs e)
         {
-            if (!downloader.isDownloading())
+            if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
             {
                 modsUrl.Clear();
                 modsUrl.Add(blastcoreUrl);
@@ -1405,7 +1382,7 @@ namespace arma3Launcher
 
         private void btn_downloadConfigs_Click(object sender, EventArgs e)
         {
-            if (!downloader.isDownloading())
+            if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
             {
                 modsUrl.Clear();
                 modsUrl.Add(cfgUrl);

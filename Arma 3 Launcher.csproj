@@ -175,6 +175,9 @@
       <SubType>component</SubType>
     </Compile>
     <Compile Include="Controls\Windows7Taskbar.cs" />
+    <Compile Include="Effects\PanelIO.cs" />
+    <Compile Include="Effects\WindowIO.cs" />
+    <Compile Include="GlobalVar.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -340,6 +343,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\cloud-download-hover.png" />
+    <None Include="Resources\cloud-download.png" />
     <None Include="Resources\arrow-down-hover.png" />
     <None Include="Resources\arrow-down.png" />
     <None Include="Resources\clipboard_copy_icon&amp;16.png" />

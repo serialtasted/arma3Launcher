@@ -21,6 +21,7 @@ namespace arma3Launcher.Workers
         private Label progressDetails;
         private Label progressCurFile;
         private PictureBox launcherButton;
+        private String activeForm;
 
         // controls (directory fields)
         private TextBox gamePathBox;
@@ -40,6 +41,9 @@ namespace arma3Launcher.Workers
 
         // forms
         private MainForm mainForm;
+
+        // user controls
+        private PackBlock packBlock;
 
         // background workers
         private BackgroundWorker installFiles = new BackgroundWorker();
@@ -99,8 +103,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressCurFile.InvokeRequired)
             {
-                stringCallBack d = new stringCallBack(currentFileText);
-                this.mainForm.Invoke(d, new object[] { text });
+                this.progressCurFile.Invoke(new MethodInvoker(delegate { this.progressCurFile.Text = text; }));
             }
             else
             {
@@ -112,8 +115,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressText.InvokeRequired)
             {
-                stringCallBack d = new stringCallBack(progressStatusText);
-                this.mainForm.Invoke(d, new object[] { text });
+                this.progressText.Invoke(new MethodInvoker(delegate { this.progressText.Text = text; }));
             }
             else
             {
@@ -125,8 +127,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressDetails.InvokeRequired)
             {
-                stringCallBack d = new stringCallBack(progressDetailsText);
-                this.mainForm.Invoke(d, new object[] { text });
+                this.progressDetails.Invoke(new MethodInvoker(delegate { this.progressDetails.Text = text; }));
             }
             else
             {
@@ -138,8 +139,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressFile.InvokeRequired)
             {
-                intCallBack d = new intCallBack(progressBarFileValue);
-                this.mainForm.Invoke(d, new object[] { prbValue });
+                this.progressFile.Invoke(new MethodInvoker(delegate { this.progressFile.Value = prbValue; }));
             }
             else
             {
@@ -151,8 +151,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressAll.InvokeRequired)
             {
-                intCallBack d = new intCallBack(progressBarAllValue);
-                this.mainForm.Invoke(d, new object[] { prbValue });
+                this.progressAll.Invoke(new MethodInvoker(delegate { this.progressAll.Value = prbValue; }));
             }
             else
             {
@@ -174,6 +173,7 @@ namespace arma3Launcher.Workers
             TextBox gamePathBox, TextBox ts3PathBox, TextBox addonsPathBox, Button gamePathErase, Button ts3PathErase, Button addonsPathErase, PictureBox gamePathFind, PictureBox ts3PathFind, PictureBox addonsPathFind,
             ToolStripMenuItem ts3Plugin, ToolStripMenuItem downloadJSRS, ToolStripMenuItem downloadBlastcore)
         {
+            this.activeForm = "mainForm";
             this.mainForm = mainForm;
 
             // construct error report
@@ -212,6 +212,38 @@ namespace arma3Launcher.Workers
             // define timer
             this.delayLaunch.Interval = 2000;
             this.delayLaunch.Tick += DelayLaunch_Tick;
+        }
+
+        public Installer(PackBlock packBlock, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, PictureBox launcherButton,
+            String gamePath, String ts3Path, String addonsPath)
+        {
+            this.activeForm = "packBlock";
+            this.packBlock = packBlock;
+
+            // construct error report
+            this.reportError = new EmailReporter();
+
+            // define controls
+            this.progressFile = progressFile;
+            this.progressAll = progressAll;
+            this.progressText = progressText;
+            this.progressDetails = progressDetails;
+            this.progressCurFile = progressCurFile;
+            this.launcherButton = launcherButton;
+
+            // define paths
+            gamePathBox = new TextBox();
+            gamePathBox.Text = gamePath;
+
+            ts3PathBox = new TextBox();
+            ts3PathBox.Text = ts3Path;
+
+            addonsPathBox = new TextBox();
+            addonsPathBox.Text = addonsPath;
+
+            // define background worker
+            this.installFiles.DoWork += InstallFiles_DoWork;
+            this.installFiles.RunWorkerCompleted += InstallFiles_RunWorkerCompleted;
         }
 
         /// <summary>
@@ -260,6 +292,7 @@ namespace arma3Launcher.Workers
 
             // begin installation
             this.installationRunning = true;
+            GlobalVar.isInstalling = true;
             this.installFiles.RunWorkerAsync();
         }
 
@@ -474,23 +507,46 @@ namespace arma3Launcher.Workers
             if (Directory.Exists(this.TempFolder))
                 Directory.Delete(this.TempFolder, true);
 
-            if (!e.Cancelled && this.isLaunch && this.mainForm.startGameAfterDownload())
+            switch (activeForm)
             {
-                this.isLaunch = false;
-                this.progressBarFileStyle(ProgressBarStyle.Marquee);
-                this.progressBarFileValue(50);
-                this.progressStatusText("Launching game...");
-                this.delayLaunch.Start();
-            }
-            else if (!e.Cancelled && this.isLaunch && !this.mainForm.startGameAfterDownload())
-            {
-                this.isLaunch = false;
-                this.progressStatusText("Game ready to launch...");
-            }
-            else if (!e.Cancelled)
-            {
-                this.progressStatusText("Waiting for orders");
-                this.mainForm.GetAddons();
+                case "mainForm":
+                    if (!e.Cancelled && this.isLaunch && this.mainForm.startGameAfterDownload())
+                    {
+                        this.isLaunch = false;
+                        this.progressBarFileStyle(ProgressBarStyle.Marquee);
+                        this.progressBarFileValue(50);
+                        this.progressStatusText("Launching game...");
+                        this.delayLaunch.Start();
+                    }
+                    else if (!e.Cancelled && this.isLaunch && !this.mainForm.startGameAfterDownload())
+                    {
+                        this.isLaunch = false;
+                        this.progressStatusText("Game ready to launch...");
+                    }
+                    else if (!e.Cancelled)
+                    {
+                        this.progressStatusText("Waiting for orders");
+                        this.mainForm.GetAddons();
+                    }
+
+                    // unlock directory fields
+                    this.gamePathBox.Enabled = true;
+                    this.gamePathErase.Enabled = true;
+                    this.gamePathFind.Enabled = true;
+
+                    this.ts3PathBox.Enabled = true;
+                    this.ts3PathErase.Enabled = true;
+                    this.ts3PathFind.Enabled = true;
+
+                    this.addonsPathBox.Enabled = true;
+                    this.addonsPathErase.Enabled = true;
+                    this.addonsPathFind.Enabled = true;
+
+                    break;
+
+                case "packBlock":
+                    this.packBlock.hidePanel();
+                    break;
             }
 
             this.progressBarAllValue(0);
@@ -501,20 +557,8 @@ namespace arma3Launcher.Workers
             // unlock controls
             this.launcherButton.Enabled = true;
 
-            // unlock directory fields
-            this.gamePathBox.Enabled = true;
-            this.gamePathErase.Enabled = true;
-            this.gamePathFind.Enabled = true;
-
-            this.ts3PathBox.Enabled = true;
-            this.ts3PathErase.Enabled = true;
-            this.ts3PathFind.Enabled = true;
-
-            this.addonsPathBox.Enabled = true;
-            this.addonsPathErase.Enabled = true;
-            this.addonsPathFind.Enabled = true;
-
             this.installationRunning = false;
+            GlobalVar.isInstalling = false;
         }
 
         /// <summary>

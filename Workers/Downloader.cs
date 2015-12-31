@@ -25,9 +25,13 @@ namespace arma3Launcher.Workers
         private PictureBox launcherButton;
         private MegaApiClient megaClient;
         private Installer installer;
+        private String activeForm;
 
         // forms
         private MainForm mainForm;
+
+        // user controls
+        private PackBlock packBlock;
 
         // background workers
         private BackgroundWorker calculateFiles = new BackgroundWorker();
@@ -94,8 +98,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressCurFile.InvokeRequired)
             {
-                stringCallBack d = new stringCallBack(currentFileText);
-                this.mainForm.Invoke(d, new object[] { text });
+                this.progressCurFile.Invoke(new MethodInvoker(delegate { this.progressCurFile.Text = text; }));
             }
             else
             {
@@ -107,8 +110,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressText.InvokeRequired)
             {
-                stringCallBack d = new stringCallBack(progressStatusText);
-                this.mainForm.Invoke(d, new object[] { text });
+                this.progressText.Invoke(new MethodInvoker(delegate { this.progressText.Text = text; }));
             }
             else
             {
@@ -120,8 +122,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressDetails.InvokeRequired)
             {
-                stringCallBack d = new stringCallBack(progressDetailsText);
-                this.mainForm.Invoke(d, new object[] { text });
+                this.progressDetails.Invoke(new MethodInvoker(delegate { this.progressDetails.Text = text; }));
             }
             else
             {
@@ -133,8 +134,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressFile.InvokeRequired)
             {
-                intCallBack d = new intCallBack(progressBarFileValue);
-                this.mainForm.Invoke(d, new object[] { prbValue });
+                this.progressFile.Invoke(new MethodInvoker(delegate { this.progressFile.Value = prbValue; }));
             }
             else
             {
@@ -146,8 +146,7 @@ namespace arma3Launcher.Workers
         {
             if (this.progressAll.InvokeRequired)
             {
-                intCallBack d = new intCallBack(progressBarAllValue);
-                this.mainForm.Invoke(d, new object[] { prbValue });
+                this.progressAll.Invoke(new MethodInvoker(delegate { this.progressAll.Value = prbValue; }));
             }
             else
             {
@@ -156,7 +155,7 @@ namespace arma3Launcher.Workers
         }
 
         /// <summary>
-        /// Constructor
+        /// Constructor for MainForm
         /// </summary>
         /// <param name="mainForm"></param>
         /// <param name="progressFile"></param>
@@ -166,7 +165,48 @@ namespace arma3Launcher.Workers
         /// <param name="launcherButton"></param>
         public Downloader (MainForm mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton)
         {
+            this.activeForm = "mainForm";
+
             this.mainForm = mainForm;
+            this.installer = installerWorker;
+            this.megaClient = new MegaApiClient();
+
+            // construct error report
+            this.reportError = new EmailReporter();
+
+            // define controls
+            this.progressCurFile = progressCurFile;
+            this.progressFile = progressFile;
+            this.progressAll = progressAll;
+            this.progressText = progressText;
+            this.progressDetails = progressDetails;
+            this.launcherButton = launcherButton;
+
+            // define calculate worker
+            this.calculateFiles.DoWork += CalculateFiles_DoWork;
+            this.calculateFiles.RunWorkerCompleted += CalculateFiles_RunWorkerCompleted;
+
+            // define download worker
+            this.downloadFiles.DoWork += DownloadFiles_DoWork;
+            this.downloadFiles.RunWorkerCompleted += DownloadFiles_RunWorkerCompleted;
+        }
+
+        /// <summary>
+        /// Constructor for PackBlock
+        /// </summary>
+        /// <param name="packBlock"></param>
+        /// <param name="installerWorker"></param>
+        /// <param name="progressFile"></param>
+        /// <param name="progressAll"></param>
+        /// <param name="progressCurFile"></param>
+        /// <param name="progressText"></param>
+        /// <param name="progressDetails"></param>
+        /// <param name="launcherButton"></param>
+        public Downloader(PackBlock packBlock, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton)
+        {
+            this.activeForm = "packBlock";
+
+            this.packBlock = packBlock;
             this.installer = installerWorker;
             this.megaClient = new MegaApiClient();
 
@@ -286,6 +326,7 @@ namespace arma3Launcher.Workers
                 this.progressDetailsText("");
                 this.currentFileText("");
                 this.downloadRunning = false;
+                GlobalVar.isDownloading = false;
                 this.megaClient.Logout();
                 installer.beginInstall(this.isLaunch, this.configUrl, this.activePack);
             }
@@ -311,6 +352,16 @@ namespace arma3Launcher.Workers
             else
             { Properties.Settings.Default.downloadQueue = ""; }
 
+            Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Clears download queue
+        /// </summary>
+        public void ClearDownloadQueue()
+        {
+            this.downloadUrls.Clear();
+            Properties.Settings.Default.downloadQueue = "";
             Properties.Settings.Default.Save();
         }
 
@@ -368,8 +419,19 @@ namespace arma3Launcher.Workers
 
             // begin download
             this.downloadRunning = true;
+            GlobalVar.isDownloading = true;
             this.megaClient.LoginAnonymous();
             this.calculateFiles.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Cancel download
+        /// </summary>
+        public void cancelDownload()
+        {
+            this.ClearDownloadQueue();
+            this.downloadFiles.CancelAsync();
+            Directory.Delete(this.TempFolder, true);
         }
     }
 }

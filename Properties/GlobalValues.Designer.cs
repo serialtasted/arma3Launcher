@@ -61,24 +61,6 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to spnlauncher.
-        /// </summary>
-        internal static string FTP_Password {
-            get {
-                return ResourceManager.GetString("FTP_Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to spnlauncher.
-        /// </summary>
-        internal static string FTP_Username {
-            get {
-                return ResourceManager.GetString("FTP_Username", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to https://github.com/serialtasted/arma3Launcher.
         /// </summary>
         internal static string Link_Gihub {

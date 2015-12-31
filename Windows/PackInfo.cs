@@ -8,54 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using arma3Launcher.Effects;
 
 namespace arma3Launcher.Windows
 {
     public partial class PackInfo : Form
     {
-        private Timer effectIn = new Timer();
-        private Timer effectOut = new Timer();
+        private WindowIO windowIO;
 
         public PackInfo(string Title, string Content)
         {
             InitializeComponent();
             txt_title.Text = Title;
             txt_content.Text = Content;
-
+            windowIO = new WindowIO(this);
             setsize();
-
-            effectIn.Interval = 10;
-            effectOut.Interval = 10;
-
-            effectIn.Tick += EffectIn_Tick;
-            effectOut.Tick += EffectOut_Tick;
         }
 
         private void PackInfo_Shown(object sender, EventArgs e)
         {
-            effectIn.Start();
-        }
-
-        private void EffectIn_Tick(object sender, EventArgs e)
-        {
-            if (this.Opacity < 1)
-            {
-                this.Opacity = this.Opacity + 0.1;
-                this.Location = new Point(this.Location.X, this.Location.Y - 1);
-            }
-            else
-            { effectIn.Stop(); }
-        }
-
-        private void EffectOut_Tick(object sender, EventArgs e)
-        {
-            if (this.Opacity > 0)
-            {
-                this.Opacity = this.Opacity - 0.1;
-                this.Location = new Point(this.Location.X, this.Location.Y + 1);
-            }
-            else
-            { effectOut.Stop(); this.Close(); }
+            windowIO.windowIn();
         }
 
         private void setsize()
@@ -66,7 +38,7 @@ namespace arma3Launcher.Windows
 
         private void btn_close_Click(object sender, EventArgs e)
         {
-            effectOut.Start();
+            windowIO.windowOut();
         }
 
         private void btn_close_MouseHover(object sender, EventArgs e)

@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FTP_Password" xml:space="preserve">
-    <value>spnlauncher</value>
-  </data>
-  <data name="FTP_Username" xml:space="preserve">
-    <value>spnlauncher</value>
-  </data>
   <data name="Link_Gihub" xml:space="preserve">
     <value>https://github.com/serialtasted/arma3Launcher</value>
   </data>

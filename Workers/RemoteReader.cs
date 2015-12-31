@@ -70,7 +70,22 @@ namespace arma3Launcher.Workers
         }
 
         /// <summary>
-        /// Get addons and their versions from active pack
+        /// Returns active pack's config url
+        /// </summary>
+        /// <param name="activePack"></param>
+        /// <returns></returns>
+        public string GetPackConfigFile(string activePack)
+        {
+            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
+            string cfgUrl = "";
+
+            cfgUrl = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["cfgfile"].Value;
+
+            return cfgUrl;
+        }
+
+        /// <summary>
+        /// Returns addons and their versions from active pack
         /// </summary>
         /// <param name="activePack"></param>
         /// <returns>

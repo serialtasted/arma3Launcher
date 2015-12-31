@@ -20,9 +20,9 @@ namespace arma3Launcher.Workers
         private string cfgUrl = "";
         private string addons = "";
 
-        public Packs(FlowLayoutPanel PacksPanel)
+        public Packs(FlowLayoutPanel packsPanel)
         {
-            gflowpacks = PacksPanel;
+            this.gflowpacks = packsPanel;
         }
 
         public void Get ()

@@ -119,7 +119,6 @@
             this.Controls.Add(this.panel3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PackInfo";
-            this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "PackInfo";
             this.Shown += new System.EventHandler(this.PackInfo_Shown);

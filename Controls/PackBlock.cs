@@ -1,20 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
+using arma3Launcher.Effects;
+using arma3Launcher.Workers;
+using System.Xml;
+using System.IO;
+using System.Collections.Generic;
+using arma3Launcher.Windows;
 
 namespace arma3Launcher.Controls
 {
     public partial class PackBlock : UserControl
     {
-        FlowLayoutPanel packsPan;
-        Windows.PackInfo packInfo;
+        private FlowLayoutPanel packsPan;
+        private PackInfo packInfo;
+        private PanelIO panelIO;
+        private Installer installer;
+        private Downloader downloader;
+        private RemoteReader remoteReader;
+        private String addonPack;
+
+        private Version aLocal = null;
+        private Version aRemote = null;
+
+        private List<string> modsUrl = new List<string>();
 
         public PackBlock(string packTitle, string packID, string packDescription, string packAddons, FlowLayoutPanel packsPanel, bool isBlastcoreAllowed, bool isJSRSAllowed, bool isOptionalAllowed)
         {
@@ -22,10 +30,12 @@ namespace arma3Launcher.Controls
 
             packsPan = packsPanel;
             txt_title.Text = packTitle;
-            txt_version.Text = packID;
+            txt_packID.Text = packID;
+            addonPack = packID;
             btn_useThis.Tag = packID;
             txt_content.Text = packDescription;
             packInfo = new Windows.PackInfo(packTitle, "Addons on this pack:\n" + packAddons);
+            remoteReader = new RemoteReader();
 
             if (isBlastcoreAllowed)
                 txt_allowed.Text = txt_allowed.Text + "Blastcore | ";
@@ -37,6 +47,9 @@ namespace arma3Launcher.Controls
             if (txt_allowed.Text != "Allowed: ")
             { txt_allowed.Text = txt_allowed.Text.Remove(txt_allowed.Text.Length - 3); txt_allowed.Visible = true; img_checkAllowed.Visible = true; }
 
+            panelIO = new PanelIO(panel_download_inner, panel_download_outter);
+            installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_downloadpack, Properties.Settings.Default.Arma3Folder, Properties.Settings.Default.TS3Folder, Properties.Settings.Default.AddonsFolder);
+            downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_downloadpack);
 
             setsize();
         }
@@ -84,9 +97,112 @@ namespace arma3Launcher.Controls
                 btn_useThis.Image = Properties.Resources.useThis_inactive;
         }
 
+        public void FetchRemoteSettings()
+        {
+            bool isInstalled = false;
+            modsUrl.Clear();
+
+            string AddonsFolder = Properties.Settings.Default.AddonsFolder;
+
+            try
+            {
+                XmlDocument RemoteXmlInfo = new XmlDocument();
+                RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
+
+                string xmlNodes = "";
+                XmlNodeList xnl;
+
+                string cfgFile = addonPack;
+                string cfgUrl = remoteReader.GetPackConfigFile(addonPack);
+
+                xmlNodes = "//arma3Launcher//ModSetInfo//" + addonPack + "//mod";
+                xnl = RemoteXmlInfo.SelectNodes(xmlNodes);
+
+                foreach (XmlNode xn in xnl)
+                {
+                    if (xn.Attributes["type"].Value == "mod")
+                    {
+                        if (AddonsFolder != "")
+                        {
+                            foreach (string d in Directory.GetDirectories(AddonsFolder))
+                            {
+                                string[] aux_d = d.Split('\\');
+
+                                if (aux_d[aux_d.Length - 1].Equals(xn.Attributes["name"].Value))
+                                {
+                                    try
+                                    {
+                                        if (d.Contains("dummy")) { isInstalled = true; break; }
+
+                                        foreach (var line in File.ReadAllLines(d + @"\spNversionController"))
+                                        {
+                                            if (line.Contains("version"))
+                                            {
+                                                string aux_line = line.Replace(" ", "");
+                                                string[] splitted_line = aux_line.Split('=');
+
+                                                aLocal = new Version(splitted_line[1]);
+                                                aRemote = new Version(xn.Attributes["version"].Value);
+                                                break;
+                                            }
+                                        }
+
+                                        if (aRemote != aLocal)
+                                        {
+                                            if (!d.Contains("RHS"))
+                                                Directory.Delete(d, true);
+
+                                            isInstalled = false;
+                                            break;
+                                        }
+                                        else { isInstalled = true; break; }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        //MessageBox.Show(ex.Message);
+                                    }
+                                }
+                                else { isInstalled = false; continue; }
+                            }
+                        }
+
+                        if (!isInstalled && Properties.Settings.Default.downloadQueue == "")
+                            modsUrl.Add(xn.Attributes["url"].Value);
+                    }
+                }
+
+                if (modsUrl.Count > 0)
+                    modsUrl.Insert(0, cfgUrl);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unable to fetch remote settings", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txt_progressStatus.Text = "Unable to fetch remote settings.";
+            }
+        }
+
         private void btn_showAddons_Click(object sender, EventArgs e)
         {
             packInfo.ShowDialog();
+        }
+
+        private void btn_downloadpack_Click(object sender, EventArgs e)
+        {
+            FetchRemoteSettings();
+            if (modsUrl.Count > 0)
+            {
+                if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
+                {
+                    downloader.beginDownload(modsUrl, false, addonPack, addonPack);
+                    panelIO.showPanel();
+                }
+                else
+                    MessageBox.Show("There's a download already in progress. Please wait for it to finish.", "Download already in progress", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("You already have everything you need to play this pack.", "All files needed already in system", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btn_showAddons_MouseHover(object sender, EventArgs e)
@@ -98,5 +214,24 @@ namespace arma3Launcher.Controls
         {
             btn_showAddons.Image = Properties.Resources.archive_w;
         }
+
+        private void btn_downloadpack_MouseHover(object sender, EventArgs e)
+        {
+            btn_downloadpack.Image = Properties.Resources.cloud_download_hover;
+        }
+
+        private void btn_downloadpack_MouseLeave(object sender, EventArgs e)
+        {
+            btn_downloadpack.Image = Properties.Resources.cloud_download;
+        }
+
+        private void btn_cancelDownload_Click(object sender, EventArgs e)
+        {
+            if(GlobalVar.isDownloading) { downloader.cancelDownload(); this.hidePanel(); };
+            if(GlobalVar.isInstalling) { MessageBox.Show("One does not simply cancel the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); };
+        }
+
+        public void hidePanel()
+        { panelIO.hidePanel(); }
     }
 }

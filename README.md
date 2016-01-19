@@ -16,8 +16,8 @@ This launcher is used by the PTrangers community. The launcher enables us to lau
 * The user can select some optional addons
 * Addons directory is not the same as the game
 * All addons have a version controller that enables the launcher to update only the addon that needs to be updated
-* Auto detects TeamSpeak 3 and Arma 3 directories (When possible...)
-* Uses FTP connection for faster download speeds
+* User defines TeamSpeak 3 and Arma 3 directories
+* Uses MEGA.nz for fast download speeds, 100% uptime and easy to share functions
 
 ###Contributing
 You can help out with the development of this launcher by reporting bugs or suggesting some new features. Or you can even contribute by forking this repository and submitting a pull request that will be later reviwed.

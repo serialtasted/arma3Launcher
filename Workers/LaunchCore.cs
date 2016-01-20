@@ -301,8 +301,8 @@ namespace arma3Launcher.Workers
             }
             else
             {
-                SvArguments = "-port=2302 -config=\"" + GameFolder + "TADST\\PTrdefault\\TADST_config.cfg\" -cfg=\"" + GameFolder + "TADST\\PTrdefault\\TADST_basic.cfg\" -profiles=\"" + GameFolder + "TADST\\PTrdefault\" -name=PTrdefault  " + Arguments;
-                HcArguments = "-client -connect=localhost -port=2302 -password=malta123 -profile=PTrHeadlessClient -name=PTrHeadlessClient" + Arguments;
+                SvArguments = "-port=" + serverInfo[1] + " \"-config=" + GameFolder + "TADST\\PTrdefault\\TADST_config.cfg\" \"-cfg=" + GameFolder + "TADST\\PTrdefault\\TADST_basic.cfg\" \"-profiles=" + GameFolder + "TADST\\PTrdefault\" -name=PTrdefault " + Arguments;
+                HcArguments = "-client -connect=localhost -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" -profile=PTrHeadlessClient -name=PTrHeadlessClient " + Arguments;
             }
 
             if (Directory.Exists(GameFolder) && File.Exists(GameFolder + "arma3battleye.exe"))
@@ -321,7 +321,7 @@ namespace arma3Launcher.Workers
                         hcProcessInfo.Arguments = HcArguments;
 
                         var hcProcess = new Process();
-                        hcProcess.StartInfo = gameProcessInfo;
+                        hcProcess.StartInfo = hcProcessInfo;
                         hcProcess.Start();
 
                         whatsRunning = "Server";

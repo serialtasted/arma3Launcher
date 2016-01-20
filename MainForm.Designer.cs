@@ -39,11 +39,9 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.menu_blastcore = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_blastcore = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadBlastcore = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
             this.menu_jsrs = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_jsrs = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadJSRS = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,12 +153,10 @@
             this.txtb_armaDirectory = new System.Windows.Forms.TextBox();
             this.lbl_Arma3Dir = new System.Windows.Forms.Label();
             this.panelLaunch = new System.Windows.Forms.Panel();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_progressStatus = new System.Windows.Forms.Label();
             this.btn_Launch = new System.Windows.Forms.PictureBox();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.TitleBar = new System.Windows.Forms.Panel();
@@ -185,6 +181,10 @@
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
+            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
+            this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
@@ -343,20 +343,6 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Audio mod wich enhances over 5500 sound effects";
             // 
-            // splitButton1
-            // 
-            this.splitButton1.AutoSize = true;
-            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
-            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.splitButton1.Location = new System.Drawing.Point(9, 42);
-            this.splitButton1.Name = "splitButton1";
-            this.splitButton1.Size = new System.Drawing.Size(91, 23);
-            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
-            this.splitButton1.TabIndex = 1;
-            this.splitButton1.Text = "Blastcore";
-            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.splitButton1.UseVisualStyleBackColor = true;
-            // 
             // menu_blastcore
             // 
             this.menu_blastcore.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -382,21 +368,6 @@
             this.btn_downloadBlastcore.Size = new System.Drawing.Size(152, 22);
             this.btn_downloadBlastcore.Text = "Download";
             this.btn_downloadBlastcore.Click += new System.EventHandler(this.btn_downloadBlastcore_Click);
-            // 
-            // btn_jsrs
-            // 
-            this.btn_jsrs.AutoSize = true;
-            this.btn_jsrs.ContextMenuStrip = this.menu_jsrs;
-            this.btn_jsrs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_jsrs.Location = new System.Drawing.Point(9, 13);
-            this.btn_jsrs.Name = "btn_jsrs";
-            this.btn_jsrs.Size = new System.Drawing.Size(91, 23);
-            this.btn_jsrs.SplitMenuStrip = this.menu_jsrs;
-            this.btn_jsrs.TabIndex = 0;
-            this.btn_jsrs.Text = "JSRS";
-            this.btn_jsrs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_jsrs.UseVisualStyleBackColor = true;
-            this.btn_jsrs.Click += new System.EventHandler(this.btn_JSRS_Click);
             // 
             // menu_jsrs
             // 
@@ -1832,15 +1803,6 @@
             this.panelLaunch.Size = new System.Drawing.Size(906, 100);
             this.panelLaunch.TabIndex = 0;
             // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(22, 70);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.ShowInTaskbar = true;
-            this.prb_progressBar_All.Size = new System.Drawing.Size(718, 5);
-            this.prb_progressBar_All.TabIndex = 11;
-            // 
             // txt_progressStatus
             // 
             this.txt_progressStatus.AutoSize = true;
@@ -1889,14 +1851,6 @@
             this.txt_percentageStatus.Size = new System.Drawing.Size(250, 19);
             this.txt_percentageStatus.TabIndex = 7;
             this.txt_percentageStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
-            this.prb_progressBar_File.TabIndex = 10;
             // 
             // label17
             // 
@@ -2109,6 +2063,52 @@
             // backgroundBlinker
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
+            // 
+            // splitButton1
+            // 
+            this.splitButton1.AutoSize = true;
+            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
+            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.splitButton1.Location = new System.Drawing.Point(9, 42);
+            this.splitButton1.Name = "splitButton1";
+            this.splitButton1.Size = new System.Drawing.Size(91, 23);
+            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
+            this.splitButton1.TabIndex = 1;
+            this.splitButton1.Text = "Blastcore";
+            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.splitButton1.UseVisualStyleBackColor = true;
+            // 
+            // btn_jsrs
+            // 
+            this.btn_jsrs.AutoSize = true;
+            this.btn_jsrs.ContextMenuStrip = this.menu_jsrs;
+            this.btn_jsrs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_jsrs.Location = new System.Drawing.Point(9, 13);
+            this.btn_jsrs.Name = "btn_jsrs";
+            this.btn_jsrs.Size = new System.Drawing.Size(91, 23);
+            this.btn_jsrs.SplitMenuStrip = this.menu_jsrs;
+            this.btn_jsrs.TabIndex = 0;
+            this.btn_jsrs.Text = "JSRS";
+            this.btn_jsrs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_jsrs.UseVisualStyleBackColor = true;
+            this.btn_jsrs.Click += new System.EventHandler(this.btn_JSRS_Click);
+            // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(22, 70);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.ShowInTaskbar = true;
+            this.prb_progressBar_All.Size = new System.Drawing.Size(718, 5);
+            this.prb_progressBar_All.TabIndex = 11;
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
+            this.prb_progressBar_File.TabIndex = 10;
             // 
             // MainForm
             // 

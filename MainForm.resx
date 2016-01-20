@@ -117,32 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menu_blastcore.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="menu_jsrs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>154, 17</value>
-  </metadata>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>564, 17</value>
-  </metadata>
-  <data name="label12.Text" xml:space="preserve">
-    <value>
- ❶ Select Arma 3 and TeamSpeak 3 folders at the top bar of the launcher;
- ❷ Select your Addons folder at "Launch &amp; Addons Options" tab;
- ❸ Choose the addons pack at the "More Options" (the one on the top, right next to the minimize button) menu and click the "Rocket"!
-
-
-
- Here you can select the options that you wish to use when launching the game.
- We recommend you to set use -noLogs, -noPause, -enableHT, -skipIntro and -noBenchmark for better performance.
-
- If you want to use some additional addons, just select what you want from the detected addons box (the one with an eye), then move them to
- the active addons box (the one with a bolt). To disable an addon just move it back to the detected addons box.
- Make sure you're using an authorized addon. Don't use addons that can ruin the game experience.
-
- For any further help, give feedback and bug reports, head over to the github page of the project. You can find the link in the "about" section.</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6316,8 +6290,37 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
+  <metadata name="menu_blastcore.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="menu_jsrs.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>154, 17</value>
+  </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>564, 17</value>
+  </metadata>
+  <data name="label12.Text" xml:space="preserve">
+    <value>
+ ❶ Select Arma 3 and TeamSpeak 3 folders at the top bar of the launcher;
+ ❷ Select your Addons folder at "Launch &amp; Addons Options" tab;
+ ❸ Choose the addons pack at the "More Options" (the one on the top, right next to the minimize button) menu and click the "Rocket"!
+
+
+
+ Here you can select the options that you wish to use when launching the game.
+ We recommend you to set use -noLogs, -noPause, -enableHT, -skipIntro and -noBenchmark for better performance.
+
+ If you want to use some additional addons, just select what you want from the detected addons box (the one with an eye), then move them to
+ the active addons box (the one with a bolt). To disable an addon just move it back to the detected addons box.
+ Make sure you're using an authorized addon. Don't use addons that can ruin the game experience.
+
+ For any further help, give feedback and bug reports, head over to the github page of the project. You can find the link in the "about" section.</value>
+  </data>
   <metadata name="dlg_folderBrowser.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>260, 17</value>
+  </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>564, 17</value>
   </metadata>
   <metadata name="backgroundFetchNews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>654, 17</value>

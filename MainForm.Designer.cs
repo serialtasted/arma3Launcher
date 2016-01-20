@@ -1992,7 +1992,7 @@
             this.btn_reinstallTFRPlugins,
             this.btn_downloadConfigs});
             this.menu_moreOptions.Name = "menu_moreOptions";
-            this.menu_moreOptions.Size = new System.Drawing.Size(209, 114);
+            this.menu_moreOptions.Size = new System.Drawing.Size(209, 92);
             // 
             // menu_RemoteSettings
             // 
@@ -2130,6 +2130,7 @@
             this.Text = "PTrangers Launcher";
             this.TransparencyKey = System.Drawing.Color.Lime;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).EndInit();

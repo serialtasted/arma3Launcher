@@ -1536,5 +1536,10 @@ namespace arma3Launcher
         {
             txtb_modsDirectory.SelectAll();
         }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(Properties.Settings.Default.firstLaunch) { Properties.Settings.Default.firstLaunch = false; Properties.Settings.Default.Save(); }
+        }
     }
 }

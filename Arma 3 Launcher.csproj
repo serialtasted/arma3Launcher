@@ -204,6 +204,12 @@
     <Compile Include="Windows\AddonsFolderSetup.Designer.cs">
       <DependentUpon>AddonsFolderSetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DelayServerStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\DelayServerStart.Designer.cs">
+      <DependentUpon>DelayServerStart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LegacyTransporter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\AddonsFolderSetup.resx">
       <DependentUpon>AddonsFolderSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DelayServerStart.resx">
+      <DependentUpon>DelayServerStart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\LegacyTransporter.resx">
       <DependentUpon>LegacyTransporter.cs</DependentUpon>

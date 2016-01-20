@@ -30,6 +30,7 @@ namespace arma3Launcher
         private WindowIO windowIO;
 
         private Windows.Splash loadingSplash;
+        private Windows.DelayServerStart serverStartDiag;
 
         private Version aLocal = null;
         private Version aRemote = null;
@@ -133,6 +134,7 @@ namespace arma3Launcher
             eReport = new EmailReporter();
             aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_jsrs, chb_blastcore);
             loadingSplash = new Windows.Splash();
+            serverStartDiag = new Windows.DelayServerStart();
             windowIO = new WindowIO(this);
         }
 
@@ -159,13 +161,27 @@ namespace arma3Launcher
             if (GlobalVar.isServer) { WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion + " | Server Edition"; }
             else { WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion; }
 
+            // Change stuff if isServer
             if (GlobalVar.isServer)
             {
                 panel_recommendedAddons.Visible = false;
                 panel_TeamSpeakDir.Visible = false;
+                pref_joinServerAuto.Visible = false;
+                btn_reinstallTFRPlugins.Visible = false;
+
+                pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
+
+                if (!Properties.Settings.Default.firstLaunch && serverStartDiag.ShowDialog() == DialogResult.OK)
+                {
+                    GlobalVar.autoPilot = true;
+                }
+                else
+                {
+                    GlobalVar.autoPilot = false;
+                }
             }
 
-            if (!QuickUpdateMethod.QuickCheck())
+            if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
             {
                 menuSelected = 4;
                 HideUnhide(menuSelected);
@@ -181,6 +197,8 @@ namespace arma3Launcher
             }
             else if (Properties.Settings.Default.firstLaunch)
             {
+                if(GlobalVar.isServer) { pref_startGameAfterDownloadsAreCompleted.Checked = true; }
+
                 menuSelected = 3;
                 HideUnhide(menuSelected);
             }
@@ -191,19 +209,6 @@ namespace arma3Launcher
             }
 
             FetchSettings();
-
-            if (String.IsNullOrEmpty(Properties.Settings.Default.AddonsFolder) || Properties.Settings.Default.AddonsFolder == "\\")
-            {
-                using (var form = new Windows.AddonsFolderSetup())
-                {
-                    var result = form.ShowDialog();
-
-                    if (result == DialogResult.OK)
-                    {
-                        txtb_modsDirectory.Text = form.AddonsFolder;
-                    }
-                }
-            }
 
             FetchRemoteSettings();
             GetAddons();
@@ -226,7 +231,7 @@ namespace arma3Launcher
 
             if (Properties.Settings.Default.downloadQueue != "" && panelMenu.Visible == true)
             {
-                if (MessageBox.Show("You haven't finished all the downloads the last time you closed the launcher.\n\"Yes\", to continue downloads.\n\"No\", will DELETE your progress.", "spN Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (GlobalVar.autoPilot || MessageBox.Show("You haven't finished all the downloads the last time you closed the launcher.\n\"Yes\", to continue downloads.\n\"No\", will DELETE your progress.", "spN Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     string[] aux_downloadQueue = Properties.Settings.Default.downloadQueue.Split(',');
                     foreach (string s in aux_downloadQueue)
@@ -245,7 +250,7 @@ namespace arma3Launcher
                         }
                     }
 
-                    downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
+                    downloader.beginDownload(modsUrl, GlobalVar.autoPilot, activePack, cfgUrl.Split('!')[1]);
                 }
                 else
                 {
@@ -255,6 +260,10 @@ namespace arma3Launcher
                     Properties.Settings.Default.downloadQueue = "";
                     Properties.Settings.Default.Save();
                 }
+            }
+            else
+            {
+                if (GlobalVar.autoPilot) { launchProcess(); }
             }
         }
 
@@ -1046,7 +1055,11 @@ namespace arma3Launcher
         private void btn_Launch_Click(object sender, EventArgs e)
         {
             btn_Launch.Focus();
+            launchProcess();
+        }
 
+        private void launchProcess()
+        {
             if ((Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")) || GlobalVar.isServer))
             {
                 if (Directory.Exists(GameFolder) && ((File.Exists(GameFolder + "arma3battleye.exe") && !GlobalVar.isServer) || (File.Exists(GameFolder + "arma3server.exe") && GlobalVar.isServer)))

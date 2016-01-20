@@ -39,9 +39,11 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.menu_blastcore = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_blastcore = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadBlastcore = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
             this.menu_jsrs = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_jsrs = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadJSRS = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,21 +143,24 @@
             this.menu_news = new System.Windows.Forms.Label();
             this.menu_launchOptions = new System.Windows.Forms.Label();
             this.panelDirectories = new System.Windows.Forms.Panel();
-            this.btn_openA3 = new System.Windows.Forms.PictureBox();
+            this.panel_TeamSpeakDir = new System.Windows.Forms.Panel();
             this.btn_openTS3 = new System.Windows.Forms.PictureBox();
             this.btn_browseTS3 = new System.Windows.Forms.PictureBox();
-            this.btn_browseA3 = new System.Windows.Forms.PictureBox();
             this.btn_ereaseTSDirectory = new System.Windows.Forms.Button();
-            this.btn_ereaseArmaDirectory = new System.Windows.Forms.Button();
-            this.txtb_armaDirectory = new System.Windows.Forms.TextBox();
             this.txtb_tsDirectory = new System.Windows.Forms.TextBox();
             this.lbl_TeamSpeakDir = new System.Windows.Forms.Label();
+            this.btn_openA3 = new System.Windows.Forms.PictureBox();
+            this.btn_browseA3 = new System.Windows.Forms.PictureBox();
+            this.btn_ereaseArmaDirectory = new System.Windows.Forms.Button();
+            this.txtb_armaDirectory = new System.Windows.Forms.TextBox();
             this.lbl_Arma3Dir = new System.Windows.Forms.Label();
             this.panelLaunch = new System.Windows.Forms.Panel();
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_progressStatus = new System.Windows.Forms.Label();
             this.btn_Launch = new System.Windows.Forms.PictureBox();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.TitleBar = new System.Windows.Forms.Panel();
@@ -180,11 +185,6 @@
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
-            this.panel_TeamSpeakDir = new System.Windows.Forms.Panel();
-            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
-            this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
@@ -225,16 +225,16 @@
             this.panel_help.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelDirectories.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).BeginInit();
+            this.panel_TeamSpeakDir.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_openTS3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseTS3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseA3)).BeginInit();
             this.panelLaunch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Launch)).BeginInit();
             this.TitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).BeginInit();
             this.menu_moreOptions.SuspendLayout();
-            this.panel_TeamSpeakDir.SuspendLayout();
             this.SuspendLayout();
             // 
             // sysbtn_minimize
@@ -343,6 +343,20 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Audio mod wich enhances over 5500 sound effects";
             // 
+            // splitButton1
+            // 
+            this.splitButton1.AutoSize = true;
+            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
+            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.splitButton1.Location = new System.Drawing.Point(9, 42);
+            this.splitButton1.Name = "splitButton1";
+            this.splitButton1.Size = new System.Drawing.Size(91, 23);
+            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
+            this.splitButton1.TabIndex = 1;
+            this.splitButton1.Text = "Blastcore";
+            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.splitButton1.UseVisualStyleBackColor = true;
+            // 
             // menu_blastcore
             // 
             this.menu_blastcore.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -368,6 +382,21 @@
             this.btn_downloadBlastcore.Size = new System.Drawing.Size(152, 22);
             this.btn_downloadBlastcore.Text = "Download";
             this.btn_downloadBlastcore.Click += new System.EventHandler(this.btn_downloadBlastcore_Click);
+            // 
+            // btn_jsrs
+            // 
+            this.btn_jsrs.AutoSize = true;
+            this.btn_jsrs.ContextMenuStrip = this.menu_jsrs;
+            this.btn_jsrs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_jsrs.Location = new System.Drawing.Point(9, 13);
+            this.btn_jsrs.Name = "btn_jsrs";
+            this.btn_jsrs.Size = new System.Drawing.Size(91, 23);
+            this.btn_jsrs.SplitMenuStrip = this.menu_jsrs;
+            this.btn_jsrs.TabIndex = 0;
+            this.btn_jsrs.Text = "JSRS";
+            this.btn_jsrs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_jsrs.UseVisualStyleBackColor = true;
+            this.btn_jsrs.Click += new System.EventHandler(this.btn_JSRS_Click);
             // 
             // menu_jsrs
             // 
@@ -1644,16 +1673,18 @@
             this.panelDirectories.Size = new System.Drawing.Size(906, 89);
             this.panelDirectories.TabIndex = 1;
             // 
-            // btn_openA3
+            // panel_TeamSpeakDir
             // 
-            this.btn_openA3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_openA3.Image = global::arma3Launcher.Properties.Resources.folder_open;
-            this.btn_openA3.Location = new System.Drawing.Point(879, 19);
-            this.btn_openA3.Name = "btn_openA3";
-            this.btn_openA3.Size = new System.Drawing.Size(16, 16);
-            this.btn_openA3.TabIndex = 11;
-            this.btn_openA3.TabStop = false;
-            this.btn_openA3.Click += new System.EventHandler(this.btn_openA3_Click);
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_openTS3);
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_browseTS3);
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_ereaseTSDirectory);
+            this.panel_TeamSpeakDir.Controls.Add(this.txtb_tsDirectory);
+            this.panel_TeamSpeakDir.Controls.Add(this.lbl_TeamSpeakDir);
+            this.panel_TeamSpeakDir.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_TeamSpeakDir.Location = new System.Drawing.Point(0, 45);
+            this.panel_TeamSpeakDir.Name = "panel_TeamSpeakDir";
+            this.panel_TeamSpeakDir.Size = new System.Drawing.Size(906, 44);
+            this.panel_TeamSpeakDir.TabIndex = 12;
             // 
             // btn_openTS3
             // 
@@ -1678,18 +1709,6 @@
             this.toolTip.SetToolTip(this.btn_browseTS3, "Double-click for manual browse");
             this.btn_browseTS3.Click += new System.EventHandler(this.btn_browseTS3_Click);
             // 
-            // btn_browseA3
-            // 
-            this.btn_browseA3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_browseA3.Image = global::arma3Launcher.Properties.Resources.browse;
-            this.btn_browseA3.Location = new System.Drawing.Point(859, 20);
-            this.btn_browseA3.Name = "btn_browseA3";
-            this.btn_browseA3.Size = new System.Drawing.Size(16, 16);
-            this.btn_browseA3.TabIndex = 8;
-            this.btn_browseA3.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_browseA3, "Double-click for manual browse");
-            this.btn_browseA3.Click += new System.EventHandler(this.btn_browseA3_Click);
-            // 
             // btn_ereaseTSDirectory
             // 
             this.btn_ereaseTSDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -1706,6 +1725,54 @@
             this.btn_ereaseTSDirectory.TabStop = false;
             this.btn_ereaseTSDirectory.UseVisualStyleBackColor = false;
             this.btn_ereaseTSDirectory.Click += new System.EventHandler(this.btn_ereaseTSDirectory_Click);
+            // 
+            // txtb_tsDirectory
+            // 
+            this.txtb_tsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_tsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtb_tsDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtb_tsDirectory.Location = new System.Drawing.Point(185, 4);
+            this.txtb_tsDirectory.Name = "txtb_tsDirectory";
+            this.txtb_tsDirectory.Size = new System.Drawing.Size(666, 25);
+            this.txtb_tsDirectory.TabIndex = 2;
+            this.txtb_tsDirectory.TabStop = false;
+            this.txtb_tsDirectory.Text = "Set directory ->";
+            this.txtb_tsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseClick);
+            this.txtb_tsDirectory.TextChanged += new System.EventHandler(this.txtb_tsDirectory_TextChanged);
+            this.txtb_tsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseDoubleClick);
+            // 
+            // lbl_TeamSpeakDir
+            // 
+            this.lbl_TeamSpeakDir.AutoSize = true;
+            this.lbl_TeamSpeakDir.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lbl_TeamSpeakDir.Location = new System.Drawing.Point(16, 7);
+            this.lbl_TeamSpeakDir.Name = "lbl_TeamSpeakDir";
+            this.lbl_TeamSpeakDir.Size = new System.Drawing.Size(155, 19);
+            this.lbl_TeamSpeakDir.TabIndex = 1;
+            this.lbl_TeamSpeakDir.Text = "TeamSpeak 3 directory:";
+            // 
+            // btn_openA3
+            // 
+            this.btn_openA3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_openA3.Image = global::arma3Launcher.Properties.Resources.folder_open;
+            this.btn_openA3.Location = new System.Drawing.Point(879, 19);
+            this.btn_openA3.Name = "btn_openA3";
+            this.btn_openA3.Size = new System.Drawing.Size(16, 16);
+            this.btn_openA3.TabIndex = 11;
+            this.btn_openA3.TabStop = false;
+            this.btn_openA3.Click += new System.EventHandler(this.btn_openA3_Click);
+            // 
+            // btn_browseA3
+            // 
+            this.btn_browseA3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_browseA3.Image = global::arma3Launcher.Properties.Resources.browse;
+            this.btn_browseA3.Location = new System.Drawing.Point(859, 20);
+            this.btn_browseA3.Name = "btn_browseA3";
+            this.btn_browseA3.Size = new System.Drawing.Size(16, 16);
+            this.btn_browseA3.TabIndex = 8;
+            this.btn_browseA3.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_browseA3, "Double-click for manual browse");
+            this.btn_browseA3.Click += new System.EventHandler(this.btn_browseA3_Click);
             // 
             // btn_ereaseArmaDirectory
             // 
@@ -1739,31 +1806,6 @@
             this.txtb_armaDirectory.TextChanged += new System.EventHandler(this.txtb_armaDirectory_TextChanged);
             this.txtb_armaDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_armaDirectory_MouseDoubleClick);
             // 
-            // txtb_tsDirectory
-            // 
-            this.txtb_tsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_tsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_tsDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtb_tsDirectory.Location = new System.Drawing.Point(185, 4);
-            this.txtb_tsDirectory.Name = "txtb_tsDirectory";
-            this.txtb_tsDirectory.Size = new System.Drawing.Size(666, 25);
-            this.txtb_tsDirectory.TabIndex = 2;
-            this.txtb_tsDirectory.TabStop = false;
-            this.txtb_tsDirectory.Text = "Set directory ->";
-            this.txtb_tsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseClick);
-            this.txtb_tsDirectory.TextChanged += new System.EventHandler(this.txtb_tsDirectory_TextChanged);
-            this.txtb_tsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseDoubleClick);
-            // 
-            // lbl_TeamSpeakDir
-            // 
-            this.lbl_TeamSpeakDir.AutoSize = true;
-            this.lbl_TeamSpeakDir.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.lbl_TeamSpeakDir.Location = new System.Drawing.Point(16, 7);
-            this.lbl_TeamSpeakDir.Name = "lbl_TeamSpeakDir";
-            this.lbl_TeamSpeakDir.Size = new System.Drawing.Size(155, 19);
-            this.lbl_TeamSpeakDir.TabIndex = 1;
-            this.lbl_TeamSpeakDir.Text = "TeamSpeak 3 directory:";
-            // 
             // lbl_Arma3Dir
             // 
             this.lbl_Arma3Dir.AutoSize = true;
@@ -1789,6 +1831,15 @@
             this.panelLaunch.Name = "panelLaunch";
             this.panelLaunch.Size = new System.Drawing.Size(906, 100);
             this.panelLaunch.TabIndex = 0;
+            // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(22, 70);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.ShowInTaskbar = true;
+            this.prb_progressBar_All.Size = new System.Drawing.Size(718, 5);
+            this.prb_progressBar_All.TabIndex = 11;
             // 
             // txt_progressStatus
             // 
@@ -1838,6 +1889,14 @@
             this.txt_percentageStatus.Size = new System.Drawing.Size(250, 19);
             this.txt_percentageStatus.TabIndex = 7;
             this.txt_percentageStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
+            this.prb_progressBar_File.TabIndex = 10;
             // 
             // label17
             // 
@@ -1933,7 +1992,7 @@
             this.btn_reinstallTFRPlugins,
             this.btn_downloadConfigs});
             this.menu_moreOptions.Name = "menu_moreOptions";
-            this.menu_moreOptions.Size = new System.Drawing.Size(209, 92);
+            this.menu_moreOptions.Size = new System.Drawing.Size(209, 114);
             // 
             // menu_RemoteSettings
             // 
@@ -2051,65 +2110,6 @@
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
-            // panel_TeamSpeakDir
-            // 
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_openTS3);
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_browseTS3);
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_ereaseTSDirectory);
-            this.panel_TeamSpeakDir.Controls.Add(this.txtb_tsDirectory);
-            this.panel_TeamSpeakDir.Controls.Add(this.lbl_TeamSpeakDir);
-            this.panel_TeamSpeakDir.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_TeamSpeakDir.Location = new System.Drawing.Point(0, 45);
-            this.panel_TeamSpeakDir.Name = "panel_TeamSpeakDir";
-            this.panel_TeamSpeakDir.Size = new System.Drawing.Size(906, 44);
-            this.panel_TeamSpeakDir.TabIndex = 12;
-            // 
-            // splitButton1
-            // 
-            this.splitButton1.AutoSize = true;
-            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
-            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.splitButton1.Location = new System.Drawing.Point(9, 42);
-            this.splitButton1.Name = "splitButton1";
-            this.splitButton1.Size = new System.Drawing.Size(91, 23);
-            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
-            this.splitButton1.TabIndex = 1;
-            this.splitButton1.Text = "Blastcore";
-            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.splitButton1.UseVisualStyleBackColor = true;
-            // 
-            // btn_jsrs
-            // 
-            this.btn_jsrs.AutoSize = true;
-            this.btn_jsrs.ContextMenuStrip = this.menu_jsrs;
-            this.btn_jsrs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_jsrs.Location = new System.Drawing.Point(9, 13);
-            this.btn_jsrs.Name = "btn_jsrs";
-            this.btn_jsrs.Size = new System.Drawing.Size(91, 23);
-            this.btn_jsrs.SplitMenuStrip = this.menu_jsrs;
-            this.btn_jsrs.TabIndex = 0;
-            this.btn_jsrs.Text = "JSRS";
-            this.btn_jsrs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_jsrs.UseVisualStyleBackColor = true;
-            this.btn_jsrs.Click += new System.EventHandler(this.btn_JSRS_Click);
-            // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(22, 70);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.ShowInTaskbar = true;
-            this.prb_progressBar_All.Size = new System.Drawing.Size(718, 5);
-            this.prb_progressBar_All.TabIndex = 11;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
-            this.prb_progressBar_File.TabIndex = 10;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2187,9 +2187,11 @@
             this.panelMenu.PerformLayout();
             this.panelDirectories.ResumeLayout(false);
             this.panelDirectories.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).EndInit();
+            this.panel_TeamSpeakDir.ResumeLayout(false);
+            this.panel_TeamSpeakDir.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_openTS3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseTS3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseA3)).EndInit();
             this.panelLaunch.ResumeLayout(false);
             this.panelLaunch.PerformLayout();
@@ -2198,8 +2200,6 @@
             this.TitleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).EndInit();
             this.menu_moreOptions.ResumeLayout(false);
-            this.panel_TeamSpeakDir.ResumeLayout(false);
-            this.panel_TeamSpeakDir.PerformLayout();
             this.ResumeLayout(false);
 
         }

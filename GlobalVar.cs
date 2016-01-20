@@ -46,5 +46,18 @@ namespace arma3Launcher
                 _isServer = value;
             }
         }
+
+        static bool _autoPilot = false;
+        public static bool autoPilot
+        {
+            get
+            {
+                return _autoPilot;
+            }
+            set
+            {
+                _autoPilot = value;
+            }
+        }
     }
 }

@@ -301,7 +301,7 @@ namespace arma3Launcher.Workers
             }
             else
             {
-                SvArguments = "-port=2302 -config=\"" + GameFolder + "TADST\\PTrdefault\\TADST_config.cfg\" -cfg=\"" + GameFolder + "TADST\\PTrdefault\\TADST_basic.cfg\" -profiles=\"" + GameFolder + "TADST\\PTrdefault -name=PTrdefault  " + Arguments;
+                SvArguments = "-port=2302 -config=\"" + GameFolder + "TADST\\PTrdefault\\TADST_config.cfg\" -cfg=\"" + GameFolder + "TADST\\PTrdefault\\TADST_basic.cfg\" -profiles=\"" + GameFolder + "TADST\\PTrdefault\" -name=PTrdefault  " + Arguments;
                 HcArguments = "-client -connect=localhost -port=2302 -password=malta123 -profile=PTrHeadlessClient -name=PTrHeadlessClient" + Arguments;
             }
 

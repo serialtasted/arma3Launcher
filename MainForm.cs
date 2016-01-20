@@ -1047,7 +1047,7 @@ namespace arma3Launcher
         {
             btn_Launch.Focus();
 
-            if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe") || GlobalVar.isServer))
+            if ((Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")) || GlobalVar.isServer))
             {
                 if (Directory.Exists(GameFolder) && ((File.Exists(GameFolder + "arma3battleye.exe") && !GlobalVar.isServer) || (File.Exists(GameFolder + "arma3server.exe") && GlobalVar.isServer)))
                 {
@@ -1192,7 +1192,7 @@ namespace arma3Launcher
                 if (txtb_modsDirectory.Text.EndsWith("/"))
                     txtb_modsDirectory.Text = txtb_modsDirectory.Text.Remove(txtb_modsDirectory.Text.Length - 1).Replace("/", "\\");
 
-                if (txtb_modsDirectory.Text != txtb_armaDirectory.Text && !File.Exists(txtb_modsDirectory.Text + "\\arma3.exe"))
+                if ((txtb_modsDirectory.Text != txtb_armaDirectory.Text && !File.Exists(txtb_modsDirectory.Text + "\\arma3.exe")) || GlobalVar.isServer)
                 {
                     AddonsFolder = Properties.Settings.Default.AddonsFolder = txtb_modsDirectory.Text + @"\";
                     Properties.Settings.Default.Save();

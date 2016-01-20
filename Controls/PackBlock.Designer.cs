@@ -33,31 +33,31 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel_download_outter = new System.Windows.Forms.Panel();
             this.panel_download_inner = new System.Windows.Forms.Panel();
+            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
             this.txt_progressStatus = new System.Windows.Forms.Label();
+            this.btn_downloadpack = new System.Windows.Forms.PictureBox();
+            this.btn_showAddons = new System.Windows.Forms.PictureBox();
+            this.img_checkAllowed = new System.Windows.Forms.PictureBox();
+            this.btn_useThis = new System.Windows.Forms.PictureBox();
             this.panel_bgTitle = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txt_packID = new System.Windows.Forms.Label();
             this.txt_content = new System.Windows.Forms.Label();
             this.txt_allowed = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
-            this.btn_downloadpack = new System.Windows.Forms.PictureBox();
-            this.btn_showAddons = new System.Windows.Forms.PictureBox();
-            this.img_checkAllowed = new System.Windows.Forms.PictureBox();
-            this.btn_useThis = new System.Windows.Forms.PictureBox();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.panel1.SuspendLayout();
             this.panel_download_outter.SuspendLayout();
             this.panel_download_inner.SuspendLayout();
-            this.panel_bgTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_downloadpack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_showAddons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_checkAllowed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_useThis)).BeginInit();
+            this.panel_bgTitle.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_title
@@ -114,6 +114,35 @@
             this.panel_download_inner.Size = new System.Drawing.Size(860, 42);
             this.panel_download_inner.TabIndex = 0;
             // 
+            // btn_cancelDownload
+            // 
+            this.btn_cancelDownload.Image = global::arma3Launcher.Properties.Resources.cloud_off;
+            this.btn_cancelDownload.Location = new System.Drawing.Point(817, 5);
+            this.btn_cancelDownload.Name = "btn_cancelDownload";
+            this.btn_cancelDownload.Size = new System.Drawing.Size(32, 32);
+            this.btn_cancelDownload.TabIndex = 17;
+            this.btn_cancelDownload.TabStop = false;
+            this.toolTip1.SetToolTip(this.btn_cancelDownload, "Cancel download");
+            this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click_1);
+            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
+            this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
+            // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(12, 28);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.Size = new System.Drawing.Size(790, 5);
+            this.prb_progressBar_All.TabIndex = 16;
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(12, 16);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(790, 12);
+            this.prb_progressBar_File.TabIndex = 15;
+            // 
             // txt_curFile
             // 
             this.txt_curFile.AutoSize = true;
@@ -148,6 +177,60 @@
             this.txt_progressStatus.Size = new System.Drawing.Size(450, 15);
             this.txt_progressStatus.TabIndex = 12;
             this.txt_progressStatus.Text = "%Download Status%";
+            // 
+            // btn_downloadpack
+            // 
+            this.btn_downloadpack.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_downloadpack.Image = global::arma3Launcher.Properties.Resources.cloud_download;
+            this.btn_downloadpack.Location = new System.Drawing.Point(698, 141);
+            this.btn_downloadpack.Name = "btn_downloadpack";
+            this.btn_downloadpack.Size = new System.Drawing.Size(16, 16);
+            this.btn_downloadpack.TabIndex = 17;
+            this.btn_downloadpack.TabStop = false;
+            this.toolTip1.SetToolTip(this.btn_downloadpack, "Download pack");
+            this.btn_downloadpack.Visible = false;
+            this.btn_downloadpack.Click += new System.EventHandler(this.btn_downloadpack_Click);
+            this.btn_downloadpack.MouseLeave += new System.EventHandler(this.btn_downloadpack_MouseLeave);
+            this.btn_downloadpack.MouseHover += new System.EventHandler(this.btn_downloadpack_MouseHover);
+            // 
+            // btn_showAddons
+            // 
+            this.btn_showAddons.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_showAddons.Image = global::arma3Launcher.Properties.Resources.archive_w;
+            this.btn_showAddons.Location = new System.Drawing.Point(724, 141);
+            this.btn_showAddons.Name = "btn_showAddons";
+            this.btn_showAddons.Size = new System.Drawing.Size(16, 16);
+            this.btn_showAddons.TabIndex = 16;
+            this.btn_showAddons.TabStop = false;
+            this.toolTip1.SetToolTip(this.btn_showAddons, "Addons on this pack");
+            this.btn_showAddons.Click += new System.EventHandler(this.btn_showAddons_Click);
+            this.btn_showAddons.MouseLeave += new System.EventHandler(this.btn_showAddons_MouseLeave);
+            this.btn_showAddons.MouseHover += new System.EventHandler(this.btn_showAddons_MouseHover);
+            // 
+            // img_checkAllowed
+            // 
+            this.img_checkAllowed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.img_checkAllowed.BackgroundImage = global::arma3Launcher.Properties.Resources.check_circle;
+            this.img_checkAllowed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.img_checkAllowed.Location = new System.Drawing.Point(11, 143);
+            this.img_checkAllowed.Name = "img_checkAllowed";
+            this.img_checkAllowed.Size = new System.Drawing.Size(12, 13);
+            this.img_checkAllowed.TabIndex = 14;
+            this.img_checkAllowed.TabStop = false;
+            this.img_checkAllowed.Visible = false;
+            // 
+            // btn_useThis
+            // 
+            this.btn_useThis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_useThis.Image = global::arma3Launcher.Properties.Resources.useThis_inactive;
+            this.btn_useThis.Location = new System.Drawing.Point(755, 129);
+            this.btn_useThis.Name = "btn_useThis";
+            this.btn_useThis.Size = new System.Drawing.Size(100, 40);
+            this.btn_useThis.TabIndex = 13;
+            this.btn_useThis.TabStop = false;
+            this.btn_useThis.Click += new System.EventHandler(this.btn_useThis_Click);
+            this.btn_useThis.MouseLeave += new System.EventHandler(this.btn_useThis_MouseLeave);
+            this.btn_useThis.MouseHover += new System.EventHandler(this.btn_useThis_MouseHover);
             // 
             // panel_bgTitle
             // 
@@ -210,88 +293,6 @@
             this.txt_allowed.Text = "Allowed: ";
             this.txt_allowed.Visible = false;
             // 
-            // btn_cancelDownload
-            // 
-            this.btn_cancelDownload.Image = global::arma3Launcher.Properties.Resources.cloud_off;
-            this.btn_cancelDownload.Location = new System.Drawing.Point(817, 5);
-            this.btn_cancelDownload.Name = "btn_cancelDownload";
-            this.btn_cancelDownload.Size = new System.Drawing.Size(32, 32);
-            this.btn_cancelDownload.TabIndex = 17;
-            this.btn_cancelDownload.TabStop = false;
-            this.toolTip1.SetToolTip(this.btn_cancelDownload, "Cancel download");
-            this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click_1);
-            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
-            this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
-            // 
-            // btn_downloadpack
-            // 
-            this.btn_downloadpack.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_downloadpack.Image = global::arma3Launcher.Properties.Resources.cloud_download;
-            this.btn_downloadpack.Location = new System.Drawing.Point(698, 141);
-            this.btn_downloadpack.Name = "btn_downloadpack";
-            this.btn_downloadpack.Size = new System.Drawing.Size(16, 16);
-            this.btn_downloadpack.TabIndex = 17;
-            this.btn_downloadpack.TabStop = false;
-            this.toolTip1.SetToolTip(this.btn_downloadpack, "Download pack");
-            this.btn_downloadpack.Click += new System.EventHandler(this.btn_downloadpack_Click);
-            this.btn_downloadpack.MouseLeave += new System.EventHandler(this.btn_downloadpack_MouseLeave);
-            this.btn_downloadpack.MouseHover += new System.EventHandler(this.btn_downloadpack_MouseHover);
-            // 
-            // btn_showAddons
-            // 
-            this.btn_showAddons.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_showAddons.Image = global::arma3Launcher.Properties.Resources.archive_w;
-            this.btn_showAddons.Location = new System.Drawing.Point(724, 141);
-            this.btn_showAddons.Name = "btn_showAddons";
-            this.btn_showAddons.Size = new System.Drawing.Size(16, 16);
-            this.btn_showAddons.TabIndex = 16;
-            this.btn_showAddons.TabStop = false;
-            this.toolTip1.SetToolTip(this.btn_showAddons, "Addons on this pack");
-            this.btn_showAddons.Click += new System.EventHandler(this.btn_showAddons_Click);
-            this.btn_showAddons.MouseLeave += new System.EventHandler(this.btn_showAddons_MouseLeave);
-            this.btn_showAddons.MouseHover += new System.EventHandler(this.btn_showAddons_MouseHover);
-            // 
-            // img_checkAllowed
-            // 
-            this.img_checkAllowed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.img_checkAllowed.BackgroundImage = global::arma3Launcher.Properties.Resources.check_circle;
-            this.img_checkAllowed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.img_checkAllowed.Location = new System.Drawing.Point(11, 143);
-            this.img_checkAllowed.Name = "img_checkAllowed";
-            this.img_checkAllowed.Size = new System.Drawing.Size(12, 13);
-            this.img_checkAllowed.TabIndex = 14;
-            this.img_checkAllowed.TabStop = false;
-            this.img_checkAllowed.Visible = false;
-            // 
-            // btn_useThis
-            // 
-            this.btn_useThis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_useThis.Image = global::arma3Launcher.Properties.Resources.useThis_inactive;
-            this.btn_useThis.Location = new System.Drawing.Point(755, 129);
-            this.btn_useThis.Name = "btn_useThis";
-            this.btn_useThis.Size = new System.Drawing.Size(100, 40);
-            this.btn_useThis.TabIndex = 13;
-            this.btn_useThis.TabStop = false;
-            this.btn_useThis.Click += new System.EventHandler(this.btn_useThis_Click);
-            this.btn_useThis.MouseLeave += new System.EventHandler(this.btn_useThis_MouseLeave);
-            this.btn_useThis.MouseHover += new System.EventHandler(this.btn_useThis_MouseHover);
-            // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(12, 28);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.Size = new System.Drawing.Size(790, 5);
-            this.prb_progressBar_All.TabIndex = 16;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(12, 16);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(790, 12);
-            this.prb_progressBar_File.TabIndex = 15;
-            // 
             // PackBlock
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -310,13 +311,13 @@
             this.panel_download_outter.PerformLayout();
             this.panel_download_inner.ResumeLayout(false);
             this.panel_download_inner.PerformLayout();
-            this.panel_bgTitle.ResumeLayout(false);
-            this.panel_bgTitle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_downloadpack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_showAddons)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_checkAllowed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_useThis)).EndInit();
+            this.panel_bgTitle.ResumeLayout(false);
+            this.panel_bgTitle.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -33,5 +33,18 @@ namespace arma3Launcher
                 _isInstalling = value;
             }
         }
+
+        static bool _isServer = false;
+        public static bool isServer
+        {
+            get
+            {
+                return _isServer;
+            }
+            set
+            {
+                _isServer = value;
+            }
+        }
     }
 }

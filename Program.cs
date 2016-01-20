@@ -15,13 +15,20 @@ namespace arma3Launcher
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             if (File.Exists("zUpdator.exe"))
                 File.Delete("zUpdator.exe");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            try
+            {
+                if (args[0] == "-server") { GlobalVar.isServer = true; }
+            }
+            catch {}
+
             if (!SingleInstance.Start())
             {
                 SingleInstance.ShowFirstInstance();

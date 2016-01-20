@@ -156,7 +156,15 @@ namespace arma3Launcher
                 Properties.Settings.Default.Save();
             }
 
-            WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion;
+            if (GlobalVar.isServer) { WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion + " | Server Edition"; }
+            else { WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion; }
+
+            if (GlobalVar.isServer)
+            {
+                panel_recommendedAddons.Visible = false;
+                panel_TeamSpeakDir.Visible = false;
+            }
+
             if (!QuickUpdateMethod.QuickCheck())
             {
                 menuSelected = 4;
@@ -686,7 +694,7 @@ namespace arma3Launcher
                 {
                     foreach (string f in Directory.GetFiles(auxA3Folder))
                     {
-                        if (f.Contains("arma3battleye.exe")) { auxIsFolder = true; break; }
+                        if ((f.Contains("arma3battleye.exe") && !GlobalVar.isServer) || (f.Contains("arma3server.exe") && GlobalVar.isServer)) { auxIsFolder = true; break; }
                         else { continue; }
                     }
                 }
@@ -760,7 +768,7 @@ namespace arma3Launcher
 
             if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
             {
-                if (dlg_folderBrowser.SelectedPath != GameFolder)
+                if (dlg_folderBrowser.SelectedPath != GameFolder || GlobalVar.isServer)
                 {
                     AddonsFolder = Properties.Settings.Default.AddonsFolder = dlg_folderBrowser.SelectedPath + @"\";
                     Properties.Settings.Default.Save();
@@ -1039,14 +1047,14 @@ namespace arma3Launcher
         {
             btn_Launch.Focus();
 
-            if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")))
+            if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe") || GlobalVar.isServer))
             {
-                if (Directory.Exists(GameFolder) && File.Exists(GameFolder + "arma3battleye.exe"))
+                if (Directory.Exists(GameFolder) && ((File.Exists(GameFolder + "arma3battleye.exe") && !GlobalVar.isServer) || (File.Exists(GameFolder + "arma3server.exe") && GlobalVar.isServer)))
                 {
-                    if (AddonsFolder != "")
+                    if (Directory.Exists(AddonsFolder))
                     {
-                        FetchRemoteSettings();
-                        GetAddons();
+                        //FetchRemoteSettings();
+                        //GetAddons();
 
                         btn_Launch.Enabled = false;
 
@@ -1123,7 +1131,7 @@ namespace arma3Launcher
                 if (txtb_armaDirectory.Text.EndsWith("/"))
                     txtb_armaDirectory.Text = txtb_armaDirectory.Text.Remove(txtb_armaDirectory.Text.Length - 1).Replace("/", "\\");
 
-                if (Directory.Exists(txtb_armaDirectory.Text) && File.Exists(txtb_armaDirectory.Text + @"\arma3battleye.exe"))
+                if (Directory.Exists(txtb_armaDirectory.Text) && ((File.Exists(txtb_armaDirectory.Text + @"\arma3battleye.exe") && !GlobalVar.isServer) || (File.Exists(txtb_armaDirectory.Text + @"\arma3server.exe") && GlobalVar.isServer)))
                 {
                     GameFolder = Properties.Settings.Default.Arma3Folder = txtb_armaDirectory.Text + @"\";
                     Properties.Settings.Default.Save();

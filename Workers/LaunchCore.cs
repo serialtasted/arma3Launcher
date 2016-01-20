@@ -17,6 +17,8 @@ namespace arma3Launcher.Workers
         private string AddonsFolder = Properties.Settings.Default.AddonsFolder;
         private string TSFolder = Properties.Settings.Default.TS3Folder;
         private string Arguments = "";
+        private string SvArguments = "";
+        private string HcArguments = "";
 
         private Process auxProcess;
         private Form auxMainForm;
@@ -224,103 +226,124 @@ namespace arma3Launcher.Workers
             auxLaunch = Launch;
             auxStatus = Status;
 
-            string aux_Arguments = "";
-            Ping ping = new Ping();
-
-            if ((serverInfo[0] != "" && serverInfo[2] != "") && autoJoin)
+            if (!GlobalVar.isServer)
             {
-                /*PingReply pingresult = ping.Send(serverInfo[0]);
-                if (pingresult.Status == IPStatus.Success)
-                {*/
-                    if (serverInfo[2] != "")
-                        aux_Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" " + Arguments;
-                    else
-                        aux_Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " " + Arguments;
-                /*}
-                else
+
+                Ping ping = new Ping();
+                if ((serverInfo[0] != "" && serverInfo[2] != "") && autoJoin)
                 {
-                    aux_Arguments = Arguments;
-                }*/
-            }
-            else
-                aux_Arguments = Arguments;
+                    /*PingReply pingresult = ping.Send(serverInfo[0]);
+                    if (pingresult.Status == IPStatus.Success)
+                    {*/
+                    if (serverInfo[2] != "")
+                        Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" " + Arguments;
+                    else
+                        Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " " + Arguments;
+                    //}
+                }
 
-            //Clipboard.SetText(aux_Arguments);
 
-            if (Process.GetProcessesByName("ts3client_win64").Length <= 0 && Process.GetProcessesByName("ts3client_win32").Length <= 0)
-            {
-                if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")))
+                if (Process.GetProcessesByName("ts3client_win64").Length <= 0 && Process.GetProcessesByName("ts3client_win32").Length <= 0)
+                {
+                    if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")))
+                    {
+                        try
+                        {
+                            var fass = new ProcessStartInfo();
+                            fass.WorkingDirectory = TSFolder;
+
+                            if (tsInfo[0] != "" && tsInfo[2] != "")
+                                fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&channel=" + tsInfo[3] + "\"";
+                            else if (tsInfo[0] != "")
+                                fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&password=" + tsInfo[2] + "&channel=" + tsInfo[3] + "\"";
+
+                            if (File.Exists(TSFolder + "ts3client_win64.exe"))
+                                fass.FileName = "ts3client_win64.exe";
+
+                            if (File.Exists(TSFolder + "ts3client_win32.exe"))
+                                fass.FileName = "ts3client_win32.exe";
+
+                            var process = new Process();
+                            process.StartInfo = fass;
+
+                            process.Start();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else
+                        MessageBox.Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                Process[] pname = Process.GetProcessesByName("steam");
+                if (pname.Length == 0)
                 {
                     try
                     {
+                        Status.Text = "Starting Steam...";
+
                         var fass = new ProcessStartInfo();
-                        fass.WorkingDirectory = TSFolder;
-
-                        if (tsInfo[0] != "" && tsInfo[2] != "")
-                            fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&channel=" + tsInfo[3] + "\"";
-                        else if (tsInfo[0] != "")
-                            fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&password=" + tsInfo[2] + "&channel=" + tsInfo[3] + "\"";
-
-                        if (File.Exists(TSFolder + "ts3client_win64.exe"))
-                            fass.FileName = "ts3client_win64.exe";
-
-                        if (File.Exists(TSFolder + "ts3client_win32.exe"))
-                            fass.FileName = "ts3client_win32.exe";
+                        fass.WorkingDirectory = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString().Replace(@"/", @"\") + @"\";
+                        fass.FileName = "steam.exe";
+                        fass.Arguments = Arguments;
 
                         var process = new Process();
                         process.StartInfo = fass;
-
                         process.Start();
+                        Thread.SpinWait(2000);
+                        Thread.Sleep(2000);
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                    catch { }
                 }
-                else
-                    MessageBox.Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
-
-            Process[] pname = Process.GetProcessesByName("steam");
-            if (pname.Length == 0)
+            else
             {
-                try
-                {
-                    Status.Text = "Starting Steam...";
-
-                    var fass = new ProcessStartInfo();
-                    fass.WorkingDirectory = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString().Replace(@"/", @"\") + @"\";
-                    fass.FileName = "steam.exe";
-                    fass.Arguments = Arguments;
-
-                    var process = new Process();
-                    process.StartInfo = fass;
-                    process.Start();
-                    Thread.SpinWait(2000);
-                    Thread.Sleep(2000);
-                }
-                catch { }
+                SvArguments = "-port=2302 -config=\"" + GameFolder + "TADST\\PTrdefault\\TADST_config.cfg\" -cfg=\"" + GameFolder + "TADST\\PTrdefault\\TADST_basic.cfg\" -profiles=\"" + GameFolder + "TADST\\PTrdefault -name=PTrdefault  " + Arguments;
+                HcArguments = "-client -connect=localhost -port=2302 -password=malta123 -profile=PTrHeadlessClient -name=PTrHeadlessClient" + Arguments;
             }
 
             if (Directory.Exists(GameFolder) && File.Exists(GameFolder + "arma3battleye.exe"))
             {
                 try
                 {
-                    var fass = new ProcessStartInfo();
-                    fass.WorkingDirectory = GameFolder;
-                    fass.FileName = "arma3battleye.exe";
-                    fass.Arguments = "2 1 " + aux_Arguments;
+                    string whatsRunning = "";
+                    var gameProcessInfo = new ProcessStartInfo();
+                    var hcProcessInfo = new ProcessStartInfo();
+                    gameProcessInfo.WorkingDirectory = hcProcessInfo.WorkingDirectory = GameFolder;
 
-                    var process = new Process();
-                    process.StartInfo = fass;
-                    auxProcess = process;
-                    process.Start();
+                    if (GlobalVar.isServer)
+                    {
+                        gameProcessInfo.FileName = hcProcessInfo.FileName = "arma3server.exe";
+                        gameProcessInfo.Arguments = SvArguments;
+                        hcProcessInfo.Arguments = HcArguments;
+
+                        var hcProcess = new Process();
+                        hcProcess.StartInfo = gameProcessInfo;
+                        hcProcess.Start();
+
+                        whatsRunning = "Server";
+                    }
+                    else
+                    {
+                        gameProcessInfo.FileName = "arma3battleye.exe";
+                        gameProcessInfo.Arguments = "2 1 " + Arguments;
+
+                        whatsRunning = "Game";
+                    }
+
+                    var gameProcess = new Process();
+                    gameProcess.StartInfo = gameProcessInfo;
+                    auxProcess = gameProcess;
+                    gameProcess.Start();
 
                     Thread.Sleep(500);
 
                     GC.Collect();
 
-                    Status.Text = "Game running...";
+                    Status.Text = whatsRunning + " running...";
                     Launch.Enabled = false;
                     mainForm.WindowState = FormWindowState.Minimized;
                     mainForm.Cursor = Cursors.Default;
@@ -329,7 +352,6 @@ namespace arma3Launcher.Workers
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    Application.Exit();
                 }
             }
             else

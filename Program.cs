@@ -29,8 +29,6 @@ namespace arma3Launcher
             }
             catch {}
 
-            GlobalVar.isServer = true;
-
             if (!SingleInstance.Start())
             {
                 SingleInstance.ShowFirstInstance();

@@ -21,7 +21,7 @@ namespace arma3Launcher.Workers
         private string HcArguments = "";
 
         private Process auxProcess;
-        private Form auxMainForm;
+        private MainForm auxMainForm;
         private PictureBox auxLaunch;
         private Label auxStatus;
 
@@ -203,7 +203,7 @@ namespace arma3Launcher.Workers
             else return false;
         }
 
-        public void LaunchGame(string Arguments, Form mainForm, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo, bool autoJoin)
+        public void LaunchGame(string Arguments, MainForm mainForm, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo, bool autoJoin)
         {
             /* 
             Array content list:
@@ -372,6 +372,9 @@ namespace arma3Launcher.Workers
             auxMainForm.Focus();
             auxLaunch.Enabled = true;
             auxStatus.Text = "Waiting for orders...";
+
+            if (GlobalVar.autoPilot)
+                auxMainForm.reLaunchServer();
         }
     }
 }

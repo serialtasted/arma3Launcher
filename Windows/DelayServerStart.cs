@@ -33,6 +33,7 @@ namespace arma3Launcher.Windows
                 this.WindowVersionStatus.Text = "Autopilot engaged";
                 this.countdown.Stop();
                 this.DialogResult = DialogResult.OK;
+                GlobalVar.autoPilot = true;
                 this.Close();
             }
             else
@@ -43,6 +44,8 @@ namespace arma3Launcher.Windows
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
+            this.WindowVersionStatus.Text = "";
+            GlobalVar.autoPilot = false;
             this.Close();
         }
 

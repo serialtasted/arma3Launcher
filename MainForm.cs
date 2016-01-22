@@ -172,14 +172,8 @@ namespace arma3Launcher
 
                 pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
 
-                if (!Properties.Settings.Default.firstLaunch && serverStartDiag.ShowDialog() == DialogResult.OK)
-                {
-                    GlobalVar.autoPilot = true;
-                }
-                else
-                {
-                    GlobalVar.autoPilot = false;
-                }
+                if (!Properties.Settings.Default.firstLaunch)
+                    serverStartDiag.ShowDialog();
             }
 
             if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
@@ -1062,6 +1056,12 @@ namespace arma3Launcher
         {
             btn_Launch.Focus();
             launchProcess();
+        }
+
+        public void reLaunchServer()
+        {
+            if (serverStartDiag.ShowDialog() == DialogResult.OK)
+                launchProcess();
         }
 
         private void launchProcess()

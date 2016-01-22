@@ -135,7 +135,7 @@ namespace arma3Launcher
             eReport = new EmailReporter();
             aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_jsrs, chb_blastcore);
             loadingSplash = new Windows.Splash();
-            serverStartDiag = new Windows.DelayServerStart();
+            serverStartDiag = new Windows.DelayServerStart(WindowVersionStatus);
             windowIO = new WindowIO(this);
         }
 

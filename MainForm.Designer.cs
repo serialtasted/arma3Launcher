@@ -39,9 +39,11 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.menu_blastcore = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_blastcore = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadBlastcore = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
             this.menu_jsrs = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_jsrs = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadJSRS = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,8 +77,10 @@
             this.txtb_maxVRAM = new System.Windows.Forms.TextBox();
             this.txtb_cpuCount = new System.Windows.Forms.TextBox();
             this.txtb_exThreads = new System.Windows.Forms.TextBox();
-            this.txtb_malloc = new System.Windows.Forms.ComboBox();
             this.chb_world = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtb_malloc = new System.Windows.Forms.ComboBox();
+            this.btn_reloadMallocs = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.chb_noLogs = new System.Windows.Forms.CheckBox();
             this.chb_noPause = new System.Windows.Forms.CheckBox();
@@ -153,10 +157,13 @@
             this.txtb_armaDirectory = new System.Windows.Forms.TextBox();
             this.lbl_Arma3Dir = new System.Windows.Forms.Label();
             this.panelLaunch = new System.Windows.Forms.Panel();
+            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_progressStatus = new System.Windows.Forms.Label();
             this.btn_Launch = new System.Windows.Forms.PictureBox();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.TitleBar = new System.Windows.Forms.Panel();
@@ -181,13 +188,6 @@
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_reloadMallocs = new System.Windows.Forms.PictureBox();
-            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
-            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
-            this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
@@ -208,6 +208,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_openModsDirectory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseModsDirectory)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).BeginInit();
@@ -234,13 +236,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseA3)).BeginInit();
             this.panelLaunch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Launch)).BeginInit();
             this.TitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).BeginInit();
             this.menu_moreOptions.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.SuspendLayout();
             // 
             // sysbtn_minimize
@@ -349,6 +349,20 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Audio mod wich enhances over 5500 sound effects";
             // 
+            // splitButton1
+            // 
+            this.splitButton1.AutoSize = true;
+            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
+            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.splitButton1.Location = new System.Drawing.Point(9, 42);
+            this.splitButton1.Name = "splitButton1";
+            this.splitButton1.Size = new System.Drawing.Size(91, 23);
+            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
+            this.splitButton1.TabIndex = 1;
+            this.splitButton1.Text = "Blastcore";
+            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.splitButton1.UseVisualStyleBackColor = true;
+            // 
             // menu_blastcore
             // 
             this.menu_blastcore.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -374,6 +388,21 @@
             this.btn_downloadBlastcore.Size = new System.Drawing.Size(152, 22);
             this.btn_downloadBlastcore.Text = "Download";
             this.btn_downloadBlastcore.Click += new System.EventHandler(this.btn_downloadBlastcore_Click);
+            // 
+            // btn_jsrs
+            // 
+            this.btn_jsrs.AutoSize = true;
+            this.btn_jsrs.ContextMenuStrip = this.menu_jsrs;
+            this.btn_jsrs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_jsrs.Location = new System.Drawing.Point(9, 13);
+            this.btn_jsrs.Name = "btn_jsrs";
+            this.btn_jsrs.Size = new System.Drawing.Size(91, 23);
+            this.btn_jsrs.SplitMenuStrip = this.menu_jsrs;
+            this.btn_jsrs.TabIndex = 0;
+            this.btn_jsrs.Text = "JSRS";
+            this.btn_jsrs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_jsrs.UseVisualStyleBackColor = true;
+            this.btn_jsrs.Click += new System.EventHandler(this.btn_JSRS_Click);
             // 
             // menu_jsrs
             // 
@@ -793,6 +822,34 @@
             this.txtb_exThreads.Size = new System.Drawing.Size(175, 22);
             this.txtb_exThreads.TabIndex = 16;
             // 
+            // chb_world
+            // 
+            this.chb_world.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chb_world.AutoSize = true;
+            this.chb_world.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_world.Location = new System.Drawing.Point(3, 12);
+            this.chb_world.Name = "chb_world";
+            this.chb_world.Size = new System.Drawing.Size(78, 21);
+            this.chb_world.TabIndex = 5;
+            this.chb_world.Text = "-world =";
+            this.chb_world.UseVisualStyleBackColor = true;
+            this.chb_world.CheckedChanged += new System.EventHandler(this.chb_world_CheckedChanged);
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.65608F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.34391F));
+            this.tableLayoutPanel4.Controls.Add(this.txtb_malloc, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btn_reloadMallocs, 1, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(106, 74);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(189, 35);
+            this.tableLayoutPanel4.TabIndex = 17;
+            // 
             // txtb_malloc
             // 
             this.txtb_malloc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -806,18 +863,17 @@
             this.txtb_malloc.Size = new System.Drawing.Size(153, 21);
             this.txtb_malloc.TabIndex = 17;
             // 
-            // chb_world
+            // btn_reloadMallocs
             // 
-            this.chb_world.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chb_world.AutoSize = true;
-            this.chb_world.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_world.Location = new System.Drawing.Point(3, 12);
-            this.chb_world.Name = "chb_world";
-            this.chb_world.Size = new System.Drawing.Size(78, 21);
-            this.chb_world.TabIndex = 5;
-            this.chb_world.Text = "-world =";
-            this.chb_world.UseVisualStyleBackColor = true;
-            this.chb_world.CheckedChanged += new System.EventHandler(this.chb_world_CheckedChanged);
+            this.btn_reloadMallocs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_reloadMallocs.Image = global::arma3Launcher.Properties.Resources.loop;
+            this.btn_reloadMallocs.Location = new System.Drawing.Point(163, 6);
+            this.btn_reloadMallocs.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.btn_reloadMallocs.Name = "btn_reloadMallocs";
+            this.btn_reloadMallocs.Size = new System.Drawing.Size(16, 16);
+            this.btn_reloadMallocs.TabIndex = 18;
+            this.btn_reloadMallocs.TabStop = false;
+            this.btn_reloadMallocs.Click += new System.EventHandler(this.btn_reloadMallocs_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -1810,6 +1866,31 @@
             this.panelLaunch.Size = new System.Drawing.Size(906, 100);
             this.panelLaunch.TabIndex = 0;
             // 
+            // btn_cancelDownload
+            // 
+            this.btn_cancelDownload.BackgroundImage = global::arma3Launcher.Properties.Resources.cloud_off;
+            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_cancelDownload.Location = new System.Drawing.Point(743, 49);
+            this.btn_cancelDownload.Name = "btn_cancelDownload";
+            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
+            this.btn_cancelDownload.TabIndex = 12;
+            this.btn_cancelDownload.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
+            this.btn_cancelDownload.Visible = false;
+            this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click);
+            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
+            this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
+            // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(22, 70);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.ShowInTaskbar = true;
+            this.prb_progressBar_All.Size = new System.Drawing.Size(718, 5);
+            this.prb_progressBar_All.TabIndex = 11;
+            // 
             // txt_progressStatus
             // 
             this.txt_progressStatus.AutoSize = true;
@@ -1858,6 +1939,14 @@
             this.txt_percentageStatus.Size = new System.Drawing.Size(250, 19);
             this.txt_percentageStatus.TabIndex = 7;
             this.txt_percentageStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
+            this.prb_progressBar_File.TabIndex = 10;
             // 
             // label17
             // 
@@ -2071,95 +2160,6 @@
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.65608F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.34391F));
-            this.tableLayoutPanel4.Controls.Add(this.txtb_malloc, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btn_reloadMallocs, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(106, 74);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(189, 35);
-            this.tableLayoutPanel4.TabIndex = 17;
-            // 
-            // btn_reloadMallocs
-            // 
-            this.btn_reloadMallocs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_reloadMallocs.Image = global::arma3Launcher.Properties.Resources.loop;
-            this.btn_reloadMallocs.Location = new System.Drawing.Point(162, 6);
-            this.btn_reloadMallocs.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
-            this.btn_reloadMallocs.Name = "btn_reloadMallocs";
-            this.btn_reloadMallocs.Size = new System.Drawing.Size(16, 16);
-            this.btn_reloadMallocs.TabIndex = 18;
-            this.btn_reloadMallocs.TabStop = false;
-            this.btn_reloadMallocs.Click += new System.EventHandler(this.btn_reloadMallocs_Click);
-            // 
-            // btn_cancelDownload
-            // 
-            this.btn_cancelDownload.BackgroundImage = global::arma3Launcher.Properties.Resources.cloud_off;
-            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_cancelDownload.Location = new System.Drawing.Point(743, 49);
-            this.btn_cancelDownload.Name = "btn_cancelDownload";
-            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
-            this.btn_cancelDownload.TabIndex = 12;
-            this.btn_cancelDownload.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
-            this.btn_cancelDownload.Visible = false;
-            this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click);
-            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
-            this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
-            // 
-            // splitButton1
-            // 
-            this.splitButton1.AutoSize = true;
-            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
-            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.splitButton1.Location = new System.Drawing.Point(9, 42);
-            this.splitButton1.Name = "splitButton1";
-            this.splitButton1.Size = new System.Drawing.Size(91, 23);
-            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
-            this.splitButton1.TabIndex = 1;
-            this.splitButton1.Text = "Blastcore";
-            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.splitButton1.UseVisualStyleBackColor = true;
-            // 
-            // btn_jsrs
-            // 
-            this.btn_jsrs.AutoSize = true;
-            this.btn_jsrs.ContextMenuStrip = this.menu_jsrs;
-            this.btn_jsrs.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_jsrs.Location = new System.Drawing.Point(9, 13);
-            this.btn_jsrs.Name = "btn_jsrs";
-            this.btn_jsrs.Size = new System.Drawing.Size(91, 23);
-            this.btn_jsrs.SplitMenuStrip = this.menu_jsrs;
-            this.btn_jsrs.TabIndex = 0;
-            this.btn_jsrs.Text = "JSRS";
-            this.btn_jsrs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_jsrs.UseVisualStyleBackColor = true;
-            this.btn_jsrs.Click += new System.EventHandler(this.btn_JSRS_Click);
-            // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(22, 70);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.ShowInTaskbar = true;
-            this.prb_progressBar_All.Size = new System.Drawing.Size(718, 5);
-            this.prb_progressBar_All.TabIndex = 11;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
-            this.prb_progressBar_File.TabIndex = 10;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2208,6 +2208,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseModsDirectory)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -2246,14 +2248,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseA3)).EndInit();
             this.panelLaunch.ResumeLayout(false);
             this.panelLaunch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Launch)).EndInit();
             this.TitleBar.ResumeLayout(false);
             this.TitleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).EndInit();
             this.menu_moreOptions.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.ResumeLayout(false);
 
         }

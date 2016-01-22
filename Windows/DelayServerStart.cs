@@ -12,29 +12,32 @@ namespace arma3Launcher.Windows
 {
     public partial class DelayServerStart : Form
     {
+        private Label WindowVersionStatus;
         private Timer countdown = new Timer();
         private int countdownLimit = 10;
 
-        public DelayServerStart()
+        public DelayServerStart(Label WindowVersionStatus)
         {
             InitializeComponent();
-            countdown.Interval = 1000;
-            countdown.Tick += Countdown_Tick;
+            this.countdown.Interval = 1000;
+            this. countdown.Tick += Countdown_Tick;
+            this.WindowVersionStatus = WindowVersionStatus;
         }
 
         private void Countdown_Tick(object sender, EventArgs e)
         {
-            txt_title.Text = "Engaging autopilot in " + countdownLimit + " seconds...";
+            this.txt_title.Text = "Engaging autopilot in " + this.countdownLimit + " seconds...";
 
-            if(countdownLimit == 0)
+            if(this.countdownLimit == 0)
             {
-                countdown.Stop();
+                this.WindowVersionStatus.Text = "Autopilot engaged";
+                this.countdown.Stop();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                countdownLimit--;
+                this.countdownLimit--;
             }
         }
 
@@ -45,7 +48,7 @@ namespace arma3Launcher.Windows
 
         private void DelayServerStart_Shown(object sender, EventArgs e)
         {
-            countdown.Start();
+            this.countdown.Start();
         }
     }
 }

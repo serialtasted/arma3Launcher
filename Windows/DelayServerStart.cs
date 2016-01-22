@@ -14,7 +14,7 @@ namespace arma3Launcher.Windows
     {
         private Label WindowVersionStatus;
         private Timer countdown = new Timer();
-        private int countdownLimit = 10;
+        private int countdownLimit;
 
         public DelayServerStart(Label WindowVersionStatus)
         {
@@ -51,6 +51,7 @@ namespace arma3Launcher.Windows
 
         private void DelayServerStart_Shown(object sender, EventArgs e)
         {
+            this.countdownLimit = 10;
             this.countdown.Start();
         }
     }

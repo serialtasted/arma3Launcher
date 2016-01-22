@@ -21,6 +21,7 @@ namespace arma3Launcher.Workers
         private Label progressDetails;
         private Label progressCurFile;
         private PictureBox launcherButton;
+        private PictureBox cancelButton;
         private String activeForm;
 
         // controls (directory fields)
@@ -169,7 +170,7 @@ namespace arma3Launcher.Workers
         /// <param name="progressDetails"></param>
         /// <param name="progressCurFile"></param>
         /// <param name="launcherButton"></param>
-        public Installer (MainForm mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, PictureBox launcherButton,
+        public Installer (MainForm mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, PictureBox launcherButton, PictureBox cancelButton,
             TextBox gamePathBox, TextBox ts3PathBox, TextBox addonsPathBox, Button gamePathErase, Button ts3PathErase, Button addonsPathErase, PictureBox gamePathFind, PictureBox ts3PathFind, PictureBox addonsPathFind,
             ToolStripMenuItem ts3Plugin, ToolStripMenuItem downloadJSRS, ToolStripMenuItem downloadBlastcore)
         {
@@ -186,6 +187,7 @@ namespace arma3Launcher.Workers
             this.progressDetails = progressDetails;
             this.progressCurFile = progressCurFile;
             this.launcherButton = launcherButton;
+            this.cancelButton = cancelButton;
 
             // define controls (directory fields)
             this.gamePathBox = gamePathBox;
@@ -556,6 +558,7 @@ namespace arma3Launcher.Workers
 
             // unlock controls
             this.launcherButton.Enabled = true;
+            try { cancelButton.Visible = false; } catch { }
 
             this.installationRunning = false;
             GlobalVar.isInstalling = false;

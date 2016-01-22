@@ -13,6 +13,7 @@ namespace arma3Launcher.Workers
 {
     class Packs
     {
+        private MainForm mainForm;
         private readonly FlowLayoutPanel gflowpacks;
         private string title = "";
         private string id = "";
@@ -20,8 +21,9 @@ namespace arma3Launcher.Workers
         private string cfgUrl = "";
         private string addons = "";
 
-        public Packs(FlowLayoutPanel packsPanel)
+        public Packs(MainForm mainForm, FlowLayoutPanel packsPanel)
         {
+            this.mainForm = mainForm;
             this.gflowpacks = packsPanel;
         }
 
@@ -59,6 +61,7 @@ namespace arma3Launcher.Workers
                     }
 
                     PackBlock auxPack = new PackBlock(
+                        mainForm,
                         title, 
                         id, 
                         description, 

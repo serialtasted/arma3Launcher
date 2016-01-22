@@ -12,6 +12,7 @@ using System.Xml;
 using System.Collections.Generic;
 using arma3Launcher.Workers;
 using arma3Launcher.Effects;
+using System.Threading.Tasks;
 
 namespace arma3Launcher
 {
@@ -127,10 +128,10 @@ namespace arma3Launcher
             QuickUpdateMethod = new zCheckUpdate(WindowVersionStatus);
             UpdateMethod = new zCheckUpdate(btn_update, txt_curversion, txt_latestversion, busy);
 
-            installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadJSRS, btn_downloadBlastcore);
-            downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_Launch);
+            installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, btn_cancelDownload, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadJSRS, btn_downloadBlastcore);
+            downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_Launch, btn_cancelDownload);
             remoteReader = new RemoteReader();
-            fetchAddonPacks = new Packs(FeedContentPanel);
+            fetchAddonPacks = new Packs(this, FeedContentPanel);
             eReport = new EmailReporter();
             aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_jsrs, chb_blastcore);
             loadingSplash = new Windows.Splash();
@@ -197,7 +198,7 @@ namespace arma3Launcher
             }
             else if (Properties.Settings.Default.firstLaunch)
             {
-                if(GlobalVar.isServer) { pref_startGameAfterDownloadsAreCompleted.Checked = true; }
+                if (GlobalVar.isServer) { pref_startGameAfterDownloadsAreCompleted.Checked = true; }
 
                 menuSelected = 3;
                 HideUnhide(menuSelected);
@@ -210,8 +211,7 @@ namespace arma3Launcher
 
             FetchSettings();
 
-            FetchRemoteSettings();
-            GetAddons();
+            updateCurrentPack(true);
             getMalloc();
             UpdateMethod.CheckUpdates();
 
@@ -223,7 +223,7 @@ namespace arma3Launcher
             loadingSplash.Close();
         }
 
-        private void MainForm_Shown(object sender, EventArgs e)
+        private async void MainForm_Shown(object sender, EventArgs e)
         {
             windowIO.windowIn();
 
@@ -263,7 +263,11 @@ namespace arma3Launcher
             }
             else
             {
-                if (GlobalVar.autoPilot) { launchProcess(); }
+                if (GlobalVar.autoPilot)
+                {
+                    await taskDelay(2500);
+                    launchProcess();
+                }
             }
         }
 
@@ -413,9 +417,10 @@ namespace arma3Launcher
             Properties.Settings.Default.Save();
         }
 
-        public void FetchRemoteSettings()
+        public void FetchRemoteSettings(bool refreshPacks)
         {
             bool isInstalled = false;
+            bool forceRefreshPacks = false;
             modsName.Clear();
             modsUrl.Clear();
 
@@ -464,7 +469,7 @@ namespace arma3Launcher
                 }
 
                 if (String.IsNullOrEmpty(activePack))
-                { Properties.Settings.Default.lastAddonPack = activePack = firstPack; }
+                { Properties.Settings.Default.lastAddonPack = activePack = firstPack; forceRefreshPacks = true; }
 
                 isBlastcoreAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["blastcore"].Value);
                 isJSRSAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["jsrs"].Value);
@@ -556,7 +561,8 @@ namespace arma3Launcher
             }
             finally
             {
-                fetchAddonPacks.Get();
+                if (refreshPacks || forceRefreshPacks)
+                    fetchAddonPacks.Get();
             }
         }
 
@@ -1066,8 +1072,7 @@ namespace arma3Launcher
                 {
                     if (Directory.Exists(AddonsFolder))
                     {
-                        //FetchRemoteSettings();
-                        //GetAddons();
+                        updateCurrentPack(false);
 
                         btn_Launch.Enabled = false;
 
@@ -1330,8 +1335,7 @@ namespace arma3Launcher
 
         private void btn_reloadAddons_Click(object sender, EventArgs e)
         {
-            FetchRemoteSettings();
-            GetAddons();
+            updateCurrentPack(false);
         }
 
         private void btn_Launch_MouseEnter(object sender, EventArgs e)
@@ -1462,8 +1466,7 @@ namespace arma3Launcher
 
         private void btn_reloadRemoteSettings_Click(object sender, EventArgs e)
         {
-            FetchRemoteSettings();
-            GetAddons();
+            updateCurrentPack(true);
         }
 
         private void btn_showRemoteSettings_Click(object sender, EventArgs e)
@@ -1491,6 +1494,9 @@ namespace arma3Launcher
 
         public void runGame()
         { PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked); }
+
+        public void updateCurrentPack(bool refreshPacks)
+        { FetchRemoteSettings(refreshPacks); GetAddons(); }
 
         public bool startGameAfterDownload()
         { return pref_startGameAfterDownloadsAreCompleted.Checked; }
@@ -1540,6 +1546,40 @@ namespace arma3Launcher
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if(Properties.Settings.Default.firstLaunch) { Properties.Settings.Default.firstLaunch = false; Properties.Settings.Default.Save(); }
+        }
+
+        private void btn_reloadMallocs_Click(object sender, EventArgs e)
+        {
+            getMalloc();
+        }
+
+        private async Task taskDelay(int delayMs)
+        {
+            await Task.Delay(delayMs);
+        }
+
+        private void btn_cancelDownload_MouseHover(object sender, EventArgs e)
+        {
+            btn_cancelDownload.BackgroundImage = Properties.Resources.cloud_off_hover;
+        }
+
+        private void btn_cancelDownload_MouseLeave(object sender, EventArgs e)
+        {
+            btn_cancelDownload.BackgroundImage = Properties.Resources.cloud_off;
+        }
+
+        private void btn_cancelDownload_Click(object sender, EventArgs e)
+        {
+            if (GlobalVar.isDownloading)
+            {
+                if (MessageBox.Show("Are you sure you want to cancel the download progress?\nAll files will be deleted. If you want to simply pause the progress just quit the launcher and resume later on.", "Cancel download progress?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    downloader.cancelDownload();
+            }
+
+            if (GlobalVar.isInstalling)
+            {
+                MessageBox.Show("One does not simply cancel the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

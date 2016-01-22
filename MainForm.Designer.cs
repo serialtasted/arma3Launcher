@@ -181,6 +181,9 @@
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_reloadMallocs = new System.Windows.Forms.PictureBox();
+            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
             this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
             this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
@@ -235,6 +238,9 @@
             this.TitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).BeginInit();
             this.menu_moreOptions.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.SuspendLayout();
             // 
             // sysbtn_minimize
@@ -652,8 +658,8 @@
             this.tableLayoutPanel2.Controls.Add(this.txtb_maxVRAM, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtb_cpuCount, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.txtb_exThreads, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_malloc, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.chb_world, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(280, 62);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -795,9 +801,9 @@
             this.txtb_malloc.Enabled = false;
             this.txtb_malloc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtb_malloc.FormattingEnabled = true;
-            this.txtb_malloc.Location = new System.Drawing.Point(109, 77);
+            this.txtb_malloc.Location = new System.Drawing.Point(3, 3);
             this.txtb_malloc.Name = "txtb_malloc";
-            this.txtb_malloc.Size = new System.Drawing.Size(175, 21);
+            this.txtb_malloc.Size = new System.Drawing.Size(153, 21);
             this.txtb_malloc.TabIndex = 17;
             // 
             // chb_world
@@ -1791,6 +1797,7 @@
             // 
             this.panelLaunch.BackColor = System.Drawing.Color.Transparent;
             this.panelLaunch.BackgroundImage = global::arma3Launcher.Properties.Resources.bgBottom;
+            this.panelLaunch.Controls.Add(this.btn_cancelDownload);
             this.panelLaunch.Controls.Add(this.prb_progressBar_All);
             this.panelLaunch.Controls.Add(this.txt_progressStatus);
             this.panelLaunch.Controls.Add(this.btn_Launch);
@@ -2064,6 +2071,49 @@
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.65608F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.34391F));
+            this.tableLayoutPanel4.Controls.Add(this.txtb_malloc, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btn_reloadMallocs, 1, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(106, 74);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(189, 35);
+            this.tableLayoutPanel4.TabIndex = 17;
+            // 
+            // btn_reloadMallocs
+            // 
+            this.btn_reloadMallocs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_reloadMallocs.Image = global::arma3Launcher.Properties.Resources.loop;
+            this.btn_reloadMallocs.Location = new System.Drawing.Point(162, 6);
+            this.btn_reloadMallocs.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.btn_reloadMallocs.Name = "btn_reloadMallocs";
+            this.btn_reloadMallocs.Size = new System.Drawing.Size(16, 16);
+            this.btn_reloadMallocs.TabIndex = 18;
+            this.btn_reloadMallocs.TabStop = false;
+            this.btn_reloadMallocs.Click += new System.EventHandler(this.btn_reloadMallocs_Click);
+            // 
+            // btn_cancelDownload
+            // 
+            this.btn_cancelDownload.BackgroundImage = global::arma3Launcher.Properties.Resources.cloud_off;
+            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_cancelDownload.Location = new System.Drawing.Point(743, 49);
+            this.btn_cancelDownload.Name = "btn_cancelDownload";
+            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
+            this.btn_cancelDownload.TabIndex = 12;
+            this.btn_cancelDownload.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
+            this.btn_cancelDownload.Visible = false;
+            this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click);
+            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
+            this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
+            // 
             // splitButton1
             // 
             this.splitButton1.AutoSize = true;
@@ -2201,6 +2251,9 @@
             this.TitleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).EndInit();
             this.menu_moreOptions.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2362,5 +2415,8 @@
         private System.ComponentModel.BackgroundWorker backgroundBlinker;
         private System.Windows.Forms.ToolStripMenuItem pref_joinServerAuto;
         private System.Windows.Forms.Panel panel_TeamSpeakDir;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.PictureBox btn_reloadMallocs;
+        private System.Windows.Forms.PictureBox btn_cancelDownload;
     }
 }

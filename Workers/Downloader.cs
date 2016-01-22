@@ -11,11 +11,19 @@ using System.Threading;
 using CG.Web.MegaApiClient;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace arma3Launcher.Workers
 {
     class Downloader
     {
+        // belongs to something not important
+        public int WM_SYSCOMMAND = 0x0112;
+        public int SC_MONITORPOWER = 0xF170;
+
+        [DllImport("user32.dll")]
+        private static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);
+
         // controls
         private Windows7ProgressBar progressFile;
         private Windows7ProgressBar progressAll;
@@ -23,6 +31,7 @@ namespace arma3Launcher.Workers
         private Label progressText;
         private Label progressDetails;
         private PictureBox launcherButton;
+        private PictureBox cancelButton;
         private MegaApiClient megaClient;
         private Installer installer;
         private String activeForm;
@@ -55,6 +64,7 @@ namespace arma3Launcher.Workers
         private int parsedDownloads = 0;
         private Int64 parsedBytes;
         private Int64 totalBytes;
+        private int numTimesCancel = 0;
 
         // error report
         private EmailReporter reportError;
@@ -163,7 +173,7 @@ namespace arma3Launcher.Workers
         /// <param name="progressText"></param>
         /// <param name="progressDetails"></param>
         /// <param name="launcherButton"></param>
-        public Downloader (MainForm mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton)
+        public Downloader (MainForm mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton, PictureBox cancelButton)
         {
             this.activeForm = "mainForm";
 
@@ -181,6 +191,7 @@ namespace arma3Launcher.Workers
             this.progressText = progressText;
             this.progressDetails = progressDetails;
             this.launcherButton = launcherButton;
+            this.cancelButton = cancelButton;
 
             // define calculate worker
             this.calculateFiles.DoWork += CalculateFiles_DoWork;
@@ -236,6 +247,9 @@ namespace arma3Launcher.Workers
 
         private void CalculateFiles_DoWork(object sender, DoWorkEventArgs e)
         {
+            if (calculateFiles.CancellationPending)
+            { e.Cancel = true; return; }
+
             // reset variables
             this.parsedBytes = 0;
             this.totalBytes = 0;
@@ -262,6 +276,9 @@ namespace arma3Launcher.Workers
         /// <param name="e"></param>
         private void DownloadFiles_DoWork(object sender, DoWorkEventArgs e)
         {
+            if (downloadFiles.CancellationPending)
+            { e.Cancel = true; return; }
+
             // specify the URL of the file to download
             string url = this.downloadUrls.Peek();
 
@@ -321,7 +338,7 @@ namespace arma3Launcher.Workers
             }
         }
 
-        private void DownloadFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private async void DownloadFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (!e.Cancelled)
             {
@@ -351,6 +368,8 @@ namespace arma3Launcher.Workers
                 this.progressDetailsText("");
                 this.currentFileText("");
 
+                this.progressBarFileStyle(ProgressBarStyle.Continuous);
+
                 this.megaClient.Logout();
                 this.downloadRunning = false;
                 GlobalVar.isDownloading = false;
@@ -359,6 +378,35 @@ namespace arma3Launcher.Workers
                 this.ClearDownloadQueue();
 
                 this.launcherButton.Enabled = true;
+                try { cancelButton.Visible = false; } catch { }
+
+                await taskDelay(3000);
+                if (numTimesCancel == 1)
+                { this.progressStatusText("Waiting for orders"); }
+                else if (numTimesCancel == 2)
+                { this.progressStatusText("Do you want or not to download the addons?"); }
+                else if (numTimesCancel == 3)
+                { this.progressStatusText("This is the third time you cancel me.. Show some respect"); }
+                else if (numTimesCancel == 4)
+                { this.progressStatusText("I'm not enjoying this"); }
+                else if (numTimesCancel == 5)
+                { this.progressStatusText("Come on you child!"); }
+                else if (numTimesCancel == 6)
+                { this.progressStatusText("I quit.. Bye"); }
+                else if (numTimesCancel >= 7 && numTimesCancel <= 9)
+                { this.progressStatusText(""); }
+                else if (numTimesCancel == 10)
+                { this.progressStatusText("Next time I'll just close the launcher..."); }
+                else if (numTimesCancel == 11)
+                { this.progressStatusText("You don't belive me? What about shutting down your computer?"); }
+                else if (numTimesCancel == 12)
+                { this.progressStatusText("Alright I'm done with this... Do it just one more time, and you'll see."); }
+                else if (numTimesCancel == 13)
+                { SendMessage(mainForm.Handle.ToInt32(), WM_SYSCOMMAND, SC_MONITORPOWER, 2); await taskDelay(3500); SendMessage(mainForm.Handle.ToInt32(), WM_SYSCOMMAND, SC_MONITORPOWER, -1); this.progressStatusText("Scared?"); }
+                else if (numTimesCancel == 14)
+                { this.progressStatusText("Should we stop now? Or do I need to format your computer too?"); }
+                else if (numTimesCancel == 15)
+                { this.progressStatusText("Alright... Bye bye"); await taskDelay(2500); Application.Exit(); }
             }
         }
 
@@ -452,19 +500,37 @@ namespace arma3Launcher.Workers
             GlobalVar.isDownloading = true;
             this.megaClient.LoginAnonymous();
             this.calculateFiles.RunWorkerAsync();
+
+            // show cancel button if possible
+            try { cancelButton.Visible = true; } catch { }
         }
 
         /// <summary>
         /// Cancel download
         /// </summary>
-        public void cancelDownload()
+        public async void cancelDownload()
         {
+            this.numTimesCancel++;
             this.progressStatusText("Cancelling download...");
             this.progressDetailsText("");
             this.currentFileText("");
 
+            this.progressBarAllValue(0);
+            this.progressBarFileValue(0);
+            this.progressBarFileStyle(ProgressBarStyle.Marquee);
+
             this.calculateFiles.CancelAsync();
             this.downloadFiles.CancelAsync();
+        }
+
+        /// <summary>
+        /// Simple custom delay
+        /// </summary>
+        /// <param name="delayMs"></param>
+        /// <returns></returns>
+        private async Task taskDelay(int delayMs)
+        {
+            await Task.Delay(delayMs);
         }
     }
 }

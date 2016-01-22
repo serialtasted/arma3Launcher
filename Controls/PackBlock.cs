@@ -19,24 +19,26 @@ namespace arma3Launcher.Controls
         private Downloader downloader;
         private RemoteReader remoteReader;
         private String addonPack;
+        private MainForm mainForm;
 
         private Version aLocal = null;
         private Version aRemote = null;
 
         private List<string> modsUrl = new List<string>();
 
-        public PackBlock(string packTitle, string packID, string packDescription, string packAddons, FlowLayoutPanel packsPanel, bool isBlastcoreAllowed, bool isJSRSAllowed, bool isOptionalAllowed)
+        public PackBlock(MainForm mainForm, string packTitle, string packID, string packDescription, string packAddons, FlowLayoutPanel packsPanel, bool isBlastcoreAllowed, bool isJSRSAllowed, bool isOptionalAllowed)
         {
             InitializeComponent();
 
-            packsPan = packsPanel;
-            txt_title.Text = packTitle;
-            txt_packID.Text = packID;
-            addonPack = packID;
-            btn_useThis.Tag = packID;
-            txt_content.Text = packDescription;
-            packInfo = new Windows.PackInfo(packTitle, "Addons on this pack:\n" + packAddons);
-            remoteReader = new RemoteReader();
+            this.packsPan = packsPanel;
+            this.txt_title.Text = packTitle;
+            this.txt_packID.Text = packID;
+            this.addonPack = packID;
+            this.btn_useThis.Tag = packID;
+            this.txt_content.Text = packDescription;
+            this.packInfo = new Windows.PackInfo(packTitle, "Addons on this pack:\n" + packAddons);
+            this.remoteReader = new RemoteReader();
+            this.mainForm = mainForm;
 
             if (isBlastcoreAllowed)
                 txt_allowed.Text = txt_allowed.Text + "Blastcore | ";
@@ -84,6 +86,7 @@ namespace arma3Launcher.Controls
 
             btn_useThis.Image = Properties.Resources.useThis_active;
             btn_useThis.Enabled = false;
+            mainForm.updateCurrentPack(false);
         }
 
         private void btn_useThis_MouseHover(object sender, EventArgs e)

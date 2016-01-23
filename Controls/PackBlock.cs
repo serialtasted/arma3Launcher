@@ -40,6 +40,11 @@ namespace arma3Launcher.Controls
             this.remoteReader = new RemoteReader();
             this.mainForm = mainForm;
 
+            if (packID == "arma3")
+                btn_showAddons.Visible = false;
+
+            loadbackground(packID);
+
             if (isBlastcoreAllowed)
                 txt_allowed.Text = txt_allowed.Text + "Blastcore | ";
             if (isJSRSAllowed)
@@ -54,7 +59,20 @@ namespace arma3Launcher.Controls
             installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_downloadpack, Properties.Settings.Default.Arma3Folder, Properties.Settings.Default.TS3Folder, Properties.Settings.Default.AddonsFolder);
             downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_downloadpack);
 
-            setsize();
+            //setsize();
+        }
+
+        private async void loadbackground(string packID)
+        {
+            try
+            {
+                PictureBox panelBG = new PictureBox();
+                panelBG.Load("https://dl.dropboxusercontent.com/u/3609589/arma3Launcher/PackImgs/" + packID + ".png");
+                panel1.BackgroundImage = panelBG.Image;
+                txt_content.MinimumSize = new System.Drawing.Size(600, 52);
+                txt_content.MaximumSize = new System.Drawing.Size(600, 52);
+            }
+            catch { }
         }
 
         private void setsize()

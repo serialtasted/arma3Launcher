@@ -181,11 +181,11 @@
             this.pref_runLauncherOnStartup = new System.Windows.Forms.ToolStripMenuItem();
             this.pref_allowNotifications = new System.Windows.Forms.ToolStripMenuItem();
             this.pref_autoDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.pref_serverAutopilot = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_reinstallTFRPlugins = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
-            this.pref_serverAutopilot = new System.Windows.Forms.ToolStripMenuItem();
             this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
             this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
@@ -2101,6 +2101,17 @@
             this.pref_autoDownload.Text = "Auto-download pack updates";
             this.pref_autoDownload.Visible = false;
             // 
+            // pref_serverAutopilot
+            // 
+            this.pref_serverAutopilot.Checked = true;
+            this.pref_serverAutopilot.CheckOnClick = true;
+            this.pref_serverAutopilot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.pref_serverAutopilot.Name = "pref_serverAutopilot";
+            this.pref_serverAutopilot.Size = new System.Drawing.Size(231, 22);
+            this.pref_serverAutopilot.Text = "Server autopilot";
+            this.pref_serverAutopilot.Visible = false;
+            this.pref_serverAutopilot.CheckedChanged += new System.EventHandler(this.pref_serverAutopilot_CheckedChanged);
+            // 
             // btn_reinstallTFRPlugins
             // 
             this.btn_reinstallTFRPlugins.Image = global::arma3Launcher.Properties.Resources.puzzle_piece;
@@ -2129,17 +2140,6 @@
             // backgroundBlinker
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
-            // 
-            // pref_serverAutopilot
-            // 
-            this.pref_serverAutopilot.Checked = true;
-            this.pref_serverAutopilot.CheckOnClick = true;
-            this.pref_serverAutopilot.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.pref_serverAutopilot.Name = "pref_serverAutopilot";
-            this.pref_serverAutopilot.Size = new System.Drawing.Size(231, 22);
-            this.pref_serverAutopilot.Text = "Server autopilot";
-            this.pref_serverAutopilot.Visible = false;
-            this.pref_serverAutopilot.CheckedChanged += new System.EventHandler(this.pref_serverAutopilot_CheckedChanged);
             // 
             // splitButton1
             // 

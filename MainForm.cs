@@ -29,9 +29,13 @@ namespace arma3Launcher
         private Installer installer;
         private RemoteReader remoteReader;
         private WindowIO windowIO;
+        private PanelIO addonsPanelIO;
+        private PanelIO communityPanelIO;
+        private PanelIO launchoptionsPanelIO;
+        private PanelIO helpPanelIO;
+        private PanelIO aboutPanelIO;
 
         private Windows.Splash loadingSplash;
-        private Windows.DelayServerStart serverStartDiag;
 
         private Version aLocal = null;
         private Version aRemote = null;
@@ -47,6 +51,8 @@ namespace arma3Launcher
         private string GameFolder = "";
         private string TSFolder = "";
         private string AddonsFolder = "";
+
+        private string oldVersionStatusText = "";
 
         private bool isBlastcoreAllowed = false;
         private bool isJSRSAllowed = false;
@@ -135,8 +141,13 @@ namespace arma3Launcher
             eReport = new EmailReporter();
             aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_jsrs, chb_blastcore);
             loadingSplash = new Windows.Splash();
-            serverStartDiag = new Windows.DelayServerStart(WindowVersionStatus);
             windowIO = new WindowIO(this);
+
+            addonsPanelIO = new PanelIO(panel_news, Panels, 304, 306, 33);
+            communityPanelIO = new PanelIO(panel_community, Panels, 304, 306, 33);
+            launchoptionsPanelIO = new PanelIO(panel_launchOptions, Panels, 304, 306, 33);
+            helpPanelIO = new PanelIO(panel_help, Panels, 304, 306, 33);
+            aboutPanelIO = new PanelIO(panel_about, Panels, 304, 306, 33);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -169,11 +180,12 @@ namespace arma3Launcher
                 panel_TeamSpeakDir.Visible = false;
                 pref_joinServerAuto.Visible = false;
                 btn_reinstallTFRPlugins.Visible = false;
+                pref_serverAutopilot.Visible = true;
 
                 pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
 
                 if (!Properties.Settings.Default.firstLaunch)
-                    serverStartDiag.ShowDialog();
+                    new Windows.DelayServerStart(pref_serverAutopilot).ShowDialog();
             }
 
             if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
@@ -807,22 +819,25 @@ namespace arma3Launcher
         /*-----------------------------------
             Hide/Unhide
         -----------------------------------*/
-        private void HideUnhide(int selectedOption)
+        private bool _isTop = false;
+        private async void HideUnhide(int selectedOption)
         {
-            if (selectedOption == 0) { menu_news.ForeColor = Color.OliveDrab; panel_news.Visible = true; FeedContentPanel.Focus(); }
-            else { menu_news.ForeColor = Color.Gray; panel_news.Visible = false; }
+            if (!GlobalVar.isAnimating)
+            {
+                if (panel_news.Height > 0) {            Panels.BackColor = Color.DimGray;   addonsPanelIO.hidePanel();        menu_news.ForeColor = Color.Gray; }
+                if (panel_community.Height > 0) {       Panels.BackColor = Color.DimGray;   communityPanelIO.hidePanel();     menu_community.ForeColor = Color.Gray; }
+                if (panel_launchOptions.Height > 0) {   Panels.BackColor = Color.DimGray;   launchoptionsPanelIO.hidePanel(); menu_launchOptions.ForeColor = Color.Gray; }
+                if (panel_help.Height > 0) {            Panels.BackColor = Color.DimGray;   helpPanelIO.hidePanel();          menu_help.ForeColor = Color.Gray; }
+                if (panel_about.Height > 0) {           Panels.BackColor = Color.DimGray;   aboutPanelIO.hidePanel();         menu_about.ForeColor = Color.Gray; }
 
-            if (selectedOption == 1) { menu_community.ForeColor = Color.OliveDrab; panel_community.Visible = true; }
-            else { menu_community.ForeColor = Color.Gray; panel_community.Visible = false; }
+                await taskDelay(600);
 
-            if (selectedOption == 2) { menu_launchOptions.ForeColor = Color.OliveDrab; panel_launchOptions.Visible = true; }
-            else { menu_launchOptions.ForeColor = Color.Gray; panel_launchOptions.Visible = false; }
-
-            if (selectedOption == 3) { menu_help.ForeColor = Color.OliveDrab; panel_help.Visible = true; }
-            else { menu_help.ForeColor = Color.Gray; panel_help.Visible = false; }
-
-            if (selectedOption == 4) { menu_about.ForeColor = Color.OliveDrab; panel_about.Visible = true; }
-            else { menu_about.ForeColor = Color.Gray; panel_about.Visible = false; }
+                if (selectedOption == 0) { Panels.BackColor = Color.OliveDrab;  menu_news.ForeColor = Color.OliveDrab;           addonsPanelIO.showPanel(); }
+                if (selectedOption == 1) { Panels.BackColor = Color.OliveDrab;  menu_community.ForeColor = Color.OliveDrab;      communityPanelIO.showPanel(); }
+                if (selectedOption == 2) { Panels.BackColor = Color.OliveDrab;  menu_launchOptions.ForeColor = Color.OliveDrab;  launchoptionsPanelIO.showPanel(); }
+                if (selectedOption == 3) { Panels.BackColor = Color.OliveDrab;  menu_help.ForeColor = Color.OliveDrab;           helpPanelIO.showPanel(); }
+                if (selectedOption == 4) { Panels.BackColor = Color.OliveDrab;  menu_about.ForeColor = Color.OliveDrab;          aboutPanelIO.showPanel(); }
+            }
         }
 
         /*-----------------------------------
@@ -830,8 +845,11 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_news_Click(object sender, EventArgs e)
         {
-            menuSelected = 0;
-            HideUnhide(menuSelected);
+            if (!GlobalVar.isAnimating)
+            {
+                menuSelected = 0;
+                HideUnhide(menuSelected);
+            }
         }
 
         private void menu_news_MouseEnter(object sender, EventArgs e)
@@ -852,8 +870,11 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_community_Click(object sender, EventArgs e)
         {
-            menuSelected = 1;
-            HideUnhide(menuSelected);
+            if (!GlobalVar.isAnimating)
+            {
+                menuSelected = 1;
+                HideUnhide(menuSelected);
+            }
         }
 
         private void menu_community_MouseEnter(object sender, EventArgs e)
@@ -874,8 +895,11 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_launchOptions_Click(object sender, EventArgs e)
         {
-            menuSelected = 2;
-            HideUnhide(menuSelected);
+            if (!GlobalVar.isAnimating)
+            {
+                menuSelected = 2;
+                HideUnhide(menuSelected);
+            }
         }
 
         private void menu_launchOptions_MouseEnter(object sender, EventArgs e)
@@ -896,8 +920,11 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_help_Click(object sender, EventArgs e)
         {
-            menuSelected = 3;
-            HideUnhide(menuSelected);
+            if (!GlobalVar.isAnimating)
+            {
+                menuSelected = 3;
+                HideUnhide(menuSelected);
+            }
         }
 
         private void menu_help_MouseEnter(object sender, EventArgs e)
@@ -918,8 +945,11 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_about_Click(object sender, EventArgs e)
         {
-            menuSelected = 4;
-            HideUnhide(menuSelected);
+            if (!GlobalVar.isAnimating)
+            {
+                menuSelected = 4;
+                HideUnhide(menuSelected);
+            }
         }
 
         private void menu_about_MouseEnter(object sender, EventArgs e)
@@ -1060,7 +1090,8 @@ namespace arma3Launcher
 
         public void reLaunchServer()
         {
-            if (serverStartDiag.ShowDialog() == DialogResult.OK)
+            new Windows.DelayServerStart(pref_serverAutopilot).ShowDialog();
+            if (GlobalVar.autoPilot)
                 launchProcess();
         }
 
@@ -1108,7 +1139,7 @@ namespace arma3Launcher
                         Arguments = PrepareLaunch.GetArguments();
                         SaveSettings();
 
-                        if (PrepareLaunch.isModPackInstalled(modsName, modsUrl))
+                        if (activePack == "arma3" || PrepareLaunch.isModPackInstalled(modsName, modsUrl))
                             runGame();
                         else
                         {
@@ -1580,6 +1611,20 @@ namespace arma3Launcher
             {
                 MessageBox.Show("One does not simply cancel the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void pref_serverAutopilot_CheckedChanged(object sender, EventArgs e)
+        {
+            if (pref_serverAutopilot.Checked)
+            { GlobalVar.autoPilot = true; WindowVersionStatus.Text = "Autopilot engaged"; }
+            else
+            { GlobalVar.autoPilot = false; this.WindowVersionStatus.Text = oldVersionStatusText; }
+        }
+
+        private void WindowVersionStatus_TextChanged(object sender, EventArgs e)
+        {
+            if (WindowVersionStatus.Text != "Autopilot engaged")
+                oldVersionStatusText = WindowVersionStatus.Text;
         }
     }
 }

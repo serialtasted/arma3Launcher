@@ -27,7 +27,8 @@ namespace arma3Launcher
             {
                 if (args[0] == "-server") { GlobalVar.isServer = true; }
             }
-            catch {}
+            catch { }
+            GlobalVar.isServer = true;
 
             if (!SingleInstance.Start())
             {

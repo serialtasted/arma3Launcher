@@ -33,7 +33,18 @@
             this.sysbtn_minimize = new System.Windows.Forms.PictureBox();
             this.sysbtn_close = new System.Windows.Forms.PictureBox();
             this.MainWindow = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.Panels = new System.Windows.Forms.Panel();
+            this.panel_news = new System.Windows.Forms.Panel();
+            this.FeedContentPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel_help = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.panel_community = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.PacksPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel_launchOptions = new System.Windows.Forms.Panel();
             this.panel_recommendedAddons = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -93,11 +104,6 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.btn_copyLaunchOptions = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.panel_community = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.PacksPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel_news = new System.Windows.Forms.Panel();
-            this.FeedContentPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel_about = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
@@ -127,11 +133,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.busy = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel_help = new System.Windows.Forms.Panel();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -184,6 +185,7 @@
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
+            this.pref_serverAutopilot = new System.Windows.Forms.ToolStripMenuItem();
             this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.btn_jsrs = new arma3Launcher.Controls.SplitButton();
             this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
@@ -191,7 +193,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.Panels.SuspendLayout();
+            this.panel_news.SuspendLayout();
+            this.panel_help.SuspendLayout();
+            this.panel_community.SuspendLayout();
             this.panel_launchOptions.SuspendLayout();
             this.panel_recommendedAddons.SuspendLayout();
             this.panel10.SuspendLayout();
@@ -213,8 +219,6 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).BeginInit();
-            this.panel_community.SuspendLayout();
-            this.panel_news.SuspendLayout();
             this.panel_about.SuspendLayout();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_goGit)).BeginInit();
@@ -227,7 +231,6 @@
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.busy)).BeginInit();
-            this.panel_help.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelDirectories.SuspendLayout();
             this.panel_TeamSpeakDir.SuspendLayout();
@@ -274,7 +277,7 @@
             // MainWindow
             // 
             this.MainWindow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.MainWindow.Controls.Add(this.Panels);
+            this.MainWindow.Controls.Add(this.panel5);
             this.MainWindow.Controls.Add(this.panelMenu);
             this.MainWindow.Controls.Add(this.panelDirectories);
             this.MainWindow.Controls.Add(this.panelLaunch);
@@ -283,31 +286,163 @@
             this.MainWindow.Size = new System.Drawing.Size(906, 537);
             this.MainWindow.TabIndex = 113;
             // 
+            // panel5
+            // 
+            this.panel5.BackgroundImage = global::arma3Launcher.Properties.Resources.panel_seperator;
+            this.panel5.Controls.Add(this.Panels);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(0, 131);
+            this.panel5.Margin = new System.Windows.Forms.Padding(0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(906, 306);
+            this.panel5.TabIndex = 10;
+            // 
             // Panels
             // 
-            this.Panels.Controls.Add(this.panel_launchOptions);
-            this.Panels.Controls.Add(this.panel_community);
+            this.Panels.BackColor = System.Drawing.Color.OliveDrab;
             this.Panels.Controls.Add(this.panel_news);
-            this.Panels.Controls.Add(this.panel_about);
             this.Panels.Controls.Add(this.panel_help);
-            this.Panels.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panels.Location = new System.Drawing.Point(0, 131);
+            this.Panels.Controls.Add(this.panel_community);
+            this.Panels.Controls.Add(this.panel_launchOptions);
+            this.Panels.Controls.Add(this.panel_about);
+            this.Panels.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Panels.Location = new System.Drawing.Point(0, 0);
+            this.Panels.Margin = new System.Windows.Forms.Padding(0);
             this.Panels.Name = "Panels";
             this.Panels.Size = new System.Drawing.Size(906, 306);
             this.Panels.TabIndex = 9;
             // 
+            // panel_news
+            // 
+            this.panel_news.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_news.Controls.Add(this.FeedContentPanel);
+            this.panel_news.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_news.Location = new System.Drawing.Point(0, -1209);
+            this.panel_news.Name = "panel_news";
+            this.panel_news.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
+            this.panel_news.Size = new System.Drawing.Size(906, 303);
+            this.panel_news.TabIndex = 4;
+            // 
+            // FeedContentPanel
+            // 
+            this.FeedContentPanel.AutoScroll = true;
+            this.FeedContentPanel.BackColor = System.Drawing.Color.Transparent;
+            this.FeedContentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FeedContentPanel.Location = new System.Drawing.Point(10, 15);
+            this.FeedContentPanel.Name = "FeedContentPanel";
+            this.FeedContentPanel.Padding = new System.Windows.Forms.Padding(0, 5, 5, 200);
+            this.FeedContentPanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.FeedContentPanel.Size = new System.Drawing.Size(886, 283);
+            this.FeedContentPanel.TabIndex = 100;
+            // 
+            // panel_help
+            // 
+            this.panel_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_help.Controls.Add(this.label29);
+            this.panel_help.Controls.Add(this.label20);
+            this.panel_help.Controls.Add(this.label19);
+            this.panel_help.Controls.Add(this.label12);
+            this.panel_help.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_help.Location = new System.Drawing.Point(0, -906);
+            this.panel_help.Name = "panel_help";
+            this.panel_help.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
+            this.panel_help.Size = new System.Drawing.Size(906, 303);
+            this.panel_help.TabIndex = 7;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Segoe UI Semibold", 7.5F, System.Drawing.FontStyle.Bold);
+            this.label29.Location = new System.Drawing.Point(19, 97);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(826, 12);
+            this.label29.TabIndex = 4;
+            this.label29.Text = "▪▪▪  All updates are done automatically. If the required addons are not installed" +
+    " the launcher will do it for you. When everything is ready the launcher will sta" +
+    "rt the game by it self.";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(10, 10);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(143, 20);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Using the launcher:";
+            this.label20.UseMnemonic = false;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(10, 124);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(247, 20);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Using \"Launch & Addons Options\":";
+            this.label19.UseMnemonic = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label12.Location = new System.Drawing.Point(10, 15);
+            this.label12.MaximumSize = new System.Drawing.Size(890, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(884, 285);
+            this.label12.TabIndex = 1;
+            this.label12.Text = resources.GetString("label12.Text");
+            this.label12.UseMnemonic = false;
+            // 
+            // panel_community
+            // 
+            this.panel_community.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_community.Controls.Add(this.label11);
+            this.panel_community.Controls.Add(this.PacksPanel);
+            this.panel_community.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_community.Location = new System.Drawing.Point(0, -603);
+            this.panel_community.Name = "panel_community";
+            this.panel_community.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
+            this.panel_community.Size = new System.Drawing.Size(906, 303);
+            this.panel_community.TabIndex = 5;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.label11.ForeColor = System.Drawing.Color.Gray;
+            this.label11.Location = new System.Drawing.Point(372, 143);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(167, 20);
+            this.label11.TabIndex = 102;
+            this.label11.Text = "Not yet implemented! :(";
+            // 
+            // PacksPanel
+            // 
+            this.PacksPanel.AutoScroll = true;
+            this.PacksPanel.BackColor = System.Drawing.Color.Transparent;
+            this.PacksPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PacksPanel.Location = new System.Drawing.Point(10, 282);
+            this.PacksPanel.Name = "PacksPanel";
+            this.PacksPanel.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
+            this.PacksPanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.PacksPanel.Size = new System.Drawing.Size(886, 16);
+            this.PacksPanel.TabIndex = 101;
+            // 
             // panel_launchOptions
             // 
+            this.panel_launchOptions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel_launchOptions.Controls.Add(this.panel_recommendedAddons);
             this.panel_launchOptions.Controls.Add(this.panel_optionalAddons);
             this.panel_launchOptions.Controls.Add(this.panel4);
-            this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_launchOptions.Location = new System.Drawing.Point(0, 0);
+            this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_launchOptions.Location = new System.Drawing.Point(0, -300);
             this.panel_launchOptions.Name = "panel_launchOptions";
             this.panel_launchOptions.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
-            this.panel_launchOptions.Size = new System.Drawing.Size(906, 306);
+            this.panel_launchOptions.Size = new System.Drawing.Size(906, 303);
             this.panel_launchOptions.TabIndex = 6;
-            this.panel_launchOptions.Visible = false;
             // 
             // panel_recommendedAddons
             // 
@@ -1015,75 +1150,18 @@
             this.label18.TabIndex = 0;
             this.label18.Text = "Launch Options";
             // 
-            // panel_community
-            // 
-            this.panel_community.Controls.Add(this.label11);
-            this.panel_community.Controls.Add(this.PacksPanel);
-            this.panel_community.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_community.Location = new System.Drawing.Point(0, 0);
-            this.panel_community.Name = "panel_community";
-            this.panel_community.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
-            this.panel_community.Size = new System.Drawing.Size(906, 306);
-            this.panel_community.TabIndex = 5;
-            this.panel_community.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.label11.ForeColor = System.Drawing.Color.Gray;
-            this.label11.Location = new System.Drawing.Point(372, 143);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(167, 20);
-            this.label11.TabIndex = 102;
-            this.label11.Text = "Not yet implemented! :(";
-            // 
-            // PacksPanel
-            // 
-            this.PacksPanel.AutoScroll = true;
-            this.PacksPanel.BackColor = System.Drawing.Color.Transparent;
-            this.PacksPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PacksPanel.Location = new System.Drawing.Point(10, 285);
-            this.PacksPanel.Name = "PacksPanel";
-            this.PacksPanel.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
-            this.PacksPanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.PacksPanel.Size = new System.Drawing.Size(886, 16);
-            this.PacksPanel.TabIndex = 101;
-            // 
-            // panel_news
-            // 
-            this.panel_news.Controls.Add(this.FeedContentPanel);
-            this.panel_news.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_news.Location = new System.Drawing.Point(0, 0);
-            this.panel_news.Name = "panel_news";
-            this.panel_news.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
-            this.panel_news.Size = new System.Drawing.Size(906, 306);
-            this.panel_news.TabIndex = 4;
-            // 
-            // FeedContentPanel
-            // 
-            this.FeedContentPanel.AutoScroll = true;
-            this.FeedContentPanel.BackColor = System.Drawing.Color.Transparent;
-            this.FeedContentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FeedContentPanel.Location = new System.Drawing.Point(10, 15);
-            this.FeedContentPanel.Name = "FeedContentPanel";
-            this.FeedContentPanel.Padding = new System.Windows.Forms.Padding(0, 5, 5, 200);
-            this.FeedContentPanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.FeedContentPanel.Size = new System.Drawing.Size(886, 286);
-            this.FeedContentPanel.TabIndex = 100;
-            // 
             // panel_about
             // 
+            this.panel_about.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel_about.Controls.Add(this.panel12);
             this.panel_about.Controls.Add(this.tableLayoutPanel3);
             this.panel_about.Controls.Add(this.panel1);
-            this.panel_about.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_about.Location = new System.Drawing.Point(0, 0);
+            this.panel_about.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_about.Location = new System.Drawing.Point(0, 3);
             this.panel_about.Name = "panel_about";
             this.panel_about.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
-            this.panel_about.Size = new System.Drawing.Size(906, 306);
+            this.panel_about.Size = new System.Drawing.Size(906, 303);
             this.panel_about.TabIndex = 8;
-            this.panel_about.Visible = false;
             // 
             // panel12
             // 
@@ -1092,10 +1170,9 @@
             this.panel12.Controls.Add(this.btn_goYoutube);
             this.panel12.Controls.Add(this.btn_goTwitch);
             this.panel12.Controls.Add(this.btn_goTwitter);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(10, 161);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(886, 40);
+            this.panel12.Size = new System.Drawing.Size(886, 37);
             this.panel12.TabIndex = 3;
             // 
             // label21
@@ -1167,7 +1244,6 @@
             this.tableLayoutPanel3.Controls.Add(this.label26, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.txt_appDescription, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.label24, 0, 2);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(10, 15);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 6;
@@ -1344,8 +1420,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(10, 201);
+            this.panel1.Location = new System.Drawing.Point(10, 198);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(886, 100);
             this.panel1.TabIndex = 1;
@@ -1458,67 +1533,6 @@
             this.label4.Size = new System.Drawing.Size(115, 19);
             this.label4.TabIndex = 0;
             this.label4.Text = "Launcher Update";
-            // 
-            // panel_help
-            // 
-            this.panel_help.Controls.Add(this.label29);
-            this.panel_help.Controls.Add(this.label20);
-            this.panel_help.Controls.Add(this.label19);
-            this.panel_help.Controls.Add(this.label12);
-            this.panel_help.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_help.Location = new System.Drawing.Point(0, 0);
-            this.panel_help.Name = "panel_help";
-            this.panel_help.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
-            this.panel_help.Size = new System.Drawing.Size(906, 306);
-            this.panel_help.TabIndex = 7;
-            this.panel_help.Visible = false;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Segoe UI Semibold", 7.5F, System.Drawing.FontStyle.Bold);
-            this.label29.Location = new System.Drawing.Point(19, 97);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(826, 12);
-            this.label29.TabIndex = 4;
-            this.label29.Text = "▪▪▪  All updates are done automatically. If the required addons are not installed" +
-    " the launcher will do it for you. When everything is ready the launcher will sta" +
-    "rt the game by it self.";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(10, 10);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(143, 20);
-            this.label20.TabIndex = 3;
-            this.label20.Text = "Using the launcher:";
-            this.label20.UseMnemonic = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(10, 124);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(247, 20);
-            this.label19.TabIndex = 2;
-            this.label19.Text = "Using \"Launch & Addons Options\":";
-            this.label19.UseMnemonic = false;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label12.Location = new System.Drawing.Point(10, 15);
-            this.label12.MaximumSize = new System.Drawing.Size(890, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(884, 285);
-            this.label12.TabIndex = 1;
-            this.label12.Text = resources.GetString("label12.Text");
-            this.label12.UseMnemonic = false;
             // 
             // panelMenu
             // 
@@ -1957,6 +1971,7 @@
             this.WindowVersionStatus.TabIndex = 1;
             this.WindowVersionStatus.Text = "%Version Status%";
             this.WindowVersionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.WindowVersionStatus.TextChanged += new System.EventHandler(this.WindowVersionStatus_TextChanged);
             this.WindowVersionStatus.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WindowVersionStatus_MouseDown);
             // 
             // dlg_folderBrowser
@@ -2031,7 +2046,8 @@
             this.pref_joinServerAuto,
             this.pref_runLauncherOnStartup,
             this.pref_allowNotifications,
-            this.pref_autoDownload});
+            this.pref_autoDownload,
+            this.pref_serverAutopilot});
             this.preferencesToolStripMenuItem.Image = global::arma3Launcher.Properties.Resources.equalizer;
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
@@ -2114,6 +2130,17 @@
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
+            // pref_serverAutopilot
+            // 
+            this.pref_serverAutopilot.Checked = true;
+            this.pref_serverAutopilot.CheckOnClick = true;
+            this.pref_serverAutopilot.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.pref_serverAutopilot.Name = "pref_serverAutopilot";
+            this.pref_serverAutopilot.Size = new System.Drawing.Size(231, 22);
+            this.pref_serverAutopilot.Text = "Server autopilot";
+            this.pref_serverAutopilot.Visible = false;
+            this.pref_serverAutopilot.CheckedChanged += new System.EventHandler(this.pref_serverAutopilot_CheckedChanged);
+            // 
             // splitButton1
             // 
             this.splitButton1.AutoSize = true;
@@ -2186,7 +2213,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).EndInit();
             this.MainWindow.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.Panels.ResumeLayout(false);
+            this.panel_news.ResumeLayout(false);
+            this.panel_help.ResumeLayout(false);
+            this.panel_help.PerformLayout();
+            this.panel_community.ResumeLayout(false);
+            this.panel_community.PerformLayout();
             this.panel_launchOptions.ResumeLayout(false);
             this.panel_recommendedAddons.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
@@ -2215,9 +2248,6 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).EndInit();
-            this.panel_community.ResumeLayout(false);
-            this.panel_community.PerformLayout();
-            this.panel_news.ResumeLayout(false);
             this.panel_about.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
@@ -2234,8 +2264,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.busy)).EndInit();
-            this.panel_help.ResumeLayout(false);
-            this.panel_help.PerformLayout();
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
             this.panelDirectories.ResumeLayout(false);
@@ -2418,5 +2446,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.PictureBox btn_reloadMallocs;
         private System.Windows.Forms.PictureBox btn_cancelDownload;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.ToolStripMenuItem pref_serverAutopilot;
     }
 }

@@ -59,5 +59,18 @@ namespace arma3Launcher
                 _autoPilot = value;
             }
         }
+
+        static bool _isAnimating = false;
+        public static bool isAnimating
+        {
+            get
+            {
+                return _isAnimating;
+            }
+            set
+            {
+                _isAnimating = value;
+            }
+        }
     }
 }

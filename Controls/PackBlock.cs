@@ -50,7 +50,7 @@ namespace arma3Launcher.Controls
             if (txt_allowed.Text != "Allowed: ")
             { txt_allowed.Text = txt_allowed.Text.Remove(txt_allowed.Text.Length - 3); txt_allowed.Visible = true; img_checkAllowed.Visible = true; }
 
-            panelIO = new PanelIO(panel_download_inner, panel_download_outter);
+            panelIO = new PanelIO(panel_download_inner, panel_download_outter, 7);
             installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_downloadpack, Properties.Settings.Default.Arma3Folder, Properties.Settings.Default.TS3Folder, Properties.Settings.Default.AddonsFolder);
             downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_downloadpack);
 

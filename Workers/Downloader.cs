@@ -35,6 +35,7 @@ namespace arma3Launcher.Workers
         private MegaApiClient megaClient;
         private Installer installer;
         private String activeForm;
+        private System.Windows.Forms.Timer totalSw;
 
         // forms
         private MainForm mainForm;
@@ -65,6 +66,9 @@ namespace arma3Launcher.Workers
         private Int64 parsedBytes;
         private Int64 totalBytes;
         private int numTimesCancel = 0;
+        private int secondsElapsed = 0;
+        private string timeLeft = "";
+        private int secondsLeft = 0;
 
         // error report
         private EmailReporter reportError;
@@ -266,6 +270,7 @@ namespace arma3Launcher.Workers
 
         private void CalculateFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.totalSw.Start();
             this.downloadFiles.RunWorkerAsync();
         }
 
@@ -352,6 +357,8 @@ namespace arma3Launcher.Workers
                     this.downloadFiles.RunWorkerAsync();
                 else
                 {
+                    this.totalSw.Stop();
+
                     this.progressDetailsText("");
                     this.currentFileText("");
 
@@ -469,6 +476,11 @@ namespace arma3Launcher.Workers
         /// <param name="isConfig"></param>
         public void beginDownload(IEnumerable<string> listUrls, bool isLaunch, string activePack, string configUrl)
         {
+            // initialize timer
+            this.totalSw = new System.Windows.Forms.Timer();
+            this.totalSw.Interval = 1000;
+            this.totalSw.Tick += TotalSw_Tick;
+
             // lock controls
             this.launcherButton.Enabled = false;
 
@@ -503,6 +515,20 @@ namespace arma3Launcher.Workers
 
             // show cancel button if possible
             try { cancelButton.Visible = true; } catch { }
+        }
+
+        /// <summary>
+        /// Timer tick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TotalSw_Tick(object sender, EventArgs e)
+        {
+            secondsElapsed++;
+            if(this.progressAll.Value > 0)
+                secondsLeft = (this.secondsElapsed / this.progressAll.Value) * 100;
+
+            this.currentFileText(String.Format("Time left: {0:00}:{1:00} | Time elapsed: {2:00}:{3:00}", (secondsLeft / 60), (secondsLeft % 60), (this.secondsElapsed / 60), (this.secondsElapsed % 60)));
         }
 
         /// <summary>

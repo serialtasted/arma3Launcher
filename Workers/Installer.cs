@@ -393,7 +393,7 @@ namespace arma3Launcher.Workers
                 }
 
                 #region isTFR
-                if (isTFR)
+                if (isTFR && !GlobalVar.isServer)
                 {
                     bool awaitTSPlugin = true;
                     do

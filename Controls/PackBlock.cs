@@ -26,7 +26,7 @@ namespace arma3Launcher.Controls
 
         private List<string> modsUrl = new List<string>();
 
-        public PackBlock(MainForm mainForm, string packTitle, string packID, string packDescription, string packAddons, FlowLayoutPanel packsPanel, bool isBlastcoreAllowed, bool isJSRSAllowed, bool isOptionalAllowed)
+        public PackBlock(MainForm mainForm, string packTitle, string packID, string packDescription, string packAddons, FlowLayoutPanel packsPanel, bool isBlastcoreAllowed, bool isDragonFyreAllowed, bool isOptionalAllowed)
         {
             InitializeComponent();
 
@@ -47,8 +47,8 @@ namespace arma3Launcher.Controls
 
             if (isBlastcoreAllowed)
                 txt_allowed.Text = txt_allowed.Text + "Blastcore | ";
-            if (isJSRSAllowed)
-                txt_allowed.Text = txt_allowed.Text + "JSRS | ";
+            if (isDragonFyreAllowed)
+                txt_allowed.Text = txt_allowed.Text + "Dragon Fyre | ";
             if (isOptionalAllowed)
                 txt_allowed.Text = txt_allowed.Text + "Optional Addons | ";
 

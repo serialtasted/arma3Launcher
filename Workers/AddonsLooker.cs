@@ -13,19 +13,19 @@ namespace arma3Launcher.Workers
         private string AddonsFolder;
         private ListBox lstb_detectedAddons;
         private ListBox lstb_activeAddons;
-        private ToolStripMenuItem chb_jsrs;
+        private ToolStripMenuItem chb_dragonfyre;
         private ToolStripMenuItem chb_blastcore;
 
 
-        public AddonsLooker(ListBox lBox_detectedAddons, ListBox lBox_activeAddons, ToolStripMenuItem cBox_JSRS, ToolStripMenuItem cBox_BlastCore)
+        public AddonsLooker(ListBox lBox_detectedAddons, ListBox lBox_activeAddons, ToolStripMenuItem cBox_dragonfyre, ToolStripMenuItem cBox_BlastCore)
         {
             this.lstb_detectedAddons = lBox_detectedAddons;
             this.lstb_activeAddons = lBox_activeAddons;
-            this.chb_jsrs = cBox_JSRS;
+            this.chb_dragonfyre = cBox_dragonfyre;
             this.chb_blastcore = cBox_BlastCore;
         }
 
-        public void getAddons(bool isJSRSAllowed, bool isBlastcoreAllowed, List<string> modsName)
+        public void getAddons(bool isDragonFyreAllowed, bool isBlastcoreAllowed, List<string> modsName)
         {
             AddonsFolder = Properties.Settings.Default.AddonsFolder;
 
@@ -38,24 +38,23 @@ namespace arma3Launcher.Workers
 
                 if (subDirs.Length == 0)
                 {
-                    chb_jsrs.Tag = ""; chb_jsrs.Enabled = false; chb_jsrs.Checked = false;
-                    chb_blastcore.Tag = ""; chb_blastcore.Enabled = false; chb_blastcore.Checked = false;
+                    chb_dragonfyre.Enabled = false; chb_dragonfyre.Checked = false;
+                    chb_blastcore.Enabled = false; chb_blastcore.Checked = false;
                 }
                 else
                 {
-                    bool aux_jsrsState = chb_jsrs.Checked;
+                    bool aux_dragonfyreState = chb_dragonfyre.Checked;
                     bool aux_blastcoreState = chb_blastcore.Checked;
 
                     foreach (DirectoryInfo dir in addonDir.GetDirectories())
                     {
-                        if ((dir.Name.ToLower().Contains("jsrs") || dir.Name.ToLower().Contains("dragonfyre")) && isJSRSAllowed)
+                        if ((dir.Name.ToLower().Contains("jsrs") || (dir.Name.ToLower().Contains("dragonfyre") && !dir.Name.ToLower().Contains("rhs"))) && isDragonFyreAllowed)
                         {
-                            chb_jsrs.Enabled = true;
-                            chb_jsrs.Checked = aux_jsrsState;
-                            chb_jsrs.Tag = Path.GetFileName(dir.Name);
+                            chb_dragonfyre.Enabled = true;
+                            chb_dragonfyre.Checked = aux_dragonfyreState;
                             break;
                         }
-                        else { chb_jsrs.Tag = ""; chb_jsrs.Enabled = false; chb_jsrs.Checked = false; }
+                        else { chb_dragonfyre.Enabled = false; chb_dragonfyre.Checked = false; }
                     }
 
                     foreach (DirectoryInfo dir in addonDir.GetDirectories())
@@ -64,10 +63,9 @@ namespace arma3Launcher.Workers
                         {
                             chb_blastcore.Enabled = true;
                             chb_blastcore.Checked = aux_blastcoreState;
-                            chb_blastcore.Tag = Path.GetFileName(dir.Name);
                             break;
                         }
-                        else { chb_blastcore.Tag = ""; chb_blastcore.Enabled = false; chb_blastcore.Checked = false; }
+                        else { chb_blastcore.Enabled = false; chb_blastcore.Checked = false; }
                     }
 
                     foreach (DirectoryInfo dir in addonDir.GetDirectories())
@@ -79,7 +77,7 @@ namespace arma3Launcher.Workers
                         {
                             foreach (string m in modsName)
                             {
-                                if (dir.Name == m || dir.Name.ToLower().Contains("blastcore") || dir.Name.ToLower().Contains("jsrs") || dir.Name.ToLower().Contains("dragonfyre")) { aux_isInstalled = true; break; }
+                                if (dir.Name == m || dir.Name.ToLower().Contains("blastcore") || dir.Name.ToLower().Contains("jsrs") || (dir.Name.ToLower().Contains("dragonfyre") && !dir.Name.ToLower().Contains("rhs"))) { aux_isInstalled = true; break; }
                                 else { continue; }
                             }
 

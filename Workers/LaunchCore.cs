@@ -76,8 +76,9 @@ namespace arma3Launcher.Workers
             string s_exThreads, 
             bool cpuCount,
             string s_cpuCount,
-            bool jsrs,
-            string s_jsrs,
+            bool dragonfyre,
+            string s_dragonfyre,
+            string s_dragonfyrerhs,
             bool blastcore,
             string s_blastcore,
             ListBox activeAddons,
@@ -85,32 +86,9 @@ namespace arma3Launcher.Workers
         {
             string auxCombinedArguments = AggregateArguments(noLogs, noPause, noSplash, noCB, enableHT, skipIntro, window, winxp, 
                 showScriptErrors, noBenchmark, world, s_world, maxMem, s_maxMem, malloc, s_malloc, maxVRAM, s_maxVRAM, exThreads, s_exThreads, cpuCount, s_cpuCount);
-            string auxCombinedAddons = "";
             string auxCoreMods = "-mod=\"";
+            string auxCombinedAddons = "";
             int i = 0;
-
-            if (auxCombinedArguments != "") Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
-
-            if (jsrs)
-                auxCombinedAddons = ";" + AddonsFolder + s_jsrs;
-
-            if (blastcore)
-                if (auxCombinedAddons != "")
-                    auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + s_blastcore;
-                else
-                    auxCombinedAddons = ";" + AddonsFolder + s_blastcore;
-
-            //MessageBox.Show(s_modsFolder);
-
-            if (activeAddons.Items.Count > 0 && activeAddons.Enabled)
-            {
-                do
-                {
-                    if (auxCombinedAddons != "") auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + activeAddons.Items[i].ToString();
-                    else auxCombinedAddons = ";" + AddonsFolder + activeAddons.Items[i].ToString();
-                    i++;
-                } while (i != activeAddons.Items.Count);
-            }
 
             foreach (string mod in modsList)
             {
@@ -122,6 +100,30 @@ namespace arma3Launcher.Workers
                 else
                     break;
             }
+
+            if (auxCombinedArguments != "") Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
+
+            if (dragonfyre)
+                auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + s_dragonfyre;
+
+            if (dragonfyre && Directory.Exists(AddonsFolder + s_dragonfyre) && auxCoreMods.ToLower().Contains("@rhs"))
+                auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + s_dragonfyrerhs;
+
+            if (blastcore)
+                auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + s_blastcore;
+
+            if (activeAddons.Items.Count > 0 && activeAddons.Enabled)
+            {
+                do
+                {
+                    if (auxCombinedAddons != "") auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + activeAddons.Items[i].ToString();
+                    else auxCombinedAddons = ";" + AddonsFolder + activeAddons.Items[i].ToString();
+                    i++;
+                } while (i != activeAddons.Items.Count);
+            }
+
+            if (modsList.Count == 0)
+                auxCombinedAddons = auxCombinedAddons.Remove(0, 1);
 
             if (Arguments != "") Arguments = Arguments + " " + auxCoreMods + auxCombinedAddons + "\"";
             else Arguments = auxCoreMods + auxCombinedAddons;

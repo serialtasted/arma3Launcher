@@ -8,6 +8,13 @@ namespace arma3Launcher
 {
     public static class GlobalVar
     {
+        // INT
+
+
+        // STRING
+
+
+        // BOOL
         static bool _isDownloading = false;
         public static bool isDownloading
         {

@@ -68,7 +68,7 @@ namespace arma3Launcher.Workers
                         addons, 
                         gflowpacks, 
                         Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["blastcore"].Value), 
-                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["jsrs"].Value), 
+                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["dragonfyre"].Value), 
                         Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["optional"].Value));
                     auxPack.Tag = id;
 

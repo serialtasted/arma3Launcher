@@ -55,7 +55,7 @@ namespace arma3Launcher
         private string oldVersionStatusText = "";
 
         private bool isBlastcoreAllowed = false;
-        private bool isJSRSAllowed = false;
+        private bool isDragonFyreAllowed = false;
         private bool isOptionalAllowed = false;
 
         private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
@@ -63,8 +63,15 @@ namespace arma3Launcher
         private List<string> modsUrl = new List<string>();
         private string cfgFile = "";
         private string cfgUrl = "";
+
         private string blastcoreUrl = "";
-        private string jsrsUrl = "";
+        private string blastcoreName = "";
+
+        private string dragonfyreUrl = "";
+        private string dragonfyreName = "";
+
+        private string dragonfyrerhsUrl = "";
+        private string dragonfyrerhsName = "";
 
         private string Arguments = "";
 
@@ -134,12 +141,12 @@ namespace arma3Launcher
             QuickUpdateMethod = new zCheckUpdate(WindowVersionStatus);
             UpdateMethod = new zCheckUpdate(btn_update, txt_curversion, txt_latestversion, busy);
 
-            installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, btn_cancelDownload, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadJSRS, btn_downloadBlastcore);
+            installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, btn_cancelDownload, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadDragonFyre, btn_downloadBlastcore);
             downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_Launch, btn_cancelDownload);
             remoteReader = new RemoteReader();
             fetchAddonPacks = new Packs(this, FeedContentPanel);
             eReport = new EmailReporter();
-            aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_jsrs, chb_blastcore);
+            aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_dragonfyre, chb_blastcore);
             loadingSplash = new Windows.Splash();
             windowIO = new WindowIO(this);
 
@@ -185,7 +192,8 @@ namespace arma3Launcher
                 pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
 
                 if (!Properties.Settings.Default.firstLaunch)
-                    new Windows.DelayServerStart(pref_serverAutopilot).ShowDialog();
+                    if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
+                        switchAutopilot(true);
             }
 
             if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
@@ -247,7 +255,7 @@ namespace arma3Launcher
 
                         if (s.Contains("DragonFyre"))
                         {
-                            btn_downloadJSRS.Enabled = false;
+                            btn_downloadDragonFyre.Enabled = false;
                         }
 
                         if (s.Contains("Blastcore"))
@@ -296,7 +304,7 @@ namespace arma3Launcher
 
         public void GetAddons()
         {
-            aLooker.getAddons(isJSRSAllowed, isBlastcoreAllowed, modsName);
+            aLooker.getAddons(isDragonFyreAllowed, isBlastcoreAllowed, modsName);
         }
 
         void FetchSettings()
@@ -347,7 +355,7 @@ namespace arma3Launcher
             chb_cpuCount.Checked = Properties.Settings.Default.cpuCount;
             txtb_cpuCount.Text = Properties.Settings.Default.cpuCount_value.ToString();
 
-            chb_jsrs.Checked = Properties.Settings.Default.JSRS;
+            chb_dragonfyre.Checked = Properties.Settings.Default.JSRS;
             chb_blastcore.Checked = Properties.Settings.Default.BlastCore;
 
             // optional addons
@@ -399,7 +407,7 @@ namespace arma3Launcher
             Properties.Settings.Default.cpuCount = chb_cpuCount.Checked;
             Properties.Settings.Default.cpuCount_value = Convert.ToInt32(txtb_cpuCount.Text);
 
-            Properties.Settings.Default.JSRS = chb_jsrs.Checked;
+            Properties.Settings.Default.JSRS = chb_dragonfyre.Checked;
             Properties.Settings.Default.BlastCore = chb_blastcore.Checked;
 
             // optional addons
@@ -448,14 +456,22 @@ namespace arma3Launcher
                 {
                     if (xn.Attributes["type"].Value == "blastcore")
                     {
+                        blastcoreName = xn.Attributes["name"].Value;
                         blastcoreUrl = xn.Attributes["url"].Value;
                         btn_downloadBlastcore.Text = "Download (" + xn.Attributes["version"].Value + ")";
                     }
 
-                    if (xn.Attributes["type"].Value == "jsrs")
+                    if (xn.Attributes["type"].Value == "dragonfyre")
                     {
-                        jsrsUrl = xn.Attributes["url"].Value;
-                        btn_downloadJSRS.Text = "Download (" + xn.Attributes["version"].Value + ")";
+                        dragonfyreName = xn.Attributes["name"].Value;
+                        dragonfyreUrl = xn.Attributes["url"].Value;
+                        btn_downloadDragonFyre.Text = "Download (" + xn.Attributes["version"].Value + ")";
+                    }
+
+                    if (xn.Attributes["type"].Value == "dragonfyrerhs")
+                    {
+                        dragonfyrerhsName = xn.Attributes["name"].Value;
+                        dragonfyrerhsUrl = xn.Attributes["url"].Value;
                     }
                 }
 
@@ -478,7 +494,7 @@ namespace arma3Launcher
                 { Properties.Settings.Default.lastAddonPack = activePack = firstPack; forceRefreshPacks = true; }
 
                 isBlastcoreAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["blastcore"].Value);
-                isJSRSAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["jsrs"].Value);
+                isDragonFyreAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["dragonfyre"].Value);
                 isOptionalAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["optional"].Value);
 
                 cfgFile = activePack;
@@ -489,10 +505,10 @@ namespace arma3Launcher
                 else
                 { chb_blastcore.Enabled = false; }
 
-                if (isJSRSAllowed)
-                { chb_jsrs.Enabled = true; }
+                if (isDragonFyreAllowed)
+                { chb_dragonfyre.Enabled = true; }
                 else
-                { chb_jsrs.Enabled = false; }
+                { chb_dragonfyre.Enabled = false; }
 
                 if (isOptionalAllowed)
                 { panel_Optional.Enabled = true; }
@@ -1021,9 +1037,9 @@ namespace arma3Launcher
         -----------------------------------*/
 
         #region Recommended Addons
-        private void btn_JSRS_Click(object sender, EventArgs e)
+        private void btn_DragonFyre_Click(object sender, EventArgs e)
         {
-            Process.Start("http://dl.jsrs-studios.com/1.%20JSRS-Studios%20Downloads/");
+            Process.Start("http://www.armaholic.com/page.php?id=27827");
         }
 
         private void btn_Blastcore_Click(object sender, EventArgs e)
@@ -1090,7 +1106,9 @@ namespace arma3Launcher
 
         public void reLaunchServer()
         {
-            new Windows.DelayServerStart(pref_serverAutopilot).ShowDialog();
+            if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
+                switchAutopilot(true);
+
             if (GlobalVar.autoPilot)
                 launchProcess();
         }
@@ -1129,10 +1147,11 @@ namespace arma3Launcher
                             txtb_exThreads.Text,
                             chb_cpuCount.Checked,
                             txtb_cpuCount.Text,
-                            chb_jsrs.Checked,
-                            chb_jsrs.Tag.ToString(),
+                            chb_dragonfyre.Checked,
+                            dragonfyreName,
+                            dragonfyrerhsName,
                             chb_blastcore.Checked,
-                            chb_blastcore.Tag.ToString(),
+                            blastcoreName,
                             lstb_activeAddons,
                             modsName);
 
@@ -1408,18 +1427,22 @@ namespace arma3Launcher
             Process.Start(Properties.GlobalValues.Link_Gihub);
         }
 
-        private void btn_downloadJSRS_Click(object sender, EventArgs e)
+        private void btn_downloadDragonFyre_Click(object sender, EventArgs e)
         {
             if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
             {
                 modsUrl.Clear();
-                modsUrl.Add(jsrsUrl);
+                modsUrl.Add(dragonfyreUrl);
+                modsUrl.Add(dragonfyrerhsUrl);
                 downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
             }
             else
-                downloader.enqueueUrl(jsrsUrl);
+            {
+                downloader.enqueueUrl(dragonfyreUrl);
+                downloader.enqueueUrl(dragonfyrerhsUrl);
+            }
 
-            btn_downloadJSRS.Enabled = false;
+            btn_downloadDragonFyre.Enabled = false;
         }
 
         private void btn_downloadBlastcore_Click(object sender, EventArgs e)
@@ -1616,9 +1639,17 @@ namespace arma3Launcher
         private void pref_serverAutopilot_CheckedChanged(object sender, EventArgs e)
         {
             if (pref_serverAutopilot.Checked)
-            { GlobalVar.autoPilot = true; WindowVersionStatus.Text = "Autopilot engaged"; }
+                switchAutopilot(true);
             else
-            { GlobalVar.autoPilot = false; this.WindowVersionStatus.Text = oldVersionStatusText; }
+                switchAutopilot(false);
+        }
+
+        private void switchAutopilot(bool On)
+        {
+            if (On)
+            { GlobalVar.autoPilot = true; WindowVersionStatus.Text = "Autopilot engaged"; pref_serverAutopilot.Checked = true; }
+            else
+            { GlobalVar.autoPilot = false; this.WindowVersionStatus.Text = oldVersionStatusText; pref_serverAutopilot.Checked = false; }
         }
 
         private void WindowVersionStatus_TextChanged(object sender, EventArgs e)

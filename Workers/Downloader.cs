@@ -68,7 +68,6 @@ namespace arma3Launcher.Workers
         private int numTimesCancel = 0;
         private int secondsElapsed = 0;
         private string timeLeft = "";
-        private int secondsLeft = 0;
 
         // error report
         private EmailReporter reportError;
@@ -270,6 +269,8 @@ namespace arma3Launcher.Workers
 
         private void CalculateFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            this.secondsElapsed = 0;
+
             this.totalSw.Start();
             this.downloadFiles.RunWorkerAsync();
         }
@@ -524,9 +525,9 @@ namespace arma3Launcher.Workers
         /// <param name="e"></param>
         private void TotalSw_Tick(object sender, EventArgs e)
         {
+            int secondsLeft = 0;
             secondsElapsed++;
-            if(this.progressAll.Value > 0)
-                secondsLeft = (this.secondsElapsed / this.progressAll.Value) * 100;
+            secondsLeft = Convert.ToInt32((this.secondsElapsed / (double)this.parsedBytes) * (this.totalBytes - (double)this.parsedBytes));
 
             this.currentFileText(String.Format("Time left: {0:00}:{1:00} | Time elapsed: {2:00}:{3:00}", (secondsLeft / 60), (secondsLeft % 60), (this.secondsElapsed / 60), (this.secondsElapsed % 60)));
         }

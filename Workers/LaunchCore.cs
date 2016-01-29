@@ -32,7 +32,6 @@ namespace arma3Launcher.Workers
             bool enableHT,
             bool skipIntro,
             bool window,
-            bool winxp,
             bool showScriptErrors,
             bool noBenchmark,
             bool world,
@@ -48,7 +47,7 @@ namespace arma3Launcher.Workers
             bool cpuCount,
             string s_cpuCount)
         {
-            string auxCombinedArguments = AggregateArguments(noLogs, noPause, noSplash, noCB, enableHT, skipIntro, window, winxp,
+            string auxCombinedArguments = AggregateArguments(noLogs, noPause, noSplash, noCB, enableHT, skipIntro, window,
                 showScriptErrors, noBenchmark, world, s_world, maxMem, s_maxMem, malloc, s_malloc, maxVRAM, s_maxVRAM, exThreads, s_exThreads, cpuCount, s_cpuCount);
 
             if (auxCombinedArguments != "") Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
@@ -60,8 +59,7 @@ namespace arma3Launcher.Workers
             bool noCB, 
             bool enableHT, 
             bool skipIntro, 
-            bool window, 
-            bool winxp, 
+            bool window,  
             bool showScriptErrors, 
             bool noBenchmark,
             bool world,
@@ -84,7 +82,7 @@ namespace arma3Launcher.Workers
             ListBox activeAddons,
             List<string> modsList)
         {
-            string auxCombinedArguments = AggregateArguments(noLogs, noPause, noSplash, noCB, enableHT, skipIntro, window, winxp, 
+            string auxCombinedArguments = AggregateArguments(noLogs, noPause, noSplash, noCB, enableHT, skipIntro, window, 
                 showScriptErrors, noBenchmark, world, s_world, maxMem, s_maxMem, malloc, s_malloc, maxVRAM, s_maxVRAM, exThreads, s_exThreads, cpuCount, s_cpuCount);
             string auxCoreMods = "-mod=\"";
             string auxCombinedAddons = "";
@@ -138,7 +136,6 @@ namespace arma3Launcher.Workers
             bool enableHT,
             bool skipIntro,
             bool window,
-            bool winxp,
             bool showScriptErrors,
             bool noBenchmark,
             bool world,
@@ -163,7 +160,6 @@ namespace arma3Launcher.Workers
             if (enableHT) auxCombinedArguments = auxCombinedArguments + "-enableHT ";
             if (skipIntro) auxCombinedArguments = auxCombinedArguments + "-skipIntro ";
             if (window) auxCombinedArguments = auxCombinedArguments + "-window ";
-            if (winxp) auxCombinedArguments = auxCombinedArguments + "-winxp ";
             if (showScriptErrors) auxCombinedArguments = auxCombinedArguments + "-showScriptErrors ";
             if (noBenchmark) auxCombinedArguments = auxCombinedArguments + "-noBenchmark ";
 
@@ -307,7 +303,7 @@ namespace arma3Launcher.Workers
                 HcArguments = "-client -connect=localhost -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" -profile=PTrHeadlessClient -name=PTrHeadlessClient " + Arguments;
             }
 
-            if (Directory.Exists(GameFolder) && File.Exists(GameFolder + "arma3battleye.exe"))
+            if (Directory.Exists(GameFolder) && File.Exists(GameFolder + GlobalVar.gameArtifact))
             {
                 try
                 {
@@ -330,7 +326,7 @@ namespace arma3Launcher.Workers
                     }
                     else
                     {
-                        gameProcessInfo.FileName = "arma3battleye.exe";
+                        gameProcessInfo.FileName = "arma3battley.exe";
                         gameProcessInfo.Arguments = "2 1 " + Arguments;
 
                         whatsRunning = "Game";

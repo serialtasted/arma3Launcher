@@ -110,12 +110,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool winxp {
+        public bool battleye {
             get {
-                return ((bool)(this["winxp"]));
+                return ((bool)(this["battleye"]));
             }
             set {
-                this["winxp"] = value;
+                this["battleye"] = value;
             }
         }
         

@@ -12,7 +12,18 @@ namespace arma3Launcher
 
 
         // STRING
-
+        static string _gameArtifact = "";
+        public static string gameArtifact
+        {
+            get
+            {
+                return _gameArtifact;
+            }
+            set
+            {
+                _gameArtifact = value;
+            }
+        }
 
         // BOOL
         static bool _isDownloading = false;

@@ -525,11 +525,11 @@ namespace arma3Launcher.Workers
         /// <param name="e"></param>
         private void TotalSw_Tick(object sender, EventArgs e)
         {
-            int secondsLeft = 0;
+            Int64 secondsLeft = 0;
             secondsElapsed++;
-            secondsLeft = Convert.ToInt32((this.secondsElapsed / (double)this.parsedBytes) * (this.totalBytes - (double)this.parsedBytes));
+            try { secondsLeft = Convert.ToInt64((this.secondsElapsed / (double)this.parsedBytes) * (this.totalBytes - (double)this.parsedBytes)); } catch { }
 
-            this.currentFileText(String.Format("Time left: {0:00}:{1:00} | Time elapsed: {2:00}:{3:00}", (secondsLeft / 60), (secondsLeft % 60), (this.secondsElapsed / 60), (this.secondsElapsed % 60)));
+            this.currentFileText(String.Format("Estimated time left: {0:00}:{1:00} | Time elapsed: {2:00}:{3:00}", (secondsLeft / 60), (secondsLeft % 60), (this.secondsElapsed / 60), (this.secondsElapsed % 60)));
         }
 
         /// <summary>

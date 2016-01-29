@@ -514,7 +514,6 @@ namespace arma3Launcher.Workers
                 case "mainForm":
                     if (!e.Cancelled && this.isLaunch && this.mainForm.startGameAfterDownload())
                     {
-                        this.isLaunch = false;
                         this.progressBarFileStyle(ProgressBarStyle.Marquee);
                         this.progressBarFileValue(50);
                         this.progressStatusText("Launching game...");
@@ -522,7 +521,6 @@ namespace arma3Launcher.Workers
                     }
                     else if (!e.Cancelled && this.isLaunch && !this.mainForm.startGameAfterDownload())
                     {
-                        this.isLaunch = false;
                         this.progressStatusText("Game ready to launch...");
                     }
                     else if (!e.Cancelled)
@@ -530,6 +528,8 @@ namespace arma3Launcher.Workers
                         this.progressStatusText("Waiting for orders");
                         this.mainForm.GetAddons();
                     }
+
+                    this.isLaunch = false;
 
                     // unlock directory fields
                     this.gamePathBox.Enabled = true;

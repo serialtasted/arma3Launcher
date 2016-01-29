@@ -333,7 +333,6 @@ namespace arma3Launcher
             chb_enableHT.Checked = Properties.Settings.Default.enableHT;
             chb_skipIntro.Checked = Properties.Settings.Default.skipIntro;
             chb_window.Checked = Properties.Settings.Default.window;
-            chb_winxp.Checked = Properties.Settings.Default.winxp;
             chb_showScriptErrors.Checked = Properties.Settings.Default.showScriptErrors;
             chb_noBenchmark.Checked = Properties.Settings.Default.noBenchmark;
 
@@ -357,6 +356,13 @@ namespace arma3Launcher
 
             chb_dragonfyre.Checked = Properties.Settings.Default.JSRS;
             chb_blastcore.Checked = Properties.Settings.Default.BlastCore;
+
+            // battleye
+            chb_battleye.Checked = Properties.Settings.Default.battleye;
+            if (Properties.Settings.Default.battleye)
+                GlobalVar.gameArtifact = "arma3battleye.exe";
+            else
+                GlobalVar.gameArtifact = "arma3.exe";
 
             // optional addons
             lstb_activeAddons.Items.Clear();
@@ -385,7 +391,7 @@ namespace arma3Launcher
             Properties.Settings.Default.enableHT = chb_enableHT.Checked;
             Properties.Settings.Default.skipIntro = chb_skipIntro.Checked;
             Properties.Settings.Default.window = chb_window.Checked;
-            Properties.Settings.Default.winxp = chb_winxp.Checked;
+            Properties.Settings.Default.battleye = chb_battleye.Checked;
             Properties.Settings.Default.showScriptErrors = chb_showScriptErrors.Checked;
             Properties.Settings.Default.noBenchmark = chb_noBenchmark.Checked;
 
@@ -731,7 +737,7 @@ namespace arma3Launcher
                 {
                     foreach (string f in Directory.GetFiles(auxA3Folder))
                     {
-                        if ((f.Contains("arma3battleye.exe") && !GlobalVar.isServer) || (f.Contains("arma3server.exe") && GlobalVar.isServer)) { auxIsFolder = true; break; }
+                        if ((f.Contains(GlobalVar.gameArtifact) && !GlobalVar.isServer) || (f.Contains("arma3server.exe") && GlobalVar.isServer)) { auxIsFolder = true; break; }
                         else { continue; }
                     }
                 }
@@ -1117,7 +1123,7 @@ namespace arma3Launcher
         {
             if ((Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")) || GlobalVar.isServer))
             {
-                if (Directory.Exists(GameFolder) && ((File.Exists(GameFolder + "arma3battleye.exe") && !GlobalVar.isServer) || (File.Exists(GameFolder + "arma3server.exe") && GlobalVar.isServer)))
+                if (Directory.Exists(GameFolder) && ((File.Exists(GameFolder + GlobalVar.gameArtifact) && !GlobalVar.isServer) || (File.Exists(GameFolder + "arma3server.exe") && GlobalVar.isServer)))
                 {
                     if (Directory.Exists(AddonsFolder))
                     {
@@ -1132,7 +1138,6 @@ namespace arma3Launcher
                             chb_enableHT.Checked,
                             chb_skipIntro.Checked,
                             chb_window.Checked,
-                            chb_winxp.Checked,
                             chb_showScriptErrors.Checked,
                             chb_noBenchmark.Checked,
                             chb_world.Checked,
@@ -1304,7 +1309,6 @@ namespace arma3Launcher
                 chb_enableHT.Checked,
                 chb_skipIntro.Checked,
                 chb_window.Checked,
-                chb_winxp.Checked,
                 chb_showScriptErrors.Checked,
                 chb_noBenchmark.Checked,
                 chb_world.Checked,
@@ -1656,6 +1660,14 @@ namespace arma3Launcher
         {
             if (WindowVersionStatus.Text != "Autopilot engaged")
                 oldVersionStatusText = WindowVersionStatus.Text;
+        }
+
+        private void chb_battleye_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chb_battleye.Checked)
+                GlobalVar.gameArtifact = "arma3battleye.exe";
+            else
+                GlobalVar.gameArtifact = "arma3.exe";
         }
     }
 }

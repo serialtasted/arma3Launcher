@@ -352,6 +352,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\be_logo.jpg" />
     <None Include="Resources\panel_seperator.jpg" />
     <None Include="Resources\panel_seperator.png" />
     <None Include="Resources\cloud-off_hover.png" />

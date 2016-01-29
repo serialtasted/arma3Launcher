@@ -141,7 +141,7 @@ namespace arma3Launcher
             txt_appVersion.Text = AssemblyVersion;
 
             QuickUpdateMethod = new zCheckUpdate(WindowVersionStatus);
-            UpdateMethod = new zCheckUpdate(btn_update, txt_curversion, txt_latestversion, busy);
+            UpdateMethod = new zCheckUpdate(btn_update, btn_checkUpdates, txt_curversion, txt_latestversion, busy);
 
             installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, btn_cancelDownload, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadDragonFyre, btn_downloadBlastcore);
             downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_Launch, btn_cancelDownload);
@@ -1692,6 +1692,16 @@ namespace arma3Launcher
         public void minimizeWindow ()
         {
             windowIO.windowOut(false);
+        }
+
+        private void btn_checkUpdates_Click(object sender, EventArgs e)
+        {
+            if (!QuickUpdateMethod.QuickCheck())
+            {
+                UpdateMethod.CheckUpdates();
+                activeButton = btn_update;
+                backgroundBlinker.RunWorkerAsync();
+            }
         }
     }
 }

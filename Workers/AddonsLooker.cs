@@ -77,7 +77,7 @@ namespace arma3Launcher.Workers
                         {
                             foreach (string m in modsName)
                             {
-                                if (dir.Name == m || dir.Name.ToLower().Contains("blastcore") || dir.Name.ToLower().Contains("jsrs") || (dir.Name.ToLower().Contains("dragonfyre") && !dir.Name.ToLower().Contains("rhs"))) { aux_isInstalled = true; break; }
+                                if (dir.Name == m || dir.Name.ToLower().Contains("blastcore") || dir.Name.ToLower().Contains("jsrs") || dir.Name.ToLower().Contains("dragonfyre")) { aux_isInstalled = true; break; }
                                 else { continue; }
                             }
 

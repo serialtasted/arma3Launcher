@@ -14,6 +14,7 @@ namespace arma3Launcher.Workers
     class zCheckUpdate
     {
         private readonly Button btn_Update;
+        private readonly Button btn_checkUpdate;
         private readonly Label txt_Cur;
         private readonly Label txt_New;
         private readonly PictureBox pic_busy;
@@ -28,9 +29,10 @@ namespace arma3Launcher.Workers
             txt_versiontag = VersionTag;
         }
 
-        public zCheckUpdate(Button BtnUpdate, Label TxtCurVersion, Label TxtNewVersion, PictureBox PicBusy)
+        public zCheckUpdate(Button BtnUpdate, Button BtnCheckUpdate, Label TxtCurVersion, Label TxtNewVersion, PictureBox PicBusy)
         {
             btn_Update = BtnUpdate;
+            btn_checkUpdate = BtnCheckUpdate;
             txt_Cur = TxtCurVersion;
             txt_New = TxtNewVersion;
             pic_busy = PicBusy;
@@ -201,9 +203,9 @@ namespace arma3Launcher.Workers
                 }
 
                 if (NewVersion > CurVersion)
-                { btn_Update.Enabled = true; }
+                { btn_Update.Enabled = true; btn_Update.Text = "Update"; btn_checkUpdate.Enabled = false; }
                 else if (NewVersion < CurVersion)
-                { btn_Update.Enabled = true; btn_Update.Text = "Downgrade"; }
+                { btn_Update.Enabled = true; btn_Update.Text = "Downgrade"; btn_checkUpdate.Enabled = false; }
                 else
                 { btn_Update.Enabled = true; btn_Update.Text = "Reinstall"; }
             }

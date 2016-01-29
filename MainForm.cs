@@ -34,6 +34,7 @@ namespace arma3Launcher
         private PanelIO launchoptionsPanelIO;
         private PanelIO helpPanelIO;
         private PanelIO aboutPanelIO;
+        private PanelIO topPanelsIO;
 
         private Windows.Splash loadingSplash;
 
@@ -76,6 +77,7 @@ namespace arma3Launcher
         private string Arguments = "";
 
         private bool isActive = true;
+        private bool isUpdate = false;
 
         private int menuSelected = 0;
 
@@ -155,6 +157,7 @@ namespace arma3Launcher
             launchoptionsPanelIO = new PanelIO(panel_launchOptions, Panels, 304, 306, 33);
             helpPanelIO = new PanelIO(panel_help, Panels, 304, 306, 33);
             aboutPanelIO = new PanelIO(panel_about, Panels, 304, 306, 33);
+            topPanelsIO = new PanelIO(panelDirectories, panelMenu, 4);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -188,6 +191,7 @@ namespace arma3Launcher
                 pref_joinServerAuto.Visible = false;
                 btn_reinstallTFRPlugins.Visible = false;
                 pref_serverAutopilot.Visible = true;
+                chb_battleye.Enabled = false;
 
                 pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
 
@@ -200,15 +204,16 @@ namespace arma3Launcher
             {
                 menuSelected = 4;
                 HideUnhide(menuSelected);
+                
+                panelLaunch.Enabled = false;
+                sysbtn_moreOptions.Visible = false;
 
-                btn_browseA3.Enabled = false;
-                btn_browseTS3.Enabled = false;
-                btn_Launch.Enabled = false;
-
-                panelMenu.Visible = false;
+                aboutPanelIO = new PanelIO(panel_about, Panels, 435, 437, 33);
 
                 activeButton = btn_update;
                 backgroundBlinker.RunWorkerAsync();
+
+                isUpdate = true;
             }
             else if (Properties.Settings.Default.firstLaunch)
             {
@@ -225,14 +230,19 @@ namespace arma3Launcher
 
             FetchSettings();
 
-            updateCurrentPack(true);
-            getMalloc();
-            UpdateMethod.CheckUpdates();
+            if (!isUpdate)
+            {
+                updateCurrentPack(true);
+                getMalloc();
 
-            if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
-                btn_reinstallTFRPlugins.Enabled = true;
-            else
-                btn_reinstallTFRPlugins.Enabled = false;
+
+                if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
+                    btn_reinstallTFRPlugins.Enabled = true;
+                else
+                    btn_reinstallTFRPlugins.Enabled = false;
+            }
+
+            UpdateMethod.CheckUpdates();
 
             loadingSplash.Close();
         }
@@ -242,6 +252,9 @@ namespace arma3Launcher
             windowIO.windowIn();
 
             FeedContentPanel.Focus();
+
+            if (!isUpdate)
+                topPanelsIO.showPanel();
 
             if (Properties.Settings.Default.downloadQueue != "" && panelMenu.Visible == true)
             {
@@ -645,12 +658,12 @@ namespace arma3Launcher
         #region System Buttons
         private void sysbtn_close_Click(object sender, EventArgs e)
         {
-            windowIO.windowOut();
+            windowIO.windowOut(true);
         }
 
         private void sysbtn_minimize_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            minimizeWindow();
         }
 
         private void sysbtn_moreOptions_Click(object sender, EventArgs e)
@@ -1004,7 +1017,7 @@ namespace arma3Launcher
         {
             StartUpdator();
             Thread.Sleep(500);
-            windowIO.windowOut();
+            windowIO.windowOut(true);
         }
 
         void StartUpdator()
@@ -1668,6 +1681,17 @@ namespace arma3Launcher
                 GlobalVar.gameArtifact = "arma3battleye.exe";
             else
                 GlobalVar.gameArtifact = "arma3.exe";
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Minimized)
+                windowIO.windowIn();
+        }
+
+        public void minimizeWindow ()
+        {
+            windowIO.windowOut(false);
         }
     }
 }

@@ -326,7 +326,7 @@ namespace arma3Launcher.Workers
                     }
                     else
                     {
-                        gameProcessInfo.FileName = "arma3battley.exe";
+                        gameProcessInfo.FileName = GlobalVar.gameArtifact;
                         gameProcessInfo.Arguments = "2 1 " + Arguments;
 
                         whatsRunning = "Game";
@@ -343,7 +343,7 @@ namespace arma3Launcher.Workers
 
                     Status.Text = whatsRunning + " running...";
                     Launch.Enabled = false;
-                    mainForm.WindowState = FormWindowState.Minimized;
+                    mainForm.minimizeWindow();
                     mainForm.Cursor = Cursors.Default;
                     waitEndGame.RunWorkerAsync();
                 }

@@ -90,5 +90,18 @@ namespace arma3Launcher
                 _isAnimating = value;
             }
         }
+
+        static bool _isDebug = false;
+        public static bool isDebug
+        {
+            get
+            {
+                return _isDebug;
+            }
+            set
+            {
+                _isDebug = value;
+            }
+        }
     }
 }

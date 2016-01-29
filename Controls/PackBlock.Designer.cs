@@ -34,8 +34,6 @@
             this.panel_download_outter = new System.Windows.Forms.Panel();
             this.panel_download_inner = new System.Windows.Forms.Panel();
             this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
             this.txt_progressStatus = new System.Windows.Forms.Label();
@@ -49,6 +47,8 @@
             this.txt_content = new System.Windows.Forms.Label();
             this.txt_allowed = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.panel1.SuspendLayout();
             this.panel_download_outter.SuspendLayout();
             this.panel_download_inner.SuspendLayout();
@@ -127,22 +127,6 @@
             this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click_1);
             this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
             this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
-            // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(12, 28);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.Size = new System.Drawing.Size(790, 5);
-            this.prb_progressBar_All.TabIndex = 16;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(12, 16);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(790, 12);
-            this.prb_progressBar_File.TabIndex = 15;
             // 
             // txt_curFile
             // 
@@ -295,6 +279,22 @@
             this.txt_allowed.TabIndex = 15;
             this.txt_allowed.Text = "Allowed: ";
             this.txt_allowed.Visible = false;
+            // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(12, 28);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.Size = new System.Drawing.Size(790, 5);
+            this.prb_progressBar_All.TabIndex = 16;
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(12, 16);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(790, 12);
+            this.prb_progressBar_File.TabIndex = 15;
             // 
             // PackBlock
             // 

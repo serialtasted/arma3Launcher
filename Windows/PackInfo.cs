@@ -38,7 +38,7 @@ namespace arma3Launcher.Windows
 
         private void btn_close_Click(object sender, EventArgs e)
         {
-            windowIO.windowOut();
+            windowIO.windowOut(true);
         }
 
         private void btn_close_MouseHover(object sender, EventArgs e)

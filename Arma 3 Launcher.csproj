@@ -236,11 +236,9 @@
     <Compile Include="Workers\Packs.cs" />
     <Compile Include="Workers\Feed.cs" />
     <Compile Include="Workers\LaunchCore.cs" />
-    <Compile Include="Workers\ModSetCheck.cs" />
     <Compile Include="Workers\SingleInstance.cs" />
     <Compile Include="Workers\WinApi.cs" />
     <Compile Include="Workers\zCheckUpdate.cs" />
-    <Compile Include="Workers\zSync.cs" />
     <EmbeddedResource Include="Controls\PackBlock.resx">
       <DependentUpon>PackBlock.cs</DependentUpon>
     </EmbeddedResource>

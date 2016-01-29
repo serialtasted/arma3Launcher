@@ -17,6 +17,10 @@ namespace arma3Launcher
         [STAThread]
         static void Main(string[] args)
         {
+            #if DEBUG
+                GlobalVar.isDebug = true;
+            #endif
+
             if (File.Exists("zUpdator.exe"))
                 File.Delete("zUpdator.exe");
 

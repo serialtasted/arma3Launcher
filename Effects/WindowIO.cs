@@ -9,6 +9,7 @@ namespace arma3Launcher.Effects
         private Timer effectIn = new Timer();
         private Timer effectOut = new Timer();
         private Form formObject;
+        private bool closeEnd = false;
 
         public WindowIO (Form formObject)
         {
@@ -41,7 +42,7 @@ namespace arma3Launcher.Effects
                 formObject.Location = new Point(formObject.Location.X, formObject.Location.Y + 1);
             }
             else
-            { effectOut.Stop(); formObject.Close(); }
+            { effectOut.Stop(); if (closeEnd) { formObject.Close(); } else { formObject.WindowState = FormWindowState.Minimized; } }
         }
 
         public void windowIn ()
@@ -49,8 +50,9 @@ namespace arma3Launcher.Effects
             effectIn.Start();
         }
 
-        public void windowOut ()
+        public void windowOut (bool closeEnd)
         {
+            this.closeEnd = closeEnd;
             effectOut.Start();
         }
     }

@@ -23,8 +23,6 @@ namespace arma3Launcher.Workers
         private string urlversionxml = Properties.GlobalValues.S_VersionXML;
         //private string zversionxml = Application.StartupPath + @"\zversion.xml";
 
-        public zCheckUpdate() { }
-
         public zCheckUpdate(Label VersionTag)
         {
             txt_versiontag = VersionTag;
@@ -43,7 +41,7 @@ namespace arma3Launcher.Workers
             Version NewVersion = null;
             Version CurVersion = null;
 
-            bool ContinueStart = false;
+            bool ContinueStart = true;
 
             string NewVersionS = "";
             string CurVersionS = "";
@@ -75,10 +73,7 @@ namespace arma3Launcher.Workers
                     else
                         NewVersionS = NewVersion.Major + "." + NewVersion.Minor + aux_vBuild;
                 }
-                catch (Exception NewEx)
-                {
-                    
-                }
+                catch { }
 
                 try
                 {
@@ -106,11 +101,16 @@ namespace arma3Launcher.Workers
                 catch (Exception CurEx)
                 {
                     txt_versiontag.Text = "Unable to determinate installed version.";
+                    ContinueStart = false;
                 }
 
                 if (NewVersion > CurVersion)
                 {
-                    if (MessageBox.Show("There's a new launcher version available.\n • \"OK\" to update.\n • \"Cancel\" to continue.", "Version " + NewVersionS + " available", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                    MessageBoxButtons msgBtns = MessageBoxButtons.OK;
+                    if (GlobalVar.isDebug)
+                        msgBtns = MessageBoxButtons.OKCancel;
+
+                    if (MessageBox.Show("There's a new launcher version available.", "Version " + NewVersionS + " available", msgBtns, MessageBoxIcon.Information) == DialogResult.OK)
                     { ContinueStart = false; }
                     else
                     { ContinueStart = true; }
@@ -119,22 +119,19 @@ namespace arma3Launcher.Workers
                 }
                 else if (NewVersion < CurVersion)
                 {
-                    if (MessageBox.Show("The launcher needs to downgrade to a stable version.\n • \"OK\" to downgrade.\n • \"Cancel\" to continue.", "Version " + NewVersionS + " available", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                    MessageBoxButtons msgBtns = MessageBoxButtons.OK;
+                    if (GlobalVar.isDebug)
+                        msgBtns = MessageBoxButtons.OKCancel;
+
+                    if (MessageBox.Show("The launcher needs to downgrade to a stable version.", "Version " + NewVersionS + " available", msgBtns, MessageBoxIcon.Information) == DialogResult.OK)
                     { ContinueStart = false; }
                     else
                     { ContinueStart = true; }
 
                     txt_versiontag.Text = "Version " + NewVersionS + " available to downgrade!";
                 }
-                else
-                {
-                    ContinueStart = true;
-                }
             }
-            catch (Exception AllEx)
-            {
-                ContinueStart = true;
-            }
+            catch { }
 
             return ContinueStart;
         }
@@ -201,14 +198,13 @@ namespace arma3Launcher.Workers
                 catch (Exception CurEx)
                 {
                     txt_Cur.Text = "Unable to determinate installed version";
-                    btn_Update.Enabled = false;
                 }
 
                 if (NewVersion > CurVersion)
                 { btn_Update.Enabled = true; }
                 else if (NewVersion < CurVersion)
                 { btn_Update.Enabled = true; btn_Update.Text = "Downgrade"; }
-                else if (NewVersion == CurVersion)
+                else
                 { btn_Update.Enabled = true; btn_Update.Text = "Reinstall"; }
             }
             catch (Exception AllEx)

@@ -79,11 +79,9 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.menu_blastcore = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_blastcore = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadBlastcore = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_dragonfyre = new arma3Launcher.Controls.SplitButton();
             this.menu_dragonfyre = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_dragonfyre = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadDragonFyre = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,12 +157,10 @@
             this.lbl_Arma3Dir = new System.Windows.Forms.Label();
             this.panelLaunch = new System.Windows.Forms.Panel();
             this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_progressStatus = new System.Windows.Forms.Label();
             this.btn_Launch = new System.Windows.Forms.PictureBox();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.TitleBar = new System.Windows.Forms.Panel();
@@ -190,6 +186,10 @@
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
+            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
+            this.btn_dragonfyre = new arma3Launcher.Controls.SplitButton();
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
@@ -289,6 +289,7 @@
             // panel5
             // 
             this.panel5.BackgroundImage = global::arma3Launcher.Properties.Resources.panel_seperator;
+            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel5.Controls.Add(this.Panels);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 131);
@@ -300,11 +301,11 @@
             // Panels
             // 
             this.Panels.BackColor = System.Drawing.Color.OliveDrab;
-            this.Panels.Controls.Add(this.panel_about);
             this.Panels.Controls.Add(this.panel_news);
             this.Panels.Controls.Add(this.panel_help);
             this.Panels.Controls.Add(this.panel_community);
             this.Panels.Controls.Add(this.panel_launchOptions);
+            this.Panels.Controls.Add(this.panel_about);
             this.Panels.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Panels.Location = new System.Drawing.Point(0, 0);
             this.Panels.Margin = new System.Windows.Forms.Padding(0);
@@ -319,7 +320,7 @@
             this.panel_about.Controls.Add(this.tableLayoutPanel3);
             this.panel_about.Controls.Add(this.panel1);
             this.panel_about.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_about.Location = new System.Drawing.Point(0, -1209);
+            this.panel_about.Location = new System.Drawing.Point(0, 3);
             this.panel_about.Name = "panel_about";
             this.panel_about.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_about.Size = new System.Drawing.Size(906, 303);
@@ -327,6 +328,7 @@
             // 
             // panel12
             // 
+            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel12.Controls.Add(this.label21);
             this.panel12.Controls.Add(this.btn_goGit);
             this.panel12.Controls.Add(this.btn_goYoutube);
@@ -393,6 +395,7 @@
             // 
             // tableLayoutPanel3
             // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.367946F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.63206F));
@@ -578,6 +581,7 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
@@ -701,7 +705,7 @@
             this.panel_news.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel_news.Controls.Add(this.FeedContentPanel);
             this.panel_news.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_news.Location = new System.Drawing.Point(0, -906);
+            this.panel_news.Location = new System.Drawing.Point(0, -1209);
             this.panel_news.Name = "panel_news";
             this.panel_news.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_news.Size = new System.Drawing.Size(906, 303);
@@ -727,7 +731,7 @@
             this.panel_help.Controls.Add(this.label19);
             this.panel_help.Controls.Add(this.label12);
             this.panel_help.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_help.Location = new System.Drawing.Point(0, -603);
+            this.panel_help.Location = new System.Drawing.Point(0, -906);
             this.panel_help.Name = "panel_help";
             this.panel_help.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_help.Size = new System.Drawing.Size(906, 303);
@@ -786,7 +790,7 @@
             this.panel_community.Controls.Add(this.label11);
             this.panel_community.Controls.Add(this.PacksPanel);
             this.panel_community.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_community.Location = new System.Drawing.Point(0, -300);
+            this.panel_community.Location = new System.Drawing.Point(0, -603);
             this.panel_community.Name = "panel_community";
             this.panel_community.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_community.Size = new System.Drawing.Size(906, 303);
@@ -822,7 +826,7 @@
             this.panel_launchOptions.Controls.Add(this.panel_optionalAddons);
             this.panel_launchOptions.Controls.Add(this.panel4);
             this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_launchOptions.Location = new System.Drawing.Point(0, 3);
+            this.panel_launchOptions.Location = new System.Drawing.Point(0, -300);
             this.panel_launchOptions.Name = "panel_launchOptions";
             this.panel_launchOptions.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_launchOptions.Size = new System.Drawing.Size(906, 303);
@@ -868,20 +872,6 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Audio mod wich enhances over 5500 sound effects";
             // 
-            // splitButton1
-            // 
-            this.splitButton1.AutoSize = true;
-            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
-            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.splitButton1.Location = new System.Drawing.Point(9, 42);
-            this.splitButton1.Name = "splitButton1";
-            this.splitButton1.Size = new System.Drawing.Size(98, 23);
-            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
-            this.splitButton1.TabIndex = 1;
-            this.splitButton1.Text = "Blastcore";
-            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.splitButton1.UseVisualStyleBackColor = true;
-            // 
             // menu_blastcore
             // 
             this.menu_blastcore.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -907,21 +897,6 @@
             this.btn_downloadBlastcore.Size = new System.Drawing.Size(152, 22);
             this.btn_downloadBlastcore.Text = "Download";
             this.btn_downloadBlastcore.Click += new System.EventHandler(this.btn_downloadBlastcore_Click);
-            // 
-            // btn_dragonfyre
-            // 
-            this.btn_dragonfyre.AutoSize = true;
-            this.btn_dragonfyre.ContextMenuStrip = this.menu_dragonfyre;
-            this.btn_dragonfyre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_dragonfyre.Location = new System.Drawing.Point(9, 13);
-            this.btn_dragonfyre.Name = "btn_dragonfyre";
-            this.btn_dragonfyre.Size = new System.Drawing.Size(98, 23);
-            this.btn_dragonfyre.SplitMenuStrip = this.menu_dragonfyre;
-            this.btn_dragonfyre.TabIndex = 0;
-            this.btn_dragonfyre.Text = "Dragon Fyre";
-            this.btn_dragonfyre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_dragonfyre.UseVisualStyleBackColor = true;
-            this.btn_dragonfyre.Click += new System.EventHandler(this.btn_DragonFyre_Click);
             // 
             // menu_dragonfyre
             // 
@@ -1899,15 +1874,6 @@
             this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
             this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
             // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(22, 70);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.ShowInTaskbar = true;
-            this.prb_progressBar_All.Size = new System.Drawing.Size(718, 5);
-            this.prb_progressBar_All.TabIndex = 11;
-            // 
             // txt_progressStatus
             // 
             this.txt_progressStatus.AutoSize = true;
@@ -1956,14 +1922,6 @@
             this.txt_percentageStatus.Size = new System.Drawing.Size(250, 19);
             this.txt_percentageStatus.TabIndex = 7;
             this.txt_percentageStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
-            this.prb_progressBar_File.TabIndex = 10;
             // 
             // label17
             // 
@@ -2190,6 +2148,52 @@
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
+            // splitButton1
+            // 
+            this.splitButton1.AutoSize = true;
+            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
+            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.splitButton1.Location = new System.Drawing.Point(9, 42);
+            this.splitButton1.Name = "splitButton1";
+            this.splitButton1.Size = new System.Drawing.Size(98, 23);
+            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
+            this.splitButton1.TabIndex = 1;
+            this.splitButton1.Text = "Blastcore";
+            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.splitButton1.UseVisualStyleBackColor = true;
+            // 
+            // btn_dragonfyre
+            // 
+            this.btn_dragonfyre.AutoSize = true;
+            this.btn_dragonfyre.ContextMenuStrip = this.menu_dragonfyre;
+            this.btn_dragonfyre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_dragonfyre.Location = new System.Drawing.Point(9, 13);
+            this.btn_dragonfyre.Name = "btn_dragonfyre";
+            this.btn_dragonfyre.Size = new System.Drawing.Size(98, 23);
+            this.btn_dragonfyre.SplitMenuStrip = this.menu_dragonfyre;
+            this.btn_dragonfyre.TabIndex = 0;
+            this.btn_dragonfyre.Text = "Dragon Fyre";
+            this.btn_dragonfyre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_dragonfyre.UseVisualStyleBackColor = true;
+            this.btn_dragonfyre.Click += new System.EventHandler(this.btn_DragonFyre_Click);
+            // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(22, 70);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.ShowInTaskbar = true;
+            this.prb_progressBar_All.Size = new System.Drawing.Size(718, 5);
+            this.prb_progressBar_All.TabIndex = 11;
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(22, 50);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(718, 20);
+            this.prb_progressBar_File.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2213,6 +2217,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).EndInit();
             this.MainWindow.ResumeLayout(false);

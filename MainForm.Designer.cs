@@ -107,6 +107,7 @@
             this.btn_copyLaunchOptions = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
             this.panel_about = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
             this.btn_goGit = new System.Windows.Forms.PictureBox();
@@ -137,6 +138,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.busy = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -192,8 +194,6 @@
             this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
@@ -236,6 +236,7 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.busy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panelMenu.SuspendLayout();
             this.panelDirectories.SuspendLayout();
             this.panel_TeamSpeakDir.SuspendLayout();
@@ -249,7 +250,6 @@
             this.TitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).BeginInit();
             this.menu_moreOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // sysbtn_minimize
@@ -1204,6 +1204,17 @@
             this.panel_about.Size = new System.Drawing.Size(906, 303);
             this.panel_about.TabIndex = 8;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.DarkGray;
+            this.label1.Location = new System.Drawing.Point(342, 414);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(222, 19);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Does this blank space bother you?";
+            // 
             // panel12
             // 
             this.panel12.Controls.Add(this.label21);
@@ -1604,6 +1615,18 @@
             this.label4.Size = new System.Drawing.Size(115, 19);
             this.label4.TabIndex = 0;
             this.label4.Text = "Launcher Update";
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackgroundImage = global::arma3Launcher.Properties.Resources.TrollFace;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox4.Location = new System.Drawing.Point(10, 312);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.pictureBox4.Size = new System.Drawing.Size(886, 125);
+            this.pictureBox4.TabIndex = 5;
+            this.pictureBox4.TabStop = false;
             // 
             // panelMenu
             // 
@@ -2229,29 +2252,6 @@
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackgroundImage = global::arma3Launcher.Properties.Resources.TrollFace;
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.Location = new System.Drawing.Point(10, 312);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.pictureBox4.Size = new System.Drawing.Size(886, 125);
-            this.pictureBox4.TabIndex = 5;
-            this.pictureBox4.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.DarkGray;
-            this.label1.Location = new System.Drawing.Point(342, 414);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(222, 19);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Does this blank space bother you?";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2332,6 +2332,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.busy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
             this.panelDirectories.ResumeLayout(false);
@@ -2350,7 +2351,6 @@
             this.TitleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).EndInit();
             this.menu_moreOptions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }

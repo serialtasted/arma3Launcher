@@ -120,7 +120,7 @@ namespace arma3Launcher.Workers
                 } while (i != activeAddons.Items.Count);
             }
 
-            if (modsList.Count == 0)
+            if (modsList.Count == 0 && auxCombinedAddons != "")
                 auxCombinedAddons = auxCombinedAddons.Remove(0, 1);
 
             if (Arguments != "") Arguments = Arguments + " " + auxCoreMods + auxCombinedAddons + "\"";

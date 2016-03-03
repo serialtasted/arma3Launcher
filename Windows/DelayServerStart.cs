@@ -41,6 +41,7 @@ namespace arma3Launcher.Windows
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             this.countdown.Stop();
+            this.DialogResult = DialogResult.Abort;
             this.Close();
         }
 

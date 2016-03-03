@@ -498,7 +498,7 @@ namespace arma3Launcher.Workers
             }
         }
 
-        private void InstallFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private async void InstallFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (this.isJSRS)
                 this.downloadJSRS.Enabled = true;
@@ -517,16 +517,23 @@ namespace arma3Launcher.Workers
                         this.progressBarFileStyle(ProgressBarStyle.Marquee);
                         this.progressBarFileValue(50);
                         this.progressStatusText("Launching game...");
+                        this.mainForm.reSizeBarText("LaunchingGame");
                         this.delayLaunch.Start();
                     }
                     else if (!e.Cancelled && this.isLaunch && !this.mainForm.startGameAfterDownload())
                     {
                         this.progressStatusText("Game ready to launch...");
+                        this.mainForm.reSizeBarText("GameReady");
+                        await this.taskDelay(1500);
+                        this.mainForm.hideDownloadPanel();
                     }
                     else if (!e.Cancelled)
                     {
                         this.progressStatusText("Waiting for orders");
+                        this.mainForm.reSizeBarText("WaitingForOrders");
                         this.mainForm.GetAddons();
+                        await this.taskDelay(1500);
+                        this.mainForm.hideDownloadPanel();
                     }
 
                     this.isLaunch = false;
@@ -571,6 +578,16 @@ namespace arma3Launcher.Workers
         public bool isInstalling()
         {
             return this.installationRunning;
+        }
+
+        /// <summary>
+        /// Delay a task, like Sleep
+        /// </summary>
+        /// <param name="delayMs"></param>
+        /// <returns></returns>
+        private async Task taskDelay(int delayMs)
+        {
+            await Task.Delay(delayMs);
         }
 
         /// <summary>
@@ -628,6 +645,7 @@ namespace arma3Launcher.Workers
 
                 this.progressBarFileValue(0);
                 this.progressStatusText("Waiting for orders");
+                this.mainForm.reSizeBarText("WaitingForOrders");
             }
             else
             {

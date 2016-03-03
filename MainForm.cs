@@ -35,6 +35,7 @@ namespace arma3Launcher
         private PanelIO helpPanelIO;
         private PanelIO aboutPanelIO;
         private PanelIO topPanelsIO;
+        private PanelIO botPanelIO;
 
         private Windows.Splash loadingSplash;
 
@@ -140,7 +141,7 @@ namespace arma3Launcher
             txt_appTitle.Text = AssemblyTitle;
             txt_appVersion.Text = AssemblyVersion;
 
-            QuickUpdateMethod = new zCheckUpdate(WindowVersionStatus);
+            QuickUpdateMethod = new zCheckUpdate(WindowVersionStatus, busy);
             UpdateMethod = new zCheckUpdate(btn_update, btn_checkUpdates, txt_curversion, txt_latestversion, busy);
 
             installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, btn_cancelDownload, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadDragonFyre, btn_downloadBlastcore);
@@ -158,6 +159,7 @@ namespace arma3Launcher
             helpPanelIO = new PanelIO(panel_help, Panels, 304, 306, 33);
             aboutPanelIO = new PanelIO(panel_about, Panels, 304, 306, 33);
             topPanelsIO = new PanelIO(panelDirectories, panelMenu, 4);
+            botPanelIO = new PanelIO(panel_bottomHide_Inner, panel_bottomhide, 746, 750, 53);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -204,7 +206,7 @@ namespace arma3Launcher
             {
                 menuSelected = 4;
                 HideUnhide(menuSelected);
-                
+
                 panelLaunch.Enabled = false;
                 sysbtn_moreOptions.Visible = false;
 
@@ -859,19 +861,19 @@ namespace arma3Launcher
         {
             if (!GlobalVar.isAnimating)
             {
-                if (panel_news.Height > 0) {            Panels.BackColor = Color.DimGray;   addonsPanelIO.hidePanel();        menu_news.ForeColor = Color.Gray; }
-                if (panel_community.Height > 0) {       Panels.BackColor = Color.DimGray;   communityPanelIO.hidePanel();     menu_community.ForeColor = Color.Gray; }
-                if (panel_launchOptions.Height > 0) {   Panels.BackColor = Color.DimGray;   launchoptionsPanelIO.hidePanel(); menu_launchOptions.ForeColor = Color.Gray; }
-                if (panel_help.Height > 0) {            Panels.BackColor = Color.DimGray;   helpPanelIO.hidePanel();          menu_help.ForeColor = Color.Gray; }
-                if (panel_about.Height > 0) {           Panels.BackColor = Color.DimGray;   aboutPanelIO.hidePanel();         menu_about.ForeColor = Color.Gray; }
+                if (panel_news.Height > 0) { Panels.BackColor = Color.DimGray; addonsPanelIO.hidePanel(); menu_news.ForeColor = Color.Gray; }
+                if (panel_community.Height > 0) { Panels.BackColor = Color.DimGray; communityPanelIO.hidePanel(); menu_community.ForeColor = Color.Gray; }
+                if (panel_launchOptions.Height > 0) { Panels.BackColor = Color.DimGray; launchoptionsPanelIO.hidePanel(); menu_launchOptions.ForeColor = Color.Gray; }
+                if (panel_help.Height > 0) { Panels.BackColor = Color.DimGray; helpPanelIO.hidePanel(); menu_help.ForeColor = Color.Gray; }
+                if (panel_about.Height > 0) { Panels.BackColor = Color.DimGray; aboutPanelIO.hidePanel(); menu_about.ForeColor = Color.Gray; }
 
                 await taskDelay(600);
 
-                if (selectedOption == 0) { Panels.BackColor = Color.OliveDrab;  menu_news.ForeColor = Color.OliveDrab;           addonsPanelIO.showPanel(); }
-                if (selectedOption == 1) { Panels.BackColor = Color.OliveDrab;  menu_community.ForeColor = Color.OliveDrab;      communityPanelIO.showPanel(); }
-                if (selectedOption == 2) { Panels.BackColor = Color.OliveDrab;  menu_launchOptions.ForeColor = Color.OliveDrab;  launchoptionsPanelIO.showPanel(); }
-                if (selectedOption == 3) { Panels.BackColor = Color.OliveDrab;  menu_help.ForeColor = Color.OliveDrab;           helpPanelIO.showPanel(); }
-                if (selectedOption == 4) { Panels.BackColor = Color.OliveDrab;  menu_about.ForeColor = Color.OliveDrab;          aboutPanelIO.showPanel(); }
+                if (selectedOption == 0) { Panels.BackColor = Color.OliveDrab; menu_news.ForeColor = Color.OliveDrab; addonsPanelIO.showPanel(); }
+                if (selectedOption == 1) { Panels.BackColor = Color.OliveDrab; menu_community.ForeColor = Color.OliveDrab; communityPanelIO.showPanel(); }
+                if (selectedOption == 2) { Panels.BackColor = Color.OliveDrab; menu_launchOptions.ForeColor = Color.OliveDrab; launchoptionsPanelIO.showPanel(); }
+                if (selectedOption == 3) { Panels.BackColor = Color.OliveDrab; menu_help.ForeColor = Color.OliveDrab; helpPanelIO.showPanel(); }
+                if (selectedOption == 4) { Panels.BackColor = Color.OliveDrab; menu_about.ForeColor = Color.OliveDrab; aboutPanelIO.showPanel(); }
             }
         }
 
@@ -1563,8 +1565,8 @@ namespace arma3Launcher
         public void runInstaller(bool isLaunch)
         { installer.beginInstall(isLaunch, cfgUrl.Split('!')[1], activePack); }
 
-        public void runGame()
-        { PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked); }
+        public async void runGame()
+        { hideDownloadPanel(); await taskDelay(800); PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked); }
 
         public void updateCurrentPack(bool refreshPacks)
         { FetchRemoteSettings(refreshPacks); GetAddons(); }
@@ -1580,6 +1582,18 @@ namespace arma3Launcher
 
         public bool autoDownloadUpdates()
         { return pref_autoDownload.Checked; }
+
+        public void updateActivePack(string packName)
+        { txt_selectedPack.MinimumSize = new Size(200, 0); txt_selectedPack.Text = packName; }
+
+        public void reSizeBarText(string text)
+        { txt_reSizeBar.Text = "#" + text; }
+
+        public void showDownloadPanel()
+        { botPanelIO.showPanel(); }
+
+        public void hideDownloadPanel()
+        { botPanelIO.hidePanel(); }
 
         private void txtb_armaDirectory_MouseClick(object sender, MouseEventArgs e)
         {
@@ -1616,7 +1630,7 @@ namespace arma3Launcher
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(Properties.Settings.Default.firstLaunch) { Properties.Settings.Default.firstLaunch = false; Properties.Settings.Default.Save(); }
+            if (Properties.Settings.Default.firstLaunch) { Properties.Settings.Default.firstLaunch = false; Properties.Settings.Default.Save(); }
         }
 
         private void btn_reloadMallocs_Click(object sender, EventArgs e)
@@ -1689,19 +1703,45 @@ namespace arma3Launcher
                 windowIO.windowIn();
         }
 
-        public void minimizeWindow ()
+        public void minimizeWindow()
         {
             windowIO.windowOut(false);
         }
 
         private void btn_checkUpdates_Click(object sender, EventArgs e)
         {
+            busy.Visible = true;
+
             if (!QuickUpdateMethod.QuickCheck())
             {
                 UpdateMethod.CheckUpdates();
                 activeButton = btn_update;
                 backgroundBlinker.RunWorkerAsync();
             }
+        }
+
+        private System.Windows.Forms.Timer reSize_Underline = new System.Windows.Forms.Timer();
+
+        private async void txt_selectedPack_TextChanged(object sender, EventArgs e)
+        {
+            reSize_Underline.Tick += ReSizeUnderline_Tick;
+            reSize_Underline.Interval = 1;
+
+            await taskDelay(400);
+            txt_selectedPack.MinimumSize = new Size(0, 0);
+            await taskDelay(400);
+            reSize_Underline.Start();
+        }
+
+        private void ReSizeUnderline_Tick(object sender, EventArgs e)
+        {
+            if (packName_underLine.Width > txt_selectedPack.Width + 30)
+                packName_underLine.Width--;
+            else
+                packName_underLine.Width++;
+
+            if (packName_underLine.Width == txt_selectedPack.Width + 30)
+                reSize_Underline.Stop();
         }
     }
 }

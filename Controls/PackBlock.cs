@@ -83,6 +83,8 @@ namespace arma3Launcher.Controls
 
         private void btn_useThis_Click(object sender, EventArgs e)
         {
+            mainForm.updateActivePack(txt_title.Text);
+
             Properties.Settings.Default.lastAddonPack = btn_useThis.Tag.ToString();
             Properties.Settings.Default.Save();
 

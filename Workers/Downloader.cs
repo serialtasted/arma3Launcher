@@ -289,7 +289,7 @@ namespace arma3Launcher.Workers
             string url = this.downloadUrls.Peek();
 
             // specify the output file name
-            string outputFile = url.Split('!')[1] + ".zip";
+            string outputFile = megaClient.GetNodeFromLink(new Uri(url)).Name;
 
             // create output directory (if necessary)
             string outputFolder = this.TempFolder;
@@ -378,7 +378,10 @@ namespace arma3Launcher.Workers
 
                 this.progressBarFileStyle(ProgressBarStyle.Continuous);
 
-                this.megaClient.Logout();
+                this.progressBarAllValue(0);
+                this.progressBarFileValue(0);
+
+                await this.megaClient.LogoutAsync();
                 this.downloadRunning = false;
                 GlobalVar.isDownloading = false;
 
@@ -415,6 +418,10 @@ namespace arma3Launcher.Workers
                 { this.progressStatusText("Should we stop now? Or do I need to format your computer too?"); }
                 else if (numTimesCancel == 15)
                 { this.progressStatusText("Alright... Bye bye"); await taskDelay(2500); Application.Exit(); }
+
+                await taskDelay(1500);
+                this.mainForm.reSizeBarText("WaitingForOrders");
+                this.mainForm.hideDownloadPanel();
             }
         }
 
@@ -475,8 +482,11 @@ namespace arma3Launcher.Workers
         /// </summary>
         /// <param name="urlsList"></param>
         /// <param name="isConfig"></param>
-        public void beginDownload(IEnumerable<string> listUrls, bool isLaunch, string activePack, string configUrl)
+        public async void beginDownload(IEnumerable<string> listUrls, bool isLaunch, string activePack, string configUrl)
         {
+            // show download panel
+            this.mainForm.showDownloadPanel();
+
             // initialize timer
             this.totalSw = new System.Windows.Forms.Timer();
             this.totalSw.Interval = 1000;
@@ -511,7 +521,7 @@ namespace arma3Launcher.Workers
             // begin download
             this.downloadRunning = true;
             GlobalVar.isDownloading = true;
-            this.megaClient.LoginAnonymous();
+            await this.megaClient.LoginAnonymousAsync();
             this.calculateFiles.RunWorkerAsync();
 
             // show cancel button if possible
@@ -529,7 +539,7 @@ namespace arma3Launcher.Workers
             secondsElapsed++;
             try { secondsLeft = Convert.ToInt64((this.secondsElapsed / (double)this.parsedBytes) * (this.totalBytes - (double)this.parsedBytes)); } catch { }
 
-            this.currentFileText(String.Format("Estimated time left: {0:00}:{1:00} | Time elapsed: {2:00}:{3:00}", (secondsLeft / 60), (secondsLeft % 60), (this.secondsElapsed / 60), (this.secondsElapsed % 60)));
+            this.currentFileText(String.Format("Estimated time left: {0:00}:{1:00}:{2:00} | Time elapsed: {3:00}:{4:00}:{5:00}", ((secondsLeft / 60) / 60), ((secondsLeft / 60) % 60), (secondsLeft % 60), ((this.secondsElapsed / 60) / 60), ((this.secondsElapsed / 60) % 60), (this.secondsElapsed % 60)));
         }
 
         /// <summary>
@@ -537,6 +547,7 @@ namespace arma3Launcher.Workers
         /// </summary>
         public async void cancelDownload()
         {
+            this.totalSw.Stop();
             this.numTimesCancel++;
             this.progressStatusText("Cancelling download...");
             this.progressDetailsText("");

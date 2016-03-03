@@ -77,6 +77,7 @@ namespace arma3Launcher.Workers
                         PictureBox btnUsePack = auxPack.Controls.Find("btn_useThis", true)[0] as PictureBox;
                         btnUsePack.Enabled = false;
                         btnUsePack.Image = Properties.Resources.useThis_active;
+                        mainForm.updateActivePack(title);
                     }
 
                     if(Convert.ToBoolean(xn.Attributes["enable"].Value))

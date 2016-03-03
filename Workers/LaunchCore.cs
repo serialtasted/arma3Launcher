@@ -342,6 +342,7 @@ namespace arma3Launcher.Workers
                     GC.Collect();
 
                     Status.Text = whatsRunning + " running...";
+                    mainForm.reSizeBarText(whatsRunning + "Running");
                     Launch.Enabled = false;
                     mainForm.minimizeWindow();
                     mainForm.Cursor = Cursors.Default;
@@ -370,6 +371,7 @@ namespace arma3Launcher.Workers
             auxMainForm.Focus();
             auxLaunch.Enabled = true;
             auxStatus.Text = "Waiting for orders...";
+            auxMainForm.reSizeBarText("WaitingForOrders");
 
             if (GlobalVar.autoPilot)
                 auxMainForm.reLaunchServer();

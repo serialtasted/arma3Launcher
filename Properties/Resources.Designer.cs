@@ -543,6 +543,16 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap grey_green_stripes {
+            get {
+                object obj = ResourceManager.GetObject("grey_green_stripes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap info {
             get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
@@ -656,6 +666,16 @@ namespace arma3Launcher.Properties {
         internal static System.Drawing.Bitmap rocket_launch {
             get {
                 object obj = ResourceManager.GetObject("rocket_launch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap searching {
+            get {
+                object obj = ResourceManager.GetObject("searching", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

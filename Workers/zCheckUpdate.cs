@@ -24,9 +24,10 @@ namespace arma3Launcher.Workers
         private string urlversionxml = Properties.GlobalValues.S_VersionXML;
         //private string zversionxml = Application.StartupPath + @"\zversion.xml";
 
-        public zCheckUpdate(Label VersionTag)
+        public zCheckUpdate(Label VersionTag, PictureBox PicBusy)
         {
             txt_versiontag = VersionTag;
+            pic_busy = PicBusy;
         }
 
         public zCheckUpdate(Button BtnUpdate, Button BtnCheckUpdate, Label TxtCurVersion, Label TxtNewVersion, PictureBox PicBusy)
@@ -134,6 +135,10 @@ namespace arma3Launcher.Workers
                 }
             }
             catch { }
+            finally
+            {
+                pic_busy.Visible = false;
+            }
 
             return ContinueStart;
         }

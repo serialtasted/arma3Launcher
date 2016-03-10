@@ -200,6 +200,8 @@ namespace arma3Launcher
                 if (!Properties.Settings.Default.firstLaunch)
                     if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
                         switchAutopilot(true);
+                    else
+                        switchAutopilot(false);
             }
 
             if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
@@ -1040,7 +1042,9 @@ namespace arma3Launcher
             {
                 var fass = new ProcessStartInfo();
                 fass.FileName = "zUpdator.exe";
-                fass.Arguments = "\"" + txt_curversion.Text + "_" + txt_latestversion.Text + "\"";
+                fass.Arguments = "-curversion=" + txt_curversion.Text + 
+                    " -newversion=" + txt_latestversion.Text +
+                    " -filename=" + Process.GetCurrentProcess().MainModule.ModuleName;
 
                 var process = new Process();
                 process.StartInfo = fass;
@@ -1129,6 +1133,8 @@ namespace arma3Launcher
         {
             if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
                 switchAutopilot(true);
+            else
+                switchAutopilot(false);
 
             if (GlobalVar.autoPilot)
                 launchProcess();
@@ -1680,7 +1686,7 @@ namespace arma3Launcher
             if (On)
             { GlobalVar.autoPilot = true; WindowVersionStatus.Text = "Autopilot engaged"; pref_serverAutopilot.Checked = true; }
             else
-            { GlobalVar.autoPilot = false; this.WindowVersionStatus.Text = oldVersionStatusText; pref_serverAutopilot.Checked = false; }
+            { GlobalVar.autoPilot = false; WindowVersionStatus.Text = oldVersionStatusText; pref_serverAutopilot.Checked = false; }
         }
 
         private void WindowVersionStatus_TextChanged(object sender, EventArgs e)
@@ -1742,6 +1748,64 @@ namespace arma3Launcher
 
             if (packName_underLine.Width == txt_selectedPack.Width + 30)
                 reSize_Underline.Stop();
+        }
+
+        private void txt_thisSpace_Click(object sender, EventArgs e)
+        {
+            txt_thisSpace.Text = "What about now? Funky right?";
+            img_thisSpace.Image = Properties.Resources.littlecat;
+        }
+
+        private void txt_thisSpace_MouseHover(object sender, EventArgs e)
+        {
+            if (img_thisSpace.Image == null)
+            {
+                Random rnd = new Random();
+                int rNumber = rnd.Next(1, 10);
+                switch (rNumber)
+                {
+                    case 1:
+                        txt_thisSpace.Text = "STAY AWAY FROM ME!!!";
+                        break;
+                    case 2:
+                        txt_thisSpace.Text = "Don't you there click me... Take that white shit out of here";
+                        break;
+                    case 3:
+                        txt_thisSpace.Text = "Little pussy, little pussy... Come over here";
+                        break;
+                    case 4:
+                        txt_thisSpace.Text = "I'm seeing shit in colors! Owwwww World";
+                        break;
+                    case 5:
+                        txt_thisSpace.Text = "A blank space is not a blank space";
+                        break;
+                    case 6:
+                        txt_thisSpace.Text = "Oh shit! What are you doing with that cursor?";
+                        break;
+                    case 7:
+                        txt_thisSpace.Text = "What da'Hell? This text changes!! *MAGIC*";
+                        break;
+                    case 8:
+                        txt_thisSpace.Text = "*PUFF*";
+                        break;
+                    case 9:
+                        txt_thisSpace.Text = "This is absolute shit (period)";
+                        break;
+                    case 10:
+                        txt_thisSpace.Text = "There are 128 different colors in that cat. I know it because I saw him.";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void txt_thisSpace_MouseLeave(object sender, EventArgs e)
+        {
+            if (img_thisSpace.Image == null)
+            {
+                txt_thisSpace.Text = "Does this blank space bother you?";
+            }
         }
     }
 }

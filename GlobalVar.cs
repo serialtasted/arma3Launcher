@@ -26,6 +26,19 @@ namespace arma3Launcher
         }
 
         // BOOL
+        static bool _isUpdateAvailable = false;
+        public static bool isUpdateAvailable
+        {
+            get
+            {
+                return _isUpdateAvailable;
+            }
+            set
+            {
+                _isUpdateAvailable = value;
+            }
+        }
+
         static bool _isDownloading = false;
         public static bool isDownloading
         {

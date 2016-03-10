@@ -21,6 +21,8 @@ namespace arma3Launcher.Effects
         private int baseInnerValue = 0;
         private int baseOutterValue = 0;
 
+        private bool isSide = false;
+
         private int velocity = 0;
 
         public PanelIO (Panel innerPanelObject, Panel outterPanelObject, int velocity)
@@ -51,11 +53,13 @@ namespace arma3Launcher.Effects
             {
                 this.innerPanelObject.Width = 0;
                 this.outterPanelObject.Width = 0;
+                this.isSide = true;
             }
             else
             {
                 this.innerPanelObject.Height = 0;
                 this.outterPanelObject.Height = 0;
+                this.isSide = false;
             }
         }
 
@@ -87,11 +91,13 @@ namespace arma3Launcher.Effects
             {
                 this.innerPanelObject.Width = 0;
                 this.outterPanelObject.Width = 0;
+                this.isSide = true;
             }
             else
             {
                 this.innerPanelObject.Height = 0;
                 this.outterPanelObject.Height = 0;
+                this.isSide = false;
             }
         }
 
@@ -123,17 +129,19 @@ namespace arma3Launcher.Effects
             {
                 this.innerPanelObject.Width = baseInnerValue;
                 this.outterPanelObject.Width = baseOutterValue;
+                this.isSide = true;
             }
             else
             {
                 this.innerPanelObject.Height = baseInnerValue;
                 this.outterPanelObject.Height = baseOutterValue;
+                this.isSide = false;
             }
         }
 
         private void EffectInInner_Tick(object sender, EventArgs e)
         {
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
+            if (this.isSide)
             {
                 if (innerPanelObject.Width < originalInnerValue)
                 {
@@ -167,7 +175,7 @@ namespace arma3Launcher.Effects
 
         private void EffectOutInner_Tick(object sender, EventArgs e)
         {
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
+            if (this.isSide)
             {
                 if (innerPanelObject.Width > baseInnerValue)
                 {
@@ -201,7 +209,7 @@ namespace arma3Launcher.Effects
 
         private void EffectInOutter_Tick(object sender, EventArgs e)
         {
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
+            if (this.isSide)
             {
                 if (outterPanelObject.Width < originalOutterValue)
                 {
@@ -235,7 +243,7 @@ namespace arma3Launcher.Effects
 
         private void EffectOutOutter_Tick(object sender, EventArgs e)
         {
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
+            if (this.isSide)
             {
                 if (outterPanelObject.Width > baseOutterValue)
                 {

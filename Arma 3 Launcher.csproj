@@ -350,11 +350,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\littlecat.gif" />
     <None Include="Resources\grey_green_stripes.jpg" />
     <None Include="Resources\searching.gif" />
     <None Include="Resources\be_logo.jpg" />
     <None Include="Resources\panel_seperator.jpg" />
-    <None Include="Resources\panel_seperator.png" />
     <None Include="Resources\cloud-off_hover.png" />
     <None Include="Resources\cloud-off.png" />
     <None Include="Resources\cloud-download-hover.png" />
@@ -407,9 +407,6 @@
     <None Include="Resources\eye.png" />
     <None Include="Resources\flash-on.png" />
     <None Include="Resources\git-square.png" />
-    <None Include="Resources\useThis_active.jpg" />
-    <None Include="Resources\useThis_hover.jpg" />
-    <None Include="Resources\useThis_inactive.jpg" />
     <None Include="Resources\useThis_active.png" />
     <None Include="Resources\useThis_hover.png" />
     <None Include="Resources\useThis_inactive.png" />

@@ -63,6 +63,16 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _301 {
+            get {
+                object obj = ResourceManager.GetObject("_301", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap archive {
             get {
                 object obj = ResourceManager.GetObject("archive", resourceCulture);
@@ -93,9 +103,19 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_circle_315_left {
+            get {
+                object obj = ResourceManager.GetObject("arrow_circle_315_left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap arrow_down {
             get {
-                object obj = ResourceManager.GetObject("arrow-down", resourceCulture);
+                object obj = ResourceManager.GetObject("arrow_down", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -105,7 +125,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap arrow_down_hover {
             get {
-                object obj = ResourceManager.GetObject("arrow-down-hover", resourceCulture);
+                object obj = ResourceManager.GetObject("arrow_down_hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -135,7 +155,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bg_addon {
             get {
-                object obj = ResourceManager.GetObject("bg-addon", resourceCulture);
+                object obj = ResourceManager.GetObject("bg_addon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -155,7 +175,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bg_launcher {
             get {
-                object obj = ResourceManager.GetObject("bg-launcher", resourceCulture);
+                object obj = ResourceManager.GetObject("bg_launcher", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -165,7 +185,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bg_map {
             get {
-                object obj = ResourceManager.GetObject("bg-map", resourceCulture);
+                object obj = ResourceManager.GetObject("bg_map", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -175,7 +195,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bg_mission {
             get {
-                object obj = ResourceManager.GetObject("bg-mission", resourceCulture);
+                object obj = ResourceManager.GetObject("bg_mission", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -185,7 +205,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bg_player {
             get {
-                object obj = ResourceManager.GetObject("bg-player", resourceCulture);
+                object obj = ResourceManager.GetObject("bg_player", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -195,7 +215,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bg_updav {
             get {
-                object obj = ResourceManager.GetObject("bg-updav", resourceCulture);
+                object obj = ResourceManager.GetObject("bg_updav", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -205,7 +225,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bg_warning {
             get {
-                object obj = ResourceManager.GetObject("bg-warning", resourceCulture);
+                object obj = ResourceManager.GetObject("bg_warning", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -215,7 +235,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bg_wiki {
             get {
-                object obj = ResourceManager.GetObject("bg-wiki", resourceCulture);
+                object obj = ResourceManager.GetObject("bg_wiki", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -325,7 +345,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bgmore1_fw {
             get {
-                object obj = ResourceManager.GetObject("bgmore1.fw", resourceCulture);
+                object obj = ResourceManager.GetObject("bgmore1_fw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -335,7 +355,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bgmore2_fw {
             get {
-                object obj = ResourceManager.GetObject("bgmore2.fw", resourceCulture);
+                object obj = ResourceManager.GetObject("bgmore2_fw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -345,7 +365,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bgmore3_fw {
             get {
-                object obj = ResourceManager.GetObject("bgmore3.fw", resourceCulture);
+                object obj = ResourceManager.GetObject("bgmore3_fw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -355,7 +375,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap bgmore4_fw {
             get {
-                object obj = ResourceManager.GetObject("bgmore4.fw", resourceCulture);
+                object obj = ResourceManager.GetObject("bgmore4_fw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -375,7 +395,37 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap check_circle {
             get {
-                object obj = ResourceManager.GetObject("check-circle", resourceCulture);
+                object obj = ResourceManager.GetObject("check_circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap check_circle1 {
+            get {
+                object obj = ResourceManager.GetObject("check_circle1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap checkbox_checked {
+            get {
+                object obj = ResourceManager.GetObject("checkbox_checked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap checkbox_unchecked {
+            get {
+                object obj = ResourceManager.GetObject("checkbox_unchecked", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -385,7 +435,27 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap circle_with_cross {
             get {
-                object obj = ResourceManager.GetObject("circle-with-cross", resourceCulture);
+                object obj = ResourceManager.GetObject("circle_with_cross", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap clipboard_copy_icon_16 {
+            get {
+                object obj = ResourceManager.GetObject("clipboard_copy_icon_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap clippy {
+            get {
+                object obj = ResourceManager.GetObject("clippy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -425,7 +495,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap cloud_download {
             get {
-                object obj = ResourceManager.GetObject("cloud-download", resourceCulture);
+                object obj = ResourceManager.GetObject("cloud_download", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -435,7 +505,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap cloud_download_hover {
             get {
-                object obj = ResourceManager.GetObject("cloud-download-hover", resourceCulture);
+                object obj = ResourceManager.GetObject("cloud_download_hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -445,7 +515,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap cloud_off {
             get {
-                object obj = ResourceManager.GetObject("cloud-off", resourceCulture);
+                object obj = ResourceManager.GetObject("cloud_off", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -455,7 +525,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap cloud_off_hover {
             get {
-                object obj = ResourceManager.GetObject("cloud-off_hover", resourceCulture);
+                object obj = ResourceManager.GetObject("cloud_off_hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -515,7 +585,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap flash_on {
             get {
-                object obj = ResourceManager.GetObject("flash-on", resourceCulture);
+                object obj = ResourceManager.GetObject("flash_on", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -525,7 +595,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap folder_open {
             get {
-                object obj = ResourceManager.GetObject("folder-open", resourceCulture);
+                object obj = ResourceManager.GetObject("folder_open", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -535,7 +605,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap git_square {
             get {
-                object obj = ResourceManager.GetObject("git-square", resourceCulture);
+                object obj = ResourceManager.GetObject("git_square", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -575,7 +645,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap keyboard_arrow_left {
             get {
-                object obj = ResourceManager.GetObject("keyboard-arrow-left", resourceCulture);
+                object obj = ResourceManager.GetObject("keyboard_arrow_left", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -585,7 +655,17 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap keyboard_arrow_right {
             get {
-                object obj = ResourceManager.GetObject("keyboard-arrow-right", resourceCulture);
+                object obj = ResourceManager.GetObject("keyboard_arrow_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap littlecat {
+            get {
+                object obj = ResourceManager.GetObject("littlecat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -615,7 +695,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap optionalAddons_fw {
             get {
-                object obj = ResourceManager.GetObject("optionalAddons.fw", resourceCulture);
+                object obj = ResourceManager.GetObject("optionalAddons_fw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -635,7 +715,7 @@ namespace arma3Launcher.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap puzzle_piece {
             get {
-                object obj = ResourceManager.GetObject("puzzle-piece", resourceCulture);
+                object obj = ResourceManager.GetObject("puzzle_piece", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -683,9 +763,29 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap splash_fw {
+            get {
+                object obj = ResourceManager.GetObject("splash_fw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap splash_spn {
             get {
                 object obj = ResourceManager.GetObject("splash_spn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap times_circle_o {
+            get {
+                object obj = ResourceManager.GetObject("times_circle_o", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -703,9 +803,19 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TrollFace {
+        internal static System.Drawing.Bitmap trollface {
             get {
-                object obj = ResourceManager.GetObject("TrollFace", resourceCulture);
+                object obj = ResourceManager.GetObject("trollface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TrollFace1 {
+            get {
+                object obj = ResourceManager.GetObject("TrollFace1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

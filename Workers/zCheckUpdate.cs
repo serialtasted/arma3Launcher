@@ -109,6 +109,8 @@ namespace arma3Launcher.Workers
 
                 if (NewVersion > CurVersion)
                 {
+                    GlobalVar.isUpdateAvailable = true;
+
                     MessageBoxButtons msgBtns = MessageBoxButtons.OK;
                     if (GlobalVar.isDebug)
                         msgBtns = MessageBoxButtons.OKCancel;
@@ -122,6 +124,8 @@ namespace arma3Launcher.Workers
                 }
                 else if (NewVersion < CurVersion)
                 {
+                    GlobalVar.isUpdateAvailable = true;
+
                     MessageBoxButtons msgBtns = MessageBoxButtons.OK;
                     if (GlobalVar.isDebug)
                         msgBtns = MessageBoxButtons.OKCancel;

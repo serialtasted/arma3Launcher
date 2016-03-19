@@ -325,7 +325,7 @@ namespace arma3Launcher.Workers
                             string filePath = "";
                             int nFile = 0;
 
-                            if (zipFile.Contains(this.configFile))
+                            if (zipFile.Contains(this.configFile) || zipFile.Contains(this.activePack))
                                 aux_ModsFolder = GameFolder;
                             else
                                 aux_ModsFolder = AddonsFolder;

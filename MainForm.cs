@@ -1568,9 +1568,6 @@ namespace arma3Launcher
         private void btn_reinstallTFRPlugins_Click(object sender, EventArgs e)
         { installer.installTeamSpeakPlugin(); }
 
-        public void runInstaller(bool isLaunch)
-        { installer.beginInstall(isLaunch, cfgUrl.Split('!')[1], activePack); }
-
         public async void runGame()
         { hideDownloadPanel(); await taskDelay(800); PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked); }
 

@@ -869,7 +869,8 @@ namespace arma3Launcher
                 if (panel_help.Height > 0) { Panels.BackColor = Color.DimGray; helpPanelIO.hidePanel(); menu_help.ForeColor = Color.Gray; }
                 if (panel_about.Height > 0) { Panels.BackColor = Color.DimGray; aboutPanelIO.hidePanel(); menu_about.ForeColor = Color.Gray; }
 
-                await taskDelay(600);
+                while (GlobalVar.isAnimating)
+                    await taskDelay(300);
 
                 if (selectedOption == 0) { Panels.BackColor = Color.OliveDrab; menu_news.ForeColor = Color.OliveDrab; addonsPanelIO.showPanel(); }
                 if (selectedOption == 1) { Panels.BackColor = Color.OliveDrab; menu_community.ForeColor = Color.OliveDrab; communityPanelIO.showPanel(); }

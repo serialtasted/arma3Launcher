@@ -27,6 +27,17 @@ namespace arma3Launcher.Workers
             this.gflowpacks = packsPanel;
         }
 
+        public void Search (string searchArgument)
+        {
+            for (int i = 0; i < gflowpacks.Controls.Count-1; i++)
+            {
+                if (!gflowpacks.Controls[i].Tag.ToString().Contains(searchArgument) && searchArgument != "")
+                    gflowpacks.Controls[i].Visible = false;
+                else
+                    gflowpacks.Controls[i].Visible = true;
+            }
+        }
+
         public void Get ()
         {
             try
@@ -39,53 +50,55 @@ namespace arma3Launcher.Workers
                 XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSets//pack");
                 foreach (XmlNode xn in xnl)
                 {
-                    title = xn.Attributes["name"].Value;
-                    id = xn.Attributes["id"].Value;
-                    description = xn.Attributes["description"].Value;
-                    cfgUrl = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["cfgfile"].Value;
-                    addons = "";
-                    
-
-                    XmlNodeList xnl2 = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSetInfo//" + id + "//mod");
-                    foreach (XmlNode xn2 in xnl2)
+                    if (Convert.ToBoolean(xn.Attributes["enable"].Value) && (Convert.ToBoolean(xn.Attributes["public"].Value) || Properties.Settings.Default.privateKeys.Split(',').Contains(xn.Attributes["id"].Value)))
                     {
-                        if (xn2.Attributes["type"].Value == "mod")
+                        title = xn.Attributes["name"].Value;
+                        id = xn.Attributes["id"].Value;
+                        description = xn.Attributes["description"].Value;
+                        cfgUrl = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["cfgfile"].Value;
+                        addons = "";
+
+
+                        XmlNodeList xnl2 = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSetInfo//" + id + "//mod");
+                        foreach (XmlNode xn2 in xnl2)
                         {
-                            if (xn2.Attributes["name"].Value != "@dummy")
+                            if (xn2.Attributes["type"].Value == "mod")
                             {
-                                addons = addons +
-                                    " • " + xn2.Attributes["name"].Value + " (" + xn2.Attributes["version"].Value + ")" +
-                                    "\n";
+                                if (xn2.Attributes["name"].Value != "@dummy")
+                                {
+                                    addons = addons +
+                                        " • " + xn2.Attributes["name"].Value + " (" + xn2.Attributes["version"].Value + ")" +
+                                        "\n";
+                                }
                             }
                         }
-                    }
 
-                    PackBlock auxPack = new PackBlock(
-                        mainForm,
-                        title, 
-                        id, 
-                        description, 
-                        addons, 
-                        gflowpacks, 
-                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["blastcore"].Value), 
-                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["dragonfyre"].Value), 
-                        Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["optional"].Value));
-                    auxPack.Tag = id;
+                        PackBlock auxPack = new PackBlock(
+                            mainForm,
+                            title,
+                            id,
+                            description,
+                            addons,
+                            gflowpacks,
+                            Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["blastcore"].Value),
+                            Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["dragonfyre"].Value),
+                            Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["optional"].Value));
+                        auxPack.Tag = string.Format("{0} {1} {2} {3}", id, title, description, addons);
 
-                    if (id == Properties.Settings.Default.lastAddonPack)
-                    {
-                        PictureBox btnUsePack = auxPack.Controls.Find("btn_useThis", true)[0] as PictureBox;
-                        btnUsePack.Enabled = false;
-                        btnUsePack.Image = Properties.Resources.useThis_active;
-                        mainForm.updateActivePack(title);
-                    }
+                        if (id == Properties.Settings.Default.lastAddonPack)
+                        {
+                            PictureBox btnUsePack = auxPack.Controls.Find("btn_useThis", true)[0] as PictureBox;
+                            btnUsePack.Enabled = false;
+                            btnUsePack.Image = Properties.Resources.useThis_active;
+                            mainForm.updateActivePack(title);
+                        }
 
-                    if(Convert.ToBoolean(xn.Attributes["enable"].Value))
+
                         gflowpacks.Controls.Add(auxPack);
+                    }
                 }
 
-                Label Maring = new Label();
-                Maring.MaximumSize = new Size(595, 10);
+                Label Maring = new Label() { MaximumSize = new Size(595, 10) };
                 gflowpacks.Controls.Add(Maring);
             }
             catch (Exception ex)

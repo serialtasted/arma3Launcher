@@ -116,5 +116,18 @@ namespace arma3Launcher
                 _isDebug = value;
             }
         }
+
+        static bool _isFirstRun = false;
+        public static bool isFirstRun
+        {
+            get
+            {
+                return _isFirstRun;
+            }
+            set
+            {
+                _isFirstRun = value;
+            }
+        }
     }
 }

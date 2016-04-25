@@ -490,5 +490,17 @@ namespace arma3Launcher.Properties {
                 this["joinServerAutomatically"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string privateKeys {
+            get {
+                return ((string)(this["privateKeys"]));
+            }
+            set {
+                this["privateKeys"] = value;
+            }
+        }
     }
 }

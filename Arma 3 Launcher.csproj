@@ -198,6 +198,7 @@
       <DependentUpon>SystemResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controls\COMTypes.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Windows\AddonManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +228,12 @@
     </Compile>
     <Compile Include="Windows\PackInfo.Designer.cs">
       <DependentUpon>PackInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PrivatePackManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\PrivatePackManager.Designer.cs">
+      <DependentUpon>PrivatePackManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\Splash.cs">
       <SubType>Form</SubType>
@@ -258,6 +265,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>GlobalValues.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -286,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\PackInfo.resx">
       <DependentUpon>PackInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\PrivatePackManager.resx">
+      <DependentUpon>PrivatePackManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\Splash.resx">
       <DependentUpon>Splash.cs</DependentUpon>
@@ -359,6 +370,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\plus-square.png" />
     <None Include="Resources\littlecat.gif" />
     <None Include="Resources\grey_green_stripes.jpg" />
     <None Include="Resources\searching.gif" />
@@ -425,6 +437,25 @@
     <None Include="Resources\archive_hover.png" />
     <None Include="Resources\equalizer.png" />
     <Content Include="ptrangers.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

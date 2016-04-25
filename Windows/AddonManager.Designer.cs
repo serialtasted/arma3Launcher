@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.panel3 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.window_topBar = new System.Windows.Forms.Panel();
-            this.btn_close = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txt_title = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn_close = new System.Windows.Forms.PictureBox();
             this.panel3.SuspendLayout();
             this.window_topBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_close)).BeginInit();
@@ -51,6 +51,14 @@
             this.panel3.Size = new System.Drawing.Size(572, 391);
             this.panel3.TabIndex = 9;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 38);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(570, 351);
+            this.flowLayoutPanel1.TabIndex = 13;
+            // 
             // window_topBar
             // 
             this.window_topBar.BackColor = System.Drawing.Color.DimGray;
@@ -62,16 +70,6 @@
             this.window_topBar.Name = "window_topBar";
             this.window_topBar.Size = new System.Drawing.Size(570, 38);
             this.window_topBar.TabIndex = 12;
-            // 
-            // btn_close
-            // 
-            this.btn_close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_close.Image = global::arma3Launcher.Properties.Resources.arrow_down;
-            this.btn_close.Location = new System.Drawing.Point(544, 11);
-            this.btn_close.Name = "btn_close";
-            this.btn_close.Size = new System.Drawing.Size(16, 16);
-            this.btn_close.TabIndex = 13;
-            this.btn_close.TabStop = false;
             // 
             // panel5
             // 
@@ -92,16 +90,19 @@
             this.txt_title.Name = "txt_title";
             this.txt_title.Size = new System.Drawing.Size(95, 15);
             this.txt_title.TabIndex = 0;
+            this.txt_title.Tag = "";
             this.txt_title.Text = "Addon Manager";
             this.txt_title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // flowLayoutPanel1
+            // btn_close
             // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 38);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(570, 351);
-            this.flowLayoutPanel1.TabIndex = 13;
+            this.btn_close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_close.Image = global::arma3Launcher.Properties.Resources.arrow_down;
+            this.btn_close.Location = new System.Drawing.Point(544, 11);
+            this.btn_close.Name = "btn_close";
+            this.btn_close.Size = new System.Drawing.Size(16, 16);
+            this.btn_close.TabIndex = 13;
+            this.btn_close.TabStop = false;
             // 
             // AddonManager
             // 

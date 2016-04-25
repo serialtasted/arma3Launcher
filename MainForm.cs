@@ -147,13 +147,13 @@ namespace arma3Launcher
             installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, btn_cancelDownload, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadDragonFyre, btn_downloadBlastcore);
             downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_Launch, btn_cancelDownload);
             remoteReader = new RemoteReader();
-            fetchAddonPacks = new Packs(this, FeedContentPanel);
+            fetchAddonPacks = new Packs(this, PacksPanel);
             eReport = new EmailReporter();
             aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_dragonfyre, chb_blastcore);
             loadingSplash = new Windows.Splash();
             windowIO = new WindowIO(this);
 
-            addonsPanelIO = new PanelIO(panel_news, Panels, 304, 306, 33);
+            addonsPanelIO = new PanelIO(panel_packs, Panels, 304, 306, 33);
             communityPanelIO = new PanelIO(panel_community, Panels, 304, 306, 33);
             launchoptionsPanelIO = new PanelIO(panel_launchOptions, Panels, 304, 306, 33);
             helpPanelIO = new PanelIO(panel_help, Panels, 304, 306, 33);
@@ -255,7 +255,7 @@ namespace arma3Launcher
         {
             windowIO.windowIn();
 
-            FeedContentPanel.Focus();
+            PacksPanel.Focus();
 
             if (!isUpdate)
                 topPanelsIO.showPanel();
@@ -863,7 +863,7 @@ namespace arma3Launcher
         {
             if (!GlobalVar.isAnimating)
             {
-                if (panel_news.Height > 0) { Panels.BackColor = Color.DimGray; addonsPanelIO.hidePanel(); menu_news.ForeColor = Color.Gray; }
+                if (panel_packs.Height > 0) { Panels.BackColor = Color.DimGray; addonsPanelIO.hidePanel(); menu_packs.ForeColor = Color.Gray; }
                 if (panel_community.Height > 0) { Panels.BackColor = Color.DimGray; communityPanelIO.hidePanel(); menu_community.ForeColor = Color.Gray; }
                 if (panel_launchOptions.Height > 0) { Panels.BackColor = Color.DimGray; launchoptionsPanelIO.hidePanel(); menu_launchOptions.ForeColor = Color.Gray; }
                 if (panel_help.Height > 0) { Panels.BackColor = Color.DimGray; helpPanelIO.hidePanel(); menu_help.ForeColor = Color.Gray; }
@@ -872,7 +872,7 @@ namespace arma3Launcher
                 while (GlobalVar.isAnimating)
                     await taskDelay(300);
 
-                if (selectedOption == 0) { Panels.BackColor = Color.OliveDrab; menu_news.ForeColor = Color.OliveDrab; addonsPanelIO.showPanel(); }
+                if (selectedOption == 0) { Panels.BackColor = Color.OliveDrab; menu_packs.ForeColor = Color.OliveDrab; addonsPanelIO.showPanel(); }
                 if (selectedOption == 1) { Panels.BackColor = Color.OliveDrab; menu_community.ForeColor = Color.OliveDrab; communityPanelIO.showPanel(); }
                 if (selectedOption == 2) { Panels.BackColor = Color.OliveDrab; menu_launchOptions.ForeColor = Color.OliveDrab; launchoptionsPanelIO.showPanel(); }
                 if (selectedOption == 3) { Panels.BackColor = Color.OliveDrab; menu_help.ForeColor = Color.OliveDrab; helpPanelIO.showPanel(); }
@@ -894,15 +894,15 @@ namespace arma3Launcher
 
         private void menu_news_MouseEnter(object sender, EventArgs e)
         {
-            menu_news.ForeColor = Color.DarkGray;
+            menu_packs.ForeColor = Color.DarkGray;
         }
 
         private void menu_news_MouseLeave(object sender, EventArgs e)
         {
             if (menuSelected != 0)
-                menu_news.ForeColor = Color.Gray;
+                menu_packs.ForeColor = Color.Gray;
             else
-                menu_news.ForeColor = Color.OliveDrab;
+                menu_packs.ForeColor = Color.OliveDrab;
         }
 
         /*-----------------------------------
@@ -1803,6 +1803,65 @@ namespace arma3Launcher
             if (img_thisSpace.Image == null)
             {
                 txt_thisSpace.Text = "Does this blank space bother you?";
+            }
+        }
+
+        private void vlink_infMovement_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            flash_youtubePlayer.Movie = "https://www.youtube.com/v/uM7JY6Q7O4Q";
+        }
+
+        private void vlink_microDAGR_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            flash_youtubePlayer.Movie = "https://www.youtube.com/v/YXNJRgKbokM";
+        }
+
+        private void vlink_medicalBasic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            flash_youtubePlayer.Movie = "https://www.youtube.com/v/reEXxeS-o0U";
+        }
+
+        private void txtb_searchPack_Enter(object sender, EventArgs e)
+        {
+            if (txtb_searchPack.Text == "Search")
+            {
+                txtb_searchPack.ForeColor = Color.FromArgb(64, 64, 64);
+                txtb_searchPack.Text = "";
+            }
+        }
+
+        private void txtb_searchPack_Leave(object sender, EventArgs e)
+        {
+            if (txtb_searchPack.Text == "")
+            {
+                txtb_searchPack.ForeColor = Color.DarkGray;
+                txtb_searchPack.Text = "Search";
+            }
+        }
+
+        private void btn_ereaseSearchPack_Click(object sender, EventArgs e)
+        {
+            fetchAddonPacks.Search("");
+            txtb_searchPack.ForeColor = Color.DarkGray;
+            txtb_searchPack.Text = "Search";
+        }
+
+        private void txtb_searchPack_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                fetchAddonPacks.Search(txtb_searchPack.Text);
+            }
+        }
+
+        private void btn_addPrivatePack_Click(object sender, EventArgs e)
+        {
+            if (new Windows.PrivatePackManager().ShowDialog() == DialogResult.OK)
+            {
+                fetchAddonPacks.Search("");
+                txtb_searchPack.ForeColor = Color.DarkGray;
+                txtb_searchPack.Text = "Search";
+                fetchAddonPacks.Get();
             }
         }
     }

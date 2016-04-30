@@ -42,6 +42,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.panel_community = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
+            this.flash_youtubePlayer = new AxShockwaveFlashObjects.AxShockwaveFlash();
             this.panel14 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.vlink_medicalBasic = new System.Windows.Forms.LinkLabel();
@@ -56,9 +57,11 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
             this.menu_blastcore = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_blastcore = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadBlastcore = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_dragonfyre = new arma3Launcher.Controls.SplitButton();
             this.menu_dragonfyre = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chb_dragonfyre = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_downloadDragonFyre = new System.Windows.Forms.ToolStripMenuItem();
@@ -177,7 +180,9 @@
             this.panel_bottomHide_Inner = new System.Windows.Forms.Panel();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
             this.txt_progressStatus = new System.Windows.Forms.Label();
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
             this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.btn_Launch = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -214,11 +219,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.flash_youtubePlayer = new AxShockwaveFlashObjects.AxShockwaveFlash();
-            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
-            this.btn_dragonfyre = new arma3Launcher.Controls.SplitButton();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
@@ -227,6 +227,7 @@
             this.panel_help.SuspendLayout();
             this.panel_community.SuspendLayout();
             this.panel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flash_youtubePlayer)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel_launchOptions.SuspendLayout();
             this.panel_recommendedAddons.SuspendLayout();
@@ -282,7 +283,6 @@
             this.TitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).BeginInit();
             this.menu_moreOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.flash_youtubePlayer)).BeginInit();
             this.SuspendLayout();
             // 
             // sysbtn_minimize
@@ -340,11 +340,11 @@
             // Panels
             // 
             this.Panels.BackColor = System.Drawing.Color.OliveDrab;
+            this.Panels.Controls.Add(this.panel_about);
+            this.Panels.Controls.Add(this.panel_packs);
             this.Panels.Controls.Add(this.panel_help);
             this.Panels.Controls.Add(this.panel_community);
             this.Panels.Controls.Add(this.panel_launchOptions);
-            this.Panels.Controls.Add(this.panel_about);
-            this.Panels.Controls.Add(this.panel_packs);
             this.Panels.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Panels.Location = new System.Drawing.Point(0, 0);
             this.Panels.Margin = new System.Windows.Forms.Padding(0);
@@ -360,7 +360,7 @@
             this.panel_help.Controls.Add(this.label19);
             this.panel_help.Controls.Add(this.label12);
             this.panel_help.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_help.Location = new System.Drawing.Point(0, -1209);
+            this.panel_help.Location = new System.Drawing.Point(0, -603);
             this.panel_help.Name = "panel_help";
             this.panel_help.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_help.Size = new System.Drawing.Size(906, 303);
@@ -419,7 +419,7 @@
             this.panel_community.Controls.Add(this.panel13);
             this.panel_community.Controls.Add(this.panel8);
             this.panel_community.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_community.Location = new System.Drawing.Point(0, -906);
+            this.panel_community.Location = new System.Drawing.Point(0, -300);
             this.panel_community.Name = "panel_community";
             this.panel_community.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_community.Size = new System.Drawing.Size(906, 303);
@@ -434,6 +434,15 @@
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(703, 283);
             this.panel13.TabIndex = 1;
+            // 
+            // flash_youtubePlayer
+            // 
+            this.flash_youtubePlayer.Enabled = true;
+            this.flash_youtubePlayer.Location = new System.Drawing.Point(11, 12);
+            this.flash_youtubePlayer.Name = "flash_youtubePlayer";
+            this.flash_youtubePlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("flash_youtubePlayer.OcxState")));
+            this.flash_youtubePlayer.Size = new System.Drawing.Size(681, 259);
+            this.flash_youtubePlayer.TabIndex = 1;
             // 
             // panel14
             // 
@@ -553,7 +562,7 @@
             this.panel_launchOptions.Controls.Add(this.panel_optionalAddons);
             this.panel_launchOptions.Controls.Add(this.panel4);
             this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_launchOptions.Location = new System.Drawing.Point(0, -603);
+            this.panel_launchOptions.Location = new System.Drawing.Point(0, 3);
             this.panel_launchOptions.Name = "panel_launchOptions";
             this.panel_launchOptions.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_launchOptions.Size = new System.Drawing.Size(906, 303);
@@ -600,6 +609,21 @@
             this.label13.TabIndex = 2;
             this.label13.Text = "Audio mod wich enhances over 5500 sound effects";
             // 
+            // splitButton1
+            // 
+            this.splitButton1.AutoSize = true;
+            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
+            this.splitButton1.Enabled = false;
+            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.splitButton1.Location = new System.Drawing.Point(9, 42);
+            this.splitButton1.Name = "splitButton1";
+            this.splitButton1.Size = new System.Drawing.Size(98, 23);
+            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
+            this.splitButton1.TabIndex = 1;
+            this.splitButton1.Text = "Blastcore";
+            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.splitButton1.UseVisualStyleBackColor = true;
+            // 
             // menu_blastcore
             // 
             this.menu_blastcore.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -625,6 +649,22 @@
             this.btn_downloadBlastcore.Size = new System.Drawing.Size(152, 22);
             this.btn_downloadBlastcore.Text = "Download";
             this.btn_downloadBlastcore.Click += new System.EventHandler(this.btn_downloadBlastcore_Click);
+            // 
+            // btn_dragonfyre
+            // 
+            this.btn_dragonfyre.AutoSize = true;
+            this.btn_dragonfyre.ContextMenuStrip = this.menu_dragonfyre;
+            this.btn_dragonfyre.Enabled = false;
+            this.btn_dragonfyre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_dragonfyre.Location = new System.Drawing.Point(9, 13);
+            this.btn_dragonfyre.Name = "btn_dragonfyre";
+            this.btn_dragonfyre.Size = new System.Drawing.Size(98, 23);
+            this.btn_dragonfyre.SplitMenuStrip = this.menu_dragonfyre;
+            this.btn_dragonfyre.TabIndex = 0;
+            this.btn_dragonfyre.Text = "Dragon Fyre";
+            this.btn_dragonfyre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_dragonfyre.UseVisualStyleBackColor = true;
+            this.btn_dragonfyre.Click += new System.EventHandler(this.btn_DragonFyre_Click);
             // 
             // menu_dragonfyre
             // 
@@ -1278,7 +1318,7 @@
             this.panel_about.Controls.Add(this.panel1);
             this.panel_about.Controls.Add(this.img_thisSpace);
             this.panel_about.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_about.Location = new System.Drawing.Point(0, -300);
+            this.panel_about.Location = new System.Drawing.Point(0, -1209);
             this.panel_about.Name = "panel_about";
             this.panel_about.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_about.Size = new System.Drawing.Size(906, 303);
@@ -1717,7 +1757,7 @@
             this.panel_packs.Controls.Add(this.PacksPanel);
             this.panel_packs.Controls.Add(this.panel15);
             this.panel_packs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_packs.Location = new System.Drawing.Point(0, 3);
+            this.panel_packs.Location = new System.Drawing.Point(0, -906);
             this.panel_packs.Name = "panel_packs";
             this.panel_packs.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_packs.Size = new System.Drawing.Size(906, 303);
@@ -2166,6 +2206,15 @@
             this.txt_progressStatus.TabIndex = 6;
             this.txt_progressStatus.Text = "Waiting for orders";
             // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(20, 60);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.ShowInTaskbar = true;
+            this.prb_progressBar_All.Size = new System.Drawing.Size(679, 5);
+            this.prb_progressBar_All.TabIndex = 11;
+            // 
             // btn_cancelDownload
             // 
             this.btn_cancelDownload.BackgroundImage = global::arma3Launcher.Properties.Resources.cloud_off;
@@ -2181,6 +2230,14 @@
             this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click);
             this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
             this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(20, 40);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(679, 20);
+            this.prb_progressBar_File.TabIndex = 10;
             // 
             // txt_curFile
             // 
@@ -2520,63 +2577,6 @@
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
             // 
-            // flash_youtubePlayer
-            // 
-            this.flash_youtubePlayer.Enabled = true;
-            this.flash_youtubePlayer.Location = new System.Drawing.Point(11, 12);
-            this.flash_youtubePlayer.Name = "flash_youtubePlayer";
-            this.flash_youtubePlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("flash_youtubePlayer.OcxState")));
-            this.flash_youtubePlayer.Size = new System.Drawing.Size(681, 259);
-            this.flash_youtubePlayer.TabIndex = 1;
-            // 
-            // splitButton1
-            // 
-            this.splitButton1.AutoSize = true;
-            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
-            this.splitButton1.Enabled = false;
-            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.splitButton1.Location = new System.Drawing.Point(9, 42);
-            this.splitButton1.Name = "splitButton1";
-            this.splitButton1.Size = new System.Drawing.Size(98, 23);
-            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
-            this.splitButton1.TabIndex = 1;
-            this.splitButton1.Text = "Blastcore";
-            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.splitButton1.UseVisualStyleBackColor = true;
-            // 
-            // btn_dragonfyre
-            // 
-            this.btn_dragonfyre.AutoSize = true;
-            this.btn_dragonfyre.ContextMenuStrip = this.menu_dragonfyre;
-            this.btn_dragonfyre.Enabled = false;
-            this.btn_dragonfyre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_dragonfyre.Location = new System.Drawing.Point(9, 13);
-            this.btn_dragonfyre.Name = "btn_dragonfyre";
-            this.btn_dragonfyre.Size = new System.Drawing.Size(98, 23);
-            this.btn_dragonfyre.SplitMenuStrip = this.menu_dragonfyre;
-            this.btn_dragonfyre.TabIndex = 0;
-            this.btn_dragonfyre.Text = "Dragon Fyre";
-            this.btn_dragonfyre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_dragonfyre.UseVisualStyleBackColor = true;
-            this.btn_dragonfyre.Click += new System.EventHandler(this.btn_DragonFyre_Click);
-            // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(20, 60);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.ShowInTaskbar = true;
-            this.prb_progressBar_All.Size = new System.Drawing.Size(679, 5);
-            this.prb_progressBar_All.TabIndex = 11;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(20, 40);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(679, 20);
-            this.prb_progressBar_File.TabIndex = 10;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2609,6 +2609,7 @@
             this.panel_help.PerformLayout();
             this.panel_community.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.flash_youtubePlayer)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel_launchOptions.ResumeLayout(false);
@@ -2685,7 +2686,6 @@
             this.TitleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_moreOptions)).EndInit();
             this.menu_moreOptions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.flash_youtubePlayer)).EndInit();
             this.ResumeLayout(false);
 
         }

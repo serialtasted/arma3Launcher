@@ -129,5 +129,45 @@ namespace arma3Launcher
                 _isFirstRun = value;
             }
         }
+
+        static bool _isReadingRepo = false;
+        public static bool isReadingRepo
+        {
+            get
+            {
+                return _isReadingRepo;
+            }
+            set
+            {
+                _isReadingRepo = value;
+            }
+        }
+
+        // LIST
+        static List<string> _folders2Create = new List<string>();
+        public static List<string> folders2Create
+        {
+            get
+            {
+                return _folders2Create;
+            }
+            set
+            {
+                _folders2Create = value;
+            }
+        }
+
+        static List<string> _files2Download = new List<string>();
+        public static List<string> files2Download
+        {
+            get
+            {
+                return _files2Download;
+            }
+            set
+            {
+                _files2Download = value;
+            }
+        }
     }
 }

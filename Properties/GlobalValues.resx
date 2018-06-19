@@ -129,16 +129,22 @@
   <data name="Link_Youtube" xml:space="preserve">
     <value>https://www.youtube.com/serialtasted</value>
   </data>
-  <data name="S_RepoXML" xml:space="preserve">
-    <value>https://dl.dropbox.com/u/3609589/arma3Launcher/Xml/repo.xml</value>
+  <data name="S_PackImgsDir" xml:space="preserve">
+    <value>ftp://ptrddns.dlinkddns.com/arma3Launcher/PackImgs/</value>
+  </data>
+  <data name="S_RepoAddress" xml:space="preserve">
+    <value>ftp://ptrddns.dlinkddns.com/arma3Launcher/Repo/</value>
+  </data>
+  <data name="S_RepoList" xml:space="preserve">
+    <value>ftp://ptrddns.dlinkddns.com/arma3Launcher/Repo/repoList.a3l</value>
   </data>
   <data name="S_UpdateUrl" xml:space="preserve">
-    <value>https://dl.dropbox.com/u/3609589/arma3Launcher/Releases/zUpdator.exe</value>
+    <value>ftp://ptrddns.dlinkddns.com/arma3Launcher/Releases/zUpdator.exe</value>
   </data>
   <data name="S_VersionTag" xml:space="preserve">
     <value />
   </data>
   <data name="S_VersionXML" xml:space="preserve">
-    <value>https://dl.dropbox.com/u/3609589/arma3Launcher/Xml/config.xml</value>
+    <value>ftp://ptrddns.dlinkddns.com/arma3Launcher/Configs/config.xml</value>
   </data>
 </root>

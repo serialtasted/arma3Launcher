@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using arma3Launcher.Workers;
 
 namespace arma3Launcher.Workers
 {
@@ -23,6 +24,7 @@ namespace arma3Launcher.Workers
         private PictureBox launcherButton;
         private PictureBox cancelButton;
         private String activeForm;
+        private Button repoValidateBtn;
 
         // controls (directory fields)
         private TextBox gamePathBox;
@@ -35,10 +37,11 @@ namespace arma3Launcher.Workers
         private PictureBox ts3PathFind;
         private PictureBox addonsPathFind;
 
+        // workers
+        private RepoReader repoReader;
+
         // controls (toolstrip menu items)
         private ToolStripMenuItem ts3Plugin;
-        private ToolStripMenuItem downloadJSRS;
-        private ToolStripMenuItem downloadBlastcore;
 
         // forms
         private MainForm mainForm;
@@ -48,6 +51,7 @@ namespace arma3Launcher.Workers
 
         // background workers
         private BackgroundWorker installFiles = new BackgroundWorker();
+        private BackgroundWorker validateFiles = new BackgroundWorker();
 
         // timer
         private Timer delayLaunch = new Timer();
@@ -65,8 +69,8 @@ namespace arma3Launcher.Workers
         private string configFile = "";
         private string activePack = "";
         private bool installationRunning = false;
-        private bool isJSRS = false;
-        private bool isBlastcore = false;
+        private bool isTFR = false;
+        private bool isInstall = false;
 
         // error report
         private EmailReporter reportError;
@@ -172,10 +176,11 @@ namespace arma3Launcher.Workers
         /// <param name="launcherButton"></param>
         public Installer (MainForm mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, PictureBox launcherButton, PictureBox cancelButton,
             TextBox gamePathBox, TextBox ts3PathBox, TextBox addonsPathBox, Button gamePathErase, Button ts3PathErase, Button addonsPathErase, PictureBox gamePathFind, PictureBox ts3PathFind, PictureBox addonsPathFind,
-            ToolStripMenuItem ts3Plugin, ToolStripMenuItem downloadJSRS, ToolStripMenuItem downloadBlastcore)
+            ToolStripMenuItem ts3Plugin, Button repoValidateBtn, RepoReader repoReader)
         {
             this.activeForm = "mainForm";
             this.mainForm = mainForm;
+            this.repoReader = repoReader;
 
             // construct error report
             this.reportError = new EmailReporter();
@@ -188,6 +193,7 @@ namespace arma3Launcher.Workers
             this.progressCurFile = progressCurFile;
             this.launcherButton = launcherButton;
             this.cancelButton = cancelButton;
+            this.repoValidateBtn = repoValidateBtn;
 
             // define controls (directory fields)
             this.gamePathBox = gamePathBox;
@@ -204,55 +210,24 @@ namespace arma3Launcher.Workers
 
             // define controls (toolstrip menu items)
             this.ts3Plugin = ts3Plugin;
-            this.downloadJSRS = downloadJSRS;
-            this.downloadBlastcore = downloadBlastcore;
 
             // define background worker
             this.installFiles.DoWork += InstallFiles_DoWork;
             this.installFiles.RunWorkerCompleted += InstallFiles_RunWorkerCompleted;
+
+            this.validateFiles.DoWork += ValidateFiles_DoWork;
+            this.validateFiles.RunWorkerCompleted += ValidateFiles_RunWorkerCompleted;
 
             // define timer
             this.delayLaunch.Interval = 2000;
             this.delayLaunch.Tick += DelayLaunch_Tick;
         }
 
-        public Installer(PackBlock packBlock, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, PictureBox launcherButton,
-            String gamePath, String ts3Path, String addonsPath)
-        {
-            this.activeForm = "packBlock";
-            this.packBlock = packBlock;
-
-            // construct error report
-            this.reportError = new EmailReporter();
-
-            // define controls
-            this.progressFile = progressFile;
-            this.progressAll = progressAll;
-            this.progressText = progressText;
-            this.progressDetails = progressDetails;
-            this.progressCurFile = progressCurFile;
-            this.launcherButton = launcherButton;
-
-            // define paths
-            gamePathBox = new TextBox();
-            gamePathBox.Text = gamePath;
-
-            ts3PathBox = new TextBox();
-            ts3PathBox.Text = ts3Path;
-
-            addonsPathBox = new TextBox();
-            addonsPathBox.Text = addonsPath;
-
-            // define background worker
-            this.installFiles.DoWork += InstallFiles_DoWork;
-            this.installFiles.RunWorkerCompleted += InstallFiles_RunWorkerCompleted;
-        }
-
         /// <summary>
         /// Begins the process of installation
         /// </summary>
         /// <param name="isConfig"></param>
-        public void beginInstall(bool isLaunch, string configFile, string activePack)
+        public void beginInstall(bool isLaunch, string configFile, string activePack, bool isTFR)
         {
             // report status
             this.progressStatusText("Preparing the installation process...");
@@ -267,6 +242,9 @@ namespace arma3Launcher.Workers
             // define if is launch
             this.isLaunch = isLaunch;
 
+            // define if is TFR
+            this.isTFR = isTFR;
+
             // define active pack
             this.activePack = activePack;
 
@@ -274,10 +252,6 @@ namespace arma3Launcher.Workers
             this.GameFolder = Properties.Settings.Default.Arma3Folder;
             this.TS3Folder = Properties.Settings.Default.TS3Folder;
             this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
-
-            // create addons folder
-            if (!Directory.Exists(AddonsFolder))
-                Directory.CreateDirectory(AddonsFolder);
 
             // lock directory fields
             this.gamePathBox.Enabled = false;
@@ -292,10 +266,110 @@ namespace arma3Launcher.Workers
             this.addonsPathErase.Enabled = false;
             this.addonsPathFind.Enabled = false;
 
+            // hide cancel button
+            try { this.cancelButton.Visible = false; } catch { }
+
             // begin installation
+            this.isInstall = true;
             this.installationRunning = true;
             GlobalVar.isInstalling = true;
-            this.installFiles.RunWorkerAsync();
+
+            if(repoReader.IsFileDifferent(repoReader.GetRepoFile()))
+                this.validateFiles.RunWorkerAsync();
+            else
+                this.installFiles.RunWorkerAsync();
+        }
+
+        public void ValidateLocalFiles()
+        {
+            // show download panel
+            this.mainForm.showDownloadPanel();
+
+            // define paths
+            this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
+
+            // hide cancel button
+            try { this.cancelButton.Visible = false; } catch { }
+
+            // begin validation
+            this.isInstall = false;
+            this.validateFiles.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Validate files and remove files not present on repo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ValidateFiles_DoWork(object sender, DoWorkEventArgs e)
+        {
+            this.progressBarFileState(ProgressBarState.Normal);
+            this.progressBarFileStyle(ProgressBarStyle.Marquee);
+
+            this.progressStatusText("Validating local storage...");
+
+            long filesCount = Directory.GetFiles(AddonsFolder, "*", SearchOption.AllDirectories).LongLength;
+            int filesDone = 0;
+
+            foreach (string item in Directory.GetFiles(AddonsFolder, "*", SearchOption.AllDirectories))
+            {
+                string auxItem = item.Remove(0, AddonsFolder.Length);
+                string auxPath = Path.GetDirectoryName(item);
+                bool deleteFile = true;
+
+                this.currentFileText("Validating file: " + auxItem);
+                this.progressBarAllValue(Convert.ToInt32(((double)filesDone / filesCount) * 100));
+
+                using (StreamReader sr = File.OpenText(repoReader.GetRepoFile()))
+                {
+                    string s = "";
+
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        if (auxItem == s.Split('*')[1])
+                            deleteFile = false;
+                    }
+                }
+
+                if (deleteFile)
+                {
+                    File.Delete(item);
+                    do
+                    {
+                        if (Directory.EnumerateDirectories(auxPath).Any() || Directory.EnumerateFiles(auxPath).Any())
+                            break;
+                        else
+                            Directory.Delete(auxPath);
+
+                        auxPath = Directory.GetParent(auxPath).FullName;
+                    } while (auxPath != AddonsFolder.Remove(AddonsFolder.Length - 1));
+                }
+
+                filesDone++;
+            }
+        }
+
+        private async void ValidateFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            this.currentFileText("");
+            this.progressBarFileValue(0);
+            this.progressBarAllValue(0);
+
+            Properties.Settings.Default.LastRepoFileSize = new FileInfo(repoReader.GetRepoFile()).Length;
+            Properties.Settings.Default.Save();
+
+            if (this.isInstall)
+                this.installFiles.RunWorkerAsync();
+            else
+            {
+                this.progressBarFileStyle(ProgressBarStyle.Continuous);
+                this.progressStatusText("Waiting for orders");
+                this.mainForm.reSizeBarText("WaitingForOrders");
+                await this.taskDelay(1500);
+                this.mainForm.hideDownloadPanel();
+                mainForm.ReadRepo(false);
+                GlobalVar.isReadingRepo = false;
+            }
         }
 
         /// <summary>
@@ -305,178 +379,41 @@ namespace arma3Launcher.Workers
         /// <param name="e"></param>
         private void InstallFiles_DoWork(object sender, DoWorkEventArgs e)
         {
-            bool isTFR = false;
-            bool isRHS_AFRF = false;
-            bool isRHS_USF = false;
+            bool allFine = false;
 
-            bool allFine = true;
-            string aux_ModsFolder = AddonsFolder;
+            string sourcePath = "";
+            string destinationPath = "";
 
             try
             {
-                int nAll = 0;
-                foreach (string zipFile in Directory.GetFiles(this.TempFolder))
-                {
-                    if (zipFile != null)
-                        using (ZipArchive archive = ZipFile.OpenRead(zipFile))
-                        {
-                            this.progressStatusText("Extracting new files...");
+                // userconfig folder
+                this.progressBarFileState(ProgressBarState.Normal);
+                this.progressBarFileStyle(ProgressBarStyle.Marquee);
+                this.progressStatusText("Moving userconfig folder...");
 
-                            string filePath = "";
-                            int nFile = 0;
+                sourcePath = AddonsFolder + @"@task_force_radio\userconfig";
+                destinationPath = Properties.Settings.Default.Arma3Folder + @"userconfig";
 
-                            if (zipFile.Contains(this.configFile) || zipFile.Contains(this.activePack))
-                                aux_ModsFolder = GameFolder;
-                            else
-                                aux_ModsFolder = AddonsFolder;
+                foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                    Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
 
-                            foreach (ZipArchiveEntry entry in archive.Entries)
-                            {
-                                if (entry.FullName.Contains("@task_force_radio") && !isTFR)
-                                { isTFR = true; }
 
-                                if (entry.FullName.Contains("@RHSAFRF") && !isRHS_AFRF)
-                                { isRHS_AFRF = true; }
+                foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                    File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
 
-                                if (entry.FullName.Contains("@RHSUSF") && !isRHS_USF)
-                                { isRHS_USF = true; }
-
-                                try
-                                {
-                                    filePath = Path.Combine(aux_ModsFolder, entry.FullName).Replace(@"/", @"\\").Replace(@"\\", @"\");
-
-                                    string[] aux_topFolder = entry.FullName.Split('/');
-                                    if (!Directory.Exists(Path.Combine(aux_ModsFolder, aux_topFolder[0])) && aux_topFolder.Length > 1)
-                                        Directory.CreateDirectory(Path.Combine(aux_ModsFolder, aux_topFolder[0]));
-
-                                    if (!entry.FullName.Contains(@"\."))
-                                    {
-                                        if (filePath.EndsWith(@"\"))
-                                        {
-                                            if (!Directory.Exists(filePath))
-                                            {
-                                                this.currentFileText("Creating folder .. " + filePath);
-
-                                                Directory.CreateDirectory(filePath);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            this.currentFileText("Extracting file .. " + filePath);
-
-                                            if (!File.Exists(filePath))
-                                            {
-                                                using (FileStream fs = File.Create(filePath))
-                                                {
-                                                    fs.Close();
-                                                }
-                                            }
-
-                                            entry.ExtractToFile(filePath, true);
-                                        }
-                                    }
-                                }
-                                catch (IOException ioex)
-                                { MessageBox.Show(ioex.Message); }
-                                catch (Exception ex)
-                                { MessageBox.Show(ex.Message); }
-
-                                this.progressBarFileValue(Convert.ToInt32(((double)nFile++ / archive.Entries.Count) * 100));
-                            }
-
-                            this.currentFileText("");
-                        }
-                    else
-                        break;
-
-                    this.progressBarAllValue(Convert.ToInt32(((double)nAll++ / (Directory.GetFiles(this.TempFolder).Length + 1)) * 100));
-                }
-
-                #region isTFR
+                // TFR Plugin
                 if (isTFR && !GlobalVar.isServer)
                 {
-                    bool awaitTSPlugin = true;
-                    do
-                    {
-                        try
-                        {
-                            this.progressBarFileState(ProgressBarState.Normal);
-                            this.progressStatusText("Installing TeamSpeak 3 plugins...");
+                    this.progressStatusText("Installing TeamSpeak 3 plugins...");
+                    this.currentFileText("Continue on TeamSpeak 3 plugin installer");
 
-                            string sourcePath = AddonsFolder + @"@task_force_radio\plugins";
-                            string destinationPath = Properties.Settings.Default.TS3Folder + @"plugins";
+                    sourcePath = AddonsFolder + @"@task_force_radio\plugins";
 
-                            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-                                Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
-
-
-                            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                                File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
-
-                            awaitTSPlugin = false;
-                        }
-                        catch
-                        {
-                            this.progressBarFileState(ProgressBarState.Pause);
-                            if (MessageBox.Show("Disable all TFR plugins in your TeamSpeak 3 before continue.\n\n • Go to \"Settings\"\n • Open the \"Plugins\" window\n • Disable all Task Force Radio plugins\n • Hit \"Close\"", "Found a problem with TFR installation", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning) == DialogResult.Retry)
-                                awaitTSPlugin = true;
-                            else
-                            { 
-                                awaitTSPlugin = false;
-                                throw;
-                            }
-                        }
-                    } while (awaitTSPlugin);
+                    foreach (string file in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                        Process.Start(file).WaitForExit();
                 }
-                #endregion
 
-                #region isRHS_AFRF
-                if (isRHS_AFRF)
-                {
-                    try
-                    {
-                        var fass = new ProcessStartInfo();
-                        fass.WorkingDirectory = AddonsFolder + "@RHSAFRF";
-                        fass.FileName = "update_rhsafrf.bat";
-
-                        var process = new Process();
-                        process.StartInfo = fass;
-                        process.Start();
-
-                        this.progressStatusText("Installing RHS AFRF...");
-                        this.progressBarFileStyle(ProgressBarStyle.Marquee);
-                        process.WaitForExit();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                #endregion
-
-                #region isRHS_USF
-                if (isRHS_USF)
-                {
-                    try
-                    {
-                        var fass = new ProcessStartInfo();
-                        fass.WorkingDirectory = AddonsFolder + "@RHSUSF";
-                        fass.FileName = "update_rhsusf.bat";
-
-                        var process = new Process();
-                        process.StartInfo = fass;
-                        process.Start();
-
-                        this.progressStatusText("Installing RHS USF...");
-                        this.progressBarFileStyle(ProgressBarStyle.Marquee);
-                        process.WaitForExit();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                #endregion
+                allFine = true;
             }
             catch (Exception ex)
             {
@@ -500,15 +437,6 @@ namespace arma3Launcher.Workers
 
         private async void InstallFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (this.isJSRS)
-                this.downloadJSRS.Enabled = true;
-
-            if (this.isBlastcore)
-                this.downloadBlastcore.Enabled = true;
-
-            if (Directory.Exists(this.TempFolder))
-                Directory.Delete(this.TempFolder, true);
-
             switch (activeForm)
             {
                 case "mainForm":
@@ -522,6 +450,7 @@ namespace arma3Launcher.Workers
                     }
                     else if (!e.Cancelled && this.isLaunch && !this.mainForm.startGameAfterDownload())
                     {
+                        this.progressBarFileStyle(ProgressBarStyle.Continuous);
                         this.progressStatusText("Game ready to launch...");
                         this.mainForm.reSizeBarText("GameReady");
                         await this.taskDelay(1500);
@@ -529,9 +458,9 @@ namespace arma3Launcher.Workers
                     }
                     else if (!e.Cancelled)
                     {
+                        this.progressBarFileStyle(ProgressBarStyle.Continuous);
                         this.progressStatusText("Waiting for orders");
                         this.mainForm.reSizeBarText("WaitingForOrders");
-                        this.mainForm.GetAddons();
                         await this.taskDelay(1500);
                         this.mainForm.hideDownloadPanel();
                     }
@@ -552,10 +481,6 @@ namespace arma3Launcher.Workers
                     this.addonsPathFind.Enabled = true;
 
                     break;
-
-                case "packBlock":
-                    this.packBlock.hidePanel();
-                    break;
             }
 
             this.progressBarAllValue(0);
@@ -565,10 +490,16 @@ namespace arma3Launcher.Workers
 
             // unlock controls
             this.launcherButton.Enabled = true;
-            try { cancelButton.Visible = false; } catch { }
+            this.repoValidateBtn.Enabled = true;
 
             this.installationRunning = false;
             GlobalVar.isInstalling = false;
+            GlobalVar.isReadingRepo = false;
+
+            if (Directory.Exists(TempFolder))
+                Directory.Delete(TempFolder, true);
+
+            mainForm.ReadRepo(false);
         }
 
         /// <summary>
@@ -606,42 +537,18 @@ namespace arma3Launcher.Workers
             this.progressBarFileStyle(ProgressBarStyle.Continuous);
             this.progressBarFileValue(0);
 
-            if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
+            if (Directory.Exists(Properties.Settings.Default.AddonsFolder + @"@task_force_radio\plugins"))
             {
-                bool awaitTSPlugin = true;
-                do
-                {
-                    try
-                    {
-                        this.progressBarFileState(ProgressBarState.Normal);
-                        this.progressStatusText("Installing TeamSpeak 3 plugins...");
 
-                        string sourcePath = AddonsFolder + @"@task_force_radio\plugins";
-                        string destinationPath = Properties.Settings.Default.TS3Folder + @"plugins";
+                string sourcePath = Properties.Settings.Default.AddonsFolder + @"@task_force_radio\plugins";
 
-                        foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-                            Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
+                this.progressBarFileState(ProgressBarState.Normal);
+                this.progressStatusText("Installing TeamSpeak 3 plugins...");
 
+                sourcePath = AddonsFolder + @"@task_force_radio\plugins";
 
-                        foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                            File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
-
-                        awaitTSPlugin = false;
-
-                        MessageBox.Show("Task Force Radio plugins have been reinstalled sucessfully.", "TFR Plugins", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch
-                    {
-                        this.progressBarFileState(ProgressBarState.Pause);
-                        if (MessageBox.Show("Disable all TFR plugins in your TeamSpeak 3 before continue.\n\n • Go to \"Settings\"\n • Open the \"Plugins\" window\n • Disable all Task Force Radio plugins\n • Hit \"Close\"", "Found a problem with TFR installation", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning) == DialogResult.Retry)
-                            awaitTSPlugin = true;
-                        else
-                        {
-                            awaitTSPlugin = false;
-                            break;
-                        }
-                    }
-                } while (awaitTSPlugin);
+                    foreach (string file in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                        if (file.EndsWith(".ts3_plugin")) { Process.Start(file).WaitForExit(); }
 
                 this.progressBarFileValue(0);
                 this.progressStatusText("Waiting for orders");

@@ -30,11 +30,119 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
             this.sysbtn_minimize = new System.Windows.Forms.PictureBox();
             this.sysbtn_close = new System.Windows.Forms.PictureBox();
             this.MainWindow = new System.Windows.Forms.Panel();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.menu_community = new System.Windows.Forms.Label();
+            this.menu_about = new System.Windows.Forms.Label();
+            this.menu_help = new System.Windows.Forms.Label();
+            this.menu_packs = new System.Windows.Forms.Label();
+            this.menu_launchOptions = new System.Windows.Forms.Label();
+            this.panelDirectories = new System.Windows.Forms.Panel();
+            this.panelRepo = new System.Windows.Forms.Panel();
+            this.panel22 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lbl_repofilemissing = new System.Windows.Forms.Label();
+            this.lbl_repofileinvalid = new System.Windows.Forms.Label();
+            this.lbl_repofileok = new System.Windows.Forms.Label();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.btn_repoExpandAll = new System.Windows.Forms.Button();
+            this.btn_checkRepo = new System.Windows.Forms.Button();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.trv_repoContent = new System.Windows.Forms.TreeView();
+            this.imageListRepo = new System.Windows.Forms.ImageList(this.components);
+            this.panel21 = new System.Windows.Forms.Panel();
+            this.btn_addonManager = new System.Windows.Forms.PictureBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btn_opencloseDirPanel = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel_TeamSpeakDir = new System.Windows.Forms.Panel();
+            this.btn_openTS3 = new System.Windows.Forms.PictureBox();
+            this.btn_browseTS3 = new System.Windows.Forms.PictureBox();
+            this.btn_ereaseTSDirectory = new System.Windows.Forms.Button();
+            this.txtb_tsDirectory = new System.Windows.Forms.TextBox();
+            this.lbl_TeamSpeakDir = new System.Windows.Forms.Label();
+            this.panel_Arma3Dir = new System.Windows.Forms.Panel();
+            this.btn_ereaseArmaDirectory = new System.Windows.Forms.Button();
+            this.btn_openA3 = new System.Windows.Forms.PictureBox();
+            this.btn_browseA3 = new System.Windows.Forms.PictureBox();
+            this.lbl_Arma3Dir = new System.Windows.Forms.Label();
+            this.txtb_armaDirectory = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.Panels = new System.Windows.Forms.Panel();
+            this.panel_help = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.panel_community = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.web_loading = new System.Windows.Forms.PictureBox();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.web_youtubeEmbed = new System.Windows.Forms.WebBrowser();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.vlink_medicalBasic = new System.Windows.Forms.LinkLabel();
+            this.vlink_microDAGR = new System.Windows.Forms.LinkLabel();
+            this.vlink_infMovement = new System.Windows.Forms.LinkLabel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel_launchOptions = new System.Windows.Forms.Panel();
+            this.panel_steamAddons = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.steamworkshopAddonsList = new System.Windows.Forms.CheckedListBox();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.btn_reloadSteamAddons = new System.Windows.Forms.PictureBox();
+            this.btn_openWorkshop = new System.Windows.Forms.PictureBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.chb_maxMem = new System.Windows.Forms.CheckBox();
+            this.txtb_maxMem = new System.Windows.Forms.TextBox();
+            this.chb_cpuCount = new System.Windows.Forms.CheckBox();
+            this.chb_malloc = new System.Windows.Forms.CheckBox();
+            this.chb_exThreads = new System.Windows.Forms.CheckBox();
+            this.txtb_exThreads = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtb_malloc = new System.Windows.Forms.ComboBox();
+            this.btn_reloadMallocs = new System.Windows.Forms.PictureBox();
+            this.txtb_cpuCount = new System.Windows.Forms.TextBox();
+            this.panel_launchOptionsChb = new System.Windows.Forms.FlowLayoutPanel();
+            this.chb_showScriptErrors = new System.Windows.Forms.CheckBox();
+            this.chb_noPause = new System.Windows.Forms.CheckBox();
+            this.chb_window = new System.Windows.Forms.CheckBox();
+            this.chb_noSplash = new System.Windows.Forms.CheckBox();
+            this.chb_hugePages = new System.Windows.Forms.CheckBox();
+            this.chb_enableHT = new System.Windows.Forms.CheckBox();
+            this.chb_skipIntro = new System.Windows.Forms.CheckBox();
+            this.chb_filePatching = new System.Windows.Forms.CheckBox();
+            this.chb_battleye = new System.Windows.Forms.CheckBox();
+            this.chb_worldEmpty = new System.Windows.Forms.CheckBox();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label28 = new System.Windows.Forms.Label();
+            this.btn_openModsDirectory = new System.Windows.Forms.PictureBox();
+            this.btn_browseModsDirectory = new System.Windows.Forms.PictureBox();
+            this.btn_ereaseModsDirectory = new System.Windows.Forms.Button();
+            this.txtb_modsDirectory = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.btn_copyLaunchOptions = new System.Windows.Forms.PictureBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.panel_about = new System.Windows.Forms.Panel();
             this.txt_thisSpace = new System.Windows.Forms.Label();
             this.panel12 = new System.Windows.Forms.Panel();
@@ -75,114 +183,12 @@
             this.btn_ereaseSearchPack = new System.Windows.Forms.Button();
             this.btn_addPrivatePack = new System.Windows.Forms.PictureBox();
             this.txtb_searchPack = new System.Windows.Forms.TextBox();
-            this.panel_help = new System.Windows.Forms.Panel();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.panel_community = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.flash_youtubePlayer = new AxShockwaveFlashObjects.AxShockwaveFlash();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.vlink_medicalBasic = new System.Windows.Forms.LinkLabel();
-            this.vlink_microDAGR = new System.Windows.Forms.LinkLabel();
-            this.vlink_infMovement = new System.Windows.Forms.LinkLabel();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel_launchOptions = new System.Windows.Forms.Panel();
-            this.panel_recommendedAddons = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.splitButton1 = new arma3Launcher.Controls.SplitButton();
-            this.menu_blastcore = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.chb_blastcore = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_downloadBlastcore = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_dragonfyre = new arma3Launcher.Controls.SplitButton();
-            this.menu_dragonfyre = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.chb_dragonfyre = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_downloadDragonFyre = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.panel_optionalAddons = new System.Windows.Forms.Panel();
-            this.panel_Optional = new System.Windows.Forms.Panel();
-            this.lstb_activeAddons = new System.Windows.Forms.ListBox();
-            this.btn_deactivateAddon = new System.Windows.Forms.Button();
-            this.btn_activateAddon = new System.Windows.Forms.Button();
-            this.lstb_detectedAddons = new System.Windows.Forms.ListBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.btn_reloadAddons = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label28 = new System.Windows.Forms.Label();
-            this.btn_openModsDirectory = new System.Windows.Forms.PictureBox();
-            this.btn_ereaseModsDirectory = new System.Windows.Forms.Button();
-            this.btn_browseModsDirectory = new System.Windows.Forms.PictureBox();
-            this.txtb_modsDirectory = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.chb_malloc = new System.Windows.Forms.CheckBox();
-            this.chb_maxMem = new System.Windows.Forms.CheckBox();
-            this.txtb_maxMem = new System.Windows.Forms.TextBox();
-            this.chb_maxVRAM = new System.Windows.Forms.CheckBox();
-            this.chb_exThreads = new System.Windows.Forms.CheckBox();
-            this.chb_cpuCount = new System.Windows.Forms.CheckBox();
-            this.txtb_world = new System.Windows.Forms.TextBox();
-            this.txtb_maxVRAM = new System.Windows.Forms.TextBox();
-            this.txtb_cpuCount = new System.Windows.Forms.TextBox();
-            this.txtb_exThreads = new System.Windows.Forms.TextBox();
-            this.chb_world = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtb_malloc = new System.Windows.Forms.ComboBox();
-            this.btn_reloadMallocs = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.chb_noLogs = new System.Windows.Forms.CheckBox();
-            this.chb_noPause = new System.Windows.Forms.CheckBox();
-            this.chb_noSplash = new System.Windows.Forms.CheckBox();
-            this.chb_noCB = new System.Windows.Forms.CheckBox();
-            this.chb_enableHT = new System.Windows.Forms.CheckBox();
-            this.chb_skipIntro = new System.Windows.Forms.CheckBox();
-            this.chb_window = new System.Windows.Forms.CheckBox();
-            this.chb_showScriptErrors = new System.Windows.Forms.CheckBox();
-            this.chb_noBenchmark = new System.Windows.Forms.CheckBox();
-            this.chb_battleye = new System.Windows.Forms.CheckBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.btn_copyLaunchOptions = new System.Windows.Forms.PictureBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.menu_community = new System.Windows.Forms.Label();
-            this.menu_about = new System.Windows.Forms.Label();
-            this.menu_help = new System.Windows.Forms.Label();
-            this.menu_packs = new System.Windows.Forms.Label();
-            this.menu_launchOptions = new System.Windows.Forms.Label();
-            this.panelDirectories = new System.Windows.Forms.Panel();
-            this.panel_TeamSpeakDir = new System.Windows.Forms.Panel();
-            this.btn_openTS3 = new System.Windows.Forms.PictureBox();
-            this.btn_browseTS3 = new System.Windows.Forms.PictureBox();
-            this.btn_ereaseTSDirectory = new System.Windows.Forms.Button();
-            this.txtb_tsDirectory = new System.Windows.Forms.TextBox();
-            this.lbl_TeamSpeakDir = new System.Windows.Forms.Label();
-            this.btn_openA3 = new System.Windows.Forms.PictureBox();
-            this.btn_browseA3 = new System.Windows.Forms.PictureBox();
-            this.btn_ereaseArmaDirectory = new System.Windows.Forms.Button();
-            this.txtb_armaDirectory = new System.Windows.Forms.TextBox();
-            this.lbl_Arma3Dir = new System.Windows.Forms.Label();
             this.panelLaunch = new System.Windows.Forms.Panel();
             this.panel_bottomhide = new System.Windows.Forms.Panel();
             this.panel_bottomHide_Inner = new System.Windows.Forms.Panel();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
             this.txt_progressStatus = new System.Windows.Forms.Label();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
             this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.btn_Launch = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -210,20 +216,62 @@
             this.pref_serverAutopilot = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.launcherPreferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pref_transitionEffects = new System.Windows.Forms.ToolStripMenuItem();
             this.pref_runLauncherOnStartup = new System.Windows.Forms.ToolStripMenuItem();
             this.pref_allowNotifications = new System.Windows.Forms.ToolStripMenuItem();
             this.pref_autoDownload = new System.Windows.Forms.ToolStripMenuItem();
+            this.pref_switchclientserver = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_reinstallTFRPlugins = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_downloadConfigs = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_addShortcutDesktop = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
+            this.panelMenu.SuspendLayout();
+            this.panelDirectories.SuspendLayout();
+            this.panelRepo.SuspendLayout();
+            this.panel22.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.panel19.SuspendLayout();
+            this.panel20.SuspendLayout();
+            this.panel21.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_addonManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_opencloseDirPanel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel_TeamSpeakDir.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openTS3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_browseTS3)).BeginInit();
+            this.panel_Arma3Dir.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_browseA3)).BeginInit();
             this.panel5.SuspendLayout();
             this.Panels.SuspendLayout();
+            this.panel_help.SuspendLayout();
+            this.panel_community.SuspendLayout();
+            this.panel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.web_loading)).BeginInit();
+            this.panel8.SuspendLayout();
+            this.panel_launchOptions.SuspendLayout();
+            this.panel_steamAddons.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadSteamAddons)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openWorkshop)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).BeginInit();
+            this.panel_launchOptionsChb.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openModsDirectory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_browseModsDirectory)).BeginInit();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).BeginInit();
             this.panel_about.SuspendLayout();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_goGit)).BeginInit();
@@ -241,39 +289,6 @@
             this.panel_packs.SuspendLayout();
             this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_addPrivatePack)).BeginInit();
-            this.panel_help.SuspendLayout();
-            this.panel_community.SuspendLayout();
-            this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.flash_youtubePlayer)).BeginInit();
-            this.panel8.SuspendLayout();
-            this.panel_launchOptions.SuspendLayout();
-            this.panel_recommendedAddons.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.menu_blastcore.SuspendLayout();
-            this.menu_dragonfyre.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel_optionalAddons.SuspendLayout();
-            this.panel_Optional.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadAddons)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_openModsDirectory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_browseModsDirectory)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).BeginInit();
-            this.panelMenu.SuspendLayout();
-            this.panelDirectories.SuspendLayout();
-            this.panel_TeamSpeakDir.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_openTS3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_browseTS3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_browseA3)).BeginInit();
             this.panelLaunch.SuspendLayout();
             this.panel_bottomhide.SuspendLayout();
             this.panel_bottomHide_Inner.SuspendLayout();
@@ -316,21 +331,597 @@
             // MainWindow
             // 
             this.MainWindow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.MainWindow.Controls.Add(this.panel5);
             this.MainWindow.Controls.Add(this.panelMenu);
             this.MainWindow.Controls.Add(this.panelDirectories);
+            this.MainWindow.Controls.Add(this.panel5);
             this.MainWindow.Controls.Add(this.panelLaunch);
             this.MainWindow.Location = new System.Drawing.Point(6, 25);
             this.MainWindow.Name = "MainWindow";
             this.MainWindow.Size = new System.Drawing.Size(906, 537);
             this.MainWindow.TabIndex = 113;
             // 
+            // panelMenu
+            // 
+            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panelMenu.Controls.Add(this.label10);
+            this.panelMenu.Controls.Add(this.label9);
+            this.panelMenu.Controls.Add(this.label8);
+            this.panelMenu.Controls.Add(this.label7);
+            this.panelMenu.Controls.Add(this.menu_community);
+            this.panelMenu.Controls.Add(this.menu_about);
+            this.panelMenu.Controls.Add(this.menu_help);
+            this.panelMenu.Controls.Add(this.menu_packs);
+            this.panelMenu.Controls.Add(this.menu_launchOptions);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelMenu.Location = new System.Drawing.Point(0, 90);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(906, 42);
+            this.panelMenu.TabIndex = 2;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.label10.Location = new System.Drawing.Point(790, 13);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(17, 19);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "●";
+            this.label10.UseMnemonic = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.label9.Location = new System.Drawing.Point(698, 13);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(17, 19);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "●";
+            this.label9.UseMnemonic = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.label8.Location = new System.Drawing.Point(176, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(17, 19);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "●";
+            this.label8.UseMnemonic = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.label7.Location = new System.Drawing.Point(350, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(17, 19);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "●";
+            this.label7.UseMnemonic = false;
+            // 
+            // menu_community
+            // 
+            this.menu_community.AutoSize = true;
+            this.menu_community.Font = new System.Drawing.Font("Segoe UI", 20F);
+            this.menu_community.ForeColor = System.Drawing.Color.Gray;
+            this.menu_community.Location = new System.Drawing.Point(194, 3);
+            this.menu_community.Name = "menu_community";
+            this.menu_community.Size = new System.Drawing.Size(155, 37);
+            this.menu_community.TabIndex = 5;
+            this.menu_community.Text = "Community";
+            this.menu_community.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.menu_community.UseMnemonic = false;
+            this.menu_community.Click += new System.EventHandler(this.menu_community_Click);
+            this.menu_community.MouseEnter += new System.EventHandler(this.menu_community_MouseEnter);
+            this.menu_community.MouseLeave += new System.EventHandler(this.menu_community_MouseLeave);
+            // 
+            // menu_about
+            // 
+            this.menu_about.AutoSize = true;
+            this.menu_about.Font = new System.Drawing.Font("Segoe UI", 20F);
+            this.menu_about.ForeColor = System.Drawing.Color.Gray;
+            this.menu_about.Location = new System.Drawing.Point(808, 3);
+            this.menu_about.Name = "menu_about";
+            this.menu_about.Size = new System.Drawing.Size(90, 37);
+            this.menu_about.TabIndex = 4;
+            this.menu_about.Text = "About";
+            this.menu_about.UseMnemonic = false;
+            this.menu_about.Click += new System.EventHandler(this.menu_about_Click);
+            this.menu_about.MouseEnter += new System.EventHandler(this.menu_about_MouseEnter);
+            this.menu_about.MouseLeave += new System.EventHandler(this.menu_about_MouseLeave);
+            // 
+            // menu_help
+            // 
+            this.menu_help.AutoSize = true;
+            this.menu_help.Font = new System.Drawing.Font("Segoe UI", 20F);
+            this.menu_help.ForeColor = System.Drawing.Color.Gray;
+            this.menu_help.Location = new System.Drawing.Point(716, 3);
+            this.menu_help.Name = "menu_help";
+            this.menu_help.Size = new System.Drawing.Size(73, 37);
+            this.menu_help.TabIndex = 3;
+            this.menu_help.Text = "Help";
+            this.menu_help.UseMnemonic = false;
+            this.menu_help.Click += new System.EventHandler(this.menu_help_Click);
+            this.menu_help.MouseEnter += new System.EventHandler(this.menu_help_MouseEnter);
+            this.menu_help.MouseLeave += new System.EventHandler(this.menu_help_MouseLeave);
+            // 
+            // menu_packs
+            // 
+            this.menu_packs.AutoSize = true;
+            this.menu_packs.Font = new System.Drawing.Font("Segoe UI", 20F);
+            this.menu_packs.ForeColor = System.Drawing.Color.OliveDrab;
+            this.menu_packs.Location = new System.Drawing.Point(7, 3);
+            this.menu_packs.Name = "menu_packs";
+            this.menu_packs.Size = new System.Drawing.Size(168, 37);
+            this.menu_packs.TabIndex = 2;
+            this.menu_packs.Text = "Addon Packs";
+            this.menu_packs.UseMnemonic = false;
+            this.menu_packs.Click += new System.EventHandler(this.menu_news_Click);
+            this.menu_packs.MouseEnter += new System.EventHandler(this.menu_news_MouseEnter);
+            this.menu_packs.MouseLeave += new System.EventHandler(this.menu_news_MouseLeave);
+            // 
+            // menu_launchOptions
+            // 
+            this.menu_launchOptions.AutoSize = true;
+            this.menu_launchOptions.Font = new System.Drawing.Font("Segoe UI", 20F);
+            this.menu_launchOptions.ForeColor = System.Drawing.Color.Gray;
+            this.menu_launchOptions.Location = new System.Drawing.Point(368, 3);
+            this.menu_launchOptions.Name = "menu_launchOptions";
+            this.menu_launchOptions.Size = new System.Drawing.Size(329, 37);
+            this.menu_launchOptions.TabIndex = 1;
+            this.menu_launchOptions.Text = "Launch & Addons Options";
+            this.menu_launchOptions.UseMnemonic = false;
+            this.menu_launchOptions.Click += new System.EventHandler(this.menu_launchOptions_Click);
+            this.menu_launchOptions.MouseEnter += new System.EventHandler(this.menu_launchOptions_MouseEnter);
+            this.menu_launchOptions.MouseLeave += new System.EventHandler(this.menu_launchOptions_MouseLeave);
+            // 
+            // panelDirectories
+            // 
+            this.panelDirectories.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
+            this.panelDirectories.Controls.Add(this.panelRepo);
+            this.panelDirectories.Controls.Add(this.pictureBox2);
+            this.panelDirectories.Controls.Add(this.panel_TeamSpeakDir);
+            this.panelDirectories.Controls.Add(this.panel_Arma3Dir);
+            this.panelDirectories.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelDirectories.Location = new System.Drawing.Point(0, 0);
+            this.panelDirectories.Name = "panelDirectories";
+            this.panelDirectories.Size = new System.Drawing.Size(906, 90);
+            this.panelDirectories.TabIndex = 1;
+            // 
+            // panelRepo
+            // 
+            this.panelRepo.Controls.Add(this.panel22);
+            this.panelRepo.Controls.Add(this.panel19);
+            this.panelRepo.Controls.Add(this.btn_opencloseDirPanel);
+            this.panelRepo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelRepo.Location = new System.Drawing.Point(0, 73);
+            this.panelRepo.Name = "panelRepo";
+            this.panelRepo.Size = new System.Drawing.Size(906, 12);
+            this.panelRepo.TabIndex = 16;
+            // 
+            // panel22
+            // 
+            this.panel22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel22.Controls.Add(this.label14);
+            this.panel22.Controls.Add(this.lbl_repofilemissing);
+            this.panel22.Controls.Add(this.lbl_repofileinvalid);
+            this.panel22.Controls.Add(this.lbl_repofileok);
+            this.panel22.Controls.Add(this.pictureBox8);
+            this.panel22.Controls.Add(this.pictureBox7);
+            this.panel22.Controls.Add(this.pictureBox6);
+            this.panel22.Controls.Add(this.btn_repoExpandAll);
+            this.panel22.Controls.Add(this.btn_checkRepo);
+            this.panel22.Location = new System.Drawing.Point(784, -333);
+            this.panel22.Name = "panel22";
+            this.panel22.Size = new System.Drawing.Size(116, 326);
+            this.panel22.TabIndex = 28;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.DarkGray;
+            this.label14.Location = new System.Drawing.Point(4, 230);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(74, 15);
+            this.label14.TabIndex = 30;
+            this.label14.Text = "Local Status:";
+            // 
+            // lbl_repofilemissing
+            // 
+            this.lbl_repofilemissing.AutoSize = true;
+            this.lbl_repofilemissing.ForeColor = System.Drawing.Color.DarkGray;
+            this.lbl_repofilemissing.Location = new System.Drawing.Point(26, 305);
+            this.lbl_repofilemissing.Name = "lbl_repofilemissing";
+            this.lbl_repofilemissing.Size = new System.Drawing.Size(69, 13);
+            this.lbl_repofilemissing.TabIndex = 36;
+            this.lbl_repofilemissing.Text = "%MISSING%";
+            // 
+            // lbl_repofileinvalid
+            // 
+            this.lbl_repofileinvalid.AutoSize = true;
+            this.lbl_repofileinvalid.ForeColor = System.Drawing.Color.DarkGray;
+            this.lbl_repofileinvalid.Location = new System.Drawing.Point(26, 280);
+            this.lbl_repofileinvalid.Name = "lbl_repofileinvalid";
+            this.lbl_repofileinvalid.Size = new System.Drawing.Size(65, 13);
+            this.lbl_repofileinvalid.TabIndex = 35;
+            this.lbl_repofileinvalid.Text = "%INVALID%";
+            // 
+            // lbl_repofileok
+            // 
+            this.lbl_repofileok.AutoSize = true;
+            this.lbl_repofileok.ForeColor = System.Drawing.Color.DarkGray;
+            this.lbl_repofileok.Location = new System.Drawing.Point(26, 255);
+            this.lbl_repofileok.Name = "lbl_repofileok";
+            this.lbl_repofileok.Size = new System.Drawing.Size(40, 13);
+            this.lbl_repofileok.TabIndex = 34;
+            this.lbl_repofileok.Text = "%OK%";
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.BackgroundImage = global::arma3Launcher.Properties.Resources.document_cancel;
+            this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox8.Location = new System.Drawing.Point(7, 302);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox8.TabIndex = 30;
+            this.pictureBox8.TabStop = false;
+            this.toolTip.SetToolTip(this.pictureBox8, "Missing Files");
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.BackgroundImage = global::arma3Launcher.Properties.Resources.document_error;
+            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox7.Location = new System.Drawing.Point(7, 277);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox7.TabIndex = 29;
+            this.pictureBox7.TabStop = false;
+            this.toolTip.SetToolTip(this.pictureBox7, "Invalid Files");
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox6.Location = new System.Drawing.Point(7, 252);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox6.TabIndex = 28;
+            this.pictureBox6.TabStop = false;
+            this.toolTip.SetToolTip(this.pictureBox6, "Synced Files");
+            // 
+            // btn_repoExpandAll
+            // 
+            this.btn_repoExpandAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_repoExpandAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_repoExpandAll.Location = new System.Drawing.Point(9, 67);
+            this.btn_repoExpandAll.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn_repoExpandAll.Name = "btn_repoExpandAll";
+            this.btn_repoExpandAll.Size = new System.Drawing.Size(99, 22);
+            this.btn_repoExpandAll.TabIndex = 20;
+            this.btn_repoExpandAll.TabStop = false;
+            this.btn_repoExpandAll.Text = "Expand All";
+            this.btn_repoExpandAll.UseVisualStyleBackColor = true;
+            this.btn_repoExpandAll.Click += new System.EventHandler(this.btn_repoExpandAll_Click);
+            // 
+            // btn_checkRepo
+            // 
+            this.btn_checkRepo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_checkRepo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btn_checkRepo.Location = new System.Drawing.Point(9, 29);
+            this.btn_checkRepo.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btn_checkRepo.Name = "btn_checkRepo";
+            this.btn_checkRepo.Size = new System.Drawing.Size(99, 34);
+            this.btn_checkRepo.TabIndex = 17;
+            this.btn_checkRepo.TabStop = false;
+            this.btn_checkRepo.Text = "Validate Files";
+            this.btn_checkRepo.UseVisualStyleBackColor = true;
+            this.btn_checkRepo.Click += new System.EventHandler(this.btn_checkRepo_Click);
+            // 
+            // panel19
+            // 
+            this.panel19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel19.Controls.Add(this.panel20);
+            this.panel19.Controls.Add(this.panel21);
+            this.panel19.Location = new System.Drawing.Point(15, -333);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(764, 326);
+            this.panel19.TabIndex = 18;
+            // 
+            // panel20
+            // 
+            this.panel20.Controls.Add(this.trv_repoContent);
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel20.Location = new System.Drawing.Point(0, 23);
+            this.panel20.Name = "panel20";
+            this.panel20.Padding = new System.Windows.Forms.Padding(8);
+            this.panel20.Size = new System.Drawing.Size(762, 301);
+            this.panel20.TabIndex = 1;
+            // 
+            // trv_repoContent
+            // 
+            this.trv_repoContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
+            this.trv_repoContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.trv_repoContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trv_repoContent.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            this.trv_repoContent.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.trv_repoContent.ImageIndex = 0;
+            this.trv_repoContent.ImageList = this.imageListRepo;
+            this.trv_repoContent.LineColor = System.Drawing.Color.Gainsboro;
+            this.trv_repoContent.Location = new System.Drawing.Point(8, 8);
+            this.trv_repoContent.Name = "trv_repoContent";
+            treeNode1.ImageIndex = -2;
+            treeNode1.Name = "Node0";
+            treeNode1.SelectedImageIndex = -2;
+            treeNode1.Text = "Node0";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "Node2";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Node2";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "Node3";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Text = "Node3";
+            treeNode4.ImageIndex = 3;
+            treeNode4.Name = "Node0";
+            treeNode4.SelectedImageIndex = 3;
+            treeNode4.Text = "Node0";
+            treeNode5.ImageIndex = 4;
+            treeNode5.Name = "Node1";
+            treeNode5.SelectedImageIndex = 4;
+            treeNode5.Text = "Node1";
+            treeNode6.ImageIndex = 5;
+            treeNode6.Name = "Node2";
+            treeNode6.SelectedImageIndex = 5;
+            treeNode6.Text = "Node2";
+            this.trv_repoContent.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
+            this.trv_repoContent.SelectedImageIndex = 0;
+            this.trv_repoContent.ShowRootLines = false;
+            this.trv_repoContent.Size = new System.Drawing.Size(746, 285);
+            this.trv_repoContent.TabIndex = 16;
+            // 
+            // imageListRepo
+            // 
+            this.imageListRepo.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListRepo.ImageStream")));
+            this.imageListRepo.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListRepo.Images.SetKeyName(0, "document-checked.png");
+            this.imageListRepo.Images.SetKeyName(1, "document-error.png");
+            this.imageListRepo.Images.SetKeyName(2, "document-cancel.png");
+            this.imageListRepo.Images.SetKeyName(3, "folder-checked.png");
+            this.imageListRepo.Images.SetKeyName(4, "folder-error.png");
+            this.imageListRepo.Images.SetKeyName(5, "folder-cancel.png");
+            // 
+            // panel21
+            // 
+            this.panel21.BackColor = System.Drawing.Color.DimGray;
+            this.panel21.Controls.Add(this.btn_addonManager);
+            this.panel21.Controls.Add(this.label13);
+            this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel21.Location = new System.Drawing.Point(0, 0);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(762, 23);
+            this.panel21.TabIndex = 0;
+            // 
+            // btn_addonManager
+            // 
+            this.btn_addonManager.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_addonManager.Image = global::arma3Launcher.Properties.Resources.tools;
+            this.btn_addonManager.Location = new System.Drawing.Point(742, 4);
+            this.btn_addonManager.Name = "btn_addonManager";
+            this.btn_addonManager.Size = new System.Drawing.Size(16, 16);
+            this.btn_addonManager.TabIndex = 2;
+            this.btn_addonManager.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_addonManager, "Repository Manager");
+            this.btn_addonManager.Click += new System.EventHandler(this.btn_addonManager_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.label13.Location = new System.Drawing.Point(5, 2);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(131, 19);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Repository Content";
+            // 
+            // btn_opencloseDirPanel
+            // 
+            this.btn_opencloseDirPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btn_opencloseDirPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_opencloseDirPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_opencloseDirPanel.Image = global::arma3Launcher.Properties.Resources.chevron_down;
+            this.btn_opencloseDirPanel.Location = new System.Drawing.Point(445, -5);
+            this.btn_opencloseDirPanel.Name = "btn_opencloseDirPanel";
+            this.btn_opencloseDirPanel.Size = new System.Drawing.Size(16, 16);
+            this.btn_opencloseDirPanel.TabIndex = 29;
+            this.btn_opencloseDirPanel.TabStop = false;
+            this.btn_opencloseDirPanel.Click += new System.EventHandler(this.btn_opencloseDirPanel_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBox2.Image = global::arma3Launcher.Properties.Resources.sep_topbar;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 85);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(906, 5);
+            this.pictureBox2.TabIndex = 14;
+            this.pictureBox2.TabStop = false;
+            // 
+            // panel_TeamSpeakDir
+            // 
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_openTS3);
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_browseTS3);
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_ereaseTSDirectory);
+            this.panel_TeamSpeakDir.Controls.Add(this.txtb_tsDirectory);
+            this.panel_TeamSpeakDir.Controls.Add(this.lbl_TeamSpeakDir);
+            this.panel_TeamSpeakDir.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_TeamSpeakDir.Location = new System.Drawing.Point(0, 40);
+            this.panel_TeamSpeakDir.Name = "panel_TeamSpeakDir";
+            this.panel_TeamSpeakDir.Size = new System.Drawing.Size(906, 33);
+            this.panel_TeamSpeakDir.TabIndex = 12;
+            // 
+            // btn_openTS3
+            // 
+            this.btn_openTS3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_openTS3.Image = global::arma3Launcher.Properties.Resources.folder_open;
+            this.btn_openTS3.Location = new System.Drawing.Point(880, 7);
+            this.btn_openTS3.Name = "btn_openTS3";
+            this.btn_openTS3.Size = new System.Drawing.Size(16, 16);
+            this.btn_openTS3.TabIndex = 10;
+            this.btn_openTS3.TabStop = false;
+            this.btn_openTS3.Click += new System.EventHandler(this.btn_openTS3_Click);
+            // 
+            // btn_browseTS3
+            // 
+            this.btn_browseTS3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_browseTS3.Image = global::arma3Launcher.Properties.Resources.browse;
+            this.btn_browseTS3.Location = new System.Drawing.Point(860, 7);
+            this.btn_browseTS3.Name = "btn_browseTS3";
+            this.btn_browseTS3.Size = new System.Drawing.Size(16, 16);
+            this.btn_browseTS3.TabIndex = 9;
+            this.btn_browseTS3.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_browseTS3, "Double-click for manual browse");
+            this.btn_browseTS3.Click += new System.EventHandler(this.btn_browseTS3_Click);
+            // 
+            // btn_ereaseTSDirectory
+            // 
+            this.btn_ereaseTSDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseTSDirectory.FlatAppearance.BorderSize = 0;
+            this.btn_ereaseTSDirectory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseTSDirectory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseTSDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ereaseTSDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.btn_ereaseTSDirectory.Image = global::arma3Launcher.Properties.Resources.circle_with_cross;
+            this.btn_ereaseTSDirectory.Location = new System.Drawing.Point(828, 5);
+            this.btn_ereaseTSDirectory.Name = "btn_ereaseTSDirectory";
+            this.btn_ereaseTSDirectory.Size = new System.Drawing.Size(20, 20);
+            this.btn_ereaseTSDirectory.TabIndex = 7;
+            this.btn_ereaseTSDirectory.TabStop = false;
+            this.btn_ereaseTSDirectory.UseVisualStyleBackColor = false;
+            this.btn_ereaseTSDirectory.Click += new System.EventHandler(this.btn_ereaseTSDirectory_Click);
+            // 
+            // txtb_tsDirectory
+            // 
+            this.txtb_tsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_tsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtb_tsDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtb_tsDirectory.Location = new System.Drawing.Point(185, 3);
+            this.txtb_tsDirectory.Name = "txtb_tsDirectory";
+            this.txtb_tsDirectory.Size = new System.Drawing.Size(666, 25);
+            this.txtb_tsDirectory.TabIndex = 2;
+            this.txtb_tsDirectory.TabStop = false;
+            this.txtb_tsDirectory.Text = "Set directory ->";
+            this.txtb_tsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseClick);
+            this.txtb_tsDirectory.TextChanged += new System.EventHandler(this.txtb_tsDirectory_TextChanged);
+            this.txtb_tsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseDoubleClick);
+            // 
+            // lbl_TeamSpeakDir
+            // 
+            this.lbl_TeamSpeakDir.AutoSize = true;
+            this.lbl_TeamSpeakDir.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lbl_TeamSpeakDir.Location = new System.Drawing.Point(16, 6);
+            this.lbl_TeamSpeakDir.Name = "lbl_TeamSpeakDir";
+            this.lbl_TeamSpeakDir.Size = new System.Drawing.Size(155, 19);
+            this.lbl_TeamSpeakDir.TabIndex = 1;
+            this.lbl_TeamSpeakDir.Text = "TeamSpeak 3 directory:";
+            // 
+            // panel_Arma3Dir
+            // 
+            this.panel_Arma3Dir.Controls.Add(this.btn_ereaseArmaDirectory);
+            this.panel_Arma3Dir.Controls.Add(this.btn_openA3);
+            this.panel_Arma3Dir.Controls.Add(this.btn_browseA3);
+            this.panel_Arma3Dir.Controls.Add(this.lbl_Arma3Dir);
+            this.panel_Arma3Dir.Controls.Add(this.txtb_armaDirectory);
+            this.panel_Arma3Dir.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Arma3Dir.Location = new System.Drawing.Point(0, 0);
+            this.panel_Arma3Dir.Name = "panel_Arma3Dir";
+            this.panel_Arma3Dir.Size = new System.Drawing.Size(906, 40);
+            this.panel_Arma3Dir.TabIndex = 13;
+            // 
+            // btn_ereaseArmaDirectory
+            // 
+            this.btn_ereaseArmaDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseArmaDirectory.FlatAppearance.BorderSize = 0;
+            this.btn_ereaseArmaDirectory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseArmaDirectory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseArmaDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ereaseArmaDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.btn_ereaseArmaDirectory.Image = global::arma3Launcher.Properties.Resources.circle_with_cross;
+            this.btn_ereaseArmaDirectory.Location = new System.Drawing.Point(828, 13);
+            this.btn_ereaseArmaDirectory.Name = "btn_ereaseArmaDirectory";
+            this.btn_ereaseArmaDirectory.Size = new System.Drawing.Size(20, 14);
+            this.btn_ereaseArmaDirectory.TabIndex = 6;
+            this.btn_ereaseArmaDirectory.TabStop = false;
+            this.btn_ereaseArmaDirectory.UseVisualStyleBackColor = false;
+            this.btn_ereaseArmaDirectory.Click += new System.EventHandler(this.btn_ereaseArmaDirectory_Click);
+            // 
+            // btn_openA3
+            // 
+            this.btn_openA3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_openA3.Image = global::arma3Launcher.Properties.Resources.folder_open;
+            this.btn_openA3.Location = new System.Drawing.Point(880, 13);
+            this.btn_openA3.Name = "btn_openA3";
+            this.btn_openA3.Size = new System.Drawing.Size(16, 14);
+            this.btn_openA3.TabIndex = 11;
+            this.btn_openA3.TabStop = false;
+            this.btn_openA3.Click += new System.EventHandler(this.btn_openA3_Click);
+            // 
+            // btn_browseA3
+            // 
+            this.btn_browseA3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_browseA3.Image = global::arma3Launcher.Properties.Resources.browse;
+            this.btn_browseA3.Location = new System.Drawing.Point(860, 13);
+            this.btn_browseA3.Name = "btn_browseA3";
+            this.btn_browseA3.Size = new System.Drawing.Size(16, 14);
+            this.btn_browseA3.TabIndex = 8;
+            this.btn_browseA3.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_browseA3, "Double-click for manual browse");
+            this.btn_browseA3.Click += new System.EventHandler(this.btn_browseA3_Click);
+            // 
+            // lbl_Arma3Dir
+            // 
+            this.lbl_Arma3Dir.AutoSize = true;
+            this.lbl_Arma3Dir.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lbl_Arma3Dir.Location = new System.Drawing.Point(18, 11);
+            this.lbl_Arma3Dir.Name = "lbl_Arma3Dir";
+            this.lbl_Arma3Dir.Size = new System.Drawing.Size(118, 19);
+            this.lbl_Arma3Dir.TabIndex = 0;
+            this.lbl_Arma3Dir.Text = "Arma 3 directory:";
+            // 
+            // txtb_armaDirectory
+            // 
+            this.txtb_armaDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_armaDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtb_armaDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtb_armaDirectory.Location = new System.Drawing.Point(185, 8);
+            this.txtb_armaDirectory.Name = "txtb_armaDirectory";
+            this.txtb_armaDirectory.Size = new System.Drawing.Size(666, 25);
+            this.txtb_armaDirectory.TabIndex = 3;
+            this.txtb_armaDirectory.TabStop = false;
+            this.txtb_armaDirectory.Text = "Set directory ->";
+            this.txtb_armaDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_armaDirectory_MouseClick);
+            this.txtb_armaDirectory.TextChanged += new System.EventHandler(this.txtb_armaDirectory_TextChanged);
+            this.txtb_armaDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_armaDirectory_MouseDoubleClick);
+            // 
             // panel5
             // 
-            this.panel5.BackgroundImage = global::arma3Launcher.Properties.Resources.panel_seperator;
             this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel5.Controls.Add(this.Panels);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(0, 131);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
@@ -351,6 +942,784 @@
             this.Panels.Name = "Panels";
             this.Panels.Size = new System.Drawing.Size(906, 306);
             this.Panels.TabIndex = 9;
+            // 
+            // panel_help
+            // 
+            this.panel_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_help.Controls.Add(this.label29);
+            this.panel_help.Controls.Add(this.label20);
+            this.panel_help.Controls.Add(this.label19);
+            this.panel_help.Controls.Add(this.label12);
+            this.panel_help.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_help.Location = new System.Drawing.Point(0, -603);
+            this.panel_help.Name = "panel_help";
+            this.panel_help.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
+            this.panel_help.Size = new System.Drawing.Size(906, 303);
+            this.panel_help.TabIndex = 7;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Segoe UI Semibold", 7.5F, System.Drawing.FontStyle.Bold);
+            this.label29.Location = new System.Drawing.Point(19, 97);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(826, 12);
+            this.label29.TabIndex = 4;
+            this.label29.Text = "▪▪▪  All updates are done automatically. If the required addons are not installed" +
+    " the launcher will do it for you. When everything is ready the launcher will sta" +
+    "rt the game by it self.";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(10, 10);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(143, 20);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Using the launcher:";
+            this.label20.UseMnemonic = false;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(10, 124);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(247, 20);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Using \"Launch & Addons Options\":";
+            this.label19.UseMnemonic = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label12.Location = new System.Drawing.Point(10, 15);
+            this.label12.MaximumSize = new System.Drawing.Size(890, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(884, 285);
+            this.label12.TabIndex = 1;
+            this.label12.Text = resources.GetString("label12.Text");
+            this.label12.UseMnemonic = false;
+            // 
+            // panel_community
+            // 
+            this.panel_community.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_community.Controls.Add(this.panel13);
+            this.panel_community.Controls.Add(this.panel8);
+            this.panel_community.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_community.Location = new System.Drawing.Point(0, -300);
+            this.panel_community.Name = "panel_community";
+            this.panel_community.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
+            this.panel_community.Size = new System.Drawing.Size(906, 303);
+            this.panel_community.TabIndex = 5;
+            // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.web_loading);
+            this.panel13.Controls.Add(this.panel14);
+            this.panel13.Controls.Add(this.web_youtubeEmbed);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel13.Location = new System.Drawing.Point(193, 15);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(703, 283);
+            this.panel13.TabIndex = 1;
+            // 
+            // web_loading
+            // 
+            this.web_loading.Image = global::arma3Launcher.Properties.Resources.Ripple_1s_200px;
+            this.web_loading.Location = new System.Drawing.Point(251, 41);
+            this.web_loading.Name = "web_loading";
+            this.web_loading.Size = new System.Drawing.Size(200, 200);
+            this.web_loading.TabIndex = 3;
+            this.web_loading.TabStop = false;
+            this.web_loading.Visible = false;
+            // 
+            // panel14
+            // 
+            this.panel14.BackColor = System.Drawing.Color.OliveDrab;
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel14.Location = new System.Drawing.Point(0, 0);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(1, 283);
+            this.panel14.TabIndex = 0;
+            // 
+            // web_youtubeEmbed
+            // 
+            this.web_youtubeEmbed.IsWebBrowserContextMenuEnabled = false;
+            this.web_youtubeEmbed.Location = new System.Drawing.Point(11, 12);
+            this.web_youtubeEmbed.Margin = new System.Windows.Forms.Padding(0);
+            this.web_youtubeEmbed.MinimumSize = new System.Drawing.Size(20, 20);
+            this.web_youtubeEmbed.Name = "web_youtubeEmbed";
+            this.web_youtubeEmbed.ScrollBarsEnabled = false;
+            this.web_youtubeEmbed.Size = new System.Drawing.Size(681, 259);
+            this.web_youtubeEmbed.TabIndex = 2;
+            this.web_youtubeEmbed.WebBrowserShortcutsEnabled = false;
+            this.web_youtubeEmbed.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.web_youtubeEmbed_DocumentCompleted);
+            this.web_youtubeEmbed.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.web_youtubeEmbed_Navigating);
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.vlink_medicalBasic);
+            this.panel8.Controls.Add(this.vlink_microDAGR);
+            this.panel8.Controls.Add(this.vlink_infMovement);
+            this.panel8.Controls.Add(this.label32);
+            this.panel8.Controls.Add(this.label31);
+            this.panel8.Controls.Add(this.label11);
+            this.panel8.Controls.Add(this.label1);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel8.Location = new System.Drawing.Point(10, 15);
+            this.panel8.Margin = new System.Windows.Forms.Padding(0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(183, 283);
+            this.panel8.TabIndex = 0;
+            // 
+            // vlink_medicalBasic
+            // 
+            this.vlink_medicalBasic.ActiveLinkColor = System.Drawing.Color.YellowGreen;
+            this.vlink_medicalBasic.AutoSize = true;
+            this.vlink_medicalBasic.LinkColor = System.Drawing.Color.WhiteSmoke;
+            this.vlink_medicalBasic.Location = new System.Drawing.Point(25, 56);
+            this.vlink_medicalBasic.Name = "vlink_medicalBasic";
+            this.vlink_medicalBasic.Size = new System.Drawing.Size(124, 13);
+            this.vlink_medicalBasic.TabIndex = 7;
+            this.vlink_medicalBasic.TabStop = true;
+            this.vlink_medicalBasic.Text = "Medical System [Basic]";
+            this.vlink_medicalBasic.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
+            this.vlink_medicalBasic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.vlink_medicalBasic_LinkClicked);
+            // 
+            // vlink_microDAGR
+            // 
+            this.vlink_microDAGR.ActiveLinkColor = System.Drawing.Color.YellowGreen;
+            this.vlink_microDAGR.AutoSize = true;
+            this.vlink_microDAGR.LinkColor = System.Drawing.Color.WhiteSmoke;
+            this.vlink_microDAGR.Location = new System.Drawing.Point(25, 41);
+            this.vlink_microDAGR.Name = "vlink_microDAGR";
+            this.vlink_microDAGR.Size = new System.Drawing.Size(117, 13);
+            this.vlink_microDAGR.TabIndex = 6;
+            this.vlink_microDAGR.TabStop = true;
+            this.vlink_microDAGR.Text = "Using the MicroDAGR";
+            this.vlink_microDAGR.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
+            this.vlink_microDAGR.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.vlink_microDAGR_LinkClicked);
+            // 
+            // vlink_infMovement
+            // 
+            this.vlink_infMovement.ActiveLinkColor = System.Drawing.Color.YellowGreen;
+            this.vlink_infMovement.AutoSize = true;
+            this.vlink_infMovement.LinkColor = System.Drawing.Color.WhiteSmoke;
+            this.vlink_infMovement.Location = new System.Drawing.Point(25, 26);
+            this.vlink_infMovement.Name = "vlink_infMovement";
+            this.vlink_infMovement.Size = new System.Drawing.Size(104, 13);
+            this.vlink_infMovement.TabIndex = 1;
+            this.vlink_infMovement.TabStop = true;
+            this.vlink_infMovement.Text = "Infantry Movement";
+            this.vlink_infMovement.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
+            this.vlink_infMovement.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.vlink_infMovement_LinkClicked);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Segoe UI Semilight", 9F);
+            this.label32.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label32.Location = new System.Drawing.Point(15, 55);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(12, 15);
+            this.label32.TabIndex = 5;
+            this.label32.Text = "-";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Segoe UI Semilight", 9F);
+            this.label31.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label31.Location = new System.Drawing.Point(15, 40);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(12, 15);
+            this.label31.TabIndex = 4;
+            this.label31.Text = "-";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semilight", 9F);
+            this.label11.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label11.Location = new System.Drawing.Point(15, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(12, 15);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "-";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.OliveDrab;
+            this.label1.Location = new System.Drawing.Point(5, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 21);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "The Basics";
+            // 
+            // panel_launchOptions
+            // 
+            this.panel_launchOptions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_launchOptions.Controls.Add(this.panel_steamAddons);
+            this.panel_launchOptions.Controls.Add(this.panel4);
+            this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_launchOptions.Location = new System.Drawing.Point(0, 3);
+            this.panel_launchOptions.Name = "panel_launchOptions";
+            this.panel_launchOptions.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
+            this.panel_launchOptions.Size = new System.Drawing.Size(906, 303);
+            this.panel_launchOptions.TabIndex = 6;
+            // 
+            // panel_steamAddons
+            // 
+            this.panel_steamAddons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_steamAddons.Controls.Add(this.panel10);
+            this.panel_steamAddons.Controls.Add(this.panel9);
+            this.panel_steamAddons.Location = new System.Drawing.Point(673, 15);
+            this.panel_steamAddons.Name = "panel_steamAddons";
+            this.panel_steamAddons.Size = new System.Drawing.Size(223, 282);
+            this.panel_steamAddons.TabIndex = 4;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.steamworkshopAddonsList);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(0, 23);
+            this.panel10.Name = "panel10";
+            this.panel10.Padding = new System.Windows.Forms.Padding(8);
+            this.panel10.Size = new System.Drawing.Size(221, 257);
+            this.panel10.TabIndex = 1;
+            // 
+            // steamworkshopAddonsList
+            // 
+            this.steamworkshopAddonsList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.steamworkshopAddonsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.steamworkshopAddonsList.CheckOnClick = true;
+            this.steamworkshopAddonsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.steamworkshopAddonsList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.steamworkshopAddonsList.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.steamworkshopAddonsList.FormattingEnabled = true;
+            this.steamworkshopAddonsList.Items.AddRange(new object[] {
+            "Test #1",
+            "Test #2",
+            "Test #3"});
+            this.steamworkshopAddonsList.Location = new System.Drawing.Point(8, 8);
+            this.steamworkshopAddonsList.Name = "steamworkshopAddonsList";
+            this.steamworkshopAddonsList.Size = new System.Drawing.Size(205, 241);
+            this.steamworkshopAddonsList.TabIndex = 0;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.DimGray;
+            this.panel9.Controls.Add(this.btn_reloadSteamAddons);
+            this.panel9.Controls.Add(this.btn_openWorkshop);
+            this.panel9.Controls.Add(this.label15);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(221, 23);
+            this.panel9.TabIndex = 0;
+            // 
+            // btn_reloadSteamAddons
+            // 
+            this.btn_reloadSteamAddons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_reloadSteamAddons.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_reloadSteamAddons.Image = global::arma3Launcher.Properties.Resources.reload_white;
+            this.btn_reloadSteamAddons.Location = new System.Drawing.Point(200, 3);
+            this.btn_reloadSteamAddons.Margin = new System.Windows.Forms.Padding(3, 3, 6, 3);
+            this.btn_reloadSteamAddons.Name = "btn_reloadSteamAddons";
+            this.btn_reloadSteamAddons.Size = new System.Drawing.Size(16, 16);
+            this.btn_reloadSteamAddons.TabIndex = 19;
+            this.btn_reloadSteamAddons.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_reloadSteamAddons, "Refresh Workshop Addons");
+            this.btn_reloadSteamAddons.Click += new System.EventHandler(this.btn_reloadSteamAddons_Click);
+            // 
+            // btn_openWorkshop
+            // 
+            this.btn_openWorkshop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_openWorkshop.Image = global::arma3Launcher.Properties.Resources.steam;
+            this.btn_openWorkshop.Location = new System.Drawing.Point(181, 3);
+            this.btn_openWorkshop.Name = "btn_openWorkshop";
+            this.btn_openWorkshop.Size = new System.Drawing.Size(16, 16);
+            this.btn_openWorkshop.TabIndex = 2;
+            this.btn_openWorkshop.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_openWorkshop, "Open Workshop Page");
+            this.btn_openWorkshop.Click += new System.EventHandler(this.btn_openWorkshop_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.label15.Location = new System.Drawing.Point(5, 2);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(167, 19);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Steam Workshop Addons";
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.tableLayoutPanel2);
+            this.panel4.Controls.Add(this.panel_launchOptionsChb);
+            this.panel4.Controls.Add(this.panel17);
+            this.panel4.Controls.Add(this.panel7);
+            this.panel4.Controls.Add(this.panel6);
+            this.panel4.Location = new System.Drawing.Point(10, 15);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(657, 282);
+            this.panel4.TabIndex = 2;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.20527F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.79474F));
+            this.tableLayoutPanel2.Controls.Add(this.chb_maxMem, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txtb_maxMem, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.chb_cpuCount, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.chb_malloc, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.chb_exThreads, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.txtb_exThreads, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtb_cpuCount, 1, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(306, 65);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(349, 215);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // chb_maxMem
+            // 
+            this.chb_maxMem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chb_maxMem.AutoSize = true;
+            this.chb_maxMem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_maxMem.Location = new System.Drawing.Point(3, 10);
+            this.chb_maxMem.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.chb_maxMem.Name = "chb_maxMem";
+            this.chb_maxMem.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.chb_maxMem.Size = new System.Drawing.Size(102, 21);
+            this.chb_maxMem.TabIndex = 2;
+            this.chb_maxMem.Text = "-maxMem";
+            this.chb_maxMem.UseVisualStyleBackColor = true;
+            this.chb_maxMem.CheckedChanged += new System.EventHandler(this.chb_maxMem_CheckedChanged);
+            // 
+            // txtb_maxMem
+            // 
+            this.txtb_maxMem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtb_maxMem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_maxMem.Enabled = false;
+            this.txtb_maxMem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_maxMem.Location = new System.Drawing.Point(111, 10);
+            this.txtb_maxMem.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
+            this.txtb_maxMem.Name = "txtb_maxMem";
+            this.txtb_maxMem.Size = new System.Drawing.Size(230, 22);
+            this.txtb_maxMem.TabIndex = 11;
+            // 
+            // chb_cpuCount
+            // 
+            this.chb_cpuCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chb_cpuCount.AutoSize = true;
+            this.chb_cpuCount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_cpuCount.Location = new System.Drawing.Point(3, 63);
+            this.chb_cpuCount.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.chb_cpuCount.Name = "chb_cpuCount";
+            this.chb_cpuCount.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.chb_cpuCount.Size = new System.Drawing.Size(102, 21);
+            this.chb_cpuCount.TabIndex = 8;
+            this.chb_cpuCount.Text = "-cpuCount";
+            this.chb_cpuCount.UseVisualStyleBackColor = true;
+            this.chb_cpuCount.CheckedChanged += new System.EventHandler(this.chb_cpuCount_CheckedChanged);
+            // 
+            // chb_malloc
+            // 
+            this.chb_malloc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chb_malloc.AutoSize = true;
+            this.chb_malloc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_malloc.Location = new System.Drawing.Point(3, 169);
+            this.chb_malloc.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.chb_malloc.Name = "chb_malloc";
+            this.chb_malloc.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.chb_malloc.Size = new System.Drawing.Size(102, 21);
+            this.chb_malloc.TabIndex = 9;
+            this.chb_malloc.Text = "-malloc";
+            this.chb_malloc.UseVisualStyleBackColor = true;
+            this.chb_malloc.CheckedChanged += new System.EventHandler(this.chb_malloc_CheckedChanged);
+            // 
+            // chb_exThreads
+            // 
+            this.chb_exThreads.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chb_exThreads.AutoSize = true;
+            this.chb_exThreads.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_exThreads.Location = new System.Drawing.Point(3, 116);
+            this.chb_exThreads.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.chb_exThreads.Name = "chb_exThreads";
+            this.chb_exThreads.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.chb_exThreads.Size = new System.Drawing.Size(102, 21);
+            this.chb_exThreads.TabIndex = 1;
+            this.chb_exThreads.Text = "-exThreads";
+            this.chb_exThreads.UseVisualStyleBackColor = true;
+            this.chb_exThreads.CheckedChanged += new System.EventHandler(this.chb_exThreads_CheckedChanged);
+            // 
+            // txtb_exThreads
+            // 
+            this.txtb_exThreads.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtb_exThreads.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_exThreads.Enabled = false;
+            this.txtb_exThreads.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_exThreads.Location = new System.Drawing.Point(111, 116);
+            this.txtb_exThreads.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
+            this.txtb_exThreads.Name = "txtb_exThreads";
+            this.txtb_exThreads.Size = new System.Drawing.Size(230, 22);
+            this.txtb_exThreads.TabIndex = 16;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.41631F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.583691F));
+            this.tableLayoutPanel4.Controls.Add(this.txtb_malloc, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btn_reloadMallocs, 1, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(108, 164);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 5, 8, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(233, 25);
+            this.tableLayoutPanel4.TabIndex = 17;
+            // 
+            // txtb_malloc
+            // 
+            this.txtb_malloc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.txtb_malloc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.txtb_malloc.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_malloc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtb_malloc.Enabled = false;
+            this.txtb_malloc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_malloc.FormattingEnabled = true;
+            this.txtb_malloc.Location = new System.Drawing.Point(3, 3);
+            this.txtb_malloc.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.txtb_malloc.Name = "txtb_malloc";
+            this.txtb_malloc.Size = new System.Drawing.Size(210, 21);
+            this.txtb_malloc.TabIndex = 17;
+            // 
+            // btn_reloadMallocs
+            // 
+            this.btn_reloadMallocs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_reloadMallocs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_reloadMallocs.Image = global::arma3Launcher.Properties.Resources.reload_white;
+            this.btn_reloadMallocs.Location = new System.Drawing.Point(216, 5);
+            this.btn_reloadMallocs.Margin = new System.Windows.Forms.Padding(0, 5, 1, 3);
+            this.btn_reloadMallocs.Name = "btn_reloadMallocs";
+            this.btn_reloadMallocs.Size = new System.Drawing.Size(16, 16);
+            this.btn_reloadMallocs.TabIndex = 18;
+            this.btn_reloadMallocs.TabStop = false;
+            this.btn_reloadMallocs.Click += new System.EventHandler(this.btn_reloadMallocs_Click);
+            // 
+            // txtb_cpuCount
+            // 
+            this.txtb_cpuCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtb_cpuCount.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_cpuCount.Enabled = false;
+            this.txtb_cpuCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_cpuCount.Location = new System.Drawing.Point(111, 63);
+            this.txtb_cpuCount.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
+            this.txtb_cpuCount.Name = "txtb_cpuCount";
+            this.txtb_cpuCount.Size = new System.Drawing.Size(230, 22);
+            this.txtb_cpuCount.TabIndex = 15;
+            // 
+            // panel_launchOptionsChb
+            // 
+            this.panel_launchOptionsChb.Controls.Add(this.chb_showScriptErrors);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_noPause);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_window);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_noSplash);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_hugePages);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_enableHT);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_skipIntro);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_filePatching);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_battleye);
+            this.panel_launchOptionsChb.Controls.Add(this.chb_worldEmpty);
+            this.panel_launchOptionsChb.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_launchOptionsChb.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panel_launchOptionsChb.Location = new System.Drawing.Point(0, 65);
+            this.panel_launchOptionsChb.Name = "panel_launchOptionsChb";
+            this.panel_launchOptionsChb.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
+            this.panel_launchOptionsChb.Size = new System.Drawing.Size(306, 215);
+            this.panel_launchOptionsChb.TabIndex = 2;
+            // 
+            // chb_showScriptErrors
+            // 
+            this.chb_showScriptErrors.AutoSize = true;
+            this.chb_showScriptErrors.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_showScriptErrors.Location = new System.Drawing.Point(11, 11);
+            this.chb_showScriptErrors.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_showScriptErrors.Name = "chb_showScriptErrors";
+            this.chb_showScriptErrors.Size = new System.Drawing.Size(135, 21);
+            this.chb_showScriptErrors.TabIndex = 8;
+            this.chb_showScriptErrors.Tag = "-showScriptErrors";
+            this.chb_showScriptErrors.Text = "Show Script Errors";
+            this.chb_showScriptErrors.UseVisualStyleBackColor = true;
+            // 
+            // chb_noPause
+            // 
+            this.chb_noPause.AutoSize = true;
+            this.chb_noPause.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_noPause.Location = new System.Drawing.Point(11, 50);
+            this.chb_noPause.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_noPause.Name = "chb_noPause";
+            this.chb_noPause.Size = new System.Drawing.Size(83, 21);
+            this.chb_noPause.TabIndex = 1;
+            this.chb_noPause.Tag = "-noPause";
+            this.chb_noPause.Text = "No Pause";
+            this.chb_noPause.UseVisualStyleBackColor = true;
+            // 
+            // chb_window
+            // 
+            this.chb_window.AutoSize = true;
+            this.chb_window.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_window.Location = new System.Drawing.Point(11, 89);
+            this.chb_window.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_window.Name = "chb_window";
+            this.chb_window.Size = new System.Drawing.Size(113, 21);
+            this.chb_window.TabIndex = 6;
+            this.chb_window.Tag = "-window";
+            this.chb_window.Text = "Window Mode";
+            this.chb_window.UseVisualStyleBackColor = true;
+            // 
+            // chb_noSplash
+            // 
+            this.chb_noSplash.AutoSize = true;
+            this.chb_noSplash.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_noSplash.Location = new System.Drawing.Point(11, 128);
+            this.chb_noSplash.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_noSplash.Name = "chb_noSplash";
+            this.chb_noSplash.Size = new System.Drawing.Size(130, 21);
+            this.chb_noSplash.TabIndex = 2;
+            this.chb_noSplash.Tag = "-noSplash";
+            this.chb_noSplash.Text = "No Splash Screen";
+            this.chb_noSplash.UseVisualStyleBackColor = true;
+            // 
+            // chb_hugePages
+            // 
+            this.chb_hugePages.AutoSize = true;
+            this.chb_hugePages.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_hugePages.Location = new System.Drawing.Point(11, 167);
+            this.chb_hugePages.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_hugePages.Name = "chb_hugePages";
+            this.chb_hugePages.Size = new System.Drawing.Size(98, 21);
+            this.chb_hugePages.TabIndex = 3;
+            this.chb_hugePages.Tag = "-hugepages";
+            this.chb_hugePages.Text = "Huge pages";
+            this.chb_hugePages.UseVisualStyleBackColor = true;
+            // 
+            // chb_enableHT
+            // 
+            this.chb_enableHT.AutoSize = true;
+            this.chb_enableHT.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_enableHT.Location = new System.Drawing.Point(170, 11);
+            this.chb_enableHT.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_enableHT.Name = "chb_enableHT";
+            this.chb_enableHT.Size = new System.Drawing.Size(86, 21);
+            this.chb_enableHT.TabIndex = 4;
+            this.chb_enableHT.Tag = "-enableHT";
+            this.chb_enableHT.Text = "Enable HT";
+            this.chb_enableHT.UseVisualStyleBackColor = true;
+            // 
+            // chb_skipIntro
+            // 
+            this.chb_skipIntro.AutoSize = true;
+            this.chb_skipIntro.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_skipIntro.Location = new System.Drawing.Point(170, 50);
+            this.chb_skipIntro.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_skipIntro.Name = "chb_skipIntro";
+            this.chb_skipIntro.Size = new System.Drawing.Size(82, 21);
+            this.chb_skipIntro.TabIndex = 5;
+            this.chb_skipIntro.Tag = "-skipIntro";
+            this.chb_skipIntro.Text = "Skip Intro";
+            this.chb_skipIntro.UseVisualStyleBackColor = true;
+            // 
+            // chb_filePatching
+            // 
+            this.chb_filePatching.AutoSize = true;
+            this.chb_filePatching.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.chb_filePatching.Location = new System.Drawing.Point(170, 89);
+            this.chb_filePatching.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_filePatching.Name = "chb_filePatching";
+            this.chb_filePatching.Size = new System.Drawing.Size(99, 21);
+            this.chb_filePatching.TabIndex = 10;
+            this.chb_filePatching.Tag = "-filePatching";
+            this.chb_filePatching.Text = "File Patching";
+            this.chb_filePatching.UseVisualStyleBackColor = true;
+            // 
+            // chb_battleye
+            // 
+            this.chb_battleye.AutoSize = true;
+            this.chb_battleye.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_battleye.Location = new System.Drawing.Point(170, 128);
+            this.chb_battleye.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_battleye.Name = "chb_battleye";
+            this.chb_battleye.Size = new System.Drawing.Size(115, 21);
+            this.chb_battleye.TabIndex = 7;
+            this.chb_battleye.Text = "Enable Battleye";
+            this.chb_battleye.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.chb_battleye.UseVisualStyleBackColor = true;
+            this.chb_battleye.CheckedChanged += new System.EventHandler(this.chb_battleye_CheckedChanged);
+            // 
+            // chb_worldEmpty
+            // 
+            this.chb_worldEmpty.AutoSize = true;
+            this.chb_worldEmpty.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.chb_worldEmpty.Location = new System.Drawing.Point(170, 167);
+            this.chb_worldEmpty.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_worldEmpty.Name = "chb_worldEmpty";
+            this.chb_worldEmpty.Size = new System.Drawing.Size(106, 21);
+            this.chb_worldEmpty.TabIndex = 11;
+            this.chb_worldEmpty.Tag = "-world=empty";
+            this.chb_worldEmpty.Text = " World Empty";
+            this.chb_worldEmpty.UseVisualStyleBackColor = true;
+            // 
+            // panel17
+            // 
+            this.panel17.BackColor = System.Drawing.Color.DimGray;
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel17.Location = new System.Drawing.Point(0, 64);
+            this.panel17.MaximumSize = new System.Drawing.Size(0, 1);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(0, 1);
+            this.panel17.TabIndex = 10;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label28);
+            this.panel7.Controls.Add(this.btn_openModsDirectory);
+            this.panel7.Controls.Add(this.btn_browseModsDirectory);
+            this.panel7.Controls.Add(this.btn_ereaseModsDirectory);
+            this.panel7.Controls.Add(this.txtb_modsDirectory);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 23);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(655, 41);
+            this.panel7.TabIndex = 1;
+            // 
+            // label28
+            // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label28.Location = new System.Drawing.Point(5, 12);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(112, 17);
+            this.label28.TabIndex = 12;
+            this.label28.Text = "Addons directory:";
+            // 
+            // btn_openModsDirectory
+            // 
+            this.btn_openModsDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_openModsDirectory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_openModsDirectory.Image = global::arma3Launcher.Properties.Resources.folder_open;
+            this.btn_openModsDirectory.Location = new System.Drawing.Point(633, 12);
+            this.btn_openModsDirectory.Name = "btn_openModsDirectory";
+            this.btn_openModsDirectory.Size = new System.Drawing.Size(16, 16);
+            this.btn_openModsDirectory.TabIndex = 11;
+            this.btn_openModsDirectory.TabStop = false;
+            this.btn_openModsDirectory.Click += new System.EventHandler(this.btn_openModsDirectory_Click);
+            // 
+            // btn_browseModsDirectory
+            // 
+            this.btn_browseModsDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_browseModsDirectory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_browseModsDirectory.Image = global::arma3Launcher.Properties.Resources.browse;
+            this.btn_browseModsDirectory.Location = new System.Drawing.Point(614, 12);
+            this.btn_browseModsDirectory.Name = "btn_browseModsDirectory";
+            this.btn_browseModsDirectory.Size = new System.Drawing.Size(16, 16);
+            this.btn_browseModsDirectory.TabIndex = 10;
+            this.btn_browseModsDirectory.TabStop = false;
+            this.btn_browseModsDirectory.Click += new System.EventHandler(this.btn_browseModsDirectory_Click);
+            // 
+            // btn_ereaseModsDirectory
+            // 
+            this.btn_ereaseModsDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_ereaseModsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseModsDirectory.FlatAppearance.BorderSize = 0;
+            this.btn_ereaseModsDirectory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseModsDirectory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_ereaseModsDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ereaseModsDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.btn_ereaseModsDirectory.Image = global::arma3Launcher.Properties.Resources.circle_with_cross;
+            this.btn_ereaseModsDirectory.Location = new System.Drawing.Point(587, 10);
+            this.btn_ereaseModsDirectory.Name = "btn_ereaseModsDirectory";
+            this.btn_ereaseModsDirectory.Size = new System.Drawing.Size(20, 20);
+            this.btn_ereaseModsDirectory.TabIndex = 10;
+            this.btn_ereaseModsDirectory.TabStop = false;
+            this.btn_ereaseModsDirectory.UseVisualStyleBackColor = false;
+            this.btn_ereaseModsDirectory.Click += new System.EventHandler(this.btn_ereaseModsDirectory_Click);
+            // 
+            // txtb_modsDirectory
+            // 
+            this.txtb_modsDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtb_modsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_modsDirectory.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtb_modsDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtb_modsDirectory.Location = new System.Drawing.Point(123, 9);
+            this.txtb_modsDirectory.Name = "txtb_modsDirectory";
+            this.txtb_modsDirectory.Size = new System.Drawing.Size(485, 23);
+            this.txtb_modsDirectory.TabIndex = 4;
+            this.txtb_modsDirectory.Text = "Set directory ->";
+            this.txtb_modsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_modsDirectory_MouseClick);
+            this.txtb_modsDirectory.TextChanged += new System.EventHandler(this.txtb_modsDirectory_TextChanged);
+            this.txtb_modsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_modsDirectory_MouseDoubleClick);
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.DimGray;
+            this.panel6.Controls.Add(this.btn_copyLaunchOptions);
+            this.panel6.Controls.Add(this.label18);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.panel6.Size = new System.Drawing.Size(655, 23);
+            this.panel6.TabIndex = 0;
+            // 
+            // btn_copyLaunchOptions
+            // 
+            this.btn_copyLaunchOptions.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_copyLaunchOptions.Location = new System.Drawing.Point(860, 3);
+            this.btn_copyLaunchOptions.Name = "btn_copyLaunchOptions";
+            this.btn_copyLaunchOptions.Size = new System.Drawing.Size(16, 16);
+            this.btn_copyLaunchOptions.TabIndex = 1;
+            this.btn_copyLaunchOptions.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_copyLaunchOptions, "Copies to clipboard a string with selected launch options");
+            this.btn_copyLaunchOptions.Click += new System.EventHandler(this.btn_copyLaunchOptions_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.label18.Location = new System.Drawing.Point(5, 2);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(108, 19);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "Launch Options";
             // 
             // panel_about
             // 
@@ -861,7 +2230,7 @@
             // btn_addPrivatePack
             // 
             this.btn_addPrivatePack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_addPrivatePack.Image = global::arma3Launcher.Properties.Resources.plus_square;
+            this.btn_addPrivatePack.Image = global::arma3Launcher.Properties.Resources.add_box;
             this.btn_addPrivatePack.Location = new System.Drawing.Point(866, 6);
             this.btn_addPrivatePack.Name = "btn_addPrivatePack";
             this.btn_addPrivatePack.Size = new System.Drawing.Size(16, 16);
@@ -882,1263 +2251,6 @@
             this.txtb_searchPack.Enter += new System.EventHandler(this.txtb_searchPack_Enter);
             this.txtb_searchPack.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtb_searchPack_KeyDown);
             this.txtb_searchPack.Leave += new System.EventHandler(this.txtb_searchPack_Leave);
-            // 
-            // panel_help
-            // 
-            this.panel_help.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_help.Controls.Add(this.label29);
-            this.panel_help.Controls.Add(this.label20);
-            this.panel_help.Controls.Add(this.label19);
-            this.panel_help.Controls.Add(this.label12);
-            this.panel_help.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_help.Location = new System.Drawing.Point(0, -603);
-            this.panel_help.Name = "panel_help";
-            this.panel_help.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
-            this.panel_help.Size = new System.Drawing.Size(906, 303);
-            this.panel_help.TabIndex = 7;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Segoe UI Semibold", 7.5F, System.Drawing.FontStyle.Bold);
-            this.label29.Location = new System.Drawing.Point(19, 97);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(826, 12);
-            this.label29.TabIndex = 4;
-            this.label29.Text = "▪▪▪  All updates are done automatically. If the required addons are not installed" +
-    " the launcher will do it for you. When everything is ready the launcher will sta" +
-    "rt the game by it self.";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(10, 10);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(143, 20);
-            this.label20.TabIndex = 3;
-            this.label20.Text = "Using the launcher:";
-            this.label20.UseMnemonic = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(10, 124);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(247, 20);
-            this.label19.TabIndex = 2;
-            this.label19.Text = "Using \"Launch & Addons Options\":";
-            this.label19.UseMnemonic = false;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label12.Location = new System.Drawing.Point(10, 15);
-            this.label12.MaximumSize = new System.Drawing.Size(890, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(884, 285);
-            this.label12.TabIndex = 1;
-            this.label12.Text = resources.GetString("label12.Text");
-            this.label12.UseMnemonic = false;
-            // 
-            // panel_community
-            // 
-            this.panel_community.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_community.Controls.Add(this.panel13);
-            this.panel_community.Controls.Add(this.panel8);
-            this.panel_community.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_community.Location = new System.Drawing.Point(0, -300);
-            this.panel_community.Name = "panel_community";
-            this.panel_community.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
-            this.panel_community.Size = new System.Drawing.Size(906, 303);
-            this.panel_community.TabIndex = 5;
-            // 
-            // panel13
-            // 
-            this.panel13.Controls.Add(this.flash_youtubePlayer);
-            this.panel13.Controls.Add(this.panel14);
-            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel13.Location = new System.Drawing.Point(193, 15);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(703, 283);
-            this.panel13.TabIndex = 1;
-            // 
-            // flash_youtubePlayer
-            // 
-            this.flash_youtubePlayer.Enabled = true;
-            this.flash_youtubePlayer.Location = new System.Drawing.Point(11, 12);
-            this.flash_youtubePlayer.Name = "flash_youtubePlayer";
-            this.flash_youtubePlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("flash_youtubePlayer.OcxState")));
-            this.flash_youtubePlayer.Size = new System.Drawing.Size(681, 259);
-            this.flash_youtubePlayer.TabIndex = 1;
-            // 
-            // panel14
-            // 
-            this.panel14.BackColor = System.Drawing.Color.OliveDrab;
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel14.Location = new System.Drawing.Point(0, 0);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1, 283);
-            this.panel14.TabIndex = 0;
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.vlink_medicalBasic);
-            this.panel8.Controls.Add(this.vlink_microDAGR);
-            this.panel8.Controls.Add(this.vlink_infMovement);
-            this.panel8.Controls.Add(this.label32);
-            this.panel8.Controls.Add(this.label31);
-            this.panel8.Controls.Add(this.label11);
-            this.panel8.Controls.Add(this.label1);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel8.Location = new System.Drawing.Point(10, 15);
-            this.panel8.Margin = new System.Windows.Forms.Padding(0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(183, 283);
-            this.panel8.TabIndex = 0;
-            // 
-            // vlink_medicalBasic
-            // 
-            this.vlink_medicalBasic.ActiveLinkColor = System.Drawing.Color.YellowGreen;
-            this.vlink_medicalBasic.AutoSize = true;
-            this.vlink_medicalBasic.LinkColor = System.Drawing.Color.WhiteSmoke;
-            this.vlink_medicalBasic.Location = new System.Drawing.Point(25, 56);
-            this.vlink_medicalBasic.Name = "vlink_medicalBasic";
-            this.vlink_medicalBasic.Size = new System.Drawing.Size(124, 13);
-            this.vlink_medicalBasic.TabIndex = 7;
-            this.vlink_medicalBasic.TabStop = true;
-            this.vlink_medicalBasic.Text = "Medical System [Basic]";
-            this.vlink_medicalBasic.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
-            this.vlink_medicalBasic.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.vlink_medicalBasic_LinkClicked);
-            // 
-            // vlink_microDAGR
-            // 
-            this.vlink_microDAGR.ActiveLinkColor = System.Drawing.Color.YellowGreen;
-            this.vlink_microDAGR.AutoSize = true;
-            this.vlink_microDAGR.LinkColor = System.Drawing.Color.WhiteSmoke;
-            this.vlink_microDAGR.Location = new System.Drawing.Point(25, 41);
-            this.vlink_microDAGR.Name = "vlink_microDAGR";
-            this.vlink_microDAGR.Size = new System.Drawing.Size(117, 13);
-            this.vlink_microDAGR.TabIndex = 6;
-            this.vlink_microDAGR.TabStop = true;
-            this.vlink_microDAGR.Text = "Using the MicroDAGR";
-            this.vlink_microDAGR.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
-            this.vlink_microDAGR.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.vlink_microDAGR_LinkClicked);
-            // 
-            // vlink_infMovement
-            // 
-            this.vlink_infMovement.ActiveLinkColor = System.Drawing.Color.YellowGreen;
-            this.vlink_infMovement.AutoSize = true;
-            this.vlink_infMovement.LinkColor = System.Drawing.Color.WhiteSmoke;
-            this.vlink_infMovement.Location = new System.Drawing.Point(25, 26);
-            this.vlink_infMovement.Name = "vlink_infMovement";
-            this.vlink_infMovement.Size = new System.Drawing.Size(104, 13);
-            this.vlink_infMovement.TabIndex = 1;
-            this.vlink_infMovement.TabStop = true;
-            this.vlink_infMovement.Text = "Infantry Movement";
-            this.vlink_infMovement.VisitedLinkColor = System.Drawing.Color.WhiteSmoke;
-            this.vlink_infMovement.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.vlink_infMovement_LinkClicked);
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Segoe UI Semilight", 9F);
-            this.label32.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label32.Location = new System.Drawing.Point(15, 55);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(12, 15);
-            this.label32.TabIndex = 5;
-            this.label32.Text = "-";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Segoe UI Semilight", 9F);
-            this.label31.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label31.Location = new System.Drawing.Point(15, 40);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(12, 15);
-            this.label31.TabIndex = 4;
-            this.label31.Text = "-";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semilight", 9F);
-            this.label11.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label11.Location = new System.Drawing.Point(15, 25);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(12, 15);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "-";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.OliveDrab;
-            this.label1.Location = new System.Drawing.Point(5, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 21);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "The Basics";
-            // 
-            // panel_launchOptions
-            // 
-            this.panel_launchOptions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_launchOptions.Controls.Add(this.panel_recommendedAddons);
-            this.panel_launchOptions.Controls.Add(this.panel_optionalAddons);
-            this.panel_launchOptions.Controls.Add(this.panel4);
-            this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_launchOptions.Location = new System.Drawing.Point(0, 3);
-            this.panel_launchOptions.Name = "panel_launchOptions";
-            this.panel_launchOptions.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
-            this.panel_launchOptions.Size = new System.Drawing.Size(906, 303);
-            this.panel_launchOptions.TabIndex = 6;
-            // 
-            // panel_recommendedAddons
-            // 
-            this.panel_recommendedAddons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_recommendedAddons.Controls.Add(this.panel10);
-            this.panel_recommendedAddons.Controls.Add(this.panel9);
-            this.panel_recommendedAddons.Location = new System.Drawing.Point(514, 193);
-            this.panel_recommendedAddons.Name = "panel_recommendedAddons";
-            this.panel_recommendedAddons.Size = new System.Drawing.Size(382, 104);
-            this.panel_recommendedAddons.TabIndex = 4;
-            this.panel_recommendedAddons.Visible = false;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.label30);
-            this.panel10.Controls.Add(this.label13);
-            this.panel10.Controls.Add(this.splitButton1);
-            this.panel10.Controls.Add(this.btn_dragonfyre);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(0, 23);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(380, 79);
-            this.panel10.TabIndex = 1;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(107, 47);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(249, 13);
-            this.label30.TabIndex = 3;
-            this.label30.Text = "Enhanced visuals, lighting and explosion effects";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(107, 18);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(262, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Audio mod wich enhances over 5500 sound effects";
-            // 
-            // splitButton1
-            // 
-            this.splitButton1.AutoSize = true;
-            this.splitButton1.ContextMenuStrip = this.menu_blastcore;
-            this.splitButton1.Enabled = false;
-            this.splitButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.splitButton1.Location = new System.Drawing.Point(9, 42);
-            this.splitButton1.Name = "splitButton1";
-            this.splitButton1.Size = new System.Drawing.Size(98, 23);
-            this.splitButton1.SplitMenuStrip = this.menu_blastcore;
-            this.splitButton1.TabIndex = 1;
-            this.splitButton1.Text = "Blastcore";
-            this.splitButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.splitButton1.UseVisualStyleBackColor = true;
-            // 
-            // menu_blastcore
-            // 
-            this.menu_blastcore.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.chb_blastcore,
-            this.btn_downloadBlastcore});
-            this.menu_blastcore.Name = "menu_blastcore";
-            this.menu_blastcore.Size = new System.Drawing.Size(153, 48);
-            // 
-            // chb_blastcore
-            // 
-            this.chb_blastcore.CheckOnClick = true;
-            this.chb_blastcore.Enabled = false;
-            this.chb_blastcore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.chb_blastcore.Name = "chb_blastcore";
-            this.chb_blastcore.Size = new System.Drawing.Size(152, 22);
-            this.chb_blastcore.Text = "Use this addon";
-            // 
-            // btn_downloadBlastcore
-            // 
-            this.btn_downloadBlastcore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_downloadBlastcore.Image = global::arma3Launcher.Properties.Resources.download3;
-            this.btn_downloadBlastcore.Name = "btn_downloadBlastcore";
-            this.btn_downloadBlastcore.Size = new System.Drawing.Size(152, 22);
-            this.btn_downloadBlastcore.Text = "Download";
-            this.btn_downloadBlastcore.Click += new System.EventHandler(this.btn_downloadBlastcore_Click);
-            // 
-            // btn_dragonfyre
-            // 
-            this.btn_dragonfyre.AutoSize = true;
-            this.btn_dragonfyre.ContextMenuStrip = this.menu_dragonfyre;
-            this.btn_dragonfyre.Enabled = false;
-            this.btn_dragonfyre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_dragonfyre.Location = new System.Drawing.Point(9, 13);
-            this.btn_dragonfyre.Name = "btn_dragonfyre";
-            this.btn_dragonfyre.Size = new System.Drawing.Size(98, 23);
-            this.btn_dragonfyre.SplitMenuStrip = this.menu_dragonfyre;
-            this.btn_dragonfyre.TabIndex = 0;
-            this.btn_dragonfyre.Text = "Dragon Fyre";
-            this.btn_dragonfyre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_dragonfyre.UseVisualStyleBackColor = true;
-            this.btn_dragonfyre.Click += new System.EventHandler(this.btn_DragonFyre_Click);
-            // 
-            // menu_dragonfyre
-            // 
-            this.menu_dragonfyre.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.chb_dragonfyre,
-            this.btn_downloadDragonFyre});
-            this.menu_dragonfyre.Name = "menu_dragonfyre";
-            this.menu_dragonfyre.Size = new System.Drawing.Size(153, 48);
-            // 
-            // chb_dragonfyre
-            // 
-            this.chb_dragonfyre.CheckOnClick = true;
-            this.chb_dragonfyre.Enabled = false;
-            this.chb_dragonfyre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.chb_dragonfyre.Name = "chb_dragonfyre";
-            this.chb_dragonfyre.Size = new System.Drawing.Size(152, 22);
-            this.chb_dragonfyre.Text = "Use this addon";
-            // 
-            // btn_downloadDragonFyre
-            // 
-            this.btn_downloadDragonFyre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_downloadDragonFyre.Image = global::arma3Launcher.Properties.Resources.download3;
-            this.btn_downloadDragonFyre.Name = "btn_downloadDragonFyre";
-            this.btn_downloadDragonFyre.Size = new System.Drawing.Size(152, 22);
-            this.btn_downloadDragonFyre.Text = "Download";
-            this.btn_downloadDragonFyre.Click += new System.EventHandler(this.btn_downloadDragonFyre_Click);
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.Color.DimGray;
-            this.panel9.Controls.Add(this.label15);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(380, 23);
-            this.panel9.TabIndex = 0;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.label15.Location = new System.Drawing.Point(5, 2);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(153, 19);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "Recommended Addons";
-            // 
-            // panel_optionalAddons
-            // 
-            this.panel_optionalAddons.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel_optionalAddons.Controls.Add(this.panel_Optional);
-            this.panel_optionalAddons.Controls.Add(this.panel7);
-            this.panel_optionalAddons.Location = new System.Drawing.Point(10, 193);
-            this.panel_optionalAddons.Name = "panel_optionalAddons";
-            this.panel_optionalAddons.Size = new System.Drawing.Size(498, 104);
-            this.panel_optionalAddons.TabIndex = 3;
-            // 
-            // panel_Optional
-            // 
-            this.panel_Optional.BackgroundImage = global::arma3Launcher.Properties.Resources.optionalAddons_fw;
-            this.panel_Optional.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel_Optional.Controls.Add(this.lstb_activeAddons);
-            this.panel_Optional.Controls.Add(this.btn_deactivateAddon);
-            this.panel_Optional.Controls.Add(this.btn_activateAddon);
-            this.panel_Optional.Controls.Add(this.lstb_detectedAddons);
-            this.panel_Optional.Controls.Add(this.pictureBox2);
-            this.panel_Optional.Controls.Add(this.pictureBox1);
-            this.panel_Optional.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_Optional.Location = new System.Drawing.Point(0, 23);
-            this.panel_Optional.Name = "panel_Optional";
-            this.panel_Optional.Size = new System.Drawing.Size(496, 79);
-            this.panel_Optional.TabIndex = 1;
-            // 
-            // lstb_activeAddons
-            // 
-            this.lstb_activeAddons.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lstb_activeAddons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lstb_activeAddons.FormattingEnabled = true;
-            this.lstb_activeAddons.Location = new System.Drawing.Point(276, 5);
-            this.lstb_activeAddons.Name = "lstb_activeAddons";
-            this.lstb_activeAddons.ScrollAlwaysVisible = true;
-            this.lstb_activeAddons.Size = new System.Drawing.Size(210, 69);
-            this.lstb_activeAddons.Sorted = true;
-            this.lstb_activeAddons.TabIndex = 9;
-            // 
-            // btn_deactivateAddon
-            // 
-            this.btn_deactivateAddon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_deactivateAddon.FlatAppearance.BorderSize = 0;
-            this.btn_deactivateAddon.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_deactivateAddon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_deactivateAddon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.btn_deactivateAddon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_deactivateAddon.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_deactivateAddon.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_deactivateAddon.Image = global::arma3Launcher.Properties.Resources.keyboard_arrow_left;
-            this.btn_deactivateAddon.Location = new System.Drawing.Point(240, 43);
-            this.btn_deactivateAddon.Name = "btn_deactivateAddon";
-            this.btn_deactivateAddon.Size = new System.Drawing.Size(16, 16);
-            this.btn_deactivateAddon.TabIndex = 8;
-            this.btn_deactivateAddon.UseVisualStyleBackColor = false;
-            this.btn_deactivateAddon.Click += new System.EventHandler(this.btn_deactivateAddon_Click);
-            // 
-            // btn_activateAddon
-            // 
-            this.btn_activateAddon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_activateAddon.FlatAppearance.BorderSize = 0;
-            this.btn_activateAddon.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_activateAddon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_activateAddon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.btn_activateAddon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_activateAddon.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_activateAddon.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_activateAddon.Image = global::arma3Launcher.Properties.Resources.keyboard_arrow_right;
-            this.btn_activateAddon.Location = new System.Drawing.Point(240, 20);
-            this.btn_activateAddon.Name = "btn_activateAddon";
-            this.btn_activateAddon.Size = new System.Drawing.Size(16, 16);
-            this.btn_activateAddon.TabIndex = 7;
-            this.btn_activateAddon.UseVisualStyleBackColor = false;
-            this.btn_activateAddon.Click += new System.EventHandler(this.btn_activateAddon_Click);
-            // 
-            // lstb_detectedAddons
-            // 
-            this.lstb_detectedAddons.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lstb_detectedAddons.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lstb_detectedAddons.FormattingEnabled = true;
-            this.lstb_detectedAddons.Location = new System.Drawing.Point(10, 5);
-            this.lstb_detectedAddons.Name = "lstb_detectedAddons";
-            this.lstb_detectedAddons.ScrollAlwaysVisible = true;
-            this.lstb_detectedAddons.Size = new System.Drawing.Size(210, 69);
-            this.lstb_detectedAddons.Sorted = true;
-            this.lstb_detectedAddons.TabIndex = 5;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = global::arma3Launcher.Properties.Resources.eye;
-            this.pictureBox2.Location = new System.Drawing.Point(213, 56);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::arma3Launcher.Properties.Resources.flash_on;
-            this.pictureBox1.Location = new System.Drawing.Point(260, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.DimGray;
-            this.panel7.Controls.Add(this.btn_reloadAddons);
-            this.panel7.Controls.Add(this.label14);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(496, 23);
-            this.panel7.TabIndex = 0;
-            // 
-            // btn_reloadAddons
-            // 
-            this.btn_reloadAddons.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_reloadAddons.Image = global::arma3Launcher.Properties.Resources.loop;
-            this.btn_reloadAddons.Location = new System.Drawing.Point(471, 3);
-            this.btn_reloadAddons.Name = "btn_reloadAddons";
-            this.btn_reloadAddons.Size = new System.Drawing.Size(16, 16);
-            this.btn_reloadAddons.TabIndex = 2;
-            this.btn_reloadAddons.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_reloadAddons, "Reload addons");
-            this.btn_reloadAddons.Click += new System.EventHandler(this.btn_reloadAddons_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.label14.Location = new System.Drawing.Point(5, 2);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(115, 19);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "Optional Addons";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.Transparent;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label28);
-            this.panel4.Controls.Add(this.btn_openModsDirectory);
-            this.panel4.Controls.Add(this.btn_ereaseModsDirectory);
-            this.panel4.Controls.Add(this.btn_browseModsDirectory);
-            this.panel4.Controls.Add(this.txtb_modsDirectory);
-            this.panel4.Controls.Add(this.tableLayoutPanel2);
-            this.panel4.Controls.Add(this.flowLayoutPanel1);
-            this.panel4.Controls.Add(this.panel6);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(10, 15);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(886, 173);
-            this.panel4.TabIndex = 2;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.label28.Location = new System.Drawing.Point(280, 34);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(112, 17);
-            this.label28.TabIndex = 12;
-            this.label28.Text = "Addons directory:";
-            // 
-            // btn_openModsDirectory
-            // 
-            this.btn_openModsDirectory.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_openModsDirectory.Image = global::arma3Launcher.Properties.Resources.folder_open;
-            this.btn_openModsDirectory.Location = new System.Drawing.Point(859, 34);
-            this.btn_openModsDirectory.Name = "btn_openModsDirectory";
-            this.btn_openModsDirectory.Size = new System.Drawing.Size(16, 16);
-            this.btn_openModsDirectory.TabIndex = 11;
-            this.btn_openModsDirectory.TabStop = false;
-            this.btn_openModsDirectory.Click += new System.EventHandler(this.btn_openModsDirectory_Click);
-            // 
-            // btn_ereaseModsDirectory
-            // 
-            this.btn_ereaseModsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseModsDirectory.FlatAppearance.BorderSize = 0;
-            this.btn_ereaseModsDirectory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseModsDirectory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseModsDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_ereaseModsDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.btn_ereaseModsDirectory.Image = global::arma3Launcher.Properties.Resources.circle_with_cross;
-            this.btn_ereaseModsDirectory.Location = new System.Drawing.Point(811, 34);
-            this.btn_ereaseModsDirectory.Name = "btn_ereaseModsDirectory";
-            this.btn_ereaseModsDirectory.Size = new System.Drawing.Size(20, 20);
-            this.btn_ereaseModsDirectory.TabIndex = 10;
-            this.btn_ereaseModsDirectory.TabStop = false;
-            this.btn_ereaseModsDirectory.UseVisualStyleBackColor = false;
-            this.btn_ereaseModsDirectory.Click += new System.EventHandler(this.btn_ereaseModsDirectory_Click);
-            // 
-            // btn_browseModsDirectory
-            // 
-            this.btn_browseModsDirectory.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_browseModsDirectory.Image = global::arma3Launcher.Properties.Resources.browse;
-            this.btn_browseModsDirectory.Location = new System.Drawing.Point(840, 36);
-            this.btn_browseModsDirectory.Name = "btn_browseModsDirectory";
-            this.btn_browseModsDirectory.Size = new System.Drawing.Size(16, 16);
-            this.btn_browseModsDirectory.TabIndex = 10;
-            this.btn_browseModsDirectory.TabStop = false;
-            this.btn_browseModsDirectory.Click += new System.EventHandler(this.btn_browseModsDirectory_Click);
-            // 
-            // txtb_modsDirectory
-            // 
-            this.txtb_modsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_modsDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtb_modsDirectory.Location = new System.Drawing.Point(398, 33);
-            this.txtb_modsDirectory.Name = "txtb_modsDirectory";
-            this.txtb_modsDirectory.Size = new System.Drawing.Size(435, 22);
-            this.txtb_modsDirectory.TabIndex = 4;
-            this.txtb_modsDirectory.Text = "Set directory ->";
-            this.txtb_modsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_modsDirectory_MouseClick);
-            this.txtb_modsDirectory.TextChanged += new System.EventHandler(this.txtb_modsDirectory_TextChanged);
-            this.txtb_modsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_modsDirectory_MouseDoubleClick);
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 5;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.97005F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.94675F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.96839F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.44759F));
-            this.tableLayoutPanel2.Controls.Add(this.chb_malloc, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.chb_maxMem, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_maxMem, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.chb_maxVRAM, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.chb_exThreads, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.chb_cpuCount, 3, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_world, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_maxVRAM, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_cpuCount, 4, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_exThreads, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.chb_world, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 2);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(280, 62);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.39823F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.85841F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(604, 109);
-            this.tableLayoutPanel2.TabIndex = 2;
-            // 
-            // chb_malloc
-            // 
-            this.chb_malloc.AutoSize = true;
-            this.chb_malloc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_malloc.Location = new System.Drawing.Point(3, 77);
-            this.chb_malloc.Name = "chb_malloc";
-            this.chb_malloc.Size = new System.Drawing.Size(83, 21);
-            this.chb_malloc.TabIndex = 9;
-            this.chb_malloc.Text = "-malloc =";
-            this.chb_malloc.UseVisualStyleBackColor = true;
-            this.chb_malloc.CheckedChanged += new System.EventHandler(this.chb_malloc_CheckedChanged);
-            // 
-            // chb_maxMem
-            // 
-            this.chb_maxMem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.chb_maxMem.AutoSize = true;
-            this.chb_maxMem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_maxMem.Location = new System.Drawing.Point(3, 39);
-            this.chb_maxMem.Name = "chb_maxMem";
-            this.chb_maxMem.Size = new System.Drawing.Size(99, 32);
-            this.chb_maxMem.TabIndex = 2;
-            this.chb_maxMem.Text = "-maxMem =";
-            this.chb_maxMem.UseVisualStyleBackColor = true;
-            this.chb_maxMem.CheckedChanged += new System.EventHandler(this.chb_maxMem_CheckedChanged);
-            // 
-            // txtb_maxMem
-            // 
-            this.txtb_maxMem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtb_maxMem.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_maxMem.Enabled = false;
-            this.txtb_maxMem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_maxMem.Location = new System.Drawing.Point(109, 45);
-            this.txtb_maxMem.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.txtb_maxMem.Name = "txtb_maxMem";
-            this.txtb_maxMem.Size = new System.Drawing.Size(175, 22);
-            this.txtb_maxMem.TabIndex = 11;
-            // 
-            // chb_maxVRAM
-            // 
-            this.chb_maxVRAM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chb_maxVRAM.AutoSize = true;
-            this.chb_maxVRAM.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_maxVRAM.Location = new System.Drawing.Point(308, 12);
-            this.chb_maxVRAM.Name = "chb_maxVRAM";
-            this.chb_maxVRAM.Size = new System.Drawing.Size(106, 21);
-            this.chb_maxVRAM.TabIndex = 7;
-            this.chb_maxVRAM.Text = "-maxVRAM = ";
-            this.chb_maxVRAM.UseVisualStyleBackColor = true;
-            this.chb_maxVRAM.CheckedChanged += new System.EventHandler(this.chb_maxVRAM_CheckedChanged);
-            // 
-            // chb_exThreads
-            // 
-            this.chb_exThreads.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.chb_exThreads.AutoSize = true;
-            this.chb_exThreads.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_exThreads.Location = new System.Drawing.Point(308, 39);
-            this.chb_exThreads.Name = "chb_exThreads";
-            this.chb_exThreads.Size = new System.Drawing.Size(106, 32);
-            this.chb_exThreads.TabIndex = 1;
-            this.chb_exThreads.Text = "-exThreads = ";
-            this.chb_exThreads.UseVisualStyleBackColor = true;
-            this.chb_exThreads.CheckedChanged += new System.EventHandler(this.chb_exThreads_CheckedChanged);
-            // 
-            // chb_cpuCount
-            // 
-            this.chb_cpuCount.AutoSize = true;
-            this.chb_cpuCount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_cpuCount.Location = new System.Drawing.Point(308, 77);
-            this.chb_cpuCount.Name = "chb_cpuCount";
-            this.chb_cpuCount.Size = new System.Drawing.Size(104, 21);
-            this.chb_cpuCount.TabIndex = 8;
-            this.chb_cpuCount.Text = "-cpuCount = ";
-            this.chb_cpuCount.UseVisualStyleBackColor = true;
-            this.chb_cpuCount.CheckedChanged += new System.EventHandler(this.chb_cpuCount_CheckedChanged);
-            // 
-            // txtb_world
-            // 
-            this.txtb_world.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtb_world.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_world.Enabled = false;
-            this.txtb_world.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_world.Location = new System.Drawing.Point(109, 11);
-            this.txtb_world.Name = "txtb_world";
-            this.txtb_world.Size = new System.Drawing.Size(175, 22);
-            this.txtb_world.TabIndex = 10;
-            // 
-            // txtb_maxVRAM
-            // 
-            this.txtb_maxVRAM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtb_maxVRAM.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_maxVRAM.Enabled = false;
-            this.txtb_maxVRAM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_maxVRAM.Location = new System.Drawing.Point(420, 11);
-            this.txtb_maxVRAM.Name = "txtb_maxVRAM";
-            this.txtb_maxVRAM.Size = new System.Drawing.Size(175, 22);
-            this.txtb_maxVRAM.TabIndex = 13;
-            // 
-            // txtb_cpuCount
-            // 
-            this.txtb_cpuCount.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_cpuCount.Enabled = false;
-            this.txtb_cpuCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_cpuCount.Location = new System.Drawing.Point(420, 77);
-            this.txtb_cpuCount.Name = "txtb_cpuCount";
-            this.txtb_cpuCount.Size = new System.Drawing.Size(175, 22);
-            this.txtb_cpuCount.TabIndex = 15;
-            // 
-            // txtb_exThreads
-            // 
-            this.txtb_exThreads.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtb_exThreads.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_exThreads.Enabled = false;
-            this.txtb_exThreads.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_exThreads.Location = new System.Drawing.Point(420, 45);
-            this.txtb_exThreads.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.txtb_exThreads.Name = "txtb_exThreads";
-            this.txtb_exThreads.Size = new System.Drawing.Size(175, 22);
-            this.txtb_exThreads.TabIndex = 16;
-            // 
-            // chb_world
-            // 
-            this.chb_world.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chb_world.AutoSize = true;
-            this.chb_world.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_world.Location = new System.Drawing.Point(3, 12);
-            this.chb_world.Name = "chb_world";
-            this.chb_world.Size = new System.Drawing.Size(78, 21);
-            this.chb_world.TabIndex = 5;
-            this.chb_world.Text = "-world =";
-            this.chb_world.UseVisualStyleBackColor = true;
-            this.chb_world.CheckedChanged += new System.EventHandler(this.chb_world_CheckedChanged);
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.65608F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.34391F));
-            this.tableLayoutPanel4.Controls.Add(this.txtb_malloc, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btn_reloadMallocs, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(106, 74);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(189, 35);
-            this.tableLayoutPanel4.TabIndex = 17;
-            // 
-            // txtb_malloc
-            // 
-            this.txtb_malloc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.txtb_malloc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.txtb_malloc.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_malloc.Enabled = false;
-            this.txtb_malloc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_malloc.FormattingEnabled = true;
-            this.txtb_malloc.Location = new System.Drawing.Point(3, 3);
-            this.txtb_malloc.Name = "txtb_malloc";
-            this.txtb_malloc.Size = new System.Drawing.Size(153, 21);
-            this.txtb_malloc.TabIndex = 17;
-            // 
-            // btn_reloadMallocs
-            // 
-            this.btn_reloadMallocs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_reloadMallocs.Image = global::arma3Launcher.Properties.Resources.loop;
-            this.btn_reloadMallocs.Location = new System.Drawing.Point(163, 6);
-            this.btn_reloadMallocs.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
-            this.btn_reloadMallocs.Name = "btn_reloadMallocs";
-            this.btn_reloadMallocs.Size = new System.Drawing.Size(16, 16);
-            this.btn_reloadMallocs.TabIndex = 18;
-            this.btn_reloadMallocs.TabStop = false;
-            this.btn_reloadMallocs.Click += new System.EventHandler(this.btn_reloadMallocs_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.chb_noLogs);
-            this.flowLayoutPanel1.Controls.Add(this.chb_noPause);
-            this.flowLayoutPanel1.Controls.Add(this.chb_noSplash);
-            this.flowLayoutPanel1.Controls.Add(this.chb_noCB);
-            this.flowLayoutPanel1.Controls.Add(this.chb_enableHT);
-            this.flowLayoutPanel1.Controls.Add(this.chb_skipIntro);
-            this.flowLayoutPanel1.Controls.Add(this.chb_window);
-            this.flowLayoutPanel1.Controls.Add(this.chb_showScriptErrors);
-            this.flowLayoutPanel1.Controls.Add(this.chb_noBenchmark);
-            this.flowLayoutPanel1.Controls.Add(this.chb_battleye);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 23);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(8, 8, 8, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(280, 148);
-            this.flowLayoutPanel1.TabIndex = 1;
-            // 
-            // chb_noLogs
-            // 
-            this.chb_noLogs.AutoSize = true;
-            this.chb_noLogs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_noLogs.Location = new System.Drawing.Point(11, 11);
-            this.chb_noLogs.Name = "chb_noLogs";
-            this.chb_noLogs.Size = new System.Drawing.Size(75, 21);
-            this.chb_noLogs.TabIndex = 0;
-            this.chb_noLogs.Text = "-noLogs";
-            this.chb_noLogs.UseVisualStyleBackColor = true;
-            // 
-            // chb_noPause
-            // 
-            this.chb_noPause.AutoSize = true;
-            this.chb_noPause.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_noPause.Location = new System.Drawing.Point(11, 38);
-            this.chb_noPause.Name = "chb_noPause";
-            this.chb_noPause.Size = new System.Drawing.Size(81, 21);
-            this.chb_noPause.TabIndex = 1;
-            this.chb_noPause.Text = "-noPause";
-            this.chb_noPause.UseVisualStyleBackColor = true;
-            // 
-            // chb_noSplash
-            // 
-            this.chb_noSplash.AutoSize = true;
-            this.chb_noSplash.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_noSplash.Location = new System.Drawing.Point(11, 65);
-            this.chb_noSplash.Name = "chb_noSplash";
-            this.chb_noSplash.Size = new System.Drawing.Size(85, 21);
-            this.chb_noSplash.TabIndex = 2;
-            this.chb_noSplash.Text = "-noSplash";
-            this.chb_noSplash.UseVisualStyleBackColor = true;
-            // 
-            // chb_noCB
-            // 
-            this.chb_noCB.AutoSize = true;
-            this.chb_noCB.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_noCB.Location = new System.Drawing.Point(11, 92);
-            this.chb_noCB.Name = "chb_noCB";
-            this.chb_noCB.Size = new System.Drawing.Size(62, 21);
-            this.chb_noCB.TabIndex = 3;
-            this.chb_noCB.Text = "-noCB";
-            this.chb_noCB.UseVisualStyleBackColor = true;
-            // 
-            // chb_enableHT
-            // 
-            this.chb_enableHT.AutoSize = true;
-            this.chb_enableHT.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_enableHT.Location = new System.Drawing.Point(11, 119);
-            this.chb_enableHT.Name = "chb_enableHT";
-            this.chb_enableHT.Size = new System.Drawing.Size(87, 21);
-            this.chb_enableHT.TabIndex = 4;
-            this.chb_enableHT.Text = "-enableHT";
-            this.chb_enableHT.UseVisualStyleBackColor = true;
-            // 
-            // chb_skipIntro
-            // 
-            this.chb_skipIntro.AutoSize = true;
-            this.chb_skipIntro.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_skipIntro.Location = new System.Drawing.Point(121, 11);
-            this.chb_skipIntro.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.chb_skipIntro.Name = "chb_skipIntro";
-            this.chb_skipIntro.Size = new System.Drawing.Size(82, 21);
-            this.chb_skipIntro.TabIndex = 5;
-            this.chb_skipIntro.Text = "-skipIntro";
-            this.chb_skipIntro.UseVisualStyleBackColor = true;
-            // 
-            // chb_window
-            // 
-            this.chb_window.AutoSize = true;
-            this.chb_window.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_window.Location = new System.Drawing.Point(121, 38);
-            this.chb_window.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.chb_window.Name = "chb_window";
-            this.chb_window.Size = new System.Drawing.Size(76, 21);
-            this.chb_window.TabIndex = 6;
-            this.chb_window.Text = "-window";
-            this.chb_window.UseVisualStyleBackColor = true;
-            // 
-            // chb_showScriptErrors
-            // 
-            this.chb_showScriptErrors.AutoSize = true;
-            this.chb_showScriptErrors.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_showScriptErrors.Location = new System.Drawing.Point(121, 65);
-            this.chb_showScriptErrors.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.chb_showScriptErrors.Name = "chb_showScriptErrors";
-            this.chb_showScriptErrors.Size = new System.Drawing.Size(131, 21);
-            this.chb_showScriptErrors.TabIndex = 8;
-            this.chb_showScriptErrors.Text = "-showScriptErrors";
-            this.chb_showScriptErrors.UseVisualStyleBackColor = true;
-            // 
-            // chb_noBenchmark
-            // 
-            this.chb_noBenchmark.AutoSize = true;
-            this.chb_noBenchmark.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_noBenchmark.Location = new System.Drawing.Point(121, 92);
-            this.chb_noBenchmark.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.chb_noBenchmark.Name = "chb_noBenchmark";
-            this.chb_noBenchmark.Size = new System.Drawing.Size(110, 21);
-            this.chb_noBenchmark.TabIndex = 9;
-            this.chb_noBenchmark.Text = "-noBenchmark";
-            this.chb_noBenchmark.UseVisualStyleBackColor = true;
-            // 
-            // chb_battleye
-            // 
-            this.chb_battleye.AutoSize = true;
-            this.chb_battleye.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_battleye.Image = global::arma3Launcher.Properties.Resources.be_logo;
-            this.chb_battleye.Location = new System.Drawing.Point(121, 119);
-            this.chb_battleye.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
-            this.chb_battleye.Name = "chb_battleye";
-            this.chb_battleye.Size = new System.Drawing.Size(86, 21);
-            this.chb_battleye.TabIndex = 7;
-            this.chb_battleye.Text = "Battleye";
-            this.chb_battleye.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.chb_battleye.UseVisualStyleBackColor = true;
-            this.chb_battleye.CheckedChanged += new System.EventHandler(this.chb_battleye_CheckedChanged);
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.DimGray;
-            this.panel6.Controls.Add(this.btn_copyLaunchOptions);
-            this.panel6.Controls.Add(this.label18);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.panel6.Size = new System.Drawing.Size(884, 23);
-            this.panel6.TabIndex = 0;
-            // 
-            // btn_copyLaunchOptions
-            // 
-            this.btn_copyLaunchOptions.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_copyLaunchOptions.Image = global::arma3Launcher.Properties.Resources.clippy1;
-            this.btn_copyLaunchOptions.Location = new System.Drawing.Point(860, 3);
-            this.btn_copyLaunchOptions.Name = "btn_copyLaunchOptions";
-            this.btn_copyLaunchOptions.Size = new System.Drawing.Size(16, 16);
-            this.btn_copyLaunchOptions.TabIndex = 1;
-            this.btn_copyLaunchOptions.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_copyLaunchOptions, "Copies to clipboard a string with selected launch options");
-            this.btn_copyLaunchOptions.Click += new System.EventHandler(this.btn_copyLaunchOptions_Click);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.label18.Location = new System.Drawing.Point(5, 2);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(108, 19);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "Launch Options";
-            // 
-            // panelMenu
-            // 
-            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panelMenu.Controls.Add(this.label10);
-            this.panelMenu.Controls.Add(this.label9);
-            this.panelMenu.Controls.Add(this.label8);
-            this.panelMenu.Controls.Add(this.label7);
-            this.panelMenu.Controls.Add(this.menu_community);
-            this.panelMenu.Controls.Add(this.menu_about);
-            this.panelMenu.Controls.Add(this.menu_help);
-            this.panelMenu.Controls.Add(this.menu_packs);
-            this.panelMenu.Controls.Add(this.menu_launchOptions);
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelMenu.Location = new System.Drawing.Point(0, 89);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(906, 42);
-            this.panelMenu.TabIndex = 2;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.label10.Location = new System.Drawing.Point(790, 13);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(17, 19);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "●";
-            this.label10.UseMnemonic = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.label9.Location = new System.Drawing.Point(698, 13);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(17, 19);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "●";
-            this.label9.UseMnemonic = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.label8.Location = new System.Drawing.Point(176, 13);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(17, 19);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "●";
-            this.label8.UseMnemonic = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            this.label7.Location = new System.Drawing.Point(350, 13);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(17, 19);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "●";
-            this.label7.UseMnemonic = false;
-            // 
-            // menu_community
-            // 
-            this.menu_community.AutoSize = true;
-            this.menu_community.Font = new System.Drawing.Font("Segoe UI", 20F);
-            this.menu_community.ForeColor = System.Drawing.Color.Gray;
-            this.menu_community.Location = new System.Drawing.Point(194, 3);
-            this.menu_community.Name = "menu_community";
-            this.menu_community.Size = new System.Drawing.Size(155, 37);
-            this.menu_community.TabIndex = 5;
-            this.menu_community.Text = "Community";
-            this.menu_community.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.menu_community.UseMnemonic = false;
-            this.menu_community.Click += new System.EventHandler(this.menu_community_Click);
-            this.menu_community.MouseEnter += new System.EventHandler(this.menu_community_MouseEnter);
-            this.menu_community.MouseLeave += new System.EventHandler(this.menu_community_MouseLeave);
-            // 
-            // menu_about
-            // 
-            this.menu_about.AutoSize = true;
-            this.menu_about.Font = new System.Drawing.Font("Segoe UI", 20F);
-            this.menu_about.ForeColor = System.Drawing.Color.Gray;
-            this.menu_about.Location = new System.Drawing.Point(808, 3);
-            this.menu_about.Name = "menu_about";
-            this.menu_about.Size = new System.Drawing.Size(90, 37);
-            this.menu_about.TabIndex = 4;
-            this.menu_about.Text = "About";
-            this.menu_about.UseMnemonic = false;
-            this.menu_about.Click += new System.EventHandler(this.menu_about_Click);
-            this.menu_about.MouseEnter += new System.EventHandler(this.menu_about_MouseEnter);
-            this.menu_about.MouseLeave += new System.EventHandler(this.menu_about_MouseLeave);
-            // 
-            // menu_help
-            // 
-            this.menu_help.AutoSize = true;
-            this.menu_help.Font = new System.Drawing.Font("Segoe UI", 20F);
-            this.menu_help.ForeColor = System.Drawing.Color.Gray;
-            this.menu_help.Location = new System.Drawing.Point(716, 3);
-            this.menu_help.Name = "menu_help";
-            this.menu_help.Size = new System.Drawing.Size(73, 37);
-            this.menu_help.TabIndex = 3;
-            this.menu_help.Text = "Help";
-            this.menu_help.UseMnemonic = false;
-            this.menu_help.Click += new System.EventHandler(this.menu_help_Click);
-            this.menu_help.MouseEnter += new System.EventHandler(this.menu_help_MouseEnter);
-            this.menu_help.MouseLeave += new System.EventHandler(this.menu_help_MouseLeave);
-            // 
-            // menu_packs
-            // 
-            this.menu_packs.AutoSize = true;
-            this.menu_packs.Font = new System.Drawing.Font("Segoe UI", 20F);
-            this.menu_packs.ForeColor = System.Drawing.Color.OliveDrab;
-            this.menu_packs.Location = new System.Drawing.Point(7, 3);
-            this.menu_packs.Name = "menu_packs";
-            this.menu_packs.Size = new System.Drawing.Size(168, 37);
-            this.menu_packs.TabIndex = 2;
-            this.menu_packs.Text = "Addon Packs";
-            this.menu_packs.UseMnemonic = false;
-            this.menu_packs.Click += new System.EventHandler(this.menu_news_Click);
-            this.menu_packs.MouseEnter += new System.EventHandler(this.menu_news_MouseEnter);
-            this.menu_packs.MouseLeave += new System.EventHandler(this.menu_news_MouseLeave);
-            // 
-            // menu_launchOptions
-            // 
-            this.menu_launchOptions.AutoSize = true;
-            this.menu_launchOptions.Font = new System.Drawing.Font("Segoe UI", 20F);
-            this.menu_launchOptions.ForeColor = System.Drawing.Color.Gray;
-            this.menu_launchOptions.Location = new System.Drawing.Point(368, 3);
-            this.menu_launchOptions.Name = "menu_launchOptions";
-            this.menu_launchOptions.Size = new System.Drawing.Size(329, 37);
-            this.menu_launchOptions.TabIndex = 1;
-            this.menu_launchOptions.Text = "Launch & Addons Options";
-            this.menu_launchOptions.UseMnemonic = false;
-            this.menu_launchOptions.Click += new System.EventHandler(this.menu_launchOptions_Click);
-            this.menu_launchOptions.MouseEnter += new System.EventHandler(this.menu_launchOptions_MouseEnter);
-            this.menu_launchOptions.MouseLeave += new System.EventHandler(this.menu_launchOptions_MouseLeave);
-            // 
-            // panelDirectories
-            // 
-            this.panelDirectories.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
-            this.panelDirectories.Controls.Add(this.panel_TeamSpeakDir);
-            this.panelDirectories.Controls.Add(this.btn_openA3);
-            this.panelDirectories.Controls.Add(this.btn_browseA3);
-            this.panelDirectories.Controls.Add(this.btn_ereaseArmaDirectory);
-            this.panelDirectories.Controls.Add(this.txtb_armaDirectory);
-            this.panelDirectories.Controls.Add(this.lbl_Arma3Dir);
-            this.panelDirectories.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelDirectories.Location = new System.Drawing.Point(0, 0);
-            this.panelDirectories.Name = "panelDirectories";
-            this.panelDirectories.Size = new System.Drawing.Size(906, 89);
-            this.panelDirectories.TabIndex = 1;
-            // 
-            // panel_TeamSpeakDir
-            // 
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_openTS3);
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_browseTS3);
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_ereaseTSDirectory);
-            this.panel_TeamSpeakDir.Controls.Add(this.txtb_tsDirectory);
-            this.panel_TeamSpeakDir.Controls.Add(this.lbl_TeamSpeakDir);
-            this.panel_TeamSpeakDir.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_TeamSpeakDir.Location = new System.Drawing.Point(0, 45);
-            this.panel_TeamSpeakDir.Name = "panel_TeamSpeakDir";
-            this.panel_TeamSpeakDir.Size = new System.Drawing.Size(906, 44);
-            this.panel_TeamSpeakDir.TabIndex = 12;
-            // 
-            // btn_openTS3
-            // 
-            this.btn_openTS3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_openTS3.Image = global::arma3Launcher.Properties.Resources.folder_open;
-            this.btn_openTS3.Location = new System.Drawing.Point(880, 9);
-            this.btn_openTS3.Name = "btn_openTS3";
-            this.btn_openTS3.Size = new System.Drawing.Size(16, 16);
-            this.btn_openTS3.TabIndex = 10;
-            this.btn_openTS3.TabStop = false;
-            this.btn_openTS3.Click += new System.EventHandler(this.btn_openTS3_Click);
-            // 
-            // btn_browseTS3
-            // 
-            this.btn_browseTS3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_browseTS3.Image = global::arma3Launcher.Properties.Resources.browse;
-            this.btn_browseTS3.Location = new System.Drawing.Point(860, 10);
-            this.btn_browseTS3.Name = "btn_browseTS3";
-            this.btn_browseTS3.Size = new System.Drawing.Size(16, 16);
-            this.btn_browseTS3.TabIndex = 9;
-            this.btn_browseTS3.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_browseTS3, "Double-click for manual browse");
-            this.btn_browseTS3.Click += new System.EventHandler(this.btn_browseTS3_Click);
-            // 
-            // btn_ereaseTSDirectory
-            // 
-            this.btn_ereaseTSDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseTSDirectory.FlatAppearance.BorderSize = 0;
-            this.btn_ereaseTSDirectory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseTSDirectory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseTSDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_ereaseTSDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.btn_ereaseTSDirectory.Image = global::arma3Launcher.Properties.Resources.circle_with_cross;
-            this.btn_ereaseTSDirectory.Location = new System.Drawing.Point(828, 6);
-            this.btn_ereaseTSDirectory.Name = "btn_ereaseTSDirectory";
-            this.btn_ereaseTSDirectory.Size = new System.Drawing.Size(20, 20);
-            this.btn_ereaseTSDirectory.TabIndex = 7;
-            this.btn_ereaseTSDirectory.TabStop = false;
-            this.btn_ereaseTSDirectory.UseVisualStyleBackColor = false;
-            this.btn_ereaseTSDirectory.Click += new System.EventHandler(this.btn_ereaseTSDirectory_Click);
-            // 
-            // txtb_tsDirectory
-            // 
-            this.txtb_tsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_tsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_tsDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtb_tsDirectory.Location = new System.Drawing.Point(185, 4);
-            this.txtb_tsDirectory.Name = "txtb_tsDirectory";
-            this.txtb_tsDirectory.Size = new System.Drawing.Size(666, 25);
-            this.txtb_tsDirectory.TabIndex = 2;
-            this.txtb_tsDirectory.TabStop = false;
-            this.txtb_tsDirectory.Text = "Set directory ->";
-            this.txtb_tsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseClick);
-            this.txtb_tsDirectory.TextChanged += new System.EventHandler(this.txtb_tsDirectory_TextChanged);
-            this.txtb_tsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_tsDirectory_MouseDoubleClick);
-            // 
-            // lbl_TeamSpeakDir
-            // 
-            this.lbl_TeamSpeakDir.AutoSize = true;
-            this.lbl_TeamSpeakDir.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.lbl_TeamSpeakDir.Location = new System.Drawing.Point(16, 7);
-            this.lbl_TeamSpeakDir.Name = "lbl_TeamSpeakDir";
-            this.lbl_TeamSpeakDir.Size = new System.Drawing.Size(155, 19);
-            this.lbl_TeamSpeakDir.TabIndex = 1;
-            this.lbl_TeamSpeakDir.Text = "TeamSpeak 3 directory:";
-            // 
-            // btn_openA3
-            // 
-            this.btn_openA3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_openA3.Image = global::arma3Launcher.Properties.Resources.folder_open;
-            this.btn_openA3.Location = new System.Drawing.Point(879, 19);
-            this.btn_openA3.Name = "btn_openA3";
-            this.btn_openA3.Size = new System.Drawing.Size(16, 16);
-            this.btn_openA3.TabIndex = 11;
-            this.btn_openA3.TabStop = false;
-            this.btn_openA3.Click += new System.EventHandler(this.btn_openA3_Click);
-            // 
-            // btn_browseA3
-            // 
-            this.btn_browseA3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_browseA3.Image = global::arma3Launcher.Properties.Resources.browse;
-            this.btn_browseA3.Location = new System.Drawing.Point(859, 20);
-            this.btn_browseA3.Name = "btn_browseA3";
-            this.btn_browseA3.Size = new System.Drawing.Size(16, 16);
-            this.btn_browseA3.TabIndex = 8;
-            this.btn_browseA3.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_browseA3, "Double-click for manual browse");
-            this.btn_browseA3.Click += new System.EventHandler(this.btn_browseA3_Click);
-            // 
-            // btn_ereaseArmaDirectory
-            // 
-            this.btn_ereaseArmaDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseArmaDirectory.FlatAppearance.BorderSize = 0;
-            this.btn_ereaseArmaDirectory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseArmaDirectory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_ereaseArmaDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_ereaseArmaDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.btn_ereaseArmaDirectory.Image = global::arma3Launcher.Properties.Resources.circle_with_cross;
-            this.btn_ereaseArmaDirectory.Location = new System.Drawing.Point(828, 16);
-            this.btn_ereaseArmaDirectory.Name = "btn_ereaseArmaDirectory";
-            this.btn_ereaseArmaDirectory.Size = new System.Drawing.Size(20, 20);
-            this.btn_ereaseArmaDirectory.TabIndex = 6;
-            this.btn_ereaseArmaDirectory.TabStop = false;
-            this.btn_ereaseArmaDirectory.UseVisualStyleBackColor = false;
-            this.btn_ereaseArmaDirectory.Click += new System.EventHandler(this.btn_ereaseArmaDirectory_Click);
-            // 
-            // txtb_armaDirectory
-            // 
-            this.txtb_armaDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_armaDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_armaDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtb_armaDirectory.Location = new System.Drawing.Point(185, 14);
-            this.txtb_armaDirectory.Name = "txtb_armaDirectory";
-            this.txtb_armaDirectory.Size = new System.Drawing.Size(666, 25);
-            this.txtb_armaDirectory.TabIndex = 3;
-            this.txtb_armaDirectory.TabStop = false;
-            this.txtb_armaDirectory.Text = "Set directory ->";
-            this.txtb_armaDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_armaDirectory_MouseClick);
-            this.txtb_armaDirectory.TextChanged += new System.EventHandler(this.txtb_armaDirectory_TextChanged);
-            this.txtb_armaDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_armaDirectory_MouseDoubleClick);
-            // 
-            // lbl_Arma3Dir
-            // 
-            this.lbl_Arma3Dir.AutoSize = true;
-            this.lbl_Arma3Dir.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.lbl_Arma3Dir.Location = new System.Drawing.Point(16, 17);
-            this.lbl_Arma3Dir.Name = "lbl_Arma3Dir";
-            this.lbl_Arma3Dir.Size = new System.Drawing.Size(118, 19);
-            this.lbl_Arma3Dir.TabIndex = 0;
-            this.lbl_Arma3Dir.Text = "Arma 3 directory:";
             // 
             // panelLaunch
             // 
@@ -2163,12 +2275,13 @@
             this.panel_bottomhide.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_bottomhide.Location = new System.Drawing.Point(0, 10);
             this.panel_bottomhide.Name = "panel_bottomhide";
-            this.panel_bottomhide.Size = new System.Drawing.Size(10, 90);
+            this.panel_bottomhide.Size = new System.Drawing.Size(906, 90);
             this.panel_bottomhide.TabIndex = 13;
             // 
             // panel_bottomHide_Inner
             // 
             this.panel_bottomHide_Inner.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(104)))), ((int)(((byte)(31)))));
+            this.panel_bottomHide_Inner.BackgroundImage = global::arma3Launcher.Properties.Resources.bg_downloadbar;
             this.panel_bottomHide_Inner.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel_bottomHide_Inner.Controls.Add(this.txt_percentageStatus);
             this.panel_bottomHide_Inner.Controls.Add(this.txt_progressStatus);
@@ -2179,50 +2292,48 @@
             this.panel_bottomHide_Inner.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_bottomHide_Inner.Location = new System.Drawing.Point(0, 0);
             this.panel_bottomHide_Inner.Name = "panel_bottomHide_Inner";
-            this.panel_bottomHide_Inner.Size = new System.Drawing.Size(5, 90);
+            this.panel_bottomHide_Inner.Size = new System.Drawing.Size(906, 90);
             this.panel_bottomHide_Inner.TabIndex = 12;
             // 
             // txt_percentageStatus
             // 
+            this.txt_percentageStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_percentageStatus.AutoSize = true;
+            this.txt_percentageStatus.BackColor = System.Drawing.Color.Transparent;
             this.txt_percentageStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txt_percentageStatus.ForeColor = System.Drawing.Color.DarkGray;
-            this.txt_percentageStatus.Location = new System.Drawing.Point(481, 18);
-            this.txt_percentageStatus.MinimumSize = new System.Drawing.Size(250, 0);
+            this.txt_percentageStatus.Location = new System.Drawing.Point(690, 18);
+            this.txt_percentageStatus.MaximumSize = new System.Drawing.Size(200, 19);
+            this.txt_percentageStatus.MinimumSize = new System.Drawing.Size(200, 19);
             this.txt_percentageStatus.Name = "txt_percentageStatus";
-            this.txt_percentageStatus.Size = new System.Drawing.Size(250, 19);
+            this.txt_percentageStatus.Size = new System.Drawing.Size(200, 19);
             this.txt_percentageStatus.TabIndex = 7;
             this.txt_percentageStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txt_progressStatus
             // 
+            this.txt_progressStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_progressStatus.AutoSize = true;
+            this.txt_progressStatus.BackColor = System.Drawing.Color.Transparent;
             this.txt_progressStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.txt_progressStatus.Location = new System.Drawing.Point(17, 18);
-            this.txt_progressStatus.MaximumSize = new System.Drawing.Size(450, 0);
-            this.txt_progressStatus.MinimumSize = new System.Drawing.Size(450, 0);
+            this.txt_progressStatus.MaximumSize = new System.Drawing.Size(650, 19);
+            this.txt_progressStatus.MinimumSize = new System.Drawing.Size(650, 19);
             this.txt_progressStatus.Name = "txt_progressStatus";
-            this.txt_progressStatus.Size = new System.Drawing.Size(450, 19);
+            this.txt_progressStatus.Size = new System.Drawing.Size(650, 19);
             this.txt_progressStatus.TabIndex = 6;
             this.txt_progressStatus.Text = "Waiting for orders";
             // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(20, 60);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.ShowInTaskbar = true;
-            this.prb_progressBar_All.Size = new System.Drawing.Size(679, 5);
-            this.prb_progressBar_All.TabIndex = 11;
-            // 
             // btn_cancelDownload
             // 
-            this.btn_cancelDownload.BackgroundImage = global::arma3Launcher.Properties.Resources.cloud_off;
-            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
+            this.btn_cancelDownload.BackgroundImage = global::arma3Launcher.Properties.Resources.cancel_circle_big_white;
+            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_cancelDownload.Location = new System.Drawing.Point(702, 39);
+            this.btn_cancelDownload.Location = new System.Drawing.Point(867, 40);
             this.btn_cancelDownload.Name = "btn_cancelDownload";
-            this.btn_cancelDownload.Size = new System.Drawing.Size(23, 24);
+            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
             this.btn_cancelDownload.TabIndex = 12;
             this.btn_cancelDownload.TabStop = false;
             this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
@@ -2231,21 +2342,16 @@
             this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
             this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
             // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(20, 40);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(679, 20);
-            this.prb_progressBar_File.TabIndex = 10;
-            // 
             // txt_curFile
             // 
+            this.txt_curFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_curFile.AutoSize = true;
+            this.txt_curFile.BackColor = System.Drawing.Color.Transparent;
             this.txt_curFile.Font = new System.Drawing.Font("Segoe UI", 7F);
             this.txt_curFile.ForeColor = System.Drawing.Color.LightGray;
             this.txt_curFile.Location = new System.Drawing.Point(18, 68);
-            this.txt_curFile.MinimumSize = new System.Drawing.Size(250, 0);
+            this.txt_curFile.MaximumSize = new System.Drawing.Size(0, 12);
+            this.txt_curFile.MinimumSize = new System.Drawing.Size(250, 12);
             this.txt_curFile.Name = "txt_curFile";
             this.txt_curFile.Size = new System.Drawing.Size(250, 12);
             this.txt_curFile.TabIndex = 8;
@@ -2413,18 +2519,18 @@
             this.menu_RemoteSettings,
             this.preferencesToolStripMenuItem,
             this.btn_reinstallTFRPlugins,
-            this.btn_downloadConfigs});
+            this.btn_addShortcutDesktop});
             this.menu_moreOptions.Name = "menu_moreOptions";
-            this.menu_moreOptions.Size = new System.Drawing.Size(209, 92);
+            this.menu_moreOptions.Size = new System.Drawing.Size(205, 92);
             // 
             // menu_RemoteSettings
             // 
             this.menu_RemoteSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_reloadRemoteSettings,
             this.btn_showRemoteSettings});
-            this.menu_RemoteSettings.Image = global::arma3Launcher.Properties.Resources.cog;
+            this.menu_RemoteSettings.Image = global::arma3Launcher.Properties.Resources.settings;
             this.menu_RemoteSettings.Name = "menu_RemoteSettings";
-            this.menu_RemoteSettings.Size = new System.Drawing.Size(208, 22);
+            this.menu_RemoteSettings.Size = new System.Drawing.Size(204, 22);
             this.menu_RemoteSettings.Text = "Remote Settings";
             // 
             // btn_reloadRemoteSettings
@@ -2437,7 +2543,7 @@
             // 
             // btn_showRemoteSettings
             // 
-            this.btn_showRemoteSettings.Image = global::arma3Launcher.Properties.Resources.info1;
+            this.btn_showRemoteSettings.Image = global::arma3Launcher.Properties.Resources.info;
             this.btn_showRemoteSettings.Name = "btn_showRemoteSettings";
             this.btn_showRemoteSettings.Size = new System.Drawing.Size(199, 22);
             this.btn_showRemoteSettings.Text = "Show Remote Settings";
@@ -2452,20 +2558,20 @@
             this.pref_serverAutopilot,
             this.toolStripSeparator1,
             this.launcherPreferencesToolStripMenuItem,
-            this.pref_transitionEffects,
             this.pref_runLauncherOnStartup,
             this.pref_allowNotifications,
-            this.pref_autoDownload});
-            this.preferencesToolStripMenuItem.Image = global::arma3Launcher.Properties.Resources.equalizer;
+            this.pref_autoDownload,
+            this.pref_switchclientserver});
+            this.preferencesToolStripMenuItem.Image = global::arma3Launcher.Properties.Resources.style;
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
             // gamePreferencesToolStripMenuItem
             // 
             this.gamePreferencesToolStripMenuItem.Enabled = false;
             this.gamePreferencesToolStripMenuItem.Name = "gamePreferencesToolStripMenuItem";
-            this.gamePreferencesToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.gamePreferencesToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.gamePreferencesToolStripMenuItem.Text = "Game preferences";
             // 
             // pref_startGameAfterDownloadsAreCompleted
@@ -2474,7 +2580,7 @@
             this.pref_startGameAfterDownloadsAreCompleted.CheckOnClick = true;
             this.pref_startGameAfterDownloadsAreCompleted.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_startGameAfterDownloadsAreCompleted.Name = "pref_startGameAfterDownloadsAreCompleted";
-            this.pref_startGameAfterDownloadsAreCompleted.Size = new System.Drawing.Size(231, 22);
+            this.pref_startGameAfterDownloadsAreCompleted.Size = new System.Drawing.Size(259, 22);
             this.pref_startGameAfterDownloadsAreCompleted.Text = "Start game when ready";
             // 
             // pref_joinServerAuto
@@ -2483,7 +2589,7 @@
             this.pref_joinServerAuto.CheckOnClick = true;
             this.pref_joinServerAuto.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_joinServerAuto.Name = "pref_joinServerAuto";
-            this.pref_joinServerAuto.Size = new System.Drawing.Size(231, 22);
+            this.pref_joinServerAuto.Size = new System.Drawing.Size(259, 22);
             this.pref_joinServerAuto.Text = "Join server automatically";
             // 
             // pref_serverAutopilot
@@ -2492,7 +2598,7 @@
             this.pref_serverAutopilot.CheckOnClick = true;
             this.pref_serverAutopilot.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_serverAutopilot.Name = "pref_serverAutopilot";
-            this.pref_serverAutopilot.Size = new System.Drawing.Size(231, 22);
+            this.pref_serverAutopilot.Size = new System.Drawing.Size(259, 22);
             this.pref_serverAutopilot.Text = "Server autopilot";
             this.pref_serverAutopilot.Visible = false;
             this.pref_serverAutopilot.CheckedChanged += new System.EventHandler(this.pref_serverAutopilot_CheckedChanged);
@@ -2500,23 +2606,14 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(228, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(256, 6);
             // 
             // launcherPreferencesToolStripMenuItem
             // 
             this.launcherPreferencesToolStripMenuItem.Enabled = false;
             this.launcherPreferencesToolStripMenuItem.Name = "launcherPreferencesToolStripMenuItem";
-            this.launcherPreferencesToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.launcherPreferencesToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.launcherPreferencesToolStripMenuItem.Text = "Launcher preferences";
-            // 
-            // pref_transitionEffects
-            // 
-            this.pref_transitionEffects.Checked = true;
-            this.pref_transitionEffects.CheckOnClick = true;
-            this.pref_transitionEffects.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.pref_transitionEffects.Name = "pref_transitionEffects";
-            this.pref_transitionEffects.Size = new System.Drawing.Size(231, 22);
-            this.pref_transitionEffects.Text = "Transition effects";
             // 
             // pref_runLauncherOnStartup
             // 
@@ -2524,9 +2621,9 @@
             this.pref_runLauncherOnStartup.CheckOnClick = true;
             this.pref_runLauncherOnStartup.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_runLauncherOnStartup.Name = "pref_runLauncherOnStartup";
-            this.pref_runLauncherOnStartup.Size = new System.Drawing.Size(231, 22);
+            this.pref_runLauncherOnStartup.Size = new System.Drawing.Size(259, 22);
             this.pref_runLauncherOnStartup.Text = "Run the launcher on startup";
-            this.pref_runLauncherOnStartup.Visible = false;
+            this.pref_runLauncherOnStartup.Click += new System.EventHandler(this.pref_runLauncherOnStartup_Click);
             // 
             // pref_allowNotifications
             // 
@@ -2534,7 +2631,7 @@
             this.pref_allowNotifications.CheckOnClick = true;
             this.pref_allowNotifications.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_allowNotifications.Name = "pref_allowNotifications";
-            this.pref_allowNotifications.Size = new System.Drawing.Size(231, 22);
+            this.pref_allowNotifications.Size = new System.Drawing.Size(259, 22);
             this.pref_allowNotifications.Text = "Allow notifications";
             this.pref_allowNotifications.Visible = false;
             // 
@@ -2544,25 +2641,31 @@
             this.pref_autoDownload.CheckOnClick = true;
             this.pref_autoDownload.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pref_autoDownload.Name = "pref_autoDownload";
-            this.pref_autoDownload.Size = new System.Drawing.Size(231, 22);
-            this.pref_autoDownload.Text = "Auto-download pack updates";
-            this.pref_autoDownload.Visible = false;
+            this.pref_autoDownload.Size = new System.Drawing.Size(259, 22);
+            this.pref_autoDownload.Text = "Auto-download repository updates";
+            // 
+            // pref_switchclientserver
+            // 
+            this.pref_switchclientserver.Name = "pref_switchclientserver";
+            this.pref_switchclientserver.Size = new System.Drawing.Size(259, 22);
+            this.pref_switchclientserver.Text = "Switch to Server Mode";
+            this.pref_switchclientserver.Click += new System.EventHandler(this.switchToServerModeToolStripMenuItem_Click);
             // 
             // btn_reinstallTFRPlugins
             // 
-            this.btn_reinstallTFRPlugins.Image = global::arma3Launcher.Properties.Resources.puzzle_piece;
+            this.btn_reinstallTFRPlugins.Image = global::arma3Launcher.Properties.Resources.extension;
             this.btn_reinstallTFRPlugins.Name = "btn_reinstallTFRPlugins";
-            this.btn_reinstallTFRPlugins.Size = new System.Drawing.Size(208, 22);
+            this.btn_reinstallTFRPlugins.Size = new System.Drawing.Size(204, 22);
             this.btn_reinstallTFRPlugins.Text = "Reinstall TFR plugins";
             this.btn_reinstallTFRPlugins.Click += new System.EventHandler(this.btn_reinstallTFRPlugins_Click);
             // 
-            // btn_downloadConfigs
+            // btn_addShortcutDesktop
             // 
-            this.btn_downloadConfigs.Image = global::arma3Launcher.Properties.Resources.download3;
-            this.btn_downloadConfigs.Name = "btn_downloadConfigs";
-            this.btn_downloadConfigs.Size = new System.Drawing.Size(208, 22);
-            this.btn_downloadConfigs.Text = "Download Active Configs";
-            this.btn_downloadConfigs.Click += new System.EventHandler(this.btn_downloadConfigs_Click);
+            this.btn_addShortcutDesktop.Image = global::arma3Launcher.Properties.Resources.favorite;
+            this.btn_addShortcutDesktop.Name = "btn_addShortcutDesktop";
+            this.btn_addShortcutDesktop.Size = new System.Drawing.Size(204, 22);
+            this.btn_addShortcutDesktop.Text = "Add Shortcut to Desktop";
+            this.btn_addShortcutDesktop.Click += new System.EventHandler(this.btn_addShortcutDesktop_Click);
             // 
             // button1
             // 
@@ -2576,6 +2679,25 @@
             // backgroundBlinker
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
+            // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(20, 60);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.ShowInTaskbar = true;
+            this.prb_progressBar_All.Size = new System.Drawing.Size(840, 5);
+            this.prb_progressBar_All.TabIndex = 11;
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(20, 40);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(840, 20);
+            this.prb_progressBar_File.TabIndex = 10;
             // 
             // MainForm
             // 
@@ -2603,8 +2725,60 @@
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).EndInit();
             this.MainWindow.ResumeLayout(false);
+            this.panelMenu.ResumeLayout(false);
+            this.panelMenu.PerformLayout();
+            this.panelDirectories.ResumeLayout(false);
+            this.panelRepo.ResumeLayout(false);
+            this.panel22.ResumeLayout(false);
+            this.panel22.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            this.panel19.ResumeLayout(false);
+            this.panel20.ResumeLayout(false);
+            this.panel21.ResumeLayout(false);
+            this.panel21.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_addonManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_opencloseDirPanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel_TeamSpeakDir.ResumeLayout(false);
+            this.panel_TeamSpeakDir.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openTS3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_browseTS3)).EndInit();
+            this.panel_Arma3Dir.ResumeLayout(false);
+            this.panel_Arma3Dir.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_browseA3)).EndInit();
             this.panel5.ResumeLayout(false);
             this.Panels.ResumeLayout(false);
+            this.panel_help.ResumeLayout(false);
+            this.panel_help.PerformLayout();
+            this.panel_community.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.web_loading)).EndInit();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.panel_launchOptions.ResumeLayout(false);
+            this.panel_steamAddons.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadSteamAddons)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openWorkshop)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).EndInit();
+            this.panel_launchOptionsChb.ResumeLayout(false);
+            this.panel_launchOptionsChb.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_openModsDirectory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_browseModsDirectory)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).EndInit();
             this.panel_about.ResumeLayout(false);
             this.panel_about.PerformLayout();
             this.panel12.ResumeLayout(false);
@@ -2628,51 +2802,6 @@
             this.panel15.ResumeLayout(false);
             this.panel15.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_addPrivatePack)).EndInit();
-            this.panel_help.ResumeLayout(false);
-            this.panel_help.PerformLayout();
-            this.panel_community.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.flash_youtubePlayer)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            this.panel_launchOptions.ResumeLayout(false);
-            this.panel_recommendedAddons.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.menu_blastcore.ResumeLayout(false);
-            this.menu_dragonfyre.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            this.panel_optionalAddons.ResumeLayout(false);
-            this.panel_Optional.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadAddons)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_openModsDirectory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_browseModsDirectory)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).EndInit();
-            this.panelMenu.ResumeLayout(false);
-            this.panelMenu.PerformLayout();
-            this.panelDirectories.ResumeLayout(false);
-            this.panelDirectories.PerformLayout();
-            this.panel_TeamSpeakDir.ResumeLayout(false);
-            this.panel_TeamSpeakDir.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_openTS3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_browseTS3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_openA3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_browseA3)).EndInit();
             this.panelLaunch.ResumeLayout(false);
             this.panelLaunch.PerformLayout();
             this.panel_bottomhide.ResumeLayout(false);
@@ -2734,11 +2863,10 @@
         private System.Windows.Forms.Panel Panels;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.CheckBox chb_noLogs;
+        private System.Windows.Forms.FlowLayoutPanel panel_launchOptionsChb;
         private System.Windows.Forms.CheckBox chb_noPause;
         private System.Windows.Forms.CheckBox chb_noSplash;
-        private System.Windows.Forms.CheckBox chb_noCB;
+        private System.Windows.Forms.CheckBox chb_hugePages;
         private System.Windows.Forms.CheckBox chb_enableHT;
         private System.Windows.Forms.CheckBox chb_skipIntro;
         private System.Windows.Forms.CheckBox chb_window;
@@ -2749,27 +2877,17 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckBox chb_malloc;
         private System.Windows.Forms.CheckBox chb_maxMem;
-        private System.Windows.Forms.CheckBox chb_world;
-        private System.Windows.Forms.CheckBox chb_maxVRAM;
         private System.Windows.Forms.CheckBox chb_exThreads;
         private System.Windows.Forms.CheckBox chb_cpuCount;
-        private System.Windows.Forms.TextBox txtb_world;
         private System.Windows.Forms.TextBox txtb_maxMem;
-        private System.Windows.Forms.TextBox txtb_maxVRAM;
         private System.Windows.Forms.TextBox txtb_cpuCount;
         private System.Windows.Forms.TextBox txtb_exThreads;
-        private System.Windows.Forms.Panel panel_recommendedAddons;
+        private System.Windows.Forms.Panel panel_steamAddons;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Panel panel_optionalAddons;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btn_deactivateAddon;
-        private System.Windows.Forms.Button btn_activateAddon;
-        private System.Windows.Forms.ListBox lstb_detectedAddons;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -2789,8 +2907,6 @@
         private System.Windows.Forms.ComboBox txtb_malloc;
         private System.Windows.Forms.Label txt_curFile;
         private System.Windows.Forms.FlowLayoutPanel PacksPanel;
-        private System.Windows.Forms.CheckBox chb_noBenchmark;
-        private System.Windows.Forms.PictureBox btn_reloadAddons;
         private System.Windows.Forms.PictureBox btn_Launch;
         private System.Windows.Forms.PictureBox btn_browseTS3;
         private System.Windows.Forms.PictureBox btn_browseA3;
@@ -2799,12 +2915,6 @@
         private System.Windows.Forms.PictureBox btn_goTwitch;
         private System.Windows.Forms.PictureBox btn_goTwitter;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ContextMenuStrip menu_dragonfyre;
-        private System.Windows.Forms.ContextMenuStrip menu_blastcore;
-        private System.Windows.Forms.ToolStripMenuItem btn_downloadDragonFyre;
-        private System.Windows.Forms.ToolStripMenuItem btn_downloadBlastcore;
-        private System.Windows.Forms.ToolStripMenuItem chb_dragonfyre;
-        private System.Windows.Forms.ToolStripMenuItem chb_blastcore;
         private Controls.Windows7ProgressBar prb_progressBar_File;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_ereaseModsDirectory;
@@ -2825,12 +2935,7 @@
         private System.Windows.Forms.ToolStripMenuItem btn_reinstallTFRPlugins;
         private System.Windows.Forms.ToolStripMenuItem btn_reloadRemoteSettings;
         private System.Windows.Forms.ToolStripMenuItem btn_showRemoteSettings;
-        private System.Windows.Forms.Panel panel_Optional;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox lstb_activeAddons;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.ToolStripMenuItem btn_downloadConfigs;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pref_startGameAfterDownloadsAreCompleted;
         private System.Windows.Forms.ToolStripMenuItem pref_runLauncherOnStartup;
@@ -2857,10 +2962,6 @@
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Panel packName_underLine;
         private System.Windows.Forms.Label txt_reSizeBar;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label13;
-        private Controls.SplitButton splitButton1;
-        private Controls.SplitButton btn_dragonfyre;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Panel panel8;
@@ -2868,18 +2969,48 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label1;
-        private AxShockwaveFlashObjects.AxShockwaveFlash flash_youtubePlayer;
         private System.Windows.Forms.LinkLabel vlink_medicalBasic;
         private System.Windows.Forms.LinkLabel vlink_microDAGR;
         private System.Windows.Forms.LinkLabel vlink_infMovement;
         private System.Windows.Forms.ToolStripMenuItem gamePreferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem launcherPreferencesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pref_transitionEffects;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Button btn_ereaseSearchPack;
         private System.Windows.Forms.PictureBox btn_addPrivatePack;
         private System.Windows.Forms.TextBox txtb_searchPack;
         private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.PictureBox btn_openWorkshop;
+        private System.Windows.Forms.CheckedListBox steamworkshopAddonsList;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.PictureBox btn_reloadSteamAddons;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Panel panel_Arma3Dir;
+        private System.Windows.Forms.Panel panelRepo;
+        private System.Windows.Forms.Button btn_repoExpandAll;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.Panel panel20;
+        private System.Windows.Forms.Panel panel21;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btn_checkRepo;
+        private System.Windows.Forms.Panel panel22;
+        private System.Windows.Forms.PictureBox btn_opencloseDirPanel;
+        private System.Windows.Forms.TreeView trv_repoContent;
+        private System.Windows.Forms.ImageList imageListRepo;
+        private System.Windows.Forms.PictureBox btn_addonManager;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Label lbl_repofilemissing;
+        private System.Windows.Forms.Label lbl_repofileinvalid;
+        private System.Windows.Forms.Label lbl_repofileok;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.WebBrowser web_youtubeEmbed;
+        private System.Windows.Forms.PictureBox web_loading;
+        private System.Windows.Forms.ToolStripMenuItem pref_switchclientserver;
+        private System.Windows.Forms.CheckBox chb_filePatching;
+        private System.Windows.Forms.CheckBox chb_worldEmpty;
+        private System.Windows.Forms.ToolStripMenuItem btn_addShortcutDesktop;
     }
 }

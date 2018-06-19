@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="arma3Launcher.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="noLogs" Type="System.Boolean" Scope="User">
+    <Setting Name="hugePages" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="noPause" Type="System.Boolean" Scope="User">
@@ -11,7 +11,7 @@
     <Setting Name="noSplash" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="noCB" Type="System.Boolean" Scope="User">
+    <Setting Name="filePatching" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="enableHT" Type="System.Boolean" Scope="User">
@@ -29,11 +29,8 @@
     <Setting Name="showScriptErrors" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="world" Type="System.Boolean" Scope="User">
+    <Setting Name="worldEmpty" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="world_value" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Empty</Value>
     </Setting>
     <Setting Name="maxMem" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -46,12 +43,6 @@
     </Setting>
     <Setting Name="malloc_value" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="maxVRAM" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="maxVRAM_value" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="exThreads" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -71,14 +62,8 @@
     <Setting Name="TS3Folder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="JSRS" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="BlastCore" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="firstLaunch" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -96,10 +81,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="lastAddonPack" Type="System.String" Scope="User">
-      <Value Profile="(Default)">spn_lite</Value>
-    </Setting>
-    <Setting Name="downloadQueue" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">arma3</Value>
     </Setting>
     <Setting Name="startGameAfterDownload" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -111,7 +93,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="autoDownload" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="allowErrorReport" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -121,6 +103,15 @@
     </Setting>
     <Setting Name="privateKeys" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RepoFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastRepoFileSize" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="isServerMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

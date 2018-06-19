@@ -56,28 +56,28 @@ namespace arma3Launcher.Controls
             switch (label)
             {
                 case "update":
-                    pic_badge.Image = Properties.Resources.bg_updav;
+                    //pic_badge.Image = Properties.Resources.bg_updav;
                     break;
                 case "map":
-                    pic_badge.Image = Properties.Resources.bg_map;
+                    //pic_badge.Image = Properties.Resources.bg_map;
                     break;
                 case "launcher":
-                    pic_badge.Image = Properties.Resources.bg_launcher;
+                    //pic_badge.Image = Properties.Resources.bg_launcher;
                     break;
                 case "addon":
-                    pic_badge.Image = Properties.Resources.bg_addon;
+                    //pic_badge.Image = Properties.Resources.bg_addon;
                     break;
                 case "wiki":
-                    pic_badge.Image = Properties.Resources.bg_wiki;
+                    //pic_badge.Image = Properties.Resources.bg_wiki;
                     break;
                 case "player":
-                    pic_badge.Image = Properties.Resources.bg_player;
+                    //pic_badge.Image = Properties.Resources.bg_player;
                     break;
                 case "mission":
-                    pic_badge.Image = Properties.Resources.bg_mission;
+                    //pic_badge.Image = Properties.Resources.bg_mission;
                     break;
                 case "warning":
-                    this.BackgroundImage = Properties.Resources.bg_warning;
+                    //this.BackgroundImage = Properties.Resources.bg_warning;
                     this.BackColor = Color.Maroon;
                     panel_bgTitle.Visible = false;
                     txt_content.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);

@@ -20,73 +20,45 @@ namespace arma3Launcher.Workers
         private string SvArguments = "";
         private string HcArguments = "";
 
-        private Process auxProcess;
-        private MainForm auxMainForm;
-        private PictureBox auxLaunch;
-        private Label auxStatus;
+        private Process process;
+        private MainForm mainForm;
+        private PictureBox launch;
+        private Label status;
 
-        public LaunchCore(bool noLogs,
-            bool noPause,
-            bool noSplash,
-            bool noCB,
-            bool enableHT,
-            bool skipIntro,
-            bool window,
-            bool showScriptErrors,
-            bool noBenchmark,
-            bool world,
-            string s_world,
+        public LaunchCore(FlowLayoutPanel launchOptions,
             bool maxMem,
             string s_maxMem,
             bool malloc,
             string s_malloc,
-            bool maxVRAM,
-            string s_maxVRAM,
             bool exThreads,
             string s_exThreads,
             bool cpuCount,
             string s_cpuCount)
         {
-            string auxCombinedArguments = AggregateArguments(noLogs, noPause, noSplash, noCB, enableHT, skipIntro, window,
-                showScriptErrors, noBenchmark, world, s_world, maxMem, s_maxMem, malloc, s_malloc, maxVRAM, s_maxVRAM, exThreads, s_exThreads, cpuCount, s_cpuCount);
+            string auxCombinedArguments = AggregateArguments(launchOptions, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
 
             if (auxCombinedArguments != "") Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
         }
 
-        public LaunchCore(bool noLogs, 
-            bool noPause, 
-            bool noSplash, 
-            bool noCB, 
-            bool enableHT, 
-            bool skipIntro, 
-            bool window,  
-            bool showScriptErrors, 
-            bool noBenchmark,
-            bool world,
-            string s_world, 
+        public LaunchCore(FlowLayoutPanel launchOptions, 
             bool maxMem,
             string s_maxMem, 
             bool malloc,
             string s_malloc, 
-            bool maxVRAM,
-            string s_maxVRAM, 
             bool exThreads,
             string s_exThreads, 
             bool cpuCount,
             string s_cpuCount,
-            bool dragonfyre,
-            string s_dragonfyre,
-            string s_dragonfyrerhs,
-            bool blastcore,
-            string s_blastcore,
-            ListBox activeAddons,
-            List<string> modsList)
+            CheckedListBox activeAddons,
+            List<string> modsList,
+            MainForm mainForm)
         {
-            string auxCombinedArguments = AggregateArguments(noLogs, noPause, noSplash, noCB, enableHT, skipIntro, window, 
-                showScriptErrors, noBenchmark, world, s_world, maxMem, s_maxMem, malloc, s_malloc, maxVRAM, s_maxVRAM, exThreads, s_exThreads, cpuCount, s_cpuCount);
+            string auxCombinedArguments = AggregateArguments(launchOptions, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
             string auxCoreMods = "-mod=\"";
             string auxCombinedAddons = "";
             int i = 0;
+
+            this.mainForm = mainForm;
 
             foreach (string mod in modsList)
             {
@@ -101,23 +73,14 @@ namespace arma3Launcher.Workers
 
             if (auxCombinedArguments != "") Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
 
-            if (dragonfyre)
-                auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + s_dragonfyre;
-
-            if (dragonfyre && Directory.Exists(AddonsFolder + s_dragonfyre) && auxCoreMods.ToLower().Contains("@rhs"))
-                auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + s_dragonfyrerhs;
-
-            if (blastcore)
-                auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + s_blastcore;
-
-            if (activeAddons.Items.Count > 0 && activeAddons.Enabled)
+            if (activeAddons.CheckedItems.Count > 0 && activeAddons.Enabled)
             {
                 do
                 {
-                    if (auxCombinedAddons != "") auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + activeAddons.Items[i].ToString();
-                    else auxCombinedAddons = ";" + AddonsFolder + activeAddons.Items[i].ToString();
+                    if (auxCombinedAddons != "") auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + activeAddons.CheckedItems[i].ToString();
+                    else auxCombinedAddons = ";" + AddonsFolder + activeAddons.CheckedItems[i].ToString();
                     i++;
-                } while (i != activeAddons.Items.Count);
+                } while (i != activeAddons.CheckedItems.Count);
             }
 
             if (modsList.Count == 0 && auxCombinedAddons != "")
@@ -129,23 +92,11 @@ namespace arma3Launcher.Workers
             //MessageBox.Show(Arguments);
         }
 
-        private string AggregateArguments(bool noLogs,
-            bool noPause,
-            bool noSplash,
-            bool noCB,
-            bool enableHT,
-            bool skipIntro,
-            bool window,
-            bool showScriptErrors,
-            bool noBenchmark,
-            bool world,
-            string s_world,
+        private string AggregateArguments(FlowLayoutPanel launchOptions,
             bool maxMem,
             string s_maxMem,
             bool malloc,
             string s_malloc,
-            bool maxVRAM,
-            string s_maxVRAM,
             bool exThreads,
             string s_exThreads,
             bool cpuCount,
@@ -153,20 +104,18 @@ namespace arma3Launcher.Workers
         {
             string auxCombinedArguments = "";
 
-            if (noLogs) auxCombinedArguments = auxCombinedArguments + "-noLogs ";
-            if (noPause) auxCombinedArguments = auxCombinedArguments + "-noPause ";
-            if (noSplash) auxCombinedArguments = auxCombinedArguments + "-noSplash ";
-            if (noCB) auxCombinedArguments = auxCombinedArguments + "-noCB ";
-            if (enableHT) auxCombinedArguments = auxCombinedArguments + "-enableHT ";
-            if (skipIntro) auxCombinedArguments = auxCombinedArguments + "-skipIntro ";
-            if (window) auxCombinedArguments = auxCombinedArguments + "-window ";
-            if (showScriptErrors) auxCombinedArguments = auxCombinedArguments + "-showScriptErrors ";
-            if (noBenchmark) auxCombinedArguments = auxCombinedArguments + "-noBenchmark ";
+            foreach (CheckBox option in launchOptions.Controls)
+            {
+                try
+                {
+                    if (option.Checked)
+                        auxCombinedArguments += option.Tag + " ";
+                }
+                catch { }
+            }
 
-            if (world && s_world != "") auxCombinedArguments = auxCombinedArguments + "-world=" + s_world + " ";
             if (maxMem && s_maxMem != "") auxCombinedArguments = auxCombinedArguments + "-maxMem=" + s_maxMem + " ";
             if (malloc && s_malloc != "") auxCombinedArguments = auxCombinedArguments + "-malloc=" + s_malloc + " ";
-            if (maxVRAM && s_maxVRAM != "") auxCombinedArguments = auxCombinedArguments + "-maxVRAM=" + s_maxVRAM + " ";
             if (exThreads && s_exThreads != "") auxCombinedArguments = auxCombinedArguments + "-exThreads=" + s_exThreads + " ";
             if (cpuCount && s_cpuCount != "") auxCombinedArguments = auxCombinedArguments + "-cpuCount=" + s_cpuCount + " ";
 
@@ -178,30 +127,12 @@ namespace arma3Launcher.Workers
             return Arguments;
         }
         
-        public bool isModPackInstalled(List<string> modsList, List<string> modsUrl)
+        public bool isModPackInstalled()
         {
-            bool aux_isAll = false;
-
-            foreach (string mod in modsList)
-            {
-                if (mod != null)
-                    foreach (string d in Directory.GetDirectories(AddonsFolder))
-                    {
-                        if (d.Contains(mod)) { aux_isAll = true; break; }
-                        else { aux_isAll = false; continue; }
-                    }
-                else
-                    break;
-
-                if (!aux_isAll)
-                    break;
-            }
-
-            if (aux_isAll && modsUrl.Count == 0) return true;
-            else return false;
+            return !(this.mainForm.ReadRepo(false));
         }
 
-        public void LaunchGame(string Arguments, MainForm mainForm, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo, bool autoJoin)
+        public void LaunchGame(string Arguments, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo, bool autoJoin)
         {
             /* 
             Array content list:
@@ -220,9 +151,8 @@ namespace arma3Launcher.Workers
             waitEndGame.DoWork += WaitEndGame_DoWork;
             waitEndGame.RunWorkerCompleted += WaitEndGame_RunWorkerCompleted;
 
-            auxMainForm = mainForm;
-            auxLaunch = Launch;
-            auxStatus = Status;
+            this.launch = Launch;
+            this.status = Status;
 
             if (!GlobalVar.isServer)
             {
@@ -334,7 +264,7 @@ namespace arma3Launcher.Workers
 
                     var gameProcess = new Process();
                     gameProcess.StartInfo = gameProcessInfo;
-                    auxProcess = gameProcess;
+                    this.process = gameProcess;
                     gameProcess.Start();
 
                     Thread.Sleep(500);
@@ -362,19 +292,19 @@ namespace arma3Launcher.Workers
 
         private void WaitEndGame_DoWork(object sender, DoWorkEventArgs e)
         {
-            auxProcess.WaitForExit();
+            this.process.WaitForExit();
         }
 
         private void WaitEndGame_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            auxMainForm.WindowState = FormWindowState.Normal;
-            auxMainForm.Focus();
-            auxLaunch.Enabled = true;
-            auxStatus.Text = "Waiting for orders...";
-            auxMainForm.reSizeBarText("WaitingForOrders");
+            this.mainForm.WindowState = FormWindowState.Normal;
+            this.mainForm.Focus();
+            this.launch.Enabled = true;
+            this.status.Text = "Waiting for orders...";
+            this.mainForm.reSizeBarText("WaitingForOrders");
 
             if (GlobalVar.autoPilot)
-                auxMainForm.reLaunchServer();
+                this.mainForm.reLaunchServer();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace arma3Launcher.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class GlobalValues {
@@ -97,16 +97,34 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/arma3Launcher/Xml/repo.xml.
+        ///   Looks up a localized string similar to ftp://ptrddns.dlinkddns.com/arma3Launcher/PackImgs/.
         /// </summary>
-        internal static string S_RepoXML {
+        internal static string S_PackImgsDir {
             get {
-                return ResourceManager.GetString("S_RepoXML", resourceCulture);
+                return ResourceManager.GetString("S_PackImgsDir", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/arma3Launcher/Releases/zUpdator.exe.
+        ///   Looks up a localized string similar to ftp://ptrddns.dlinkddns.com/arma3Launcher/Repo/.
+        /// </summary>
+        internal static string S_RepoAddress {
+            get {
+                return ResourceManager.GetString("S_RepoAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ftp://ptrddns.dlinkddns.com/arma3Launcher/Repo/repoList.a3l.
+        /// </summary>
+        internal static string S_RepoList {
+            get {
+                return ResourceManager.GetString("S_RepoList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ftp://ptrddns.dlinkddns.com/arma3Launcher/Releases/zUpdator.exe.
         /// </summary>
         internal static string S_UpdateUrl {
             get {
@@ -124,7 +142,7 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://dl.dropbox.com/u/3609589/arma3Launcher/Xml/config.xml.
+        ///   Looks up a localized string similar to ftp://ptrddns.dlinkddns.com/arma3Launcher/Configs/config.xml.
         /// </summary>
         internal static string S_VersionXML {
             get {

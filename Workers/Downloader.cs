@@ -8,10 +8,10 @@ using System.ComponentModel;
 using arma3Launcher.Workers;
 using arma3Launcher.Controls;
 using System.Threading;
-using CG.Web.MegaApiClient;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Net;
 
 namespace arma3Launcher.Workers
 {
@@ -32,10 +32,10 @@ namespace arma3Launcher.Workers
         private Label progressDetails;
         private PictureBox launcherButton;
         private PictureBox cancelButton;
-        private MegaApiClient megaClient;
         private Installer installer;
         private String activeForm;
         private System.Windows.Forms.Timer totalSw;
+        private Button repoValidateBtn;
 
         // forms
         private MainForm mainForm;
@@ -52,7 +52,17 @@ namespace arma3Launcher.Workers
         private IEnumerable<string> listUrls = new List<string>();
 
         // folder paths
-        private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
+        //private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
+        private string AddonsFolder = Properties.Settings.Default.AddonsFolder;
+
+        // ftp url
+        private string ftpAddress = Properties.GlobalValues.S_RepoAddress;
+
+        // ftp
+        private WebClient client = new WebClient();
+        private NetworkCredential networkCredential = new NetworkCredential("anonymous", "anonymous@example.com");
+        private FtpWebRequest ftpRequest;
+        private FtpWebResponse ftpResponse;
 
         // paramters
         private bool isLaunch = false;
@@ -68,6 +78,8 @@ namespace arma3Launcher.Workers
         private int numTimesCancel = 0;
         private int secondsElapsed = 0;
         private string timeLeft = "";
+        private bool isTFR = false;
+        private bool cancelProcess = false;
 
         // error report
         private EmailReporter reportError;
@@ -176,13 +188,12 @@ namespace arma3Launcher.Workers
         /// <param name="progressText"></param>
         /// <param name="progressDetails"></param>
         /// <param name="launcherButton"></param>
-        public Downloader (MainForm mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton, PictureBox cancelButton)
+        public Downloader (MainForm mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton, PictureBox cancelButton, Button repoValidateBtn)
         {
             this.activeForm = "mainForm";
 
             this.mainForm = mainForm;
             this.installer = installerWorker;
-            this.megaClient = new MegaApiClient();
 
             // construct error report
             this.reportError = new EmailReporter();
@@ -193,48 +204,8 @@ namespace arma3Launcher.Workers
             this.progressAll = progressAll;
             this.progressText = progressText;
             this.progressDetails = progressDetails;
-            this.launcherButton = launcherButton;
             this.cancelButton = cancelButton;
-
-            // define calculate worker
-            this.calculateFiles.DoWork += CalculateFiles_DoWork;
-            this.calculateFiles.RunWorkerCompleted += CalculateFiles_RunWorkerCompleted;
-            this.calculateFiles.WorkerSupportsCancellation = true;
-
-            // define download worker
-            this.downloadFiles.DoWork += DownloadFiles_DoWork;
-            this.downloadFiles.RunWorkerCompleted += DownloadFiles_RunWorkerCompleted;
-            this.downloadFiles.WorkerSupportsCancellation = true;
-        }
-
-        /// <summary>
-        /// Constructor for PackBlock
-        /// </summary>
-        /// <param name="packBlock"></param>
-        /// <param name="installerWorker"></param>
-        /// <param name="progressFile"></param>
-        /// <param name="progressAll"></param>
-        /// <param name="progressCurFile"></param>
-        /// <param name="progressText"></param>
-        /// <param name="progressDetails"></param>
-        /// <param name="launcherButton"></param>
-        public Downloader(PackBlock packBlock, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton)
-        {
-            this.activeForm = "packBlock";
-
-            this.packBlock = packBlock;
-            this.installer = installerWorker;
-            this.megaClient = new MegaApiClient();
-
-            // construct error report
-            this.reportError = new EmailReporter();
-
-            // define controls
-            this.progressCurFile = progressCurFile;
-            this.progressFile = progressFile;
-            this.progressAll = progressAll;
-            this.progressText = progressText;
-            this.progressDetails = progressDetails;
+            this.repoValidateBtn = repoValidateBtn;
             this.launcherButton = launcherButton;
 
             // define calculate worker
@@ -250,7 +221,7 @@ namespace arma3Launcher.Workers
 
         private void CalculateFiles_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (calculateFiles.CancellationPending)
+            if (this.cancelProcess)
             { e.Cancel = true; return; }
 
             // reset variables
@@ -259,11 +230,30 @@ namespace arma3Launcher.Workers
 
             foreach (var url in listUrls)
             {
-                if (calculateFiles.CancellationPending)
+                if (this.cancelProcess)
                 { e.Cancel = true; return; }
 
-                using (Stream webStream = megaClient.Download(new Uri(url)))
-                    this.totalBytes += Convert.ToInt64(webStream.Length);
+                ftpRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpAddress + url));
+                ftpRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+                ftpRequest.Credentials = networkCredential;
+                ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
+                this.totalBytes += Convert.ToInt64(ftpResponse.ContentLength);
+                ftpResponse.Close();
+            }
+
+            // create addons folder
+            if (!Directory.Exists(AddonsFolder))
+                Directory.CreateDirectory(AddonsFolder);
+
+            // create needed folders
+            this.progressStatusText("Preparing the environment...");
+            if (GlobalVar.folders2Create.Count > 0)
+            {
+                foreach (string folder in GlobalVar.folders2Create)
+                {
+                    Directory.CreateDirectory(AddonsFolder + folder);
+                    this.currentFileText("Creating needed folders (" + folder.Split('\\')[0] + ")");
+                }
             }
         }
 
@@ -274,7 +264,7 @@ namespace arma3Launcher.Workers
             this.totalSw.Start();
             this.downloadFiles.RunWorkerAsync();
         }
-
+        
         /// <summary>
         /// Download background worker
         /// </summary>
@@ -282,49 +272,57 @@ namespace arma3Launcher.Workers
         /// <param name="e"></param>
         private void DownloadFiles_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (downloadFiles.CancellationPending)
+            if (this.cancelProcess)
             { e.Cancel = true; return; }
 
             // specify the URL of the file to download
-            string url = this.downloadUrls.Peek();
+            string url = this.ftpAddress + this.downloadUrls.Peek().Replace('\\', '/');
 
             // specify the output file name
-            string outputFile = megaClient.GetNodeFromLink(new Uri(url)).Name;
+            int outputFileArraySize = this.downloadUrls.Peek().Split('\\').Length;
+            string outputFile = this.downloadUrls.Peek().Split('\\')[outputFileArraySize - 1];
 
-            // create output directory (if necessary)
-            string outputFolder = this.TempFolder;
-            if (!Directory.Exists(outputFolder))
-                Directory.CreateDirectory(outputFolder);
+            // looks for tfr
+            if (outputFile.Contains("task_force_radio"))
+                this.isTFR = true;
 
             // auxiliary variables
-            string outputComplete = outputFolder + outputFile;
+            string outputComplete = AddonsFolder + this.downloadUrls.Peek();
             string downloadSpeed = "";
             int progressPercentage = 0;
 
+            // ftp login
+            client.Credentials = networkCredential;
+
+            // get the size of the file to download
+            ftpRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(url));
+            ftpRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+            ftpRequest.Credentials = networkCredential;
+            ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
+            Int64 bytesTotal = Convert.ToInt64(ftpResponse.ContentLength);
+            ftpResponse.Close();
 
             // download the file and write it to disk
-            using (Stream webStream = megaClient.Download(new Uri(url)))
-            using (FileStream fileStream = new FileStream(outputComplete, FileMode.Create))
+            using (Stream stream = client.OpenRead(new Uri(url)))
+            using (FileStream file = new FileStream(outputComplete, FileMode.Create))
             {
                 var buffer = new byte[32768];
                 int bytesRead;
                 Int64 bytesReadComplete = 0;  // use Int64 for files larger than 2 gb
 
-                // get the size of the file to download
-                Int64 bytesTotal = Convert.ToInt64(webStream.Length);
-
                 // start a new StartWatch for measuring download time
                 Stopwatch sw = Stopwatch.StartNew();
 
                 // download file in chunks
-                while ((bytesRead = webStream.Read(buffer, 0, buffer.Length)) > 0)
+                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
                 {
-                    if (downloadFiles.CancellationPending)
+                    if (this.cancelProcess)
                     { e.Cancel = true; return; }
 
                     bytesReadComplete += bytesRead;
                     parsedBytes += bytesRead;
-                    fileStream.Write(buffer, 0, bytesRead);
+                    file.Write(buffer, 0, bytesRead);
+                    
 
                     if ((bytesReadComplete / 1024d / sw.Elapsed.TotalSeconds) > 999)
                         downloadSpeed = String.Format("{0:F1} mb/s", bytesReadComplete / 1048576d / sw.Elapsed.TotalSeconds);
@@ -349,7 +347,6 @@ namespace arma3Launcher.Workers
             if (!e.Cancelled)
             {
                 this.downloadUrls.Dequeue();
-                this.SaveDownloadQueue();
 
                 if (this.parsedDownloads < this.totalDownloads)
                     this.parsedDownloads++;
@@ -363,11 +360,10 @@ namespace arma3Launcher.Workers
                     this.progressDetailsText("");
                     this.currentFileText("");
 
-                    this.megaClient.Logout();
                     this.downloadRunning = false;
                     GlobalVar.isDownloading = false;
 
-                    installer.beginInstall(this.isLaunch, this.configUrl, this.activePack);
+                    installer.beginInstall(this.isLaunch, this.configUrl, this.activePack, this.isTFR);
                 }
             }
             else
@@ -381,21 +377,18 @@ namespace arma3Launcher.Workers
                 this.progressBarAllValue(0);
                 this.progressBarFileValue(0);
 
-                await this.megaClient.LogoutAsync();
                 this.downloadRunning = false;
                 GlobalVar.isDownloading = false;
 
-                Directory.Delete(this.TempFolder, true);
-                this.ClearDownloadQueue();
-
                 this.launcherButton.Enabled = true;
+                this.repoValidateBtn.Enabled = true;
                 try { cancelButton.Visible = false; } catch { }
 
-                await taskDelay(3000);
+                await taskDelay(1500);
                 if (numTimesCancel == 1)
                 { this.progressStatusText("Waiting for orders"); }
                 else if (numTimesCancel == 2)
-                { this.progressStatusText("Do you want or not to download the addons?"); }
+                { this.progressStatusText("Do you want to download the addons or not?"); }
                 else if (numTimesCancel == 3)
                 { this.progressStatusText("This is the third time you cancel me.. Show some respect"); }
                 else if (numTimesCancel == 4)
@@ -417,45 +410,12 @@ namespace arma3Launcher.Workers
                 else if (numTimesCancel == 14)
                 { this.progressStatusText("Should we stop now? Or do I need to format your computer too?"); }
                 else if (numTimesCancel == 15)
-                { this.progressStatusText("Alright... Bye bye"); await taskDelay(2500); Application.Exit(); }
+                { this.progressStatusText("Alright... Bye bye"); await taskDelay(2500); this.mainForm.Close(); }
 
-                await taskDelay(1500);
+                await taskDelay(2000);
                 this.mainForm.reSizeBarText("WaitingForOrders");
                 this.mainForm.hideDownloadPanel();
             }
-        }
-
-        /// <summary>
-        /// Saves download queue to allow download resume after crash or failure
-        /// </summary>
-        public void SaveDownloadQueue()
-        {
-            if (this.downloadUrls.Count != 0)
-            {
-                string aux_downloadQueue = "";
-                foreach (var item in this.downloadUrls)
-                {
-                    if (aux_downloadQueue == "")
-                        aux_downloadQueue = item + ",";
-                    else
-                        aux_downloadQueue = aux_downloadQueue + item + ",";
-                }
-                Properties.Settings.Default.downloadQueue = aux_downloadQueue;
-            }
-            else
-            { Properties.Settings.Default.downloadQueue = ""; }
-
-            Properties.Settings.Default.Save();
-        }
-
-        /// <summary>
-        /// Clears download queue
-        /// </summary>
-        public void ClearDownloadQueue()
-        {
-            this.downloadUrls.Clear();
-            Properties.Settings.Default.downloadQueue = "";
-            Properties.Settings.Default.Save();
         }
 
         /// <summary>
@@ -482,8 +442,11 @@ namespace arma3Launcher.Workers
         /// </summary>
         /// <param name="urlsList"></param>
         /// <param name="isConfig"></param>
-        public async void beginDownload(IEnumerable<string> listUrls, bool isLaunch, string activePack, string configUrl)
+        public async void beginDownload(IEnumerable<string> listUrls, bool isLaunch, string activePack)
         {
+            // reset cancel var
+            this.cancelProcess = false;
+
             // show download panel
             this.mainForm.showDownloadPanel();
 
@@ -494,16 +457,17 @@ namespace arma3Launcher.Workers
 
             // lock controls
             this.launcherButton.Enabled = false;
+            this.repoValidateBtn.Enabled = false;
 
             // report status
             this.progressStatusText("Connecting to the host...");
-            this.currentFileText("Download server: MEGA (mega.nz)");
+            this.currentFileText("Download server: FTP");
             this.progressBarFileStyle(ProgressBarStyle.Marquee);
 
             // define paramters
             this.isLaunch = isLaunch;
             this.activePack = activePack;
-            this.configUrl = configUrl;
+            this.isTFR = false;
 
             // fill urls list
             this.listUrls = listUrls;
@@ -521,7 +485,6 @@ namespace arma3Launcher.Workers
             // begin download
             this.downloadRunning = true;
             GlobalVar.isDownloading = true;
-            await this.megaClient.LoginAnonymousAsync();
             this.calculateFiles.RunWorkerAsync();
 
             // show cancel button if possible
@@ -557,8 +520,9 @@ namespace arma3Launcher.Workers
             this.progressBarFileValue(0);
             this.progressBarFileStyle(ProgressBarStyle.Marquee);
 
-            this.calculateFiles.CancelAsync();
-            this.downloadFiles.CancelAsync();
+            this.cancelProcess = true;
+            this.client.CancelAsync();
+            this.mainForm.ReadRepo(false);
         }
 
         /// <summary>

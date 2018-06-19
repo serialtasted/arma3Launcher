@@ -48,6 +48,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>true</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -123,18 +124,6 @@
     <StartupObject>arma3Launcher.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MegaApiClient, Version=1.2.1.150, Culture=neutral, PublicKeyToken=0480d311efbeb4e2, processorArchitecture=MSIL">
-      <HintPath>..\packages\MegaApiClient.1.2.1\lib\net45\MegaApiClient.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Octokit, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Octokit.0.19.0\lib\net45\Octokit.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -143,6 +132,7 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xml.Linq" />
@@ -192,6 +182,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="ProgramInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\SystemResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -217,12 +212,6 @@
     <Compile Include="Windows\DelayServerStart.Designer.cs">
       <DependentUpon>DelayServerStart.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LegacyTransporter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Windows\LegacyTransporter.Designer.cs">
-      <DependentUpon>LegacyTransporter.cs</DependentUpon>
-    </Compile>
     <Compile Include="Windows\PackInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +231,7 @@
       <DependentUpon>Splash.cs</DependentUpon>
     </Compile>
     <Compile Include="Workers\AddonsLooker.cs" />
+    <Compile Include="Workers\BuildRepo.cs" />
     <Compile Include="Workers\Installer.cs" />
     <Compile Include="Workers\RemoteReader.cs" />
     <Compile Include="Workers\Downloader.cs" />
@@ -249,6 +239,7 @@
     <Compile Include="Workers\Packs.cs" />
     <Compile Include="Workers\Feed.cs" />
     <Compile Include="Workers\LaunchCore.cs" />
+    <Compile Include="Workers\RepoReader.cs" />
     <Compile Include="Workers\SingleInstance.cs" />
     <Compile Include="Workers\WinApi.cs" />
     <Compile Include="Workers\zCheckUpdate.cs" />
@@ -269,16 +260,11 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Properties\SystemResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SystemResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\AddonManager.resx">
       <DependentUpon>AddonManager.cs</DependentUpon>
@@ -288,9 +274,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\DelayServerStart.resx">
       <DependentUpon>DelayServerStart.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Windows\LegacyTransporter.resx">
-      <DependentUpon>LegacyTransporter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\PackInfo.resx">
       <DependentUpon>PackInfo.cs</DependentUpon>
@@ -302,7 +285,6 @@
       <DependentUpon>Splash.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -315,36 +297,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgMainWindow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgclose1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgclose2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgclose3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgclose4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgminimize1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgminimize2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgminimize3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\bgminimize4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\trollface.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -364,88 +316,103 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bgBottom.png" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\plus-square.png" />
-    <None Include="Resources\littlecat.gif" />
-    <None Include="Resources\grey_green_stripes.jpg" />
-    <None Include="Resources\searching.gif" />
-    <None Include="Resources\be_logo.jpg" />
-    <None Include="Resources\panel_seperator.jpg" />
-    <None Include="Resources\cloud-off_hover.png" />
-    <None Include="Resources\cloud-off.png" />
-    <None Include="Resources\cloud-download-hover.png" />
-    <None Include="Resources\cloud-download.png" />
-    <None Include="Resources\arrow-down-hover.png" />
-    <None Include="Resources\arrow-down.png" />
-    <None Include="Resources\clipboard_copy_icon&amp;16.png" />
-    <None Include="Resources\bg-addon.png" />
-    <None Include="Resources\bg-map.png" />
-    <None Include="Resources\bg-player.png" />
-    <None Include="Resources\bg-updav.png" />
-    <None Include="Resources\bg-wiki.png" />
-    <None Include="Resources\bg-launcher.png" />
-    <None Include="Resources\bg-warning.png" />
-    <None Include="Resources\arrow-circle-315-left.png" />
-    <None Include="Resources\301.gif" />
-    <None Include="Resources\bg-mission.png" />
-    <None Include="Resources\optionalAddons.fw.png" />
-    <None Include="Resources\clippy.png" />
-    <None Include="Resources\clippy1.png" />
-    <None Include="Resources\loop.png" />
-    <None Include="Resources\rocket.png" />
-    <None Include="Resources\rocket_launch.png" />
-    <None Include="Resources\browse.png" />
-    <None Include="Resources\circle-with-cross.png" />
-    <None Include="Resources\facebook.png" />
-    <None Include="Resources\mail.png" />
+    <Content Include="ptrangers.ico" />
+    <None Include="Resources\youtube.png" />
+    <None Include="Resources\warning.png" />
+    <None Include="Resources\useThis_inactive.png" />
+    <None Include="Resources\useThis_hover.png" />
+    <None Include="Resources\useThis_active.png" />
     <None Include="Resources\twitter.png" />
     <None Include="Resources\twitch.png" />
-    <None Include="Resources\youtube.png" />
-    <None Include="Resources\checkbox-checked.png" />
-    <None Include="Resources\checkbox-unchecked.png" />
-    <None Include="Resources\download3.png" />
-    <None Include="Resources\reload.png" />
-    <None Include="Resources\TrollFace1.png" />
-    <None Include="Resources\folder-open.png" />
-    <None Include="Resources\bgmore1.fw.png" />
-    <None Include="Resources\bgmore2.fw.png" />
-    <None Include="Resources\bgmore3.fw.png" />
-    <None Include="Resources\bgmore4.fw.png" />
-    <None Include="Resources\info.png" />
-    <None Include="Resources\info1.png" />
-    <None Include="Resources\bg.png" />
-    <None Include="Resources\bg_bottom.png" />
-    <None Include="Resources\puzzle-piece.png" />
-    <None Include="Resources\splash_spn.jpg" />
-    <None Include="Resources\keyboard-arrow-left.png" />
-    <None Include="Resources\keyboard-arrow-right.png" />
-    <None Include="Resources\transfer.png" />
-    <None Include="Resources\eye.png" />
-    <None Include="Resources\flash-on.png" />
-    <None Include="Resources\git-square.png" />
-    <None Include="Resources\useThis_active.png" />
-    <None Include="Resources\useThis_hover.png" />
-    <None Include="Resources\useThis_inactive.png" />
-    <None Include="Resources\check-circle.png" />
+    <None Include="Resources\trollface.png" />
+    <None Include="Resources\tools.png" />
     <None Include="Resources\times-circle-o.png" />
+    <None Include="Resources\style.png" />
+    <None Include="Resources\steam.png" />
+    <None Include="Resources\settings.png" />
+    <None Include="Resources\sep_topbar.jpg" />
+    <None Include="Resources\searching.gif" />
+    <None Include="Resources\rocket_launch.png" />
+    <None Include="Resources\rocket.png" />
+    <None Include="Resources\Ripple-1s-200px.gif" />
+    <None Include="Resources\reload-white.png" />
+    <None Include="Resources\reload.png" />
+    <None Include="Resources\ptrlogo.png" />
+    <None Include="Resources\play2.png" />
+    <None Include="Resources\pause.png" />
+    <None Include="Resources\panel_seperator.jpg" />
+    <None Include="Resources\mail.png" />
+    <None Include="Resources\littlecat.gif" />
+    <None Include="Resources\keyboard-arrow-right.png" />
+    <None Include="Resources\keyboard-arrow-left.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\grey_green_stripes.jpg" />
+    <None Include="Resources\git-square.png" />
+    <None Include="Resources\folder-open.png" />
+    <None Include="Resources\folder-error.png" />
+    <None Include="Resources\folder-checked.png" />
+    <None Include="Resources\folder-cancel.png" />
+    <None Include="Resources\favorite.png" />
+    <None Include="Resources\facebook.png" />
+    <None Include="Resources\extension.png" />
+    <None Include="Resources\document-error.png" />
+    <None Include="Resources\document-checked.png" />
+    <None Include="Resources\document-cancel.png" />
+    <None Include="Resources\cloud-download-hover.png" />
+    <None Include="Resources\cloud-download.png" />
+    <None Include="Resources\close1.png" />
+    <None Include="Resources\close_hover1.png" />
+    <None Include="Resources\close_hover.png" />
+    <None Include="Resources\close.png" />
+    <None Include="Resources\circle-with-cross.png" />
+    <None Include="Resources\chevron-up.png" />
+    <None Include="Resources\chevron-down.png" />
     <None Include="Resources\check-circle1.png" />
+    <None Include="Resources\check-circle.png" />
+    <None Include="Resources\checkbox-unchecked.png" />
+    <None Include="Resources\checkbox-checked.png" />
+    <None Include="Resources\cancel-circle-big-white.png" />
+    <None Include="Resources\cancel-circle-big-red.png" />
+    <None Include="Resources\cancel-circle.png" />
+    <None Include="Resources\browse.png" />
+    <None Include="Resources\bgmore4.fw.png" />
+    <None Include="Resources\bgmore3.fw.png" />
+    <None Include="Resources\bgmore2.fw.png" />
+    <None Include="Resources\bgmore1.fw.png" />
+    <None Include="Resources\bgminimize4.png" />
+    <None Include="Resources\bgminimize3.png" />
+    <None Include="Resources\bgminimize2.png" />
+    <None Include="Resources\bgminimize1.png" />
+    <None Include="Resources\bgMainWindow.png" />
+    <None Include="Resources\bgclose4.png" />
+    <None Include="Resources\bgclose3.png" />
+    <None Include="Resources\bgclose2.png" />
+    <None Include="Resources\bgclose1.png" />
+    <None Include="Resources\bgBottom.png" />
+    <None Include="Resources\bg_downloadbar.jpg" />
+    <None Include="Resources\bg_bottom.png" />
+    <None Include="Resources\bg.png" />
+    <None Include="Resources\arrow-down-hover.png" />
+    <None Include="Resources\arrow-down.png" />
+    <None Include="Resources\archive1.png" />
+    <None Include="Resources\archive_w1.png" />
+    <None Include="Resources\archive_w.png" />
     <None Include="Resources\archive_hover.png" />
-    <None Include="Resources\equalizer.png" />
-    <Content Include="ptrangers.ico" />
+    <None Include="Resources\archive.png" />
+    <None Include="Resources\add_box.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxShockwaveFlashObjects">
-      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
+      <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
     <COMReference Include="ShockwaveFlashObjects">
       <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>

@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using arma3Launcher.Workers;
 using arma3Launcher.Effects;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 
 namespace arma3Launcher
 {
@@ -28,6 +29,7 @@ namespace arma3Launcher
         private Downloader downloader;
         private Installer installer;
         private RemoteReader remoteReader;
+        private RepoReader repoReader;
         private WindowIO windowIO;
         private PanelIO addonsPanelIO;
         private PanelIO communityPanelIO;
@@ -36,6 +38,9 @@ namespace arma3Launcher
         private PanelIO aboutPanelIO;
         private PanelIO topPanelsIO;
         private PanelIO botPanelIO;
+
+        private int expandState = 0;
+        private Windows.AddonManager addonManager;
 
         private Windows.Splash loadingSplash;
 
@@ -56,31 +61,26 @@ namespace arma3Launcher
 
         private string oldVersionStatusText = "";
 
-        private bool isBlastcoreAllowed = false;
-        private bool isDragonFyreAllowed = false;
         private bool isOptionalAllowed = false;
 
         private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
         private List<string> modsName = new List<string>();
-        private List<string> modsUrl = new List<string>();
-        private string cfgFile = "";
-        private string cfgUrl = "";
-
-        private string blastcoreUrl = "";
-        private string blastcoreName = "";
-
-        private string dragonfyreUrl = "";
-        private string dragonfyreName = "";
-
-        private string dragonfyrerhsUrl = "";
-        private string dragonfyrerhsName = "";
 
         private string Arguments = "";
 
         private bool isActive = true;
         private bool isUpdate = false;
+        private bool hasShown = false;
 
         private int menuSelected = 0;
+
+        // broweser settings for youtube
+        string embedYT = "<html><head>" +
+                    "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"/>" +
+                    "</head><body>" +
+                    "<iframe width=\"681\" height=\"259\" src=\"{0}\"" +
+                    "frameborder = \"0\" allow = \"autoplay; encrypted-media\" allowfullscreen></iframe>" +
+                    "</body></html>";
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -144,22 +144,28 @@ namespace arma3Launcher
             QuickUpdateMethod = new zCheckUpdate(WindowVersionStatus, busy);
             UpdateMethod = new zCheckUpdate(btn_update, btn_checkUpdates, txt_curversion, txt_latestversion, busy);
 
-            installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, btn_cancelDownload, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_downloadDragonFyre, btn_downloadBlastcore);
-            downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_Launch, btn_cancelDownload);
+            aLooker = new AddonsLooker(steamworkshopAddonsList);
             remoteReader = new RemoteReader();
+            repoReader = new RepoReader(trv_repoContent, lbl_repofileok, lbl_repofileinvalid, lbl_repofilemissing);
             fetchAddonPacks = new Packs(this, PacksPanel);
             eReport = new EmailReporter();
-            aLooker = new AddonsLooker(lstb_detectedAddons, lstb_activeAddons, chb_dragonfyre, chb_blastcore);
             loadingSplash = new Windows.Splash();
             windowIO = new WindowIO(this);
+            installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, btn_Launch, btn_cancelDownload, txtb_armaDirectory, txtb_tsDirectory, txtb_modsDirectory, btn_ereaseArmaDirectory, btn_ereaseTSDirectory, btn_ereaseModsDirectory, btn_browseA3, btn_browseTS3, btn_browseModsDirectory, btn_reinstallTFRPlugins, btn_checkRepo, repoReader);
+            downloader = new Downloader(this, installer, prb_progressBar_File, prb_progressBar_All, txt_curFile, txt_progressStatus, txt_percentageStatus, btn_Launch, btn_cancelDownload, btn_checkRepo);
 
             addonsPanelIO = new PanelIO(panel_packs, Panels, 304, 306, 33);
             communityPanelIO = new PanelIO(panel_community, Panels, 304, 306, 33);
             launchoptionsPanelIO = new PanelIO(panel_launchOptions, Panels, 304, 306, 33);
             helpPanelIO = new PanelIO(panel_help, Panels, 304, 306, 33);
             aboutPanelIO = new PanelIO(panel_about, Panels, 304, 306, 33);
-            topPanelsIO = new PanelIO(panelDirectories, panelMenu, 4);
-            botPanelIO = new PanelIO(panel_bottomHide_Inner, panel_bottomhide, 746, 750, 53);
+            topPanelsIO = new PanelIO(panelDirectories, panelMenu, 90, 42, 4);
+            botPanelIO = new PanelIO(panel_bottomHide_Inner, panel_bottomhide, 906, 906, 56);
+
+            addonManager = new Windows.AddonManager();
+
+            // default video on community tab
+            web_youtubeEmbed.DocumentText = string.Format(this.embedYT, "https://www.youtube.com/embed/uM7JY6Q7O4Q");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -188,14 +194,20 @@ namespace arma3Launcher
             // Change stuff if isServer
             if (GlobalVar.isServer)
             {
-                panel_recommendedAddons.Visible = false;
-                panel_TeamSpeakDir.Visible = false;
+                pref_switchclientserver.Text = "Switch to Client Mode";
+                panel_steamAddons.Visible = false;
                 pref_joinServerAuto.Visible = false;
                 btn_reinstallTFRPlugins.Visible = false;
                 pref_serverAutopilot.Visible = true;
                 chb_battleye.Enabled = false;
+                btn_addonManager.Visible = true;
 
                 pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
+
+                foreach (Control control in panel_TeamSpeakDir.Controls)
+                {
+                    control.Visible = false;
+                }
 
                 if (!Properties.Settings.Default.firstLaunch)
                     if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
@@ -258,39 +270,18 @@ namespace arma3Launcher
             PacksPanel.Focus();
 
             if (!isUpdate)
-                topPanelsIO.showPanel();
-
-            if (Properties.Settings.Default.downloadQueue != "" && panelMenu.Visible == true)
             {
-                if (GlobalVar.autoPilot || MessageBox.Show("You haven't finished all the downloads the last time you closed the launcher.\n\"Yes\", to continue downloads.\n\"No\", will DELETE your progress.", "spN Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    string[] aux_downloadQueue = Properties.Settings.Default.downloadQueue.Split(',');
-                    foreach (string s in aux_downloadQueue)
-                    {
-                        if (s != "")
-                            modsUrl.Add(s);
+                topPanelsIO.showPanelDual();
+                await taskDelay(800);
+                topPanelsIO = new PanelIO(panelDirectories, 437, 90, 33);
+                panelMenu.Dock = DockStyle.Bottom;
+                panelDirectories.BringToFront();
+            }
 
-                        if (s.Contains("DragonFyre"))
-                        {
-                            btn_downloadDragonFyre.Enabled = false;
-                        }
-
-                        if (s.Contains("Blastcore"))
-                        {
-                            btn_downloadBlastcore.Enabled = false;
-                        }
-                    }
-
-                    downloader.beginDownload(modsUrl, GlobalVar.autoPilot, activePack, cfgUrl.Split('!')[1]);
-                }
-                else
-                {
-                    if (Directory.Exists(TempFolder))
-                        Directory.Delete(TempFolder, true);
-
-                    Properties.Settings.Default.downloadQueue = "";
-                    Properties.Settings.Default.Save();
-                }
+            if (ReadRepo(false) && panelMenu.Visible == true)
+            {
+                topPanelsIO.showPanelSingle();
+                btn_opencloseDirPanel.Image = Properties.Resources.chevron_up;
             }
             else
             {
@@ -300,6 +291,8 @@ namespace arma3Launcher
                     launchProcess();
                 }
             }
+
+            this.hasShown = true;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -307,7 +300,6 @@ namespace arma3Launcher
             if (!installer.isInstalling())
             {
                 SaveSettings();
-                downloader.SaveDownloadQueue();
                 GC.Collect();
             }
             else
@@ -321,10 +313,50 @@ namespace arma3Launcher
 
         public void GetAddons()
         {
-            aLooker.getAddons(isDragonFyreAllowed, isBlastcoreAllowed, modsName);
+            aLooker.getAddons(Properties.Settings.Default.Arma3Folder + "\\!Workshop");
         }
 
-        void FetchSettings()
+        public bool ReadRepo(bool showMessage)
+        {
+            if (GlobalVar.isReadingRepo)
+                return false;
+
+            GlobalVar.isReadingRepo = true;
+
+            if (Properties.Settings.Default.AddonsFolder != string.Empty)
+            {
+                string updateType = repoReader.ReadRepo();
+
+                if (updateType == string.Empty)
+                {
+                    if (showMessage)
+                        MessageBox.Show("All files are synced with the repository!", "You're amazing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    GlobalVar.isReadingRepo = false;
+                    return false;
+                }
+                else
+                {
+                    if (updateType == "download" && (GlobalVar.autoPilot || pref_autoDownload.Checked || (showMessage && MessageBox.Show("Your local files are not in sync with the repository.\nDo you want to download the missing files?", "Repository has new updates", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)))
+                        downloader.beginDownload(GlobalVar.files2Download, GlobalVar.autoPilot, activePack);
+                    else
+                    {
+                        if (updateType == "validation") { installer.ValidateLocalFiles(); }
+                        else { GlobalVar.isReadingRepo = false; }
+                    }
+
+                    return true;
+                }
+            }
+            else
+            {
+                trv_repoContent.Nodes.Clear();
+                trv_repoContent.Nodes.Add("ERROR", "No addons folder selected!", 5, 5);
+                return false;
+            }
+        }
+
+        private void FetchSettings()
         {
             // directories
             if (Properties.Settings.Default.Arma3Folder != "")
@@ -343,18 +375,15 @@ namespace arma3Launcher
             { txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->"; }
 
             // launch options
-            chb_noLogs.Checked = Properties.Settings.Default.noLogs;
             chb_noPause.Checked = Properties.Settings.Default.noPause;
             chb_noSplash.Checked = Properties.Settings.Default.noSplash;
-            chb_noCB.Checked = Properties.Settings.Default.noCB;
             chb_enableHT.Checked = Properties.Settings.Default.enableHT;
             chb_skipIntro.Checked = Properties.Settings.Default.skipIntro;
             chb_window.Checked = Properties.Settings.Default.window;
             chb_showScriptErrors.Checked = Properties.Settings.Default.showScriptErrors;
-            chb_noBenchmark.Checked = Properties.Settings.Default.noBenchmark;
-
-            chb_world.Checked = Properties.Settings.Default.world;
-            txtb_world.Text = Properties.Settings.Default.world_value;
+            chb_hugePages.Checked = Properties.Settings.Default.hugePages;
+            chb_filePatching.Checked = Properties.Settings.Default.filePatching;
+            chb_worldEmpty.Checked = Properties.Settings.Default.worldEmpty;
 
             chb_maxMem.Checked = Properties.Settings.Default.maxMem;
             txtb_maxMem.Text = Properties.Settings.Default.maxMem_value.ToString();
@@ -362,17 +391,11 @@ namespace arma3Launcher
             chb_malloc.Checked = Properties.Settings.Default.malloc;
             txtb_malloc.Text = Properties.Settings.Default.malloc_value.ToString();
 
-            chb_maxVRAM.Checked = Properties.Settings.Default.maxVRAM;
-            txtb_maxVRAM.Text = Properties.Settings.Default.maxVRAM_value.ToString();
-
             chb_exThreads.Checked = Properties.Settings.Default.exThreads;
             txtb_exThreads.Text = Properties.Settings.Default.exThreads_value.ToString();
 
             chb_cpuCount.Checked = Properties.Settings.Default.cpuCount;
             txtb_cpuCount.Text = Properties.Settings.Default.cpuCount_value.ToString();
-
-            chb_dragonfyre.Checked = Properties.Settings.Default.JSRS;
-            chb_blastcore.Checked = Properties.Settings.Default.BlastCore;
 
             // battleye
             chb_battleye.Checked = Properties.Settings.Default.battleye;
@@ -381,39 +404,27 @@ namespace arma3Launcher
             else
                 GlobalVar.gameArtifact = "arma3.exe";
 
-            // optional addons
-            lstb_activeAddons.Items.Clear();
-            string[] aux_activeMods = Properties.Settings.Default.activeMods.Split(',');
-            foreach (string s in aux_activeMods)
-            {
-                if (s != "")
-                    lstb_activeAddons.Items.Add(s);
-            }
-
             // preferences
             pref_startGameAfterDownloadsAreCompleted.Checked = Properties.Settings.Default.startGameAfterDownload;
             pref_runLauncherOnStartup.Checked = Properties.Settings.Default.runLauncherOnStartup;
             pref_allowNotifications.Checked = Properties.Settings.Default.allowNotifications;
-            pref_allowNotifications.Checked = Properties.Settings.Default.autoDownload;
+            pref_autoDownload.Checked = Properties.Settings.Default.autoDownload;
             pref_joinServerAuto.Checked = Properties.Settings.Default.joinServerAutomatically;
         }
 
-        void SaveSettings()
+        private void SaveSettings()
         {
             // launch options
-            Properties.Settings.Default.noLogs = chb_noLogs.Checked;
             Properties.Settings.Default.noPause = chb_noPause.Checked;
             Properties.Settings.Default.noSplash = chb_noSplash.Checked;
-            Properties.Settings.Default.noCB = chb_noCB.Checked;
             Properties.Settings.Default.enableHT = chb_enableHT.Checked;
             Properties.Settings.Default.skipIntro = chb_skipIntro.Checked;
             Properties.Settings.Default.window = chb_window.Checked;
             Properties.Settings.Default.battleye = chb_battleye.Checked;
             Properties.Settings.Default.showScriptErrors = chb_showScriptErrors.Checked;
-            Properties.Settings.Default.noBenchmark = chb_noBenchmark.Checked;
-
-            Properties.Settings.Default.world = chb_world.Checked;
-            Properties.Settings.Default.world_value = txtb_world.Text;
+            Properties.Settings.Default.hugePages = chb_hugePages.Checked;
+            Properties.Settings.Default.filePatching = chb_filePatching.Checked;
+            Properties.Settings.Default.worldEmpty = chb_worldEmpty.Checked;
 
             Properties.Settings.Default.maxMem = chb_maxMem.Checked;
             Properties.Settings.Default.maxMem_value = Convert.ToInt32(txtb_maxMem.Text);
@@ -421,34 +432,17 @@ namespace arma3Launcher
             Properties.Settings.Default.malloc = chb_malloc.Checked;
             Properties.Settings.Default.malloc_value = txtb_malloc.Text;
 
-            Properties.Settings.Default.maxVRAM = chb_maxVRAM.Checked;
-            Properties.Settings.Default.maxVRAM_value = Convert.ToInt32(txtb_maxVRAM.Text);
-
             Properties.Settings.Default.exThreads = chb_exThreads.Checked;
             Properties.Settings.Default.exThreads_value = Convert.ToInt32(txtb_exThreads.Text);
 
             Properties.Settings.Default.cpuCount = chb_cpuCount.Checked;
             Properties.Settings.Default.cpuCount_value = Convert.ToInt32(txtb_cpuCount.Text);
 
-            Properties.Settings.Default.JSRS = chb_dragonfyre.Checked;
-            Properties.Settings.Default.BlastCore = chb_blastcore.Checked;
-
-            // optional addons
-            string aux_activeMods = "";
-            foreach (var item in lstb_activeAddons.Items)
-            {
-                if (aux_activeMods == "")
-                    aux_activeMods = item + ",";
-                else
-                    aux_activeMods = aux_activeMods + item + ",";
-            }
-            Properties.Settings.Default.activeMods = aux_activeMods;
-
             // preferences
             Properties.Settings.Default.startGameAfterDownload = pref_startGameAfterDownloadsAreCompleted.Checked;
             Properties.Settings.Default.runLauncherOnStartup = pref_runLauncherOnStartup.Checked;
             Properties.Settings.Default.allowNotifications = pref_allowNotifications.Checked;
-            Properties.Settings.Default.autoDownload = pref_allowNotifications.Checked;
+            Properties.Settings.Default.autoDownload = pref_autoDownload.Checked;
             Properties.Settings.Default.joinServerAutomatically = pref_joinServerAuto.Checked;
 
             Properties.Settings.Default.Save();
@@ -456,10 +450,8 @@ namespace arma3Launcher
 
         public void FetchRemoteSettings(bool refreshPacks)
         {
-            bool isInstalled = false;
             bool forceRefreshPacks = false;
             modsName.Clear();
-            modsUrl.Clear();
 
             AddonsFolder = Properties.Settings.Default.AddonsFolder;
 
@@ -470,33 +462,6 @@ namespace arma3Launcher
 
                 string xmlNodes = "";
                 XmlNodeList xnl;
-
-                //Common Files
-                xmlNodes = "//arma3Launcher//ModSetInfo//Recommended//mod";
-                xnl = RemoteXmlInfo.SelectNodes(xmlNodes);
-
-                foreach (XmlNode xn in xnl)
-                {
-                    if (xn.Attributes["type"].Value == "blastcore")
-                    {
-                        blastcoreName = xn.Attributes["name"].Value;
-                        blastcoreUrl = xn.Attributes["url"].Value;
-                        btn_downloadBlastcore.Text = "Download (" + xn.Attributes["version"].Value + ")";
-                    }
-
-                    if (xn.Attributes["type"].Value == "dragonfyre")
-                    {
-                        dragonfyreName = xn.Attributes["name"].Value;
-                        dragonfyreUrl = xn.Attributes["url"].Value;
-                        btn_downloadDragonFyre.Text = "Download (" + xn.Attributes["version"].Value + ")";
-                    }
-
-                    if (xn.Attributes["type"].Value == "dragonfyrerhs")
-                    {
-                        dragonfyrerhsName = xn.Attributes["name"].Value;
-                        dragonfyrerhsUrl = xn.Attributes["url"].Value;
-                    }
-                }
 
                 //Validate if activePack exists or select first on the list
                 xmlNodes = "//arma3Launcher//ModSets//pack";
@@ -516,88 +481,20 @@ namespace arma3Launcher
                 if (String.IsNullOrEmpty(activePack))
                 { Properties.Settings.Default.lastAddonPack = activePack = firstPack; forceRefreshPacks = true; }
 
-                isBlastcoreAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["blastcore"].Value);
-                isDragonFyreAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["dragonfyre"].Value);
                 isOptionalAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["optional"].Value);
 
-                cfgFile = activePack;
-                cfgUrl = remoteReader.GetPackConfigFile(activePack);
-
-                if (isBlastcoreAllowed)
-                { chb_blastcore.Enabled = true; }
-                else
-                { chb_blastcore.Enabled = false; }
-
-                if (isDragonFyreAllowed)
-                { chb_dragonfyre.Enabled = true; }
-                else
-                { chb_dragonfyre.Enabled = false; }
-
                 if (isOptionalAllowed)
-                { panel_Optional.Enabled = true; }
+                { panel_steamAddons.Enabled = true; }
                 else
-                { panel_Optional.Enabled = false; }
+                { panel_steamAddons.Enabled = false; }
 
                 xmlNodes = "//arma3Launcher//ModSetInfo//" + activePack + "//mod";
                 xnl = RemoteXmlInfo.SelectNodes(xmlNodes);
 
                 foreach (XmlNode xn in xnl)
                 {
-                    if (xn.Attributes["type"].Value == "mod")
-                    {
-                        modsName.Add(xn.Attributes["name"].Value);
-
-                        if (AddonsFolder != "")
-                        {
-                            foreach (string d in Directory.GetDirectories(AddonsFolder))
-                            {
-                                string[] aux_d = d.Split('\\');
-
-                                if (aux_d[aux_d.Length - 1].Equals(xn.Attributes["name"].Value))
-                                {
-                                    try
-                                    {
-                                        if (d.Contains("dummy")) { isInstalled = true; break; }
-
-                                        foreach (var line in File.ReadAllLines(d + @"\spNversionController"))
-                                        {
-                                            if (line.Contains("version"))
-                                            {
-                                                string aux_line = line.Replace(" ", "");
-                                                string[] splitted_line = aux_line.Split('=');
-
-                                                aLocal = new Version(splitted_line[1]);
-                                                aRemote = new Version(xn.Attributes["version"].Value);
-                                                break;
-                                            }
-                                        }
-
-                                        if (aRemote != aLocal)
-                                        {
-                                            if (!d.Contains("RHS"))
-                                                Directory.Delete(d, true);
-
-                                            isInstalled = false;
-                                            break;
-                                        }
-                                        else { isInstalled = true; break; }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        //MessageBox.Show(ex.Message);
-                                    }
-                                }
-                                else { isInstalled = false; continue; }
-                            }
-                        }
-
-                        if (!isInstalled && Properties.Settings.Default.downloadQueue == "")
-                            modsUrl.Add(xn.Attributes["url"].Value);
-                    }
+                    modsName.Add(xn.Attributes["name"].Value);
                 }
-
-                if (modsUrl.Count > 0)
-                    modsUrl.Insert(0, cfgUrl);
             }
             catch (Exception ex)
             {
@@ -768,6 +665,7 @@ namespace arma3Launcher
                         GameFolder = Properties.Settings.Default.Arma3Folder = auxA3Folder + @"\";
                         Properties.Settings.Default.Save();
                         txtb_armaDirectory.Text = auxA3Folder;
+                        GetAddons();
                     }
                     else
                     {
@@ -833,7 +731,6 @@ namespace arma3Launcher
                     AddonsFolder = Properties.Settings.Default.AddonsFolder = dlg_folderBrowser.SelectedPath + @"\";
                     Properties.Settings.Default.Save();
                     txtb_modsDirectory.Text = dlg_folderBrowser.SelectedPath;
-                    GetAddons();
                 }
                 else
                 {
@@ -863,20 +760,20 @@ namespace arma3Launcher
         {
             if (!GlobalVar.isAnimating)
             {
-                if (panel_packs.Height > 0) { Panels.BackColor = Color.DimGray; addonsPanelIO.hidePanel(); menu_packs.ForeColor = Color.Gray; }
-                if (panel_community.Height > 0) { Panels.BackColor = Color.DimGray; communityPanelIO.hidePanel(); menu_community.ForeColor = Color.Gray; }
-                if (panel_launchOptions.Height > 0) { Panels.BackColor = Color.DimGray; launchoptionsPanelIO.hidePanel(); menu_launchOptions.ForeColor = Color.Gray; }
-                if (panel_help.Height > 0) { Panels.BackColor = Color.DimGray; helpPanelIO.hidePanel(); menu_help.ForeColor = Color.Gray; }
-                if (panel_about.Height > 0) { Panels.BackColor = Color.DimGray; aboutPanelIO.hidePanel(); menu_about.ForeColor = Color.Gray; }
+                if (panel_packs.Height > 0) { Panels.BackColor = Color.DimGray; addonsPanelIO.hidePanelDual(); menu_packs.ForeColor = Color.Gray; }
+                if (panel_community.Height > 0) { Panels.BackColor = Color.DimGray; communityPanelIO.hidePanelDual(); menu_community.ForeColor = Color.Gray; }
+                if (panel_launchOptions.Height > 0) { Panels.BackColor = Color.DimGray; launchoptionsPanelIO.hidePanelDual(); menu_launchOptions.ForeColor = Color.Gray; }
+                if (panel_help.Height > 0) { Panels.BackColor = Color.DimGray; helpPanelIO.hidePanelDual(); menu_help.ForeColor = Color.Gray; }
+                if (panel_about.Height > 0) { Panels.BackColor = Color.DimGray; aboutPanelIO.hidePanelDual(); menu_about.ForeColor = Color.Gray; }
 
                 while (GlobalVar.isAnimating)
                     await taskDelay(300);
 
-                if (selectedOption == 0) { Panels.BackColor = Color.OliveDrab; menu_packs.ForeColor = Color.OliveDrab; addonsPanelIO.showPanel(); }
-                if (selectedOption == 1) { Panels.BackColor = Color.OliveDrab; menu_community.ForeColor = Color.OliveDrab; communityPanelIO.showPanel(); }
-                if (selectedOption == 2) { Panels.BackColor = Color.OliveDrab; menu_launchOptions.ForeColor = Color.OliveDrab; launchoptionsPanelIO.showPanel(); }
-                if (selectedOption == 3) { Panels.BackColor = Color.OliveDrab; menu_help.ForeColor = Color.OliveDrab; helpPanelIO.showPanel(); }
-                if (selectedOption == 4) { Panels.BackColor = Color.OliveDrab; menu_about.ForeColor = Color.OliveDrab; aboutPanelIO.showPanel(); }
+                if (selectedOption == 0) { Panels.BackColor = Color.OliveDrab; menu_packs.ForeColor = Color.OliveDrab; addonsPanelIO.showPanelDual(); }
+                if (selectedOption == 1) { Panels.BackColor = Color.OliveDrab; menu_community.ForeColor = Color.OliveDrab; communityPanelIO.showPanelDual(); }
+                if (selectedOption == 2) { Panels.BackColor = Color.OliveDrab; menu_launchOptions.ForeColor = Color.OliveDrab; launchoptionsPanelIO.showPanelDual(); }
+                if (selectedOption == 3) { Panels.BackColor = Color.OliveDrab; menu_help.ForeColor = Color.OliveDrab; helpPanelIO.showPanelDual(); }
+                if (selectedOption == 4) { Panels.BackColor = Color.OliveDrab; menu_about.ForeColor = Color.OliveDrab; aboutPanelIO.showPanelDual(); }
             }
         }
 
@@ -1043,7 +940,7 @@ namespace arma3Launcher
             {
                 var fass = new ProcessStartInfo();
                 fass.FileName = "zUpdator.exe";
-                fass.Arguments = "-curversion=" + txt_curversion.Text + 
+                fass.Arguments = "-curversion=" + txt_curversion.Text +
                     " -newversion=" + txt_latestversion.Text +
                     " -filename=" + Process.GetCurrentProcess().MainModule.ModuleName;
 
@@ -1062,27 +959,7 @@ namespace arma3Launcher
             END UPDATE FUNCTIONS
         -----------------------------------*/
 
-        #region Recommended Addons
-        private void btn_DragonFyre_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://www.armaholic.com/page.php?id=27827");
-        }
-
-        private void btn_Blastcore_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://www.armaholic.com/page.php?id=23899");
-        }
-        #endregion
-
         #region Game Options Conditions
-        private void chb_world_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chb_world.Checked)
-                txtb_world.Enabled = true;
-            else
-                txtb_world.Enabled = false;
-        }
-
         private void chb_maxMem_CheckedChanged(object sender, EventArgs e)
         {
             if (chb_maxMem.Checked)
@@ -1099,14 +976,6 @@ namespace arma3Launcher
                 txtb_malloc.Enabled = false;
         }
 
-        private void chb_maxVRAM_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chb_maxVRAM.Checked)
-                txtb_maxVRAM.Enabled = true;
-            else
-                txtb_maxVRAM.Enabled = false;
-        }
-
         private void chb_exThreads_CheckedChanged(object sender, EventArgs e)
         {
             if (chb_exThreads.Checked)
@@ -1118,9 +987,9 @@ namespace arma3Launcher
         private void chb_cpuCount_CheckedChanged(object sender, EventArgs e)
         {
             if (chb_cpuCount.Checked)
-                txtb_cpuCount.Enabled = true;
+            { txtb_cpuCount.Enabled = true; chb_enableHT.Enabled = false; chb_enableHT.Checked = false; }
             else
-                txtb_cpuCount.Enabled = false;
+            { txtb_cpuCount.Enabled = false; chb_enableHT.Enabled = true; }
         }
         #endregion
 
@@ -1153,44 +1022,28 @@ namespace arma3Launcher
 
                         btn_Launch.Enabled = false;
 
-                        PrepareLaunch = new LaunchCore(chb_noLogs.Checked,
-                            chb_noPause.Checked,
-                            chb_noSplash.Checked,
-                            chb_noCB.Checked,
-                            chb_enableHT.Checked,
-                            chb_skipIntro.Checked,
-                            chb_window.Checked,
-                            chb_showScriptErrors.Checked,
-                            chb_noBenchmark.Checked,
-                            chb_world.Checked,
-                            txtb_world.Text,
+                        PrepareLaunch = new LaunchCore(panel_launchOptionsChb,
                             chb_maxMem.Checked,
                             txtb_maxMem.Text,
                             chb_malloc.Checked,
                             txtb_malloc.Text,
-                            chb_maxVRAM.Checked,
-                            txtb_maxVRAM.Text,
                             chb_exThreads.Checked,
                             txtb_exThreads.Text,
                             chb_cpuCount.Checked,
                             txtb_cpuCount.Text,
-                            chb_dragonfyre.Checked,
-                            dragonfyreName,
-                            dragonfyrerhsName,
-                            chb_blastcore.Checked,
-                            blastcoreName,
-                            lstb_activeAddons,
-                            modsName);
+                            steamworkshopAddonsList,
+                            modsName,
+                            this);
 
                         Arguments = PrepareLaunch.GetArguments();
                         SaveSettings();
 
-                        if (activePack == "arma3" || PrepareLaunch.isModPackInstalled(modsName, modsUrl))
+                        if (activePack == "arma3" || PrepareLaunch.isModPackInstalled())
                             runGame();
                         else
                         {
                             if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
-                                downloader.beginDownload(modsUrl, true, activePack, cfgUrl.Split('!')[1]);
+                                downloader.beginDownload(GlobalVar.files2Download, true, activePack);
                             else
                                 MessageBox.Show("There's a download already in progress. Please wait for it to finish.", "Download already in progress", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
@@ -1216,7 +1069,7 @@ namespace arma3Launcher
 
         private void txtb_armaDirectory_TextChanged(object sender, EventArgs e)
         {
-            if (txtb_armaDirectory.Text != "Set directory ->")
+            if (txtb_armaDirectory.Text != "Set directory ->" && txtb_armaDirectory.Text != "")
             {
                 txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64);
 
@@ -1243,11 +1096,21 @@ namespace arma3Launcher
                         txtb_armaDirectory.Text = armaDir_previousDir;
                 }
             }
+            else
+            {
+                if (txtb_armaDirectory.Text == "")
+                {
+                    Properties.Settings.Default.Arma3Folder = "";
+                    Properties.Settings.Default.Save();
+
+                    txtb_armaDirectory.ForeColor = Color.DarkGray; txtb_armaDirectory.Text = "Set directory ->";
+                }
+            }
         }
 
         private void txtb_tsDirectory_TextChanged(object sender, EventArgs e)
         {
-            if (txtb_tsDirectory.Text != "Set directory ->")
+            if (txtb_tsDirectory.Text != "Set directory ->" && txtb_tsDirectory.Text != "")
             {
                 txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
 
@@ -1273,11 +1136,21 @@ namespace arma3Launcher
                         txtb_tsDirectory.Text = tsDir_previousDir;
                 }
             }
+            else
+            {
+                if (txtb_tsDirectory.Text == "")
+                {
+                    Properties.Settings.Default.TS3Folder = "";
+                    Properties.Settings.Default.Save();
+
+                    txtb_tsDirectory.ForeColor = Color.DarkGray; txtb_tsDirectory.Text = "Set directory ->";
+                }
+            }
         }
 
         private void txtb_modsDirectory_TextChanged(object sender, EventArgs e)
         {
-            if (txtb_modsDirectory.Text != "Set directory ->")
+            if (txtb_modsDirectory.Text != "Set directory ->" && txtb_modsDirectory.Text != "")
             {
                 txtb_modsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
 
@@ -1304,6 +1177,19 @@ namespace arma3Launcher
                         txtb_modsDirectory.Text = modsDir_previousDir;
                 }
             }
+            else
+            {
+                if (txtb_modsDirectory.Text == "")
+                {
+                    Properties.Settings.Default.AddonsFolder = "";
+                    Properties.Settings.Default.Save();
+
+                    txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->";
+                }
+            }
+
+            if(hasShown)
+                ReadRepo(false);
         }
 
         private void btn_ereaseArmaDirectory_Click(object sender, EventArgs e)
@@ -1324,23 +1210,11 @@ namespace arma3Launcher
 
         private void btn_copyLaunchOptions_Click(object sender, EventArgs e)
         {
-            PrepareLaunch = new LaunchCore(chb_noLogs.Checked,
-                chb_noPause.Checked,
-                chb_noSplash.Checked,
-                chb_noCB.Checked,
-                chb_enableHT.Checked,
-                chb_skipIntro.Checked,
-                chb_window.Checked,
-                chb_showScriptErrors.Checked,
-                chb_noBenchmark.Checked,
-                chb_world.Checked,
-                txtb_world.Text,
+            PrepareLaunch = new LaunchCore(panel_launchOptionsChb,
                 chb_maxMem.Checked,
                 txtb_maxMem.Text,
                 chb_malloc.Checked,
                 txtb_malloc.Text,
-                chb_maxVRAM.Checked,
-                txtb_maxVRAM.Text,
                 chb_exThreads.Checked,
                 txtb_exThreads.Text,
                 chb_cpuCount.Checked,
@@ -1367,46 +1241,6 @@ namespace arma3Launcher
                 activeButton.BackColor = Color.Transparent;
                 Thread.Sleep(400);
             } while (aux_Blinker == 0);
-        }
-
-        private void btn_activateAddon_Click(object sender, EventArgs e)
-        {
-            if (lstb_activeAddons.Items.Count > 0)
-                lstb_activeAddons.SetSelected(0, false);
-
-            try
-            {
-                lstb_activeAddons.Items.Add(lstb_detectedAddons.SelectedItem);
-                lstb_detectedAddons.Items.Remove(lstb_detectedAddons.SelectedItem);
-
-                SaveSettings();
-                lstb_detectedAddons.Focus();
-                if (lstb_detectedAddons.Items.Count > 0)
-                    lstb_detectedAddons.SelectedIndex = 0;
-                lstb_detectedAddons.Select();
-            }
-            catch
-            { }
-        }
-
-        private void btn_deactivateAddon_Click(object sender, EventArgs e)
-        {
-            if (lstb_detectedAddons.Items.Count > 0)
-                lstb_detectedAddons.SetSelected(0, false);
-
-            try
-            {
-                lstb_detectedAddons.Items.Add(lstb_activeAddons.SelectedItem);
-                lstb_activeAddons.Items.Remove(lstb_activeAddons.SelectedItem);
-
-                SaveSettings();
-                lstb_activeAddons.Focus();
-                if (lstb_activeAddons.Items.Count > 0)
-                    lstb_activeAddons.SelectedIndex = 0;
-                lstb_activeAddons.Select();
-            }
-            catch
-            { }
         }
 
         private void btn_reloadAddons_Click(object sender, EventArgs e)
@@ -1451,50 +1285,6 @@ namespace arma3Launcher
         private void btn_goGit_Click(object sender, EventArgs e)
         {
             Process.Start(Properties.GlobalValues.Link_Gihub);
-        }
-
-        private void btn_downloadDragonFyre_Click(object sender, EventArgs e)
-        {
-            if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
-            {
-                modsUrl.Clear();
-                modsUrl.Add(dragonfyreUrl);
-                modsUrl.Add(dragonfyrerhsUrl);
-                downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
-            }
-            else
-            {
-                downloader.enqueueUrl(dragonfyreUrl);
-                downloader.enqueueUrl(dragonfyrerhsUrl);
-            }
-
-            btn_downloadDragonFyre.Enabled = false;
-        }
-
-        private void btn_downloadBlastcore_Click(object sender, EventArgs e)
-        {
-            if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
-            {
-                modsUrl.Clear();
-                modsUrl.Add(blastcoreUrl);
-                downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
-            }
-            else
-                downloader.enqueueUrl(blastcoreUrl);
-
-            btn_downloadBlastcore.Enabled = false;
-        }
-
-        private void btn_downloadConfigs_Click(object sender, EventArgs e)
-        {
-            if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
-            {
-                modsUrl.Clear();
-                modsUrl.Add(cfgUrl);
-                downloader.beginDownload(modsUrl, false, activePack, cfgUrl.Split('!')[1]);
-            }
-
-            btn_downloadConfigs.Enabled = false;
         }
 
         private void btn_ereaseModsDirectory_Click(object sender, EventArgs e)
@@ -1563,14 +1353,14 @@ namespace arma3Launcher
                     break;
             }
 
-            MessageBox.Show("Temp Path: " + TempFolder + "\nConfig File: " + cfgFile + "\nGame Server: " + remoteReader.ServerInfo(activePack)[0] + ":" + remoteReader.ServerInfo(activePack)[1] + "\n\nActive Mods:" + aux_listMods, "Fetched remote settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Temp Path: " + TempFolder + "\nGame Server: " + remoteReader.ServerInfo()[0] + ":" + remoteReader.ServerInfo()[1] + "\n\nActive Mods:" + aux_listMods, "Fetched remote settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btn_reinstallTFRPlugins_Click(object sender, EventArgs e)
         { installer.installTeamSpeakPlugin(); }
 
         public async void runGame()
-        { hideDownloadPanel(); await taskDelay(800); PrepareLaunch.LaunchGame(Arguments, this, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(activePack), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked); }
+        { hideDownloadPanel(); await taskDelay(800); PrepareLaunch.LaunchGame(Arguments, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked); }
 
         public void updateCurrentPack(bool refreshPacks)
         { FetchRemoteSettings(refreshPacks); GetAddons(); }
@@ -1594,10 +1384,10 @@ namespace arma3Launcher
         { txt_reSizeBar.Text = "#" + text; }
 
         public void showDownloadPanel()
-        { botPanelIO.showPanel(); }
+        { botPanelIO.showPanelDual(); }
 
         public void hideDownloadPanel()
-        { botPanelIO.hidePanel(); }
+        { botPanelIO.hidePanelDual(); }
 
         private void txtb_armaDirectory_MouseClick(object sender, MouseEventArgs e)
         {
@@ -1649,26 +1439,37 @@ namespace arma3Launcher
 
         private void btn_cancelDownload_MouseHover(object sender, EventArgs e)
         {
-            btn_cancelDownload.BackgroundImage = Properties.Resources.cloud_off_hover;
+            btn_cancelDownload.BackgroundImage = Properties.Resources.cancel_circle_big_red;
         }
 
         private void btn_cancelDownload_MouseLeave(object sender, EventArgs e)
         {
-            btn_cancelDownload.BackgroundImage = Properties.Resources.cloud_off;
+            btn_cancelDownload.BackgroundImage = Properties.Resources.cancel_circle_big_white;
         }
 
         private void btn_cancelDownload_Click(object sender, EventArgs e)
         {
             if (GlobalVar.isDownloading)
             {
-                if (MessageBox.Show("Are you sure you want to cancel the download progress?\nAll files will be deleted. If you want to simply pause the progress just quit the launcher and resume later on.", "Cancel download progress?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Are you sure you want to stop the download?", "Stop download progress?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     downloader.cancelDownload();
             }
 
             if (GlobalVar.isInstalling)
             {
-                MessageBox.Show("One does not simply cancel the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("One does not simply stop the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void switchToServerModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (GlobalVar.isServer)
+                Properties.Settings.Default.isServerMode = false;
+            else
+                Properties.Settings.Default.isServerMode = true;
+
+            this.Close();
+            Process.Start(Application.ExecutablePath);
         }
 
         private void pref_serverAutopilot_CheckedChanged(object sender, EventArgs e)
@@ -1685,6 +1486,17 @@ namespace arma3Launcher
             { GlobalVar.autoPilot = true; WindowVersionStatus.Text = "Autopilot engaged"; pref_serverAutopilot.Checked = true; }
             else
             { GlobalVar.autoPilot = false; WindowVersionStatus.Text = oldVersionStatusText; pref_serverAutopilot.Checked = false; }
+        }
+
+        private void pref_runLauncherOnStartup_Click(object sender, EventArgs e)
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey
+                ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            if (pref_runLauncherOnStartup.Checked)
+                rk.SetValue(AssemblyTitle, Application.ExecutablePath);
+            else
+                rk.DeleteValue(AssemblyTitle, false);
         }
 
         private void WindowVersionStatus_TextChanged(object sender, EventArgs e)
@@ -1808,17 +1620,17 @@ namespace arma3Launcher
 
         private void vlink_infMovement_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            flash_youtubePlayer.Movie = "https://www.youtube.com/v/uM7JY6Q7O4Q";
+            web_youtubeEmbed.DocumentText = string.Format(this.embedYT, "https://www.youtube.com/embed/uM7JY6Q7O4Q");
         }
 
         private void vlink_microDAGR_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            flash_youtubePlayer.Movie = "https://www.youtube.com/v/YXNJRgKbokM";
+            web_youtubeEmbed.DocumentText = string.Format(this.embedYT, "https://www.youtube.com/embed/YXNJRgKbokM");
         }
 
         private void vlink_medicalBasic_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            flash_youtubePlayer.Movie = "https://www.youtube.com/v/reEXxeS-o0U";
+            web_youtubeEmbed.DocumentText = string.Format(this.embedYT, "https://www.youtube.com/embed/reEXxeS-o0U");
         }
 
         private void txtb_searchPack_Enter(object sender, EventArgs e)
@@ -1863,6 +1675,75 @@ namespace arma3Launcher
                 txtb_searchPack.Text = "Search";
                 fetchAddonPacks.Get();
             }
+        }
+
+        private void btn_reloadSteamAddons_Click(object sender, EventArgs e)
+        {
+            GetAddons();
+        }
+
+        /// <summary>
+        /// Top Bar Repo Actions
+        /// </summary>
+        private void btn_opencloseDirPanel_Click(object sender, EventArgs e)
+        {
+            if (panelDirectories.Height > 90) { topPanelsIO.hidePanelSingle(); btn_opencloseDirPanel.Image = Properties.Resources.chevron_down; }
+            else { topPanelsIO.showPanelSingle(); btn_opencloseDirPanel.Image = Properties.Resources.chevron_up; }
+        }
+
+        private void btn_repoExpandAll_Click(object sender, EventArgs e)
+        {
+            if (expandState == 0)
+            {
+                btn_repoExpandAll.Text = "Collapse All";
+                trv_repoContent.ExpandAll();
+                expandState = 1;
+            }
+            else
+            {
+                btn_repoExpandAll.Text = "Expand All";
+                trv_repoContent.CollapseAll();
+                expandState = 0;
+            }
+        }
+
+        private void btn_addonManager_Click(object sender, EventArgs e)
+        {
+            addonManager.ShowDialog();
+        }
+
+        private void btn_checkRepo_Click(object sender, EventArgs e)
+        {
+            ReadRepo(true);
+        }
+
+        private void web_youtubeEmbed_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            web_youtubeEmbed.Document.Body.Style = "overflow:hidden; margin: 0";
+            web_loading.Visible = false;
+            web_youtubeEmbed.Visible = true;
+        }
+
+        private void web_youtubeEmbed_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            web_youtubeEmbed.Visible = false;
+            web_loading.Visible = true;
+        }
+
+        private void btn_openWorkshop_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/app/107410/workshop/");
+        }
+
+        private void btn_addShortcutDesktop_Click(object sender, EventArgs e)
+        {
+            object shDesktop = (object)"Desktop";
+            IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
+            string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\Run Arma 3 Launcher.lnk";
+            IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutAddress);
+            shortcut.Description = "Run Arma 3 Launcher";
+            shortcut.TargetPath = Application.ExecutablePath;
+            shortcut.Save();
         }
     }
 }

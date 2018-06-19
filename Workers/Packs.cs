@@ -18,7 +18,6 @@ namespace arma3Launcher.Workers
         private string title = "";
         private string id = "";
         private string description = "";
-        private string cfgUrl = "";
         private string addons = "";
 
         public Packs(MainForm mainForm, FlowLayoutPanel packsPanel)
@@ -55,21 +54,17 @@ namespace arma3Launcher.Workers
                         title = xn.Attributes["name"].Value;
                         id = xn.Attributes["id"].Value;
                         description = xn.Attributes["description"].Value;
-                        cfgUrl = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["cfgfile"].Value;
                         addons = "";
 
 
                         XmlNodeList xnl2 = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSetInfo//" + id + "//mod");
                         foreach (XmlNode xn2 in xnl2)
                         {
-                            if (xn2.Attributes["type"].Value == "mod")
+                            if (xn2.Attributes["name"].Value != "@dummy")
                             {
-                                if (xn2.Attributes["name"].Value != "@dummy")
-                                {
-                                    addons = addons +
-                                        " • " + xn2.Attributes["name"].Value + " (" + xn2.Attributes["version"].Value + ")" +
-                                        "\n";
-                                }
+                                addons = addons +
+                                    " • " + xn2.Attributes["name"].Value +
+                                    "\n";
                             }
                         }
 
@@ -80,8 +75,6 @@ namespace arma3Launcher.Workers
                             description,
                             addons,
                             gflowpacks,
-                            Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["blastcore"].Value),
-                            Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["dragonfyre"].Value),
                             Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["optional"].Value));
                         auxPack.Tag = string.Format("{0} {1} {2} {3}", id, title, description, addons);
 
@@ -104,7 +97,7 @@ namespace arma3Launcher.Workers
             catch (Exception ex)
             {
                 TableLayoutPanel ErrorTable = new TableLayoutPanel();
-                ErrorTable.Size = new Size(gflowpacks.Size.Width-10, gflowpacks.Size.Height-15);
+                ErrorTable.Size = new Size(gflowpacks.Size.Width - 10, gflowpacks.Size.Height - 15);
 
                 Label ErrorRead = new Label();
                 ErrorRead.Anchor = AnchorStyles.None;

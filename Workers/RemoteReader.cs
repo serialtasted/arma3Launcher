@@ -47,41 +47,16 @@ namespace arma3Launcher.Workers
         /// serverInfo[1]: server port
         /// serverInfo[2]: server password
         /// </returns>
-        public string[] ServerInfo(string activePack)
+        public string[] ServerInfo()
         {
             RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
             string[] serverInfo = new string[3];
 
-            serverInfo[0] = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["ip"].Value;
-            serverInfo[1] = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["port"].Value;
-            serverInfo[2] = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["password"].Value;
+            serverInfo[0] = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Server").Attributes["ip"].Value;
+            serverInfo[1] = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Server").Attributes["port"].Value;
+            serverInfo[2] = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Server").Attributes["password"].Value;
 
             return serverInfo;
-        }
-
-        /// <summary>
-        /// Get addon packs
-        /// </summary>
-        /// <returns></returns>
-        public object GetPacks()
-        {
-
-            return null;
-        }
-
-        /// <summary>
-        /// Returns active pack's config url
-        /// </summary>
-        /// <param name="activePack"></param>
-        /// <returns></returns>
-        public string GetPackConfigFile(string activePack)
-        {
-            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
-            string cfgUrl = "";
-
-            cfgUrl = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["cfgfile"].Value;
-
-            return cfgUrl;
         }
 
         /// <summary>
@@ -103,7 +78,6 @@ namespace arma3Launcher.Workers
                 if (xn.Attributes["type"].Value == "mod" && xn.Attributes["name"].Value != "@dummy")
                 {
                     addonPack[ap, 0] = xn.Attributes["name"].Value;
-                    addonPack[ap, 1] = xn.Attributes["version"].Value;
                     ap++;
                 }
             }

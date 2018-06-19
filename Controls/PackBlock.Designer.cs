@@ -31,13 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.txt_title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel_download_outter = new System.Windows.Forms.Panel();
-            this.panel_download_inner = new System.Windows.Forms.Panel();
-            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
-            this.txt_curFile = new System.Windows.Forms.Label();
-            this.txt_percentageStatus = new System.Windows.Forms.Label();
-            this.txt_progressStatus = new System.Windows.Forms.Label();
-            this.btn_downloadpack = new System.Windows.Forms.PictureBox();
             this.btn_showAddons = new System.Windows.Forms.PictureBox();
             this.img_checkAllowed = new System.Windows.Forms.PictureBox();
             this.btn_useThis = new System.Windows.Forms.PictureBox();
@@ -47,13 +40,7 @@
             this.txt_content = new System.Windows.Forms.Label();
             this.txt_allowed = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.panel1.SuspendLayout();
-            this.panel_download_outter.SuspendLayout();
-            this.panel_download_inner.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_downloadpack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_showAddons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_checkAllowed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_useThis)).BeginInit();
@@ -76,8 +63,6 @@
             // panel1
             // 
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.panel_download_outter);
-            this.panel1.Controls.Add(this.btn_downloadpack);
             this.panel1.Controls.Add(this.btn_showAddons);
             this.panel1.Controls.Add(this.img_checkAllowed);
             this.panel1.Controls.Add(this.btn_useThis);
@@ -89,94 +74,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(860, 174);
             this.panel1.TabIndex = 6;
-            // 
-            // panel_download_outter
-            // 
-            this.panel_download_outter.BackColor = System.Drawing.Color.OliveDrab;
-            this.panel_download_outter.Controls.Add(this.panel_download_inner);
-            this.panel_download_outter.Controls.Add(this.txt_percentageStatus);
-            this.panel_download_outter.Controls.Add(this.txt_progressStatus);
-            this.panel_download_outter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_download_outter.Location = new System.Drawing.Point(0, 114);
-            this.panel_download_outter.Name = "panel_download_outter";
-            this.panel_download_outter.Size = new System.Drawing.Size(860, 60);
-            this.panel_download_outter.TabIndex = 18;
-            // 
-            // panel_download_inner
-            // 
-            this.panel_download_inner.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel_download_inner.Controls.Add(this.btn_cancelDownload);
-            this.panel_download_inner.Controls.Add(this.prb_progressBar_All);
-            this.panel_download_inner.Controls.Add(this.prb_progressBar_File);
-            this.panel_download_inner.Controls.Add(this.txt_curFile);
-            this.panel_download_inner.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_download_inner.Location = new System.Drawing.Point(0, 18);
-            this.panel_download_inner.Name = "panel_download_inner";
-            this.panel_download_inner.Size = new System.Drawing.Size(860, 42);
-            this.panel_download_inner.TabIndex = 0;
-            // 
-            // btn_cancelDownload
-            // 
-            this.btn_cancelDownload.Image = global::arma3Launcher.Properties.Resources.cloud_off;
-            this.btn_cancelDownload.Location = new System.Drawing.Point(817, 5);
-            this.btn_cancelDownload.Name = "btn_cancelDownload";
-            this.btn_cancelDownload.Size = new System.Drawing.Size(32, 32);
-            this.btn_cancelDownload.TabIndex = 17;
-            this.btn_cancelDownload.TabStop = false;
-            this.toolTip1.SetToolTip(this.btn_cancelDownload, "Cancel download");
-            this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click_1);
-            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
-            this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
-            // 
-            // txt_curFile
-            // 
-            this.txt_curFile.AutoSize = true;
-            this.txt_curFile.Font = new System.Drawing.Font("Segoe UI", 7F);
-            this.txt_curFile.ForeColor = System.Drawing.Color.DarkGray;
-            this.txt_curFile.Location = new System.Drawing.Point(5, 2);
-            this.txt_curFile.MinimumSize = new System.Drawing.Size(250, 0);
-            this.txt_curFile.Name = "txt_curFile";
-            this.txt_curFile.Size = new System.Drawing.Size(250, 12);
-            this.txt_curFile.TabIndex = 14;
-            // 
-            // txt_percentageStatus
-            // 
-            this.txt_percentageStatus.AutoSize = true;
-            this.txt_percentageStatus.Font = new System.Drawing.Font("Segoe UI", 7F);
-            this.txt_percentageStatus.ForeColor = System.Drawing.Color.LightGray;
-            this.txt_percentageStatus.Location = new System.Drawing.Point(604, 3);
-            this.txt_percentageStatus.MinimumSize = new System.Drawing.Size(250, 0);
-            this.txt_percentageStatus.Name = "txt_percentageStatus";
-            this.txt_percentageStatus.Size = new System.Drawing.Size(250, 12);
-            this.txt_percentageStatus.TabIndex = 13;
-            this.txt_percentageStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // txt_progressStatus
-            // 
-            this.txt_progressStatus.AutoSize = true;
-            this.txt_progressStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.txt_progressStatus.Location = new System.Drawing.Point(4, 2);
-            this.txt_progressStatus.MaximumSize = new System.Drawing.Size(450, 0);
-            this.txt_progressStatus.MinimumSize = new System.Drawing.Size(450, 0);
-            this.txt_progressStatus.Name = "txt_progressStatus";
-            this.txt_progressStatus.Size = new System.Drawing.Size(450, 15);
-            this.txt_progressStatus.TabIndex = 12;
-            this.txt_progressStatus.Text = "%Download Status%";
-            // 
-            // btn_downloadpack
-            // 
-            this.btn_downloadpack.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_downloadpack.Image = global::arma3Launcher.Properties.Resources.cloud_download;
-            this.btn_downloadpack.Location = new System.Drawing.Point(698, 141);
-            this.btn_downloadpack.Name = "btn_downloadpack";
-            this.btn_downloadpack.Size = new System.Drawing.Size(16, 16);
-            this.btn_downloadpack.TabIndex = 17;
-            this.btn_downloadpack.TabStop = false;
-            this.toolTip1.SetToolTip(this.btn_downloadpack, "Download pack");
-            this.btn_downloadpack.Visible = false;
-            this.btn_downloadpack.Click += new System.EventHandler(this.btn_downloadpack_Click);
-            this.btn_downloadpack.MouseLeave += new System.EventHandler(this.btn_downloadpack_MouseLeave);
-            this.btn_downloadpack.MouseHover += new System.EventHandler(this.btn_downloadpack_MouseHover);
             // 
             // btn_showAddons
             // 
@@ -280,22 +177,6 @@
             this.txt_allowed.Text = "Allowed: ";
             this.txt_allowed.Visible = false;
             // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(12, 28);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.Size = new System.Drawing.Size(790, 5);
-            this.prb_progressBar_All.TabIndex = 16;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(12, 16);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(790, 12);
-            this.prb_progressBar_File.TabIndex = 15;
-            // 
             // PackBlock
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -309,12 +190,6 @@
             this.Size = new System.Drawing.Size(860, 174);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel_download_outter.ResumeLayout(false);
-            this.panel_download_outter.PerformLayout();
-            this.panel_download_inner.ResumeLayout(false);
-            this.panel_download_inner.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_downloadpack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_showAddons)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_checkAllowed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_useThis)).EndInit();
@@ -337,14 +212,5 @@
         private System.Windows.Forms.Label txt_allowed;
         private System.Windows.Forms.PictureBox btn_showAddons;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.PictureBox btn_downloadpack;
-        private System.Windows.Forms.Panel panel_download_outter;
-        private System.Windows.Forms.Panel panel_download_inner;
-        private Windows7ProgressBar prb_progressBar_All;
-        private System.Windows.Forms.Label txt_progressStatus;
-        private System.Windows.Forms.Label txt_curFile;
-        private System.Windows.Forms.Label txt_percentageStatus;
-        private Windows7ProgressBar prb_progressBar_File;
-        private System.Windows.Forms.PictureBox btn_cancelDownload;
     }
 }

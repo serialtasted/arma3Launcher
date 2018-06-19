@@ -29,7 +29,7 @@ namespace arma3Launcher
 
             try
             {
-                if (args[0] == "-server") { GlobalVar.isServer = true; }
+                if (Properties.Settings.Default.isServerMode) { GlobalVar.isServer = true; }
             }
             catch { }
 

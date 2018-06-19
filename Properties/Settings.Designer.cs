@@ -12,7 +12,7 @@ namespace arma3Launcher.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,12 +26,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool noLogs {
+        public bool hugePages {
             get {
-                return ((bool)(this["noLogs"]));
+                return ((bool)(this["hugePages"]));
             }
             set {
-                this["noLogs"] = value;
+                this["hugePages"] = value;
             }
         }
         
@@ -62,12 +62,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool noCB {
+        public bool filePatching {
             get {
-                return ((bool)(this["noCB"]));
+                return ((bool)(this["filePatching"]));
             }
             set {
-                this["noCB"] = value;
+                this["filePatching"] = value;
             }
         }
         
@@ -134,24 +134,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool world {
+        public bool worldEmpty {
             get {
-                return ((bool)(this["world"]));
+                return ((bool)(this["worldEmpty"]));
             }
             set {
-                this["world"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Empty")]
-        public string world_value {
-            get {
-                return ((string)(this["world_value"]));
-            }
-            set {
-                this["world_value"] = value;
+                this["worldEmpty"] = value;
             }
         }
         
@@ -200,30 +188,6 @@ namespace arma3Launcher.Properties {
             }
             set {
                 this["malloc_value"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool maxVRAM {
-            get {
-                return ((bool)(this["maxVRAM"]));
-            }
-            set {
-                this["maxVRAM"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int maxVRAM_value {
-            get {
-                return ((int)(this["maxVRAM_value"]));
-            }
-            set {
-                this["maxVRAM_value"] = value;
             }
         }
         
@@ -302,30 +266,6 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool JSRS {
-            get {
-                return ((bool)(this["JSRS"]));
-            }
-            set {
-                this["JSRS"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool BlastCore {
-            get {
-                return ((bool)(this["BlastCore"]));
-            }
-            set {
-                this["BlastCore"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool firstLaunch {
             get {
                 return ((bool)(this["firstLaunch"]));
@@ -397,25 +337,13 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("spn_lite")]
+        [global::System.Configuration.DefaultSettingValueAttribute("arma3")]
         public string lastAddonPack {
             get {
                 return ((string)(this["lastAddonPack"]));
             }
             set {
                 this["lastAddonPack"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string downloadQueue {
-            get {
-                return ((string)(this["downloadQueue"]));
-            }
-            set {
-                this["downloadQueue"] = value;
             }
         }
         
@@ -457,7 +385,7 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool autoDownload {
             get {
                 return ((bool)(this["autoDownload"]));
@@ -500,6 +428,42 @@ namespace arma3Launcher.Properties {
             }
             set {
                 this["privateKeys"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RepoFolder {
+            get {
+                return ((string)(this["RepoFolder"]));
+            }
+            set {
+                this["RepoFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long LastRepoFileSize {
+            get {
+                return ((long)(this["LastRepoFileSize"]));
+            }
+            set {
+                this["LastRepoFileSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isServerMode {
+            get {
+                return ((bool)(this["isServerMode"]));
+            }
+            set {
+                this["isServerMode"] = value;
             }
         }
     }

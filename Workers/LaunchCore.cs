@@ -164,9 +164,9 @@ namespace arma3Launcher.Workers
                     if (pingresult.Status == IPStatus.Success)
                     {*/
                     if (serverInfo[2] != "")
-                        Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" -FilePatching " + Arguments;
+                        Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" " + Arguments;
                     else
-                        Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " -FilePatching " + Arguments;
+                        Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " " + Arguments;
                     //}
                 }
 

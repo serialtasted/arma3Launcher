@@ -179,15 +179,6 @@ namespace arma3Launcher
             //FeedMethod.GetRSSNews();
             //delayFecthNews.Start();
 
-            if (Properties.Settings.Default.UpdateSettings)
-            {
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.UpdateSettings = false;
-                if (AssemblyVersion == "0.6")
-                    Properties.Settings.Default.firstLaunch = true;
-                Properties.Settings.Default.Save();
-            }
-
             if (GlobalVar.isServer) { WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion + " | Server Edition"; }
             else { WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion; }
 
@@ -352,6 +343,7 @@ namespace arma3Launcher
             {
                 trv_repoContent.Nodes.Clear();
                 trv_repoContent.Nodes.Add("ERROR", "No addons folder selected!", 5, 5);
+                GlobalVar.isReadingRepo = false;
                 return false;
             }
         }
@@ -929,7 +921,7 @@ namespace arma3Launcher
                 WebClient update_file = new WebClient();
                 Uri update_url = new Uri(Properties.GlobalValues.S_UpdateUrl);
 
-                update_file.DownloadFile(update_url, "zUpdator.exe");
+                update_file.DownloadFile(update_url, Application.ExecutablePath.Remove(Application.ExecutablePath.Length - Process.GetCurrentProcess().MainModule.ModuleName.Length) + "zUpdator.exe");
             }
             catch (Exception ex)
             {
@@ -939,6 +931,7 @@ namespace arma3Launcher
             try
             {
                 var fass = new ProcessStartInfo();
+                fass.WorkingDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.Length - Process.GetCurrentProcess().MainModule.ModuleName.Length);
                 fass.FileName = "zUpdator.exe";
                 fass.Arguments = "-curversion=" + txt_curversion.Text +
                     " -newversion=" + txt_latestversion.Text +
@@ -1739,9 +1732,9 @@ namespace arma3Launcher
         {
             object shDesktop = (object)"Desktop";
             IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
-            string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\Run Arma 3 Launcher.lnk";
+            string shortcutAddress = (string)shell.SpecialFolders.Item(ref shDesktop) + @"\Run PTrangers Arma 3 Launcher.lnk";
             IWshRuntimeLibrary.IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutAddress);
-            shortcut.Description = "Run Arma 3 Launcher";
+            shortcut.Description = "Run PTrangers Arma 3 Launcher";
             shortcut.TargetPath = Application.ExecutablePath;
             shortcut.Save();
         }

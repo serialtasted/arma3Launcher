@@ -229,8 +229,8 @@ namespace arma3Launcher.Workers
             }
             else
             {
-                SvArguments = "-port=" + serverInfo[1] + " \"-config=" + GameFolder + "TADST\\PTrdefault\\TADST_config.cfg\" \"-cfg=" + GameFolder + "TADST\\PTrdefault\\TADST_basic.cfg\" \"-profiles=" + GameFolder + "TADST\\PTrdefault\" -name=PTrdefault " + Arguments;
-                HcArguments = "-client -connect=localhost -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" -profile=PTrHeadlessClient -name=PTrHeadlessClient " + Arguments;
+                SvArguments = "-port=" + serverInfo[1] + " -config=server.cfg -name=PTrServer " + Arguments;
+                HcArguments = "-client -connect=localhost -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" -name=headlessclient " + Arguments;
             }
 
             if (Directory.Exists(GameFolder) && File.Exists(GameFolder + GlobalVar.gameArtifact))

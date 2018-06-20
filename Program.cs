@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using arma3Launcher.Workers;
 using System.IO;
+using System.Diagnostics;
 
 namespace arma3Launcher
 {
@@ -21,8 +22,15 @@ namespace arma3Launcher
                 GlobalVar.isDebug = true;
             #endif
 
-            if (File.Exists("zUpdator.exe"))
-                File.Delete("zUpdator.exe");
+            if (File.Exists(Application.ExecutablePath.Remove(Application.ExecutablePath.Length - Process.GetCurrentProcess().MainModule.ModuleName.Length) + "zUpdator.exe"))
+                File.Delete(Application.ExecutablePath.Remove(Application.ExecutablePath.Length - Process.GetCurrentProcess().MainModule.ModuleName.Length) + "zUpdator.exe");
+
+            if (Properties.Settings.Default.UpdateSettings)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpdateSettings = false;
+                Properties.Settings.Default.Save();
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

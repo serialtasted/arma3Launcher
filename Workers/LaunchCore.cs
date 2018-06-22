@@ -19,6 +19,7 @@ namespace arma3Launcher.Workers
         private string Arguments = "";
         private string SvArguments = "";
         private string HcArguments = "";
+        private int HcInstances = 0;
 
         private Process process;
         private MainForm mainForm;
@@ -26,6 +27,11 @@ namespace arma3Launcher.Workers
         private Label status;
 
         public LaunchCore(FlowLayoutPanel launchOptions,
+            string clientProfile,
+            string serverConfig,
+            string serverProfile,
+            string hcProfile,
+            int hcInstances,
             bool maxMem,
             string s_maxMem,
             bool malloc,
@@ -35,12 +41,18 @@ namespace arma3Launcher.Workers
             bool cpuCount,
             string s_cpuCount)
         {
-            string auxCombinedArguments = AggregateArguments(launchOptions, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
+            string auxCombinedArguments = AggregateArguments(launchOptions, clientProfile, serverConfig, serverProfile, hcProfile, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
+            this.HcInstances = hcInstances;
 
             if (auxCombinedArguments != "") Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
         }
 
-        public LaunchCore(FlowLayoutPanel launchOptions, 
+        public LaunchCore(FlowLayoutPanel launchOptions,
+            string clientProfile,
+            string serverConfig,
+            string serverProfile,
+            string hcProfile,
+            int hcInstances,
             bool maxMem,
             string s_maxMem, 
             bool malloc,
@@ -53,12 +65,13 @@ namespace arma3Launcher.Workers
             List<string> modsList,
             MainForm mainForm)
         {
-            string auxCombinedArguments = AggregateArguments(launchOptions, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
+            string auxCombinedArguments = AggregateArguments(launchOptions, clientProfile, serverConfig, serverProfile, hcProfile, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
             string auxCoreMods = "-mod=\"";
             string auxCombinedAddons = "";
             int i = 0;
 
             this.mainForm = mainForm;
+            this.HcInstances = hcInstances;
 
             foreach (string mod in modsList)
             {
@@ -93,6 +106,10 @@ namespace arma3Launcher.Workers
         }
 
         private string AggregateArguments(FlowLayoutPanel launchOptions,
+            string clientProfile,
+            string serverConfig,
+            string serverProfile,
+            string hcProfile,
             bool maxMem,
             string s_maxMem,
             bool malloc,
@@ -103,6 +120,24 @@ namespace arma3Launcher.Workers
             string s_cpuCount)
         {
             string auxCombinedArguments = "";
+            this.SvArguments = "";
+            this.HcArguments = "";
+
+            if (GlobalVar.isServer)
+            {
+                if (serverConfig.ToLower().EndsWith(".cfg")) SvArguments += "-config=" + serverConfig + " ";
+                if (serverProfile.ToLower() != "default") SvArguments += "-name=" + serverProfile + " ";
+                if (hcProfile.ToLower() != "default") HcArguments += "-name=" + hcProfile + " ";
+            }
+            else
+            {
+                if (clientProfile.ToLower() != "default") auxCombinedArguments += "-name=" + clientProfile + " ";
+            }
+
+            if (maxMem && s_maxMem != "") auxCombinedArguments += "-maxMem=" + s_maxMem + " ";
+            if (malloc && s_malloc != "") auxCombinedArguments += "-malloc=" + s_malloc + " ";
+            if (exThreads && s_exThreads != "") auxCombinedArguments += "-exThreads=" + s_exThreads + " ";
+            if (cpuCount && s_cpuCount != "") auxCombinedArguments += "-cpuCount=" + s_cpuCount + " ";
 
             foreach (CheckBox option in launchOptions.Controls)
             {
@@ -113,11 +148,6 @@ namespace arma3Launcher.Workers
                 }
                 catch { }
             }
-
-            if (maxMem && s_maxMem != "") auxCombinedArguments = auxCombinedArguments + "-maxMem=" + s_maxMem + " ";
-            if (malloc && s_malloc != "") auxCombinedArguments = auxCombinedArguments + "-malloc=" + s_malloc + " ";
-            if (exThreads && s_exThreads != "") auxCombinedArguments = auxCombinedArguments + "-exThreads=" + s_exThreads + " ";
-            if (cpuCount && s_cpuCount != "") auxCombinedArguments = auxCombinedArguments + "-cpuCount=" + s_cpuCount + " ";
 
             return auxCombinedArguments;
         }
@@ -229,8 +259,8 @@ namespace arma3Launcher.Workers
             }
             else
             {
-                SvArguments = "-port=" + serverInfo[1] + " -config=server.cfg -name=PTrServer " + Arguments;
-                HcArguments = "-client -connect=localhost -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" -name=headlessclient " + Arguments;
+                SvArguments += "-port=" + serverInfo[1] + " " + Arguments;
+                HcArguments += "-client -connect=localhost -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" " + Arguments;
             }
 
             if (Directory.Exists(GameFolder) && File.Exists(GameFolder + GlobalVar.gameArtifact))
@@ -244,13 +274,16 @@ namespace arma3Launcher.Workers
 
                     if (GlobalVar.isServer)
                     {
-                        gameProcessInfo.FileName = hcProcessInfo.FileName = "arma3server.exe";
+                        gameProcessInfo.FileName = hcProcessInfo.FileName = GlobalVar.gameArtifact;
                         gameProcessInfo.Arguments = SvArguments;
                         hcProcessInfo.Arguments = HcArguments;
 
-                        var hcProcess = new Process();
-                        hcProcess.StartInfo = hcProcessInfo;
-                        hcProcess.Start();
+                        for (int i = 0; i < HcInstances; i++)
+                        {
+                            var hcProcess = new Process();
+                            hcProcess.StartInfo = hcProcessInfo;
+                            hcProcess.Start();
+                        }
 
                         whatsRunning = "Server";
                     }

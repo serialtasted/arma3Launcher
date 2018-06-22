@@ -466,5 +466,77 @@ namespace arma3Launcher.Properties {
                 this["isServerMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ServerConfig {
+            get {
+                return ((string)(this["ServerConfig"]));
+            }
+            set {
+                this["ServerConfig"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ServerProfile {
+            get {
+                return ((string)(this["ServerProfile"]));
+            }
+            set {
+                this["ServerProfile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HCProfile {
+            get {
+                return ((string)(this["HCProfile"]));
+            }
+            set {
+                this["HCProfile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int HCInstances {
+            get {
+                return ((int)(this["HCInstances"]));
+            }
+            set {
+                this["HCInstances"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ClientProfile {
+            get {
+                return ((string)(this["ClientProfile"]));
+            }
+            set {
+                this["ClientProfile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool x64Game {
+            get {
+                return ((bool)(this["x64Game"]));
+            }
+            set {
+                this["x64Game"] = value;
+            }
+        }
     }
 }

@@ -143,6 +143,22 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel_launchOptions = new System.Windows.Forms.Panel();
+            this.panel_headlessOptions = new System.Windows.Forms.Panel();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.cb_hcInstances = new System.Windows.Forms.ComboBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.cb_hcProfile = new System.Windows.Forms.ComboBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.panel26 = new System.Windows.Forms.Panel();
+            this.label37 = new System.Windows.Forms.Label();
+            this.panel_serverOptions = new System.Windows.Forms.Panel();
+            this.panel23 = new System.Windows.Forms.Panel();
+            this.cb_serverProfile = new System.Windows.Forms.ComboBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.cb_serverConfig = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.panel24 = new System.Windows.Forms.Panel();
+            this.label30 = new System.Windows.Forms.Label();
             this.panel_steamAddons = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.steamworkshopAddonsList = new System.Windows.Forms.CheckedListBox();
@@ -152,16 +168,18 @@
             this.label15 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.chb_maxMem = new System.Windows.Forms.CheckBox();
-            this.txtb_maxMem = new System.Windows.Forms.TextBox();
-            this.chb_cpuCount = new System.Windows.Forms.CheckBox();
+            this.cb_clientProfile = new System.Windows.Forms.ComboBox();
             this.chb_malloc = new System.Windows.Forms.CheckBox();
             this.chb_exThreads = new System.Windows.Forms.CheckBox();
-            this.txtb_exThreads = new System.Windows.Forms.TextBox();
+            this.chb_cpuCount = new System.Windows.Forms.CheckBox();
+            this.chb_maxMem = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.txtb_malloc = new System.Windows.Forms.ComboBox();
             this.btn_reloadMallocs = new System.Windows.Forms.PictureBox();
+            this.txtb_exThreads = new System.Windows.Forms.TextBox();
             this.txtb_cpuCount = new System.Windows.Forms.TextBox();
+            this.txtb_maxMem = new System.Windows.Forms.TextBox();
+            this.lbl_clientProfile = new System.Windows.Forms.Label();
             this.panel_launchOptionsChb = new System.Windows.Forms.FlowLayoutPanel();
             this.chb_showScriptErrors = new System.Windows.Forms.CheckBox();
             this.chb_noPause = new System.Windows.Forms.CheckBox();
@@ -181,6 +199,7 @@
             this.btn_ereaseModsDirectory = new System.Windows.Forms.Button();
             this.txtb_modsDirectory = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.img_x64status = new System.Windows.Forms.PictureBox();
             this.btn_copyLaunchOptions = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
             this.panelLaunch = new System.Windows.Forms.Panel();
@@ -214,6 +233,7 @@
             this.pref_startGameAfterDownloadsAreCompleted = new System.Windows.Forms.ToolStripMenuItem();
             this.pref_joinServerAuto = new System.Windows.Forms.ToolStripMenuItem();
             this.pref_serverAutopilot = new System.Windows.Forms.ToolStripMenuItem();
+            this.pref_64bitGame = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.launcherPreferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pref_runLauncherOnStartup = new System.Windows.Forms.ToolStripMenuItem();
@@ -274,6 +294,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.web_loading)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel_launchOptions.SuspendLayout();
+            this.panel_headlessOptions.SuspendLayout();
+            this.panel25.SuspendLayout();
+            this.panel26.SuspendLayout();
+            this.panel_serverOptions.SuspendLayout();
+            this.panel23.SuspendLayout();
+            this.panel24.SuspendLayout();
             this.panel_steamAddons.SuspendLayout();
             this.panel10.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -288,6 +314,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_openModsDirectory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseModsDirectory)).BeginInit();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.img_x64status)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).BeginInit();
             this.panelLaunch.SuspendLayout();
             this.panel_bottomhide.SuspendLayout();
@@ -931,11 +958,11 @@
             // Panels
             // 
             this.Panels.BackColor = System.Drawing.Color.OliveDrab;
-            this.Panels.Controls.Add(this.panel_packs);
-            this.Panels.Controls.Add(this.panel_help);
             this.Panels.Controls.Add(this.panel_community);
             this.Panels.Controls.Add(this.panel_launchOptions);
             this.Panels.Controls.Add(this.panel_about);
+            this.Panels.Controls.Add(this.panel_packs);
+            this.Panels.Controls.Add(this.panel_help);
             this.Panels.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Panels.Location = new System.Drawing.Point(0, 0);
             this.Panels.Margin = new System.Windows.Forms.Padding(0);
@@ -952,7 +979,7 @@
             this.panel_about.Controls.Add(this.panel1);
             this.panel_about.Controls.Add(this.img_thisSpace);
             this.panel_about.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_about.Location = new System.Drawing.Point(0, 3);
+            this.panel_about.Location = new System.Drawing.Point(0, -603);
             this.panel_about.Name = "panel_about";
             this.panel_about.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_about.Size = new System.Drawing.Size(906, 303);
@@ -1391,7 +1418,7 @@
             this.panel_packs.Controls.Add(this.PacksPanel);
             this.panel_packs.Controls.Add(this.panel15);
             this.panel_packs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_packs.Location = new System.Drawing.Point(0, -1209);
+            this.panel_packs.Location = new System.Drawing.Point(0, -300);
             this.panel_packs.Name = "panel_packs";
             this.panel_packs.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_packs.Size = new System.Drawing.Size(906, 303);
@@ -1482,7 +1509,7 @@
             this.panel_help.Controls.Add(this.label19);
             this.panel_help.Controls.Add(this.label12);
             this.panel_help.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_help.Location = new System.Drawing.Point(0, -906);
+            this.panel_help.Location = new System.Drawing.Point(0, 3);
             this.panel_help.Name = "panel_help";
             this.panel_help.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_help.Size = new System.Drawing.Size(906, 303);
@@ -1494,11 +1521,11 @@
             this.label29.Font = new System.Drawing.Font("Segoe UI Semibold", 7.5F, System.Drawing.FontStyle.Bold);
             this.label29.Location = new System.Drawing.Point(19, 97);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(826, 12);
+            this.label29.Size = new System.Drawing.Size(861, 12);
             this.label29.TabIndex = 4;
-            this.label29.Text = "▪▪▪  All updates are done automatically. If the required addons are not installed" +
-    " the launcher will do it for you. When everything is ready the launcher will sta" +
-    "rt the game by it self.";
+            this.label29.Text = "▪▪▪  All files are synced automatically with the repository. If the required file" +
+    "s are not installed the launcher will do it for you. Also check the More Options" +
+    " menu (≡) for more preferences.";
             // 
             // label20
             // 
@@ -1530,7 +1557,8 @@
             this.label12.Location = new System.Drawing.Point(10, 15);
             this.label12.MaximumSize = new System.Drawing.Size(890, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(884, 285);
+            this.label12.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Size = new System.Drawing.Size(887, 285);
             this.label12.TabIndex = 1;
             this.label12.Text = resources.GetString("label12.Text");
             this.label12.UseMnemonic = false;
@@ -1541,7 +1569,7 @@
             this.panel_community.Controls.Add(this.panel13);
             this.panel_community.Controls.Add(this.panel8);
             this.panel_community.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_community.Location = new System.Drawing.Point(0, -603);
+            this.panel_community.Location = new System.Drawing.Point(0, -1209);
             this.panel_community.Name = "panel_community";
             this.panel_community.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_community.Size = new System.Drawing.Size(906, 303);
@@ -1696,14 +1724,194 @@
             // panel_launchOptions
             // 
             this.panel_launchOptions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_launchOptions.Controls.Add(this.panel_headlessOptions);
+            this.panel_launchOptions.Controls.Add(this.panel_serverOptions);
             this.panel_launchOptions.Controls.Add(this.panel_steamAddons);
             this.panel_launchOptions.Controls.Add(this.panel4);
             this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_launchOptions.Location = new System.Drawing.Point(0, -300);
+            this.panel_launchOptions.Location = new System.Drawing.Point(0, -906);
             this.panel_launchOptions.Name = "panel_launchOptions";
             this.panel_launchOptions.Padding = new System.Windows.Forms.Padding(10, 15, 10, 5);
             this.panel_launchOptions.Size = new System.Drawing.Size(906, 303);
             this.panel_launchOptions.TabIndex = 6;
+            // 
+            // panel_headlessOptions
+            // 
+            this.panel_headlessOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_headlessOptions.Controls.Add(this.panel25);
+            this.panel_headlessOptions.Controls.Add(this.panel26);
+            this.panel_headlessOptions.Location = new System.Drawing.Point(673, 157);
+            this.panel_headlessOptions.Name = "panel_headlessOptions";
+            this.panel_headlessOptions.Size = new System.Drawing.Size(223, 140);
+            this.panel_headlessOptions.TabIndex = 6;
+            this.panel_headlessOptions.Visible = false;
+            // 
+            // panel25
+            // 
+            this.panel25.Controls.Add(this.cb_hcInstances);
+            this.panel25.Controls.Add(this.label35);
+            this.panel25.Controls.Add(this.cb_hcProfile);
+            this.panel25.Controls.Add(this.label36);
+            this.panel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel25.Location = new System.Drawing.Point(0, 23);
+            this.panel25.Name = "panel25";
+            this.panel25.Padding = new System.Windows.Forms.Padding(8);
+            this.panel25.Size = new System.Drawing.Size(221, 115);
+            this.panel25.TabIndex = 1;
+            // 
+            // cb_hcInstances
+            // 
+            this.cb_hcInstances.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_hcInstances.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cb_hcInstances.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cb_hcInstances.FormattingEnabled = true;
+            this.cb_hcInstances.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.cb_hcInstances.Location = new System.Drawing.Point(96, 40);
+            this.cb_hcInstances.Name = "cb_hcInstances";
+            this.cb_hcInstances.Size = new System.Drawing.Size(120, 25);
+            this.cb_hcInstances.TabIndex = 3;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label35.Location = new System.Drawing.Point(5, 43);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(85, 17);
+            this.label35.TabIndex = 2;
+            this.label35.Text = "HC Instances:";
+            // 
+            // cb_hcProfile
+            // 
+            this.cb_hcProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_hcProfile.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cb_hcProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cb_hcProfile.FormattingEnabled = true;
+            this.cb_hcProfile.Location = new System.Drawing.Point(59, 9);
+            this.cb_hcProfile.Name = "cb_hcProfile";
+            this.cb_hcProfile.Size = new System.Drawing.Size(158, 25);
+            this.cb_hcProfile.TabIndex = 1;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label36.Location = new System.Drawing.Point(5, 12);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(48, 17);
+            this.label36.TabIndex = 0;
+            this.label36.Text = "Profile:";
+            // 
+            // panel26
+            // 
+            this.panel26.BackColor = System.Drawing.Color.DimGray;
+            this.panel26.Controls.Add(this.label37);
+            this.panel26.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel26.Location = new System.Drawing.Point(0, 0);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(221, 23);
+            this.panel26.TabIndex = 0;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.label37.Location = new System.Drawing.Point(5, 2);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(159, 19);
+            this.label37.TabIndex = 1;
+            this.label37.Text = "Headless Client Options";
+            // 
+            // panel_serverOptions
+            // 
+            this.panel_serverOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_serverOptions.Controls.Add(this.panel23);
+            this.panel_serverOptions.Controls.Add(this.panel24);
+            this.panel_serverOptions.Location = new System.Drawing.Point(673, 15);
+            this.panel_serverOptions.Name = "panel_serverOptions";
+            this.panel_serverOptions.Size = new System.Drawing.Size(223, 140);
+            this.panel_serverOptions.TabIndex = 5;
+            this.panel_serverOptions.Visible = false;
+            // 
+            // panel23
+            // 
+            this.panel23.Controls.Add(this.cb_serverProfile);
+            this.panel23.Controls.Add(this.label34);
+            this.panel23.Controls.Add(this.cb_serverConfig);
+            this.panel23.Controls.Add(this.label33);
+            this.panel23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel23.Location = new System.Drawing.Point(0, 23);
+            this.panel23.Name = "panel23";
+            this.panel23.Padding = new System.Windows.Forms.Padding(8);
+            this.panel23.Size = new System.Drawing.Size(221, 115);
+            this.panel23.TabIndex = 1;
+            // 
+            // cb_serverProfile
+            // 
+            this.cb_serverProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_serverProfile.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cb_serverProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cb_serverProfile.FormattingEnabled = true;
+            this.cb_serverProfile.Location = new System.Drawing.Point(59, 40);
+            this.cb_serverProfile.Name = "cb_serverProfile";
+            this.cb_serverProfile.Size = new System.Drawing.Size(157, 25);
+            this.cb_serverProfile.TabIndex = 3;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label34.Location = new System.Drawing.Point(5, 43);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(48, 17);
+            this.label34.TabIndex = 2;
+            this.label34.Text = "Profile:";
+            // 
+            // cb_serverConfig
+            // 
+            this.cb_serverConfig.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_serverConfig.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cb_serverConfig.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cb_serverConfig.FormattingEnabled = true;
+            this.cb_serverConfig.Location = new System.Drawing.Point(59, 9);
+            this.cb_serverConfig.Name = "cb_serverConfig";
+            this.cb_serverConfig.Size = new System.Drawing.Size(158, 25);
+            this.cb_serverConfig.TabIndex = 1;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label33.Location = new System.Drawing.Point(5, 12);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(49, 17);
+            this.label33.TabIndex = 0;
+            this.label33.Text = "Config:";
+            // 
+            // panel24
+            // 
+            this.panel24.BackColor = System.Drawing.Color.DimGray;
+            this.panel24.Controls.Add(this.label30);
+            this.panel24.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel24.Location = new System.Drawing.Point(0, 0);
+            this.panel24.Name = "panel24";
+            this.panel24.Size = new System.Drawing.Size(221, 23);
+            this.panel24.TabIndex = 0;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.label30.Location = new System.Drawing.Point(5, 2);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(103, 19);
+            this.label30.TabIndex = 1;
+            this.label30.Text = "Server Options";
             // 
             // panel_steamAddons
             // 
@@ -1809,70 +2017,41 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.20527F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.79474F));
-            this.tableLayoutPanel2.Controls.Add(this.chb_maxMem, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_maxMem, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.chb_cpuCount, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.chb_malloc, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.chb_exThreads, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_exThreads, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtb_cpuCount, 1, 1);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.79473F));
+            this.tableLayoutPanel2.Controls.Add(this.cb_clientProfile, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.chb_malloc, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.chb_exThreads, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.chb_cpuCount, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.chb_maxMem, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.txtb_exThreads, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtb_cpuCount, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.txtb_maxMem, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lbl_clientProfile, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(306, 65);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(349, 215);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
-            // chb_maxMem
+            // cb_clientProfile
             // 
-            this.chb_maxMem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chb_maxMem.AutoSize = true;
-            this.chb_maxMem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_maxMem.Location = new System.Drawing.Point(3, 10);
-            this.chb_maxMem.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.chb_maxMem.Name = "chb_maxMem";
-            this.chb_maxMem.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.chb_maxMem.Size = new System.Drawing.Size(102, 21);
-            this.chb_maxMem.TabIndex = 2;
-            this.chb_maxMem.Text = "-maxMem";
-            this.chb_maxMem.UseVisualStyleBackColor = true;
-            this.chb_maxMem.CheckedChanged += new System.EventHandler(this.chb_maxMem_CheckedChanged);
-            // 
-            // txtb_maxMem
-            // 
-            this.txtb_maxMem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtb_maxMem.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_maxMem.Enabled = false;
-            this.txtb_maxMem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_maxMem.Location = new System.Drawing.Point(111, 10);
-            this.txtb_maxMem.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
-            this.txtb_maxMem.Name = "txtb_maxMem";
-            this.txtb_maxMem.Size = new System.Drawing.Size(230, 22);
-            this.txtb_maxMem.TabIndex = 11;
-            // 
-            // chb_cpuCount
-            // 
-            this.chb_cpuCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chb_cpuCount.AutoSize = true;
-            this.chb_cpuCount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_cpuCount.Location = new System.Drawing.Point(3, 63);
-            this.chb_cpuCount.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.chb_cpuCount.Name = "chb_cpuCount";
-            this.chb_cpuCount.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.chb_cpuCount.Size = new System.Drawing.Size(102, 21);
-            this.chb_cpuCount.TabIndex = 8;
-            this.chb_cpuCount.Text = "-cpuCount";
-            this.chb_cpuCount.UseVisualStyleBackColor = true;
-            this.chb_cpuCount.CheckedChanged += new System.EventHandler(this.chb_cpuCount_CheckedChanged);
+            this.cb_clientProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_clientProfile.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.cb_clientProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cb_clientProfile.FormattingEnabled = true;
+            this.cb_clientProfile.Location = new System.Drawing.Point(111, 10);
+            this.cb_clientProfile.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
+            this.cb_clientProfile.Name = "cb_clientProfile";
+            this.cb_clientProfile.Size = new System.Drawing.Size(229, 25);
+            this.cb_clientProfile.TabIndex = 4;
             // 
             // chb_malloc
             // 
@@ -1880,7 +2059,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chb_malloc.AutoSize = true;
             this.chb_malloc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_malloc.Location = new System.Drawing.Point(3, 169);
+            this.chb_malloc.Location = new System.Drawing.Point(3, 182);
             this.chb_malloc.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.chb_malloc.Name = "chb_malloc";
             this.chb_malloc.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
@@ -1896,7 +2075,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chb_exThreads.AutoSize = true;
             this.chb_exThreads.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_exThreads.Location = new System.Drawing.Point(3, 116);
+            this.chb_exThreads.Location = new System.Drawing.Point(3, 139);
             this.chb_exThreads.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.chb_exThreads.Name = "chb_exThreads";
             this.chb_exThreads.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
@@ -1906,18 +2085,37 @@
             this.chb_exThreads.UseVisualStyleBackColor = true;
             this.chb_exThreads.CheckedChanged += new System.EventHandler(this.chb_exThreads_CheckedChanged);
             // 
-            // txtb_exThreads
+            // chb_cpuCount
             // 
-            this.txtb_exThreads.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.chb_cpuCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtb_exThreads.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_exThreads.Enabled = false;
-            this.txtb_exThreads.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_exThreads.Location = new System.Drawing.Point(111, 116);
-            this.txtb_exThreads.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
-            this.txtb_exThreads.Name = "txtb_exThreads";
-            this.txtb_exThreads.Size = new System.Drawing.Size(230, 22);
-            this.txtb_exThreads.TabIndex = 16;
+            this.chb_cpuCount.AutoSize = true;
+            this.chb_cpuCount.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_cpuCount.Location = new System.Drawing.Point(3, 96);
+            this.chb_cpuCount.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.chb_cpuCount.Name = "chb_cpuCount";
+            this.chb_cpuCount.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.chb_cpuCount.Size = new System.Drawing.Size(102, 21);
+            this.chb_cpuCount.TabIndex = 8;
+            this.chb_cpuCount.Text = "-cpuCount";
+            this.chb_cpuCount.UseVisualStyleBackColor = true;
+            this.chb_cpuCount.CheckedChanged += new System.EventHandler(this.chb_cpuCount_CheckedChanged);
+            // 
+            // chb_maxMem
+            // 
+            this.chb_maxMem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chb_maxMem.AutoSize = true;
+            this.chb_maxMem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_maxMem.Location = new System.Drawing.Point(3, 53);
+            this.chb_maxMem.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.chb_maxMem.Name = "chb_maxMem";
+            this.chb_maxMem.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.chb_maxMem.Size = new System.Drawing.Size(102, 21);
+            this.chb_maxMem.TabIndex = 2;
+            this.chb_maxMem.Text = "-maxMem";
+            this.chb_maxMem.UseVisualStyleBackColor = true;
+            this.chb_maxMem.CheckedChanged += new System.EventHandler(this.chb_maxMem_CheckedChanged);
             // 
             // tableLayoutPanel4
             // 
@@ -1928,7 +2126,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.583691F));
             this.tableLayoutPanel4.Controls.Add(this.txtb_malloc, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.btn_reloadMallocs, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(108, 164);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(108, 177);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0, 5, 8, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
@@ -1964,6 +2162,19 @@
             this.btn_reloadMallocs.TabStop = false;
             this.btn_reloadMallocs.Click += new System.EventHandler(this.btn_reloadMallocs_Click);
             // 
+            // txtb_exThreads
+            // 
+            this.txtb_exThreads.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtb_exThreads.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_exThreads.Enabled = false;
+            this.txtb_exThreads.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_exThreads.Location = new System.Drawing.Point(111, 139);
+            this.txtb_exThreads.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
+            this.txtb_exThreads.Name = "txtb_exThreads";
+            this.txtb_exThreads.Size = new System.Drawing.Size(230, 22);
+            this.txtb_exThreads.TabIndex = 16;
+            // 
             // txtb_cpuCount
             // 
             this.txtb_cpuCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1971,11 +2182,36 @@
             this.txtb_cpuCount.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtb_cpuCount.Enabled = false;
             this.txtb_cpuCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtb_cpuCount.Location = new System.Drawing.Point(111, 63);
+            this.txtb_cpuCount.Location = new System.Drawing.Point(111, 96);
             this.txtb_cpuCount.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
             this.txtb_cpuCount.Name = "txtb_cpuCount";
             this.txtb_cpuCount.Size = new System.Drawing.Size(230, 22);
             this.txtb_cpuCount.TabIndex = 15;
+            // 
+            // txtb_maxMem
+            // 
+            this.txtb_maxMem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtb_maxMem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_maxMem.Enabled = false;
+            this.txtb_maxMem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtb_maxMem.Location = new System.Drawing.Point(111, 53);
+            this.txtb_maxMem.Margin = new System.Windows.Forms.Padding(3, 10, 8, 3);
+            this.txtb_maxMem.Name = "txtb_maxMem";
+            this.txtb_maxMem.Size = new System.Drawing.Size(230, 22);
+            this.txtb_maxMem.TabIndex = 11;
+            // 
+            // lbl_clientProfile
+            // 
+            this.lbl_clientProfile.AutoSize = true;
+            this.lbl_clientProfile.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lbl_clientProfile.Location = new System.Drawing.Point(3, 15);
+            this.lbl_clientProfile.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
+            this.lbl_clientProfile.Name = "lbl_clientProfile";
+            this.lbl_clientProfile.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.lbl_clientProfile.Size = new System.Drawing.Size(89, 17);
+            this.lbl_clientProfile.TabIndex = 18;
+            this.lbl_clientProfile.Text = "Client Profile";
             // 
             // panel_launchOptionsChb
             // 
@@ -2001,8 +2237,8 @@
             // 
             this.chb_showScriptErrors.AutoSize = true;
             this.chb_showScriptErrors.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_showScriptErrors.Location = new System.Drawing.Point(11, 11);
-            this.chb_showScriptErrors.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_showScriptErrors.Location = new System.Drawing.Point(11, 18);
+            this.chb_showScriptErrors.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_showScriptErrors.Name = "chb_showScriptErrors";
             this.chb_showScriptErrors.Size = new System.Drawing.Size(135, 21);
             this.chb_showScriptErrors.TabIndex = 8;
@@ -2014,8 +2250,8 @@
             // 
             this.chb_noPause.AutoSize = true;
             this.chb_noPause.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_noPause.Location = new System.Drawing.Point(11, 50);
-            this.chb_noPause.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_noPause.Location = new System.Drawing.Point(11, 59);
+            this.chb_noPause.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_noPause.Name = "chb_noPause";
             this.chb_noPause.Size = new System.Drawing.Size(83, 21);
             this.chb_noPause.TabIndex = 1;
@@ -2027,8 +2263,8 @@
             // 
             this.chb_window.AutoSize = true;
             this.chb_window.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_window.Location = new System.Drawing.Point(11, 89);
-            this.chb_window.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_window.Location = new System.Drawing.Point(11, 100);
+            this.chb_window.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_window.Name = "chb_window";
             this.chb_window.Size = new System.Drawing.Size(113, 21);
             this.chb_window.TabIndex = 6;
@@ -2040,8 +2276,8 @@
             // 
             this.chb_noSplash.AutoSize = true;
             this.chb_noSplash.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_noSplash.Location = new System.Drawing.Point(11, 128);
-            this.chb_noSplash.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_noSplash.Location = new System.Drawing.Point(11, 141);
+            this.chb_noSplash.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_noSplash.Name = "chb_noSplash";
             this.chb_noSplash.Size = new System.Drawing.Size(130, 21);
             this.chb_noSplash.TabIndex = 2;
@@ -2053,8 +2289,8 @@
             // 
             this.chb_hugePages.AutoSize = true;
             this.chb_hugePages.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_hugePages.Location = new System.Drawing.Point(11, 167);
-            this.chb_hugePages.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_hugePages.Location = new System.Drawing.Point(11, 182);
+            this.chb_hugePages.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_hugePages.Name = "chb_hugePages";
             this.chb_hugePages.Size = new System.Drawing.Size(98, 21);
             this.chb_hugePages.TabIndex = 3;
@@ -2066,8 +2302,8 @@
             // 
             this.chb_enableHT.AutoSize = true;
             this.chb_enableHT.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_enableHT.Location = new System.Drawing.Point(170, 11);
-            this.chb_enableHT.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_enableHT.Location = new System.Drawing.Point(174, 18);
+            this.chb_enableHT.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_enableHT.Name = "chb_enableHT";
             this.chb_enableHT.Size = new System.Drawing.Size(86, 21);
             this.chb_enableHT.TabIndex = 4;
@@ -2079,8 +2315,8 @@
             // 
             this.chb_skipIntro.AutoSize = true;
             this.chb_skipIntro.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_skipIntro.Location = new System.Drawing.Point(170, 50);
-            this.chb_skipIntro.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_skipIntro.Location = new System.Drawing.Point(174, 59);
+            this.chb_skipIntro.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_skipIntro.Name = "chb_skipIntro";
             this.chb_skipIntro.Size = new System.Drawing.Size(82, 21);
             this.chb_skipIntro.TabIndex = 5;
@@ -2092,8 +2328,8 @@
             // 
             this.chb_filePatching.AutoSize = true;
             this.chb_filePatching.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.chb_filePatching.Location = new System.Drawing.Point(170, 89);
-            this.chb_filePatching.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_filePatching.Location = new System.Drawing.Point(174, 100);
+            this.chb_filePatching.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_filePatching.Name = "chb_filePatching";
             this.chb_filePatching.Size = new System.Drawing.Size(99, 21);
             this.chb_filePatching.TabIndex = 10;
@@ -2105,8 +2341,8 @@
             // 
             this.chb_battleye.AutoSize = true;
             this.chb_battleye.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_battleye.Location = new System.Drawing.Point(170, 128);
-            this.chb_battleye.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_battleye.Location = new System.Drawing.Point(174, 141);
+            this.chb_battleye.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_battleye.Name = "chb_battleye";
             this.chb_battleye.Size = new System.Drawing.Size(115, 21);
             this.chb_battleye.TabIndex = 7;
@@ -2119,8 +2355,8 @@
             // 
             this.chb_worldEmpty.AutoSize = true;
             this.chb_worldEmpty.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.chb_worldEmpty.Location = new System.Drawing.Point(170, 167);
-            this.chb_worldEmpty.Margin = new System.Windows.Forms.Padding(3, 3, 21, 15);
+            this.chb_worldEmpty.Location = new System.Drawing.Point(174, 182);
+            this.chb_worldEmpty.Margin = new System.Windows.Forms.Padding(3, 10, 25, 10);
             this.chb_worldEmpty.Name = "chb_worldEmpty";
             this.chb_worldEmpty.Size = new System.Drawing.Size(106, 21);
             this.chb_worldEmpty.TabIndex = 11;
@@ -2222,6 +2458,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.DimGray;
+            this.panel6.Controls.Add(this.img_x64status);
             this.panel6.Controls.Add(this.btn_copyLaunchOptions);
             this.panel6.Controls.Add(this.label18);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
@@ -2230,6 +2467,17 @@
             this.panel6.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.panel6.Size = new System.Drawing.Size(655, 23);
             this.panel6.TabIndex = 0;
+            // 
+            // img_x64status
+            // 
+            this.img_x64status.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.img_x64status.Image = global::arma3Launcher.Properties.Resources.x64_inactive;
+            this.img_x64status.Location = new System.Drawing.Point(620, 4);
+            this.img_x64status.Name = "img_x64status";
+            this.img_x64status.Size = new System.Drawing.Size(32, 16);
+            this.img_x64status.TabIndex = 2;
+            this.img_x64status.TabStop = false;
+            this.img_x64status.Visible = false;
             // 
             // btn_copyLaunchOptions
             // 
@@ -2556,6 +2804,7 @@
             this.pref_startGameAfterDownloadsAreCompleted,
             this.pref_joinServerAuto,
             this.pref_serverAutopilot,
+            this.pref_64bitGame,
             this.toolStripSeparator1,
             this.launcherPreferencesToolStripMenuItem,
             this.pref_runLauncherOnStartup,
@@ -2602,6 +2851,17 @@
             this.pref_serverAutopilot.Text = "Server autopilot";
             this.pref_serverAutopilot.Visible = false;
             this.pref_serverAutopilot.CheckedChanged += new System.EventHandler(this.pref_serverAutopilot_CheckedChanged);
+            // 
+            // pref_64bitGame
+            // 
+            this.pref_64bitGame.Checked = true;
+            this.pref_64bitGame.CheckOnClick = true;
+            this.pref_64bitGame.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.pref_64bitGame.Name = "pref_64bitGame";
+            this.pref_64bitGame.Size = new System.Drawing.Size(259, 22);
+            this.pref_64bitGame.Text = "Use 64-bit";
+            this.pref_64bitGame.Visible = false;
+            this.pref_64bitGame.Click += new System.EventHandler(this.pref_64bitGame_Click);
             // 
             // toolStripSeparator1
             // 
@@ -2782,6 +3042,16 @@
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel_launchOptions.ResumeLayout(false);
+            this.panel_headlessOptions.ResumeLayout(false);
+            this.panel25.ResumeLayout(false);
+            this.panel25.PerformLayout();
+            this.panel26.ResumeLayout(false);
+            this.panel26.PerformLayout();
+            this.panel_serverOptions.ResumeLayout(false);
+            this.panel23.ResumeLayout(false);
+            this.panel23.PerformLayout();
+            this.panel24.ResumeLayout(false);
+            this.panel24.PerformLayout();
             this.panel_steamAddons.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
@@ -2801,6 +3071,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_browseModsDirectory)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.img_x64status)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_copyLaunchOptions)).EndInit();
             this.panelLaunch.ResumeLayout(false);
             this.panelLaunch.PerformLayout();
@@ -3012,5 +3283,25 @@
         private System.Windows.Forms.CheckBox chb_filePatching;
         private System.Windows.Forms.CheckBox chb_worldEmpty;
         private System.Windows.Forms.ToolStripMenuItem btn_addShortcutDesktop;
+        private System.Windows.Forms.Panel panel_serverOptions;
+        private System.Windows.Forms.Panel panel23;
+        private System.Windows.Forms.Panel panel24;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.ComboBox cb_serverProfile;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox cb_serverConfig;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Panel panel_headlessOptions;
+        private System.Windows.Forms.Panel panel25;
+        private System.Windows.Forms.ComboBox cb_hcInstances;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.ComboBox cb_hcProfile;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Panel panel26;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.ComboBox cb_clientProfile;
+        private System.Windows.Forms.Label lbl_clientProfile;
+        private System.Windows.Forms.ToolStripMenuItem pref_64bitGame;
+        private System.Windows.Forms.PictureBox img_x64status;
     }
 }

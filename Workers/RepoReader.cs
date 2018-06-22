@@ -13,7 +13,7 @@ namespace arma3Launcher.Workers
     {
         private TreeView repoTreeView;
         private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
-        private string AddonsFolder = Properties.Settings.Default.AddonsFolder;
+        private string AddonsFolder = "";
 
         private List<long> modsSize = new List<long>();
         private List<string> modsList = new List<string>();
@@ -47,6 +47,7 @@ namespace arma3Launcher.Workers
             this.filesOK = 0;
             this.filesINVALID = 0;
             this.filesMISSING = 0;
+            this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
 
             GlobalVar.folders2Create.Clear();
             GlobalVar.files2Download.Clear();

@@ -320,6 +320,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ptrangers.ico" />
+    <None Include="Resources\x64-inactive.jpg" />
+    <None Include="Resources\x64-active.jpg" />
     <None Include="Resources\youtube.png" />
     <None Include="Resources\warning.png" />
     <None Include="Resources\useThis_inactive.png" />

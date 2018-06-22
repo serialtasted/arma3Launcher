@@ -187,6 +187,8 @@ namespace arma3Launcher
             {
                 pref_switchclientserver.Text = "Switch to Client Mode";
                 panel_steamAddons.Visible = false;
+                panel_serverOptions.Visible = true;
+                panel_headlessOptions.Visible = true;
                 pref_joinServerAuto.Visible = false;
                 btn_reinstallTFRPlugins.Visible = false;
                 pref_serverAutopilot.Visible = true;
@@ -194,6 +196,9 @@ namespace arma3Launcher
                 btn_addonManager.Visible = true;
 
                 pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
+
+                cb_clientProfile.Enabled = false;
+                lbl_clientProfile.Enabled = false;
 
                 foreach (Control control in panel_TeamSpeakDir.Controls)
                 {
@@ -205,6 +210,8 @@ namespace arma3Launcher
                         switchAutopilot(true);
                     else
                         switchAutopilot(false);
+
+                this.ServerSettings();
             }
 
             if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
@@ -235,7 +242,8 @@ namespace arma3Launcher
                 HideUnhide(menuSelected);
             }
 
-            FetchSettings();
+            this.ClientSettings();
+            this.FetchSettings();
 
             if (!isUpdate)
             {
@@ -307,6 +315,48 @@ namespace arma3Launcher
             aLooker.getAddons(Properties.Settings.Default.Arma3Folder + "\\!Workshop");
         }
 
+        private void ServerSettings()
+        {
+            cb_serverConfig.Items.Clear();
+            cb_serverProfile.Items.Clear();
+            cb_hcProfile.Items.Clear();
+
+            string documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles";
+
+            // get server config
+            if (File.Exists(Properties.Settings.Default.Arma3Folder + "server.cfg"))
+                cb_serverConfig.Items.Add("server.cfg");
+            else
+                cb_serverConfig.Items.Add("Server.cfg not found");
+
+            // get server profiles
+            cb_serverProfile.Items.Add("Default");
+            foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+            {
+                cb_serverProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+            }
+
+            // get hc profiles
+            cb_hcProfile.Items.Add("Default");
+            foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+            {
+                cb_hcProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+            }
+        }
+
+        private void ClientSettings()
+        {
+            cb_clientProfile.Items.Clear();
+
+            string documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles";
+
+            cb_clientProfile.Items.Add("Default");
+            foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+            {
+                cb_clientProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+            }
+        }
+
         public bool ReadRepo(bool showMessage)
         {
             if (GlobalVar.isReadingRepo)
@@ -341,8 +391,13 @@ namespace arma3Launcher
             }
             else
             {
-                trv_repoContent.Nodes.Clear();
-                trv_repoContent.Nodes.Add("ERROR", "No addons folder selected!", 5, 5);
+                this.trv_repoContent.Nodes.Clear();
+                this.trv_repoContent.Nodes.Add("ERROR", "No addons folder selected!", 5, 5);
+
+                this.lbl_repofileok.Text = "N/A";
+                this.lbl_repofileinvalid.Text = "N/A";
+                this.lbl_repofilemissing.Text = "N/A";
+
                 GlobalVar.isReadingRepo = false;
                 return false;
             }
@@ -351,17 +406,17 @@ namespace arma3Launcher
         private void FetchSettings()
         {
             // directories
-            if (Properties.Settings.Default.Arma3Folder != "")
+            if (Properties.Settings.Default.Arma3Folder != string.Empty)
             { txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64); GameFolder = txtb_armaDirectory.Text = Properties.Settings.Default.Arma3Folder; }
             else
             { txtb_armaDirectory.ForeColor = Color.DarkGray; txtb_armaDirectory.Text = "Set directory ->"; }
 
-            if (Properties.Settings.Default.TS3Folder != "")
+            if (Properties.Settings.Default.TS3Folder != string.Empty)
             { txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64); TSFolder = txtb_tsDirectory.Text = Properties.Settings.Default.TS3Folder; }
             else
             { txtb_tsDirectory.ForeColor = Color.DarkGray; txtb_tsDirectory.Text = "Set directory ->"; }
 
-            if (Properties.Settings.Default.AddonsFolder != "")
+            if (Properties.Settings.Default.AddonsFolder != string.Empty)
             { txtb_modsDirectory.ForeColor = Color.FromArgb(64, 64, 64); AddonsFolder = txtb_modsDirectory.Text = Properties.Settings.Default.AddonsFolder; }
             else
             { txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->"; }
@@ -389,12 +444,67 @@ namespace arma3Launcher
             chb_cpuCount.Checked = Properties.Settings.Default.cpuCount;
             txtb_cpuCount.Text = Properties.Settings.Default.cpuCount_value.ToString();
 
-            // battleye
-            chb_battleye.Checked = Properties.Settings.Default.battleye;
-            if (Properties.Settings.Default.battleye)
-                GlobalVar.gameArtifact = "arma3battleye.exe";
+            // game artifact
+            if (Environment.Is64BitOperatingSystem)
+            {
+                pref_64bitGame.Checked = Properties.Settings.Default.x64Game;
+                pref_64bitGame.Visible = true;
+                img_x64status.Visible = true;
+
+                if (Properties.Settings.Default.x64Game)
+                {
+                    img_x64status.Image = Properties.Resources.x64_active;
+
+                    if (GlobalVar.isServer)
+                    {
+                        GlobalVar.gameArtifact = "arma3server_x64.exe";
+                    }
+                    else
+                    {
+                        chb_battleye.Checked = Properties.Settings.Default.battleye;
+                        if (Properties.Settings.Default.battleye)
+                            GlobalVar.gameArtifact = "arma3battleye.exe";
+                        else
+                            GlobalVar.gameArtifact = "arma3_x64.exe";
+                    }
+                }
+                else
+                {
+                    img_x64status.Image = Properties.Resources.x64_inactive;
+
+                    if (GlobalVar.isServer)
+                    {
+                        GlobalVar.gameArtifact = "arma3server.exe";
+                    }
+                    else
+                    {
+                        chb_battleye.Checked = Properties.Settings.Default.battleye;
+                        if (Properties.Settings.Default.battleye)
+                            GlobalVar.gameArtifact = "arma3battleye.exe";
+                        else
+                            GlobalVar.gameArtifact = "arma3.exe";
+                    }
+                }
+            }
             else
-                GlobalVar.gameArtifact = "arma3.exe";
+            {
+                pref_64bitGame.Checked = false;
+                Properties.Settings.Default.x64Game = false;
+
+
+                if (GlobalVar.isServer)
+                {
+                    GlobalVar.gameArtifact = "arma3server.exe";
+                }
+                else
+                {
+                    chb_battleye.Checked = Properties.Settings.Default.battleye;
+                    if (Properties.Settings.Default.battleye)
+                        GlobalVar.gameArtifact = "arma3battleye.exe";
+                    else
+                        GlobalVar.gameArtifact = "arma3.exe";
+                }
+            }
 
             // preferences
             pref_startGameAfterDownloadsAreCompleted.Checked = Properties.Settings.Default.startGameAfterDownload;
@@ -402,6 +512,34 @@ namespace arma3Launcher
             pref_allowNotifications.Checked = Properties.Settings.Default.allowNotifications;
             pref_autoDownload.Checked = Properties.Settings.Default.autoDownload;
             pref_joinServerAuto.Checked = Properties.Settings.Default.joinServerAutomatically;
+
+            // server-client specific settings
+            if (GlobalVar.isServer)
+            {
+                if (Properties.Settings.Default.ServerConfig != string.Empty)
+                    cb_serverConfig.SelectedItem = Properties.Settings.Default.ServerConfig;
+                else
+                    cb_serverConfig.SelectedIndex = 0;
+
+                if (Properties.Settings.Default.ServerProfile != string.Empty)
+                    cb_serverProfile.SelectedItem = Properties.Settings.Default.ServerProfile;
+                else
+                    cb_serverProfile.SelectedIndex = 0;
+
+                if (Properties.Settings.Default.HCProfile != string.Empty)
+                    cb_hcProfile.SelectedItem = Properties.Settings.Default.HCProfile;
+                else
+                    cb_hcProfile.SelectedIndex = 0;
+
+                cb_hcInstances.SelectedIndex = Properties.Settings.Default.HCInstances;
+            }
+            else
+            {
+                if (Properties.Settings.Default.ClientProfile != string.Empty)
+                    cb_clientProfile.SelectedItem = Properties.Settings.Default.ClientProfile;
+                else
+                    cb_clientProfile.SelectedIndex = 0;
+            }
         }
 
         private void SaveSettings()
@@ -430,12 +568,27 @@ namespace arma3Launcher
             Properties.Settings.Default.cpuCount = chb_cpuCount.Checked;
             Properties.Settings.Default.cpuCount_value = Convert.ToInt32(txtb_cpuCount.Text);
 
+            Properties.Settings.Default.x64Game = pref_64bitGame.Checked;
+
             // preferences
             Properties.Settings.Default.startGameAfterDownload = pref_startGameAfterDownloadsAreCompleted.Checked;
             Properties.Settings.Default.runLauncherOnStartup = pref_runLauncherOnStartup.Checked;
             Properties.Settings.Default.allowNotifications = pref_allowNotifications.Checked;
             Properties.Settings.Default.autoDownload = pref_autoDownload.Checked;
             Properties.Settings.Default.joinServerAutomatically = pref_joinServerAuto.Checked;
+
+            // server-client specific settings
+            if (GlobalVar.isServer)
+            {
+                Properties.Settings.Default.ServerConfig = (string)cb_serverConfig.SelectedItem;
+                Properties.Settings.Default.ServerProfile = (string)cb_serverProfile.SelectedItem;
+                Properties.Settings.Default.HCProfile = (string)cb_hcProfile.SelectedItem;
+                Properties.Settings.Default.HCInstances = cb_hcInstances.SelectedIndex;
+            }
+            else
+            {
+                Properties.Settings.Default.ClientProfile = (string)cb_clientProfile.SelectedItem;
+            }
 
             Properties.Settings.Default.Save();
         }
@@ -1016,6 +1169,11 @@ namespace arma3Launcher
                         btn_Launch.Enabled = false;
 
                         PrepareLaunch = new LaunchCore(panel_launchOptionsChb,
+                            (string)cb_clientProfile.SelectedItem,
+                            (string)cb_serverConfig.SelectedItem,
+                            (string)cb_serverProfile.SelectedItem,
+                            (string)cb_hcProfile.SelectedItem,
+                            cb_hcInstances.SelectedIndex,
                             chb_maxMem.Checked,
                             txtb_maxMem.Text,
                             chb_malloc.Checked,
@@ -1204,6 +1362,11 @@ namespace arma3Launcher
         private void btn_copyLaunchOptions_Click(object sender, EventArgs e)
         {
             PrepareLaunch = new LaunchCore(panel_launchOptionsChb,
+                (string)cb_clientProfile.SelectedItem,
+                (string)cb_serverConfig.SelectedItem,
+                (string)cb_serverProfile.SelectedItem,
+                (string)cb_hcProfile.SelectedItem,
+                cb_hcInstances.SelectedIndex,
                 chb_maxMem.Checked,
                 txtb_maxMem.Text,
                 chb_malloc.Checked,
@@ -1490,6 +1653,42 @@ namespace arma3Launcher
                 rk.SetValue(AssemblyTitle, Application.ExecutablePath);
             else
                 rk.DeleteValue(AssemblyTitle, false);
+        }
+
+        private void pref_64bitGame_Click(object sender, EventArgs e)
+        {
+            if (pref_64bitGame.Checked)
+            {
+                img_x64status.Image = Properties.Resources.x64_active;
+
+                if (GlobalVar.isServer)
+                {
+                    GlobalVar.gameArtifact = "arma3server_x64.exe";
+                }
+                else
+                {
+                    if (Properties.Settings.Default.battleye)
+                        GlobalVar.gameArtifact = "arma3battleye.exe";
+                    else
+                        GlobalVar.gameArtifact = "arma3_x64.exe";
+                }
+            }
+            else
+            {
+                img_x64status.Image = Properties.Resources.x64_inactive;
+
+                if (GlobalVar.isServer)
+                {
+                    GlobalVar.gameArtifact = "arma3server.exe";
+                }
+                else
+                {
+                    if (Properties.Settings.Default.battleye)
+                        GlobalVar.gameArtifact = "arma3battleye.exe";
+                    else
+                        GlobalVar.gameArtifact = "arma3.exe";
+                }
+            }
         }
 
         private void WindowVersionStatus_TextChanged(object sender, EventArgs e)

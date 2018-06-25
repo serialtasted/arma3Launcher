@@ -321,7 +321,9 @@ namespace arma3Launcher
             cb_serverProfile.Items.Clear();
             cb_hcProfile.Items.Clear();
 
-            string documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles";
+            string documentsA3Profiles = "";
+            try { documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles"; }
+            catch { }
 
             // get server config
             if (File.Exists(Properties.Settings.Default.Arma3Folder + "server.cfg"))
@@ -331,16 +333,22 @@ namespace arma3Launcher
 
             // get server profiles
             cb_serverProfile.Items.Add("Default");
-            foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+            if (documentsA3Profiles != string.Empty)
             {
-                cb_serverProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+                {
+                    cb_serverProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                }
             }
 
             // get hc profiles
             cb_hcProfile.Items.Add("Default");
-            foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+            if (documentsA3Profiles != string.Empty)
             {
-                cb_hcProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+                {
+                    cb_hcProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                }
             }
         }
 
@@ -348,12 +356,17 @@ namespace arma3Launcher
         {
             cb_clientProfile.Items.Clear();
 
-            string documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles";
+            string documentsA3Profiles = "";
+            try { documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles"; }
+            catch { }
 
             cb_clientProfile.Items.Add("Default");
-            foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+            if (documentsA3Profiles != string.Empty)
             {
-                cb_clientProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+                {
+                    cb_clientProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                }
             }
         }
 

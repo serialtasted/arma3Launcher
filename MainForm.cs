@@ -333,7 +333,7 @@ namespace arma3Launcher
 
             // get server profiles
             cb_serverProfile.Items.Add("Default");
-            if (documentsA3Profiles != string.Empty)
+            if (documentsA3Profiles != string.Empty && Directory.Exists(documentsA3Profiles))
             {
                 foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
                 {
@@ -343,7 +343,7 @@ namespace arma3Launcher
 
             // get hc profiles
             cb_hcProfile.Items.Add("Default");
-            if (documentsA3Profiles != string.Empty)
+            if (documentsA3Profiles != string.Empty && Directory.Exists(documentsA3Profiles))
             {
                 foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
                 {
@@ -361,7 +361,7 @@ namespace arma3Launcher
             catch { }
 
             cb_clientProfile.Items.Add("Default");
-            if (documentsA3Profiles != string.Empty)
+            if (documentsA3Profiles != string.Empty && Directory.Exists(documentsA3Profiles))
             {
                 foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
                 {

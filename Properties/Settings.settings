@@ -107,8 +107,8 @@
     <Setting Name="RepoFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="LastRepoFileSize" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="LastRepoFileMD5" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="isServerMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -130,6 +130,9 @@
     </Setting>
     <Setting Name="x64Game" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="workshopAddons" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

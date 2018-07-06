@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using arma3Launcher.Effects;
+using arma3Launcher.Controls;
 
 namespace arma3Launcher.Workers
 {
@@ -13,11 +16,20 @@ namespace arma3Launcher.Workers
     {
         private CheckedListBox addonsList;
         private Label progressText;
-        private ProgressBar progressFile;
+        private Windows7ProgressBar progressFile;
+        private TextBox buildLog;
+        private WindowIO windowIO;
+
+        private bool isBuilding = false;
+        private bool isCancel = false;
+        private bool closeAfter = false;
 
         private BackgroundWorker builder = new BackgroundWorker();
 
-        private string repoPath = "";
+        // workers
+        private RepoReader repoReader;
+
+        private string repoPath = string.Empty;
 
         // invokes
         private void progressBarFileStyle(ProgressBarStyle prbStyle)
@@ -56,21 +68,54 @@ namespace arma3Launcher.Workers
             }
         }
 
-        public BuildRepo (CheckedListBox addonsList, Label progressText, ProgressBar progressFile)
+        private void buildLogText(string text)
         {
+            if (this.buildLog.InvokeRequired)
+            {
+                this.buildLog.Invoke(new MethodInvoker(delegate { this.buildLog.AppendText(text); }));
+            }
+            else
+            {
+                this.buildLog.AppendText(text);
+            }
+        }
+
+        public BuildRepo (CheckedListBox addonsList, Label progressText, Windows7ProgressBar progressFile, TextBox buildLog, WindowIO windowIO)
+        {
+            this.repoReader = new RepoReader();
+
             this.addonsList = addonsList;
             this.progressText = progressText;
             this.progressFile = progressFile;
+            this.buildLog = buildLog;
+            this.windowIO = windowIO;
 
             this.builder.DoWork += Builder_DoWork;
             this.builder.RunWorkerCompleted += Builder_RunWorkerCompleted;
+            this.builder.WorkerSupportsCancellation = true;
 
             this.progressStatusText("Waiting for orders");
+        }
+
+        public void CancelBuild()
+        {
+            if (this.isBuilding)
+            {
+                this.closeAfter = true;
+                this.builder.CancelAsync();
+            }
+            else
+            {
+                windowIO.windowOut(true);
+            }
         }
 
         private void Builder_DoWork(object sender, DoWorkEventArgs e)
         {
             if (File.Exists(repoPath + "repoList.a3l")) { File.Delete(repoPath + "repoList.a3l"); }
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
 
             long filesCount = Directory.GetFiles(repoPath, "*", SearchOption.AllDirectories).LongLength;
             int filesDone = 0;
@@ -84,6 +129,8 @@ namespace arma3Launcher.Workers
                 {
                     foreach (string item in items)
                     {
+                        
+
                         bool addIt = false;
 
                         for (int i = 0; i < addonsList.CheckedItems.Count; i++)
@@ -93,8 +140,11 @@ namespace arma3Launcher.Workers
 
                         if (addIt)
                         {
+                            int splitCount = item.Split('\\').Length;
+                            this.buildLogText(Environment.NewLine + "Adding: " + item.Split('\\')[splitCount - 1]);
+
                             byte[] file = new UTF8Encoding(true).GetBytes(
-                                new FileInfo(item).Length.ToString() +
+                                 repoReader.CalculateFileHash(item) +
                                 "*" +
                                 item.Remove(0, repoPath.Length)
                             );
@@ -105,25 +155,71 @@ namespace arma3Launcher.Workers
                         }
 
                         this.progressBarFileValue(Convert.ToInt32(((double)filesDone / filesCount) * 100));
+
+                        if (this.builder.CancellationPending)
+                        { e.Cancel = true; break; }
+
                         filesDone++;
                     }
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error while building repository", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            finally
+            {
+                // Get the elapsed time as a TimeSpan value.
+                TimeSpan ts = stopWatch.Elapsed;
+
+                // Format and display the TimeSpan value.
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds,
+                    ts.Milliseconds / 10);
+
+                stopWatch.Stop();
+
+                this.buildLogText(Environment.NewLine);
+                this.buildLogText(Environment.NewLine + "Files added to catalog: " + filesDone + " of " + filesCount);
+                this.buildLogText(Environment.NewLine + "Catalog built in: " + elapsedTime);
+            }
         }
 
         private void Builder_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.progressStatusText("Build complete!");
+            this.isBuilding = false;
+
+            if (e.Cancelled)
+            {
+                this.buildLog.ForeColor = System.Drawing.Color.Red;
+                this.progressFile.State = ProgressBarState.Error;
+                this.progressStatusText("Build canceled!");
+                this.buildLogText(Environment.NewLine + "Catalog build canceled!");
+                this.buildLogText(Environment.NewLine + "To close the Repository Manager press the close button again.");
+            }
+            else
+            {
+                this.progressStatusText("Build complete!");
+                this.buildLogText(Environment.NewLine + "Catalog build complete!");
+            }
         }
 
         public void Run(string repoPath)
         {
             this.repoPath = repoPath;
+
+            this.isBuilding = true;
+            this.buildLog.Clear();
+            this.buildLog.ForeColor = System.Drawing.Color.Lime;
+            this.progressFile.State = ProgressBarState.Normal;
+
             this.progressStatusText("Building repository file...");
+            this.buildLogText("Started building process...");
             this.progressBarFileValue(0);
 
             builder.RunWorkerAsync();
+        }
+
+        private async Task taskDelay(int delayMs)
+        {
+            await Task.Delay(delayMs);
         }
     }
 }

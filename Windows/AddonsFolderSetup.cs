@@ -13,7 +13,7 @@ namespace arma3Launcher.Windows
 {
     public partial class AddonsFolderSetup : Form
     {
-        private string GameFolder = "";
+        private string GameFolder = string.Empty;
         public string AddonsFolder { get; set; }
 
         public AddonsFolderSetup()
@@ -33,7 +33,7 @@ namespace arma3Launcher.Windows
                 if (attributes.Length > 0)
                 {
                     AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
+                    if (titleAttribute.Title != string.Empty)
                     {
                         return titleAttribute.Title;
                     }
@@ -46,7 +46,7 @@ namespace arma3Launcher.Windows
         {
             get
             {
-                string aux = "";
+                string aux = string.Empty;
                 if (Assembly.GetExecutingAssembly().GetName().Version.Build != 0)
                     aux = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Build.ToString() /*+ "." + Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString()*/;
                 else
@@ -58,7 +58,7 @@ namespace arma3Launcher.Windows
 
         private void btn_ereaseModsDirectory_Click(object sender, EventArgs e)
         {
-            txtb_modsDirectory.Text = "";
+            txtb_modsDirectory.Text = string.Empty;
             btn_done.Enabled = false;
         }
 
@@ -84,13 +84,13 @@ namespace arma3Launcher.Windows
 
         private void btn_done_Click(object sender, EventArgs e)
         {
-            if(AddonsFolder != "")
+            if(AddonsFolder != string.Empty)
                 this.Close();
         }
 
         private void AddonsFolderSetup_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (AddonsFolder == "")
+            if (AddonsFolder == string.Empty)
                 e.Cancel = true;
         }
     }

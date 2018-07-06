@@ -445,13 +445,13 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public long LastRepoFileSize {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastRepoFileMD5 {
             get {
-                return ((long)(this["LastRepoFileSize"]));
+                return ((string)(this["LastRepoFileMD5"]));
             }
             set {
-                this["LastRepoFileSize"] = value;
+                this["LastRepoFileMD5"] = value;
             }
         }
         
@@ -536,6 +536,18 @@ namespace arma3Launcher.Properties {
             }
             set {
                 this["x64Game"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string workshopAddons {
+            get {
+                return ((string)(this["workshopAddons"]));
+            }
+            set {
+                this["workshopAddons"] = value;
             }
         }
     }

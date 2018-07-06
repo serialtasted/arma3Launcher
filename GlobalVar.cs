@@ -12,7 +12,7 @@ namespace arma3Launcher
 
 
         // STRING
-        static string _gameArtifact = "";
+        static string _gameArtifact = string.Empty;
         public static string gameArtifact
         {
             get

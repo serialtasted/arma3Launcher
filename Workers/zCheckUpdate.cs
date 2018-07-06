@@ -46,9 +46,9 @@ namespace arma3Launcher.Workers
 
             bool ContinueStart = true;
 
-            string NewVersionS = "";
-            string CurVersionS = "";
-            string aux_vBuild = "";
+            string NewVersionS = string.Empty;
+            string CurVersionS = string.Empty;
+            string aux_vBuild = string.Empty;
 
             try
             {
@@ -69,9 +69,9 @@ namespace arma3Launcher.Workers
                     if (NewVersion.Build != 0)
                         aux_vBuild = "." + NewVersion.Build;
                     else
-                        aux_vBuild = "";
+                        aux_vBuild = string.Empty;
 
-                    if (new_versiontag != "")
+                    if (new_versiontag != string.Empty)
                         NewVersionS = NewVersion.Major + "." + NewVersion.Minor + aux_vBuild + " (" + new_versiontag + ")";
                     else
                         NewVersionS = NewVersion.Major + "." + NewVersion.Minor + aux_vBuild;
@@ -92,11 +92,11 @@ namespace arma3Launcher.Workers
                     if (CurVersion.Build != 0)
                         aux_vBuild = "." + CurVersion.Build;
                     else
-                        aux_vBuild = "";
+                        aux_vBuild = string.Empty;
 
                     txt_versiontag.Text = cur_versiontag;
 
-                    if (cur_versiontag != "")
+                    if (cur_versiontag != string.Empty)
                         CurVersionS = CurVersion.Major + "." + CurVersion.Minor + aux_vBuild + " (" + cur_versiontag + ")";
                     else
                         CurVersionS = CurVersion.Major + "." + CurVersion.Minor + aux_vBuild;
@@ -151,7 +151,7 @@ namespace arma3Launcher.Workers
         {
             Version NewVersion = null;
             Version CurVersion = null;
-            string aux_vBuild = "";
+            string aux_vBuild = string.Empty;
 
             try
             {
@@ -172,9 +172,9 @@ namespace arma3Launcher.Workers
                     if (NewVersion.Build != 0)
                         aux_vBuild = "." + NewVersion.Build;
                     else
-                        aux_vBuild = "";
+                        aux_vBuild = string.Empty;
 
-                    if (new_versiontag != "")
+                    if (new_versiontag != string.Empty)
                         txt_New.Text = NewVersion.Major + "." + NewVersion.Minor + aux_vBuild + " (" + new_versiontag + ")";
                     else
                         txt_New.Text = NewVersion.Major + "." + NewVersion.Minor + aux_vBuild;
@@ -199,9 +199,9 @@ namespace arma3Launcher.Workers
                     if (CurVersion.Build != 0)
                         aux_vBuild = "." + CurVersion.Build;
                     else
-                        aux_vBuild = "";
+                        aux_vBuild = string.Empty;
 
-                    if (cur_versiontag != "")
+                    if (cur_versiontag != string.Empty)
                         txt_Cur.Text = CurVersion.Major + "." + CurVersion.Minor + aux_vBuild + " (" + cur_versiontag + ")";
                     else
                         txt_Cur.Text = CurVersion.Major + "." + CurVersion.Minor + aux_vBuild;

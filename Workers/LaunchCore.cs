@@ -16,9 +16,10 @@ namespace arma3Launcher.Workers
         private string GameFolder = Properties.Settings.Default.Arma3Folder;
         private string AddonsFolder = Properties.Settings.Default.AddonsFolder;
         private string TSFolder = Properties.Settings.Default.TS3Folder;
-        private string Arguments = "";
-        private string SvArguments = "";
-        private string HcArguments = "";
+        private string WorkshopFolder = Properties.Settings.Default.Arma3Folder + "!Workshop\\";
+        private string Arguments = string.Empty;
+        private string SvArguments = string.Empty;
+        private string HcArguments = string.Empty;
         private int HcInstances = 0;
 
         private Process process;
@@ -44,7 +45,7 @@ namespace arma3Launcher.Workers
             string auxCombinedArguments = AggregateArguments(launchOptions, clientProfile, serverConfig, serverProfile, hcProfile, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
             this.HcInstances = hcInstances;
 
-            if (auxCombinedArguments != "") Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
+            if (auxCombinedArguments != string.Empty) Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
         }
 
         public LaunchCore(FlowLayoutPanel launchOptions,
@@ -61,14 +62,13 @@ namespace arma3Launcher.Workers
             string s_exThreads, 
             bool cpuCount,
             string s_cpuCount,
-            CheckedListBox activeAddons,
+            CheckedListBox workshopAddons,
             List<string> modsList,
             MainForm mainForm)
         {
             string auxCombinedArguments = AggregateArguments(launchOptions, clientProfile, serverConfig, serverProfile, hcProfile, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
             string auxCoreMods = "-mod=\"";
-            string auxCombinedAddons = "";
-            int i = 0;
+            string auxCombinedAddons = string.Empty;
 
             this.mainForm = mainForm;
             this.HcInstances = hcInstances;
@@ -84,22 +84,21 @@ namespace arma3Launcher.Workers
                     break;
             }
 
-            if (auxCombinedArguments != "") Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
+            if (auxCombinedArguments != string.Empty) Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
 
-            if (activeAddons.CheckedItems.Count > 0 && activeAddons.Enabled)
+            if (workshopAddons.CheckedItems.Count > 0 && workshopAddons.Enabled)
             {
-                do
+                foreach (var waddon in workshopAddons.CheckedItems)
                 {
-                    if (auxCombinedAddons != "") auxCombinedAddons = auxCombinedAddons + ";" + AddonsFolder + activeAddons.CheckedItems[i].ToString();
-                    else auxCombinedAddons = ";" + AddonsFolder + activeAddons.CheckedItems[i].ToString();
-                    i++;
-                } while (i != activeAddons.CheckedItems.Count);
+                    if (auxCombinedAddons != string.Empty) auxCombinedAddons += ";" + WorkshopFolder + waddon.ToString();
+                    else auxCombinedAddons = ";" + WorkshopFolder + waddon.ToString();
+                }
             }
 
-            if (modsList.Count == 0 && auxCombinedAddons != "")
+            if (modsList.Count == 0 && auxCombinedAddons != string.Empty)
                 auxCombinedAddons = auxCombinedAddons.Remove(0, 1);
 
-            if (Arguments != "") Arguments = Arguments + " " + auxCoreMods + auxCombinedAddons + "\"";
+            if (Arguments != string.Empty) Arguments = Arguments + " " + auxCoreMods + auxCombinedAddons + "\"";
             else Arguments = auxCoreMods + auxCombinedAddons;
 
             //MessageBox.Show(Arguments);
@@ -119,9 +118,9 @@ namespace arma3Launcher.Workers
             bool cpuCount,
             string s_cpuCount)
         {
-            string auxCombinedArguments = "";
-            this.SvArguments = "";
-            this.HcArguments = "";
+            string auxCombinedArguments = string.Empty;
+            this.SvArguments = string.Empty;
+            this.HcArguments = string.Empty;
 
             if (GlobalVar.isServer)
             {
@@ -134,10 +133,10 @@ namespace arma3Launcher.Workers
                 if (clientProfile.ToLower() != "default") auxCombinedArguments += "-name=" + clientProfile + " ";
             }
 
-            if (maxMem && s_maxMem != "") auxCombinedArguments += "-maxMem=" + s_maxMem + " ";
-            if (malloc && s_malloc != "") auxCombinedArguments += "-malloc=" + s_malloc + " ";
-            if (exThreads && s_exThreads != "") auxCombinedArguments += "-exThreads=" + s_exThreads + " ";
-            if (cpuCount && s_cpuCount != "") auxCombinedArguments += "-cpuCount=" + s_cpuCount + " ";
+            if (maxMem && s_maxMem != string.Empty) auxCombinedArguments += "-maxMem=" + s_maxMem + " ";
+            if (malloc && s_malloc != string.Empty) auxCombinedArguments += "-malloc=" + s_malloc + " ";
+            if (exThreads && s_exThreads != string.Empty) auxCombinedArguments += "-exThreads=" + s_exThreads + " ";
+            if (cpuCount && s_cpuCount != string.Empty) auxCombinedArguments += "-cpuCount=" + s_cpuCount + " ";
 
             foreach (CheckBox option in launchOptions.Controls)
             {
@@ -188,12 +187,12 @@ namespace arma3Launcher.Workers
             {
 
                 Ping ping = new Ping();
-                if ((serverInfo[0] != "" && serverInfo[2] != "") && autoJoin)
+                if ((serverInfo[0] != string.Empty && serverInfo[2] != string.Empty) && autoJoin)
                 {
                     /*PingReply pingresult = ping.Send(serverInfo[0]);
                     if (pingresult.Status == IPStatus.Success)
                     {*/
-                    if (serverInfo[2] != "")
+                    if (serverInfo[2] != string.Empty)
                         Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " -password=\"" + serverInfo[2] + "\" " + Arguments;
                     else
                         Arguments = "-connect=" + serverInfo[0] + " -port=" + serverInfo[1] + " " + Arguments;
@@ -210,9 +209,9 @@ namespace arma3Launcher.Workers
                             var fass = new ProcessStartInfo();
                             fass.WorkingDirectory = TSFolder;
 
-                            if (tsInfo[0] != "" && tsInfo[2] != "")
+                            if (tsInfo[0] != string.Empty && tsInfo[2] != string.Empty)
                                 fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&channel=" + tsInfo[3] + "\"";
-                            else if (tsInfo[0] != "")
+                            else if (tsInfo[0] != string.Empty)
                                 fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&password=" + tsInfo[2] + "&channel=" + tsInfo[3] + "\"";
 
                             if (File.Exists(TSFolder + "ts3client_win64.exe"))
@@ -267,7 +266,7 @@ namespace arma3Launcher.Workers
             {
                 try
                 {
-                    string whatsRunning = "";
+                    string whatsRunning = string.Empty;
                     var gameProcessInfo = new ProcessStartInfo();
                     var hcProcessInfo = new ProcessStartInfo();
                     gameProcessInfo.WorkingDirectory = hcProcessInfo.WorkingDirectory = GameFolder;

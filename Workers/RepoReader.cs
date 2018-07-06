@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,9 +14,9 @@ namespace arma3Launcher.Workers
     {
         private TreeView repoTreeView;
         private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
-        private string AddonsFolder = "";
+        private string AddonsFolder = string.Empty;
 
-        private List<long> modsSize = new List<long>();
+        private List<string> modsHash = new List<string>();
         private List<string> modsList = new List<string>();
 
         private int filesOK;
@@ -26,9 +27,12 @@ namespace arma3Launcher.Workers
         private Label lbl_filesINVALID;
         private Label lbl_filesMISSING;
 
-        private string needsUpdate = "";
+        private string needsUpdate = string.Empty;
 
-        public RepoReader (TreeView repoTreeView, Label lbl_filesOK, Label lbl_filesINVALID, Label lbl_filesMISSING)
+        public RepoReader()
+        { }
+
+        public RepoReader(TreeView repoTreeView, Label lbl_filesOK, Label lbl_filesINVALID, Label lbl_filesMISSING)
         {
             this.repoTreeView = repoTreeView;
             this.lbl_filesOK = lbl_filesOK;
@@ -41,7 +45,7 @@ namespace arma3Launcher.Workers
             string repoFile = GetRepoFile();
 
             this.repoTreeView.Nodes.Clear();
-            this.modsSize.Clear();
+            this.modsHash.Clear();
             this.modsList.Clear();
 
             this.filesOK = 0;
@@ -52,19 +56,19 @@ namespace arma3Launcher.Workers
             GlobalVar.folders2Create.Clear();
             GlobalVar.files2Download.Clear();
 
-            this.needsUpdate = "";
+            this.needsUpdate = string.Empty;
 
             using (StreamReader sr = File.OpenText(repoFile))
             {
-                string s = "";
+                string s = string.Empty;
                 while ((s = sr.ReadLine()) != null)
                 {
-                    modsSize.Add(Convert.ToInt64(s.Split('*')[0]));
+                    modsHash.Add(s.Split('*')[0]);
                     modsList.Add(s.Split('*')[1]);
                 }
 
                 repoTreeView.PathSeparator = "\\";
-                PopulateTreeView(repoTreeView, modsList, modsSize, '\\');
+                PopulateTreeView(repoTreeView, modsList, modsHash, '\\');
                 repoTreeView.Sort();
             }
 
@@ -79,12 +83,13 @@ namespace arma3Launcher.Workers
             this.lbl_filesINVALID.Text = filesINVALID.ToString();
             this.lbl_filesMISSING.Text = filesMISSING.ToString();
 
+            GlobalVar.isReadingRepo = false;
             return needsUpdate;
         }
 
         public bool IsFileDifferent(string repoFile)
         {
-            if (new FileInfo(repoFile).Length != Properties.Settings.Default.LastRepoFileSize)
+            if (this.CalculateFileHash(repoFile) != Properties.Settings.Default.LastRepoFileMD5)
                 return true;
             else
                 return false;
@@ -113,16 +118,37 @@ namespace arma3Launcher.Workers
             return tempFile;
         }
 
-        private void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, List<long> fsize, char pathSeparator)
+        public string CalculateFileHash(string filename)
+        {
+            //TODO: Implement MD5 hash system
+            // - local catalog compares with remote catalog
+            // - build catalog during file download
+            // - compute hash during file download
+            // - file validation compares hash with remote catalog
+
+            /*using (var crypt = MD5.Create())
+            {
+                using(var stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    var hash = crypt.ComputeHash(stream);
+                    return BitConverter.ToString(hash).Replace("-", String.Empty).ToLowerInvariant();
+                }
+            }*/
+
+            var fInfo = new FileInfo(filename);
+            return Convert.ToString(fInfo.Length);
+        }
+
+        private void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, List<string> fHash, char pathSeparator)
         {
             TreeNode lastNode = null;
             string subPathAgg;
-            long fileSize = 0;
+            string fileHash = String.Empty;
             int a = 0;
             int i;
             foreach (string path in paths)
             {
-                fileSize = fsize[a];
+                fileHash = fHash[a];
                 subPathAgg = string.Empty;
                 i = 0;
                 foreach (string subPath in path.Split(pathSeparator))
@@ -144,7 +170,7 @@ namespace arma3Launcher.Workers
                     if (subPathAgg.EndsWith("\\"))
                         ValidateFolder(subPath, subPathAgg, lastNode);
                     else
-                        ValidateFile(subPath, subPathAgg, lastNode, fileSize);
+                        ValidateFile(subPath, subPathAgg, lastNode, fileHash);
 
                     i++;
                 }
@@ -153,15 +179,15 @@ namespace arma3Launcher.Workers
             }
         }
 
-        private void ValidateFile(string remoteFile, string fullPath, TreeNode node, long remoteFileSize)
+        private void ValidateFile(string remoteFile, string fullPath, TreeNode node, string remoteFileHash)
         {
             bool invalidFile = false;
 
             if (File.Exists(AddonsFolder + fullPath))
             {
-                long localfileSize = new FileInfo(AddonsFolder + fullPath).Length;
+                string localfileHash = CalculateFileHash(AddonsFolder + fullPath);
 
-                if (localfileSize == remoteFileSize)
+                if (localfileHash == remoteFileHash)
                 {
                     node.ImageIndex = 0;
                     node.SelectedImageIndex = 0;

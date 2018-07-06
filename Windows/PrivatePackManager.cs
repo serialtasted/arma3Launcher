@@ -37,7 +37,7 @@ namespace arma3Launcher.Windows
 
         private void link_clearKeys_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Properties.Settings.Default.privateKeys = "";
+            Properties.Settings.Default.privateKeys = string.Empty;
             Properties.Settings.Default.Save();
             this.DialogResult = DialogResult.OK;
             this.windowIO.windowOut(true);

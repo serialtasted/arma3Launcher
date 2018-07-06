@@ -58,16 +58,16 @@ namespace arma3Launcher.Workers
 
         // folder paths
         private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
-        private string GameFolder = "";
-        private string TS3Folder = "";
-        private string AddonsFolder = "";
+        private string GameFolder = string.Empty;
+        private string TS3Folder = string.Empty;
+        private string AddonsFolder = string.Empty;
 
         // paramters
         private bool isLaunch = false;
 
         // controllers
-        private string configFile = "";
-        private string activePack = "";
+        private string configFile = string.Empty;
+        private string activePack = string.Empty;
         private bool installationRunning = false;
         private bool isTFR = false;
         private bool isInstall = false;
@@ -322,7 +322,7 @@ namespace arma3Launcher.Workers
 
                 using (StreamReader sr = File.OpenText(repoReader.GetRepoFile()))
                 {
-                    string s = "";
+                    string s = string.Empty;
 
                     while ((s = sr.ReadLine()) != null)
                     {
@@ -355,7 +355,7 @@ namespace arma3Launcher.Workers
             this.progressBarFileValue(0);
             this.progressBarAllValue(0);
 
-            Properties.Settings.Default.LastRepoFileSize = new FileInfo(repoReader.GetRepoFile()).Length;
+            Properties.Settings.Default.LastRepoFileMD5 = repoReader.CalculateFileHash(repoReader.GetRepoFile());
             Properties.Settings.Default.Save();
 
             if (this.isInstall)
@@ -368,7 +368,6 @@ namespace arma3Launcher.Workers
                 await this.taskDelay(1500);
                 this.mainForm.hideDownloadPanel();
                 mainForm.ReadRepo(false);
-                GlobalVar.isReadingRepo = false;
             }
         }
 
@@ -381,8 +380,8 @@ namespace arma3Launcher.Workers
         {
             bool allFine = false;
 
-            string sourcePath = "";
-            string destinationPath = "";
+            string sourcePath = string.Empty;
+            string destinationPath = string.Empty;
 
             try
             {
@@ -494,7 +493,6 @@ namespace arma3Launcher.Workers
 
             this.installationRunning = false;
             GlobalVar.isInstalling = false;
-            GlobalVar.isReadingRepo = false;
 
             if (Directory.Exists(TempFolder))
                 Directory.Delete(TempFolder, true);

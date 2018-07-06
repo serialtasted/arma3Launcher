@@ -14,6 +14,8 @@ using arma3Launcher.Workers;
 using arma3Launcher.Effects;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using System.Management;
+using Microsoft.VisualBasic.Devices;
 
 namespace arma3Launcher
 {
@@ -50,23 +52,24 @@ namespace arma3Launcher
         private Button activeButton;
         private int aux_Blinker = 0;
 
-        private string armaDir_previousDir = "";
-        private string tsDir_previousDir = "";
-        private string modsDir_previousDir = "";
+        private string armaDir_previousDir = string.Empty;
+        private string tsDir_previousDir = string.Empty;
+        private string modsDir_previousDir = string.Empty;
 
-        private string activePack = "";
-        private string GameFolder = "";
-        private string TSFolder = "";
-        private string AddonsFolder = "";
+        private string activePack = string.Empty;
+        private string GameFolder = string.Empty;
+        private string TSFolder = string.Empty;
+        private string AddonsFolder = string.Empty;
+        private string documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles";
 
-        private string oldVersionStatusText = "";
+        private string oldVersionStatusText = string.Empty;
 
         private bool isOptionalAllowed = false;
 
         private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
         private List<string> modsName = new List<string>();
 
-        private string Arguments = "";
+        private string Arguments = string.Empty;
 
         private bool isActive = true;
         private bool isUpdate = false;
@@ -211,7 +214,6 @@ namespace arma3Launcher
                     else
                         switchAutopilot(false);
 
-                this.ServerSettings();
             }
 
             if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
@@ -242,14 +244,13 @@ namespace arma3Launcher
                 HideUnhide(menuSelected);
             }
 
-            this.ClientSettings();
+            this.GetMalloc();
+            this.MachineSettings();
             this.FetchSettings();
 
             if (!isUpdate)
             {
                 updateCurrentPack(true);
-                getMalloc();
-
 
                 if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
                     btn_reinstallTFRPlugins.Enabled = true;
@@ -312,7 +313,13 @@ namespace arma3Launcher
 
         public void GetAddons()
         {
-            aLooker.getAddons(Properties.Settings.Default.Arma3Folder + "\\!Workshop");
+            this.aLooker.getAddons(Properties.Settings.Default.Arma3Folder + "!Workshop\\");
+            this.PropertiesWorkshopReader();
+        }
+
+        private void steamworkshopAddonsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.PropertiesWorkshopSaver();
         }
 
         private void ServerSettings()
@@ -321,33 +328,34 @@ namespace arma3Launcher
             cb_serverProfile.Items.Clear();
             cb_hcProfile.Items.Clear();
 
-            string documentsA3Profiles = "";
-            try { documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles"; }
-            catch { }
-
             // get server config
-            if (File.Exists(Properties.Settings.Default.Arma3Folder + "server.cfg"))
-                cb_serverConfig.Items.Add("server.cfg");
-            else
-                cb_serverConfig.Items.Add("Server.cfg not found");
+            cb_serverConfig.Items.Add("Default");
+            try
+            {
+                foreach (var item in Directory.GetFiles(Properties.Settings.Default.Arma3Folder, "*.cfg", SearchOption.TopDirectoryOnly))
+                {
+                    cb_serverConfig.Items.Add(item.Remove(0, Properties.Settings.Default.Arma3Folder.Length));
+                }
+            }
+            catch { }
 
             // get server profiles
             cb_serverProfile.Items.Add("Default");
-            if (documentsA3Profiles != string.Empty && Directory.Exists(documentsA3Profiles))
+            if (Directory.Exists(this.documentsA3Profiles))
             {
-                foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+                foreach (var item in Directory.GetDirectories(this.documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
                 {
-                    cb_serverProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                    cb_serverProfile.Items.Add(item.Remove(0, this.documentsA3Profiles.Length + 1));
                 }
             }
 
             // get hc profiles
             cb_hcProfile.Items.Add("Default");
-            if (documentsA3Profiles != string.Empty && Directory.Exists(documentsA3Profiles))
+            if (Directory.Exists(this.documentsA3Profiles))
             {
-                foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+                foreach (var item in Directory.GetDirectories(this.documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
                 {
-                    cb_hcProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                    cb_hcProfile.Items.Add(item.Remove(0, this.documentsA3Profiles.Length + 1));
                 }
             }
         }
@@ -356,23 +364,59 @@ namespace arma3Launcher
         {
             cb_clientProfile.Items.Clear();
 
-            string documentsA3Profiles = "";
-            try { documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles"; }
-            catch { }
-
             cb_clientProfile.Items.Add("Default");
-            if (documentsA3Profiles != string.Empty && Directory.Exists(documentsA3Profiles))
+            if (Directory.Exists(this.documentsA3Profiles))
             {
-                foreach (var item in Directory.GetDirectories(documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
+                foreach (var item in Directory.GetDirectories(this.documentsA3Profiles, "*", SearchOption.TopDirectoryOnly))
                 {
-                    cb_clientProfile.Items.Add(item.Remove(0, documentsA3Profiles.Length + 1));
+                    cb_clientProfile.Items.Add(item.Remove(0, this.documentsA3Profiles.Length + 1));
                 }
             }
         }
 
+        private void MachineSettings()
+        {
+            cb_cpuCount.Items.Clear();
+            cb_exThreads.Items.Clear();
+
+            // get logical processors
+            for (int i = 1; i <= Environment.ProcessorCount; i++)
+            {
+                cb_cpuCount.Items.Add(i);
+            }
+
+            // set default exthreads
+            int[] exThreads = new int[] { 0, 1, 3 };
+            foreach (int item in exThreads)
+            {
+                cb_exThreads.Items.Add(item);
+            }
+
+            // get cpu core number
+            int coreCount = 0;
+            foreach (var item in new System.Management.ManagementObjectSearcher("Select * from Win32_Processor").Get())
+            {
+                coreCount += int.Parse(item["NumberOfCores"].ToString());
+            }
+
+            // set extra exthreads if cpu cores more than 2
+            if (coreCount > 2)
+            {
+                int[] exThreadsPlus = new int[] { 5, 7 };
+                foreach (int item in exThreadsPlus)
+                {
+                    cb_exThreads.Items.Add(item);
+                }
+            }
+
+            // get machine memory
+            long machineMemory = (Convert.ToInt64(new ComputerInfo().TotalPhysicalMemory) / 1024) / 1024;
+            num_maxMem.Maximum = machineMemory;
+        }
+
         public bool ReadRepo(bool showMessage)
         {
-            if (GlobalVar.isReadingRepo)
+            if (GlobalVar.isReadingRepo || GlobalVar.isDownloading || GlobalVar.isInstalling)
                 return false;
 
             GlobalVar.isReadingRepo = true;
@@ -386,7 +430,6 @@ namespace arma3Launcher
                     if (showMessage)
                         MessageBox.Show("All files are synced with the repository!", "You're amazing", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    GlobalVar.isReadingRepo = false;
                     return false;
                 }
                 else
@@ -396,7 +439,6 @@ namespace arma3Launcher
                     else
                     {
                         if (updateType == "validation") { installer.ValidateLocalFiles(); }
-                        else { GlobalVar.isReadingRepo = false; }
                     }
 
                     return true;
@@ -434,6 +476,11 @@ namespace arma3Launcher
             else
             { txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->"; }
 
+            if (GlobalVar.isServer)
+                this.ServerSettings();
+            else
+                this.ClientSettings();
+
             // launch options
             chb_noPause.Checked = Properties.Settings.Default.noPause;
             chb_noSplash.Checked = Properties.Settings.Default.noSplash;
@@ -446,77 +493,39 @@ namespace arma3Launcher
             chb_worldEmpty.Checked = Properties.Settings.Default.worldEmpty;
 
             chb_maxMem.Checked = Properties.Settings.Default.maxMem;
-            txtb_maxMem.Text = Properties.Settings.Default.maxMem_value.ToString();
+            if (Properties.Settings.Default.maxMem_value >= num_maxMem.Minimum && Properties.Settings.Default.maxMem_value <= num_maxMem.Maximum) { num_maxMem.Value = Properties.Settings.Default.maxMem_value; }
+            else { chb_maxMem.Checked = false; num_maxMem.Value = num_maxMem.Minimum; }
 
             chb_malloc.Checked = Properties.Settings.Default.malloc;
-            txtb_malloc.Text = Properties.Settings.Default.malloc_value.ToString();
+            try
+            {
+                if (File.Exists(Properties.Settings.Default.Arma3Folder + "Dll\\" + Properties.Settings.Default.malloc_value + ".dll")) { cb_malloc.SelectedItem = Properties.Settings.Default.malloc_value; }
+                else { chb_malloc.Checked = false; cb_malloc.SelectedItem = null; }
+            }
+            catch
+            {
+                chb_malloc.Checked = false; cb_malloc.SelectedItem = null;
+            }
 
             chb_exThreads.Checked = Properties.Settings.Default.exThreads;
-            txtb_exThreads.Text = Properties.Settings.Default.exThreads_value.ToString();
+            cb_exThreads.SelectedItem = Properties.Settings.Default.exThreads_value;
+            if (cb_exThreads.SelectedItem == null) { chb_exThreads.Checked = false; cb_exThreads.SelectedIndex = 0; }
 
             chb_cpuCount.Checked = Properties.Settings.Default.cpuCount;
-            txtb_cpuCount.Text = Properties.Settings.Default.cpuCount_value.ToString();
+            cb_cpuCount.SelectedItem = Properties.Settings.Default.cpuCount_value;
+            if (cb_cpuCount.SelectedItem == null) { chb_cpuCount.Checked = false; cb_cpuCount.SelectedIndex = 0; }
 
             // game artifact
+            chb_battleye.Checked = Properties.Settings.Default.battleye;
             if (Environment.Is64BitOperatingSystem)
             {
-                pref_64bitGame.Checked = Properties.Settings.Default.x64Game;
-                pref_64bitGame.Visible = true;
-                img_x64status.Visible = true;
-
-                if (Properties.Settings.Default.x64Game)
-                {
-                    img_x64status.Image = Properties.Resources.x64_active;
-
-                    if (GlobalVar.isServer)
-                    {
-                        GlobalVar.gameArtifact = "arma3server_x64.exe";
-                    }
-                    else
-                    {
-                        chb_battleye.Checked = Properties.Settings.Default.battleye;
-                        if (Properties.Settings.Default.battleye)
-                            GlobalVar.gameArtifact = "arma3battleye.exe";
-                        else
-                            GlobalVar.gameArtifact = "arma3_x64.exe";
-                    }
-                }
-                else
-                {
-                    img_x64status.Image = Properties.Resources.x64_inactive;
-
-                    if (GlobalVar.isServer)
-                    {
-                        GlobalVar.gameArtifact = "arma3server.exe";
-                    }
-                    else
-                    {
-                        chb_battleye.Checked = Properties.Settings.Default.battleye;
-                        if (Properties.Settings.Default.battleye)
-                            GlobalVar.gameArtifact = "arma3battleye.exe";
-                        else
-                            GlobalVar.gameArtifact = "arma3.exe";
-                    }
-                }
+                chb_use64Bit.Checked = Properties.Settings.Default.x64Game;
+                chb_use64Bit.Visible = true;
             }
             else
             {
-                pref_64bitGame.Checked = false;
+                chb_use64Bit.Checked = false;
                 Properties.Settings.Default.x64Game = false;
-
-
-                if (GlobalVar.isServer)
-                {
-                    GlobalVar.gameArtifact = "arma3server.exe";
-                }
-                else
-                {
-                    chb_battleye.Checked = Properties.Settings.Default.battleye;
-                    if (Properties.Settings.Default.battleye)
-                        GlobalVar.gameArtifact = "arma3battleye.exe";
-                    else
-                        GlobalVar.gameArtifact = "arma3.exe";
-                }
             }
 
             // preferences
@@ -526,29 +535,39 @@ namespace arma3Launcher
             pref_autoDownload.Checked = Properties.Settings.Default.autoDownload;
             pref_joinServerAuto.Checked = Properties.Settings.Default.joinServerAutomatically;
 
+            // workshop addons
+            this.PropertiesWorkshopReader();
+
             // server-client specific settings
             if (GlobalVar.isServer)
             {
-                if (Properties.Settings.Default.ServerConfig != string.Empty)
-                    cb_serverConfig.SelectedItem = Properties.Settings.Default.ServerConfig;
-                else
+                try
+                {
+                    if (Properties.Settings.Default.ServerConfig != string.Empty && File.Exists(Properties.Settings.Default.Arma3Folder + Properties.Settings.Default.ServerConfig))
+                        cb_serverConfig.SelectedItem = Properties.Settings.Default.ServerConfig;
+                    else
+                        cb_serverConfig.SelectedIndex = 0;
+                }
+                catch
+                {
                     cb_serverConfig.SelectedIndex = 0;
+                }
 
-                if (Properties.Settings.Default.ServerProfile != string.Empty)
+                if (Properties.Settings.Default.ServerProfile != string.Empty && Directory.Exists(this.documentsA3Profiles + "\\" + Properties.Settings.Default.ServerProfile))
                     cb_serverProfile.SelectedItem = Properties.Settings.Default.ServerProfile;
                 else
                     cb_serverProfile.SelectedIndex = 0;
 
-                if (Properties.Settings.Default.HCProfile != string.Empty)
+                if (Properties.Settings.Default.HCProfile != string.Empty && Directory.Exists(this.documentsA3Profiles + "\\" + Properties.Settings.Default.HCProfile))
                     cb_hcProfile.SelectedItem = Properties.Settings.Default.HCProfile;
                 else
                     cb_hcProfile.SelectedIndex = 0;
 
-                cb_hcInstances.SelectedIndex = Properties.Settings.Default.HCInstances;
+                num_hcInstances.Value = Properties.Settings.Default.HCInstances;
             }
             else
             {
-                if (Properties.Settings.Default.ClientProfile != string.Empty)
+                if (Properties.Settings.Default.ClientProfile != string.Empty && Directory.Exists(this.documentsA3Profiles + "\\" + Properties.Settings.Default.ClientProfile))
                     cb_clientProfile.SelectedItem = Properties.Settings.Default.ClientProfile;
                 else
                     cb_clientProfile.SelectedIndex = 0;
@@ -570,18 +589,18 @@ namespace arma3Launcher
             Properties.Settings.Default.worldEmpty = chb_worldEmpty.Checked;
 
             Properties.Settings.Default.maxMem = chb_maxMem.Checked;
-            Properties.Settings.Default.maxMem_value = Convert.ToInt32(txtb_maxMem.Text);
+            Properties.Settings.Default.maxMem_value = (int)num_maxMem.Value;
 
             Properties.Settings.Default.malloc = chb_malloc.Checked;
-            Properties.Settings.Default.malloc_value = txtb_malloc.Text;
+            Properties.Settings.Default.malloc_value = (string)cb_malloc.SelectedItem;
 
             Properties.Settings.Default.exThreads = chb_exThreads.Checked;
-            Properties.Settings.Default.exThreads_value = Convert.ToInt32(txtb_exThreads.Text);
+            Properties.Settings.Default.exThreads_value = (int)cb_exThreads.SelectedItem;
 
             Properties.Settings.Default.cpuCount = chb_cpuCount.Checked;
-            Properties.Settings.Default.cpuCount_value = Convert.ToInt32(txtb_cpuCount.Text);
+            Properties.Settings.Default.cpuCount_value = (int)cb_cpuCount.SelectedItem;
 
-            Properties.Settings.Default.x64Game = pref_64bitGame.Checked;
+            Properties.Settings.Default.x64Game = chb_use64Bit.Checked;
 
             // preferences
             Properties.Settings.Default.startGameAfterDownload = pref_startGameAfterDownloadsAreCompleted.Checked;
@@ -590,19 +609,46 @@ namespace arma3Launcher
             Properties.Settings.Default.autoDownload = pref_autoDownload.Checked;
             Properties.Settings.Default.joinServerAutomatically = pref_joinServerAuto.Checked;
 
+            // workshop addons
+            this.PropertiesWorkshopSaver();
+
             // server-client specific settings
             if (GlobalVar.isServer)
             {
                 Properties.Settings.Default.ServerConfig = (string)cb_serverConfig.SelectedItem;
                 Properties.Settings.Default.ServerProfile = (string)cb_serverProfile.SelectedItem;
                 Properties.Settings.Default.HCProfile = (string)cb_hcProfile.SelectedItem;
-                Properties.Settings.Default.HCInstances = cb_hcInstances.SelectedIndex;
+                Properties.Settings.Default.HCInstances = (int)num_hcInstances.Value;
             }
             else
             {
                 Properties.Settings.Default.ClientProfile = (string)cb_clientProfile.SelectedItem;
             }
 
+            Properties.Settings.Default.Save();
+        }
+
+        private void PropertiesWorkshopReader()
+        {
+            foreach (var waddon in Properties.Settings.Default.workshopAddons.Split(';'))
+            {
+                for (int i = 0; i < steamworkshopAddonsList.Items.Count; i++)
+                {
+                    if (steamworkshopAddonsList.Items[i].ToString() == waddon)
+                    { steamworkshopAddonsList.SetItemCheckState(i, CheckState.Checked); break; }
+                }
+            }
+        }
+
+        private void PropertiesWorkshopSaver()
+        {
+            string auxWorkshopAddons = string.Empty;
+            foreach (var waddon in steamworkshopAddonsList.CheckedItems)
+            {
+                if (auxWorkshopAddons != string.Empty) auxWorkshopAddons += ";" + waddon.ToString();
+                else auxWorkshopAddons = waddon.ToString();
+            }
+            Properties.Settings.Default.workshopAddons = auxWorkshopAddons;
             Properties.Settings.Default.Save();
         }
 
@@ -618,14 +664,14 @@ namespace arma3Launcher
                 XmlDocument RemoteXmlInfo = new XmlDocument();
                 RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
 
-                string xmlNodes = "";
+                string xmlNodes = string.Empty;
                 XmlNodeList xnl;
 
                 //Validate if activePack exists or select first on the list
                 xmlNodes = "//arma3Launcher//ModSets//pack";
                 xnl = RemoteXmlInfo.SelectNodes(xmlNodes);
-                string firstPack = "";
-                activePack = "";
+                string firstPack = string.Empty;
+                activePack = string.Empty;
 
                 foreach (XmlNode xn in xnl)
                 {
@@ -666,16 +712,16 @@ namespace arma3Launcher
             }
         }
 
-        void getMalloc()
+        private void GetMalloc()
         {
-            txtb_malloc.Items.Clear();
+            cb_malloc.Items.Clear();
 
             try
             {
-                string[] fileEntries = Directory.GetFiles(Properties.Settings.Default.Arma3Folder + "Dll\\", "*.dll");
+                string[] fileEntries = Directory.GetFiles(Properties.Settings.Default.Arma3Folder + "Dll\\", "*.dll", SearchOption.TopDirectoryOnly);
                 foreach (string fileName in fileEntries)
                 {
-                    txtb_malloc.Items.Add(Path.GetFileName(fileName).Remove(Path.GetFileName(fileName).Length - 4));
+                    cb_malloc.Items.Add(Path.GetFileName(fileName).Remove(Path.GetFileName(fileName).Length - 4));
                 }
             }
             catch
@@ -691,7 +737,7 @@ namespace arma3Launcher
                 if (attributes.Length > 0)
                 {
                     AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
+                    if (titleAttribute.Title != string.Empty)
                     {
                         return titleAttribute.Title;
                     }
@@ -704,7 +750,7 @@ namespace arma3Launcher
         {
             get
             {
-                string aux = "";
+                string aux = string.Empty;
                 if (Assembly.GetExecutingAssembly().GetName().Version.Build != 0)
                     aux = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Build.ToString() /*+ "." + Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString()*/;
                 else
@@ -832,7 +878,7 @@ namespace arma3Launcher
                 }
             }
 
-            dlg_folderBrowser.SelectedPath = "";
+            dlg_folderBrowser.SelectedPath = string.Empty;
         }
 
         private void browseTSFolder()
@@ -872,7 +918,7 @@ namespace arma3Launcher
                 }
             }
 
-            dlg_folderBrowser.SelectedPath = "";
+            dlg_folderBrowser.SelectedPath = string.Empty;
         }
 
         private void browseAddonsFolder()
@@ -897,7 +943,7 @@ namespace arma3Launcher
                 }
             }
 
-            dlg_folderBrowser.SelectedPath = "";
+            dlg_folderBrowser.SelectedPath = string.Empty;
             dlg_folderBrowser.ShowNewFolderButton = false;
         }
 
@@ -1122,33 +1168,33 @@ namespace arma3Launcher
         private void chb_maxMem_CheckedChanged(object sender, EventArgs e)
         {
             if (chb_maxMem.Checked)
-                txtb_maxMem.Enabled = true;
+                num_maxMem.Enabled = true;
             else
-                txtb_maxMem.Enabled = false;
+                num_maxMem.Enabled = false;
         }
 
         private void chb_malloc_CheckedChanged(object sender, EventArgs e)
         {
             if (chb_malloc.Checked)
-                txtb_malloc.Enabled = true;
+                cb_malloc.Enabled = true;
             else
-                txtb_malloc.Enabled = false;
+                cb_malloc.Enabled = false;
         }
 
         private void chb_exThreads_CheckedChanged(object sender, EventArgs e)
         {
             if (chb_exThreads.Checked)
-                txtb_exThreads.Enabled = true;
+                cb_exThreads.Enabled = true;
             else
-                txtb_exThreads.Enabled = false;
+                cb_exThreads.Enabled = false;
         }
 
         private void chb_cpuCount_CheckedChanged(object sender, EventArgs e)
         {
             if (chb_cpuCount.Checked)
-            { txtb_cpuCount.Enabled = true; chb_enableHT.Enabled = false; chb_enableHT.Checked = false; }
+            { cb_cpuCount.Enabled = true; chb_enableHT.Enabled = false; chb_enableHT.Checked = false; }
             else
-            { txtb_cpuCount.Enabled = false; chb_enableHT.Enabled = true; }
+            { cb_cpuCount.Enabled = false; chb_enableHT.Enabled = true; }
         }
         #endregion
 
@@ -1186,15 +1232,15 @@ namespace arma3Launcher
                             (string)cb_serverConfig.SelectedItem,
                             (string)cb_serverProfile.SelectedItem,
                             (string)cb_hcProfile.SelectedItem,
-                            cb_hcInstances.SelectedIndex,
+                            (int)num_hcInstances.Value,
                             chb_maxMem.Checked,
-                            txtb_maxMem.Text,
+                            num_maxMem.Value.ToString(),
                             chb_malloc.Checked,
-                            txtb_malloc.Text,
+                            (string)cb_malloc.SelectedItem,
                             chb_exThreads.Checked,
-                            txtb_exThreads.Text,
+                            cb_exThreads.SelectedItem.ToString(),
                             chb_cpuCount.Checked,
-                            txtb_cpuCount.Text,
+                            cb_cpuCount.SelectedItem.ToString(),
                             steamworkshopAddonsList,
                             modsName,
                             this);
@@ -1233,7 +1279,7 @@ namespace arma3Launcher
 
         private void txtb_armaDirectory_TextChanged(object sender, EventArgs e)
         {
-            if (txtb_armaDirectory.Text != "Set directory ->" && txtb_armaDirectory.Text != "")
+            if (txtb_armaDirectory.Text != "Set directory ->" && txtb_armaDirectory.Text != string.Empty)
             {
                 txtb_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64);
 
@@ -1248,7 +1294,7 @@ namespace arma3Launcher
                     GameFolder = Properties.Settings.Default.Arma3Folder = txtb_armaDirectory.Text + @"\";
                     Properties.Settings.Default.Save();
 
-                    getMalloc();
+                    GetMalloc();
                     armaDir_previousDir = txtb_armaDirectory.Text;
                 }
                 else
@@ -1262,9 +1308,9 @@ namespace arma3Launcher
             }
             else
             {
-                if (txtb_armaDirectory.Text == "")
+                if (txtb_armaDirectory.Text == string.Empty)
                 {
-                    Properties.Settings.Default.Arma3Folder = "";
+                    Properties.Settings.Default.Arma3Folder = string.Empty;
                     Properties.Settings.Default.Save();
 
                     txtb_armaDirectory.ForeColor = Color.DarkGray; txtb_armaDirectory.Text = "Set directory ->";
@@ -1274,7 +1320,7 @@ namespace arma3Launcher
 
         private void txtb_tsDirectory_TextChanged(object sender, EventArgs e)
         {
-            if (txtb_tsDirectory.Text != "Set directory ->" && txtb_tsDirectory.Text != "")
+            if (txtb_tsDirectory.Text != "Set directory ->" && txtb_tsDirectory.Text != string.Empty)
             {
                 txtb_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
 
@@ -1302,9 +1348,9 @@ namespace arma3Launcher
             }
             else
             {
-                if (txtb_tsDirectory.Text == "")
+                if (txtb_tsDirectory.Text == string.Empty)
                 {
-                    Properties.Settings.Default.TS3Folder = "";
+                    Properties.Settings.Default.TS3Folder = string.Empty;
                     Properties.Settings.Default.Save();
 
                     txtb_tsDirectory.ForeColor = Color.DarkGray; txtb_tsDirectory.Text = "Set directory ->";
@@ -1314,7 +1360,7 @@ namespace arma3Launcher
 
         private void txtb_modsDirectory_TextChanged(object sender, EventArgs e)
         {
-            if (txtb_modsDirectory.Text != "Set directory ->" && txtb_modsDirectory.Text != "")
+            if (txtb_modsDirectory.Text != "Set directory ->" && txtb_modsDirectory.Text != string.Empty)
             {
                 txtb_modsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
 
@@ -1343,9 +1389,9 @@ namespace arma3Launcher
             }
             else
             {
-                if (txtb_modsDirectory.Text == "")
+                if (txtb_modsDirectory.Text == string.Empty)
                 {
-                    Properties.Settings.Default.AddonsFolder = "";
+                    Properties.Settings.Default.AddonsFolder = string.Empty;
                     Properties.Settings.Default.Save();
 
                     txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->";
@@ -1358,7 +1404,7 @@ namespace arma3Launcher
 
         private void btn_ereaseArmaDirectory_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Arma3Folder = "";
+            Properties.Settings.Default.Arma3Folder = string.Empty;
             Properties.Settings.Default.Save();
 
             txtb_armaDirectory.ForeColor = Color.DarkGray; txtb_armaDirectory.Text = "Set directory ->";
@@ -1366,7 +1412,7 @@ namespace arma3Launcher
 
         private void btn_ereaseTSDirectory_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.TS3Folder = "";
+            Properties.Settings.Default.TS3Folder = string.Empty;
             Properties.Settings.Default.Save();
 
             txtb_tsDirectory.ForeColor = Color.DarkGray; txtb_tsDirectory.Text = "Set directory ->";
@@ -1379,18 +1425,18 @@ namespace arma3Launcher
                 (string)cb_serverConfig.SelectedItem,
                 (string)cb_serverProfile.SelectedItem,
                 (string)cb_hcProfile.SelectedItem,
-                cb_hcInstances.SelectedIndex,
+                (int)num_hcInstances.Value,
                 chb_maxMem.Checked,
-                txtb_maxMem.Text,
+                num_maxMem.Value.ToString(),
                 chb_malloc.Checked,
-                txtb_malloc.Text,
+                (string)cb_malloc.SelectedItem,
                 chb_exThreads.Checked,
-                txtb_exThreads.Text,
+                (string)cb_exThreads.SelectedItem,
                 chb_cpuCount.Checked,
-                txtb_cpuCount.Text);
+                (string)cb_cpuCount.SelectedItem);
 
             string Arguments = PrepareLaunch.GetArguments();
-            if (Arguments != "" && Arguments != null)
+            if (Arguments != string.Empty && Arguments != null)
             {
                 Clipboard.SetText(Arguments);
                 MessageBox.Show("This is on your clipboard:\n" + Arguments, "Launch options copied", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1458,7 +1504,7 @@ namespace arma3Launcher
 
         private void btn_ereaseModsDirectory_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.AddonsFolder = "";
+            Properties.Settings.Default.AddonsFolder = string.Empty;
             Properties.Settings.Default.Save();
 
             txtb_modsDirectory.ForeColor = Color.DarkGray; txtb_modsDirectory.Text = "Set directory ->";
@@ -1471,19 +1517,19 @@ namespace arma3Launcher
 
         private void btn_openA3_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.Arma3Folder != "")
+            if (Properties.Settings.Default.Arma3Folder != string.Empty)
                 Process.Start(Properties.Settings.Default.Arma3Folder);
         }
 
         private void btn_openTS3_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.TS3Folder != "")
+            if (Properties.Settings.Default.TS3Folder != string.Empty)
                 Process.Start(Properties.Settings.Default.TS3Folder);
         }
 
         private void btn_openModsDirectory_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.AddonsFolder != "")
+            if (Properties.Settings.Default.AddonsFolder != string.Empty)
                 Process.Start(Properties.Settings.Default.AddonsFolder);
         }
 
@@ -1510,7 +1556,7 @@ namespace arma3Launcher
 
         private void btn_showRemoteSettings_Click(object sender, EventArgs e)
         {
-            string aux_listMods = "";
+            string aux_listMods = string.Empty;
 
             foreach (var mod in modsName)
             {
@@ -1598,7 +1644,7 @@ namespace arma3Launcher
 
         private void btn_reloadMallocs_Click(object sender, EventArgs e)
         {
-            getMalloc();
+            GetMalloc();
         }
 
         private async Task taskDelay(int delayMs)
@@ -1670,38 +1716,7 @@ namespace arma3Launcher
 
         private void pref_64bitGame_Click(object sender, EventArgs e)
         {
-            if (pref_64bitGame.Checked)
-            {
-                img_x64status.Image = Properties.Resources.x64_active;
-
-                if (GlobalVar.isServer)
-                {
-                    GlobalVar.gameArtifact = "arma3server_x64.exe";
-                }
-                else
-                {
-                    if (Properties.Settings.Default.battleye)
-                        GlobalVar.gameArtifact = "arma3battleye.exe";
-                    else
-                        GlobalVar.gameArtifact = "arma3_x64.exe";
-                }
-            }
-            else
-            {
-                img_x64status.Image = Properties.Resources.x64_inactive;
-
-                if (GlobalVar.isServer)
-                {
-                    GlobalVar.gameArtifact = "arma3server.exe";
-                }
-                else
-                {
-                    if (Properties.Settings.Default.battleye)
-                        GlobalVar.gameArtifact = "arma3battleye.exe";
-                    else
-                        GlobalVar.gameArtifact = "arma3.exe";
-                }
-            }
+            
         }
 
         private void WindowVersionStatus_TextChanged(object sender, EventArgs e)
@@ -1843,13 +1858,13 @@ namespace arma3Launcher
             if (txtb_searchPack.Text == "Search")
             {
                 txtb_searchPack.ForeColor = Color.FromArgb(64, 64, 64);
-                txtb_searchPack.Text = "";
+                txtb_searchPack.Text = string.Empty;
             }
         }
 
         private void txtb_searchPack_Leave(object sender, EventArgs e)
         {
-            if (txtb_searchPack.Text == "")
+            if (txtb_searchPack.Text == string.Empty)
             {
                 txtb_searchPack.ForeColor = Color.DarkGray;
                 txtb_searchPack.Text = "Search";
@@ -1949,6 +1964,50 @@ namespace arma3Launcher
             shortcut.Description = "Run PTrangers Arma 3 Launcher";
             shortcut.TargetPath = Application.ExecutablePath;
             shortcut.Save();
+        }
+
+        private void num_hcInstances_ValueChanged(object sender, EventArgs e)
+        {
+            // I hate that cursor blinking there
+            menu_launchOptions.Select();
+        }
+
+        private void num_maxMem_ValueChanged(object sender, EventArgs e)
+        {
+            // I hate that cursor blinking there
+            menu_launchOptions.Select();
+        }
+
+        private void chb_use64Bit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chb_use64Bit.Checked)
+            {
+                if (GlobalVar.isServer)
+                {
+                    GlobalVar.gameArtifact = "arma3server_x64.exe";
+                }
+                else
+                {
+                    if (Properties.Settings.Default.battleye)
+                        GlobalVar.gameArtifact = "arma3battleye.exe";
+                    else
+                        GlobalVar.gameArtifact = "arma3_x64.exe";
+                }
+            }
+            else
+            {
+                if (GlobalVar.isServer)
+                {
+                    GlobalVar.gameArtifact = "arma3server.exe";
+                }
+                else
+                {
+                    if (Properties.Settings.Default.battleye)
+                        GlobalVar.gameArtifact = "arma3battleye.exe";
+                    else
+                        GlobalVar.gameArtifact = "arma3.exe";
+                }
+            }
         }
     }
 }

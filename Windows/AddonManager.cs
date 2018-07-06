@@ -27,9 +27,9 @@ namespace arma3Launcher.Windows
             InitializeComponent();
             aLooker = new AddonsLooker(chbl_repoContent);
             windowIO = new WindowIO(this);
-            repoBuilder = new BuildRepo(chbl_repoContent, lbl_buildStatus, prgb_repoBuild);
+            repoBuilder = new BuildRepo(chbl_repoContent, lbl_buildStatus, prgb_repoBuild, buildLog, windowIO);
 
-            if (Properties.Settings.Default.RepoFolder != "")
+            if (Properties.Settings.Default.RepoFolder != string.Empty)
             { txtb_repoLocation.ForeColor = Color.FromArgb(64, 64, 64); txtb_repoLocation.Text = Properties.Settings.Default.RepoFolder; GetAddons(); }
             else
             { txtb_repoLocation.ForeColor = Color.DarkGray; txtb_repoLocation.Text = "Set directory ->"; }
@@ -44,7 +44,7 @@ namespace arma3Launcher.Windows
 
         private void btn_close_Click(object sender, EventArgs e)
         {
-            windowIO.windowOut(true);
+            repoBuilder.CancelBuild();
         }
 
         private void btn_close_MouseHover(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace arma3Launcher.Windows
                 GetAddons();
             }
 
-            dlg_folderBrowser.SelectedPath = "";
+            dlg_folderBrowser.SelectedPath = string.Empty;
         }
 
         private void GetAddons()
@@ -87,7 +87,7 @@ namespace arma3Launcher.Windows
 
         private void btn_ereaseRepoLocation_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.RepoFolder = "";
+            Properties.Settings.Default.RepoFolder = string.Empty;
             Properties.Settings.Default.Save();
 
             txtb_repoLocation.ForeColor = Color.DarkGray; txtb_repoLocation.Text = "Set directory ->";
@@ -95,7 +95,7 @@ namespace arma3Launcher.Windows
 
         private void btn_openRepoLocation_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.RepoFolder != "")
+            if (Properties.Settings.Default.RepoFolder != string.Empty)
                 Process.Start(Properties.Settings.Default.RepoFolder);
         }
 
@@ -113,16 +113,16 @@ namespace arma3Launcher.Windows
 
         private void txtb_repoLocation_TextChanged(object sender, EventArgs e)
         {
-            if (txtb_repoLocation.Text != "Set directory ->" && txtb_repoLocation.Text != "")
+            if (txtb_repoLocation.Text != "Set directory ->" && txtb_repoLocation.Text != string.Empty)
             {
                 if (txtb_repoLocation.Text.EndsWith("\\"))
                     txtb_repoLocation.Text = txtb_repoLocation.Text.Remove(txtb_repoLocation.Text.Length - 1);
             }
             else
             {
-                if (txtb_repoLocation.Text == "")
+                if (txtb_repoLocation.Text == string.Empty)
                 {
-                    Properties.Settings.Default.RepoFolder = "";
+                    Properties.Settings.Default.RepoFolder = string.Empty;
                     Properties.Settings.Default.Save();
 
                     txtb_repoLocation.ForeColor = Color.DarkGray; txtb_repoLocation.Text = "Set directory ->";
@@ -132,7 +132,7 @@ namespace arma3Launcher.Windows
 
         private void btn_buildRepo_Click(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.RepoFolder != "")
+            if (Properties.Settings.Default.RepoFolder != string.Empty)
             {
                 repoBuilder.Run(Properties.Settings.Default.RepoFolder);
             }

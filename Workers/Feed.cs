@@ -61,7 +61,7 @@ namespace arma3Launcher.Workers
 
                     if (!hidecontent || (forCount == 0 && warningactive))
                     {
-                        if (linkname != "")
+                        if (linkname != string.Empty)
                             gflowrss.Controls.Add(new NewsBlock(title, content, linkname + " >", linkuri, label));
                         else
                             gflowrss.Controls.Add(new NewsBlock(title, content, label));

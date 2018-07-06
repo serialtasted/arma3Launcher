@@ -66,8 +66,8 @@ namespace arma3Launcher.Workers
 
         // paramters
         private bool isLaunch = false;
-        private string configUrl = "";
-        private string activePack = "";
+        private string configUrl = string.Empty;
+        private string activePack = string.Empty;
 
         // controllers
         private bool downloadRunning = false;
@@ -77,7 +77,7 @@ namespace arma3Launcher.Workers
         private Int64 totalBytes;
         private int numTimesCancel = 0;
         private int secondsElapsed = 0;
-        private string timeLeft = "";
+        private string timeLeft = string.Empty;
         private bool isTFR = false;
         private bool cancelProcess = false;
 
@@ -288,7 +288,7 @@ namespace arma3Launcher.Workers
 
             // auxiliary variables
             string outputComplete = AddonsFolder + this.downloadUrls.Peek();
-            string downloadSpeed = "";
+            string downloadSpeed = string.Empty;
             int progressPercentage = 0;
 
             // ftp login
@@ -317,7 +317,7 @@ namespace arma3Launcher.Workers
                 while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
                 {
                     if (this.cancelProcess)
-                    { e.Cancel = true; return; }
+                    { e.Cancel = true; break; }
 
                     bytesReadComplete += bytesRead;
                     parsedBytes += bytesRead;

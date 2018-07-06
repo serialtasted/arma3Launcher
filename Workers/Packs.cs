@@ -15,10 +15,10 @@ namespace arma3Launcher.Workers
     {
         private MainForm mainForm;
         private readonly FlowLayoutPanel gflowpacks;
-        private string title = "";
-        private string id = "";
-        private string description = "";
-        private string addons = "";
+        private string title = string.Empty;
+        private string id = string.Empty;
+        private string description = string.Empty;
+        private string addons = string.Empty;
 
         public Packs(MainForm mainForm, FlowLayoutPanel packsPanel)
         {
@@ -30,7 +30,7 @@ namespace arma3Launcher.Workers
         {
             for (int i = 0; i < gflowpacks.Controls.Count-1; i++)
             {
-                if (!gflowpacks.Controls[i].Tag.ToString().Contains(searchArgument) && searchArgument != "")
+                if (!gflowpacks.Controls[i].Tag.ToString().Contains(searchArgument) && searchArgument != string.Empty)
                     gflowpacks.Controls[i].Visible = false;
                 else
                     gflowpacks.Controls[i].Visible = true;
@@ -54,7 +54,7 @@ namespace arma3Launcher.Workers
                         title = xn.Attributes["name"].Value;
                         id = xn.Attributes["id"].Value;
                         description = xn.Attributes["description"].Value;
-                        addons = "";
+                        addons = string.Empty;
 
 
                         XmlNodeList xnl2 = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSetInfo//" + id + "//mod");

@@ -1917,7 +1917,7 @@ namespace arma3Launcher
         {
             if (txtb_searchPack.Text == "Search")
             {
-                txtb_searchPack.ForeColor = Color.FromArgb(64, 64, 64);
+                txtb_searchPack.ForeColor = Color.WhiteSmoke;
                 txtb_searchPack.Text = string.Empty;
             }
         }

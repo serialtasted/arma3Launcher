@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-
 using arma3Launcher.Controls;
 using System.Net;
 using System.Xml;
@@ -79,6 +78,12 @@ namespace arma3Launcher.Workers
                             viewMode
                             );
                         auxPack.Tag = string.Format("{0} {1} {2} {3}", id, title, description, addons);
+                        Padding margin = auxPack.Margin;
+                        margin.Left = 3;
+                        margin.Right = 3;
+                        margin.Top = 0;
+                        margin.Bottom = 8;
+                        auxPack.Margin = margin;
 
                         if (id == Properties.Settings.Default.lastAddonPack)
                         {
@@ -92,10 +97,6 @@ namespace arma3Launcher.Workers
                         gflowpacks.Controls.Add(auxPack);
                     }
                 }
-
-                Label Marging = new Label() { MaximumSize = new Size(10, 5) };
-                if (gflowpacks.Controls.Count % 2 != 0 && (viewMode == View.LargeIcon || viewMode == View.SmallIcon || viewMode == View.Tile)) { Marging = new Label() { MinimumSize = new Size(10, 98) }; }
-                gflowpacks.Controls.Add(Marging);
             }
             catch (Exception ex)
             {

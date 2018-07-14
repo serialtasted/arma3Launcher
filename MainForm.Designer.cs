@@ -205,12 +205,16 @@
             this.btn_ereaseSearchPack = new System.Windows.Forms.Button();
             this.btn_addPrivatePack = new System.Windows.Forms.PictureBox();
             this.txtb_searchPack = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
             this.panelLaunch = new System.Windows.Forms.Panel();
             this.panel_bottomhide = new System.Windows.Forms.Panel();
             this.panel_bottomHide_Inner = new System.Windows.Forms.Panel();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
             this.txt_progressStatus = new System.Windows.Forms.Label();
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
             this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.btn_Launch = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -248,10 +252,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundBlinker = new System.ComponentModel.BackgroundWorker();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_minimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sysbtn_close)).BeginInit();
             this.MainWindow.SuspendLayout();
@@ -2582,12 +2582,32 @@
             this.txtb_searchPack.MaximumSize = new System.Drawing.Size(190, 20);
             this.txtb_searchPack.MinimumSize = new System.Drawing.Size(190, 20);
             this.txtb_searchPack.Name = "txtb_searchPack";
-            this.txtb_searchPack.Size = new System.Drawing.Size(190, 20);
+            this.txtb_searchPack.Size = new System.Drawing.Size(190, 18);
             this.txtb_searchPack.TabIndex = 1;
             this.txtb_searchPack.Text = "Search";
             this.txtb_searchPack.Enter += new System.EventHandler(this.txtb_searchPack_Enter);
             this.txtb_searchPack.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtb_searchPack_KeyDown);
             this.txtb_searchPack.Leave += new System.EventHandler(this.txtb_searchPack_Leave);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(643, 1);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(15, 21);
+            this.label38.TabIndex = 16;
+            this.label38.Text = "[";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(854, 1);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(15, 21);
+            this.label39.TabIndex = 17;
+            this.label39.Text = "]";
             // 
             // panelLaunch
             // 
@@ -2661,6 +2681,16 @@
             this.txt_progressStatus.TabIndex = 6;
             this.txt_progressStatus.Text = "Waiting for orders";
             // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(20, 60);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.ShowInTaskbar = true;
+            this.prb_progressBar_All.Size = new System.Drawing.Size(840, 5);
+            this.prb_progressBar_All.TabIndex = 11;
+            // 
             // btn_cancelDownload
             // 
             this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2678,6 +2708,15 @@
             this.btn_cancelDownload.Click += new System.EventHandler(this.btn_cancelDownload_Click);
             this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
             this.btn_cancelDownload.MouseHover += new System.EventHandler(this.btn_cancelDownload_MouseHover);
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(20, 40);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(840, 20);
+            this.prb_progressBar_File.TabIndex = 10;
             // 
             // txt_curFile
             // 
@@ -3026,45 +3065,6 @@
             // backgroundBlinker
             // 
             this.backgroundBlinker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundBlinker_DoWork);
-            // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(20, 60);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.ShowInTaskbar = true;
-            this.prb_progressBar_All.Size = new System.Drawing.Size(840, 5);
-            this.prb_progressBar_All.TabIndex = 11;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(20, 40);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(840, 20);
-            this.prb_progressBar_File.TabIndex = 10;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(643, 1);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(15, 21);
-            this.label38.TabIndex = 16;
-            this.label38.Text = "[";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(854, 1);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(15, 21);
-            this.label39.TabIndex = 17;
-            this.label39.Text = "]";
             // 
             // MainForm
             // 

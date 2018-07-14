@@ -89,7 +89,7 @@ namespace arma3Launcher.Workers
 
         public bool IsFileDifferent(string repoFile)
         {
-            if (this.CalculateFileHash(repoFile) != Properties.Settings.Default.LastRepoFileMD5)
+            if (this.CalculateFileHash(repoFile) != Properties.Settings.Default.LastRepoFileHash)
                 return true;
             else
                 return false;

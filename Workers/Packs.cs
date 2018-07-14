@@ -37,7 +37,7 @@ namespace arma3Launcher.Workers
             }
         }
 
-        public void Get ()
+        public void Get (View viewMode)
         {
             try
             {
@@ -75,7 +75,9 @@ namespace arma3Launcher.Workers
                             description,
                             addons,
                             gflowpacks,
-                            Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["optional"].Value));
+                            Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["optional"].Value),
+                            viewMode
+                            );
                         auxPack.Tag = string.Format("{0} {1} {2} {3}", id, title, description, addons);
 
                         if (id == Properties.Settings.Default.lastAddonPack)
@@ -91,8 +93,9 @@ namespace arma3Launcher.Workers
                     }
                 }
 
-                Label Maring = new Label() { MaximumSize = new Size(595, 10) };
-                gflowpacks.Controls.Add(Maring);
+                Label Marging = new Label() { MaximumSize = new Size(10, 5) };
+                if (gflowpacks.Controls.Count % 2 != 0 && (viewMode == View.LargeIcon || viewMode == View.SmallIcon || viewMode == View.Tile)) { Marging = new Label() { MinimumSize = new Size(10, 98) }; }
+                gflowpacks.Controls.Add(Marging);
             }
             catch (Exception ex)
             {

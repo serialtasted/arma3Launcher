@@ -74,6 +74,7 @@ namespace arma3Launcher
         private bool isActive = true;
         private bool isUpdate = false;
         private bool hasShown = false;
+        private View packsViewMode;
 
         private int menuSelected = 0;
 
@@ -193,6 +194,7 @@ namespace arma3Launcher
                 panel_serverOptions.Visible = true;
                 panel_headlessOptions.Visible = true;
                 pref_joinServerAuto.Visible = false;
+                pref_joinTsServerAuto.Visible = false;
                 btn_reinstallTFRPlugins.Visible = false;
                 pref_serverAutopilot.Visible = true;
                 chb_battleye.Enabled = false;
@@ -528,12 +530,48 @@ namespace arma3Launcher
                 Properties.Settings.Default.x64Game = false;
             }
 
+            // packs view mode
+            switch (Properties.Settings.Default.packsViewMode)
+            {
+                case 0:
+                    packsViewMode = View.LargeIcon;
+                    break;
+                case 1:
+                    packsViewMode = View.Details;
+                    break;
+                case 2:
+                    packsViewMode = View.SmallIcon;
+                    break;
+                case 3:
+                    packsViewMode = View.List;
+                    break;
+                case 4:
+                    packsViewMode = View.Tile;
+                    break;
+                default:
+                    packsViewMode = View.Details;
+                    break;
+            }
+
             // preferences
             pref_startGameAfterDownloadsAreCompleted.Checked = Properties.Settings.Default.startGameAfterDownload;
-            pref_runLauncherOnStartup.Checked = Properties.Settings.Default.runLauncherOnStartup;
             pref_allowNotifications.Checked = Properties.Settings.Default.allowNotifications;
             pref_autoDownload.Checked = Properties.Settings.Default.autoDownload;
             pref_joinServerAuto.Checked = Properties.Settings.Default.joinServerAutomatically;
+            pref_joinTsServerAuto.Checked = Properties.Settings.Default.joinTsServerAutomatically;
+
+            // preference run on startup
+            pref_runLauncherOnStartup.Checked = false;
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            foreach (string key in rk.GetValueNames())
+            {
+                if (key == AssemblyTitle)
+                {
+                    pref_runLauncherOnStartup.Checked = true;
+                    if (rk.GetValue(AssemblyTitle).ToString() != Application.ExecutablePath)
+                        rk.SetValue(AssemblyTitle, Application.ExecutablePath);
+                }
+            } 
 
             // workshop addons
             this.PropertiesWorkshopReader();
@@ -602,12 +640,35 @@ namespace arma3Launcher
 
             Properties.Settings.Default.x64Game = chb_use64Bit.Checked;
 
+            // packs view mode
+            switch (packsViewMode)
+            {
+                case View.LargeIcon:
+                    Properties.Settings.Default.packsViewMode = 0;
+                    break;
+                case View.Details:
+                    Properties.Settings.Default.packsViewMode = 1;
+                    break;
+                case View.SmallIcon:
+                    Properties.Settings.Default.packsViewMode = 2;
+                    break;
+                case View.List:
+                    Properties.Settings.Default.packsViewMode = 3;
+                    break;
+                case View.Tile:
+                    Properties.Settings.Default.packsViewMode = 4;
+                    break;
+                default:
+                    Properties.Settings.Default.packsViewMode = 1;
+                    break;
+            }
+
             // preferences
             Properties.Settings.Default.startGameAfterDownload = pref_startGameAfterDownloadsAreCompleted.Checked;
-            Properties.Settings.Default.runLauncherOnStartup = pref_runLauncherOnStartup.Checked;
             Properties.Settings.Default.allowNotifications = pref_allowNotifications.Checked;
             Properties.Settings.Default.autoDownload = pref_autoDownload.Checked;
             Properties.Settings.Default.joinServerAutomatically = pref_joinServerAuto.Checked;
+            Properties.Settings.Default.joinTsServerAutomatically = pref_joinTsServerAuto.Checked;
 
             // workshop addons
             this.PropertiesWorkshopSaver();
@@ -708,7 +769,7 @@ namespace arma3Launcher
             finally
             {
                 if (refreshPacks || forceRefreshPacks)
-                    fetchAddonPacks.Get();
+                    fetchAddonPacks.Get(packsViewMode);
             }
         }
 
@@ -1575,7 +1636,7 @@ namespace arma3Launcher
         { installer.installTeamSpeakPlugin(); }
 
         public async void runGame()
-        { hideDownloadPanel(); await taskDelay(800); PrepareLaunch.LaunchGame(Arguments, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked); }
+        { hideDownloadPanel(); await taskDelay(800); PrepareLaunch.LaunchGame(Arguments, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked, pref_joinTsServerAuto.Checked); }
 
         public void updateCurrentPack(bool refreshPacks)
         { FetchRemoteSettings(refreshPacks); GetAddons(); }
@@ -1705,8 +1766,7 @@ namespace arma3Launcher
 
         private void pref_runLauncherOnStartup_Click(object sender, EventArgs e)
         {
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey
-                ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
             if (pref_runLauncherOnStartup.Checked)
                 rk.SetValue(AssemblyTitle, Application.ExecutablePath);
@@ -1893,7 +1953,7 @@ namespace arma3Launcher
                 fetchAddonPacks.Search("");
                 txtb_searchPack.ForeColor = Color.DarkGray;
                 txtb_searchPack.Text = "Search";
-                fetchAddonPacks.Get();
+                fetchAddonPacks.Get(packsViewMode);
             }
         }
 
@@ -2008,6 +2068,24 @@ namespace arma3Launcher
                         GlobalVar.gameArtifact = "arma3.exe";
                 }
             }
+        }
+
+        private void btn_packsViewDetails_Click(object sender, EventArgs e)
+        {
+            packsViewMode = View.Details;
+            fetchAddonPacks.Get(packsViewMode);
+        }
+
+        private void btn_packsViewList_Click(object sender, EventArgs e)
+        {
+            packsViewMode = View.List;
+            fetchAddonPacks.Get(packsViewMode);
+        }
+
+        private void btn_packsViewTiles_Click(object sender, EventArgs e)
+        {
+            packsViewMode = View.Tile;
+            fetchAddonPacks.Get(packsViewMode);
         }
     }
 }

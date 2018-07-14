@@ -161,7 +161,7 @@ namespace arma3Launcher.Workers
             return !(this.mainForm.ReadRepo(false));
         }
 
-        public void LaunchGame(string Arguments, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo, bool autoJoin)
+        public void LaunchGame(string Arguments, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo, bool autoJoin, bool autoJoinTs)
         {
             /* 
             Array content list:
@@ -200,7 +200,7 @@ namespace arma3Launcher.Workers
                 }
 
 
-                if (Process.GetProcessesByName("ts3client_win64").Length <= 0 && Process.GetProcessesByName("ts3client_win32").Length <= 0)
+                if (Process.GetProcessesByName("ts3client_win64").Length <= 0 && Process.GetProcessesByName("ts3client_win32").Length <= 0 && autoJoinTs)
                 {
                     if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")))
                     {

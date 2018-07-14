@@ -324,6 +324,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ptrangers.ico" />
+    <None Include="Resources\view_details.png" />
+    <None Include="Resources\view_tiles.png" />
+    <None Include="Resources\view_list.png" />
     <None Include="Resources\x64-inactive.jpg" />
     <None Include="Resources\x64-active.jpg" />
     <None Include="Resources\youtube.png" />

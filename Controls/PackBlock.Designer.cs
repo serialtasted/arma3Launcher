@@ -31,20 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.txt_title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_showAddons = new System.Windows.Forms.PictureBox();
-            this.img_checkAllowed = new System.Windows.Forms.PictureBox();
-            this.btn_useThis = new System.Windows.Forms.PictureBox();
             this.panel_bgTitle = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txt_packID = new System.Windows.Forms.Label();
             this.txt_content = new System.Windows.Forms.Label();
             this.txt_allowed = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btn_showAddons = new System.Windows.Forms.PictureBox();
+            this.img_checkAllowed = new System.Windows.Forms.PictureBox();
+            this.btn_useThis = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            this.panel_bgTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_showAddons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_checkAllowed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_useThis)).BeginInit();
-            this.panel_bgTitle.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_title
@@ -74,6 +74,70 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(860, 174);
             this.panel1.TabIndex = 6;
+            // 
+            // panel_bgTitle
+            // 
+            this.panel_bgTitle.BackColor = System.Drawing.Color.DimGray;
+            this.panel_bgTitle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel_bgTitle.Controls.Add(this.panel2);
+            this.panel_bgTitle.Controls.Add(this.txt_title);
+            this.panel_bgTitle.Controls.Add(this.txt_packID);
+            this.panel_bgTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_bgTitle.Location = new System.Drawing.Point(0, 0);
+            this.panel_bgTitle.Name = "panel_bgTitle";
+            this.panel_bgTitle.Size = new System.Drawing.Size(860, 38);
+            this.panel_bgTitle.TabIndex = 12;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.OliveDrab;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 34);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(860, 4);
+            this.panel2.TabIndex = 11;
+            // 
+            // txt_packID
+            // 
+            this.txt_packID.AutoSize = true;
+            this.txt_packID.BackColor = System.Drawing.Color.Transparent;
+            this.txt_packID.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_packID.ForeColor = System.Drawing.Color.Gray;
+            this.txt_packID.Location = new System.Drawing.Point(703, 11);
+            this.txt_packID.MinimumSize = new System.Drawing.Size(150, 0);
+            this.txt_packID.Name = "txt_packID";
+            this.txt_packID.Size = new System.Drawing.Size(150, 13);
+            this.txt_packID.TabIndex = 10;
+            this.txt_packID.Text = "%pack_ID%";
+            this.txt_packID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txt_content
+            // 
+            this.txt_content.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_content.AutoSize = true;
+            this.txt_content.BackColor = System.Drawing.Color.Transparent;
+            this.txt_content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_content.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_content.Location = new System.Drawing.Point(30, 61);
+            this.txt_content.MaximumSize = new System.Drawing.Size(800, 52);
+            this.txt_content.MinimumSize = new System.Drawing.Size(800, 52);
+            this.txt_content.Name = "txt_content";
+            this.txt_content.Size = new System.Drawing.Size(800, 52);
+            this.txt_content.TabIndex = 11;
+            this.txt_content.Text = "%Content%\r\n";
+            // 
+            // txt_allowed
+            // 
+            this.txt_allowed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txt_allowed.AutoSize = true;
+            this.txt_allowed.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txt_allowed.Location = new System.Drawing.Point(23, 143);
+            this.txt_allowed.Name = "txt_allowed";
+            this.txt_allowed.Size = new System.Drawing.Size(54, 13);
+            this.txt_allowed.TabIndex = 15;
+            this.txt_allowed.Text = "Allowed: ";
+            this.txt_allowed.Visible = false;
             // 
             // btn_showAddons
             // 
@@ -115,68 +179,6 @@
             this.btn_useThis.MouseLeave += new System.EventHandler(this.btn_useThis_MouseLeave);
             this.btn_useThis.MouseHover += new System.EventHandler(this.btn_useThis_MouseHover);
             // 
-            // panel_bgTitle
-            // 
-            this.panel_bgTitle.BackColor = System.Drawing.Color.DimGray;
-            this.panel_bgTitle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel_bgTitle.Controls.Add(this.panel2);
-            this.panel_bgTitle.Controls.Add(this.txt_title);
-            this.panel_bgTitle.Controls.Add(this.txt_packID);
-            this.panel_bgTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_bgTitle.Location = new System.Drawing.Point(0, 0);
-            this.panel_bgTitle.Name = "panel_bgTitle";
-            this.panel_bgTitle.Size = new System.Drawing.Size(860, 38);
-            this.panel_bgTitle.TabIndex = 12;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.OliveDrab;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 34);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(860, 4);
-            this.panel2.TabIndex = 11;
-            // 
-            // txt_packID
-            // 
-            this.txt_packID.AutoSize = true;
-            this.txt_packID.BackColor = System.Drawing.Color.Transparent;
-            this.txt_packID.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_packID.ForeColor = System.Drawing.Color.Gray;
-            this.txt_packID.Location = new System.Drawing.Point(703, 11);
-            this.txt_packID.MinimumSize = new System.Drawing.Size(150, 0);
-            this.txt_packID.Name = "txt_packID";
-            this.txt_packID.Size = new System.Drawing.Size(150, 13);
-            this.txt_packID.TabIndex = 10;
-            this.txt_packID.Text = "%pack_ID%";
-            this.txt_packID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txt_content
-            // 
-            this.txt_content.AutoSize = true;
-            this.txt_content.BackColor = System.Drawing.Color.Transparent;
-            this.txt_content.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_content.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txt_content.Location = new System.Drawing.Point(30, 61);
-            this.txt_content.MaximumSize = new System.Drawing.Size(800, 52);
-            this.txt_content.MinimumSize = new System.Drawing.Size(800, 52);
-            this.txt_content.Name = "txt_content";
-            this.txt_content.Size = new System.Drawing.Size(800, 52);
-            this.txt_content.TabIndex = 11;
-            this.txt_content.Text = "%Content%\r\n";
-            // 
-            // txt_allowed
-            // 
-            this.txt_allowed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txt_allowed.AutoSize = true;
-            this.txt_allowed.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txt_allowed.Location = new System.Drawing.Point(23, 143);
-            this.txt_allowed.Name = "txt_allowed";
-            this.txt_allowed.Size = new System.Drawing.Size(54, 13);
-            this.txt_allowed.TabIndex = 15;
-            this.txt_allowed.Text = "Allowed: ";
-            this.txt_allowed.Visible = false;
-            // 
             // PackBlock
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -190,11 +192,11 @@
             this.Size = new System.Drawing.Size(860, 174);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel_bgTitle.ResumeLayout(false);
+            this.panel_bgTitle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_showAddons)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_checkAllowed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_useThis)).EndInit();
-            this.panel_bgTitle.ResumeLayout(false);
-            this.panel_bgTitle.PerformLayout();
             this.ResumeLayout(false);
 
         }

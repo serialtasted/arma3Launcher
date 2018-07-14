@@ -361,18 +361,6 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool runLauncherOnStartup {
-            get {
-                return ((bool)(this["runLauncherOnStartup"]));
-            }
-            set {
-                this["runLauncherOnStartup"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool allowNotifications {
             get {
@@ -446,12 +434,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LastRepoFileMD5 {
+        public string LastRepoFileHash {
             get {
-                return ((string)(this["LastRepoFileMD5"]));
+                return ((string)(this["LastRepoFileHash"]));
             }
             set {
-                this["LastRepoFileMD5"] = value;
+                this["LastRepoFileHash"] = value;
             }
         }
         
@@ -548,6 +536,30 @@ namespace arma3Launcher.Properties {
             }
             set {
                 this["workshopAddons"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool joinTsServerAutomatically {
+            get {
+                return ((bool)(this["joinTsServerAutomatically"]));
+            }
+            set {
+                this["joinTsServerAutomatically"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int packsViewMode {
+            get {
+                return ((int)(this["packsViewMode"]));
+            }
+            set {
+                this["packsViewMode"] = value;
             }
         }
     }

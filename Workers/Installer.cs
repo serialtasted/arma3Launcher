@@ -355,7 +355,7 @@ namespace arma3Launcher.Workers
             this.progressBarFileValue(0);
             this.progressBarAllValue(0);
 
-            Properties.Settings.Default.LastRepoFileMD5 = repoReader.CalculateFileHash(repoReader.GetRepoFile());
+            Properties.Settings.Default.LastRepoFileHash = repoReader.CalculateFileHash(repoReader.GetRepoFile());
             Properties.Settings.Default.Save();
 
             if (this.isInstall)

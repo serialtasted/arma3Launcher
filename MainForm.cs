@@ -418,7 +418,7 @@ namespace arma3Launcher
 
         public bool ReadRepo(bool showMessage)
         {
-            if (GlobalVar.isReadingRepo || GlobalVar.isDownloading || GlobalVar.isInstalling)
+            if (GlobalVar.isReadingRepo || GlobalVar.isDownloading || GlobalVar.isInstalling || GlobalVar.offlineMode)
                 return false;
 
             GlobalVar.isReadingRepo = true;
@@ -719,58 +719,95 @@ namespace arma3Launcher
             modsName.Clear();
 
             AddonsFolder = Properties.Settings.Default.AddonsFolder;
+            bool keepGoing = true;
 
-            try
+            do
             {
-                XmlDocument RemoteXmlInfo = new XmlDocument();
-                RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
-
-                string xmlNodes = string.Empty;
-                XmlNodeList xnl;
-
-                //Validate if activePack exists or select first on the list
-                xmlNodes = "//arma3Launcher//ModSets//pack";
-                xnl = RemoteXmlInfo.SelectNodes(xmlNodes);
-                string firstPack = string.Empty;
-                activePack = string.Empty;
-
-                foreach (XmlNode xn in xnl)
+                try
                 {
-                    if (String.IsNullOrEmpty(firstPack) && Convert.ToBoolean(xn.Attributes["enable"].Value))
-                    { firstPack = xn.Attributes["id"].Value; }
+                    XmlDocument RemoteXmlInfo = new XmlDocument();
+                    RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
 
-                    if (Properties.Settings.Default.lastAddonPack == xn.Attributes["id"].Value && Convert.ToBoolean(xn.Attributes["enable"].Value))
-                    { activePack = Properties.Settings.Default.lastAddonPack; break; }
+                    string xmlNodes = string.Empty;
+                    XmlNodeList xnl;
+
+                    //Validate if activePack exists or select first on the list
+                    xmlNodes = "//arma3Launcher//ModSets//pack";
+                    xnl = RemoteXmlInfo.SelectNodes(xmlNodes);
+                    string firstPack = string.Empty;
+                    activePack = string.Empty;
+
+                    foreach (XmlNode xn in xnl)
+                    {
+                        if (String.IsNullOrEmpty(firstPack) && Convert.ToBoolean(xn.Attributes["enable"].Value))
+                        { firstPack = xn.Attributes["id"].Value; }
+
+                        if (Properties.Settings.Default.lastAddonPack == xn.Attributes["id"].Value && Convert.ToBoolean(xn.Attributes["enable"].Value))
+                        { activePack = Properties.Settings.Default.lastAddonPack; break; }
+                    }
+
+                    if (String.IsNullOrEmpty(activePack))
+                    { Properties.Settings.Default.lastAddonPack = activePack = firstPack; forceRefreshPacks = true; }
+
+                    isOptionalAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["optional"].Value);
+
+                    if (isOptionalAllowed)
+                    { panel_steamAddons.Enabled = true; }
+                    else
+                    { panel_steamAddons.Enabled = false; }
+
+                    xmlNodes = "//arma3Launcher//ModSetInfo//" + activePack + "//mod";
+                    xnl = RemoteXmlInfo.SelectNodes(xmlNodes);
+
+                    foreach (XmlNode xn in xnl)
+                    {
+                        modsName.Add(xn.Attributes["name"].Value);
+                    }
                 }
-
-                if (String.IsNullOrEmpty(activePack))
-                { Properties.Settings.Default.lastAddonPack = activePack = firstPack; forceRefreshPacks = true; }
-
-                isOptionalAllowed = Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + activePack).Attributes["optional"].Value);
-
-                if (isOptionalAllowed)
-                { panel_steamAddons.Enabled = true; }
-                else
-                { panel_steamAddons.Enabled = false; }
-
-                xmlNodes = "//arma3Launcher//ModSetInfo//" + activePack + "//mod";
-                xnl = RemoteXmlInfo.SelectNodes(xmlNodes);
-
-                foreach (XmlNode xn in xnl)
+                catch (Exception ex)
                 {
-                    modsName.Add(xn.Attributes["name"].Value);
+                    keepGoing = false;
+
+                    MessageBoxButtons msgOptions = MessageBoxButtons.RetryCancel;
+                    if (Debugger.IsAttached)
+                        msgOptions = MessageBoxButtons.AbortRetryIgnore;
+
+                    switch (MessageBox.Show(ex.Message, "Unable to fetch remote settings", msgOptions, MessageBoxIcon.Warning))
+                    {
+                        case DialogResult.Abort:
+                            Process.GetCurrentProcess().Kill();
+                            break;
+                        case DialogResult.Cancel:
+                            Process.GetCurrentProcess().Kill();
+                            break;
+                        case DialogResult.Retry:
+                            break;
+                        case DialogResult.Ignore:
+                            setOfflineMode();
+                            keepGoing = true;
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Unable to fetch remote settings", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txt_progressStatus.Text = "Unable to fetch remote settings.";
-            }
-            finally
-            {
-                if (refreshPacks || forceRefreshPacks)
-                    fetchAddonPacks.Get(packsViewMode);
-            }
+                finally
+                {
+                    if (refreshPacks || forceRefreshPacks)
+                        fetchAddonPacks.Get(packsViewMode);
+                }
+            } while (!keepGoing);
+        }
+
+        private void setOfflineMode()
+        {
+            GlobalVar.offlineMode = true;
+            WindowVersionStatus.Text = "Offline Mode";
+
+            // disable launcher updates
+            panel_launcherUpdate.Enabled = false;
+
+            // disable menu remote settings
+            menu_RemoteSettings.Enabled = false;
         }
 
         private void GetMalloc()
@@ -874,20 +911,20 @@ namespace arma3Launcher
 
         private void sysbtn_moreOptions_MouseDown(object sender, MouseEventArgs e)
         {
-            sysbtn_moreOptions.Image = Properties.Resources.bgmore4_fw;
+            sysbtn_moreOptions.Image = Properties.Resources.bgmore4;
         }
 
         private void sysbtn_moreOptions_MouseEnter(object sender, EventArgs e)
         {
-            sysbtn_moreOptions.Image = Properties.Resources.bgmore2_fw;
+            sysbtn_moreOptions.Image = Properties.Resources.bgmore2;
         }
 
         private void sysbtn_moreOptions_MouseLeave(object sender, EventArgs e)
         {
             if (isActive)
-                sysbtn_moreOptions.Image = Properties.Resources.bgmore1_fw;
+                sysbtn_moreOptions.Image = Properties.Resources.bgmore1;
             else
-                sysbtn_moreOptions.Image = Properties.Resources.bgmore3_fw;
+                sysbtn_moreOptions.Image = Properties.Resources.bgmore3;
         }
         #endregion
 
@@ -1183,11 +1220,9 @@ namespace arma3Launcher
         private void btn_update_Click(object sender, EventArgs e)
         {
             StartUpdator();
-            Thread.Sleep(500);
-            windowIO.windowOut(true);
         }
 
-        void StartUpdator()
+        private async void StartUpdator()
         {
             try
             {
@@ -1198,25 +1233,31 @@ namespace arma3Launcher
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Unable to download zUpdator");
             }
-
-            try
+            finally
             {
-                var fass = new ProcessStartInfo();
-                fass.WorkingDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.Length - Process.GetCurrentProcess().MainModule.ModuleName.Length);
-                fass.FileName = "zUpdator.exe";
-                fass.Arguments = "-curversion=" + txt_curversion.Text +
-                    " -newversion=" + txt_latestversion.Text +
-                    " -filename=" + Process.GetCurrentProcess().MainModule.ModuleName;
 
-                var process = new Process();
-                process.StartInfo = fass;
-                process.Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    var fass = new ProcessStartInfo();
+                    fass.WorkingDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.Length - Process.GetCurrentProcess().MainModule.ModuleName.Length);
+                    fass.FileName = "zUpdator.exe";
+                    fass.Arguments = "-curversion=" + txt_curversion.Text +
+                        " -newversion=" + txt_latestversion.Text +
+                        " -filename=" + Process.GetCurrentProcess().MainModule.ModuleName;
+
+                    var process = new Process();
+                    process.StartInfo = fass;
+                    process.Start();
+
+                    await this.taskDelay(500);
+                    windowIO.windowOut(true);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Unable to start zUpdator");
+                }
             }
         }
         #endregion
@@ -1481,29 +1522,7 @@ namespace arma3Launcher
 
         private void btn_copyLaunchOptions_Click(object sender, EventArgs e)
         {
-            PrepareLaunch = new LaunchCore(panel_launchOptionsChb,
-                (string)cb_clientProfile.SelectedItem,
-                (string)cb_serverConfig.SelectedItem,
-                (string)cb_serverProfile.SelectedItem,
-                (string)cb_hcProfile.SelectedItem,
-                (int)num_hcInstances.Value,
-                chb_maxMem.Checked,
-                num_maxMem.Value.ToString(),
-                chb_malloc.Checked,
-                (string)cb_malloc.SelectedItem,
-                chb_exThreads.Checked,
-                (string)cb_exThreads.SelectedItem,
-                chb_cpuCount.Checked,
-                (string)cb_cpuCount.SelectedItem);
-
-            string Arguments = PrepareLaunch.GetArguments();
-            if (Arguments != string.Empty && Arguments != null)
-            {
-                Clipboard.SetText(Arguments);
-                MessageBox.Show("This is on your clipboard:\n" + Arguments, "Launch options copied", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            { MessageBox.Show("Select any option before trying to copy", "Launch options copy failed", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            
         }
 
         private void backgroundBlinker_DoWork(object sender, DoWorkEventArgs e)
@@ -2086,6 +2105,33 @@ namespace arma3Launcher
         {
             packsViewMode = View.Tile;
             fetchAddonPacks.Get(packsViewMode);
+        }
+
+        private void btn_copyLaunchArguments_Click(object sender, EventArgs e)
+        {
+            PrepareLaunch = new LaunchCore(panel_launchOptionsChb,
+                (string)cb_clientProfile.SelectedItem,
+                (string)cb_serverConfig.SelectedItem,
+                (string)cb_serverProfile.SelectedItem,
+                (string)cb_hcProfile.SelectedItem,
+                (int)num_hcInstances.Value,
+                chb_maxMem.Checked,
+                num_maxMem.Value.ToString(),
+                chb_malloc.Checked,
+                (string)cb_malloc.SelectedItem,
+                chb_exThreads.Checked,
+                cb_exThreads.SelectedItem.ToString(),
+                chb_cpuCount.Checked,
+                cb_cpuCount.SelectedItem.ToString());
+
+            string Arguments = PrepareLaunch.GetArguments();
+            if (Arguments != string.Empty && Arguments != null)
+            {
+                Clipboard.SetText(Arguments);
+                MessageBox.Show("Arguments copied to clipboard:\n" + Arguments, "Launch arguments copied", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            { MessageBox.Show("No arguments were detected. Select something first.", "Launch arguments copy failed", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
     }
 }

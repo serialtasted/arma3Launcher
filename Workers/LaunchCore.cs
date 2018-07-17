@@ -187,7 +187,7 @@ namespace arma3Launcher.Workers
             {
 
                 Ping ping = new Ping();
-                if ((serverInfo[0] != string.Empty && serverInfo[2] != string.Empty) && autoJoin)
+                if ((serverInfo[0] != string.Empty && serverInfo[2] != string.Empty) && autoJoin && !GlobalVar.offlineMode)
                 {
                     /*PingReply pingresult = ping.Send(serverInfo[0]);
                     if (pingresult.Status == IPStatus.Success)
@@ -200,7 +200,7 @@ namespace arma3Launcher.Workers
                 }
 
 
-                if (Process.GetProcessesByName("ts3client_win64").Length <= 0 && Process.GetProcessesByName("ts3client_win32").Length <= 0 && autoJoinTs)
+                if (Process.GetProcessesByName("ts3client_win64").Length <= 0 && Process.GetProcessesByName("ts3client_win32").Length <= 0 && autoJoinTs && !GlobalVar.offlineMode)
                 {
                     if (Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")))
                     {
@@ -227,7 +227,7 @@ namespace arma3Launcher.Workers
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            MessageBox.Show(ex.Message, "Unable to start TeamSpeak 3");
                         }
                     }
                     else
@@ -312,7 +312,7 @@ namespace arma3Launcher.Workers
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message, "Unable to start Arma 3");
                 }
             }
             else

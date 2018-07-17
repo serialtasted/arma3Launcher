@@ -143,6 +143,19 @@ namespace arma3Launcher
             }
         }
 
+        static bool _offlineMode = false;
+        public static bool offlineMode
+        {
+            get
+            {
+                return _offlineMode;
+            }
+            set
+            {
+                _offlineMode = value;
+            }
+        }
+
         // LIST
         static List<string> _folders2Create = new List<string>();
         public static List<string> folders2Create

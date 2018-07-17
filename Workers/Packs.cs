@@ -112,7 +112,6 @@ namespace arma3Launcher.Workers
                 ErrorRead.Text = "Unable to read the contents from the server!\n" + ex.Message;
 
                 ErrorTable.Controls.Add(ErrorRead);
-
                 gflowpacks.Controls.Add(ErrorTable);
             }
         }

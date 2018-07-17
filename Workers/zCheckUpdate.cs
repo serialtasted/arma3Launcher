@@ -223,7 +223,7 @@ namespace arma3Launcher.Workers
                 btn_Update.Enabled = false;
 
                 if (System.Diagnostics.Debugger.IsAttached)
-                    MessageBox.Show(AllEx.Message);
+                    MessageBox.Show(AllEx.Message, "DEBUG MODE");
             }
             finally
             {

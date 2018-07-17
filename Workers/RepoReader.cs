@@ -112,7 +112,7 @@ namespace arma3Launcher.Workers
             }
             catch (WebException e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Unable to get repository info");
             }
 
             return tempFile;

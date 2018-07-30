@@ -527,7 +527,7 @@ namespace arma3Launcher.Workers
         private void DelayLaunch_Tick(object sender, EventArgs e)
         {
             this.delayLaunch.Stop();
-            this.mainForm.runGame();
+            this.mainForm.LaunchGame();
         }
 
         public void installTeamSpeakPlugin()

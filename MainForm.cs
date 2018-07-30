@@ -289,8 +289,8 @@ namespace arma3Launcher
             {
                 if (GlobalVar.autoPilot)
                 {
-                    await taskDelay(2500);
-                    launchProcess();
+                    await taskDelay(500);
+                    this.LaunchGame();
                 }
             }
 
@@ -1303,7 +1303,7 @@ namespace arma3Launcher
         private void btn_Launch_Click(object sender, EventArgs e)
         {
             btn_Launch.Focus();
-            launchProcess();
+            this.LaunchGame();
         }
 
         public void reLaunchServer()
@@ -1314,10 +1314,10 @@ namespace arma3Launcher
                 switchAutopilot(false);
 
             if (GlobalVar.autoPilot)
-                launchProcess();
+                this.LaunchGame();
         }
 
-        private void launchProcess()
+        public async void LaunchGame()
         {
             if ((Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")) || GlobalVar.isServer))
             {
@@ -1351,7 +1351,20 @@ namespace arma3Launcher
                         SaveSettings();
 
                         if (activePack == "arma3" || PrepareLaunch.isModPackInstalled())
-                            runGame();
+                        {
+                            hideDownloadPanel();
+                            await taskDelay(800);
+
+                            PrepareLaunch.LaunchGame(
+                                Arguments,
+                                txt_progressStatus,
+                                btn_Launch,
+                                remoteReader.ServerInfo(),
+                                remoteReader.TeamSpeakInfo(),
+                                pref_joinServerAuto.Checked,
+                                pref_joinTsServerAuto.Checked
+                            );
+                        }
                         else
                         {
                             if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
@@ -1653,9 +1666,6 @@ namespace arma3Launcher
 
         private void btn_reinstallTFRPlugins_Click(object sender, EventArgs e)
         { installer.installTeamSpeakPlugin(); }
-
-        public async void runGame()
-        { hideDownloadPanel(); await taskDelay(800); PrepareLaunch.LaunchGame(Arguments, txt_progressStatus, btn_Launch, remoteReader.ServerInfo(), remoteReader.TeamSpeakInfo(), pref_joinServerAuto.Checked, pref_joinTsServerAuto.Checked); }
 
         public void updateCurrentPack(bool refreshPacks)
         { FetchRemoteSettings(refreshPacks); GetAddons(); }

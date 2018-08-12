@@ -532,13 +532,14 @@ namespace arma3Launcher.Workers
 
         public void installTeamSpeakPlugin()
         {
+            this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
             this.progressBarFileStyle(ProgressBarStyle.Continuous);
             this.progressBarFileValue(0);
 
-            if (Directory.Exists(Properties.Settings.Default.AddonsFolder + @"@task_force_radio\plugins"))
+            if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
             {
 
-                string sourcePath = Properties.Settings.Default.AddonsFolder + @"@task_force_radio\plugins";
+                string sourcePath = AddonsFolder + @"@task_force_radio\plugins";
 
                 this.progressBarFileState(ProgressBarState.Normal);
                 this.progressStatusText("Installing TeamSpeak 3 plugins...");

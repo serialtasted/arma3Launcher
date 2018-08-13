@@ -48,6 +48,7 @@ namespace arma3Launcher.Workers
 
             this.repoTreeView.Nodes.Clear();
             this.modsHash.Clear();
+            this.modsEdit.Clear();
             this.modsList.Clear();
 
             this.filesOK = 0;
@@ -65,17 +66,9 @@ namespace arma3Launcher.Workers
                 string s = string.Empty;
                 while ((s = sr.ReadLine()) != null)
                 {
-                    try
-                    {
-                        modsHash.Add(s.Split('*')[0]);
-                        modsEdit.Add(s.Split('*')[1]);
-                        modsList.Add(s.Split('*')[2]);
-                    }
-                    catch // legacy
-                    {
-                        modsHash.Add(s.Split('*')[0]);
-                        modsList.Add(s.Split('*')[1]);
-                    }
+                    modsHash.Add(s.Split('*')[0]);
+                    modsEdit.Add(s.Split('*')[1]);
+                    modsList.Add(s.Split('*')[2]);
                 }
 
                 repoTreeView.PathSeparator = "\\";

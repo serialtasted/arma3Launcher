@@ -326,7 +326,7 @@ namespace arma3Launcher.Workers
 
                     while ((s = sr.ReadLine()) != null)
                     {
-                        if (auxItem == s.Split('*')[1])
+                        if (auxItem == s.Split('*')[2])
                             deleteFile = false;
                     }
                 }

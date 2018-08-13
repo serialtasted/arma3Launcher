@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
             this.sysbtn_minimize = new System.Windows.Forms.PictureBox();
             this.sysbtn_close = new System.Windows.Forms.PictureBox();
             this.MainWindow = new System.Windows.Forms.Panel();
@@ -388,7 +388,7 @@
             this.panelMenu.Controls.Add(this.menu_packs);
             this.panelMenu.Controls.Add(this.menu_launchOptions);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelMenu.Location = new System.Drawing.Point(0, 90);
+            this.panelMenu.Location = new System.Drawing.Point(0, 431);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(906, 42);
             this.panelMenu.TabIndex = 2;
@@ -527,7 +527,7 @@
             this.panelDirectories.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelDirectories.Location = new System.Drawing.Point(0, 0);
             this.panelDirectories.Name = "panelDirectories";
-            this.panelDirectories.Size = new System.Drawing.Size(906, 90);
+            this.panelDirectories.Size = new System.Drawing.Size(906, 431);
             this.panelDirectories.TabIndex = 1;
             // 
             // panelRepo
@@ -538,7 +538,7 @@
             this.panelRepo.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelRepo.Location = new System.Drawing.Point(0, 73);
             this.panelRepo.Name = "panelRepo";
-            this.panelRepo.Size = new System.Drawing.Size(906, 12);
+            this.panelRepo.Size = new System.Drawing.Size(906, 353);
             this.panelRepo.TabIndex = 16;
             // 
             // panel22
@@ -553,7 +553,7 @@
             this.panel22.Controls.Add(this.pictureBox6);
             this.panel22.Controls.Add(this.btn_repoExpandAll);
             this.panel22.Controls.Add(this.btn_checkRepo);
-            this.panel22.Location = new System.Drawing.Point(784, -333);
+            this.panel22.Location = new System.Drawing.Point(784, 8);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(116, 326);
             this.panel22.TabIndex = 28;
@@ -666,7 +666,7 @@
             this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel19.Controls.Add(this.panel20);
             this.panel19.Controls.Add(this.panel21);
-            this.panel19.Location = new System.Drawing.Point(15, -333);
+            this.panel19.Location = new System.Drawing.Point(15, 8);
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(764, 326);
             this.panel19.TabIndex = 18;
@@ -693,37 +693,37 @@
             this.trv_repoContent.LineColor = System.Drawing.Color.Gainsboro;
             this.trv_repoContent.Location = new System.Drawing.Point(8, 8);
             this.trv_repoContent.Name = "trv_repoContent";
-            treeNode1.ImageIndex = -2;
-            treeNode1.Name = "Node0";
-            treeNode1.SelectedImageIndex = -2;
-            treeNode1.Text = "Node0";
-            treeNode2.ImageIndex = 1;
-            treeNode2.Name = "Node2";
-            treeNode2.SelectedImageIndex = 1;
-            treeNode2.Text = "Node2";
-            treeNode3.ImageIndex = 2;
-            treeNode3.Name = "Node3";
-            treeNode3.SelectedImageIndex = 2;
-            treeNode3.Text = "Node3";
-            treeNode4.ImageIndex = 3;
-            treeNode4.Name = "Node0";
-            treeNode4.SelectedImageIndex = 3;
-            treeNode4.Text = "Node0";
-            treeNode5.ImageIndex = 4;
-            treeNode5.Name = "Node1";
-            treeNode5.SelectedImageIndex = 4;
-            treeNode5.Text = "Node1";
-            treeNode6.ImageIndex = 5;
-            treeNode6.Name = "Node2";
-            treeNode6.SelectedImageIndex = 5;
-            treeNode6.Text = "Node2";
+            treeNode7.ImageIndex = -2;
+            treeNode7.Name = "Node0";
+            treeNode7.SelectedImageIndex = -2;
+            treeNode7.Text = "Node0";
+            treeNode8.ImageIndex = 1;
+            treeNode8.Name = "Node2";
+            treeNode8.SelectedImageIndex = 1;
+            treeNode8.Text = "Node2";
+            treeNode9.ImageIndex = 2;
+            treeNode9.Name = "Node3";
+            treeNode9.SelectedImageIndex = 2;
+            treeNode9.Text = "Node3";
+            treeNode10.ImageIndex = 3;
+            treeNode10.Name = "Node0";
+            treeNode10.SelectedImageIndex = 3;
+            treeNode10.Text = "Node0";
+            treeNode11.ImageIndex = 4;
+            treeNode11.Name = "Node1";
+            treeNode11.SelectedImageIndex = 4;
+            treeNode11.Text = "Node1";
+            treeNode12.ImageIndex = 5;
+            treeNode12.Name = "Node2";
+            treeNode12.SelectedImageIndex = 5;
+            treeNode12.Text = "Node2";
             this.trv_repoContent.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6});
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12});
             this.trv_repoContent.SelectedImageIndex = 0;
             this.trv_repoContent.ShowRootLines = false;
             this.trv_repoContent.Size = new System.Drawing.Size(746, 285);
@@ -779,7 +779,7 @@
             this.btn_opencloseDirPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btn_opencloseDirPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_opencloseDirPanel.Image = global::arma3Launcher.Properties.Resources.chevron_down;
-            this.btn_opencloseDirPanel.Location = new System.Drawing.Point(445, -5);
+            this.btn_opencloseDirPanel.Location = new System.Drawing.Point(445, 336);
             this.btn_opencloseDirPanel.Name = "btn_opencloseDirPanel";
             this.btn_opencloseDirPanel.Size = new System.Drawing.Size(16, 16);
             this.btn_opencloseDirPanel.TabIndex = 29;
@@ -790,7 +790,7 @@
             // 
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pictureBox2.Image = global::arma3Launcher.Properties.Resources.sep_topbar;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 85);
+            this.pictureBox2.Location = new System.Drawing.Point(0, 426);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(906, 5);
             this.pictureBox2.TabIndex = 14;

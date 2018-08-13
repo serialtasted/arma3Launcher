@@ -27,7 +27,7 @@ namespace arma3Launcher.Windows
             InitializeComponent();
             aLooker = new AddonsLooker(chbl_repoContent);
             windowIO = new WindowIO(this);
-            repoBuilder = new BuildRepo(chbl_repoContent, lbl_buildStatus, prgb_repoBuild, buildLog, windowIO, btn_buildRepo);
+            repoBuilder = new BuildRepo(chbl_repoContent, lbl_buildStatus, prgb_repoBuild, buildLog, windowIO, btn_buildRepo, chb_checkAll);
 
             if (Properties.Settings.Default.RepoFolder != string.Empty)
             { txtb_repoLocation.ForeColor = Color.FromArgb(64, 64, 64); txtb_repoLocation.Text = Properties.Settings.Default.RepoFolder; GetAddons(); }

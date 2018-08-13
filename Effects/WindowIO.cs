@@ -42,7 +42,7 @@ namespace arma3Launcher.Effects
                 formObject.Location = new Point(formObject.Location.X, formObject.Location.Y + 1);
             }
             else
-            { effectOut.Stop(); if (closeEnd) { formObject.Close(); } else { formObject.WindowState = FormWindowState.Minimized; } }
+            { effectOut.Stop(); if (closeEnd) { if (formObject != Application.OpenForms[0]) { formObject.Close(); } else { Application.Exit(); } } else { formObject.WindowState = FormWindowState.Minimized; } }
         }
 
         public void windowIn ()

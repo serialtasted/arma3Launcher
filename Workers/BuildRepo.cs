@@ -20,6 +20,7 @@ namespace arma3Launcher.Workers
         private TextBox buildLog;
         private WindowIO windowIO;
         private Button buildBtn;
+        private CheckBox checkBtn;
 
         private bool isBuilding = false;
         private bool isCancel = false;
@@ -81,7 +82,7 @@ namespace arma3Launcher.Workers
             }
         }
 
-        public BuildRepo (CheckedListBox addonsList, Label progressText, Windows7ProgressBar progressFile, TextBox buildLog, WindowIO windowIO, Button buildBtn)
+        public BuildRepo (CheckedListBox addonsList, Label progressText, Windows7ProgressBar progressFile, TextBox buildLog, WindowIO windowIO, Button buildBtn, CheckBox checkBtn)
         {
             this.repoReader = new RepoReader();
 
@@ -91,6 +92,7 @@ namespace arma3Launcher.Workers
             this.buildLog = buildLog;
             this.windowIO = windowIO;
             this.buildBtn = buildBtn;
+            this.checkBtn = checkBtn;
 
             this.builder.DoWork += Builder_DoWork;
             this.builder.RunWorkerCompleted += Builder_RunWorkerCompleted;
@@ -197,6 +199,7 @@ namespace arma3Launcher.Workers
         {
             this.isBuilding = false;
             this.buildBtn.Enabled = true;
+            this.checkBtn.Enabled = true;
 
             if (e.Cancelled)
             {
@@ -227,6 +230,7 @@ namespace arma3Launcher.Workers
             this.progressBarFileValue(0);
 
             this.buildBtn.Enabled = false;
+            this.checkBtn.Enabled = false;
             builder.RunWorkerAsync();
         }
 

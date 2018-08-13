@@ -307,17 +307,24 @@ namespace arma3Launcher
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!installer.isInstalling())
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                SaveSettings();
-                GC.Collect();
-            }
-            else
-            {
-                if (MessageBox.Show("The launcher is installing the addons. Do you want to cancel the process and leave?", "Installing addons", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                    e.Cancel = true;
+                if (GlobalVar.isDownloading)
+                {
+                    if (MessageBox.Show("Are you sure you want to stop the download?", "Stop download progress?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        e.Cancel = true;
+                }
+                else if (GlobalVar.isInstalling)
+                {
+                    if (MessageBox.Show("The launcher is installing the addons. Do you want to cancel the process and leave?", "Installing addons", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                        e.Cancel = true;
+                }
                 else
-                { SaveSettings(); GC.Collect(); }
+                {
+                    SaveSettings(); GC.Collect();
+                    windowIO.windowOut(true);
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -869,25 +876,12 @@ namespace arma3Launcher
         #region System Buttons
         private void sysbtn_close_Click(object sender, EventArgs e)
         {
-            if (GlobalVar.isDownloading)
-            {
-                if (MessageBox.Show("Are you sure you want to stop the download?", "Stop download progress?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    windowIO.windowOut(true);
-
-            }
-            else if (GlobalVar.isInstalling)
-            {
-                MessageBox.Show("One does not simply stop the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                windowIO.windowOut(true);
-            }
+            this.Close();
         }
 
         private void sysbtn_minimize_Click(object sender, EventArgs e)
         {
-            minimizeWindow();
+            this.minimizeWindow();
         }
 
         private void sysbtn_moreOptions_Click(object sender, EventArgs e)

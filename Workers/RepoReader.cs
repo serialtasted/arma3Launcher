@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -154,13 +155,13 @@ namespace arma3Launcher.Workers
             TreeNode lastNode = null;
             string subPathAgg;
             string fileHash = String.Empty;
-            DateTime fileEdit;
+            long fileEdit = 0;
             int a = 0;
             int i;
             foreach (string path in paths)
             {
                 fileHash = fHash[a];
-                fileEdit = DateTime.Parse(fEdit[a]);
+                fileEdit = Convert.ToInt64(fEdit[a]);
                 subPathAgg = string.Empty;
                 i = 0;
                 foreach (string subPath in path.Split(pathSeparator))
@@ -191,14 +192,15 @@ namespace arma3Launcher.Workers
             }
         }
 
-        private void ValidateFile(string remoteFile, string fullPath, TreeNode node, string remoteFileHash, DateTime fileEdit)
+        private void ValidateFile(string remoteFile, string fullPath, TreeNode node, string remoteFileHash, long fileEdit)
         {
             bool invalidFile = false;
 
             if (File.Exists(AddonsFolder + fullPath))
             {
-                string localfileHash = CalculateFileHash(AddonsFolder + fullPath);
-                DateTime localfileEdit =  File.GetLastWriteTime(AddonsFolder + fullPath);
+                string item = AddonsFolder + fullPath;
+                string localfileHash = CalculateFileHash(item);
+                long localfileEdit =  Convert.ToInt64(string.Format("{2:0000}{1:00}{0:00}{3:00}{4:00}{5:00}", File.GetLastWriteTime(item).Day, File.GetLastWriteTime(item).Month, File.GetLastWriteTime(item).Year, File.GetLastWriteTime(item).Hour, File.GetLastWriteTime(item).Minute, File.GetLastWriteTime(item).Second));
 
                 if (localfileHash == remoteFileHash && localfileEdit > fileEdit)
                 {

@@ -19,6 +19,7 @@ namespace arma3Launcher.Workers
         private Windows7ProgressBar progressFile;
         private TextBox buildLog;
         private WindowIO windowIO;
+        private Button buildBtn;
 
         private bool isBuilding = false;
         private bool isCancel = false;
@@ -80,7 +81,7 @@ namespace arma3Launcher.Workers
             }
         }
 
-        public BuildRepo (CheckedListBox addonsList, Label progressText, Windows7ProgressBar progressFile, TextBox buildLog, WindowIO windowIO)
+        public BuildRepo (CheckedListBox addonsList, Label progressText, Windows7ProgressBar progressFile, TextBox buildLog, WindowIO windowIO, Button buildBtn)
         {
             this.repoReader = new RepoReader();
 
@@ -89,6 +90,7 @@ namespace arma3Launcher.Workers
             this.progressFile = progressFile;
             this.buildLog = buildLog;
             this.windowIO = windowIO;
+            this.buildBtn = buildBtn;
 
             this.builder.DoWork += Builder_DoWork;
             this.builder.RunWorkerCompleted += Builder_RunWorkerCompleted;
@@ -153,7 +155,7 @@ namespace arma3Launcher.Workers
 
                             byte[] file = new UTF8Encoding(true).GetBytes(
                                 repoReader.CalculateFileHash(item) + "*" +
-                                File.GetLastWriteTime(item) + "*" +
+                                string.Format("{2:0000}{1:00}{0:00}{3:00}{4:00}{5:00}", File.GetLastWriteTime(item).Day, File.GetLastWriteTime(item).Month, File.GetLastWriteTime(item).Year, File.GetLastWriteTime(item).Hour, File.GetLastWriteTime(item).Minute, File.GetLastWriteTime(item).Second) + "*" +
                                 item.Remove(0, repoPath.Length)
                             );
                             fs.Write(file, 0, file.Length);
@@ -194,6 +196,7 @@ namespace arma3Launcher.Workers
         private void Builder_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.isBuilding = false;
+            this.buildBtn.Enabled = true;
 
             if (e.Cancelled)
             {
@@ -223,6 +226,7 @@ namespace arma3Launcher.Workers
             this.buildLogText("Started building process...");
             this.progressBarFileValue(0);
 
+            this.buildBtn.Enabled = false;
             builder.RunWorkerAsync();
         }
 

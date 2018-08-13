@@ -869,7 +869,20 @@ namespace arma3Launcher
         #region System Buttons
         private void sysbtn_close_Click(object sender, EventArgs e)
         {
-            windowIO.windowOut(true);
+            if (GlobalVar.isDownloading)
+            {
+                if (MessageBox.Show("Are you sure you want to stop the download?", "Stop download progress?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    windowIO.windowOut(true);
+
+            }
+            else if (GlobalVar.isInstalling)
+            {
+                MessageBox.Show("One does not simply stop the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                windowIO.windowOut(true);
+            }
         }
 
         private void sysbtn_minimize_Click(object sender, EventArgs e)
@@ -1767,10 +1780,10 @@ namespace arma3Launcher
                 if (MessageBox.Show("Are you sure you want to stop the download?", "Stop download progress?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     downloader.cancelDownload();
             }
-
-            if (GlobalVar.isInstalling)
+            else if (GlobalVar.isInstalling)
             {
                 MessageBox.Show("One does not simply stop the installation process.", "You can't stop me now!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             }
         }
 

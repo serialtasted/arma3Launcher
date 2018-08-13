@@ -186,81 +186,89 @@ namespace arma3Launcher
             if (GlobalVar.isServer) { WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion + " | Server Edition"; }
             else { WindowTitle.Text = AssemblyTitle + " | v" + AssemblyVersion; }
 
-            // Change stuff if isServer
-            if (GlobalVar.isServer)
+            if (!remoteReader.isLauncherLocked() || GlobalVar.isDebug)
             {
-                pref_switchclientserver.Text = "Switch to Client Mode";
-                panel_steamAddons.Visible = false;
-                panel_serverOptions.Visible = true;
-                panel_headlessOptions.Visible = true;
-                pref_joinServerAuto.Visible = false;
-                pref_joinTsServerAuto.Visible = false;
-                btn_reinstallTFRPlugins.Visible = false;
-                pref_serverAutopilot.Visible = true;
-                chb_battleye.Enabled = false;
-                btn_addonManager.Visible = true;
-
-                pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
-
-                cb_clientProfile.Enabled = false;
-                lbl_clientProfile.Enabled = false;
-
-                foreach (Control control in panel_TeamSpeakDir.Controls)
+                // Change stuff if isServer
+                if (GlobalVar.isServer)
                 {
-                    control.Visible = false;
+                    pref_switchclientserver.Text = "Switch to Client Mode";
+                    panel_steamAddons.Visible = false;
+                    panel_serverOptions.Visible = true;
+                    panel_headlessOptions.Visible = true;
+                    pref_joinServerAuto.Visible = false;
+                    pref_joinTsServerAuto.Visible = false;
+                    btn_reinstallTFRPlugins.Visible = false;
+                    pref_serverAutopilot.Visible = true;
+                    chb_battleye.Enabled = false;
+                    btn_addonManager.Visible = true;
+
+                    pref_startGameAfterDownloadsAreCompleted.Text = "Start server when ready";
+
+                    cb_clientProfile.Enabled = false;
+                    lbl_clientProfile.Enabled = false;
+
+                    foreach (Control control in panel_TeamSpeakDir.Controls)
+                    {
+                        control.Visible = false;
+                    }
+
+                    if (!Properties.Settings.Default.firstLaunch)
+                        if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
+                            switchAutopilot(true);
+                        else
+                            switchAutopilot(false);
+
                 }
 
-                if (!Properties.Settings.Default.firstLaunch)
-                    if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
-                        switchAutopilot(true);
+                if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
+                {
+                    menuSelected = 4;
+                    HideUnhide(menuSelected);
+
+                    panelLaunch.Enabled = false;
+                    sysbtn_moreOptions.Visible = false;
+
+                    aboutPanelIO = new PanelIO(panel_about, Panels, 435, 437, 33);
+
+                    activeButton = btn_update;
+                    backgroundBlinker.RunWorkerAsync();
+
+                    isUpdate = true;
+                }
+                else if (Properties.Settings.Default.firstLaunch)
+                {
+                    if (GlobalVar.isServer) { pref_startGameAfterDownloadsAreCompleted.Checked = true; }
+
+                    menuSelected = 3;
+                    HideUnhide(menuSelected);
+                }
+                else
+                {
+                    menuSelected = 0;
+                    HideUnhide(menuSelected);
+                }
+
+                this.GetMalloc();
+                this.MachineSettings();
+                this.FetchSettings();
+
+                if (!isUpdate)
+                {
+                    updateCurrentPack(true);
+
+                    if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
+                        btn_reinstallTFRPlugins.Enabled = true;
                     else
-                        switchAutopilot(false);
+                        btn_reinstallTFRPlugins.Enabled = false;
+                }
 
-            }
-
-            if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
-            {
-                menuSelected = 4;
-                HideUnhide(menuSelected);
-
-                panelLaunch.Enabled = false;
-                sysbtn_moreOptions.Visible = false;
-
-                aboutPanelIO = new PanelIO(panel_about, Panels, 435, 437, 33);
-
-                activeButton = btn_update;
-                backgroundBlinker.RunWorkerAsync();
-
-                isUpdate = true;
-            }
-            else if (Properties.Settings.Default.firstLaunch)
-            {
-                if (GlobalVar.isServer) { pref_startGameAfterDownloadsAreCompleted.Checked = true; }
-
-                menuSelected = 3;
-                HideUnhide(menuSelected);
+                UpdateMethod.CheckUpdates();
             }
             else
             {
-                menuSelected = 0;
-                HideUnhide(menuSelected);
+                MessageBox.Show("To prevent the loss of data the launcher has been locked.\n\nOnce all the needed maintenance is done it'll be unlocked.\n\nPlease try again later.", "Launcher locked!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Process.GetCurrentProcess().Kill();
             }
-
-            this.GetMalloc();
-            this.MachineSettings();
-            this.FetchSettings();
-
-            if (!isUpdate)
-            {
-                updateCurrentPack(true);
-
-                if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
-                    btn_reinstallTFRPlugins.Enabled = true;
-                else
-                    btn_reinstallTFRPlugins.Enabled = false;
-            }
-
-            UpdateMethod.CheckUpdates();
 
             loadingSplash.Close();
         }
@@ -769,7 +777,7 @@ namespace arma3Launcher
                     keepGoing = false;
 
                     MessageBoxButtons msgOptions = MessageBoxButtons.RetryCancel;
-                    if (Debugger.IsAttached)
+                    if (GlobalVar.isDebug)
                         msgOptions = MessageBoxButtons.AbortRetryIgnore;
 
                     switch (MessageBox.Show(ex.Message, "Unable to fetch remote settings", msgOptions, MessageBoxIcon.Warning))

@@ -17,6 +17,7 @@ namespace arma3Launcher.Workers
         private string AddonsFolder = string.Empty;
 
         private List<string> modsHash = new List<string>();
+        private List<string> modsEdit = new List<string>();
         private List<string> modsList = new List<string>();
 
         private int filesOK;
@@ -63,17 +64,26 @@ namespace arma3Launcher.Workers
                 string s = string.Empty;
                 while ((s = sr.ReadLine()) != null)
                 {
-                    modsHash.Add(s.Split('*')[0]);
-                    modsList.Add(s.Split('*')[1]);
+                    try
+                    {
+                        modsHash.Add(s.Split('*')[0]);
+                        modsEdit.Add(s.Split('*')[1]);
+                        modsList.Add(s.Split('*')[2]);
+                    }
+                    catch // legacy
+                    {
+                        modsHash.Add(s.Split('*')[0]);
+                        modsList.Add(s.Split('*')[1]);
+                    }
                 }
 
                 repoTreeView.PathSeparator = "\\";
-                PopulateTreeView(repoTreeView, modsList, modsHash, '\\');
+                PopulateTreeView(repoTreeView, modsList, modsHash, '\\', modsEdit);
                 repoTreeView.Sort();
             }
 
             // checks if repofile is different from last time
-            if (IsFileDifferent(repoFile) && this.needsUpdate == string.Empty) { this.needsUpdate = "validation"; }
+            if (IsRepoDifferent(repoFile) && this.needsUpdate == string.Empty) { this.needsUpdate = "validation"; }
 
             if (Directory.Exists(TempFolder))
                 Directory.Delete(TempFolder, true);
@@ -87,7 +97,7 @@ namespace arma3Launcher.Workers
             return needsUpdate;
         }
 
-        public bool IsFileDifferent(string repoFile)
+        public bool IsRepoDifferent(string repoFile)
         {
             if (this.CalculateFileHash(repoFile) != Properties.Settings.Default.LastRepoFileHash)
                 return true;
@@ -126,7 +136,7 @@ namespace arma3Launcher.Workers
             // - compute hash during file download
             // - file validation compares hash with remote catalog
 
-            /*using (var crypt = MD5.Create())
+            /*
             {
                 using(var stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
@@ -139,16 +149,18 @@ namespace arma3Launcher.Workers
             return Convert.ToString(fInfo.Length);
         }
 
-        private void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, List<string> fHash, char pathSeparator)
+        private void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, List<string> fHash, char pathSeparator, List<string> fEdit)
         {
             TreeNode lastNode = null;
             string subPathAgg;
             string fileHash = String.Empty;
+            DateTime fileEdit;
             int a = 0;
             int i;
             foreach (string path in paths)
             {
                 fileHash = fHash[a];
+                fileEdit = DateTime.Parse(fEdit[a]);
                 subPathAgg = string.Empty;
                 i = 0;
                 foreach (string subPath in path.Split(pathSeparator))
@@ -170,7 +182,7 @@ namespace arma3Launcher.Workers
                     if (subPathAgg.EndsWith("\\"))
                         ValidateFolder(subPath, subPathAgg, lastNode);
                     else
-                        ValidateFile(subPath, subPathAgg, lastNode, fileHash);
+                        ValidateFile(subPath, subPathAgg, lastNode, fileHash, fileEdit);
 
                     i++;
                 }
@@ -179,15 +191,16 @@ namespace arma3Launcher.Workers
             }
         }
 
-        private void ValidateFile(string remoteFile, string fullPath, TreeNode node, string remoteFileHash)
+        private void ValidateFile(string remoteFile, string fullPath, TreeNode node, string remoteFileHash, DateTime fileEdit)
         {
             bool invalidFile = false;
 
             if (File.Exists(AddonsFolder + fullPath))
             {
                 string localfileHash = CalculateFileHash(AddonsFolder + fullPath);
+                DateTime localfileEdit =  File.GetLastWriteTime(AddonsFolder + fullPath);
 
-                if (localfileHash == remoteFileHash)
+                if (localfileHash == remoteFileHash && localfileEdit > fileEdit)
                 {
                     node.ImageIndex = 0;
                     node.SelectedImageIndex = 0;

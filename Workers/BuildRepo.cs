@@ -118,6 +118,7 @@ namespace arma3Launcher.Workers
             stopWatch.Start();
 
             long filesCount = Directory.GetFiles(repoPath, "*", SearchOption.AllDirectories).LongLength;
+            int filesSelected = 0;
             int filesDone = 0;
             string[] items = new string[filesCount];
 
@@ -125,12 +126,18 @@ namespace arma3Launcher.Workers
 
             try
             {
+                foreach (string item in items)
+                {
+                    for (int i = 0; i < addonsList.CheckedItems.Count; i++)
+                    {
+                        if (addonsList.CheckedItems[i].ToString() == item.Remove(0, repoPath.Length).Split('\\')[0]) { filesSelected++; }
+                    }
+                }
+
                 using (FileStream fs = File.Create(repoPath + "repoList.a3l"))
                 {
                     foreach (string item in items)
                     {
-                        
-
                         bool addIt = false;
 
                         for (int i = 0; i < addonsList.CheckedItems.Count; i++)
@@ -138,28 +145,29 @@ namespace arma3Launcher.Workers
                             if (addonsList.CheckedItems[i].ToString() == item.Remove(0, repoPath.Length).Split('\\')[0]) { addIt = true; }
                         }
 
+
                         if (addIt)
                         {
                             int splitCount = item.Split('\\').Length;
                             this.buildLogText(Environment.NewLine + "Adding: " + item.Split('\\')[splitCount - 1]);
 
                             byte[] file = new UTF8Encoding(true).GetBytes(
-                                 repoReader.CalculateFileHash(item) +
-                                "*" +
+                                repoReader.CalculateFileHash(item) + "*" +
+                                File.GetLastWriteTime(item) + "*" +
                                 item.Remove(0, repoPath.Length)
                             );
                             fs.Write(file, 0, file.Length);
 
                             byte[] newline = Encoding.ASCII.GetBytes(Environment.NewLine);
                             fs.Write(newline, 0, newline.Length);
+
+                            filesDone++;
                         }
 
-                        this.progressBarFileValue(Convert.ToInt32(((double)filesDone / filesCount) * 100));
+                        this.progressBarFileValue(Convert.ToInt32(((double)filesDone / filesSelected) * 100));
 
                         if (this.builder.CancellationPending)
                         { e.Cancel = true; break; }
-
-                        filesDone++;
                     }
                 }
             }
@@ -177,7 +185,8 @@ namespace arma3Launcher.Workers
                 stopWatch.Stop();
 
                 this.buildLogText(Environment.NewLine);
-                this.buildLogText(Environment.NewLine + "Files added to catalog: " + filesDone + " of " + filesCount);
+                this.buildLogText(Environment.NewLine + "Files in repository folder: " + filesCount);
+                this.buildLogText(Environment.NewLine + "Files added to catalog: " + filesDone + " of " + filesSelected);
                 this.buildLogText(Environment.NewLine + "Catalog built in: " + elapsedTime);
             }
         }

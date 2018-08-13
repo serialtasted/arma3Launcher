@@ -17,6 +17,18 @@ namespace arma3Launcher.Workers
         }
 
         /// <summary>
+        /// Fetch if launcher is locked
+        /// </summary>
+        /// <returns>
+        /// Boolean value
+        /// </returns>
+        public bool isLauncherLocked()
+        {
+            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
+            return Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Lock").Attributes["enable"].Value);
+        }
+
+        /// <summary>
         /// Fetch TeamSpeak server info
         /// </summary>
         /// <returns>

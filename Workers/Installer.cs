@@ -274,7 +274,7 @@ namespace arma3Launcher.Workers
             this.installationRunning = true;
             GlobalVar.isInstalling = true;
 
-            if(repoReader.IsFileDifferent(repoReader.GetRepoFile()))
+            if(repoReader.IsRepoDifferent(repoReader.GetRepoFile()))
                 this.validateFiles.RunWorkerAsync();
             else
                 this.installFiles.RunWorkerAsync();

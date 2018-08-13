@@ -222,7 +222,7 @@ namespace arma3Launcher.Workers
             {
                 btn_Update.Enabled = false;
 
-                if (System.Diagnostics.Debugger.IsAttached)
+                if (GlobalVar.isDebug)
                     MessageBox.Show(AllEx.Message, "DEBUG MODE");
             }
             finally

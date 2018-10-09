@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm2));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
             this.imageListRepo = new System.Windows.Forms.ImageList(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
@@ -48,19 +48,66 @@
             this.repositorymenu_separator = new System.Windows.Forms.ToolStripSeparator();
             this.reloadRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlp_mallocSettings = new System.Windows.Forms.TableLayoutPanel();
+            this.cb_malloc = new MetroFramework.Controls.MetroComboBox();
+            this.btn_reloadMallocs = new System.Windows.Forms.PictureBox();
             this.win_mainWindow = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_sideMenu = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.doubleBufferFlowPanel1 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
+            this.doubleBufferPanel5 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.menu_addonPacks = new System.Windows.Forms.Label();
+            this.doubleBufferPanel6 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.doubleBufferPanel7 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.menu_launchOptions = new System.Windows.Forms.Label();
+            this.doubleBufferPanel8 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.doubleBufferPanel9 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.menu_repositoryDownloads = new System.Windows.Forms.Label();
+            this.img_repoBusy = new System.Windows.Forms.PictureBox();
+            this.doubleBufferPanel10 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.doubleBufferPanel11 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.menu_preferences = new System.Windows.Forms.Label();
             this.doubleBufferPanel4 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.menu_help = new System.Windows.Forms.Label();
             this.menu_about = new System.Windows.Forms.Label();
             this.txt_versionNumber = new System.Windows.Forms.Label();
-            this.img_repoBusy = new System.Windows.Forms.PictureBox();
-            this.menu_preferences = new System.Windows.Forms.Label();
-            this.menu_repositoryDownloads = new System.Windows.Forms.Label();
-            this.menu_launchOptions = new System.Windows.Forms.Label();
-            this.menu_addonPacks = new System.Windows.Forms.Label();
             this.panel_mainPanel = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_outterPanel = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel_preferences = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel_contentPreferences = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.flowLayoutPanel2 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
+            this.txt_pref_gamePrefrences = new System.Windows.Forms.Label();
+            this.chb_pref_startGame = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chb_pref_joinServer = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chb_pref_joinTSServer = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chb_pref_serverAutopilot = new MaterialSkin.Controls.MaterialCheckBox();
+            this.panel18 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.txt_pref_launcherPreferences = new System.Windows.Forms.Label();
+            this.chb_pref_disableAnimations = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chb_pref_runLauncherStartup = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chb_pref_allowNotifications = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chb_pref_autoDownload = new MaterialSkin.Controls.MaterialCheckBox();
+            this.chb_pref_serverMode = new MaterialSkin.Controls.MaterialCheckBox();
+            this.panel17 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel16 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel_TeamSpeakDir = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.btn_pref_ereaseTSDir = new System.Windows.Forms.PictureBox();
+            this.btn_pref_openTS3Dir = new System.Windows.Forms.PictureBox();
+            this.btn_pref_browseTS3Dir = new System.Windows.Forms.PictureBox();
+            this.txtb_pref_tsDirectory = new System.Windows.Forms.TextBox();
+            this.lbl_pref_TeamSpeakDir = new System.Windows.Forms.Label();
+            this.panel15 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.lbl_pref_AddonsDir = new System.Windows.Forms.Label();
+            this.btn_pref_ereaseAddonsDir = new System.Windows.Forms.PictureBox();
+            this.btn_pref_openAddonsDir = new System.Windows.Forms.PictureBox();
+            this.btn_pref_browseAddonsDir = new System.Windows.Forms.PictureBox();
+            this.txtb_pref_addonsDirectory = new System.Windows.Forms.TextBox();
+            this.panel_Arma3Dir = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.btn_pref_openA3Dir = new System.Windows.Forms.PictureBox();
+            this.btn_pref_browseA3Dir = new System.Windows.Forms.PictureBox();
+            this.btn_pref_ereaseArmaDir = new System.Windows.Forms.PictureBox();
+            this.lbl_pref_Arma3Dir = new System.Windows.Forms.Label();
+            this.txtb_pref_armaDirectory = new System.Windows.Forms.TextBox();
+            this.lbl_preferences = new System.Windows.Forms.Label();
             this.panel_repositoryDownloads = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_contentRepositoryDownloads = new arma3Launcher.Controls.DoubleBufferPanel();
             this.trv_repoContent = new arma3Launcher.Controls.DoubleBufferTreeView();
@@ -160,66 +207,43 @@
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.btn_reinstallTFRPlugins = new MaterialSkin.Controls.MaterialFlatButton();
             this.lbl_addonOptions = new System.Windows.Forms.Label();
-            this.panel_preferences = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.panel_contentPreferences = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.flowLayoutPanel2 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
-            this.txt_pref_gamePrefrences = new System.Windows.Forms.Label();
-            this.chb_pref_startGame = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chb_pref_joinServer = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chb_pref_joinTSServer = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chb_pref_serverAutopilot = new MaterialSkin.Controls.MaterialCheckBox();
-            this.panel18 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.txt_pref_launcherPreferences = new System.Windows.Forms.Label();
-            this.chb_pref_runLauncherStartup = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chb_pref_allowNotifications = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chb_pref_autoDownload = new MaterialSkin.Controls.MaterialCheckBox();
-            this.chb_pref_serverMode = new MaterialSkin.Controls.MaterialCheckBox();
-            this.panel17 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.panel16 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.panel_TeamSpeakDir = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.btn_pref_ereaseTSDir = new System.Windows.Forms.PictureBox();
-            this.btn_pref_openTS3Dir = new System.Windows.Forms.PictureBox();
-            this.btn_pref_browseTS3Dir = new System.Windows.Forms.PictureBox();
-            this.txtb_pref_tsDirectory = new System.Windows.Forms.TextBox();
-            this.lbl_pref_TeamSpeakDir = new System.Windows.Forms.Label();
-            this.panel15 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.lbl_pref_AddonsDir = new System.Windows.Forms.Label();
-            this.btn_pref_ereaseAddonsDir = new System.Windows.Forms.PictureBox();
-            this.btn_pref_openAddonsDir = new System.Windows.Forms.PictureBox();
-            this.btn_pref_browseAddonsDir = new System.Windows.Forms.PictureBox();
-            this.txtb_pref_addonsDirectory = new System.Windows.Forms.TextBox();
-            this.panel_Arma3Dir = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.btn_pref_openA3Dir = new System.Windows.Forms.PictureBox();
-            this.btn_pref_browseA3Dir = new System.Windows.Forms.PictureBox();
-            this.btn_pref_ereaseArmaDir = new System.Windows.Forms.PictureBox();
-            this.lbl_pref_Arma3Dir = new System.Windows.Forms.Label();
-            this.txtb_pref_armaDirectory = new System.Windows.Forms.TextBox();
-            this.lbl_preferences = new System.Windows.Forms.Label();
             this.win_titleBar = new arma3Launcher.Controls.DoubleBufferPanel();
             this.WindowTitle = new System.Windows.Forms.Label();
             this.btn_windowMenu = new System.Windows.Forms.PictureBox();
             this.btn_windowClose = new System.Windows.Forms.PictureBox();
             this.btn_windowMinimize = new System.Windows.Forms.PictureBox();
-            this.tlp_mallocSettings = new System.Windows.Forms.TableLayoutPanel();
-            this.cb_malloc = new MetroFramework.Controls.MetroComboBox();
-            this.btn_reloadMallocs = new System.Windows.Forms.PictureBox();
-            this.doubleBufferFlowPanel1 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
-            this.doubleBufferPanel5 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel6 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel7 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel8 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel9 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel10 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel11 = new arma3Launcher.Controls.DoubleBufferPanel();
             ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.flowAddonsMenu.SuspendLayout();
             this.repositoryMenu.SuspendLayout();
+            this.tlp_mallocSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).BeginInit();
             this.win_mainWindow.SuspendLayout();
             this.panel_sideMenu.SuspendLayout();
-            this.doubleBufferPanel4.SuspendLayout();
+            this.doubleBufferFlowPanel1.SuspendLayout();
+            this.doubleBufferPanel5.SuspendLayout();
+            this.doubleBufferPanel7.SuspendLayout();
+            this.doubleBufferPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.img_repoBusy)).BeginInit();
+            this.doubleBufferPanel11.SuspendLayout();
+            this.doubleBufferPanel4.SuspendLayout();
             this.panel_mainPanel.SuspendLayout();
             this.panel_outterPanel.SuspendLayout();
+            this.panel_preferences.SuspendLayout();
+            this.panel_contentPreferences.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.panel16.SuspendLayout();
+            this.panel_TeamSpeakDir.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseTSDir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openTS3Dir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseTS3Dir)).BeginInit();
+            this.panel15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseAddonsDir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openAddonsDir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseAddonsDir)).BeginInit();
+            this.panel_Arma3Dir.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openA3Dir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseA3Dir)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseArmaDir)).BeginInit();
             this.panel_repositoryDownloads.SuspendLayout();
             this.panel_contentRepositoryDownloads.SuspendLayout();
             this.panel_repoBottom.SuspendLayout();
@@ -247,33 +271,10 @@
             this.doubleBufferPanel2.SuspendLayout();
             this.flowpanel_steamworkshopAddonsList.SuspendLayout();
             this.doubleBufferPanel3.SuspendLayout();
-            this.panel_preferences.SuspendLayout();
-            this.panel_contentPreferences.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel_TeamSpeakDir.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseTSDir)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openTS3Dir)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseTS3Dir)).BeginInit();
-            this.panel15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseAddonsDir)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openAddonsDir)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseAddonsDir)).BeginInit();
-            this.panel_Arma3Dir.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openA3Dir)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseA3Dir)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseArmaDir)).BeginInit();
             this.win_titleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMinimize)).BeginInit();
-            this.tlp_mallocSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).BeginInit();
-            this.doubleBufferFlowPanel1.SuspendLayout();
-            this.doubleBufferPanel5.SuspendLayout();
-            this.doubleBufferPanel7.SuspendLayout();
-            this.doubleBufferPanel9.SuspendLayout();
-            this.doubleBufferPanel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageListRepo
@@ -377,6 +378,53 @@
             this.manageRepositoryToolStripMenuItem.Text = "Manage repository";
             this.manageRepositoryToolStripMenuItem.Click += new System.EventHandler(this.manageRepositoryToolStripMenuItem_Click);
             // 
+            // tlp_mallocSettings
+            // 
+            this.tlp_mallocSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlp_mallocSettings.ColumnCount = 2;
+            this.tlp_mallocSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96.81416F));
+            this.tlp_mallocSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.185841F));
+            this.tlp_mallocSettings.Controls.Add(this.cb_malloc, 0, 0);
+            this.tlp_mallocSettings.Controls.Add(this.btn_reloadMallocs, 1, 0);
+            this.tlp_mallocSettings.Location = new System.Drawing.Point(129, 209);
+            this.tlp_mallocSettings.Margin = new System.Windows.Forms.Padding(3, 0, 8, 3);
+            this.tlp_mallocSettings.Name = "tlp_mallocSettings";
+            this.tlp_mallocSettings.RowCount = 1;
+            this.tlp_mallocSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlp_mallocSettings.Size = new System.Drawing.Size(548, 29);
+            this.tlp_mallocSettings.TabIndex = 17;
+            // 
+            // cb_malloc
+            // 
+            this.cb_malloc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_malloc.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.cb_malloc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cb_malloc.Enabled = false;
+            this.cb_malloc.Font = new System.Drawing.Font("Lato", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_malloc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.cb_malloc.FormattingEnabled = true;
+            this.cb_malloc.ItemHeight = 23;
+            this.cb_malloc.Location = new System.Drawing.Point(0, 0);
+            this.cb_malloc.Margin = new System.Windows.Forms.Padding(0);
+            this.cb_malloc.Name = "cb_malloc";
+            this.cb_malloc.Size = new System.Drawing.Size(530, 29);
+            this.cb_malloc.Style = MetroFramework.MetroColorStyle.Lime;
+            this.cb_malloc.TabIndex = 17;
+            this.cb_malloc.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.cb_malloc.UseSelectable = true;
+            // 
+            // btn_reloadMallocs
+            // 
+            this.btn_reloadMallocs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_reloadMallocs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_reloadMallocs.Location = new System.Drawing.Point(532, 7);
+            this.btn_reloadMallocs.Margin = new System.Windows.Forms.Padding(0, 7, 0, 3);
+            this.btn_reloadMallocs.Name = "btn_reloadMallocs";
+            this.btn_reloadMallocs.Size = new System.Drawing.Size(16, 16);
+            this.btn_reloadMallocs.TabIndex = 18;
+            this.btn_reloadMallocs.TabStop = false;
+            // 
             // win_mainWindow
             // 
             this.win_mainWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -402,6 +450,175 @@
             this.panel_sideMenu.Size = new System.Drawing.Size(300, 670);
             this.panel_sideMenu.TabIndex = 1;
             // 
+            // doubleBufferFlowPanel1
+            // 
+            this.doubleBufferFlowPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel5);
+            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel6);
+            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel7);
+            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel8);
+            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel9);
+            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel10);
+            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel11);
+            this.doubleBufferFlowPanel1.Location = new System.Drawing.Point(0, 0);
+            this.doubleBufferFlowPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.doubleBufferFlowPanel1.Name = "doubleBufferFlowPanel1";
+            this.doubleBufferFlowPanel1.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
+            this.doubleBufferFlowPanel1.Size = new System.Drawing.Size(300, 599);
+            this.doubleBufferFlowPanel1.TabIndex = 11;
+            // 
+            // doubleBufferPanel5
+            // 
+            this.doubleBufferPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doubleBufferPanel5.Controls.Add(this.menu_addonPacks);
+            this.doubleBufferPanel5.Location = new System.Drawing.Point(0, 20);
+            this.doubleBufferPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.doubleBufferPanel5.MaximumSize = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel5.MinimumSize = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel5.Name = "doubleBufferPanel5";
+            this.doubleBufferPanel5.Size = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel5.TabIndex = 0;
+            // 
+            // menu_addonPacks
+            // 
+            this.menu_addonPacks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.menu_addonPacks.AutoSize = true;
+            this.menu_addonPacks.BackColor = System.Drawing.Color.Transparent;
+            this.menu_addonPacks.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_addonPacks.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.menu_addonPacks.Location = new System.Drawing.Point(10, 1);
+            this.menu_addonPacks.Name = "menu_addonPacks";
+            this.menu_addonPacks.Size = new System.Drawing.Size(122, 28);
+            this.menu_addonPacks.TabIndex = 2;
+            this.menu_addonPacks.Text = "Addon Packs";
+            this.menu_addonPacks.Click += new System.EventHandler(this.menu_addonPacks_Click);
+            this.menu_addonPacks.MouseEnter += new System.EventHandler(this.menu_addonPacks_MouseEnter);
+            this.menu_addonPacks.MouseLeave += new System.EventHandler(this.menu_addonPacks_MouseLeave);
+            // 
+            // doubleBufferPanel6
+            // 
+            this.doubleBufferPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doubleBufferPanel6.BackColor = System.Drawing.Color.DimGray;
+            this.doubleBufferPanel6.Location = new System.Drawing.Point(15, 55);
+            this.doubleBufferPanel6.Margin = new System.Windows.Forms.Padding(15, 5, 15, 5);
+            this.doubleBufferPanel6.Name = "doubleBufferPanel6";
+            this.doubleBufferPanel6.Size = new System.Drawing.Size(270, 1);
+            this.doubleBufferPanel6.TabIndex = 11;
+            // 
+            // doubleBufferPanel7
+            // 
+            this.doubleBufferPanel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doubleBufferPanel7.Controls.Add(this.menu_launchOptions);
+            this.doubleBufferPanel7.Location = new System.Drawing.Point(0, 61);
+            this.doubleBufferPanel7.Margin = new System.Windows.Forms.Padding(0);
+            this.doubleBufferPanel7.MaximumSize = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel7.MinimumSize = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel7.Name = "doubleBufferPanel7";
+            this.doubleBufferPanel7.Size = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel7.TabIndex = 12;
+            // 
+            // menu_launchOptions
+            // 
+            this.menu_launchOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.menu_launchOptions.AutoSize = true;
+            this.menu_launchOptions.BackColor = System.Drawing.Color.Transparent;
+            this.menu_launchOptions.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_launchOptions.Location = new System.Drawing.Point(10, 1);
+            this.menu_launchOptions.Name = "menu_launchOptions";
+            this.menu_launchOptions.Size = new System.Drawing.Size(143, 28);
+            this.menu_launchOptions.TabIndex = 3;
+            this.menu_launchOptions.Text = "Launch Options";
+            this.menu_launchOptions.Click += new System.EventHandler(this.menu_launchOptions_Click);
+            this.menu_launchOptions.MouseEnter += new System.EventHandler(this.menu_launchOptions_MouseEnter);
+            this.menu_launchOptions.MouseLeave += new System.EventHandler(this.menu_launchOptions_MouseLeave);
+            // 
+            // doubleBufferPanel8
+            // 
+            this.doubleBufferPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doubleBufferPanel8.BackColor = System.Drawing.Color.DimGray;
+            this.doubleBufferPanel8.Location = new System.Drawing.Point(15, 96);
+            this.doubleBufferPanel8.Margin = new System.Windows.Forms.Padding(15, 5, 15, 5);
+            this.doubleBufferPanel8.Name = "doubleBufferPanel8";
+            this.doubleBufferPanel8.Size = new System.Drawing.Size(270, 1);
+            this.doubleBufferPanel8.TabIndex = 13;
+            // 
+            // doubleBufferPanel9
+            // 
+            this.doubleBufferPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doubleBufferPanel9.Controls.Add(this.menu_repositoryDownloads);
+            this.doubleBufferPanel9.Controls.Add(this.img_repoBusy);
+            this.doubleBufferPanel9.Location = new System.Drawing.Point(0, 102);
+            this.doubleBufferPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.doubleBufferPanel9.MaximumSize = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel9.MinimumSize = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel9.Name = "doubleBufferPanel9";
+            this.doubleBufferPanel9.Size = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel9.TabIndex = 14;
+            // 
+            // menu_repositoryDownloads
+            // 
+            this.menu_repositoryDownloads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.menu_repositoryDownloads.AutoSize = true;
+            this.menu_repositoryDownloads.BackColor = System.Drawing.Color.Transparent;
+            this.menu_repositoryDownloads.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_repositoryDownloads.Location = new System.Drawing.Point(10, 1);
+            this.menu_repositoryDownloads.Name = "menu_repositoryDownloads";
+            this.menu_repositoryDownloads.Size = new System.Drawing.Size(207, 28);
+            this.menu_repositoryDownloads.TabIndex = 4;
+            this.menu_repositoryDownloads.Text = "Repository Downloads";
+            this.menu_repositoryDownloads.Click += new System.EventHandler(this.menu_repositoryDownloads_Click);
+            this.menu_repositoryDownloads.MouseEnter += new System.EventHandler(this.menu_repositoryDownloads_MouseEnter);
+            this.menu_repositoryDownloads.MouseLeave += new System.EventHandler(this.menu_repositoryDownloads_MouseLeave);
+            // 
+            // img_repoBusy
+            // 
+            this.img_repoBusy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.img_repoBusy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.img_repoBusy.Image = global::arma3Launcher.Properties.Resources.sidemenu_busy_32;
+            this.img_repoBusy.Location = new System.Drawing.Point(259, -1);
+            this.img_repoBusy.Name = "img_repoBusy";
+            this.img_repoBusy.Size = new System.Drawing.Size(32, 32);
+            this.img_repoBusy.TabIndex = 9;
+            this.img_repoBusy.TabStop = false;
+            this.img_repoBusy.Visible = false;
+            // 
+            // doubleBufferPanel10
+            // 
+            this.doubleBufferPanel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doubleBufferPanel10.BackColor = System.Drawing.Color.DimGray;
+            this.doubleBufferPanel10.Location = new System.Drawing.Point(15, 137);
+            this.doubleBufferPanel10.Margin = new System.Windows.Forms.Padding(15, 5, 15, 5);
+            this.doubleBufferPanel10.Name = "doubleBufferPanel10";
+            this.doubleBufferPanel10.Size = new System.Drawing.Size(270, 1);
+            this.doubleBufferPanel10.TabIndex = 15;
+            // 
+            // doubleBufferPanel11
+            // 
+            this.doubleBufferPanel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.doubleBufferPanel11.Controls.Add(this.menu_preferences);
+            this.doubleBufferPanel11.Location = new System.Drawing.Point(0, 143);
+            this.doubleBufferPanel11.Margin = new System.Windows.Forms.Padding(0);
+            this.doubleBufferPanel11.MaximumSize = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel11.MinimumSize = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel11.Name = "doubleBufferPanel11";
+            this.doubleBufferPanel11.Size = new System.Drawing.Size(300, 30);
+            this.doubleBufferPanel11.TabIndex = 16;
+            // 
+            // menu_preferences
+            // 
+            this.menu_preferences.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.menu_preferences.AutoSize = true;
+            this.menu_preferences.BackColor = System.Drawing.Color.Transparent;
+            this.menu_preferences.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_preferences.Location = new System.Drawing.Point(10, 1);
+            this.menu_preferences.Name = "menu_preferences";
+            this.menu_preferences.Size = new System.Drawing.Size(118, 28);
+            this.menu_preferences.TabIndex = 5;
+            this.menu_preferences.Text = "Preferences";
+            this.menu_preferences.Click += new System.EventHandler(this.menu_preferences_Click);
+            this.menu_preferences.MouseEnter += new System.EventHandler(this.menu_preferences_MouseEnter);
+            this.menu_preferences.MouseLeave += new System.EventHandler(this.menu_preferences_MouseLeave);
+            // 
             // doubleBufferPanel4
             // 
             this.doubleBufferPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
@@ -426,6 +643,9 @@
             this.menu_help.Size = new System.Drawing.Size(35, 16);
             this.menu_help.TabIndex = 6;
             this.menu_help.Text = "Help";
+            this.menu_help.Click += new System.EventHandler(this.menu_help_Click);
+            this.menu_help.MouseEnter += new System.EventHandler(this.menu_help_MouseEnter);
+            this.menu_help.MouseLeave += new System.EventHandler(this.menu_help_MouseLeave);
             // 
             // menu_about
             // 
@@ -439,6 +659,9 @@
             this.menu_about.Size = new System.Drawing.Size(43, 16);
             this.menu_about.TabIndex = 7;
             this.menu_about.Text = "About";
+            this.menu_about.Click += new System.EventHandler(this.menu_about_Click);
+            this.menu_about.MouseEnter += new System.EventHandler(this.menu_about_MouseEnter);
+            this.menu_about.MouseLeave += new System.EventHandler(this.menu_about_MouseLeave);
             // 
             // txt_versionNumber
             // 
@@ -455,79 +678,6 @@
             this.txt_versionNumber.Text = "%version%";
             this.txt_versionNumber.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // img_repoBusy
-            // 
-            this.img_repoBusy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.img_repoBusy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.img_repoBusy.Image = global::arma3Launcher.Properties.Resources.sidemenu_busy_32;
-            this.img_repoBusy.Location = new System.Drawing.Point(259, -1);
-            this.img_repoBusy.Name = "img_repoBusy";
-            this.img_repoBusy.Size = new System.Drawing.Size(32, 32);
-            this.img_repoBusy.TabIndex = 9;
-            this.img_repoBusy.TabStop = false;
-            this.img_repoBusy.Visible = false;
-            // 
-            // menu_preferences
-            // 
-            this.menu_preferences.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.menu_preferences.AutoSize = true;
-            this.menu_preferences.BackColor = System.Drawing.Color.Transparent;
-            this.menu_preferences.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menu_preferences.Location = new System.Drawing.Point(10, 1);
-            this.menu_preferences.Name = "menu_preferences";
-            this.menu_preferences.Size = new System.Drawing.Size(118, 28);
-            this.menu_preferences.TabIndex = 5;
-            this.menu_preferences.Text = "Preferences";
-            this.menu_preferences.Click += new System.EventHandler(this.menu_preferences_Click);
-            this.menu_preferences.MouseEnter += new System.EventHandler(this.menu_preferences_MouseEnter);
-            this.menu_preferences.MouseLeave += new System.EventHandler(this.menu_preferences_MouseLeave);
-            // 
-            // menu_repositoryDownloads
-            // 
-            this.menu_repositoryDownloads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.menu_repositoryDownloads.AutoSize = true;
-            this.menu_repositoryDownloads.BackColor = System.Drawing.Color.Transparent;
-            this.menu_repositoryDownloads.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menu_repositoryDownloads.Location = new System.Drawing.Point(10, 1);
-            this.menu_repositoryDownloads.Name = "menu_repositoryDownloads";
-            this.menu_repositoryDownloads.Size = new System.Drawing.Size(207, 28);
-            this.menu_repositoryDownloads.TabIndex = 4;
-            this.menu_repositoryDownloads.Text = "Repository Downloads";
-            this.menu_repositoryDownloads.Click += new System.EventHandler(this.menu_repositoryDownloads_Click);
-            this.menu_repositoryDownloads.MouseEnter += new System.EventHandler(this.menu_repositoryDownloads_MouseEnter);
-            this.menu_repositoryDownloads.MouseLeave += new System.EventHandler(this.menu_repositoryDownloads_MouseLeave);
-            // 
-            // menu_launchOptions
-            // 
-            this.menu_launchOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.menu_launchOptions.AutoSize = true;
-            this.menu_launchOptions.BackColor = System.Drawing.Color.Transparent;
-            this.menu_launchOptions.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menu_launchOptions.Location = new System.Drawing.Point(10, 1);
-            this.menu_launchOptions.Name = "menu_launchOptions";
-            this.menu_launchOptions.Size = new System.Drawing.Size(143, 28);
-            this.menu_launchOptions.TabIndex = 3;
-            this.menu_launchOptions.Text = "Launch Options";
-            this.menu_launchOptions.Click += new System.EventHandler(this.menu_launchOptions_Click);
-            this.menu_launchOptions.MouseEnter += new System.EventHandler(this.menu_launchOptions_MouseEnter);
-            this.menu_launchOptions.MouseLeave += new System.EventHandler(this.menu_launchOptions_MouseLeave);
-            // 
-            // menu_addonPacks
-            // 
-            this.menu_addonPacks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.menu_addonPacks.AutoSize = true;
-            this.menu_addonPacks.BackColor = System.Drawing.Color.Transparent;
-            this.menu_addonPacks.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menu_addonPacks.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.menu_addonPacks.Location = new System.Drawing.Point(10, 1);
-            this.menu_addonPacks.Name = "menu_addonPacks";
-            this.menu_addonPacks.Size = new System.Drawing.Size(122, 28);
-            this.menu_addonPacks.TabIndex = 2;
-            this.menu_addonPacks.Text = "Addon Packs";
-            this.menu_addonPacks.Click += new System.EventHandler(this.menu_addonPacks_Click);
-            this.menu_addonPacks.MouseEnter += new System.EventHandler(this.menu_addonPacks_MouseEnter);
-            this.menu_addonPacks.MouseLeave += new System.EventHandler(this.menu_addonPacks_MouseLeave);
-            // 
             // panel_mainPanel
             // 
             this.panel_mainPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -541,10 +691,10 @@
             // panel_outterPanel
             // 
             this.panel_outterPanel.BackColor = System.Drawing.Color.DimGray;
+            this.panel_outterPanel.Controls.Add(this.panel_preferences);
             this.panel_outterPanel.Controls.Add(this.panel_repositoryDownloads);
             this.panel_outterPanel.Controls.Add(this.panel_launchOptions);
             this.panel_outterPanel.Controls.Add(this.panel_addonPacks);
-            this.panel_outterPanel.Controls.Add(this.panel_preferences);
             this.panel_outterPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_outterPanel.Location = new System.Drawing.Point(0, 0);
             this.panel_outterPanel.MinimumSize = new System.Drawing.Size(0, 670);
@@ -552,13 +702,506 @@
             this.panel_outterPanel.Size = new System.Drawing.Size(1300, 670);
             this.panel_outterPanel.TabIndex = 0;
             // 
+            // panel_preferences
+            // 
+            this.panel_preferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.panel_preferences.Controls.Add(this.panel_contentPreferences);
+            this.panel_preferences.Controls.Add(this.lbl_preferences);
+            this.panel_preferences.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_preferences.Location = new System.Drawing.Point(3900, 0);
+            this.panel_preferences.Name = "panel_preferences";
+            this.panel_preferences.Size = new System.Drawing.Size(1300, 670);
+            this.panel_preferences.TabIndex = 3;
+            // 
+            // panel_contentPreferences
+            // 
+            this.panel_contentPreferences.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panel_contentPreferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.panel_contentPreferences.Controls.Add(this.flowLayoutPanel2);
+            this.panel_contentPreferences.Controls.Add(this.panel17);
+            this.panel_contentPreferences.Controls.Add(this.panel16);
+            this.panel_contentPreferences.Location = new System.Drawing.Point(32, 80);
+            this.panel_contentPreferences.Name = "panel_contentPreferences";
+            this.panel_contentPreferences.Size = new System.Drawing.Size(1240, 560);
+            this.panel_contentPreferences.TabIndex = 4;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.txt_pref_gamePrefrences);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_startGame);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_joinServer);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_joinTSServer);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_serverAutopilot);
+            this.flowLayoutPanel2.Controls.Add(this.panel18);
+            this.flowLayoutPanel2.Controls.Add(this.txt_pref_launcherPreferences);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_disableAnimations);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_runLauncherStartup);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_allowNotifications);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_autoDownload);
+            this.flowLayoutPanel2.Controls.Add(this.chb_pref_serverMode);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(952, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(288, 560);
+            this.flowLayoutPanel2.TabIndex = 19;
+            // 
+            // txt_pref_gamePrefrences
+            // 
+            this.txt_pref_gamePrefrences.AutoSize = true;
+            this.txt_pref_gamePrefrences.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txt_pref_gamePrefrences.Location = new System.Drawing.Point(20, 15);
+            this.txt_pref_gamePrefrences.Margin = new System.Windows.Forms.Padding(10, 15, 15, 5);
+            this.txt_pref_gamePrefrences.Name = "txt_pref_gamePrefrences";
+            this.txt_pref_gamePrefrences.Size = new System.Drawing.Size(136, 21);
+            this.txt_pref_gamePrefrences.TabIndex = 0;
+            this.txt_pref_gamePrefrences.Text = "Game preferences";
+            // 
+            // chb_pref_startGame
+            // 
+            this.chb_pref_startGame.AutoSize = true;
+            this.chb_pref_startGame.Depth = 0;
+            this.chb_pref_startGame.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_startGame.Location = new System.Drawing.Point(10, 41);
+            this.chb_pref_startGame.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_startGame.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_startGame.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_startGame.Name = "chb_pref_startGame";
+            this.chb_pref_startGame.Ripple = true;
+            this.chb_pref_startGame.Size = new System.Drawing.Size(171, 30);
+            this.chb_pref_startGame.TabIndex = 1;
+            this.chb_pref_startGame.Text = "Start game when ready";
+            this.chb_pref_startGame.UseVisualStyleBackColor = true;
+            // 
+            // chb_pref_joinServer
+            // 
+            this.chb_pref_joinServer.AutoSize = true;
+            this.chb_pref_joinServer.Depth = 0;
+            this.chb_pref_joinServer.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_joinServer.Location = new System.Drawing.Point(10, 71);
+            this.chb_pref_joinServer.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_joinServer.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_joinServer.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_joinServer.Name = "chb_pref_joinServer";
+            this.chb_pref_joinServer.Ripple = true;
+            this.chb_pref_joinServer.Size = new System.Drawing.Size(185, 30);
+            this.chb_pref_joinServer.TabIndex = 2;
+            this.chb_pref_joinServer.Text = "Join server automatically";
+            this.chb_pref_joinServer.UseVisualStyleBackColor = true;
+            // 
+            // chb_pref_joinTSServer
+            // 
+            this.chb_pref_joinTSServer.AutoSize = true;
+            this.chb_pref_joinTSServer.Depth = 0;
+            this.chb_pref_joinTSServer.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_joinTSServer.Location = new System.Drawing.Point(10, 101);
+            this.chb_pref_joinTSServer.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_joinTSServer.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_joinTSServer.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_joinTSServer.Name = "chb_pref_joinTSServer";
+            this.chb_pref_joinTSServer.Ripple = true;
+            this.chb_pref_joinTSServer.Size = new System.Drawing.Size(261, 30);
+            this.chb_pref_joinTSServer.TabIndex = 3;
+            this.chb_pref_joinTSServer.Text = "Join TeamSpeak server automatically";
+            this.chb_pref_joinTSServer.UseVisualStyleBackColor = true;
+            // 
+            // chb_pref_serverAutopilot
+            // 
+            this.chb_pref_serverAutopilot.AutoSize = true;
+            this.chb_pref_serverAutopilot.Depth = 0;
+            this.chb_pref_serverAutopilot.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_serverAutopilot.Location = new System.Drawing.Point(10, 131);
+            this.chb_pref_serverAutopilot.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_serverAutopilot.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_serverAutopilot.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_serverAutopilot.Name = "chb_pref_serverAutopilot";
+            this.chb_pref_serverAutopilot.Ripple = true;
+            this.chb_pref_serverAutopilot.Size = new System.Drawing.Size(127, 30);
+            this.chb_pref_serverAutopilot.TabIndex = 4;
+            this.chb_pref_serverAutopilot.Text = "Server autopilot";
+            this.chb_pref_serverAutopilot.UseVisualStyleBackColor = true;
+            this.chb_pref_serverAutopilot.Visible = false;
+            this.chb_pref_serverAutopilot.CheckedChanged += new System.EventHandler(this.chb_pref_serverAutopilot_CheckedChanged);
+            // 
+            // panel18
+            // 
+            this.panel18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.panel18.Location = new System.Drawing.Point(20, 176);
+            this.panel18.Margin = new System.Windows.Forms.Padding(10, 15, 20, 0);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(250, 2);
+            this.panel18.TabIndex = 10;
+            // 
+            // txt_pref_launcherPreferences
+            // 
+            this.txt_pref_launcherPreferences.AutoSize = true;
+            this.txt_pref_launcherPreferences.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txt_pref_launcherPreferences.Location = new System.Drawing.Point(20, 193);
+            this.txt_pref_launcherPreferences.Margin = new System.Windows.Forms.Padding(10, 15, 15, 5);
+            this.txt_pref_launcherPreferences.Name = "txt_pref_launcherPreferences";
+            this.txt_pref_launcherPreferences.Size = new System.Drawing.Size(159, 21);
+            this.txt_pref_launcherPreferences.TabIndex = 5;
+            this.txt_pref_launcherPreferences.Text = "Launcher preferences";
+            // 
+            // chb_pref_disableAnimations
+            // 
+            this.chb_pref_disableAnimations.AutoSize = true;
+            this.chb_pref_disableAnimations.Depth = 0;
+            this.chb_pref_disableAnimations.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_disableAnimations.Location = new System.Drawing.Point(10, 219);
+            this.chb_pref_disableAnimations.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_disableAnimations.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_disableAnimations.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_disableAnimations.Name = "chb_pref_disableAnimations";
+            this.chb_pref_disableAnimations.Ripple = true;
+            this.chb_pref_disableAnimations.Size = new System.Drawing.Size(210, 30);
+            this.chb_pref_disableAnimations.TabIndex = 11;
+            this.chb_pref_disableAnimations.Text = "Disable transition animations";
+            this.chb_pref_disableAnimations.UseVisualStyleBackColor = true;
+            this.chb_pref_disableAnimations.CheckedChanged += new System.EventHandler(this.chb_pref_disableAnimations_CheckedChanged);
+            // 
+            // chb_pref_runLauncherStartup
+            // 
+            this.chb_pref_runLauncherStartup.AutoSize = true;
+            this.chb_pref_runLauncherStartup.Depth = 0;
+            this.chb_pref_runLauncherStartup.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_runLauncherStartup.Location = new System.Drawing.Point(10, 249);
+            this.chb_pref_runLauncherStartup.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_runLauncherStartup.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_runLauncherStartup.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_runLauncherStartup.Name = "chb_pref_runLauncherStartup";
+            this.chb_pref_runLauncherStartup.Ripple = true;
+            this.chb_pref_runLauncherStartup.Size = new System.Drawing.Size(200, 30);
+            this.chb_pref_runLauncherStartup.TabIndex = 6;
+            this.chb_pref_runLauncherStartup.Text = "Run the launcher on startup";
+            this.chb_pref_runLauncherStartup.UseVisualStyleBackColor = true;
+            this.chb_pref_runLauncherStartup.Visible = false;
+            this.chb_pref_runLauncherStartup.CheckedChanged += new System.EventHandler(this.chb_pref_runLauncherStartup_CheckedChanged);
+            // 
+            // chb_pref_allowNotifications
+            // 
+            this.chb_pref_allowNotifications.AutoSize = true;
+            this.chb_pref_allowNotifications.Depth = 0;
+            this.chb_pref_allowNotifications.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_allowNotifications.Location = new System.Drawing.Point(10, 279);
+            this.chb_pref_allowNotifications.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_allowNotifications.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_allowNotifications.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_allowNotifications.Name = "chb_pref_allowNotifications";
+            this.chb_pref_allowNotifications.Ripple = true;
+            this.chb_pref_allowNotifications.Size = new System.Drawing.Size(145, 30);
+            this.chb_pref_allowNotifications.TabIndex = 7;
+            this.chb_pref_allowNotifications.Text = "Allow notifications";
+            this.chb_pref_allowNotifications.UseVisualStyleBackColor = true;
+            this.chb_pref_allowNotifications.Visible = false;
+            // 
+            // chb_pref_autoDownload
+            // 
+            this.chb_pref_autoDownload.AutoSize = true;
+            this.chb_pref_autoDownload.Depth = 0;
+            this.chb_pref_autoDownload.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_autoDownload.Location = new System.Drawing.Point(10, 309);
+            this.chb_pref_autoDownload.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_autoDownload.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_autoDownload.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_autoDownload.Name = "chb_pref_autoDownload";
+            this.chb_pref_autoDownload.Ripple = true;
+            this.chb_pref_autoDownload.Size = new System.Drawing.Size(242, 30);
+            this.chb_pref_autoDownload.TabIndex = 8;
+            this.chb_pref_autoDownload.Text = "Auto-download repository updates";
+            this.chb_pref_autoDownload.UseVisualStyleBackColor = true;
+            // 
+            // chb_pref_serverMode
+            // 
+            this.chb_pref_serverMode.AutoSize = true;
+            this.chb_pref_serverMode.Depth = 0;
+            this.chb_pref_serverMode.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chb_pref_serverMode.Location = new System.Drawing.Point(10, 339);
+            this.chb_pref_serverMode.Margin = new System.Windows.Forms.Padding(0);
+            this.chb_pref_serverMode.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chb_pref_serverMode.MouseState = MaterialSkin.MouseState.HOVER;
+            this.chb_pref_serverMode.Name = "chb_pref_serverMode";
+            this.chb_pref_serverMode.Ripple = true;
+            this.chb_pref_serverMode.Size = new System.Drawing.Size(273, 30);
+            this.chb_pref_serverMode.TabIndex = 9;
+            this.chb_pref_serverMode.Text = "Server Mode (launcher restart required)";
+            this.chb_pref_serverMode.UseVisualStyleBackColor = true;
+            this.chb_pref_serverMode.CheckedChanged += new System.EventHandler(this.chb_pref_serverMode_CheckedChanged);
+            // 
+            // panel17
+            // 
+            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel17.Location = new System.Drawing.Point(950, 0);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(2, 560);
+            this.panel17.TabIndex = 18;
+            // 
+            // panel16
+            // 
+            this.panel16.Controls.Add(this.panel_TeamSpeakDir);
+            this.panel16.Controls.Add(this.panel15);
+            this.panel16.Controls.Add(this.panel_Arma3Dir);
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel16.Location = new System.Drawing.Point(0, 0);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(950, 560);
+            this.panel16.TabIndex = 17;
+            // 
+            // panel_TeamSpeakDir
+            // 
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_pref_ereaseTSDir);
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_pref_openTS3Dir);
+            this.panel_TeamSpeakDir.Controls.Add(this.btn_pref_browseTS3Dir);
+            this.panel_TeamSpeakDir.Controls.Add(this.txtb_pref_tsDirectory);
+            this.panel_TeamSpeakDir.Controls.Add(this.lbl_pref_TeamSpeakDir);
+            this.panel_TeamSpeakDir.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_TeamSpeakDir.Location = new System.Drawing.Point(0, 100);
+            this.panel_TeamSpeakDir.Name = "panel_TeamSpeakDir";
+            this.panel_TeamSpeakDir.Size = new System.Drawing.Size(950, 50);
+            this.panel_TeamSpeakDir.TabIndex = 17;
+            // 
+            // btn_pref_ereaseTSDir
+            // 
+            this.btn_pref_ereaseTSDir.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_pref_ereaseTSDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_ereaseTSDir.Image")));
+            this.btn_pref_ereaseTSDir.Location = new System.Drawing.Point(862, 19);
+            this.btn_pref_ereaseTSDir.Name = "btn_pref_ereaseTSDir";
+            this.btn_pref_ereaseTSDir.Size = new System.Drawing.Size(12, 12);
+            this.btn_pref_ereaseTSDir.TabIndex = 21;
+            this.btn_pref_ereaseTSDir.TabStop = false;
+            this.btn_pref_ereaseTSDir.Click += new System.EventHandler(this.btn_pref_ereaseTSDir_Click);
+            this.btn_pref_ereaseTSDir.MouseEnter += new System.EventHandler(this.btn_pref_ereaseTSDir_MouseEnter);
+            this.btn_pref_ereaseTSDir.MouseLeave += new System.EventHandler(this.btn_pref_ereaseTSDir_MouseLeave);
+            // 
+            // btn_pref_openTS3Dir
+            // 
+            this.btn_pref_openTS3Dir.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_pref_openTS3Dir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_openTS3Dir.Image")));
+            this.btn_pref_openTS3Dir.Location = new System.Drawing.Point(912, 17);
+            this.btn_pref_openTS3Dir.Name = "btn_pref_openTS3Dir";
+            this.btn_pref_openTS3Dir.Size = new System.Drawing.Size(16, 16);
+            this.btn_pref_openTS3Dir.TabIndex = 10;
+            this.btn_pref_openTS3Dir.TabStop = false;
+            this.btn_pref_openTS3Dir.Click += new System.EventHandler(this.btn_pref_openTS3Dir_Click);
+            this.btn_pref_openTS3Dir.MouseEnter += new System.EventHandler(this.btn_pref_openTS3Dir_MouseEnter);
+            this.btn_pref_openTS3Dir.MouseLeave += new System.EventHandler(this.btn_pref_openTS3Dir_MouseLeave);
+            // 
+            // btn_pref_browseTS3Dir
+            // 
+            this.btn_pref_browseTS3Dir.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_pref_browseTS3Dir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_browseTS3Dir.Image")));
+            this.btn_pref_browseTS3Dir.Location = new System.Drawing.Point(892, 17);
+            this.btn_pref_browseTS3Dir.Name = "btn_pref_browseTS3Dir";
+            this.btn_pref_browseTS3Dir.Size = new System.Drawing.Size(16, 16);
+            this.btn_pref_browseTS3Dir.TabIndex = 9;
+            this.btn_pref_browseTS3Dir.TabStop = false;
+            this.btn_pref_browseTS3Dir.Click += new System.EventHandler(this.btn_pref_browseTS3Dir_Click);
+            this.btn_pref_browseTS3Dir.MouseEnter += new System.EventHandler(this.btn_pref_browseTS3Dir_MouseEnter);
+            this.btn_pref_browseTS3Dir.MouseLeave += new System.EventHandler(this.btn_pref_browseTS3Dir_MouseLeave);
+            // 
+            // txtb_pref_tsDirectory
+            // 
+            this.txtb_pref_tsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_pref_tsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtb_pref_tsDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtb_pref_tsDirectory.Location = new System.Drawing.Point(172, 12);
+            this.txtb_pref_tsDirectory.Name = "txtb_pref_tsDirectory";
+            this.txtb_pref_tsDirectory.Size = new System.Drawing.Size(707, 25);
+            this.txtb_pref_tsDirectory.TabIndex = 2;
+            this.txtb_pref_tsDirectory.TabStop = false;
+            this.txtb_pref_tsDirectory.Text = "Set directory ->";
+            this.txtb_pref_tsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_tsDirectory_MouseClick);
+            this.txtb_pref_tsDirectory.TextChanged += new System.EventHandler(this.txtb_pref_tsDirectory_TextChanged);
+            this.txtb_pref_tsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_tsDirectory_MouseDoubleClick);
+            // 
+            // lbl_pref_TeamSpeakDir
+            // 
+            this.lbl_pref_TeamSpeakDir.AutoSize = true;
+            this.lbl_pref_TeamSpeakDir.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lbl_pref_TeamSpeakDir.Location = new System.Drawing.Point(7, 15);
+            this.lbl_pref_TeamSpeakDir.Name = "lbl_pref_TeamSpeakDir";
+            this.lbl_pref_TeamSpeakDir.Size = new System.Drawing.Size(150, 19);
+            this.lbl_pref_TeamSpeakDir.TabIndex = 1;
+            this.lbl_pref_TeamSpeakDir.Text = "TeamSpeak 3 directory:";
+            // 
+            // panel15
+            // 
+            this.panel15.Controls.Add(this.lbl_pref_AddonsDir);
+            this.panel15.Controls.Add(this.btn_pref_ereaseAddonsDir);
+            this.panel15.Controls.Add(this.btn_pref_openAddonsDir);
+            this.panel15.Controls.Add(this.btn_pref_browseAddonsDir);
+            this.panel15.Controls.Add(this.txtb_pref_addonsDirectory);
+            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel15.Location = new System.Drawing.Point(0, 50);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(950, 50);
+            this.panel15.TabIndex = 19;
+            // 
+            // lbl_pref_AddonsDir
+            // 
+            this.lbl_pref_AddonsDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_pref_AddonsDir.AutoSize = true;
+            this.lbl_pref_AddonsDir.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lbl_pref_AddonsDir.Location = new System.Drawing.Point(7, 15);
+            this.lbl_pref_AddonsDir.Name = "lbl_pref_AddonsDir";
+            this.lbl_pref_AddonsDir.Size = new System.Drawing.Size(117, 19);
+            this.lbl_pref_AddonsDir.TabIndex = 12;
+            this.lbl_pref_AddonsDir.Text = "Addons directory:";
+            // 
+            // btn_pref_ereaseAddonsDir
+            // 
+            this.btn_pref_ereaseAddonsDir.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_pref_ereaseAddonsDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_ereaseAddonsDir.Image")));
+            this.btn_pref_ereaseAddonsDir.Location = new System.Drawing.Point(862, 19);
+            this.btn_pref_ereaseAddonsDir.Name = "btn_pref_ereaseAddonsDir";
+            this.btn_pref_ereaseAddonsDir.Size = new System.Drawing.Size(12, 12);
+            this.btn_pref_ereaseAddonsDir.TabIndex = 20;
+            this.btn_pref_ereaseAddonsDir.TabStop = false;
+            this.btn_pref_ereaseAddonsDir.Click += new System.EventHandler(this.btn_pref_ereaseAddonsDir_Click);
+            this.btn_pref_ereaseAddonsDir.MouseEnter += new System.EventHandler(this.btn_pref_ereaseAddonsDir_MouseEnter);
+            this.btn_pref_ereaseAddonsDir.MouseLeave += new System.EventHandler(this.btn_pref_ereaseAddonsDir_MouseLeave);
+            // 
+            // btn_pref_openAddonsDir
+            // 
+            this.btn_pref_openAddonsDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_pref_openAddonsDir.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_pref_openAddonsDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_openAddonsDir.Image")));
+            this.btn_pref_openAddonsDir.Location = new System.Drawing.Point(911, 17);
+            this.btn_pref_openAddonsDir.Name = "btn_pref_openAddonsDir";
+            this.btn_pref_openAddonsDir.Size = new System.Drawing.Size(16, 16);
+            this.btn_pref_openAddonsDir.TabIndex = 11;
+            this.btn_pref_openAddonsDir.TabStop = false;
+            this.btn_pref_openAddonsDir.Click += new System.EventHandler(this.btn_pref_openAddonsDir_Click);
+            this.btn_pref_openAddonsDir.MouseEnter += new System.EventHandler(this.btn_pref_openAddonsDir_MouseEnter);
+            this.btn_pref_openAddonsDir.MouseLeave += new System.EventHandler(this.btn_pref_openAddonsDir_MouseLeave);
+            // 
+            // btn_pref_browseAddonsDir
+            // 
+            this.btn_pref_browseAddonsDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_pref_browseAddonsDir.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_pref_browseAddonsDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_browseAddonsDir.Image")));
+            this.btn_pref_browseAddonsDir.Location = new System.Drawing.Point(892, 17);
+            this.btn_pref_browseAddonsDir.Name = "btn_pref_browseAddonsDir";
+            this.btn_pref_browseAddonsDir.Size = new System.Drawing.Size(16, 16);
+            this.btn_pref_browseAddonsDir.TabIndex = 10;
+            this.btn_pref_browseAddonsDir.TabStop = false;
+            this.btn_pref_browseAddonsDir.Click += new System.EventHandler(this.btn_pref_browseAddonsDir_Click);
+            this.btn_pref_browseAddonsDir.MouseEnter += new System.EventHandler(this.btn_pref_browseAddonsDir_MouseEnter);
+            this.btn_pref_browseAddonsDir.MouseLeave += new System.EventHandler(this.btn_pref_browseAddonsDir_MouseLeave);
+            // 
+            // txtb_pref_addonsDirectory
+            // 
+            this.txtb_pref_addonsDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtb_pref_addonsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_pref_addonsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtb_pref_addonsDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtb_pref_addonsDirectory.Location = new System.Drawing.Point(172, 12);
+            this.txtb_pref_addonsDirectory.Name = "txtb_pref_addonsDirectory";
+            this.txtb_pref_addonsDirectory.Size = new System.Drawing.Size(707, 25);
+            this.txtb_pref_addonsDirectory.TabIndex = 4;
+            this.txtb_pref_addonsDirectory.Text = "Set directory ->";
+            this.txtb_pref_addonsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_addonsDirectory_MouseClick);
+            this.txtb_pref_addonsDirectory.TextChanged += new System.EventHandler(this.txtb_pref_addonsDirectory_TextChanged);
+            this.txtb_pref_addonsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_addonsDirectory_MouseDoubleClick);
+            // 
+            // panel_Arma3Dir
+            // 
+            this.panel_Arma3Dir.Controls.Add(this.btn_pref_openA3Dir);
+            this.panel_Arma3Dir.Controls.Add(this.btn_pref_browseA3Dir);
+            this.panel_Arma3Dir.Controls.Add(this.btn_pref_ereaseArmaDir);
+            this.panel_Arma3Dir.Controls.Add(this.lbl_pref_Arma3Dir);
+            this.panel_Arma3Dir.Controls.Add(this.txtb_pref_armaDirectory);
+            this.panel_Arma3Dir.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Arma3Dir.Location = new System.Drawing.Point(0, 0);
+            this.panel_Arma3Dir.Name = "panel_Arma3Dir";
+            this.panel_Arma3Dir.Size = new System.Drawing.Size(950, 50);
+            this.panel_Arma3Dir.TabIndex = 18;
+            // 
+            // btn_pref_openA3Dir
+            // 
+            this.btn_pref_openA3Dir.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_pref_openA3Dir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_openA3Dir.Image")));
+            this.btn_pref_openA3Dir.Location = new System.Drawing.Point(912, 17);
+            this.btn_pref_openA3Dir.Name = "btn_pref_openA3Dir";
+            this.btn_pref_openA3Dir.Size = new System.Drawing.Size(16, 16);
+            this.btn_pref_openA3Dir.TabIndex = 11;
+            this.btn_pref_openA3Dir.TabStop = false;
+            this.btn_pref_openA3Dir.Click += new System.EventHandler(this.btn_pref_openA3Dir_Click);
+            this.btn_pref_openA3Dir.MouseEnter += new System.EventHandler(this.btn_pref_openA3Dir_MouseEnter);
+            this.btn_pref_openA3Dir.MouseLeave += new System.EventHandler(this.btn_pref_openA3Dir_MouseLeave);
+            // 
+            // btn_pref_browseA3Dir
+            // 
+            this.btn_pref_browseA3Dir.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_pref_browseA3Dir.Image = global::arma3Launcher.Properties.Resources.addfolder_idle;
+            this.btn_pref_browseA3Dir.Location = new System.Drawing.Point(892, 17);
+            this.btn_pref_browseA3Dir.Name = "btn_pref_browseA3Dir";
+            this.btn_pref_browseA3Dir.Size = new System.Drawing.Size(16, 16);
+            this.btn_pref_browseA3Dir.TabIndex = 8;
+            this.btn_pref_browseA3Dir.TabStop = false;
+            this.btn_pref_browseA3Dir.Click += new System.EventHandler(this.btn_pref_browseA3Dir_Click);
+            this.btn_pref_browseA3Dir.MouseEnter += new System.EventHandler(this.btn_pref_browseA3Dir_MouseEnter);
+            this.btn_pref_browseA3Dir.MouseLeave += new System.EventHandler(this.btn_pref_browseA3Dir_MouseLeave);
+            // 
+            // btn_pref_ereaseArmaDir
+            // 
+            this.btn_pref_ereaseArmaDir.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_pref_ereaseArmaDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_ereaseArmaDir.Image")));
+            this.btn_pref_ereaseArmaDir.Location = new System.Drawing.Point(862, 19);
+            this.btn_pref_ereaseArmaDir.Name = "btn_pref_ereaseArmaDir";
+            this.btn_pref_ereaseArmaDir.Size = new System.Drawing.Size(12, 12);
+            this.btn_pref_ereaseArmaDir.TabIndex = 12;
+            this.btn_pref_ereaseArmaDir.TabStop = false;
+            this.btn_pref_ereaseArmaDir.Click += new System.EventHandler(this.btn_pref_ereaseArmaDir_Click);
+            this.btn_pref_ereaseArmaDir.MouseEnter += new System.EventHandler(this.btn_pref_ereaseArmaDir_MouseEnter);
+            this.btn_pref_ereaseArmaDir.MouseLeave += new System.EventHandler(this.btn_pref_ereaseArmaDir_MouseLeave);
+            // 
+            // lbl_pref_Arma3Dir
+            // 
+            this.lbl_pref_Arma3Dir.AutoSize = true;
+            this.lbl_pref_Arma3Dir.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lbl_pref_Arma3Dir.Location = new System.Drawing.Point(7, 15);
+            this.lbl_pref_Arma3Dir.Name = "lbl_pref_Arma3Dir";
+            this.lbl_pref_Arma3Dir.Size = new System.Drawing.Size(115, 19);
+            this.lbl_pref_Arma3Dir.TabIndex = 0;
+            this.lbl_pref_Arma3Dir.Text = "Arma 3 directory:";
+            // 
+            // txtb_pref_armaDirectory
+            // 
+            this.txtb_pref_armaDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtb_pref_armaDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtb_pref_armaDirectory.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtb_pref_armaDirectory.Location = new System.Drawing.Point(172, 12);
+            this.txtb_pref_armaDirectory.Name = "txtb_pref_armaDirectory";
+            this.txtb_pref_armaDirectory.Size = new System.Drawing.Size(707, 25);
+            this.txtb_pref_armaDirectory.TabIndex = 3;
+            this.txtb_pref_armaDirectory.TabStop = false;
+            this.txtb_pref_armaDirectory.Text = "Set directory ->";
+            this.txtb_pref_armaDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_armaDirectory_MouseClick);
+            this.txtb_pref_armaDirectory.TextChanged += new System.EventHandler(this.txtb_pref_armaDirectory_TextChanged);
+            this.txtb_pref_armaDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_armaDirectory_MouseDoubleClick);
+            // 
+            // lbl_preferences
+            // 
+            this.lbl_preferences.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_preferences.AutoSize = true;
+            this.lbl_preferences.Font = new System.Drawing.Font("Bebas Neue Book", 36F);
+            this.lbl_preferences.ForeColor = System.Drawing.Color.DimGray;
+            this.lbl_preferences.Location = new System.Drawing.Point(10, 15);
+            this.lbl_preferences.Name = "lbl_preferences";
+            this.lbl_preferences.Size = new System.Drawing.Size(217, 49);
+            this.lbl_preferences.TabIndex = 3;
+            this.lbl_preferences.Text = "Preferences";
+            // 
             // panel_repositoryDownloads
             // 
             this.panel_repositoryDownloads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.panel_repositoryDownloads.Controls.Add(this.panel_contentRepositoryDownloads);
             this.panel_repositoryDownloads.Controls.Add(this.lbl_repositoryDownloads);
             this.panel_repositoryDownloads.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_repositoryDownloads.Location = new System.Drawing.Point(3900, 0);
+            this.panel_repositoryDownloads.Location = new System.Drawing.Point(2600, 0);
             this.panel_repositoryDownloads.Name = "panel_repositoryDownloads";
             this.panel_repositoryDownloads.Size = new System.Drawing.Size(1300, 670);
             this.panel_repositoryDownloads.TabIndex = 2;
@@ -591,37 +1234,37 @@
             this.trv_repoContent.Location = new System.Drawing.Point(0, 0);
             this.trv_repoContent.MinimumSize = new System.Drawing.Size(1240, 0);
             this.trv_repoContent.Name = "trv_repoContent";
-            treeNode1.ImageIndex = -2;
-            treeNode1.Name = "Node0";
-            treeNode1.SelectedImageIndex = -2;
-            treeNode1.Text = "Node0";
-            treeNode2.ImageIndex = 1;
-            treeNode2.Name = "Node2";
-            treeNode2.SelectedImageIndex = 1;
-            treeNode2.Text = "Node2";
-            treeNode3.ImageIndex = 2;
-            treeNode3.Name = "Node3";
-            treeNode3.SelectedImageIndex = 2;
-            treeNode3.Text = "Node3";
-            treeNode4.ImageIndex = 3;
-            treeNode4.Name = "Node0";
-            treeNode4.SelectedImageIndex = 3;
-            treeNode4.Text = "Node0";
-            treeNode5.ImageIndex = 4;
-            treeNode5.Name = "Node1";
-            treeNode5.SelectedImageIndex = 4;
-            treeNode5.Text = "Node1";
-            treeNode6.ImageIndex = 5;
-            treeNode6.Name = "Node2";
-            treeNode6.SelectedImageIndex = 5;
-            treeNode6.Text = "Node2";
+            treeNode7.ImageIndex = -2;
+            treeNode7.Name = "Node0";
+            treeNode7.SelectedImageIndex = -2;
+            treeNode7.Text = "Node0";
+            treeNode8.ImageIndex = 1;
+            treeNode8.Name = "Node2";
+            treeNode8.SelectedImageIndex = 1;
+            treeNode8.Text = "Node2";
+            treeNode9.ImageIndex = 2;
+            treeNode9.Name = "Node3";
+            treeNode9.SelectedImageIndex = 2;
+            treeNode9.Text = "Node3";
+            treeNode10.ImageIndex = 3;
+            treeNode10.Name = "Node0";
+            treeNode10.SelectedImageIndex = 3;
+            treeNode10.Text = "Node0";
+            treeNode11.ImageIndex = 4;
+            treeNode11.Name = "Node1";
+            treeNode11.SelectedImageIndex = 4;
+            treeNode11.Text = "Node1";
+            treeNode12.ImageIndex = 5;
+            treeNode12.Name = "Node2";
+            treeNode12.SelectedImageIndex = 5;
+            treeNode12.Text = "Node2";
             this.trv_repoContent.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6});
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12});
             this.trv_repoContent.SelectedImageIndex = 0;
             this.trv_repoContent.ShowRootLines = false;
             this.trv_repoContent.Size = new System.Drawing.Size(1240, 490);
@@ -857,7 +1500,7 @@
             this.panel_launchOptions.Controls.Add(this.panel_contentLaunchOptions);
             this.panel_launchOptions.Controls.Add(this.lbl_launchOptions);
             this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_launchOptions.Location = new System.Drawing.Point(2600, 0);
+            this.panel_launchOptions.Location = new System.Drawing.Point(1300, 0);
             this.panel_launchOptions.Name = "panel_launchOptions";
             this.panel_launchOptions.Size = new System.Drawing.Size(1300, 670);
             this.panel_launchOptions.TabIndex = 1;
@@ -1718,7 +2361,7 @@
             this.panel_addonPacks.Controls.Add(this.panel_addonPacksFlow);
             this.panel_addonPacks.Controls.Add(this.panel_addonOptions);
             this.panel_addonPacks.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_addonPacks.Location = new System.Drawing.Point(1300, 0);
+            this.panel_addonPacks.Location = new System.Drawing.Point(0, 0);
             this.panel_addonPacks.Name = "panel_addonPacks";
             this.panel_addonPacks.Size = new System.Drawing.Size(1300, 670);
             this.panel_addonPacks.TabIndex = 0;
@@ -2032,481 +2675,6 @@
             this.lbl_addonOptions.TabIndex = 1;
             this.lbl_addonOptions.Text = "Addon Options";
             // 
-            // panel_preferences
-            // 
-            this.panel_preferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.panel_preferences.Controls.Add(this.panel_contentPreferences);
-            this.panel_preferences.Controls.Add(this.lbl_preferences);
-            this.panel_preferences.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_preferences.Location = new System.Drawing.Point(0, 0);
-            this.panel_preferences.Name = "panel_preferences";
-            this.panel_preferences.Size = new System.Drawing.Size(1300, 670);
-            this.panel_preferences.TabIndex = 3;
-            // 
-            // panel_contentPreferences
-            // 
-            this.panel_contentPreferences.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panel_contentPreferences.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.panel_contentPreferences.Controls.Add(this.flowLayoutPanel2);
-            this.panel_contentPreferences.Controls.Add(this.panel17);
-            this.panel_contentPreferences.Controls.Add(this.panel16);
-            this.panel_contentPreferences.Location = new System.Drawing.Point(32, 80);
-            this.panel_contentPreferences.Name = "panel_contentPreferences";
-            this.panel_contentPreferences.Size = new System.Drawing.Size(1240, 560);
-            this.panel_contentPreferences.TabIndex = 4;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.txt_pref_gamePrefrences);
-            this.flowLayoutPanel2.Controls.Add(this.chb_pref_startGame);
-            this.flowLayoutPanel2.Controls.Add(this.chb_pref_joinServer);
-            this.flowLayoutPanel2.Controls.Add(this.chb_pref_joinTSServer);
-            this.flowLayoutPanel2.Controls.Add(this.chb_pref_serverAutopilot);
-            this.flowLayoutPanel2.Controls.Add(this.panel18);
-            this.flowLayoutPanel2.Controls.Add(this.txt_pref_launcherPreferences);
-            this.flowLayoutPanel2.Controls.Add(this.chb_pref_runLauncherStartup);
-            this.flowLayoutPanel2.Controls.Add(this.chb_pref_allowNotifications);
-            this.flowLayoutPanel2.Controls.Add(this.chb_pref_autoDownload);
-            this.flowLayoutPanel2.Controls.Add(this.chb_pref_serverMode);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(952, 0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(288, 560);
-            this.flowLayoutPanel2.TabIndex = 19;
-            // 
-            // txt_pref_gamePrefrences
-            // 
-            this.txt_pref_gamePrefrences.AutoSize = true;
-            this.txt_pref_gamePrefrences.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.txt_pref_gamePrefrences.Location = new System.Drawing.Point(20, 15);
-            this.txt_pref_gamePrefrences.Margin = new System.Windows.Forms.Padding(10, 15, 15, 5);
-            this.txt_pref_gamePrefrences.Name = "txt_pref_gamePrefrences";
-            this.txt_pref_gamePrefrences.Size = new System.Drawing.Size(136, 21);
-            this.txt_pref_gamePrefrences.TabIndex = 0;
-            this.txt_pref_gamePrefrences.Text = "Game preferences";
-            // 
-            // chb_pref_startGame
-            // 
-            this.chb_pref_startGame.AutoSize = true;
-            this.chb_pref_startGame.Depth = 0;
-            this.chb_pref_startGame.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chb_pref_startGame.Location = new System.Drawing.Point(10, 41);
-            this.chb_pref_startGame.Margin = new System.Windows.Forms.Padding(0);
-            this.chb_pref_startGame.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chb_pref_startGame.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chb_pref_startGame.Name = "chb_pref_startGame";
-            this.chb_pref_startGame.Ripple = true;
-            this.chb_pref_startGame.Size = new System.Drawing.Size(171, 30);
-            this.chb_pref_startGame.TabIndex = 1;
-            this.chb_pref_startGame.Text = "Start game when ready";
-            this.chb_pref_startGame.UseVisualStyleBackColor = true;
-            // 
-            // chb_pref_joinServer
-            // 
-            this.chb_pref_joinServer.AutoSize = true;
-            this.chb_pref_joinServer.Depth = 0;
-            this.chb_pref_joinServer.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chb_pref_joinServer.Location = new System.Drawing.Point(10, 71);
-            this.chb_pref_joinServer.Margin = new System.Windows.Forms.Padding(0);
-            this.chb_pref_joinServer.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chb_pref_joinServer.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chb_pref_joinServer.Name = "chb_pref_joinServer";
-            this.chb_pref_joinServer.Ripple = true;
-            this.chb_pref_joinServer.Size = new System.Drawing.Size(185, 30);
-            this.chb_pref_joinServer.TabIndex = 2;
-            this.chb_pref_joinServer.Text = "Join server automatically";
-            this.chb_pref_joinServer.UseVisualStyleBackColor = true;
-            // 
-            // chb_pref_joinTSServer
-            // 
-            this.chb_pref_joinTSServer.AutoSize = true;
-            this.chb_pref_joinTSServer.Depth = 0;
-            this.chb_pref_joinTSServer.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chb_pref_joinTSServer.Location = new System.Drawing.Point(10, 101);
-            this.chb_pref_joinTSServer.Margin = new System.Windows.Forms.Padding(0);
-            this.chb_pref_joinTSServer.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chb_pref_joinTSServer.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chb_pref_joinTSServer.Name = "chb_pref_joinTSServer";
-            this.chb_pref_joinTSServer.Ripple = true;
-            this.chb_pref_joinTSServer.Size = new System.Drawing.Size(261, 30);
-            this.chb_pref_joinTSServer.TabIndex = 3;
-            this.chb_pref_joinTSServer.Text = "Join TeamSpeak server automatically";
-            this.chb_pref_joinTSServer.UseVisualStyleBackColor = true;
-            // 
-            // chb_pref_serverAutopilot
-            // 
-            this.chb_pref_serverAutopilot.AutoSize = true;
-            this.chb_pref_serverAutopilot.Depth = 0;
-            this.chb_pref_serverAutopilot.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chb_pref_serverAutopilot.Location = new System.Drawing.Point(10, 131);
-            this.chb_pref_serverAutopilot.Margin = new System.Windows.Forms.Padding(0);
-            this.chb_pref_serverAutopilot.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chb_pref_serverAutopilot.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chb_pref_serverAutopilot.Name = "chb_pref_serverAutopilot";
-            this.chb_pref_serverAutopilot.Ripple = true;
-            this.chb_pref_serverAutopilot.Size = new System.Drawing.Size(127, 30);
-            this.chb_pref_serverAutopilot.TabIndex = 4;
-            this.chb_pref_serverAutopilot.Text = "Server autopilot";
-            this.chb_pref_serverAutopilot.UseVisualStyleBackColor = true;
-            this.chb_pref_serverAutopilot.Visible = false;
-            this.chb_pref_serverAutopilot.CheckedChanged += new System.EventHandler(this.chb_pref_serverAutopilot_CheckedChanged);
-            // 
-            // panel18
-            // 
-            this.panel18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.panel18.Location = new System.Drawing.Point(20, 176);
-            this.panel18.Margin = new System.Windows.Forms.Padding(10, 15, 20, 0);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(250, 2);
-            this.panel18.TabIndex = 10;
-            // 
-            // txt_pref_launcherPreferences
-            // 
-            this.txt_pref_launcherPreferences.AutoSize = true;
-            this.txt_pref_launcherPreferences.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.txt_pref_launcherPreferences.Location = new System.Drawing.Point(20, 193);
-            this.txt_pref_launcherPreferences.Margin = new System.Windows.Forms.Padding(10, 15, 15, 5);
-            this.txt_pref_launcherPreferences.Name = "txt_pref_launcherPreferences";
-            this.txt_pref_launcherPreferences.Size = new System.Drawing.Size(159, 21);
-            this.txt_pref_launcherPreferences.TabIndex = 5;
-            this.txt_pref_launcherPreferences.Text = "Launcher preferences";
-            // 
-            // chb_pref_runLauncherStartup
-            // 
-            this.chb_pref_runLauncherStartup.AutoSize = true;
-            this.chb_pref_runLauncherStartup.Depth = 0;
-            this.chb_pref_runLauncherStartup.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chb_pref_runLauncherStartup.Location = new System.Drawing.Point(10, 219);
-            this.chb_pref_runLauncherStartup.Margin = new System.Windows.Forms.Padding(0);
-            this.chb_pref_runLauncherStartup.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chb_pref_runLauncherStartup.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chb_pref_runLauncherStartup.Name = "chb_pref_runLauncherStartup";
-            this.chb_pref_runLauncherStartup.Ripple = true;
-            this.chb_pref_runLauncherStartup.Size = new System.Drawing.Size(200, 30);
-            this.chb_pref_runLauncherStartup.TabIndex = 6;
-            this.chb_pref_runLauncherStartup.Text = "Run the launcher on startup";
-            this.chb_pref_runLauncherStartup.UseVisualStyleBackColor = true;
-            this.chb_pref_runLauncherStartup.Visible = false;
-            this.chb_pref_runLauncherStartup.CheckedChanged += new System.EventHandler(this.chb_pref_runLauncherStartup_CheckedChanged);
-            // 
-            // chb_pref_allowNotifications
-            // 
-            this.chb_pref_allowNotifications.AutoSize = true;
-            this.chb_pref_allowNotifications.Depth = 0;
-            this.chb_pref_allowNotifications.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chb_pref_allowNotifications.Location = new System.Drawing.Point(10, 249);
-            this.chb_pref_allowNotifications.Margin = new System.Windows.Forms.Padding(0);
-            this.chb_pref_allowNotifications.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chb_pref_allowNotifications.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chb_pref_allowNotifications.Name = "chb_pref_allowNotifications";
-            this.chb_pref_allowNotifications.Ripple = true;
-            this.chb_pref_allowNotifications.Size = new System.Drawing.Size(145, 30);
-            this.chb_pref_allowNotifications.TabIndex = 7;
-            this.chb_pref_allowNotifications.Text = "Allow notifications";
-            this.chb_pref_allowNotifications.UseVisualStyleBackColor = true;
-            this.chb_pref_allowNotifications.Visible = false;
-            // 
-            // chb_pref_autoDownload
-            // 
-            this.chb_pref_autoDownload.AutoSize = true;
-            this.chb_pref_autoDownload.Depth = 0;
-            this.chb_pref_autoDownload.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chb_pref_autoDownload.Location = new System.Drawing.Point(10, 279);
-            this.chb_pref_autoDownload.Margin = new System.Windows.Forms.Padding(0);
-            this.chb_pref_autoDownload.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chb_pref_autoDownload.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chb_pref_autoDownload.Name = "chb_pref_autoDownload";
-            this.chb_pref_autoDownload.Ripple = true;
-            this.chb_pref_autoDownload.Size = new System.Drawing.Size(242, 30);
-            this.chb_pref_autoDownload.TabIndex = 8;
-            this.chb_pref_autoDownload.Text = "Auto-download repository updates";
-            this.chb_pref_autoDownload.UseVisualStyleBackColor = true;
-            // 
-            // chb_pref_serverMode
-            // 
-            this.chb_pref_serverMode.AutoSize = true;
-            this.chb_pref_serverMode.Depth = 0;
-            this.chb_pref_serverMode.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chb_pref_serverMode.Location = new System.Drawing.Point(10, 309);
-            this.chb_pref_serverMode.Margin = new System.Windows.Forms.Padding(0);
-            this.chb_pref_serverMode.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.chb_pref_serverMode.MouseState = MaterialSkin.MouseState.HOVER;
-            this.chb_pref_serverMode.Name = "chb_pref_serverMode";
-            this.chb_pref_serverMode.Ripple = true;
-            this.chb_pref_serverMode.Size = new System.Drawing.Size(273, 30);
-            this.chb_pref_serverMode.TabIndex = 9;
-            this.chb_pref_serverMode.Text = "Server Mode (launcher restart required)";
-            this.chb_pref_serverMode.UseVisualStyleBackColor = true;
-            this.chb_pref_serverMode.CheckedChanged += new System.EventHandler(this.chb_pref_serverMode_CheckedChanged);
-            // 
-            // panel17
-            // 
-            this.panel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.panel17.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel17.Location = new System.Drawing.Point(950, 0);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(2, 560);
-            this.panel17.TabIndex = 18;
-            // 
-            // panel16
-            // 
-            this.panel16.Controls.Add(this.panel_TeamSpeakDir);
-            this.panel16.Controls.Add(this.panel15);
-            this.panel16.Controls.Add(this.panel_Arma3Dir);
-            this.panel16.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel16.Location = new System.Drawing.Point(0, 0);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(950, 560);
-            this.panel16.TabIndex = 17;
-            // 
-            // panel_TeamSpeakDir
-            // 
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_pref_ereaseTSDir);
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_pref_openTS3Dir);
-            this.panel_TeamSpeakDir.Controls.Add(this.btn_pref_browseTS3Dir);
-            this.panel_TeamSpeakDir.Controls.Add(this.txtb_pref_tsDirectory);
-            this.panel_TeamSpeakDir.Controls.Add(this.lbl_pref_TeamSpeakDir);
-            this.panel_TeamSpeakDir.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_TeamSpeakDir.Location = new System.Drawing.Point(0, 100);
-            this.panel_TeamSpeakDir.Name = "panel_TeamSpeakDir";
-            this.panel_TeamSpeakDir.Size = new System.Drawing.Size(950, 50);
-            this.panel_TeamSpeakDir.TabIndex = 17;
-            // 
-            // btn_pref_ereaseTSDir
-            // 
-            this.btn_pref_ereaseTSDir.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_pref_ereaseTSDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_ereaseTSDir.Image")));
-            this.btn_pref_ereaseTSDir.Location = new System.Drawing.Point(862, 19);
-            this.btn_pref_ereaseTSDir.Name = "btn_pref_ereaseTSDir";
-            this.btn_pref_ereaseTSDir.Size = new System.Drawing.Size(12, 12);
-            this.btn_pref_ereaseTSDir.TabIndex = 21;
-            this.btn_pref_ereaseTSDir.TabStop = false;
-            this.btn_pref_ereaseTSDir.Click += new System.EventHandler(this.btn_pref_ereaseTSDir_Click);
-            this.btn_pref_ereaseTSDir.MouseEnter += new System.EventHandler(this.btn_pref_ereaseTSDir_MouseEnter);
-            this.btn_pref_ereaseTSDir.MouseLeave += new System.EventHandler(this.btn_pref_ereaseTSDir_MouseLeave);
-            // 
-            // btn_pref_openTS3Dir
-            // 
-            this.btn_pref_openTS3Dir.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_pref_openTS3Dir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_openTS3Dir.Image")));
-            this.btn_pref_openTS3Dir.Location = new System.Drawing.Point(912, 17);
-            this.btn_pref_openTS3Dir.Name = "btn_pref_openTS3Dir";
-            this.btn_pref_openTS3Dir.Size = new System.Drawing.Size(16, 16);
-            this.btn_pref_openTS3Dir.TabIndex = 10;
-            this.btn_pref_openTS3Dir.TabStop = false;
-            this.btn_pref_openTS3Dir.Click += new System.EventHandler(this.btn_pref_openTS3Dir_Click);
-            this.btn_pref_openTS3Dir.MouseEnter += new System.EventHandler(this.btn_pref_openTS3Dir_MouseEnter);
-            this.btn_pref_openTS3Dir.MouseLeave += new System.EventHandler(this.btn_pref_openTS3Dir_MouseLeave);
-            // 
-            // btn_pref_browseTS3Dir
-            // 
-            this.btn_pref_browseTS3Dir.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_pref_browseTS3Dir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_browseTS3Dir.Image")));
-            this.btn_pref_browseTS3Dir.Location = new System.Drawing.Point(892, 17);
-            this.btn_pref_browseTS3Dir.Name = "btn_pref_browseTS3Dir";
-            this.btn_pref_browseTS3Dir.Size = new System.Drawing.Size(16, 16);
-            this.btn_pref_browseTS3Dir.TabIndex = 9;
-            this.btn_pref_browseTS3Dir.TabStop = false;
-            this.btn_pref_browseTS3Dir.Click += new System.EventHandler(this.btn_pref_browseTS3Dir_Click);
-            this.btn_pref_browseTS3Dir.MouseEnter += new System.EventHandler(this.btn_pref_browseTS3Dir_MouseEnter);
-            this.btn_pref_browseTS3Dir.MouseLeave += new System.EventHandler(this.btn_pref_browseTS3Dir_MouseLeave);
-            // 
-            // txtb_pref_tsDirectory
-            // 
-            this.txtb_pref_tsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_pref_tsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_pref_tsDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtb_pref_tsDirectory.Location = new System.Drawing.Point(172, 12);
-            this.txtb_pref_tsDirectory.Name = "txtb_pref_tsDirectory";
-            this.txtb_pref_tsDirectory.Size = new System.Drawing.Size(707, 25);
-            this.txtb_pref_tsDirectory.TabIndex = 2;
-            this.txtb_pref_tsDirectory.TabStop = false;
-            this.txtb_pref_tsDirectory.Text = "Set directory ->";
-            this.txtb_pref_tsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_tsDirectory_MouseClick);
-            this.txtb_pref_tsDirectory.TextChanged += new System.EventHandler(this.txtb_pref_tsDirectory_TextChanged);
-            this.txtb_pref_tsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_tsDirectory_MouseDoubleClick);
-            // 
-            // lbl_pref_TeamSpeakDir
-            // 
-            this.lbl_pref_TeamSpeakDir.AutoSize = true;
-            this.lbl_pref_TeamSpeakDir.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lbl_pref_TeamSpeakDir.Location = new System.Drawing.Point(7, 15);
-            this.lbl_pref_TeamSpeakDir.Name = "lbl_pref_TeamSpeakDir";
-            this.lbl_pref_TeamSpeakDir.Size = new System.Drawing.Size(150, 19);
-            this.lbl_pref_TeamSpeakDir.TabIndex = 1;
-            this.lbl_pref_TeamSpeakDir.Text = "TeamSpeak 3 directory:";
-            // 
-            // panel15
-            // 
-            this.panel15.Controls.Add(this.lbl_pref_AddonsDir);
-            this.panel15.Controls.Add(this.btn_pref_ereaseAddonsDir);
-            this.panel15.Controls.Add(this.btn_pref_openAddonsDir);
-            this.panel15.Controls.Add(this.btn_pref_browseAddonsDir);
-            this.panel15.Controls.Add(this.txtb_pref_addonsDirectory);
-            this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel15.Location = new System.Drawing.Point(0, 50);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(950, 50);
-            this.panel15.TabIndex = 19;
-            // 
-            // lbl_pref_AddonsDir
-            // 
-            this.lbl_pref_AddonsDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbl_pref_AddonsDir.AutoSize = true;
-            this.lbl_pref_AddonsDir.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lbl_pref_AddonsDir.Location = new System.Drawing.Point(7, 15);
-            this.lbl_pref_AddonsDir.Name = "lbl_pref_AddonsDir";
-            this.lbl_pref_AddonsDir.Size = new System.Drawing.Size(117, 19);
-            this.lbl_pref_AddonsDir.TabIndex = 12;
-            this.lbl_pref_AddonsDir.Text = "Addons directory:";
-            // 
-            // btn_pref_ereaseAddonsDir
-            // 
-            this.btn_pref_ereaseAddonsDir.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_pref_ereaseAddonsDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_ereaseAddonsDir.Image")));
-            this.btn_pref_ereaseAddonsDir.Location = new System.Drawing.Point(862, 19);
-            this.btn_pref_ereaseAddonsDir.Name = "btn_pref_ereaseAddonsDir";
-            this.btn_pref_ereaseAddonsDir.Size = new System.Drawing.Size(12, 12);
-            this.btn_pref_ereaseAddonsDir.TabIndex = 20;
-            this.btn_pref_ereaseAddonsDir.TabStop = false;
-            this.btn_pref_ereaseAddonsDir.Click += new System.EventHandler(this.btn_pref_ereaseAddonsDir_Click);
-            this.btn_pref_ereaseAddonsDir.MouseEnter += new System.EventHandler(this.btn_pref_ereaseAddonsDir_MouseEnter);
-            this.btn_pref_ereaseAddonsDir.MouseLeave += new System.EventHandler(this.btn_pref_ereaseAddonsDir_MouseLeave);
-            // 
-            // btn_pref_openAddonsDir
-            // 
-            this.btn_pref_openAddonsDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_pref_openAddonsDir.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_pref_openAddonsDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_openAddonsDir.Image")));
-            this.btn_pref_openAddonsDir.Location = new System.Drawing.Point(911, 17);
-            this.btn_pref_openAddonsDir.Name = "btn_pref_openAddonsDir";
-            this.btn_pref_openAddonsDir.Size = new System.Drawing.Size(16, 16);
-            this.btn_pref_openAddonsDir.TabIndex = 11;
-            this.btn_pref_openAddonsDir.TabStop = false;
-            this.btn_pref_openAddonsDir.Click += new System.EventHandler(this.btn_pref_openAddonsDir_Click);
-            this.btn_pref_openAddonsDir.MouseEnter += new System.EventHandler(this.btn_pref_openAddonsDir_MouseEnter);
-            this.btn_pref_openAddonsDir.MouseLeave += new System.EventHandler(this.btn_pref_openAddonsDir_MouseLeave);
-            // 
-            // btn_pref_browseAddonsDir
-            // 
-            this.btn_pref_browseAddonsDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_pref_browseAddonsDir.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_pref_browseAddonsDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_browseAddonsDir.Image")));
-            this.btn_pref_browseAddonsDir.Location = new System.Drawing.Point(892, 17);
-            this.btn_pref_browseAddonsDir.Name = "btn_pref_browseAddonsDir";
-            this.btn_pref_browseAddonsDir.Size = new System.Drawing.Size(16, 16);
-            this.btn_pref_browseAddonsDir.TabIndex = 10;
-            this.btn_pref_browseAddonsDir.TabStop = false;
-            this.btn_pref_browseAddonsDir.Click += new System.EventHandler(this.btn_pref_browseAddonsDir_Click);
-            this.btn_pref_browseAddonsDir.MouseEnter += new System.EventHandler(this.btn_pref_browseAddonsDir_MouseEnter);
-            this.btn_pref_browseAddonsDir.MouseLeave += new System.EventHandler(this.btn_pref_browseAddonsDir_MouseLeave);
-            // 
-            // txtb_pref_addonsDirectory
-            // 
-            this.txtb_pref_addonsDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtb_pref_addonsDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_pref_addonsDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_pref_addonsDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtb_pref_addonsDirectory.Location = new System.Drawing.Point(172, 12);
-            this.txtb_pref_addonsDirectory.Name = "txtb_pref_addonsDirectory";
-            this.txtb_pref_addonsDirectory.Size = new System.Drawing.Size(707, 25);
-            this.txtb_pref_addonsDirectory.TabIndex = 4;
-            this.txtb_pref_addonsDirectory.Text = "Set directory ->";
-            this.txtb_pref_addonsDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_addonsDirectory_MouseClick);
-            this.txtb_pref_addonsDirectory.TextChanged += new System.EventHandler(this.txtb_pref_addonsDirectory_TextChanged);
-            this.txtb_pref_addonsDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_addonsDirectory_MouseDoubleClick);
-            // 
-            // panel_Arma3Dir
-            // 
-            this.panel_Arma3Dir.Controls.Add(this.btn_pref_openA3Dir);
-            this.panel_Arma3Dir.Controls.Add(this.btn_pref_browseA3Dir);
-            this.panel_Arma3Dir.Controls.Add(this.btn_pref_ereaseArmaDir);
-            this.panel_Arma3Dir.Controls.Add(this.lbl_pref_Arma3Dir);
-            this.panel_Arma3Dir.Controls.Add(this.txtb_pref_armaDirectory);
-            this.panel_Arma3Dir.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_Arma3Dir.Location = new System.Drawing.Point(0, 0);
-            this.panel_Arma3Dir.Name = "panel_Arma3Dir";
-            this.panel_Arma3Dir.Size = new System.Drawing.Size(950, 50);
-            this.panel_Arma3Dir.TabIndex = 18;
-            // 
-            // btn_pref_openA3Dir
-            // 
-            this.btn_pref_openA3Dir.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_pref_openA3Dir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_openA3Dir.Image")));
-            this.btn_pref_openA3Dir.Location = new System.Drawing.Point(912, 17);
-            this.btn_pref_openA3Dir.Name = "btn_pref_openA3Dir";
-            this.btn_pref_openA3Dir.Size = new System.Drawing.Size(16, 16);
-            this.btn_pref_openA3Dir.TabIndex = 11;
-            this.btn_pref_openA3Dir.TabStop = false;
-            this.btn_pref_openA3Dir.Click += new System.EventHandler(this.btn_pref_openA3Dir_Click);
-            this.btn_pref_openA3Dir.MouseEnter += new System.EventHandler(this.btn_pref_openA3Dir_MouseEnter);
-            this.btn_pref_openA3Dir.MouseLeave += new System.EventHandler(this.btn_pref_openA3Dir_MouseLeave);
-            // 
-            // btn_pref_browseA3Dir
-            // 
-            this.btn_pref_browseA3Dir.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_pref_browseA3Dir.Image = global::arma3Launcher.Properties.Resources.addfolder_idle;
-            this.btn_pref_browseA3Dir.Location = new System.Drawing.Point(892, 17);
-            this.btn_pref_browseA3Dir.Name = "btn_pref_browseA3Dir";
-            this.btn_pref_browseA3Dir.Size = new System.Drawing.Size(16, 16);
-            this.btn_pref_browseA3Dir.TabIndex = 8;
-            this.btn_pref_browseA3Dir.TabStop = false;
-            this.btn_pref_browseA3Dir.Click += new System.EventHandler(this.btn_pref_browseA3Dir_Click);
-            this.btn_pref_browseA3Dir.MouseEnter += new System.EventHandler(this.btn_pref_browseA3Dir_MouseEnter);
-            this.btn_pref_browseA3Dir.MouseLeave += new System.EventHandler(this.btn_pref_browseA3Dir_MouseLeave);
-            // 
-            // btn_pref_ereaseArmaDir
-            // 
-            this.btn_pref_ereaseArmaDir.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_pref_ereaseArmaDir.Image = ((System.Drawing.Image)(resources.GetObject("btn_pref_ereaseArmaDir.Image")));
-            this.btn_pref_ereaseArmaDir.Location = new System.Drawing.Point(862, 19);
-            this.btn_pref_ereaseArmaDir.Name = "btn_pref_ereaseArmaDir";
-            this.btn_pref_ereaseArmaDir.Size = new System.Drawing.Size(12, 12);
-            this.btn_pref_ereaseArmaDir.TabIndex = 12;
-            this.btn_pref_ereaseArmaDir.TabStop = false;
-            this.btn_pref_ereaseArmaDir.Click += new System.EventHandler(this.btn_pref_ereaseArmaDir_Click);
-            this.btn_pref_ereaseArmaDir.MouseEnter += new System.EventHandler(this.btn_pref_ereaseArmaDir_MouseEnter);
-            this.btn_pref_ereaseArmaDir.MouseLeave += new System.EventHandler(this.btn_pref_ereaseArmaDir_MouseLeave);
-            // 
-            // lbl_pref_Arma3Dir
-            // 
-            this.lbl_pref_Arma3Dir.AutoSize = true;
-            this.lbl_pref_Arma3Dir.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lbl_pref_Arma3Dir.Location = new System.Drawing.Point(7, 15);
-            this.lbl_pref_Arma3Dir.Name = "lbl_pref_Arma3Dir";
-            this.lbl_pref_Arma3Dir.Size = new System.Drawing.Size(115, 19);
-            this.lbl_pref_Arma3Dir.TabIndex = 0;
-            this.lbl_pref_Arma3Dir.Text = "Arma 3 directory:";
-            // 
-            // txtb_pref_armaDirectory
-            // 
-            this.txtb_pref_armaDirectory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtb_pref_armaDirectory.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtb_pref_armaDirectory.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtb_pref_armaDirectory.Location = new System.Drawing.Point(172, 12);
-            this.txtb_pref_armaDirectory.Name = "txtb_pref_armaDirectory";
-            this.txtb_pref_armaDirectory.Size = new System.Drawing.Size(707, 25);
-            this.txtb_pref_armaDirectory.TabIndex = 3;
-            this.txtb_pref_armaDirectory.TabStop = false;
-            this.txtb_pref_armaDirectory.Text = "Set directory ->";
-            this.txtb_pref_armaDirectory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_armaDirectory_MouseClick);
-            this.txtb_pref_armaDirectory.TextChanged += new System.EventHandler(this.txtb_pref_armaDirectory_TextChanged);
-            this.txtb_pref_armaDirectory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtb_pref_armaDirectory_MouseDoubleClick);
-            // 
-            // lbl_preferences
-            // 
-            this.lbl_preferences.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbl_preferences.AutoSize = true;
-            this.lbl_preferences.Font = new System.Drawing.Font("Bebas Neue Book", 36F);
-            this.lbl_preferences.ForeColor = System.Drawing.Color.DimGray;
-            this.lbl_preferences.Location = new System.Drawing.Point(10, 15);
-            this.lbl_preferences.Name = "lbl_preferences";
-            this.lbl_preferences.Size = new System.Drawing.Size(217, 49);
-            this.lbl_preferences.TabIndex = 3;
-            this.lbl_preferences.Text = "Preferences";
-            // 
             // win_titleBar
             // 
             this.win_titleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -2577,149 +2745,6 @@
             this.btn_windowMinimize.MouseEnter += new System.EventHandler(this.btn_windowMinimize_MouseEnter);
             this.btn_windowMinimize.MouseLeave += new System.EventHandler(this.btn_windowMinimize_MouseLeave);
             // 
-            // tlp_mallocSettings
-            // 
-            this.tlp_mallocSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlp_mallocSettings.ColumnCount = 2;
-            this.tlp_mallocSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96.81416F));
-            this.tlp_mallocSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.185841F));
-            this.tlp_mallocSettings.Controls.Add(this.cb_malloc, 0, 0);
-            this.tlp_mallocSettings.Controls.Add(this.btn_reloadMallocs, 1, 0);
-            this.tlp_mallocSettings.Location = new System.Drawing.Point(129, 209);
-            this.tlp_mallocSettings.Margin = new System.Windows.Forms.Padding(3, 0, 8, 3);
-            this.tlp_mallocSettings.Name = "tlp_mallocSettings";
-            this.tlp_mallocSettings.RowCount = 1;
-            this.tlp_mallocSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp_mallocSettings.Size = new System.Drawing.Size(548, 29);
-            this.tlp_mallocSettings.TabIndex = 17;
-            // 
-            // cb_malloc
-            // 
-            this.cb_malloc.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cb_malloc.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.cb_malloc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cb_malloc.Enabled = false;
-            this.cb_malloc.Font = new System.Drawing.Font("Lato", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_malloc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.cb_malloc.FormattingEnabled = true;
-            this.cb_malloc.ItemHeight = 23;
-            this.cb_malloc.Location = new System.Drawing.Point(0, 0);
-            this.cb_malloc.Margin = new System.Windows.Forms.Padding(0);
-            this.cb_malloc.Name = "cb_malloc";
-            this.cb_malloc.Size = new System.Drawing.Size(530, 29);
-            this.cb_malloc.Style = MetroFramework.MetroColorStyle.Lime;
-            this.cb_malloc.TabIndex = 17;
-            this.cb_malloc.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.cb_malloc.UseSelectable = true;
-            // 
-            // btn_reloadMallocs
-            // 
-            this.btn_reloadMallocs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_reloadMallocs.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_reloadMallocs.Location = new System.Drawing.Point(532, 7);
-            this.btn_reloadMallocs.Margin = new System.Windows.Forms.Padding(0, 7, 0, 3);
-            this.btn_reloadMallocs.Name = "btn_reloadMallocs";
-            this.btn_reloadMallocs.Size = new System.Drawing.Size(16, 16);
-            this.btn_reloadMallocs.TabIndex = 18;
-            this.btn_reloadMallocs.TabStop = false;
-            // 
-            // doubleBufferFlowPanel1
-            // 
-            this.doubleBufferFlowPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel5);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel6);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel7);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel8);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel9);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel10);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel11);
-            this.doubleBufferFlowPanel1.Location = new System.Drawing.Point(0, 0);
-            this.doubleBufferFlowPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.doubleBufferFlowPanel1.Name = "doubleBufferFlowPanel1";
-            this.doubleBufferFlowPanel1.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
-            this.doubleBufferFlowPanel1.Size = new System.Drawing.Size(300, 599);
-            this.doubleBufferFlowPanel1.TabIndex = 11;
-            // 
-            // doubleBufferPanel5
-            // 
-            this.doubleBufferPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferPanel5.Controls.Add(this.menu_addonPacks);
-            this.doubleBufferPanel5.Location = new System.Drawing.Point(0, 20);
-            this.doubleBufferPanel5.Margin = new System.Windows.Forms.Padding(0);
-            this.doubleBufferPanel5.MaximumSize = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel5.MinimumSize = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel5.Name = "doubleBufferPanel5";
-            this.doubleBufferPanel5.Size = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel5.TabIndex = 0;
-            // 
-            // doubleBufferPanel6
-            // 
-            this.doubleBufferPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferPanel6.BackColor = System.Drawing.Color.DimGray;
-            this.doubleBufferPanel6.Location = new System.Drawing.Point(15, 55);
-            this.doubleBufferPanel6.Margin = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.doubleBufferPanel6.Name = "doubleBufferPanel6";
-            this.doubleBufferPanel6.Size = new System.Drawing.Size(270, 1);
-            this.doubleBufferPanel6.TabIndex = 11;
-            // 
-            // doubleBufferPanel7
-            // 
-            this.doubleBufferPanel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferPanel7.Controls.Add(this.menu_launchOptions);
-            this.doubleBufferPanel7.Location = new System.Drawing.Point(0, 61);
-            this.doubleBufferPanel7.Margin = new System.Windows.Forms.Padding(0);
-            this.doubleBufferPanel7.MaximumSize = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel7.MinimumSize = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel7.Name = "doubleBufferPanel7";
-            this.doubleBufferPanel7.Size = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel7.TabIndex = 12;
-            // 
-            // doubleBufferPanel8
-            // 
-            this.doubleBufferPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferPanel8.BackColor = System.Drawing.Color.DimGray;
-            this.doubleBufferPanel8.Location = new System.Drawing.Point(15, 96);
-            this.doubleBufferPanel8.Margin = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.doubleBufferPanel8.Name = "doubleBufferPanel8";
-            this.doubleBufferPanel8.Size = new System.Drawing.Size(270, 1);
-            this.doubleBufferPanel8.TabIndex = 13;
-            // 
-            // doubleBufferPanel9
-            // 
-            this.doubleBufferPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferPanel9.Controls.Add(this.menu_repositoryDownloads);
-            this.doubleBufferPanel9.Controls.Add(this.img_repoBusy);
-            this.doubleBufferPanel9.Location = new System.Drawing.Point(0, 102);
-            this.doubleBufferPanel9.Margin = new System.Windows.Forms.Padding(0);
-            this.doubleBufferPanel9.MaximumSize = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel9.MinimumSize = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel9.Name = "doubleBufferPanel9";
-            this.doubleBufferPanel9.Size = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel9.TabIndex = 14;
-            // 
-            // doubleBufferPanel10
-            // 
-            this.doubleBufferPanel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferPanel10.BackColor = System.Drawing.Color.DimGray;
-            this.doubleBufferPanel10.Location = new System.Drawing.Point(15, 137);
-            this.doubleBufferPanel10.Margin = new System.Windows.Forms.Padding(15, 5, 15, 5);
-            this.doubleBufferPanel10.Name = "doubleBufferPanel10";
-            this.doubleBufferPanel10.Size = new System.Drawing.Size(270, 1);
-            this.doubleBufferPanel10.TabIndex = 15;
-            // 
-            // doubleBufferPanel11
-            // 
-            this.doubleBufferPanel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferPanel11.Controls.Add(this.menu_preferences);
-            this.doubleBufferPanel11.Location = new System.Drawing.Point(0, 143);
-            this.doubleBufferPanel11.Margin = new System.Windows.Forms.Padding(0);
-            this.doubleBufferPanel11.MaximumSize = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel11.MinimumSize = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel11.Name = "doubleBufferPanel11";
-            this.doubleBufferPanel11.Size = new System.Drawing.Size(300, 30);
-            this.doubleBufferPanel11.TabIndex = 16;
-            // 
             // MainForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -2729,6 +2754,7 @@
             this.Controls.Add(this.win_mainWindow);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1300, 793);
             this.MinimumSize = new System.Drawing.Size(1300, 700);
@@ -2742,13 +2768,45 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.flowAddonsMenu.ResumeLayout(false);
             this.repositoryMenu.ResumeLayout(false);
+            this.tlp_mallocSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).EndInit();
             this.win_mainWindow.ResumeLayout(false);
             this.panel_sideMenu.ResumeLayout(false);
+            this.doubleBufferFlowPanel1.ResumeLayout(false);
+            this.doubleBufferPanel5.ResumeLayout(false);
+            this.doubleBufferPanel5.PerformLayout();
+            this.doubleBufferPanel7.ResumeLayout(false);
+            this.doubleBufferPanel7.PerformLayout();
+            this.doubleBufferPanel9.ResumeLayout(false);
+            this.doubleBufferPanel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.img_repoBusy)).EndInit();
+            this.doubleBufferPanel11.ResumeLayout(false);
+            this.doubleBufferPanel11.PerformLayout();
             this.doubleBufferPanel4.ResumeLayout(false);
             this.doubleBufferPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.img_repoBusy)).EndInit();
             this.panel_mainPanel.ResumeLayout(false);
             this.panel_outterPanel.ResumeLayout(false);
+            this.panel_preferences.ResumeLayout(false);
+            this.panel_preferences.PerformLayout();
+            this.panel_contentPreferences.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel_TeamSpeakDir.ResumeLayout(false);
+            this.panel_TeamSpeakDir.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseTSDir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openTS3Dir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseTS3Dir)).EndInit();
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseAddonsDir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openAddonsDir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseAddonsDir)).EndInit();
+            this.panel_Arma3Dir.ResumeLayout(false);
+            this.panel_Arma3Dir.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openA3Dir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseA3Dir)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseArmaDir)).EndInit();
             this.panel_repositoryDownloads.ResumeLayout(false);
             this.panel_repositoryDownloads.PerformLayout();
             this.panel_contentRepositoryDownloads.ResumeLayout(false);
@@ -2792,43 +2850,11 @@
             this.flowpanel_steamworkshopAddonsList.PerformLayout();
             this.doubleBufferPanel3.ResumeLayout(false);
             this.doubleBufferPanel3.PerformLayout();
-            this.panel_preferences.ResumeLayout(false);
-            this.panel_preferences.PerformLayout();
-            this.panel_contentPreferences.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            this.panel16.ResumeLayout(false);
-            this.panel_TeamSpeakDir.ResumeLayout(false);
-            this.panel_TeamSpeakDir.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseTSDir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openTS3Dir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseTS3Dir)).EndInit();
-            this.panel15.ResumeLayout(false);
-            this.panel15.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseAddonsDir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openAddonsDir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseAddonsDir)).EndInit();
-            this.panel_Arma3Dir.ResumeLayout(false);
-            this.panel_Arma3Dir.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openA3Dir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseA3Dir)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseArmaDir)).EndInit();
             this.win_titleBar.ResumeLayout(false);
             this.win_titleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMinimize)).EndInit();
-            this.tlp_mallocSettings.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btn_reloadMallocs)).EndInit();
-            this.doubleBufferFlowPanel1.ResumeLayout(false);
-            this.doubleBufferPanel5.ResumeLayout(false);
-            this.doubleBufferPanel5.PerformLayout();
-            this.doubleBufferPanel7.ResumeLayout(false);
-            this.doubleBufferPanel7.PerformLayout();
-            this.doubleBufferPanel9.ResumeLayout(false);
-            this.doubleBufferPanel9.PerformLayout();
-            this.doubleBufferPanel11.ResumeLayout(false);
-            this.doubleBufferPanel11.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3010,5 +3036,6 @@
         private Controls.DoubleBufferPanel doubleBufferPanel9;
         private Controls.DoubleBufferPanel doubleBufferPanel10;
         private Controls.DoubleBufferPanel doubleBufferPanel11;
+        private MaterialSkin.Controls.MaterialCheckBox chb_pref_disableAnimations;
     }
 }

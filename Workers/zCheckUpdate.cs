@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using System.Reflection;
 //using System.Threading;
 using System.IO;
+using System.Net;
+using System.Diagnostics;
 
 namespace arma3Launcher.Workers
 {
@@ -21,7 +23,8 @@ namespace arma3Launcher.Workers
         private readonly Label txt_versiontag;
 
         private string urlversionxml = Properties.GlobalValues.S_VersionXML;
-        //private string zversionxml = Application.StartupPath + @"\zversion.xml";
+        private string NewVersionS = string.Empty;
+        private string CurVersionS = string.Empty;
 
         public zCheckUpdate(Label VersionTag)
         {
@@ -43,8 +46,8 @@ namespace arma3Launcher.Workers
 
             bool ContinueStart = true;
 
-            string NewVersionS = string.Empty;
-            string CurVersionS = string.Empty;
+            NewVersionS = string.Empty;
+            CurVersionS = string.Empty;
             string aux_vBuild = string.Empty;
 
             try
@@ -112,7 +115,7 @@ namespace arma3Launcher.Workers
                     if (GlobalVar.isDebug)
                         msgBtns = MessageBoxButtons.OKCancel;
 
-                    if (MessageBox.Show("There's a new launcher version available.", "Version " + NewVersionS + " available", msgBtns, MessageBoxIcon.Information) == DialogResult.OK)
+                    if (new Windows.MessageBox().Show("There's a new launcher version available.", "Version " + NewVersionS + " available", msgBtns, MessageIcon.Information) == DialogResult.OK)
                     { ContinueStart = false; }
                     else
                     { ContinueStart = true; }
@@ -127,7 +130,7 @@ namespace arma3Launcher.Workers
                     if (GlobalVar.isDebug)
                         msgBtns = MessageBoxButtons.OKCancel;
 
-                    if (MessageBox.Show("The launcher needs to downgrade to a stable version.", "Version " + NewVersionS + " available", msgBtns, MessageBoxIcon.Information) == DialogResult.OK)
+                    if (new Windows.MessageBox().Show("The launcher needs to downgrade to a stable version.", "Version " + NewVersionS + " available", msgBtns, MessageIcon.Information) == DialogResult.OK)
                     { ContinueStart = false; }
                     else
                     { ContinueStart = true; }
@@ -140,83 +143,41 @@ namespace arma3Launcher.Workers
             return ContinueStart;
         }
 
-        public void CheckUpdates()
+        public void StartUpdate()
         {
-            Version NewVersion = null;
-            Version CurVersion = null;
-            string aux_vBuild = string.Empty;
-
             try
             {
-                try
-                {
-                    #region NewUpdateXmlInfo
-                    XmlDocument NewUpdateXmlInfo = new XmlDocument();
-                    NewUpdateXmlInfo.Load(urlversionxml);
+                WebClient update_file = new WebClient();
+                Uri update_url = new Uri(Properties.GlobalValues.S_UpdateUrl);
 
-                    int new_versionmajor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["major"].Value);
-                    int new_versionminor = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["minor"].Value);
-                    int new_versionbuild = Convert.ToInt32(NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["build"].Value);
-                    string new_versiontag = NewUpdateXmlInfo.SelectSingleNode("//arma3Launcher//LauncherInfo//Version").Attributes["tag"].Value;
-
-                    NewVersion = new Version(new_versionmajor, new_versionminor, new_versionbuild);
-                    #endregion
-
-                    if (NewVersion.Build != 0)
-                        aux_vBuild = "." + NewVersion.Build;
-                    else
-                        aux_vBuild = string.Empty;
-
-                    if (new_versiontag != string.Empty)
-                        txt_New.Text = NewVersion.Major + "." + NewVersion.Minor + aux_vBuild + " (" + new_versiontag + ")";
-                    else
-                        txt_New.Text = NewVersion.Major + "." + NewVersion.Minor + aux_vBuild;
-                }
-                catch
-                {
-                    txt_New.Text = "Unable to get information from the server!";
-                    btn_Update.Enabled = false;
-                }
-
-                try
-                {
-                    #region CurVersionXmlInfo
-                    int cur_versionmajor = Assembly.GetExecutingAssembly().GetName().Version.Major;
-                    int cur_versionminor = Assembly.GetExecutingAssembly().GetName().Version.Minor;
-                    int cur_versionbuild = Assembly.GetExecutingAssembly().GetName().Version.Build;
-                    string cur_versiontag = Properties.GlobalValues.S_VersionTag;
-
-                    CurVersion = new Version(cur_versionmajor, cur_versionminor, cur_versionbuild);
-                    #endregion
-
-                    if (CurVersion.Build != 0)
-                        aux_vBuild = "." + CurVersion.Build;
-                    else
-                        aux_vBuild = string.Empty;
-
-                    if (cur_versiontag != string.Empty)
-                        txt_Cur.Text = CurVersion.Major + "." + CurVersion.Minor + aux_vBuild + " (" + cur_versiontag + ")";
-                    else
-                        txt_Cur.Text = CurVersion.Major + "." + CurVersion.Minor + aux_vBuild;
-                }
-                catch
-                {
-                    txt_Cur.Text = "Unable to determinate installed version";
-                }
-
-                if (NewVersion > CurVersion)
-                { btn_Update.Enabled = true; btn_Update.Text = "Update"; btn_checkUpdate.Enabled = false; }
-                else if (NewVersion < CurVersion)
-                { btn_Update.Enabled = true; btn_Update.Text = "Downgrade"; btn_checkUpdate.Enabled = false; }
-                else
-                { btn_Update.Enabled = true; btn_Update.Text = "Reinstall"; }
+                update_file.DownloadFile(update_url, Application.ExecutablePath.Remove(Application.ExecutablePath.Length - Process.GetCurrentProcess().MainModule.ModuleName.Length) + "zUpdator.exe");
             }
-            catch (Exception AllEx)
+            catch (Exception ex)
             {
-                btn_Update.Enabled = false;
+                new Windows.MessageBox().Show(ex.Message, "Unable to download zUpdator");
+            }
+            finally
+            {
 
-                if (GlobalVar.isDebug)
-                    MessageBox.Show(AllEx.Message, "DEBUG MODE");
+                try
+                {
+                    var fass = new ProcessStartInfo();
+                    fass.WorkingDirectory = Application.ExecutablePath.Remove(Application.ExecutablePath.Length - Process.GetCurrentProcess().MainModule.ModuleName.Length);
+                    fass.FileName = "zUpdator.exe";
+                    fass.Arguments = "-curversion=" + CurVersionS +
+                        " -newversion=" + NewVersionS +
+                        " -filename=" + Process.GetCurrentProcess().MainModule.ModuleName;
+
+                    Application.Exit();
+
+                    var process = new Process();
+                    process.StartInfo = fass;
+                    process.Start();
+                }
+                catch (Exception ex)
+                {
+                    new Windows.MessageBox().Show(ex.Message, "Unable to start zUpdator");
+                }
             }
         }
     }

@@ -234,7 +234,7 @@ namespace arma3Launcher.Workers
             
         }
 
-        private async void ValidateRepo_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void ValidateRepo_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             GlobalVar.isReadingRepo = false;
 
@@ -249,7 +249,7 @@ namespace arma3Launcher.Workers
                 GlobalVar.repoChecked = true;
 
                 if (showMessage)
-                    MessageBox.Show("All files are synced with the repository!", "You're amazing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    new Windows.MessageBox().Show("All files are synced with the repository!", "You're amazing", MessageBoxButtons.OK, MessageIcon.Information);
             }
             else
             {
@@ -266,7 +266,7 @@ namespace arma3Launcher.Workers
                         this.mainForm.HideUnhide(GlobalVar.menuSelected);
                     }
 
-                    if (GlobalVar.autoPilot || autoDownload || (showMessage && MessageBox.Show("Your local files are not in sync with the repository.\nDo you want to download the missing files?", "Repository has new updates", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
+                    if (GlobalVar.autoPilot || autoDownload || (showMessage && new Windows.MessageBox().Show("Your local files are not in sync with the repository.\nDo you want to download the missing files?", "Repository has new updates", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes))
                         downloader.beginDownload(GlobalVar.files2Download, GlobalVar.autoPilot);
                 }
                 else
@@ -316,7 +316,7 @@ namespace arma3Launcher.Workers
             }
             catch (WebException e)
             {
-                MessageBox.Show(e.Message, "Unable to get repository info");
+                new Windows.MessageBox().Show(e.Message, "Unable to get repository info");
             }
 
             return tempFile;

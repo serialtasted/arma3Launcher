@@ -370,10 +370,15 @@ namespace arma3Launcher.Effects
             {
                 if (innerPanelObject.Width < originalInnerValue)
                 {
-                    if (innerPanelObject.Width + velocity < originalInnerValue)
-                        setPanelWidth(innerPanelObject, innerPanelObject.Width + velocity);
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (innerPanelObject.Width + velocity < originalInnerValue)
+                            setPanelWidth(innerPanelObject, innerPanelObject.Width + velocity);
+                        else
+                            setPanelWidth(innerPanelObject, innerPanelObject.Width + 1);
+                    }
                     else
-                        setPanelWidth(innerPanelObject, innerPanelObject.Width + 1);
+                    { setPanelWidth(innerPanelObject, originalInnerValue); }
                 }
                 else
                 {
@@ -385,16 +390,20 @@ namespace arma3Launcher.Effects
             {
                 if (innerPanelObject.Height < originalInnerValue)
                 {
-                    if (innerPanelObject.Height + velocity < originalInnerValue)
-                        setPanelHeight(innerPanelObject, innerPanelObject.Height + velocity);
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (innerPanelObject.Height + velocity < originalInnerValue)
+                            setPanelHeight(innerPanelObject, innerPanelObject.Height + velocity);
+                        else
+                            setPanelHeight(innerPanelObject, innerPanelObject.Height + 1);
+                    }
                     else
-                        setPanelHeight(innerPanelObject, innerPanelObject.Height + 1);
+                    { setPanelHeight(innerPanelObject, originalInnerValue); }
                 }
                 else
                 {
                     effectInInner.Stop();
                     GlobalVar.isAnimating = false;
-                    
                 }
             }
         }
@@ -405,10 +414,15 @@ namespace arma3Launcher.Effects
             {
                 if (innerPanelObject.Width > baseInnerValue)
                 {
-                    if (innerPanelObject.Width - velocity > baseInnerValue)
-                        setPanelWidth(innerPanelObject, innerPanelObject.Width - velocity);
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (innerPanelObject.Width - velocity > baseInnerValue)
+                            setPanelWidth(innerPanelObject, innerPanelObject.Width - velocity);
+                        else
+                            setPanelWidth(innerPanelObject, innerPanelObject.Width - 1);
+                    }
                     else
-                        setPanelWidth(innerPanelObject, innerPanelObject.Width - 1);
+                    { setPanelWidth(innerPanelObject, baseInnerValue); }
                 }
                 else
                 {
@@ -425,10 +439,15 @@ namespace arma3Launcher.Effects
             {
                 if (innerPanelObject.Height > baseInnerValue)
                 {
-                    if (innerPanelObject.Height - velocity > baseInnerValue)
-                        setPanelHeight(innerPanelObject, innerPanelObject.Height - velocity);
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (innerPanelObject.Height - velocity > baseInnerValue)
+                            setPanelHeight(innerPanelObject, innerPanelObject.Height - velocity);
+                        else
+                            setPanelHeight(innerPanelObject, innerPanelObject.Height - 1);
+                    }
                     else
-                        setPanelHeight(innerPanelObject, innerPanelObject.Height - 1);
+                    { setPanelHeight(innerPanelObject, baseInnerValue); }
                 }
                 else
                 {
@@ -449,10 +468,15 @@ namespace arma3Launcher.Effects
             {
                 if (outterPanelObject.Width < originalOutterValue)
                 {
-                    if (outterPanelObject.Width + velocity < originalOutterValue)
-                        setPanelWidth(outterPanelObject, outterPanelObject.Width + velocity);
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (outterPanelObject.Width + velocity < originalOutterValue)
+                            setPanelWidth(outterPanelObject, outterPanelObject.Width + velocity);
+                        else
+                            setPanelWidth(outterPanelObject, outterPanelObject.Width + 1);
+                    }
                     else
-                        setPanelWidth(outterPanelObject, outterPanelObject.Width + 1);
+                    { setPanelWidth(outterPanelObject, originalOutterValue); }
                 }
                 else
                 { effectInOutter.Stop(); }
@@ -463,10 +487,15 @@ namespace arma3Launcher.Effects
             {
                 if (outterPanelObject.Height < originalOutterValue)
                 {
-                    if (outterPanelObject.Height + velocity < originalOutterValue)
-                        setPanelHeight(outterPanelObject, outterPanelObject.Height + velocity);
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (outterPanelObject.Height + velocity < originalOutterValue)
+                            setPanelHeight(outterPanelObject, outterPanelObject.Height + velocity);
+                        else
+                            setPanelHeight(outterPanelObject, outterPanelObject.Height + 1);
+                    }
                     else
-                        setPanelHeight(outterPanelObject, outterPanelObject.Height + 1);
+                    { setPanelHeight(outterPanelObject, originalOutterValue); }
                 }
                 else
                 { effectInOutter.Stop(); }
@@ -482,10 +511,15 @@ namespace arma3Launcher.Effects
             {
                 if (outterPanelObject.Width > baseOutterValue)
                 {
-                    if (outterPanelObject.Width - velocity > baseOutterValue)
-                        setPanelWidth(outterPanelObject, outterPanelObject.Width - velocity);
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (outterPanelObject.Width - velocity > baseOutterValue)
+                            setPanelWidth(outterPanelObject, outterPanelObject.Width - velocity);
+                        else
+                            setPanelWidth(outterPanelObject, outterPanelObject.Width - 1);
+                    }
                     else
-                        setPanelWidth(outterPanelObject, outterPanelObject.Width - 1);
+                    { setPanelWidth(outterPanelObject, baseOutterValue); }
                 }
                 else
                 {
@@ -497,10 +531,15 @@ namespace arma3Launcher.Effects
             {
                 if (outterPanelObject.Height > baseOutterValue)
                 {
-                    if (outterPanelObject.Height - velocity > baseOutterValue)
-                        setPanelHeight(outterPanelObject, outterPanelObject.Height - velocity);
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (outterPanelObject.Height - velocity > baseOutterValue)
+                            setPanelHeight(outterPanelObject, outterPanelObject.Height - velocity);
+                        else
+                            setPanelHeight(outterPanelObject, outterPanelObject.Height - 1);
+                    }
                     else
-                        setPanelHeight(outterPanelObject, outterPanelObject.Height - 1);
+                    { setPanelHeight(outterPanelObject, baseOutterValue); }
                 }
                 else
                 {

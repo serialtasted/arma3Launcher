@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Forms;
 
 namespace arma3Launcher.Controls
 {
-    class DoubleBufferFlowPanel : System.Windows.Forms.FlowLayoutPanel
+    class DoubleBufferFlowPanel : FlowLayoutPanel
     {
+        protected override void OnScroll(ScrollEventArgs se)
+        {
+            if (se.ScrollOrientation == ScrollOrientation.VerticalScroll)
+            {
+                this.VerticalScroll.Value = se.NewValue;
+            }
+            else if (se.ScrollOrientation == ScrollOrientation.HorizontalScroll)
+            {
+                this.HorizontalScroll.Value = se.NewValue;
+            }
+        }
+
         public DoubleBufferFlowPanel()
         {
             this.SetStyle(

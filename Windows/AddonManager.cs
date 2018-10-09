@@ -2,27 +2,32 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using arma3Launcher.Effects;
 using arma3Launcher.Workers;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace arma3Launcher.Windows
 {
-    public partial class AddonManager : Form
+    public partial class AddonManager : MaterialForm
     {
         private AddonsLooker aLooker;
         private WindowIO windowIO;
         private BuildRepo repoBuilder;
 
-        private Fonts customFont = new Fonts();
-
         private bool checkState = false;
 
         public AddonManager()
         {
-            InitializeComponent();
+            // Material Skin properties
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
 
-            txt_title.Font = customFont.getFont(Properties.Fonts.Lato_Semibold, 9F, FontStyle.Regular);
+            InitializeComponent();
 
             aLooker = new AddonsLooker(chbl_repoContent);
             windowIO = new WindowIO(this);
@@ -44,16 +49,6 @@ namespace arma3Launcher.Windows
         private void btn_close_Click(object sender, EventArgs e)
         {
             repoBuilder.CancelBuild();
-        }
-
-        private void btn_close_MouseEnter(object sender, EventArgs e)
-        {
-            btn_close.Image = Properties.Resources.arrow_down_hover;
-        }
-
-        private void btn_close_MouseLeave(object sender, EventArgs e)
-        {
-            btn_close.Image = Properties.Resources.arrow_down;
         }
 
         private void btn_browseRepoLocation_Click(object sender, EventArgs e)
@@ -165,6 +160,20 @@ namespace arma3Launcher.Windows
         private void btn_openRepoLocation_MouseLeave(object sender, EventArgs e)
         {
             btn_openRepoLocation.Image = Properties.Resources.openfolder_idle;
+        }
+
+        private void AddonManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ((string)this.Tag != "close")
+            {
+                repoBuilder.CancelBuild();
+                e.Cancel = true;
+            }
+            else
+            {
+                GC.Collect(2, GCCollectionMode.Forced);
+                this.Dispose();
+            }
         }
     }
 }

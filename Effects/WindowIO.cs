@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace arma3Launcher.Effects
@@ -82,7 +81,29 @@ namespace arma3Launcher.Effects
                 setWindowLocation(formObject, formObject.Location.X, formObject.Location.Y + 1);
             }
             else
-            { effectOut.Stop(); if (closeEnd) { if (formObject != Application.OpenForms[0]) { formObject.Close(); } else { Application.Exit(); } } else { setWindowState(formObject, FormWindowState.Minimized); } }
+            {
+                effectOut.Stop();
+                if (closeEnd)
+                {
+                    if (formObject != Application.OpenForms[0])
+                    {
+                        if (formObject.InvokeRequired)
+                        {
+                            formObject.Invoke(new MethodInvoker(delegate {
+                                formObject.Tag = "close";
+                                formObject.Close();
+                            }));
+                        }
+                        else
+                        {
+                            formObject.Tag = "close";
+                            formObject.Close();
+                        }
+                    }
+                    else { Application.Exit(); }
+                }
+                else { setWindowState(formObject, FormWindowState.Minimized); }
+            }
         }
 
         public void windowIn ()

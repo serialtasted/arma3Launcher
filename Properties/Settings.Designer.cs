@@ -386,18 +386,6 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool allowErrorReport {
-            get {
-                return ((bool)(this["allowErrorReport"]));
-            }
-            set {
-                this["allowErrorReport"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool joinServerAutomatically {
             get {
                 return ((bool)(this["joinServerAutomatically"]));
@@ -410,12 +398,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string privateKeys {
+        public string PrivateKeys {
             get {
-                return ((string)(this["privateKeys"]));
+                return ((string)(this["PrivateKeys"]));
             }
             set {
-                this["privateKeys"] = value;
+                this["PrivateKeys"] = value;
             }
         }
         
@@ -553,18 +541,6 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int packsViewMode {
-            get {
-                return ((int)(this["packsViewMode"]));
-            }
-            set {
-                this["packsViewMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ServerPack {
             get {
@@ -584,6 +560,18 @@ namespace arma3Launcher.Properties {
             }
             set {
                 this["ServerMission"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DisableAnimations {
+            get {
+                return ((bool)(this["DisableAnimations"]));
+            }
+            set {
+                this["DisableAnimations"] = value;
             }
         }
     }

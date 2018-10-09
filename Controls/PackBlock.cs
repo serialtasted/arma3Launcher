@@ -13,7 +13,7 @@ namespace arma3Launcher.Controls
 {
     public partial class PackBlock : UserControl
     {
-        private System.Timers.Timer effectIn = new System.Timers.Timer();
+        private Timer effectIn = new Timer();
 
         private FlowLayoutPanel packsPan;
         private MainForm2 mainForm;
@@ -70,13 +70,13 @@ namespace arma3Launcher.Controls
 
             await taskDelay(rnd.Next(350, 700));
             effectIn.Interval = 7;
-            effectIn.Elapsed += EffectIn_Tick;
+            effectIn.Tick += EffectIn_Tick;
             effectIn.Start();
         }
 
         private void EffectIn_Tick(object sender, EventArgs e)
         {
-            if (panel_effectFade.BackColor.A > 0)
+            if (panel_effectFade.BackColor.A > 0 && !GlobalVar.disableAnimations)
             {
                 alpha = alpha - 5;
                 int flash = rnd.Next(50, 150);
@@ -110,7 +110,7 @@ namespace arma3Launcher.Controls
                     }
                 }
 
-                this.showInfoPanel();
+                this.moreInfoPanelIO.showPanelSingle();
             }
         }
 
@@ -212,13 +212,6 @@ namespace arma3Launcher.Controls
             btn_playBot.Enabled = true;
             btn_playTop.Image = Properties.Resources.play_btn_idle_top;
             btn_playBot.Image = Properties.Resources.play_btn_idle_bot;
-        }
-
-        public async void showInfoPanel()
-        {
-            while (GlobalVar.isAnimating)
-                await taskDelay(100);
-            this.moreInfoPanelIO.showPanelSingle();
         }
 
         private void loadbackground(string packID)

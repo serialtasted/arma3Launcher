@@ -23,7 +23,6 @@ namespace arma3Launcher.Workers
         private CheckBox checkBtn;
 
         private bool isBuilding = false;
-        private bool closeAfter = false;
 
         private BackgroundWorker builder = new BackgroundWorker();
 
@@ -104,7 +103,6 @@ namespace arma3Launcher.Workers
         {
             if (this.isBuilding)
             {
-                this.closeAfter = true;
                 this.builder.CancelAsync();
             }
             else
@@ -174,7 +172,7 @@ namespace arma3Launcher.Workers
                     }
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Error while building repository", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { new Windows.MessageBox().Show(ex.Message, "Error while building repository", MessageBoxButtons.OK, MessageIcon.Error); }
             finally
             {
                 // Get the elapsed time as a TimeSpan value.

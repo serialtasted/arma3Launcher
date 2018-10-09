@@ -51,7 +51,7 @@ namespace arma3Launcher.Workers
             }
         }
 
-        public async void Get ()
+        public void Get ()
         {
             try
             {
@@ -64,7 +64,7 @@ namespace arma3Launcher.Workers
                 XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSets//pack");
                 foreach (XmlNode xn in xnl)
                 {
-                    if (Convert.ToBoolean(xn.Attributes["enable"].Value) && (Convert.ToBoolean(xn.Attributes["public"].Value) || Properties.Settings.Default.privateKeys.Split(',').Contains(xn.Attributes["id"].Value)))
+                    if (Convert.ToBoolean(xn.Attributes["enable"].Value) && (Convert.ToBoolean(xn.Attributes["public"].Value) || Properties.Settings.Default.PrivateKeys.Split(',').Contains(xn.Attributes["id"].Value)))
                     {
                         title = xn.Attributes["name"].Value;
                         id = xn.Attributes["id"].Value;
@@ -101,6 +101,8 @@ namespace arma3Launcher.Workers
                         auxPack.Margin = margin;
 
                         packsPanel.Controls.Add(auxPack);
+
+                        GC.Collect(2, GCCollectionMode.Forced);
                     }
                 }
             }

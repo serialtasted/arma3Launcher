@@ -22,10 +22,9 @@ using arma3Launcher.Controls;
 
 namespace arma3Launcher
 {
-    public partial class MainForm2 : MaterialForm
+    public partial class MainForm2 : Form
     {
         private zCheckUpdate QuickUpdateMethod;
-        private zCheckUpdate UpdateMethod;
         private LaunchCore PrepareLaunch;
         private Packs fetchAddonPacks;
         private AddonsLooker aLooker;
@@ -43,13 +42,9 @@ namespace arma3Launcher
         private PanelIO addonOptionsPanelIO;
         private PanelIO repoInfoPanelIO;
 
-        private Windows.AddonManager addonManager;
         private Windows.Splash loadingSplash;
 
         private Fonts customFont = new Fonts();
-
-        private Version aLocal = null;
-        private Version aRemote = null;
 
         private string packID = string.Empty;
         private List<string> addonsName = new List<string>();
@@ -77,7 +72,6 @@ namespace arma3Launcher
         private bool isUpdate = false;
         private bool hasShown = false;
         private bool sideMenuOpen = false;
-        private View packsViewMode;
 
         // Move window stuff
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -99,7 +93,6 @@ namespace arma3Launcher
 
             // Material Skin Properties
             var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen800, Primary.LightGreen900, Primary.LightGreen500, Accent.Lime200, TextShade.WHITE);
 
@@ -128,7 +121,6 @@ namespace arma3Launcher
 
             // Init workers
             this.QuickUpdateMethod = new zCheckUpdate(txt_versionNumber);
-            //this.UpdateMethod = new zCheckUpdate(btn_update, btn_checkUpdates, txt_curversion, txt_latestversion, busy);
 
             this.aLooker = new AddonsLooker(flowpanel_steamworkshopAddonsList);
             this.remoteReader = new RemoteReader();
@@ -139,7 +131,6 @@ namespace arma3Launcher
 
             // Init forms
             this.loadingSplash = new Windows.Splash();
-            this.addonManager = new Windows.AddonManager();
 
             // Init window IO
             this.windowIO = new WindowIO(this);
@@ -248,7 +239,7 @@ namespace arma3Launcher
         }
 
         // Button Action
-        private async void btn_windowMenu_Click(object sender, EventArgs e)
+        private void btn_windowMenu_Click(object sender, EventArgs e)
         {
             if (this.panel_sideMenu.Width < 300)
             {
@@ -279,6 +270,7 @@ namespace arma3Launcher
         }
         #endregion
 
+        #region MainForm Events
         private void MainForm2_Shown(object sender, EventArgs e)
         {
             windowIO.windowIn();
@@ -300,18 +292,18 @@ namespace arma3Launcher
             {
                 if (GlobalVar.isDownloading)
                 {
-                    if (MessageBox.Show("Are you sure you want to stop the download?", "Stop download progress?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    if (new Windows.MessageBox().Show("Are you sure you want to stop the download?", "Stop download progress?", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.No)
                         e.Cancel = true;
                 }
                 else if (GlobalVar.isInstalling)
                 {
-                    if (MessageBox.Show("The launcher is installing the addons. Do you want to cancel the process and leave?", "Installing addons", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                    if (new Windows.MessageBox().Show("The launcher is installing the addons. Do you want to cancel the process and leave?", "Installing addons", MessageBoxButtons.YesNo, MessageIcon.Warning) == DialogResult.No)
                         e.Cancel = true;
                 }
                 else
                 {
                     SaveSettings();
-                    GC.Collect();
+                    GC.Collect(2, GCCollectionMode.Forced);
                     windowIO.windowOut(true);
                     e.Cancel = true;
                 }
@@ -331,8 +323,8 @@ namespace arma3Launcher
             this.Location = new Point((Screen.FromControl(this).WorkingArea.Width - this.Width) / 2,
                           (Screen.FromControl(this).WorkingArea.Height - this.Height) / 2);
 
-            if (GlobalVar.isServer) { WindowTitle.Text = AssemblyTitle + " | Server Edition"; }
-            else { WindowTitle.Text = AssemblyTitle; }
+            if (GlobalVar.isServer) { this.Text = WindowTitle.Text = AssemblyTitle + " | Server Edition"; }
+            else { this.Text = WindowTitle.Text = AssemblyTitle; }
             txt_versionNumber.Text = "version " + AssemblyVersion;
 
             if (!remoteReader.isLauncherLocked() || GlobalVar.isDebug)
@@ -373,23 +365,23 @@ namespace arma3Launcher
 
                 if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
                 {
-                    GlobalVar.menuSelected = 4;
-                    HideUnhide(GlobalVar.menuSelected);
-
-                    /*panelLaunch.Enabled = false;
-                    sysbtn_moreOptions.Visible = false;
-
-                    aboutPanelIO = new PanelIO(panel_about, Panels, 435, 437, 33);
-
-                    activeButton = btn_update;
-                    backgroundBlinker.RunWorkerAsync();*/
-
+                    QuickUpdateMethod.StartUpdate();
                     isUpdate = true;
                 }
                 else if (Properties.Settings.Default.firstLaunch)
                 {
                     if (GlobalVar.isServer) { chb_pref_startGame.Checked = true; }
 
+                    GlobalVar.menuSelected = 3;
+                    HideUnhide(GlobalVar.menuSelected);
+                }
+                else if (Properties.Settings.Default.Arma3Folder.Equals(string.Empty) ||
+                    Properties.Settings.Default.AddonsFolder.Equals(string.Empty) ||
+                    Properties.Settings.Default.TS3Folder.Equals(string.Empty) ||
+                    !Directory.Exists(Properties.Settings.Default.Arma3Folder) ||
+                    !Directory.Exists(Properties.Settings.Default.AddonsFolder) ||
+                    !Directory.Exists(Properties.Settings.Default.TS3Folder))
+                {
                     GlobalVar.menuSelected = 3;
                     HideUnhide(GlobalVar.menuSelected);
                 }
@@ -401,7 +393,7 @@ namespace arma3Launcher
 
                 if (!isUpdate)
                 {
-                    updateCurrentPack(true,false);
+                    updateCurrentPack(true, false);
 
                     if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
                         btn_reinstallTFRPlugins.Enabled = true;
@@ -412,17 +404,16 @@ namespace arma3Launcher
                 this.GetMalloc();
                 this.MachineSettings();
                 this.LoadSettings();
-
-                //UpdateMethod.CheckUpdates();
             }
             else
             {
-                MessageBox.Show("To prevent the loss of data the launcher has been locked.\n\nOnce all the needed maintenance is done it'll be unlocked.\n\nPlease try again later.", "Launcher locked!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                new Windows.MessageBox().Show("To prevent the loss of data the launcher has been locked.\n\nOnce all the needed maintenance is done it'll be unlocked.\n\nPlease try again later.", "Launcher locked!", MessageBoxButtons.OK, MessageIcon.Warning);
                 Process.GetCurrentProcess().Kill();
             }
 
             loadingSplash.Close();
-        }
+        } 
+        #endregion
 
         #region Side Menu
         /*-----------------------------------
@@ -456,7 +447,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_addonPacks_Click(object sender, EventArgs e)
         {
-            if (!GlobalVar.isAnimating)
+            if (GlobalVar.menuSelected != 0)
             {
                 GlobalVar.menuSelected = 0;
                 this.HideUnhide(GlobalVar.menuSelected);
@@ -481,7 +472,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_launchOptions_Click(object sender, EventArgs e)
         {
-            if (!GlobalVar.isAnimating)
+            if (GlobalVar.menuSelected != 1)
             {
                 GlobalVar.menuSelected = 1;
                 this.HideUnhide(GlobalVar.menuSelected);
@@ -506,7 +497,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_repositoryDownloads_Click(object sender, EventArgs e)
         {
-            if (!GlobalVar.isAnimating)
+            if (GlobalVar.menuSelected != 2)
             {
                 GlobalVar.menuSelected = 2;
                 this.HideUnhide(GlobalVar.menuSelected);
@@ -531,7 +522,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_preferences_Click(object sender, EventArgs e)
         {
-            if (!GlobalVar.isAnimating)
+            if (GlobalVar.menuSelected != 3)
             {
                 GlobalVar.menuSelected = 3;
                 this.HideUnhide(GlobalVar.menuSelected);
@@ -550,10 +541,138 @@ namespace arma3Launcher
             else
                 this.menu_preferences.ForeColor = Color.YellowGreen;
         }
+
+        /*-----------------------------------
+            Menu Help
+        -----------------------------------*/
+        private void menu_help_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menu_help_MouseEnter(object sender, EventArgs e)
+        {
+            this.menu_help.ForeColor = Color.OliveDrab;
+        }
+
+        private void menu_help_MouseLeave(object sender, EventArgs e)
+        {
+            this.menu_help.ForeColor = Color.Silver;
+        }
+
+        /*-----------------------------------
+            Menu About
+        -----------------------------------*/
+        private void menu_about_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menu_about_MouseEnter(object sender, EventArgs e)
+        {
+            this.menu_about.ForeColor = Color.OliveDrab;
+        }
+
+        private void menu_about_MouseLeave(object sender, EventArgs e)
+        {
+            this.menu_about.ForeColor = Color.Silver;
+        }
+        #endregion
+
+        #region Button States
+        private void btn_pref_ereaseArmaDir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_ereaseArmaDir.Image = Properties.Resources.erase_hover;
+        }
+
+        private void btn_pref_ereaseArmaDir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_ereaseArmaDir.Image = Properties.Resources.erase_idle;
+        }
+
+        private void btn_pref_ereaseAddonsDir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_ereaseAddonsDir.Image = Properties.Resources.erase_hover;
+        }
+
+        private void btn_pref_ereaseAddonsDir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_ereaseAddonsDir.Image = Properties.Resources.erase_idle;
+        }
+
+        private void btn_pref_ereaseTSDir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_ereaseTSDir.Image = Properties.Resources.erase_hover;
+        }
+
+        private void btn_pref_ereaseTSDir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_ereaseTSDir.Image = Properties.Resources.erase_idle;
+        }
+
+        private void btn_pref_browseA3Dir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_browseA3Dir.Image = Properties.Resources.addfolder_hover;
+        }
+
+        private void btn_pref_browseA3Dir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_browseA3Dir.Image = Properties.Resources.addfolder_idle;
+        }
+
+        private void btn_pref_openA3Dir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_openA3Dir.Image = Properties.Resources.openfolder_hover;
+        }
+
+        private void btn_pref_openA3Dir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_openA3Dir.Image = Properties.Resources.openfolder_idle;
+        }
+
+        private void btn_pref_browseAddonsDir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_browseAddonsDir.Image = Properties.Resources.addfolder_hover;
+        }
+
+        private void btn_pref_browseAddonsDir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_browseAddonsDir.Image = Properties.Resources.addfolder_idle;
+        }
+
+        private void btn_pref_openAddonsDir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_openAddonsDir.Image = Properties.Resources.openfolder_hover;
+        }
+
+        private void btn_pref_openAddonsDir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_openAddonsDir.Image = Properties.Resources.openfolder_idle;
+        }
+
+        private void btn_pref_browseTS3Dir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_browseTS3Dir.Image = Properties.Resources.addfolder_hover;
+        }
+
+        private void btn_pref_browseTS3Dir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_browseTS3Dir.Image = Properties.Resources.addfolder_idle;
+        }
+
+        private void btn_pref_openTS3Dir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_openTS3Dir.Image = Properties.Resources.openfolder_hover;
+        }
+
+        private void btn_pref_openTS3Dir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_openTS3Dir.Image = Properties.Resources.openfolder_idle;
+        } 
         #endregion
 
         #region Addon Packs Panel
-        private async void btn_addonsOptionsOpen_Click(object sender, EventArgs e)
+        private void btn_addonsOptionsOpen_Click(object sender, EventArgs e)
         {
             this.addonOptionsPanelIO.showPanelSingle();
         }
@@ -570,7 +689,7 @@ namespace arma3Launcher
             this.btn_addonsOptionsOpen.BackColor = Color.FromArgb(45, 45, 45);
         }
 
-        private async void btn_addonsOptionsClose_Click(object sender, EventArgs e)
+        private void btn_addonsOptionsClose_Click(object sender, EventArgs e)
         {
             this.addonOptionsPanelIO.hidePanelSingle();
         }
@@ -799,35 +918,13 @@ namespace arma3Launcher
                 Properties.Settings.Default.x64Game = false;
             }
 
-            // packs view mode
-            switch (Properties.Settings.Default.packsViewMode)
-            {
-                case 0:
-                    packsViewMode = View.LargeIcon;
-                    break;
-                case 1:
-                    packsViewMode = View.Details;
-                    break;
-                case 2:
-                    packsViewMode = View.SmallIcon;
-                    break;
-                case 3:
-                    packsViewMode = View.List;
-                    break;
-                case 4:
-                    packsViewMode = View.Tile;
-                    break;
-                default:
-                    packsViewMode = View.Details;
-                    break;
-            }
-
             // preferences
             chb_pref_startGame.Checked = Properties.Settings.Default.startGameAfterDownload;
             chb_pref_allowNotifications.Checked = Properties.Settings.Default.allowNotifications;
             chb_pref_autoDownload.Checked = Properties.Settings.Default.autoDownload;
             chb_pref_joinServer.Checked = Properties.Settings.Default.joinServerAutomatically;
             chb_pref_joinTSServer.Checked = Properties.Settings.Default.joinTsServerAutomatically;
+            chb_pref_disableAnimations.Checked = Properties.Settings.Default.DisableAnimations;
 
             // preference run on startup
             chb_pref_runLauncherStartup.Checked = false;
@@ -923,35 +1020,13 @@ namespace arma3Launcher
 
             Properties.Settings.Default.x64Game = chb_use64Bit.Checked;
 
-            // packs view mode
-            switch (packsViewMode)
-            {
-                case View.LargeIcon:
-                    Properties.Settings.Default.packsViewMode = 0;
-                    break;
-                case View.Details:
-                    Properties.Settings.Default.packsViewMode = 1;
-                    break;
-                case View.SmallIcon:
-                    Properties.Settings.Default.packsViewMode = 2;
-                    break;
-                case View.List:
-                    Properties.Settings.Default.packsViewMode = 3;
-                    break;
-                case View.Tile:
-                    Properties.Settings.Default.packsViewMode = 4;
-                    break;
-                default:
-                    Properties.Settings.Default.packsViewMode = 1;
-                    break;
-            }
-
             // preferences
             Properties.Settings.Default.startGameAfterDownload = chb_pref_startGame.Checked;
             Properties.Settings.Default.allowNotifications = chb_pref_allowNotifications.Checked;
             Properties.Settings.Default.autoDownload = chb_pref_autoDownload.Checked;
             Properties.Settings.Default.joinServerAutomatically = chb_pref_joinServer.Checked;
             Properties.Settings.Default.joinTsServerAutomatically = chb_pref_joinTSServer.Checked;
+            Properties.Settings.Default.DisableAnimations = chb_pref_disableAnimations.Checked;
 
             // workshop addons
             this.PropertiesWorkshopSaver();
@@ -1014,7 +1089,7 @@ namespace arma3Launcher
                     if (GlobalVar.isDebug)
                         msgOptions = MessageBoxButtons.AbortRetryIgnore;
 
-                    switch (MessageBox.Show(ex.Message, "Unable to fetch remote settings", msgOptions, MessageBoxIcon.Warning))
+                    switch (new Windows.MessageBox().Show(ex.Message, "Unable to fetch remote settings", msgOptions, MessageIcon.Warning))
                     {
                         case DialogResult.Abort:
                             Process.GetCurrentProcess().Kill();
@@ -1138,24 +1213,24 @@ namespace arma3Launcher
                             if (!GlobalVar.isDownloading && !GlobalVar.isInstalling)
                                 downloader.beginDownload(GlobalVar.files2Download, true);
                             else
-                                MessageBox.Show("There's a download already in progress. Please wait for it to finish.", "Download already in progress", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                new Windows.MessageBox().Show("There's a download already in progress. Please wait for it to finish.", "Download already in progress", MessageBoxButtons.OK, MessageIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Addons directory doesn't exist. Please check your Addons directory and try again.", "Missing directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        new Windows.MessageBox().Show("Addons directory doesn't exist. Please check your Addons directory and try again.", "Missing directory", MessageBoxButtons.OK, MessageIcon.Error);
                         this.browseAddonsFolder();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Game directory doesn't exist or executable not there. Please check your Arma 3 directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    new Windows.MessageBox().Show("Game directory doesn't exist or executable not there. Please check your Arma 3 directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageIcon.Error);
                     this.browseGameFolder();
                 }
             }
             else
             {
-                MessageBox.Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                new Windows.MessageBox().Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageIcon.Error);
                 this.browseTSFolder();
             }
         }
@@ -1194,7 +1269,7 @@ namespace arma3Launcher
                     }
                     else
                     {
-                        MessageBox.Show("Game executable not there. Please check your Arma 3 directory and try again.", "Missing file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        new Windows.MessageBox().Show("Game executable not there. Please check your Arma 3 directory and try again.", "Missing file", MessageBoxButtons.OK, MessageIcon.Error);
                     }
                 }
             }
@@ -1234,7 +1309,7 @@ namespace arma3Launcher
                     }
                     else
                     {
-                        MessageBox.Show("TeamSpeak executable not there. Please check your TeamSpeak directory and try again.", "Missing file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        new Windows.MessageBox().Show("TeamSpeak executable not there. Please check your TeamSpeak directory and try again.", "Missing file", MessageBoxButtons.OK, MessageIcon.Error);
                     }
                 }
             }
@@ -1259,7 +1334,7 @@ namespace arma3Launcher
                 }
                 else
                 {
-                    MessageBox.Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    new Windows.MessageBox().Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageIcon.Error);
                     this.browseAddonsFolder();
                 }
             }
@@ -1387,7 +1462,7 @@ namespace arma3Launcher
 
         private void manageRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            addonManager.ShowDialog();
+            new Windows.AddonManager().ShowDialog();
         }
 
         private void btn_checkRepo_Click(object sender, EventArgs e)
@@ -1486,7 +1561,7 @@ namespace arma3Launcher
                 }
                 else
                 {
-                    MessageBox.Show("Game executable not there. Please check your Arma 3 directory and try again.", "Missing file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    new Windows.MessageBox().Show("Game executable not there. Please check your Arma 3 directory and try again.", "Missing file", MessageBoxButtons.OK, MessageIcon.Error);
                     if (String.IsNullOrEmpty(armaDir_previousDir))
                         this.browseGameFolder();
                     else
@@ -1538,7 +1613,7 @@ namespace arma3Launcher
                 }
                 else
                 {
-                    MessageBox.Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    new Windows.MessageBox().Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageIcon.Error);
                     if (String.IsNullOrEmpty(modsDir_previousDir))
                         this.browseAddonsFolder();
                     else
@@ -1592,7 +1667,7 @@ namespace arma3Launcher
                 }
                 else
                 {
-                    MessageBox.Show("TeamSpeak executable not there. Please check your TeamSpeak directory and try again.", "Missing file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    new Windows.MessageBox().Show("TeamSpeak executable not there. Please check your TeamSpeak directory and try again.", "Missing file", MessageBoxButtons.OK, MessageIcon.Error);
                     if (String.IsNullOrEmpty(tsDir_previousDir))
                         this.browseTSFolder();
                     else
@@ -1716,94 +1791,12 @@ namespace arma3Launcher
             Properties.Settings.Default.Save();
         }
 
-        private void btn_pref_ereaseArmaDir_MouseEnter(object sender, EventArgs e)
+        private void chb_pref_disableAnimations_CheckedChanged(object sender, EventArgs e)
         {
-            btn_pref_ereaseArmaDir.Image = Properties.Resources.erase_hover;
-        }
-
-        private void btn_pref_ereaseArmaDir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_ereaseArmaDir.Image = Properties.Resources.erase_idle;
-        }
-
-        private void btn_pref_ereaseAddonsDir_MouseEnter(object sender, EventArgs e)
-        {
-            btn_pref_ereaseAddonsDir.Image = Properties.Resources.erase_hover;
-        }
-
-        private void btn_pref_ereaseAddonsDir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_ereaseAddonsDir.Image = Properties.Resources.erase_idle;
-        }
-
-        private void btn_pref_ereaseTSDir_MouseEnter(object sender, EventArgs e)
-        {
-            btn_pref_ereaseTSDir.Image = Properties.Resources.erase_hover;
-        }
-
-        private void btn_pref_ereaseTSDir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_ereaseTSDir.Image = Properties.Resources.erase_idle;
-        }
-
-        private void btn_pref_browseA3Dir_MouseEnter(object sender, EventArgs e)
-        {
-            btn_pref_browseA3Dir.Image = Properties.Resources.addfolder_hover;
-        }
-
-        private void btn_pref_browseA3Dir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_browseA3Dir.Image = Properties.Resources.addfolder_idle;
-        }
-
-        private void btn_pref_openA3Dir_MouseEnter(object sender, EventArgs e)
-        {
-            btn_pref_openA3Dir.Image = Properties.Resources.openfolder_hover;
-        }
-
-        private void btn_pref_openA3Dir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_openA3Dir.Image = Properties.Resources.openfolder_idle;
-        }
-
-        private void btn_pref_browseAddonsDir_MouseEnter(object sender, EventArgs e)
-        {
-            btn_pref_browseAddonsDir.Image = Properties.Resources.addfolder_hover;
-        }
-
-        private void btn_pref_browseAddonsDir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_browseAddonsDir.Image = Properties.Resources.addfolder_idle;
-        }
-
-        private void btn_pref_openAddonsDir_MouseEnter(object sender, EventArgs e)
-        {
-            btn_pref_openAddonsDir.Image = Properties.Resources.openfolder_hover;
-        }
-
-        private void btn_pref_openAddonsDir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_openAddonsDir.Image = Properties.Resources.openfolder_idle;
-        }
-
-        private void btn_pref_browseTS3Dir_MouseEnter(object sender, EventArgs e)
-        {
-            btn_pref_browseTS3Dir.Image = Properties.Resources.addfolder_hover;
-        }
-
-        private void btn_pref_browseTS3Dir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_browseTS3Dir.Image = Properties.Resources.addfolder_idle;
-        }
-
-        private void btn_pref_openTS3Dir_MouseEnter(object sender, EventArgs e)
-        {
-            btn_pref_openTS3Dir.Image = Properties.Resources.openfolder_hover;
-        }
-
-        private void btn_pref_openTS3Dir_MouseLeave(object sender, EventArgs e)
-        {
-            btn_pref_openTS3Dir.Image = Properties.Resources.openfolder_idle;
+            if (chb_pref_disableAnimations.Checked)
+                GlobalVar.disableAnimations = true;
+            else
+                GlobalVar.disableAnimations = false;
         }
     }
 }

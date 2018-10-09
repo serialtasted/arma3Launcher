@@ -106,7 +106,7 @@ namespace arma3Launcher.Workers
             if (Arguments != string.Empty) Arguments = Arguments + " " + auxCoreMods + auxCombinedAddons + "\"";
             else Arguments = auxCoreMods + auxCombinedAddons;
 
-            //MessageBox.Show(Arguments);
+            //new Windows.MessageBox().Show(Arguments);
         }
 
         private string AggregateArguments(DoubleBufferFlowPanel launchOptions,
@@ -227,11 +227,11 @@ namespace arma3Launcher.Workers
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Unable to start TeamSpeak 3");
+                            new Windows.MessageBox().Show(ex.Message, "Unable to start TeamSpeak 3");
                         }
                     }
                     else
-                        MessageBox.Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        new Windows.MessageBox().Show("TeamSpeak directory doesn't exist or executable not there. Please check your TeamSpeak directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageIcon.Error);
                 }
 
                 Process[] pname = Process.GetProcessesByName("steam");
@@ -301,7 +301,7 @@ namespace arma3Launcher.Workers
 
                     Thread.Sleep(500);
 
-                    GC.Collect();
+                    GC.Collect(2, GCCollectionMode.Forced);
 
                     Status.Text = whatsRunning + " running...";
                     mainForm.minimizeWindow();
@@ -310,12 +310,12 @@ namespace arma3Launcher.Workers
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Unable to start Arma 3");
+                    new Windows.MessageBox().Show(ex.Message, "Unable to start Arma 3");
                 }
             }
             else
             {
-                MessageBox.Show("Game directory doesn't exist or executable not there. Please check your Arma 3 directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                new Windows.MessageBox().Show("Game directory doesn't exist or executable not there. Please check your Arma 3 directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageIcon.Error);
             }
         }
 

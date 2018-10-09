@@ -10,6 +10,19 @@ using System.Diagnostics;
 
 namespace arma3Launcher
 {
+    public enum MessageIcon
+    {
+        None,
+        Hand,
+        Question,
+        Exclamation,
+        Asterisk,
+        Stop,
+        Error,
+        Warning,
+        Information
+    }
+
     static class Program
     {
         /// <summary>

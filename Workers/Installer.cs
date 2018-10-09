@@ -401,7 +401,7 @@ namespace arma3Launcher.Workers
                 e.Cancel = true;
                 allFine = false;
                 this.progressStatusText("Something went wrong. Please try again.");
-                MessageBox.Show(ex.Message, "Installation failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                new Windows.MessageBox().Show(ex.Message, "Installation failed", MessageBoxButtons.OK, MessageIcon.Error);
             }
             finally
             {
@@ -535,7 +535,7 @@ namespace arma3Launcher.Workers
             }
             else
             {
-                MessageBox.Show("No such directory \"" + AddonsFolder + @"@task_force_radio\plugins" + "\".", "No such file or directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                new Windows.MessageBox().Show("No such directory \"" + AddonsFolder + @"@task_force_radio\plugins" + "\".", "No such file or directory", MessageBoxButtons.OK, MessageIcon.Error);
             }
         }
     }

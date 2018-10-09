@@ -116,6 +116,19 @@ namespace arma3Launcher
             }
         }
 
+        static bool _disableAnimations = false;
+        public static bool disableAnimations
+        {
+            get
+            {
+                return _disableAnimations;
+            }
+            set
+            {
+                _disableAnimations = value;
+            }
+        }
+
         static bool _isDebug = false;
         public static bool isDebug
         {

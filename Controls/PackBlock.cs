@@ -13,72 +13,221 @@ namespace arma3Launcher.Controls
 {
     public partial class PackBlock : UserControl
     {
+        private System.Timers.Timer effectIn = new System.Timers.Timer();
+
         private FlowLayoutPanel packsPan;
-        private PackInfo packInfo;
-        private MainForm mainForm;
-        private View viewList;
+        private MainForm2 mainForm;
 
-        private Version aLocal = null;
-        private Version aRemote = null;
+        private List<string> addonsName = new List<string>();
+        private bool isOptionalAllowed = false;
 
-        private List<string> modsUrl = new List<string>();
+        private PanelIO moreInfoPanelIO;
+        private PanelIO packInfoPanelIO;
 
-        public PackBlock(MainForm mainForm, string packTitle, string packID, string packDescription, string packAddons, FlowLayoutPanel packsPanel, bool isOptionalAllowed, View viewList)
+        private Fonts customFont = new Fonts();
+
+        private int alpha = 255;
+        private Random rnd = new Random();
+
+        private string packID = string.Empty;
+
+        private async Task taskDelay(int delayMs)
         {
+            await Task.Delay(delayMs);
+        }
+
+        /// <summary>
+        /// Invoke required controls for threading
+        /// </summary>
+        private void setPanelVisibility(Panel control, bool visible)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new MethodInvoker(delegate { control.Visible = visible; }));
+            }
+            else
+            {
+                control.Visible = visible;
+            }
+        }
+
+        private void setPanelWidth(Panel control, int width)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new MethodInvoker(delegate { control.Width = width; }));
+            }
+            else
+            {
+                control.Width = width;
+            }
+        }
+
+        public async void fadeIn()
+        {
+            while (GlobalVar.isAnimating)
+                await taskDelay(100);
+
+            await taskDelay(rnd.Next(350, 700));
+            effectIn.Interval = 7;
+            effectIn.Elapsed += EffectIn_Tick;
+            effectIn.Start();
+        }
+
+        private void EffectIn_Tick(object sender, EventArgs e)
+        {
+            if (panel_effectFade.BackColor.A > 0)
+            {
+                alpha = alpha - 5;
+                int flash = rnd.Next(50, 150);
+                this.panel_effectFade.BackColor = Color.FromArgb(alpha, flash + 10, flash + 20, flash);
+            }
+            else
+            {
+                setPanelVisibility(panel_effectFade, false);
+                this.effectIn.Stop();
+
+                if (flowpanel_packContent.VerticalScroll.Visible)
+                {
+                    setPanelWidth(flowpanel_packContent, flowpanel_packContent.Width + SystemInformation.VerticalScrollBarWidth);
+
+                    if (scroll_packContent.InvokeRequired)
+                    {
+                        scroll_packContent.Invoke(new MethodInvoker(delegate
+                        {
+                            scroll_packContent.Visible = true;
+                            scroll_packContent.Minimum = flowpanel_packContent.VerticalScroll.Minimum;
+                            scroll_packContent.Maximum = flowpanel_packContent.VerticalScroll.Maximum;
+                            scroll_packContent.LargeChange = flowpanel_packContent.VerticalScroll.LargeChange;
+                        }));
+                    }
+                    else
+                    {
+                        scroll_packContent.Visible = true;
+                        scroll_packContent.Minimum = flowpanel_packContent.VerticalScroll.Minimum;
+                        scroll_packContent.Maximum = flowpanel_packContent.VerticalScroll.Maximum;
+                        scroll_packContent.LargeChange = flowpanel_packContent.VerticalScroll.LargeChange;
+                    }
+                }
+
+                this.showInfoPanel();
+            }
+        }
+
+        public PackBlock(MainForm2 mainForm, string packTitle, string packID, string packDescription, XmlDocument RemoteXmlInfo, FlowLayoutPanel packsPanel, bool isOptionalAllowed, List<string> addonsName)
+        {
+            this.SetStyle(
+                System.Windows.Forms.ControlStyles.UserPaint |
+                System.Windows.Forms.ControlStyles.AllPaintingInWmPaint |
+                System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer,
+                true
+            );
+
             InitializeComponent();
+
+            this.panel_effectFade.Size = new Size(410, 200);
+
+            this.flowpanel_packContent.Controls.Clear();
+
+            this.moreInfoPanelIO = new PanelIO(panel_moreInfo, 120, 33);
+            this.packInfoPanelIO = new PanelIO(panel_packInfo, 410, 33);
 
             this.packsPan = packsPanel;
             this.txt_title.Text = packTitle;
-            this.txt_packID.Text = packID;
-            this.btn_useThis.Tag = packID;
+            this.packID = packID;
             this.txt_content.Text = packDescription;
-            this.packInfo = new PackInfo(packTitle, "Addons on this pack:\n" + packAddons);
             this.mainForm = mainForm;
-            this.viewList = viewList;
 
-            switch (viewList)
+            this.isOptionalAllowed = isOptionalAllowed;
+            this.addonsName = addonsName;
+
+            txt_title.Font = customFont.getFont(Properties.Fonts.Lato_Semibold, 10F, FontStyle.Regular);
+            lbl_packcontent.Font = customFont.getFont(Properties.Fonts.Lato_Semibold, 10F, FontStyle.Regular);
+            txt_content.Font = customFont.getFont(Properties.Fonts.ClearSans_Light, 9F, FontStyle.Regular);
+
+            foreach (string addonName in addonsName)
             {
-                case View.LargeIcon:
-                    break;
-                case View.Details:
-                    this.Width = 860;
-                    this.Height = 174;
-                    break;
-                case View.SmallIcon:
-                    break;
-                case View.List:
-                    this.Width = 860;
-                    this.Height = 88;
-                    break;
-                case View.Tile:
-                    this.Width = 426;
-                    this.Height = 88;
-                    break;
+                if (addonName != "@dummy")
+                {
+                    Label addon = new Label
+                    {
+                        AutoSize = true,
+                        Text = addonName,
+                        Font = customFont.getFont(Properties.Fonts.ClearSans_Light, 9F, FontStyle.Regular)
+                    };
+                    int bgColor = rnd.Next(60, 120);
+                    addon.BackColor = Color.FromArgb(150, bgColor, bgColor, bgColor);
+
+                    Padding margin = addon.Margin;
+                    margin.Left = 0;
+                    margin.Right = 0;
+                    margin.Top = 0;
+                    margin.Bottom = 3;
+                    addon.Margin = margin;
+
+                    this.flowpanel_packContent.Controls.Add(addon);
+                }
             }
 
             if (packID == "arma3")
-                btn_showAddons.Visible = false;
+                btn_addonsOptionsClose.Visible = false;
 
             loadbackground(packID);
 
             if (isOptionalAllowed)
-                txt_allowed.Text = txt_allowed.Text + "Steam Workshop Addons | ";
+            {
+                Label addon = new Label
+                {
+                    AutoSize = true,
+                    Text = "✓ Optional addons allowed",
+                    Font = customFont.getFont(Properties.Fonts.ClearSans_Light, 9F, FontStyle.Regular)
+                };
+                int bgColor = rnd.Next(60, 120);
+                addon.BackColor = Color.FromArgb(150, bgColor, bgColor, bgColor);
 
-            if (txt_allowed.Text != "Allowed: ")
-            { txt_allowed.Text = txt_allowed.Text.Remove(txt_allowed.Text.Length - 3); txt_allowed.Visible = true; img_checkAllowed.Visible = true; }
+                Padding margin = addon.Margin;
+                margin.Left = 0;
+                margin.Right = 0;
+                margin.Top = 0;
+                margin.Bottom = 3;
+                addon.Margin = margin;
+
+                this.flowpanel_packContent.Controls.Add(addon);
+            }
+
+            this.packInfoPanelIO.showPanelSingle();
         }
 
-        private async void loadbackground(string packID)
+        public void disablePlayButton()
         {
-            if (viewList != View.Details) { return; }
+            btn_playTop.Enabled = false;
+            btn_playBot.Enabled = false;
+            btn_playTop.Image = Properties.Resources.play_btn_disabled_top;
+            btn_playBot.Image = Properties.Resources.play_btn_disabled_bot;
+        }
 
+        public void enablePlayButton()
+        {
+            btn_playTop.Enabled = true;
+            btn_playBot.Enabled = true;
+            btn_playTop.Image = Properties.Resources.play_btn_idle_top;
+            btn_playBot.Image = Properties.Resources.play_btn_idle_bot;
+        }
+
+        public async void showInfoPanel()
+        {
+            while (GlobalVar.isAnimating)
+                await taskDelay(100);
+            this.moreInfoPanelIO.showPanelSingle();
+        }
+
+        private void loadbackground(string packID)
+        {
             try
             {
                 PictureBox panelBG = new PictureBox();
-                panelBG.Load(Properties.GlobalValues.S_PackImgsDir + packID + ".png");
-                panel1.BackgroundImage = panelBG.Image;
-                txt_content.MinimumSize = new Size(600, 52);
-                txt_content.MaximumSize = new Size(600, 52);
+                panelBG.Load(Properties.GlobalValues.S_PackImgsDir + packID + ".jpg");
+                panel_packImage.BackgroundImage = panelBG.Image;
             }
             catch { }
         }
@@ -89,59 +238,115 @@ namespace arma3Launcher.Controls
                 this.Height = txt_content.Height + 110;
         }
 
-        private void btn_useThis_Click(object sender, EventArgs e)
+        private void btn_addonsOptionsClose_Click(object sender, EventArgs e)
         {
-            mainForm.updateActivePack(txt_title.Text);
+            this.packInfoPanelIO.hidePanelSingle();
+        }
 
-            Properties.Settings.Default.lastAddonPack = btn_useThis.Tag.ToString();
-            Properties.Settings.Default.Save();
+        private void btn_addonsOptionsClose_MouseEnter(object sender, EventArgs e)
+        {
+            this.btn_addonsOptionsClose.ForeColor = Color.Silver;
+            this.btn_addonsOptionsClose.BackColor = Color.FromArgb(55, 55, 55);
+        }
 
-            try
+        private void btn_addonsOptionsClose_MouseLeave(object sender, EventArgs e)
+        {
+            this.btn_addonsOptionsClose.ForeColor = Color.WhiteSmoke;
+            this.btn_addonsOptionsClose.BackColor = Color.FromArgb(45, 45, 45);
+        }
+
+        private void btn_addonsOptionsOpen_Click(object sender, EventArgs e)
+        {
+            this.packInfoPanelIO.showPanelSingle();
+        }
+
+        private void btn_addonsOptionsOpen_MouseEnter(object sender, EventArgs e)
+        {
+            this.btn_addonsOptionsOpen.ForeColor = Color.Silver;
+            this.btn_addonsOptionsOpen.BackColor = Color.FromArgb(55, 55, 55);
+        }
+
+        private void btn_addonsOptionsOpen_MouseLeave(object sender, EventArgs e)
+        {
+            this.btn_addonsOptionsOpen.ForeColor = Color.WhiteSmoke;
+            this.btn_addonsOptionsOpen.BackColor = Color.FromArgb(45, 45, 45);
+
+        }
+
+        private void flowpanel_packContent_Paint(object sender, PaintEventArgs e)
+        {
+            this.scroll_packContent.Value = this.flowpanel_packContent.AutoScrollPosition.Y * -1;
+        }
+
+        private void scroll_packContent_Scroll(object sender, ScrollEventArgs e)
+        {
+            this.flowpanel_packContent.Refresh();
+            this.flowpanel_packContent.AutoScrollPosition = new Point(this.flowpanel_packContent.AutoScrollPosition.Y, e.NewValue);
+        }
+
+        private void btn_playBot_MouseEnter(object sender, EventArgs e)
+        {
+            if (btn_playBot.Enabled)
             {
-                int i = 0;
-                foreach (Control c in packsPan.Controls)
-                {
-                    if (i < packsPan.Controls.Count)
-                    {
-                        PictureBox btnUsePack = c.Controls.Find("btn_useThis", true)[0] as PictureBox;
-                        btnUsePack.Image = Properties.Resources.useThis_inactive;
-                        btnUsePack.Enabled = true;
-                    }
-                    i++;
-                }
+                this.btn_playBot.Image = Properties.Resources.play_btn_hover_bot;
+                this.btn_playTop.Image = Properties.Resources.play_btn_hover_top;
             }
-            catch { }
-
-            btn_useThis.Image = Properties.Resources.useThis_active;
-            btn_useThis.Enabled = false;
-            mainForm.updateCurrentPack(false);
         }
 
-        private void btn_useThis_MouseHover(object sender, EventArgs e)
+        private void btn_playTop_MouseEnter(object sender, EventArgs e)
         {
-            if (btn_useThis.Enabled)
-                btn_useThis.Image = Properties.Resources.useThis_hover;
+            if (btn_playBot.Enabled)
+            {
+                this.btn_playBot.Image = Properties.Resources.play_btn_hover_bot;
+                this.btn_playTop.Image = Properties.Resources.play_btn_hover_top;
+            }
         }
 
-        private void btn_useThis_MouseLeave(object sender, EventArgs e)
+        private void btn_playBot_MouseLeave(object sender, EventArgs e)
         {
-            if (btn_useThis.Enabled)
-                btn_useThis.Image = Properties.Resources.useThis_inactive;
+            if (btn_playBot.Enabled)
+            {
+                this.btn_playBot.Image = Properties.Resources.play_btn_idle_bot;
+                this.btn_playTop.Image = Properties.Resources.play_btn_idle_top;
+            }
         }
 
-        private void btn_showAddons_Click(object sender, EventArgs e)
+        private void btn_playTop_MouseLeave(object sender, EventArgs e)
         {
-            packInfo.ShowDialog();
+            if (btn_playBot.Enabled)
+            {
+                this.btn_playBot.Image = Properties.Resources.play_btn_idle_bot;
+                this.btn_playTop.Image = Properties.Resources.play_btn_idle_top;
+            }
         }
 
-        private void btn_showAddons_MouseHover(object sender, EventArgs e)
+        private void panel_moreInfo_Paint(object sender, PaintEventArgs e)
         {
-            btn_showAddons.Image = Properties.Resources.archive_hover;
+            if (!btn_playTop.Visible) { btn_playTop.Visible = true; }
+            btn_playTop.Location = new Point(btn_playBot.Location.X, panel_moreInfo.Location.Y - btn_playTop.Height);
         }
 
-        private void btn_showAddons_MouseLeave(object sender, EventArgs e)
+        private void btn_playBot_Click(object sender, EventArgs e)
         {
-            btn_showAddons.Image = Properties.Resources.archive_w;
+            if (btn_playBot.Enabled)
+            {
+                playAction();
+            }
+        }
+
+        private void btn_playTop_Click(object sender, EventArgs e)
+        {
+            if (btn_playBot.Enabled)
+            {
+                playAction();
+            }
+        }
+
+        private void playAction()
+        {
+            Properties.Settings.Default.lastAddonPack = packID;
+            Properties.Settings.Default.Save();
+            this.mainForm.LaunchGame(false);
         }
     }
 }

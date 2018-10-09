@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using arma3Launcher.Effects;
 using arma3Launcher.Workers;
@@ -20,11 +14,16 @@ namespace arma3Launcher.Windows
         private WindowIO windowIO;
         private BuildRepo repoBuilder;
 
+        private Fonts customFont = new Fonts();
+
         private bool checkState = false;
 
         public AddonManager()
         {
             InitializeComponent();
+
+            txt_title.Font = customFont.getFont(Properties.Fonts.Lato_Semibold, 9F, FontStyle.Regular);
+
             aLooker = new AddonsLooker(chbl_repoContent);
             windowIO = new WindowIO(this);
             repoBuilder = new BuildRepo(chbl_repoContent, lbl_buildStatus, prgb_repoBuild, buildLog, windowIO, btn_buildRepo, chb_checkAll);
@@ -47,7 +46,7 @@ namespace arma3Launcher.Windows
             repoBuilder.CancelBuild();
         }
 
-        private void btn_close_MouseHover(object sender, EventArgs e)
+        private void btn_close_MouseEnter(object sender, EventArgs e)
         {
             btn_close.Image = Properties.Resources.arrow_down_hover;
         }
@@ -82,7 +81,7 @@ namespace arma3Launcher.Windows
 
         private void GetAddons()
         {
-            aLooker.getAddons(txtb_repoLocation.Text);
+            aLooker.getAddonsCheckListBox(txtb_repoLocation.Text);
         }
 
         private void btn_ereaseRepoLocation_Click(object sender, EventArgs e)
@@ -136,6 +135,36 @@ namespace arma3Launcher.Windows
             {
                 repoBuilder.Run(Properties.Settings.Default.RepoFolder);
             }
+        }
+
+        private void btn_ereaseRepoLocation_MouseEnter(object sender, EventArgs e)
+        {
+            btn_ereaseRepoLocation.Image = Properties.Resources.erase_hover;
+        }
+
+        private void btn_ereaseRepoLocation_MouseLeave(object sender, EventArgs e)
+        {
+            btn_ereaseRepoLocation.Image = Properties.Resources.erase_idle;
+        }
+
+        private void btn_browseRepoLocation_MouseEnter(object sender, EventArgs e)
+        {
+            btn_browseRepoLocation.Image = Properties.Resources.addfolder_hover;
+        }
+
+        private void btn_browseRepoLocation_MouseLeave(object sender, EventArgs e)
+        {
+            btn_browseRepoLocation.Image = Properties.Resources.addfolder_idle;
+        }
+
+        private void btn_openRepoLocation_MouseEnter(object sender, EventArgs e)
+        {
+            btn_openRepoLocation.Image = Properties.Resources.openfolder_hover;
+        }
+
+        private void btn_openRepoLocation_MouseLeave(object sender, EventArgs e)
+        {
+            btn_openRepoLocation.Image = Properties.Resources.openfolder_idle;
         }
     }
 }

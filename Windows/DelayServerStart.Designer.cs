@@ -30,10 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DelayServerStart));
             this.btn_cancel = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txt_title = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel2 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -63,7 +63,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::arma3Launcher.Properties.Resources.rocket_launch;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(4, 4);
             this.pictureBox1.Name = "pictureBox1";
@@ -121,9 +120,9 @@
         #endregion
 
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.Panel panel1;
+        private arma3Launcher.Controls.DoubleBufferPanel panel1;
         private System.Windows.Forms.Label txt_title;
-        private System.Windows.Forms.Panel panel2;
+        private arma3Launcher.Controls.DoubleBufferPanel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

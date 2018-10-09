@@ -1,7 +1,7 @@
 ﻿using arma3Launcher.Effects;
+using arma3Launcher.Workers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace arma3Launcher.Windows
@@ -9,11 +9,14 @@ namespace arma3Launcher.Windows
     public partial class PrivatePackManager : Form
     {
         private WindowIO windowIO;
+        private Fonts customFont = new Fonts();
 
         public PrivatePackManager()
         {
             InitializeComponent();
             windowIO = new WindowIO(this);
+
+            txt_title.Font = customFont.getFont(Properties.Fonts.Lato_Semibold, 9F, FontStyle.Regular);
         }
 
         private void btn_addKey_Click(object sender, EventArgs e)

@@ -23,7 +23,6 @@ namespace arma3Launcher.Workers
         private CheckBox checkBtn;
 
         private bool isBuilding = false;
-        private bool isCancel = false;
         private bool closeAfter = false;
 
         private BackgroundWorker builder = new BackgroundWorker();

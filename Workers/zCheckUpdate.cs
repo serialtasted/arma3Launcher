@@ -17,26 +17,23 @@ namespace arma3Launcher.Workers
         private readonly Button btn_checkUpdate;
         private readonly Label txt_Cur;
         private readonly Label txt_New;
-        private readonly PictureBox pic_busy;
 
         private readonly Label txt_versiontag;
 
         private string urlversionxml = Properties.GlobalValues.S_VersionXML;
         //private string zversionxml = Application.StartupPath + @"\zversion.xml";
 
-        public zCheckUpdate(Label VersionTag, PictureBox PicBusy)
+        public zCheckUpdate(Label VersionTag)
         {
             txt_versiontag = VersionTag;
-            pic_busy = PicBusy;
         }
 
-        public zCheckUpdate(Button BtnUpdate, Button BtnCheckUpdate, Label TxtCurVersion, Label TxtNewVersion, PictureBox PicBusy)
+        public zCheckUpdate(Button BtnUpdate, Button BtnCheckUpdate, Label TxtCurVersion, Label TxtNewVersion)
         {
             btn_Update = BtnUpdate;
             btn_checkUpdate = BtnCheckUpdate;
             txt_Cur = TxtCurVersion;
             txt_New = TxtNewVersion;
-            pic_busy = PicBusy;
         }
 
         public bool QuickCheck()
@@ -101,7 +98,7 @@ namespace arma3Launcher.Workers
                     else
                         CurVersionS = CurVersion.Major + "." + CurVersion.Minor + aux_vBuild;
                 }
-                catch (Exception CurEx)
+                catch
                 {
                     txt_versiontag.Text = "Unable to determinate installed version.";
                     ContinueStart = false;
@@ -139,10 +136,6 @@ namespace arma3Launcher.Workers
                 }
             }
             catch { }
-            finally
-            {
-                pic_busy.Visible = false;
-            }
 
             return ContinueStart;
         }
@@ -179,7 +172,7 @@ namespace arma3Launcher.Workers
                     else
                         txt_New.Text = NewVersion.Major + "." + NewVersion.Minor + aux_vBuild;
                 }
-                catch (Exception NewEx)
+                catch
                 {
                     txt_New.Text = "Unable to get information from the server!";
                     btn_Update.Enabled = false;
@@ -206,7 +199,7 @@ namespace arma3Launcher.Workers
                     else
                         txt_Cur.Text = CurVersion.Major + "." + CurVersion.Minor + aux_vBuild;
                 }
-                catch (Exception CurEx)
+                catch
                 {
                     txt_Cur.Text = "Unable to determinate installed version";
                 }
@@ -224,10 +217,6 @@ namespace arma3Launcher.Workers
 
                 if (GlobalVar.isDebug)
                     MessageBox.Show(AllEx.Message, "DEBUG MODE");
-            }
-            finally
-            {
-                pic_busy.Visible = false;
             }
         }
     }

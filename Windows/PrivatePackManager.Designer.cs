@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel4 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.btn_close = new System.Windows.Forms.PictureBox();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.txt_title = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtb_privateKey = new System.Windows.Forms.TextBox();
-            this.btn_addKey = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.btn_addKey = new MaterialSkin.Controls.MaterialFlatButton();
+            this.panel3 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.link_clearKeys = new System.Windows.Forms.LinkLabel();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_close)).BeginInit();
@@ -44,9 +43,8 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.DimGray;
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel4.Controls.Add(this.btn_close);
-            this.panel4.Controls.Add(this.panel5);
             this.panel4.Controls.Add(this.txt_title);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
@@ -65,31 +63,23 @@
             this.btn_close.TabStop = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.OliveDrab;
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 34);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(347, 4);
-            this.panel5.TabIndex = 11;
-            // 
             // txt_title
             // 
             this.txt_title.AutoSize = true;
             this.txt_title.BackColor = System.Drawing.Color.Transparent;
-            this.txt_title.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_title.Font = new System.Drawing.Font("Lato", 9F, System.Drawing.FontStyle.Bold);
             this.txt_title.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txt_title.Location = new System.Drawing.Point(7, 10);
+            this.txt_title.Location = new System.Drawing.Point(7, 12);
             this.txt_title.Name = "txt_title";
-            this.txt_title.Size = new System.Drawing.Size(118, 15);
+            this.txt_title.Size = new System.Drawing.Size(96, 15);
             this.txt_title.TabIndex = 0;
-            this.txt_title.Text = "Unlock Private Pack";
+            this.txt_title.Text = "Add Private Pack";
             this.txt_title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label1.Location = new System.Drawing.Point(9, 51);
@@ -107,10 +97,18 @@
             // 
             // btn_addKey
             // 
+            this.btn_addKey.AutoSize = true;
+            this.btn_addKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_addKey.Depth = 0;
             this.btn_addKey.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addKey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btn_addKey.Location = new System.Drawing.Point(262, 74);
+            this.btn_addKey.Location = new System.Drawing.Point(260, 74);
+            this.btn_addKey.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btn_addKey.MaximumSize = new System.Drawing.Size(75, 23);
+            this.btn_addKey.MinimumSize = new System.Drawing.Size(75, 23);
+            this.btn_addKey.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_addKey.Name = "btn_addKey";
+            this.btn_addKey.Primary = false;
             this.btn_addKey.Size = new System.Drawing.Size(75, 23);
             this.btn_addKey.TabIndex = 17;
             this.btn_addKey.Text = "Add";
@@ -119,8 +117,9 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btn_addKey);
             this.panel3.Controls.Add(this.link_clearKeys);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
@@ -148,7 +147,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(347, 105);
-            this.Controls.Add(this.btn_addKey);
             this.Controls.Add(this.txtb_privateKey);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel4);
@@ -172,14 +170,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel4;
+        private arma3Launcher.Controls.DoubleBufferPanel panel4;
         private System.Windows.Forms.PictureBox btn_close;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label txt_title;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtb_privateKey;
-        private System.Windows.Forms.Button btn_addKey;
-        private System.Windows.Forms.Panel panel3;
+        private MaterialSkin.Controls.MaterialFlatButton btn_addKey;
+        private arma3Launcher.Controls.DoubleBufferPanel panel3;
         private System.Windows.Forms.LinkLabel link_clearKeys;
     }
 }

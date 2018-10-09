@@ -47,7 +47,7 @@ namespace arma3Launcher
                 return;
             }
 
-            Application.Run(new MainForm());
+            Application.Run(new MainForm2());
 
             SingleInstance.Stop();
         }

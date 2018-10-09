@@ -1,23 +1,63 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace arma3Launcher.Effects
 {
     class WindowIO
     {
-        private Timer effectIn = new Timer();
-        private Timer effectOut = new Timer();
+        private System.Timers.Timer effectIn = new System.Timers.Timer();
+        private System.Timers.Timer effectOut = new System.Timers.Timer();
         private Form formObject;
         private bool closeEnd = false;
+
+        /// <summary>
+        /// Invoke required controls for threading
+        /// </summary>
+        private void setWindowOpacity(Form control, double opacity)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new MethodInvoker(delegate { control.Opacity = opacity; }));
+            }
+            else
+            {
+                control.Opacity = opacity;
+            }
+        }
+
+        private void setWindowLocation(Form control, int locationX, int locationY)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new MethodInvoker(delegate { control.Location = new Point(locationX, locationY); }));
+            }
+            else
+            {
+                control.Location = new Point(locationX, locationY);
+            }
+        }
+
+        private void setWindowState(Form control, FormWindowState windowState)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new MethodInvoker(delegate { control.WindowState = windowState; }));
+            }
+            else
+            {
+                control.WindowState = windowState;
+            }
+        }
 
         public WindowIO (Form formObject)
         {
             effectIn.Interval = 10;
             effectOut.Interval = 10;
 
-            effectIn.Tick += EffectIn_Tick;
-            effectOut.Tick += EffectOut_Tick;
+            effectIn.Elapsed += EffectIn_Tick;
+            effectOut.Elapsed += EffectOut_Tick;
 
             this.formObject = formObject;
             this.formObject.Opacity = 0;
@@ -27,8 +67,8 @@ namespace arma3Launcher.Effects
         {
             if (formObject.Opacity < 1)
             {
-                formObject.Opacity = formObject.Opacity + 0.1;
-                formObject.Location = new Point(formObject.Location.X, formObject.Location.Y - 1);
+                setWindowOpacity(formObject, formObject.Opacity + 0.1);
+                setWindowLocation(formObject, formObject.Location.X, formObject.Location.Y - 1);
             }
             else
             { effectIn.Stop(); }
@@ -38,11 +78,11 @@ namespace arma3Launcher.Effects
         {
             if (formObject.Opacity > 0)
             {
-                formObject.Opacity = formObject.Opacity - 0.1;
-                formObject.Location = new Point(formObject.Location.X, formObject.Location.Y + 1);
+                setWindowOpacity(formObject, formObject.Opacity - 0.1);
+                setWindowLocation(formObject, formObject.Location.X, formObject.Location.Y + 1);
             }
             else
-            { effectOut.Stop(); if (closeEnd) { if (formObject != Application.OpenForms[0]) { formObject.Close(); } else { Application.Exit(); } } else { formObject.WindowState = FormWindowState.Minimized; } }
+            { effectOut.Stop(); if (closeEnd) { if (formObject != Application.OpenForms[0]) { formObject.Close(); } else { Application.Exit(); } } else { setWindowState(formObject, FormWindowState.Minimized); } }
         }
 
         public void windowIn ()

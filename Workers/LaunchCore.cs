@@ -7,6 +7,7 @@ using System.IO;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
+using arma3Launcher.Controls;
 
 namespace arma3Launcher.Workers
 {
@@ -23,11 +24,11 @@ namespace arma3Launcher.Workers
         private int HcInstances = 0;
 
         private Process process;
-        private MainForm mainForm;
-        private PictureBox launch;
+        private MainForm2 mainForm;
+        private DoubleBufferFlowPanel flowpanelAddonPacks;
         private Label status;
 
-        public LaunchCore(FlowLayoutPanel launchOptions,
+        public LaunchCore(DoubleBufferFlowPanel launchOptions,
             string clientProfile,
             string serverConfig,
             string serverProfile,
@@ -48,7 +49,7 @@ namespace arma3Launcher.Workers
             if (auxCombinedArguments != string.Empty) Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
         }
 
-        public LaunchCore(FlowLayoutPanel launchOptions,
+        public LaunchCore(DoubleBufferFlowPanel launchOptions,
             string clientProfile,
             string serverConfig,
             string serverProfile,
@@ -62,9 +63,10 @@ namespace arma3Launcher.Workers
             string s_exThreads, 
             bool cpuCount,
             string s_cpuCount,
-            CheckedListBox workshopAddons,
-            List<string> modsList,
-            MainForm mainForm)
+            DoubleBufferFlowPanel workshopAddons,
+            List<string> addonsList,
+            bool isOptionalAllowed,
+            MainForm2 mainForm)
         {
             string auxCombinedArguments = AggregateArguments(launchOptions, clientProfile, serverConfig, serverProfile, hcProfile, maxMem, s_maxMem, malloc, s_malloc, exThreads, s_exThreads, cpuCount, s_cpuCount);
             string auxCoreMods = "-mod=\"";
@@ -73,29 +75,32 @@ namespace arma3Launcher.Workers
             this.mainForm = mainForm;
             this.HcInstances = hcInstances;
 
-            foreach (string mod in modsList)
+            foreach (string addon in addonsList)
             {
-                if (mod != null)
+                if (addon != null)
                     if (auxCoreMods != "-mod=\"")
-                        auxCoreMods = auxCoreMods + ";" + AddonsFolder + mod;
+                        auxCoreMods = auxCoreMods + ";" + AddonsFolder + addon;
                     else
-                        auxCoreMods = auxCoreMods + AddonsFolder + mod;
+                        auxCoreMods = auxCoreMods + AddonsFolder + addon;
                 else
                     break;
             }
 
             if (auxCombinedArguments != string.Empty) Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
 
-            if (workshopAddons.CheckedItems.Count > 0 && workshopAddons.Enabled)
+            if (workshopAddons.Controls.Count > 0 && isOptionalAllowed)
             {
-                foreach (var waddon in workshopAddons.CheckedItems)
+                foreach (MaterialSkin.Controls.MaterialCheckBox waddon in workshopAddons.Controls)
                 {
-                    if (auxCombinedAddons != string.Empty) auxCombinedAddons += ";" + WorkshopFolder + waddon.ToString();
-                    else auxCombinedAddons = ";" + WorkshopFolder + waddon.ToString();
+                    if (waddon.Checked)
+                    {
+                        if (auxCombinedAddons != string.Empty) auxCombinedAddons += ";" + WorkshopFolder + waddon.Text;
+                        else auxCombinedAddons = ";" + WorkshopFolder + waddon.Text;
+                    }
                 }
             }
 
-            if (modsList.Count == 0 && auxCombinedAddons != string.Empty)
+            if (addonsList.Count == 0 && auxCombinedAddons != string.Empty)
                 auxCombinedAddons = auxCombinedAddons.Remove(0, 1);
 
             if (Arguments != string.Empty) Arguments = Arguments + " " + auxCoreMods + auxCombinedAddons + "\"";
@@ -104,7 +109,7 @@ namespace arma3Launcher.Workers
             //MessageBox.Show(Arguments);
         }
 
-        private string AggregateArguments(FlowLayoutPanel launchOptions,
+        private string AggregateArguments(DoubleBufferFlowPanel launchOptions,
             string clientProfile,
             string serverConfig,
             string serverProfile,
@@ -155,13 +160,8 @@ namespace arma3Launcher.Workers
         {
             return Arguments;
         }
-        
-        public bool isModPackInstalled()
-        {
-            return !(this.mainForm.ReadRepo(false));
-        }
 
-        public void LaunchGame(string Arguments, Label Status, PictureBox Launch, string[] serverInfo, string[] tsInfo, bool autoJoin, bool autoJoinTs)
+        public void LaunchGame(string Arguments, Label Status, DoubleBufferFlowPanel flowpanelAddonPacks, string[] serverInfo, string[] tsInfo, bool autoJoin, bool autoJoinTs)
         {
             /* 
             Array content list:
@@ -180,7 +180,7 @@ namespace arma3Launcher.Workers
             waitEndGame.DoWork += WaitEndGame_DoWork;
             waitEndGame.RunWorkerCompleted += WaitEndGame_RunWorkerCompleted;
 
-            this.launch = Launch;
+            this.flowpanelAddonPacks = flowpanelAddonPacks;
             this.status = Status;
 
             if (!GlobalVar.isServer)
@@ -304,8 +304,6 @@ namespace arma3Launcher.Workers
                     GC.Collect();
 
                     Status.Text = whatsRunning + " running...";
-                    mainForm.reSizeBarText(whatsRunning + "Running");
-                    Launch.Enabled = false;
                     mainForm.minimizeWindow();
                     mainForm.Cursor = Cursors.Default;
                     waitEndGame.RunWorkerAsync();
@@ -318,7 +316,6 @@ namespace arma3Launcher.Workers
             else
             {
                 MessageBox.Show("Game directory doesn't exist or executable not there. Please check your Arma 3 directory and try again.", "Missing directory or file", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Launch.Enabled = true;
             }
         }
 
@@ -331,9 +328,7 @@ namespace arma3Launcher.Workers
         {
             this.mainForm.WindowState = FormWindowState.Normal;
             this.mainForm.Focus();
-            this.launch.Enabled = true;
             this.status.Text = "Waiting for orders...";
-            this.mainForm.reSizeBarText("WaitingForOrders");
 
             if (GlobalVar.autoPilot)
                 this.mainForm.reLaunchServer();

@@ -63,9 +63,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap add_box {
+        internal static System.Drawing.Bitmap addfolder_hover {
             get {
-                object obj = ResourceManager.GetObject("add_box", resourceCulture);
+                object obj = ResourceManager.GetObject("addfolder_hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,49 +73,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap archive {
+        internal static System.Drawing.Bitmap addfolder_idle {
             get {
-                object obj = ResourceManager.GetObject("archive", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap archive_hover {
-            get {
-                object obj = ResourceManager.GetObject("archive_hover", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap archive_w {
-            get {
-                object obj = ResourceManager.GetObject("archive_w", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap archive_w1 {
-            get {
-                object obj = ResourceManager.GetObject("archive_w1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap archive1 {
-            get {
-                object obj = ResourceManager.GetObject("archive1", resourceCulture);
+                object obj = ResourceManager.GetObject("addfolder_idle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,176 +96,6 @@ namespace arma3Launcher.Properties {
         internal static System.Drawing.Bitmap arrow_down_hover {
             get {
                 object obj = ResourceManager.GetObject("arrow-down-hover", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bg {
-            get {
-                object obj = ResourceManager.GetObject("bg", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bg_bottom {
-            get {
-                object obj = ResourceManager.GetObject("bg_bottom", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bg_downloadbar {
-            get {
-                object obj = ResourceManager.GetObject("bg_downloadbar", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgBottom {
-            get {
-                object obj = ResourceManager.GetObject("bgBottom", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgclose1 {
-            get {
-                object obj = ResourceManager.GetObject("bgclose1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgclose2 {
-            get {
-                object obj = ResourceManager.GetObject("bgclose2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgclose3 {
-            get {
-                object obj = ResourceManager.GetObject("bgclose3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgclose4 {
-            get {
-                object obj = ResourceManager.GetObject("bgclose4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgMainWindow {
-            get {
-                object obj = ResourceManager.GetObject("bgMainWindow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgminimize1 {
-            get {
-                object obj = ResourceManager.GetObject("bgminimize1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgminimize2 {
-            get {
-                object obj = ResourceManager.GetObject("bgminimize2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgminimize3 {
-            get {
-                object obj = ResourceManager.GetObject("bgminimize3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgminimize4 {
-            get {
-                object obj = ResourceManager.GetObject("bgminimize4", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgmore1 {
-            get {
-                object obj = ResourceManager.GetObject("bgmore1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgmore2 {
-            get {
-                object obj = ResourceManager.GetObject("bgmore2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgmore3 {
-            get {
-                object obj = ResourceManager.GetObject("bgmore3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bgmore4 {
-            get {
-                object obj = ResourceManager.GetObject("bgmore4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -353,139 +143,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap check_circle {
-            get {
-                object obj = ResourceManager.GetObject("check-circle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap check_circle1 {
-            get {
-                object obj = ResourceManager.GetObject("check-circle1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap checkbox_checked {
-            get {
-                object obj = ResourceManager.GetObject("checkbox-checked", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap checkbox_unchecked {
-            get {
-                object obj = ResourceManager.GetObject("checkbox-unchecked", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chevron_down {
-            get {
-                object obj = ResourceManager.GetObject("chevron-down", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap chevron_up {
-            get {
-                object obj = ResourceManager.GetObject("chevron-up", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap circle_with_cross {
             get {
                 object obj = ResourceManager.GetObject("circle-with-cross", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap close {
-            get {
-                object obj = ResourceManager.GetObject("close", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap close_hover {
-            get {
-                object obj = ResourceManager.GetObject("close_hover", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap close_hover1 {
-            get {
-                object obj = ResourceManager.GetObject("close_hover1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap close1 {
-            get {
-                object obj = ResourceManager.GetObject("close1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cloud_download {
-            get {
-                object obj = ResourceManager.GetObject("cloud-download", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cloud_download_hover {
-            get {
-                object obj = ResourceManager.GetObject("cloud-download-hover", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap content_copy {
-            get {
-                object obj = ResourceManager.GetObject("content_copy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -523,9 +183,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap extension {
+        internal static System.Drawing.Bitmap erase_hover {
             get {
-                object obj = ResourceManager.GetObject("extension", resourceCulture);
+                object obj = ResourceManager.GetObject("erase_hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -533,19 +193,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap facebook {
+        internal static System.Drawing.Bitmap erase_idle {
             get {
-                object obj = ResourceManager.GetObject("facebook", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap favorite {
-            get {
-                object obj = ResourceManager.GetObject("favorite", resourceCulture);
+                object obj = ResourceManager.GetObject("erase_idle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -593,9 +243,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap git_square {
+        internal static System.Drawing.Bitmap nopackimg {
             get {
-                object obj = ResourceManager.GetObject("git-square", resourceCulture);
+                object obj = ResourceManager.GetObject("nopackimg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -603,9 +253,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap grey_green_stripes {
+        internal static System.Drawing.Bitmap openfolder_hover {
             get {
-                object obj = ResourceManager.GetObject("grey_green_stripes", resourceCulture);
+                object obj = ResourceManager.GetObject("openfolder_hover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -613,49 +263,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap info {
+        internal static System.Drawing.Bitmap openfolder_idle {
             get {
-                object obj = ResourceManager.GetObject("info", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap keyboard_arrow_left {
-            get {
-                object obj = ResourceManager.GetObject("keyboard-arrow-left", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap keyboard_arrow_right {
-            get {
-                object obj = ResourceManager.GetObject("keyboard-arrow-right", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap littlecat {
-            get {
-                object obj = ResourceManager.GetObject("littlecat", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap mail {
-            get {
-                object obj = ResourceManager.GetObject("mail", resourceCulture);
+                object obj = ResourceManager.GetObject("openfolder_idle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -673,9 +283,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pause {
+        internal static System.Drawing.Bitmap play_btn_disabled_bot {
             get {
-                object obj = ResourceManager.GetObject("pause", resourceCulture);
+                object obj = ResourceManager.GetObject("play_btn_disabled_bot", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -683,9 +293,49 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap play2 {
+        internal static System.Drawing.Bitmap play_btn_disabled_top {
             get {
-                object obj = ResourceManager.GetObject("play2", resourceCulture);
+                object obj = ResourceManager.GetObject("play_btn_disabled_top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_btn_hover_bot {
+            get {
+                object obj = ResourceManager.GetObject("play_btn_hover_bot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_btn_hover_top {
+            get {
+                object obj = ResourceManager.GetObject("play_btn_hover_top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_btn_idle_bot {
+            get {
+                object obj = ResourceManager.GetObject("play_btn_idle_bot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap play_btn_idle_top {
+            get {
+                object obj = ResourceManager.GetObject("play_btn_idle_top", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -703,16 +353,6 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap reload {
-            get {
-                object obj = ResourceManager.GetObject("reload", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap reload_white {
             get {
                 object obj = ResourceManager.GetObject("reload-white", resourceCulture);
@@ -723,9 +363,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Ripple_1s_200px {
+        internal static System.Drawing.Bitmap side_menu {
             get {
-                object obj = ResourceManager.GetObject("Ripple-1s-200px", resourceCulture);
+                object obj = ResourceManager.GetObject("side_menu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -733,69 +373,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap rocket {
+        internal static System.Drawing.Bitmap sidemenu_busy_32 {
             get {
-                object obj = ResourceManager.GetObject("rocket", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap rocket_launch {
-            get {
-                object obj = ResourceManager.GetObject("rocket_launch", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap searching {
-            get {
-                object obj = ResourceManager.GetObject("searching", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap sep_topbar {
-            get {
-                object obj = ResourceManager.GetObject("sep_topbar", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap settings {
-            get {
-                object obj = ResourceManager.GetObject("settings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap steam {
-            get {
-                object obj = ResourceManager.GetObject("steam", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap style {
-            get {
-                object obj = ResourceManager.GetObject("style", resourceCulture);
+                object obj = ResourceManager.GetObject("sidemenu_busy_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -813,9 +393,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap tools {
+        internal static System.Drawing.Bitmap windowClose {
             get {
-                object obj = ResourceManager.GetObject("tools", resourceCulture);
+                object obj = ResourceManager.GetObject("windowClose", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -823,9 +403,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap trollface {
+        internal static System.Drawing.Bitmap windowCloseHover {
             get {
-                object obj = ResourceManager.GetObject("trollface", resourceCulture);
+                object obj = ResourceManager.GetObject("windowCloseHover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -833,9 +413,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap twitch {
+        internal static System.Drawing.Bitmap windowCross {
             get {
-                object obj = ResourceManager.GetObject("twitch", resourceCulture);
+                object obj = ResourceManager.GetObject("windowCross", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -843,9 +423,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap twitter {
+        internal static System.Drawing.Bitmap windowCrossHover {
             get {
-                object obj = ResourceManager.GetObject("twitter", resourceCulture);
+                object obj = ResourceManager.GetObject("windowCrossHover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -853,9 +433,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap useThis_active {
+        internal static System.Drawing.Bitmap windowMenu {
             get {
-                object obj = ResourceManager.GetObject("useThis_active", resourceCulture);
+                object obj = ResourceManager.GetObject("windowMenu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -863,9 +443,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap useThis_hover {
+        internal static System.Drawing.Bitmap windowMenuHover {
             get {
-                object obj = ResourceManager.GetObject("useThis_hover", resourceCulture);
+                object obj = ResourceManager.GetObject("windowMenuHover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -873,9 +453,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap useThis_inactive {
+        internal static System.Drawing.Bitmap windowToTaskbar {
             get {
-                object obj = ResourceManager.GetObject("useThis_inactive", resourceCulture);
+                object obj = ResourceManager.GetObject("windowToTaskbar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -883,69 +463,9 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap view_details {
+        internal static System.Drawing.Bitmap windowToTaskbarHover {
             get {
-                object obj = ResourceManager.GetObject("view_details", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap view_list {
-            get {
-                object obj = ResourceManager.GetObject("view_list", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap view_tiles {
-            get {
-                object obj = ResourceManager.GetObject("view_tiles", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap warning {
-            get {
-                object obj = ResourceManager.GetObject("warning", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap x64_active {
-            get {
-                object obj = ResourceManager.GetObject("x64-active", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap x64_inactive {
-            get {
-                object obj = ResourceManager.GetObject("x64-inactive", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap youtube {
-            get {
-                object obj = ResourceManager.GetObject("youtube", resourceCulture);
+                object obj = ResourceManager.GetObject("windowToTaskbarHover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

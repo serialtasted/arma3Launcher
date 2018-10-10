@@ -19,11 +19,11 @@ namespace arma3Launcher.Workers
     {
         private Downloader downloader;
         private Installer installer;
-        private MainForm2 mainForm;
+        private readonly MainForm2 mainForm;
         private DoubleBufferFlowPanel flowpanelAddonPacks;
 
         private TreeView repoTreeView;
-        private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
+        private readonly string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
         private string AddonsFolder = string.Empty;
 
         private List<string> modsHash = new List<string>();
@@ -34,11 +34,11 @@ namespace arma3Launcher.Workers
         private int filesINVALID;
         private int filesMISSING;
 
-        private Label lbl_filesOK;
-        private Label lbl_filesINVALID;
-        private Label lbl_filesMISSING;
+        private readonly Label lbl_filesOK;
+        private readonly Label lbl_filesINVALID;
+        private readonly Label lbl_filesMISSING;
 
-        private BackgroundWorker validateRepo = new BackgroundWorker();
+        private readonly BackgroundWorker validateRepo = new BackgroundWorker();
 
         private string repoFile = string.Empty;
         private string needsUpdate = string.Empty;
@@ -245,8 +245,9 @@ namespace arma3Launcher.Workers
                     item.enablePlayButton();
                 }
 
-                if (GlobalVar.autoPilot) { this.mainForm.LaunchGame(false); }
                 GlobalVar.repoChecked = true;
+
+                if (GlobalVar.autoPilot) { this.mainForm.LaunchGame(false); }
 
                 if (showMessage)
                     new Windows.MessageBox().Show("All files are synced with the repository!", "You're amazing", MessageBoxButtons.OK, MessageIcon.Information);

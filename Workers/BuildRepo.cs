@@ -15,12 +15,12 @@ namespace arma3Launcher.Workers
     class BuildRepo
     {
         private CheckedListBox addonsList;
-        private Label progressText;
-        private Windows7ProgressBar progressFile;
-        private TextBox buildLog;
+        private readonly Label progressText;
+        private readonly Windows7ProgressBar progressFile;
+        private readonly TextBox buildLog;
         private WindowIO windowIO;
-        private Button buildBtn;
-        private CheckBox checkBtn;
+        private readonly Button buildBtn;
+        private readonly CheckBox checkBtn;
 
         private bool isBuilding = false;
 

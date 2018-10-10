@@ -1,4 +1,5 @@
 ﻿using arma3Launcher.Effects;
+using arma3Launcher.Workers;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
@@ -17,6 +18,8 @@ namespace arma3Launcher.Windows
     {
         private System.Timers.Timer animatedImage = new System.Timers.Timer();
         private WindowIO windowIO;
+        private DialogResult holdResult;
+        private Fonts customFont = new Fonts();
 
         public MessageBox()
         {
@@ -24,6 +27,8 @@ namespace arma3Launcher.Windows
             windowIO = new WindowIO(this);
             animatedImage.Interval = 40;
             animatedImage.Elapsed += AnimatedImage_Elapsed;
+
+            this.Message.Font = this.customFont.getFont(Properties.Fonts.ClearSans_Light, 9F, FontStyle.Regular);
         }
 
         public DialogResult Show(string Message)
@@ -246,11 +251,13 @@ namespace arma3Launcher.Windows
         {
             if ((string)this.Tag != "close")
             {
+                holdResult = this.DialogResult;
                 windowIO.windowOut(true);
                 e.Cancel = true;
             }
             else
             {
+                this.DialogResult = holdResult;
                 GC.Collect(2, GCCollectionMode.Forced);
                 this.Dispose();
             }

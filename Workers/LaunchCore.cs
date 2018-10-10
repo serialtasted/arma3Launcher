@@ -14,14 +14,15 @@ namespace arma3Launcher.Workers
     class LaunchCore
     {
         private BackgroundWorker waitEndGame = new BackgroundWorker();
-        private string GameFolder = Properties.Settings.Default.Arma3Folder;
-        private string AddonsFolder = Properties.Settings.Default.AddonsFolder;
-        private string TSFolder = Properties.Settings.Default.TS3Folder;
-        private string WorkshopFolder = Properties.Settings.Default.Arma3Folder + "!Workshop\\";
-        private string Arguments = string.Empty;
+        private readonly string GameFolder = Properties.Settings.Default.Arma3Folder;
+        private readonly string AddonsFolder = Properties.Settings.Default.AddonsFolder;
+        private readonly string TSFolder = Properties.Settings.Default.TS3Folder;
+        private readonly string WorkshopFolder = Properties.Settings.Default.Arma3Folder + "!Workshop\\";
+        private readonly string OptionalFolder = Properties.Settings.Default.OptionalAddonsFolder;
+        private readonly string Arguments = string.Empty;
         private string SvArguments = string.Empty;
         private string HcArguments = string.Empty;
-        private int HcInstances = 0;
+        private readonly int HcInstances = 0;
 
         private Process process;
         private MainForm2 mainForm;
@@ -64,6 +65,7 @@ namespace arma3Launcher.Workers
             bool cpuCount,
             string s_cpuCount,
             DoubleBufferFlowPanel workshopAddons,
+            DoubleBufferFlowPanel optionalAddons,
             List<string> addonsList,
             bool isOptionalAllowed,
             MainForm2 mainForm)
@@ -90,14 +92,34 @@ namespace arma3Launcher.Workers
 
             if (workshopAddons.Controls.Count > 0 && isOptionalAllowed)
             {
-                foreach (MaterialSkin.Controls.MaterialCheckBox waddon in workshopAddons.Controls)
+                try
                 {
-                    if (waddon.Checked)
+                    foreach (MaterialSkin.Controls.MaterialCheckBox waddon in workshopAddons.Controls)
                     {
-                        if (auxCombinedAddons != string.Empty) auxCombinedAddons += ";" + WorkshopFolder + waddon.Text;
-                        else auxCombinedAddons = ";" + WorkshopFolder + waddon.Text;
+                        if (waddon.Checked)
+                        {
+                            if (auxCombinedAddons != string.Empty) auxCombinedAddons += ";" + WorkshopFolder + waddon.Text;
+                            else auxCombinedAddons = ";" + WorkshopFolder + waddon.Text;
+                        }
                     }
                 }
+                catch { }
+        }
+
+            if (optionalAddons.Controls.Count > 0 && isOptionalAllowed)
+            {
+                try
+                {
+                    foreach (MaterialSkin.Controls.MaterialCheckBox waddon in optionalAddons.Controls)
+                    {
+                        if (waddon.Checked)
+                        {
+                            if (auxCombinedAddons != string.Empty) auxCombinedAddons += ";" + OptionalFolder + waddon.Text;
+                            else auxCombinedAddons = ";" + OptionalFolder + waddon.Text;
+                        }
+                    }
+                }
+                catch { }
             }
 
             if (addonsList.Count == 0 && auxCombinedAddons != string.Empty)
@@ -206,8 +228,10 @@ namespace arma3Launcher.Workers
                     {
                         try
                         {
-                            var fass = new ProcessStartInfo();
-                            fass.WorkingDirectory = TSFolder;
+                            var fass = new ProcessStartInfo
+                            {
+                                WorkingDirectory = TSFolder
+                            };
 
                             if (tsInfo[0] != string.Empty && tsInfo[2] != string.Empty)
                                 fass.Arguments = "ts3server://\"" + tsInfo[0] + "/?port=" + tsInfo[1] + "&channel=" + tsInfo[3] + "\"";
@@ -220,8 +244,10 @@ namespace arma3Launcher.Workers
                             if (File.Exists(TSFolder + "ts3client_win32.exe"))
                                 fass.FileName = "ts3client_win32.exe";
 
-                            var process = new Process();
-                            process.StartInfo = fass;
+                            var process = new Process
+                            {
+                                StartInfo = fass
+                            };
 
                             process.Start();
                         }
@@ -241,13 +267,17 @@ namespace arma3Launcher.Workers
                     {
                         Status.Text = "Starting Steam...";
 
-                        var fass = new ProcessStartInfo();
-                        fass.WorkingDirectory = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString().Replace(@"/", @"\") + @"\";
-                        fass.FileName = "steam.exe";
-                        fass.Arguments = Arguments;
+                        var fass = new ProcessStartInfo
+                        {
+                            WorkingDirectory = (string)Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString().Replace(@"/", @"\") + @"\",
+                            FileName = "steam.exe",
+                            Arguments = Arguments
+                        };
 
-                        var process = new Process();
-                        process.StartInfo = fass;
+                        var process = new Process
+                        {
+                            StartInfo = fass
+                        };
                         process.Start();
                         Thread.SpinWait(2000);
                         Thread.Sleep(2000);
@@ -279,8 +309,10 @@ namespace arma3Launcher.Workers
 
                         for (int i = 0; i < HcInstances; i++)
                         {
-                            var hcProcess = new Process();
-                            hcProcess.StartInfo = hcProcessInfo;
+                            var hcProcess = new Process
+                            {
+                                StartInfo = hcProcessInfo
+                            };
                             hcProcess.Start();
                         }
 
@@ -294,8 +326,10 @@ namespace arma3Launcher.Workers
                         whatsRunning = "Game";
                     }
 
-                    var gameProcess = new Process();
-                    gameProcess.StartInfo = gameProcessInfo;
+                    var gameProcess = new Process
+                    {
+                        StartInfo = gameProcessInfo
+                    };
                     this.process = gameProcess;
                     gameProcess.Start();
 

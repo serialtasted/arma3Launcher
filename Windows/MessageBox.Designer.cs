@@ -51,7 +51,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(45)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
             this.panel1.Controls.Add(this.option_3);
             this.panel1.Controls.Add(this.option_2);
             this.panel1.Controls.Add(this.option_1);
@@ -114,10 +114,10 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(44)))));
             this.panel2.Controls.Add(this.Message);
             this.panel2.Controls.Add(this.diagImg);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 64);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(450, 116);
@@ -126,9 +126,10 @@
             // Message
             // 
             this.Message.AutoSize = true;
-            this.Message.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Message.Font = new System.Drawing.Font("Clear Sans Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Message.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.Message.Location = new System.Drawing.Point(142, 8);
+            this.Message.MaximumSize = new System.Drawing.Size(300, 100);
             this.Message.MinimumSize = new System.Drawing.Size(300, 100);
             this.Message.Name = "Message";
             this.Message.Size = new System.Drawing.Size(300, 100);
@@ -148,6 +149,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MessageBox";
+            this.Padding = new System.Windows.Forms.Padding(0, 64, 0, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "%Title%";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MessageBox_FormClosing);

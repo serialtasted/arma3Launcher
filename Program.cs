@@ -48,6 +48,12 @@ namespace arma3Launcher
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            /// <summary>
+            /// Load and apply custom fonts
+            /// Only needs to initialize once for all other windows and controls. It stores data on GlobalVar!
+            /// </summary>
+            new Fonts().InitFonts();
+
             try
             {
                 if (Properties.Settings.Default.isServerMode) { GlobalVar.isServer = true; }

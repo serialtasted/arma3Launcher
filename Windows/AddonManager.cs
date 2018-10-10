@@ -29,7 +29,7 @@ namespace arma3Launcher.Windows
 
             InitializeComponent();
 
-            aLooker = new AddonsLooker(chbl_repoContent);
+            aLooker = new AddonsLooker();
             windowIO = new WindowIO(this);
             repoBuilder = new BuildRepo(chbl_repoContent, lbl_buildStatus, prgb_repoBuild, buildLog, windowIO, btn_buildRepo, chb_checkAll);
 
@@ -76,7 +76,7 @@ namespace arma3Launcher.Windows
 
         private void GetAddons()
         {
-            aLooker.getAddonsCheckListBox(txtb_repoLocation.Text);
+            aLooker.getAddonsCheckListBox(chbl_repoContent, txtb_repoLocation.Text);
         }
 
         private void btn_ereaseRepoLocation_Click(object sender, EventArgs e)

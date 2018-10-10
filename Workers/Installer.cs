@@ -16,45 +16,45 @@ namespace arma3Launcher.Workers
     class Installer
     {
         // controls
-        private Windows7ProgressBar progressFile;
-        private Windows7ProgressBar progressAll;
-        private Label progressText;
-        private Label progressDetails;
-        private Label progressCurFile;
+        private readonly Windows7ProgressBar progressFile;
+        private readonly Windows7ProgressBar progressAll;
+        private readonly Label progressText;
+        private readonly Label progressDetails;
+        private readonly Label progressCurFile;
         private DoubleBufferFlowPanel flowpanelAddonPacks;
-        private PictureBox cancelButton;
-        private String activeForm;
-        private Button repoValidateBtn;
+        private readonly PictureBox cancelButton;
+        private readonly String activeForm;
+        private readonly Button repoValidateBtn;
 
         // controls (directory fields)
-        private TextBox gamePathBox;
-        private TextBox ts3PathBox;
-        private TextBox addonsPathBox;
-        private PictureBox gamePathErase;
-        private PictureBox ts3PathErase;
-        private PictureBox addonsPathErase;
-        private PictureBox gamePathFind;
-        private PictureBox ts3PathFind;
-        private PictureBox addonsPathFind;
+        private readonly TextBox gamePathBox;
+        private readonly TextBox ts3PathBox;
+        private readonly TextBox addonsPathBox;
+        private readonly PictureBox gamePathErase;
+        private readonly PictureBox ts3PathErase;
+        private readonly PictureBox addonsPathErase;
+        private readonly PictureBox gamePathFind;
+        private readonly PictureBox ts3PathFind;
+        private readonly PictureBox addonsPathFind;
 
         // workers
         private RepoReader repoReader = new RepoReader();
 
         // controls (toolstrip menu items)
-        private MaterialFlatButton ts3Plugin;
+        private readonly MaterialRaisedButton ts3Plugin;
 
         // forms
         private MainForm2 mainForm;
 
         // background workers
-        private BackgroundWorker installFiles = new BackgroundWorker();
-        private BackgroundWorker validateFiles = new BackgroundWorker();
+        private readonly BackgroundWorker installFiles = new BackgroundWorker();
+        private readonly BackgroundWorker validateFiles = new BackgroundWorker();
 
         // timer
-        private Timer delayLaunch = new Timer();
+        private readonly Timer delayLaunch = new Timer();
 
         // folder paths
-        private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
+        private readonly string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
         private string GameFolder = string.Empty;
         private string TS3Folder = string.Empty;
         private string AddonsFolder = string.Empty;
@@ -168,7 +168,7 @@ namespace arma3Launcher.Workers
         /// <param name="launcherButton"></param>
         public Installer (MainForm2 mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, DoubleBufferFlowPanel flowpanelAddonPacks, PictureBox cancelButton,
             TextBox gamePathBox, TextBox ts3PathBox, TextBox addonsPathBox, PictureBox gamePathErase, PictureBox ts3PathErase, PictureBox addonsPathErase, PictureBox gamePathFind, PictureBox ts3PathFind, PictureBox addonsPathFind,
-            MaterialFlatButton ts3Plugin, Button repoValidateBtn)
+            MaterialRaisedButton ts3Plugin, Button repoValidateBtn)
         {
             this.activeForm = "mainForm";
             this.mainForm = mainForm;

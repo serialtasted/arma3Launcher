@@ -574,5 +574,29 @@ namespace arma3Launcher.Properties {
                 this["DisableAnimations"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string optionalAddons {
+            get {
+                return ((string)(this["optionalAddons"]));
+            }
+            set {
+                this["optionalAddons"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OptionalAddonsFolder {
+            get {
+                return ((string)(this["OptionalAddonsFolder"]));
+            }
+            set {
+                this["OptionalAddonsFolder"] = value;
+            }
+        }
     }
 }

@@ -218,6 +218,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Windows\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddonManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +235,12 @@
     </Compile>
     <Compile Include="Windows\DelayServerStart.Designer.cs">
       <DependentUpon>DelayServerStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Help.Designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\MessageBox.cs">
       <SubType>Form</SubType>
@@ -283,11 +295,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\AddonManager.resx">
       <DependentUpon>AddonManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\DelayServerStart.resx">
       <DependentUpon>DelayServerStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MessageBox.resx">
       <DependentUpon>MessageBox.cs</DependentUpon>

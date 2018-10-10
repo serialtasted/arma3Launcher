@@ -53,10 +53,12 @@ namespace arma3Launcher
         private string armaDir_previousDir = string.Empty;
         private string tsDir_previousDir = string.Empty;
         private string modsDir_previousDir = string.Empty;
+        private string optionalDir_previousDir = string.Empty;
 
         private string GameFolder = string.Empty;
         private string TSFolder = string.Empty;
         private string AddonsFolder = string.Empty;
+        private string OptionalAddonsFolder = string.Empty;
         private string documentsA3Profiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Arma 3 - Other Profiles";
         private string missionsFolder = string.Empty;
 
@@ -99,12 +101,6 @@ namespace arma3Launcher
             // Init Components
             InitializeComponent();
 
-            /// <summary>
-            /// Load and apply custom fonts
-            /// Only needs to initialize once for all other windows and controls. It stores data on GlobalVar!
-            /// </summary>
-            this.customFont.InitFonts();
-
             // Apply fonts to menu items (they're actually labels...)
             this.menu_addonPacks.Font = this.customFont.getFont(Properties.Fonts.BebasNeue_Book, 20F, FontStyle.Regular);
             this.menu_launchOptions.Font = this.customFont.getFont(Properties.Fonts.BebasNeue_Book, 20F, FontStyle.Regular);
@@ -113,16 +109,21 @@ namespace arma3Launcher
             this.menu_help.Font = this.customFont.getFont(Properties.Fonts.Lato_Regular, 9.5F, FontStyle.Regular);
             this.menu_about.Font = this.customFont.getFont(Properties.Fonts.Lato_Regular, 9.5F, FontStyle.Regular);
 
-            // Apply font to labels
+            // Apply fonts to labels
             this.lbl_addonOptions.Font = this.customFont.getFont(Properties.Fonts.BebasNeue_Book, 30F, FontStyle.Regular);
             this.lbl_launchOptions.Font = this.customFont.getFont(Properties.Fonts.BebasNeue_Book, 30F, FontStyle.Regular);
             this.lbl_repositoryDownloads.Font = this.customFont.getFont(Properties.Fonts.BebasNeue_Book, 30F, FontStyle.Regular);
             this.lbl_preferences.Font = this.customFont.getFont(Properties.Fonts.BebasNeue_Book, 30F, FontStyle.Regular);
 
+            this.lbl_pref_Arma3Dir.Font = this.customFont.getFont(Properties.Fonts.ClearSans_Light, 9.75F, FontStyle.Regular);
+            this.lbl_pref_AddonsDir.Font = this.customFont.getFont(Properties.Fonts.ClearSans_Light, 9.75F, FontStyle.Regular);
+            this.lbl_pref_OptionalDir.Font = this.customFont.getFont(Properties.Fonts.ClearSans_Light, 9.75F, FontStyle.Regular);
+            this.lbl_pref_TeamSpeakDir.Font = this.customFont.getFont(Properties.Fonts.ClearSans_Light, 9.75F, FontStyle.Regular);
+
             // Init workers
             this.QuickUpdateMethod = new zCheckUpdate(txt_versionNumber);
 
-            this.aLooker = new AddonsLooker(flowpanel_steamworkshopAddonsList);
+            this.aLooker = new AddonsLooker();
             this.remoteReader = new RemoteReader();
             this.fetchAddonPacks = new Packs(this, flowpanel_addonPacks, cb_serverPack);
             this.installer = new Installer(this, prb_progressBar_File, prb_progressBar_All, txt_progressStatus, txt_percentageStatus, txt_curFile, flowpanel_addonPacks, btn_cancelDownload, txtb_pref_armaDirectory, txtb_pref_tsDirectory, txtb_pref_addonsDirectory, btn_pref_ereaseArmaDir, btn_pref_ereaseTSDir, btn_pref_ereaseAddonsDir, btn_pref_browseA3Dir, btn_pref_browseTS3Dir, btn_pref_browseAddonsDir, btn_reinstallTFRPlugins, btn_checkRepo);
@@ -333,26 +334,33 @@ namespace arma3Launcher
                 if (GlobalVar.isServer)
                 {
                     chb_pref_serverMode.Checked = true;
-                    flowpanel_steamworkshopAddonsList.Visible = false;
                     panel_serverOptions.Visible = true;
                     panel_headlessOptions.Visible = true;
                     panel_serverOptions_vSep.Visible = true;
                     panel_serverOptions_hSep.Visible = true;
+                    tsmi_manageRepository.Visible = true;
+
+                    btn_addonsOptionsOpen.Visible = false;
                     chb_pref_joinServer.Visible = false;
                     chb_pref_joinTSServer.Visible = false;
-                    btn_reinstallTFRPlugins.Visible = false;
                     chb_pref_serverAutopilot.Visible = true;
                     chb_battleye.Enabled = false;
-                    manageRepositoryToolStripMenuItem.Visible = true;
 
                     chb_pref_startGame.Text = "Start server when ready";
 
                     cb_clientProfile.Enabled = false;
                     lbl_clientProfile.Enabled = false;
 
-                    foreach (Control control in panel_TeamSpeakDir.Controls)
+                    int _idx = 0;
+                    foreach (Panel panel in flowpanel_preferencesDirectories.Controls)
                     {
-                        control.Visible = false;
+                        if(panel.Name == panel_TeamSpeakDir.Name)
+                        {
+                            if (_idx > 0) flowpanel_preferencesDirectories.Controls[_idx - 1].Visible = false;
+                            panel.Visible = false;
+                        }
+
+                        _idx++;
                     }
 
                     if (!Properties.Settings.Default.firstLaunch)
@@ -447,7 +455,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_addonPacks_Click(object sender, EventArgs e)
         {
-            if (GlobalVar.menuSelected != 0)
+            if (GlobalVar.menuSelected != 0 && !GlobalVar.isAnimating)
             {
                 GlobalVar.menuSelected = 0;
                 this.HideUnhide(GlobalVar.menuSelected);
@@ -472,7 +480,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_launchOptions_Click(object sender, EventArgs e)
         {
-            if (GlobalVar.menuSelected != 1)
+            if (GlobalVar.menuSelected != 1 && !GlobalVar.isAnimating)
             {
                 GlobalVar.menuSelected = 1;
                 this.HideUnhide(GlobalVar.menuSelected);
@@ -497,7 +505,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_repositoryDownloads_Click(object sender, EventArgs e)
         {
-            if (GlobalVar.menuSelected != 2)
+            if (GlobalVar.menuSelected != 2 && !GlobalVar.isAnimating)
             {
                 GlobalVar.menuSelected = 2;
                 this.HideUnhide(GlobalVar.menuSelected);
@@ -522,7 +530,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_preferences_Click(object sender, EventArgs e)
         {
-            if (GlobalVar.menuSelected != 3)
+            if (GlobalVar.menuSelected != 3 && !GlobalVar.isAnimating)
             {
                 GlobalVar.menuSelected = 3;
                 this.HideUnhide(GlobalVar.menuSelected);
@@ -547,7 +555,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_help_Click(object sender, EventArgs e)
         {
-
+            new Windows.Help().ShowDialog();
         }
 
         private void menu_help_MouseEnter(object sender, EventArgs e)
@@ -565,7 +573,7 @@ namespace arma3Launcher
         -----------------------------------*/
         private void menu_about_Click(object sender, EventArgs e)
         {
-
+            new Windows.About(AssemblyTitle, AssemblyVersion).ShowDialog();
         }
 
         private void menu_about_MouseEnter(object sender, EventArgs e)
@@ -668,7 +676,37 @@ namespace arma3Launcher
         private void btn_pref_openTS3Dir_MouseLeave(object sender, EventArgs e)
         {
             btn_pref_openTS3Dir.Image = Properties.Resources.openfolder_idle;
-        } 
+        }
+
+        private void btn_pref_ereaseOptionalDir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_ereaseOptionalDir.Image = Properties.Resources.erase_hover;
+        }
+
+        private void btn_pref_ereaseOptionalDir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_ereaseOptionalDir.Image = Properties.Resources.erase_idle;
+        }
+
+        private void btn_pref_browseOptionalDir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_browseOptionalDir.Image = Properties.Resources.addfolder_hover;
+        }
+
+        private void btn_pref_browseOptionalDir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_browseOptionalDir.Image = Properties.Resources.addfolder_idle;
+        }
+
+        private void btn_pref_openOptionalDir_MouseEnter(object sender, EventArgs e)
+        {
+            btn_pref_openOptionalDir.Image = Properties.Resources.openfolder_hover;
+        }
+
+        private void btn_pref_openOptionalDir_MouseLeave(object sender, EventArgs e)
+        {
+            btn_pref_openOptionalDir.Image = Properties.Resources.openfolder_idle;
+        }
         #endregion
 
         #region Addon Packs Panel
@@ -707,15 +745,16 @@ namespace arma3Launcher
         }
         #endregion
 
-        public void GetAddons()
+        private void GetWorkshopAddons()
         {
-            this.aLooker.getAddonsFlowPanel(Properties.Settings.Default.Arma3Folder + "!Workshop\\");
+            this.aLooker.getAddonsFlowPanel(flowpanel_steamworkshopAddonsList, Properties.Settings.Default.Arma3Folder + "!Workshop\\", steamworkshopMenu);
             this.PropertiesWorkshopReader();
         }
 
-        private void steamworkshopAddonsList_SelectedIndexChanged(object sender, EventArgs e)
+        private void GetOptionalAddons()
         {
-            this.PropertiesWorkshopSaver();
+            this.aLooker.getAddonsFlowPanel(flowpanel_optionalAddons, Properties.Settings.Default.OptionalAddonsFolder, optionaladdonsMenu);
+            this.PropertiesOptionalAddonsReader();
         }
 
         private void ServerSettings()
@@ -821,31 +860,74 @@ namespace arma3Launcher
             memoryMaximum = machineMemory;
         }
 
+        private void PropertiesOptionalAddonsReader()
+        {
+            foreach (var waddon in Properties.Settings.Default.optionalAddons.Split(';'))
+            {
+                try
+                {
+                    foreach (MaterialCheckBox item in flowpanel_optionalAddons.Controls)
+                    {
+                        if (item.Text == waddon)
+                        { item.Checked = true; break; }
+                    }
+                }
+                catch { }
+            }
+        }
+
+        private void PropertiesOptionalAddonsSaver()
+        {
+            try
+            {
+                string auxOptionalAddons = string.Empty;
+                foreach (MaterialCheckBox item in flowpanel_optionalAddons.Controls)
+                {
+                    if (item.Checked)
+                    {
+                        if (auxOptionalAddons != string.Empty) auxOptionalAddons += ";" + item.Text;
+                        else auxOptionalAddons = item.Text;
+                    }
+                }
+                Properties.Settings.Default.optionalAddons = auxOptionalAddons;
+                Properties.Settings.Default.Save();
+            }
+            catch { }
+        }
+
         private void PropertiesWorkshopReader()
         {
             foreach (var waddon in Properties.Settings.Default.workshopAddons.Split(';'))
             {
-                foreach (MaterialCheckBox item in flowpanel_steamworkshopAddonsList.Controls)
+                try
                 {
-                    if(item.Text == waddon)
-                    { item.Checked = true; break; }
+                    foreach (MaterialCheckBox item in flowpanel_steamworkshopAddonsList.Controls)
+                    {
+                        if (item.Text == waddon)
+                        { item.Checked = true; break; }
+                    }
                 }
+                catch { }
             }
         }
 
         private void PropertiesWorkshopSaver()
         {
-            string auxWorkshopAddons = string.Empty;
-            foreach (MaterialCheckBox item in flowpanel_steamworkshopAddonsList.Controls)
+            try
             {
-                if (item.Checked)
+                string auxWorkshopAddons = string.Empty;
+                foreach (MaterialCheckBox item in flowpanel_steamworkshopAddonsList.Controls)
                 {
-                    if (auxWorkshopAddons != string.Empty) auxWorkshopAddons += ";" + item.Text;
-                    else auxWorkshopAddons = item.Text;
+                    if (item.Checked)
+                    {
+                        if (auxWorkshopAddons != string.Empty) auxWorkshopAddons += ";" + item.Text;
+                        else auxWorkshopAddons = item.Text;
+                    }
                 }
+                Properties.Settings.Default.workshopAddons = auxWorkshopAddons;
+                Properties.Settings.Default.Save();
             }
-            Properties.Settings.Default.workshopAddons = auxWorkshopAddons;
-            Properties.Settings.Default.Save();
+            catch { }
         }
 
         private void LoadSettings()
@@ -865,6 +947,11 @@ namespace arma3Launcher
             { txtb_pref_addonsDirectory.ForeColor = Color.FromArgb(64, 64, 64); AddonsFolder = txtb_pref_addonsDirectory.Text = Properties.Settings.Default.AddonsFolder; }
             else
             { txtb_pref_addonsDirectory.ForeColor = Color.DarkGray; txtb_pref_addonsDirectory.Text = "Set directory ->"; }
+
+            if (Properties.Settings.Default.OptionalAddonsFolder != string.Empty)
+            { txtb_pref_optionalDirectory.ForeColor = Color.FromArgb(64, 64, 64); OptionalAddonsFolder = txtb_pref_optionalDirectory.Text = Properties.Settings.Default.OptionalAddonsFolder; }
+            else
+            { txtb_pref_optionalDirectory.ForeColor = Color.DarkGray; txtb_pref_optionalDirectory.Text = "Set directory ->"; }
 
             if (GlobalVar.isServer)
                 this.ServerSettings();
@@ -941,6 +1028,9 @@ namespace arma3Launcher
 
             // workshop addons
             this.PropertiesWorkshopReader();
+
+            // optional addons
+            this.PropertiesOptionalAddonsReader();
 
             // server-client specific settings
             if (GlobalVar.isServer)
@@ -1030,6 +1120,9 @@ namespace arma3Launcher
 
             // workshop addons
             this.PropertiesWorkshopSaver();
+
+            // optional addons
+            this.PropertiesOptionalAddonsSaver();
 
             // server-client specific settings
             if (GlobalVar.isServer)
@@ -1139,12 +1232,10 @@ namespace arma3Launcher
 
         private void switchAutopilot(bool On)
         {
-            oldVersionStatusText = WindowTitle.Text;
-
-            if (On)
-            { GlobalVar.autoPilot = true; WindowTitle.Text = WindowTitle.Text + " | Autopilot engaged"; chb_pref_serverAutopilot.Checked = true; }
-            else
-            { GlobalVar.autoPilot = false; WindowTitle.Text = oldVersionStatusText; chb_pref_serverAutopilot.Checked = false; }
+            if (On && !GlobalVar.autoPilot)
+            { GlobalVar.autoPilot = true; oldVersionStatusText = WindowTitle.Text; WindowTitle.Text = WindowTitle.Text + " | Autopilot engaged"; chb_pref_serverAutopilot.Checked = true; }
+            else if (!On && GlobalVar.autoPilot)
+            { GlobalVar.autoPilot = false; oldVersionStatusText = WindowTitle.Text; WindowTitle.Text = oldVersionStatusText; chb_pref_serverAutopilot.Checked = false; }
         }
 
         public void reLaunchServer()
@@ -1186,6 +1277,7 @@ namespace arma3Launcher
                             chb_cpuCount.Checked,
                             cb_cpuCount.SelectedItem.ToString(),
                             flowpanel_steamworkshopAddonsList,
+                            flowpanel_optionalAddons,
                             addonsName,
                             isOptionalAllowed,
                             this);
@@ -1265,7 +1357,7 @@ namespace arma3Launcher
                         missionsFolder = Properties.Settings.Default.Arma3Folder + "mpmissions";
                         Properties.Settings.Default.Save();
                         txtb_pref_armaDirectory.Text = auxA3Folder;
-                        GetAddons();
+                        GetWorkshopAddons();
                     }
                     else
                     {
@@ -1326,7 +1418,7 @@ namespace arma3Launcher
 
             if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
             {
-                if (dlg_folderBrowser.SelectedPath != GameFolder || GlobalVar.isServer)
+                if (dlg_folderBrowser.SelectedPath != GameFolder)
                 {
                     AddonsFolder = Properties.Settings.Default.AddonsFolder = dlg_folderBrowser.SelectedPath + @"\";
                     Properties.Settings.Default.Save();
@@ -1343,11 +1435,41 @@ namespace arma3Launcher
             dlg_folderBrowser.ShowNewFolderButton = false;
         }
 
+        private void browseOptionalFolder()
+        {
+            dlg_folderBrowser.ShowNewFolderButton = true;
+            dlg_folderBrowser.Description = "Select the Optional Addons folder or create a new one.\n⚠ It can't be the same as the Game or the Addons folders.";
+            if (Directory.Exists(txtb_pref_optionalDirectory.Text))
+                dlg_folderBrowser.SelectedPath = txtb_pref_optionalDirectory.Text;
+
+            if (dlg_folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                if (dlg_folderBrowser.SelectedPath != AddonsFolder && (dlg_folderBrowser.SelectedPath != GameFolder || (dlg_folderBrowser.SelectedPath != GameFolder + "!Workshop")))
+                {
+                    AddonsFolder = Properties.Settings.Default.OptionalAddonsFolder = dlg_folderBrowser.SelectedPath + @"\";
+                    Properties.Settings.Default.Save();
+                    txtb_pref_optionalDirectory.Text = dlg_folderBrowser.SelectedPath;
+                }
+                else
+                {
+                    if (dlg_folderBrowser.SelectedPath == AddonsFolder)
+                        new Windows.MessageBox().Show("The Optional Addons folder can't be the same as the Addons folder.", "Wrong directory", MessageBoxButtons.OK, MessageIcon.Error);
+                    else if (dlg_folderBrowser.SelectedPath == GameFolder || (dlg_folderBrowser.SelectedPath == GameFolder + "!Workshop"))
+                        new Windows.MessageBox().Show("The Optional Addons folder can't be the same as the Game folder.", "Wrong directory", MessageBoxButtons.OK, MessageIcon.Error);
+
+                    this.browseAddonsFolder();
+                }
+            }
+
+            dlg_folderBrowser.SelectedPath = string.Empty;
+            dlg_folderBrowser.ShowNewFolderButton = false;
+        }
+
         private void btn_reinstallTFRPlugins_Click(object sender, EventArgs e)
         { installer.installTeamSpeakPlugin(); }
 
         public void updateCurrentPack(bool refreshPacks, bool revealPacks)
-        { FetchRemoteSettings(refreshPacks, false); GetAddons(); if (revealPacks) { fetchAddonPacks.RevealPacks(flowpanel_addonPacks); } }
+        { FetchRemoteSettings(refreshPacks, false); GetWorkshopAddons(); GetOptionalAddons(); if (revealPacks) { fetchAddonPacks.RevealPacks(flowpanel_addonPacks); } }
 
         public bool startGameAfterDownload()
         { return chb_pref_startGame.Checked; }
@@ -1470,6 +1592,8 @@ namespace arma3Launcher
             ReadRepo(true, true);
         }
 
+        #region Preferences Directories Actions
+        // BROWSE BUTTONS
         private void btn_pref_browseA3Dir_Click(object sender, EventArgs e)
         {
             this.browseGameFolder();
@@ -1480,11 +1604,17 @@ namespace arma3Launcher
             this.browseAddonsFolder();
         }
 
+        private void btn_pref_browseOptionalDir_Click(object sender, EventArgs e)
+        {
+            this.browseOptionalFolder();
+        }
+
         private void btn_pref_browseTS3Dir_Click(object sender, EventArgs e)
         {
             this.browseTSFolder();
         }
 
+        // EREASE BUTTONS
         private void btn_pref_ereaseArmaDir_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.Arma3Folder = string.Empty;
@@ -1500,6 +1630,13 @@ namespace arma3Launcher
 
             txtb_pref_addonsDirectory.ForeColor = Color.DarkGray; txtb_pref_addonsDirectory.Text = "Set directory ->";
         }
+        private void btn_pref_ereaseOptionalDir_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.OptionalAddonsFolder = string.Empty;
+            Properties.Settings.Default.Save();
+
+            txtb_pref_optionalDirectory.ForeColor = Color.DarkGray; txtb_pref_optionalDirectory.Text = "Set directory ->";
+        }
 
         private void btn_pref_ereaseTSDir_Click(object sender, EventArgs e)
         {
@@ -1509,24 +1646,40 @@ namespace arma3Launcher
             txtb_pref_tsDirectory.ForeColor = Color.DarkGray; txtb_pref_tsDirectory.Text = "Set directory ->";
         }
 
+        // OPEN DIRECTORY BUTTONS
         private void btn_pref_openA3Dir_Click(object sender, EventArgs e)
         {
             if (Properties.Settings.Default.Arma3Folder != string.Empty)
                 Process.Start(Properties.Settings.Default.Arma3Folder);
+            else
+                this.browseGameFolder();
         }
 
         private void btn_pref_openAddonsDir_Click(object sender, EventArgs e)
         {
             if (Properties.Settings.Default.AddonsFolder != string.Empty)
                 Process.Start(Properties.Settings.Default.AddonsFolder);
+            else
+                this.browseAddonsFolder();
+        }
+
+        private void btn_pref_openOptionalDir_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.OptionalAddonsFolder != string.Empty)
+                Process.Start(Properties.Settings.Default.OptionalAddonsFolder);
+            else
+                this.browseOptionalFolder();
         }
 
         private void btn_pref_openTS3Dir_Click(object sender, EventArgs e)
         {
             if (Properties.Settings.Default.TS3Folder != string.Empty)
                 Process.Start(Properties.Settings.Default.TS3Folder);
+            else
+                this.browseTSFolder();
         }
 
+        // ARMA 3 DIR TEXTBOX
         private void txtb_pref_armaDirectory_MouseClick(object sender, MouseEventArgs e)
         {
             if (txtb_pref_armaDirectory.Text == "Set directory ->")
@@ -1556,14 +1709,16 @@ namespace arma3Launcher
                     missionsFolder = Properties.Settings.Default.Arma3Folder + "mpmissions";
                     Properties.Settings.Default.Save();
 
-                    GetMalloc();
                     armaDir_previousDir = txtb_pref_armaDirectory.Text;
                 }
                 else
                 {
                     new Windows.MessageBox().Show("Game executable not there. Please check your Arma 3 directory and try again.", "Missing file", MessageBoxButtons.OK, MessageIcon.Error);
                     if (String.IsNullOrEmpty(armaDir_previousDir))
+                    {
+                        txtb_pref_armaDirectory.ForeColor = Color.DarkGray; txtb_pref_armaDirectory.Text = "Set directory ->";
                         this.browseGameFolder();
+                    }
                     else
                         txtb_pref_armaDirectory.Text = armaDir_previousDir;
                 }
@@ -1578,8 +1733,12 @@ namespace arma3Launcher
                     txtb_pref_armaDirectory.ForeColor = Color.DarkGray; txtb_pref_armaDirectory.Text = "Set directory ->";
                 }
             }
+
+            GetMalloc();
+            GetWorkshopAddons();
         }
 
+        // ADDONS DIR TEXTBOX
         private void txtb_pref_addonsDirectory_MouseClick(object sender, MouseEventArgs e)
         {
             if (txtb_pref_addonsDirectory.Text == "Set directory ->")
@@ -1608,14 +1767,16 @@ namespace arma3Launcher
                     AddonsFolder = Properties.Settings.Default.AddonsFolder = txtb_pref_addonsDirectory.Text + @"\";
                     Properties.Settings.Default.Save();
 
-                    GetAddons();
                     modsDir_previousDir = txtb_pref_addonsDirectory.Text;
                 }
                 else
                 {
                     new Windows.MessageBox().Show("The Addons folder can't be the same as the Game folder.\nWe recommend you to have a specific folder for the addons on this launcher to avoid conflicts.", "Wrong directory", MessageBoxButtons.OK, MessageIcon.Error);
                     if (String.IsNullOrEmpty(modsDir_previousDir))
+                    {
+                        txtb_pref_addonsDirectory.ForeColor = Color.DarkGray; txtb_pref_addonsDirectory.Text = "Set directory ->";
                         this.browseAddonsFolder();
+                    }
                     else
                         txtb_pref_addonsDirectory.Text = modsDir_previousDir;
                 }
@@ -1635,6 +1796,70 @@ namespace arma3Launcher
                 ReadRepo(false, true);
         }
 
+        // OPTIONAL ADDONS DIR TEXTBOX
+        private void txtb_pref_optionalDirectory_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (txtb_pref_optionalDirectory.Text == "Set directory ->")
+                txtb_pref_optionalDirectory.SelectAll();
+        }
+
+        private void txtb_pref_optionalDirectory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            txtb_pref_optionalDirectory.SelectAll();
+        }
+
+        private void txtb_pref_optionalDirectory_TextChanged(object sender, EventArgs e)
+        {
+            if (txtb_pref_optionalDirectory.Text != "Set directory ->" && txtb_pref_optionalDirectory.Text != string.Empty)
+            {
+                txtb_pref_optionalDirectory.ForeColor = Color.FromArgb(64, 64, 64);
+
+                if (txtb_pref_optionalDirectory.Text.EndsWith("\\"))
+                    txtb_pref_optionalDirectory.Text = txtb_pref_optionalDirectory.Text.Remove(txtb_pref_optionalDirectory.Text.Length - 1);
+
+                if (txtb_pref_optionalDirectory.Text.EndsWith("/"))
+                    txtb_pref_optionalDirectory.Text = txtb_pref_optionalDirectory.Text.Remove(txtb_pref_optionalDirectory.Text.Length - 1).Replace("/", "\\");
+
+                if (Directory.Exists(txtb_pref_optionalDirectory.Text) && txtb_pref_optionalDirectory.Text != txtb_pref_addonsDirectory.Text && (txtb_pref_optionalDirectory.Text != txtb_pref_armaDirectory.Text || txtb_pref_optionalDirectory.Text == (txtb_pref_armaDirectory.Text + "\\!Workshop")))
+                {
+                    OptionalAddonsFolder = Properties.Settings.Default.OptionalAddonsFolder = txtb_pref_optionalDirectory.Text + @"\";
+                    Properties.Settings.Default.Save();
+
+                    optionalDir_previousDir = txtb_pref_optionalDirectory.Text;
+                }
+                else
+                {
+                    if (txtb_pref_optionalDirectory.Text == txtb_pref_addonsDirectory.Text)
+                        new Windows.MessageBox().Show("The Optional Addons folder can't be the same as the Addons folder.", "Wrong directory", MessageBoxButtons.OK, MessageIcon.Error);
+                    else if (txtb_pref_optionalDirectory.Text == txtb_pref_armaDirectory.Text || txtb_pref_optionalDirectory.Text == (txtb_pref_armaDirectory.Text + "\\!Workshop"))
+                        new Windows.MessageBox().Show("The Optional Addons folder can't be the same as the Game folder.", "Wrong directory", MessageBoxButtons.OK, MessageIcon.Error);
+                    else
+                        new Windows.MessageBox().Show("Selected directory does not exist.", "Missing directory", MessageBoxButtons.OK, MessageIcon.Error);
+
+                    if (String.IsNullOrEmpty(optionalDir_previousDir))
+                    {
+                        txtb_pref_optionalDirectory.ForeColor = Color.DarkGray; txtb_pref_optionalDirectory.Text = "Set directory ->";
+                        this.browseOptionalFolder();
+                    }
+                    else
+                        txtb_pref_optionalDirectory.Text = optionalDir_previousDir;
+                }
+            }
+            else
+            {
+                if (txtb_pref_optionalDirectory.Text == string.Empty)
+                {
+                    Properties.Settings.Default.OptionalAddonsFolder = string.Empty;
+                    Properties.Settings.Default.Save();
+
+                    txtb_pref_optionalDirectory.ForeColor = Color.DarkGray; txtb_pref_optionalDirectory.Text = "Set directory ->";
+                }
+            }
+
+            GetOptionalAddons();
+        }
+
+        // TS3 DIR TEXTBOX
         private void txtb_pref_tsDirectory_MouseClick(object sender, MouseEventArgs e)
         {
             if (txtb_pref_tsDirectory.Text == "Set directory ->")
@@ -1669,7 +1894,10 @@ namespace arma3Launcher
                 {
                     new Windows.MessageBox().Show("TeamSpeak executable not there. Please check your TeamSpeak directory and try again.", "Missing file", MessageBoxButtons.OK, MessageIcon.Error);
                     if (String.IsNullOrEmpty(tsDir_previousDir))
+                    {
+                        txtb_pref_tsDirectory.ForeColor = Color.DarkGray; txtb_pref_tsDirectory.Text = "Set directory ->";
                         this.browseTSFolder();
+                    }
                     else
                         txtb_pref_tsDirectory.Text = tsDir_previousDir;
                 }
@@ -1684,7 +1912,8 @@ namespace arma3Launcher
                     txtb_pref_tsDirectory.ForeColor = Color.DarkGray; txtb_pref_tsDirectory.Text = "Set directory ->";
                 }
             }
-        }
+        } 
+        #endregion
 
         private void panel_repoDownload_Paint(object sender, PaintEventArgs e)
         {
@@ -1701,9 +1930,14 @@ namespace arma3Launcher
         private void chb_pref_serverAutopilot_CheckedChanged(object sender, EventArgs e)
         {
             if (chb_pref_serverAutopilot.Checked)
-                switchAutopilot(true);
+            {
+                if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
+                    switchAutopilot(true);
+                else
+                    chb_pref_serverAutopilot.Checked = false;
+            }
             else
-                switchAutopilot(false);
+            { switchAutopilot(false); }
         }
 
         private void chb_pref_runLauncherStartup_CheckedChanged(object sender, EventArgs e)
@@ -1724,11 +1958,11 @@ namespace arma3Launcher
 
             if (Directory.Exists(Properties.Settings.Default.AddonsFolder + auxNode.Text))
             {
-                openAddonFolderToolStripMenuItem.Enabled = true;
+                tsmi_openAddonFolder.Enabled = true;
             }
             else
             {
-                openAddonFolderToolStripMenuItem.Enabled = false;
+                tsmi_openAddonFolder.Enabled = false;
             }
         }
 
@@ -1783,12 +2017,16 @@ namespace arma3Launcher
 
         private void chb_pref_serverMode_CheckedChanged(object sender, EventArgs e)
         {
-            if (chb_pref_serverMode.Checked)
-                Properties.Settings.Default.isServerMode = true;
-            else
-                Properties.Settings.Default.isServerMode = false;
-
-            Properties.Settings.Default.Save();
+            if (chb_pref_serverMode.Checked && !Properties.Settings.Default.isServerMode)
+            {
+                if (new Windows.MessageBox().Show("Requires the launcher to be restarted to activate Server Mode.\nSelecting \"YES\" will make the launcher close.", "Switch to Server Mode?", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes)
+                { Properties.Settings.Default.isServerMode = true; this.Close(); }
+            }
+            else if (!chb_pref_serverMode.Checked && Properties.Settings.Default.isServerMode)
+            {
+                if (new Windows.MessageBox().Show("Requires the launcher to be restarted to activate Client Mode.\nSelecting \"YES\" will make the launcher close.", "Switch to Client Mode?", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes)
+                { Properties.Settings.Default.isServerMode = false; this.Close(); }
+            }
         }
 
         private void chb_pref_disableAnimations_CheckedChanged(object sender, EventArgs e)
@@ -1797,6 +2035,52 @@ namespace arma3Launcher
                 GlobalVar.disableAnimations = true;
             else
                 GlobalVar.disableAnimations = false;
+        }
+
+        private void btn_openWorkshop_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/app/107410/workshop/");
+        }
+
+        private void btn_openArmaholic_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://www.armaholic.com/");
+        }
+
+        private void tsmi_openWorkshopFolder_Click(object sender, EventArgs e)
+        {
+            ToolStripItem item = (sender as ToolStripItem);
+            if (item != null)
+            {
+                ContextMenuStrip owner = item.Owner as ContextMenuStrip;
+                if (owner != null)
+                {
+                    Process.Start(Properties.Settings.Default.Arma3Folder + "!Workshop\\" + owner.SourceControl.Text);
+                }
+            }
+        }
+
+        private void tsmi_workshopReload_Click(object sender, EventArgs e)
+        {
+            GetWorkshopAddons();
+        }
+
+        private void tsmi_openOptionalFolder_Click(object sender, EventArgs e)
+        {
+            ToolStripItem item = (sender as ToolStripItem);
+            if (item != null)
+            {
+                ContextMenuStrip owner = item.Owner as ContextMenuStrip;
+                if (owner != null)
+                {
+                    Process.Start(Properties.Settings.Default.OptionalAddonsFolder + owner.SourceControl.Text);
+                }
+            }
+        }
+
+        private void tsmi_reloadOptional_Click(object sender, EventArgs e)
+        {
+            GetOptionalAddons();
         }
     }
 }

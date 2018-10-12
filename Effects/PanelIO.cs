@@ -554,7 +554,7 @@ namespace arma3Launcher.Effects
         /// <summary>
         /// SHOW / HIDE Functions for single panels
         /// </summary>
-        public void showPanelSingle()
+        public void ShowPanelSingle()
         {
             GlobalVar.isAnimating = true;
 
@@ -573,7 +573,7 @@ namespace arma3Launcher.Effects
             effectInInner.Start();
         }
 
-        public void hidePanelSingle()
+        public void HidePanelSingle()
         {
             GlobalVar.isAnimating = true;
             effectOutInner.Start();
@@ -582,7 +582,7 @@ namespace arma3Launcher.Effects
         /// <summary>
         /// SHOW / HIDE Functions for dual panels
         /// </summary>
-        public void showPanelDual ()
+        public void ShowPanelDual ()
         {
             GlobalVar.isAnimating = true;
 
@@ -603,7 +603,7 @@ namespace arma3Launcher.Effects
             effectInOutter.Start();
         }
 
-        public void hidePanelDual ()
+        public void HidePanelDual ()
         {
             GlobalVar.isAnimating = true;
             effectOutInner.Start();

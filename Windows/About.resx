@@ -117,4 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label5.Text" xml:space="preserve">
+    <value>This launcher was created to help players from the PTrangers community to play Arma 3.
+With it you can update and download everything you need to start playing.
+This is still not about the sardine, this is about something else.</value>
+  </data>
 </root>

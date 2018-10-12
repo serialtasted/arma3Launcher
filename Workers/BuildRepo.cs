@@ -107,7 +107,7 @@ namespace arma3Launcher.Workers
             }
             else
             {
-                windowIO.windowOut(true);
+                windowIO.WindowOut(true);
             }
         }
 

@@ -39,8 +39,13 @@
             // 
             this.txtb_privateKey.Location = new System.Drawing.Point(152, 33);
             this.txtb_privateKey.Name = "txtb_privateKey";
-            this.txtb_privateKey.Size = new System.Drawing.Size(178, 20);
+            this.txtb_privateKey.PasswordChar = '\0';
+            this.txtb_privateKey.SelectedText = "";
+            this.txtb_privateKey.SelectionLength = 0;
+            this.txtb_privateKey.SelectionStart = 0;
+            this.txtb_privateKey.Size = new System.Drawing.Size(178, 23);
             this.txtb_privateKey.TabIndex = 16;
+            this.txtb_privateKey.UseSystemPasswordChar = false;
             // 
             // btn_addKey
             // 
@@ -110,7 +115,6 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

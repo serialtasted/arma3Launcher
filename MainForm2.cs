@@ -93,10 +93,9 @@ namespace arma3Launcher
                 true
             );
 
-            // Material Skin Properties
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen800, Primary.LightGreen900, Primary.LightGreen500, Accent.Lime200, TextShade.WHITE);
+            // Init Material Skin Properties
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen700, Primary.LightGreen800, Primary.LightGreen500, Accent.Lime700, TextShade.WHITE);
 
             // Init Components
             InitializeComponent();
@@ -146,7 +145,7 @@ namespace arma3Launcher
             this.repoInfoPanelIO = new PanelIO(this.panel_repoInfo, 1240, 86);
 
             // Position panel IO
-            this.repoInfoPanelIO.showPanelSingle();
+            this.repoInfoPanelIO.ShowPanelSingle();
         }
 
         private void win_titleBar_MouseDown(object sender, MouseEventArgs e)
@@ -245,13 +244,13 @@ namespace arma3Launcher
             if (this.panel_sideMenu.Width < 300)
             {
                 this.btn_windowMenu.Image = Properties.Resources.windowCross;
-                this.sideMenuIO.showPanelSingle();
+                this.sideMenuIO.ShowPanelSingle();
                 this.sideMenuOpen = true;
             }
             else
             {
                 this.btn_windowMenu.Image = Properties.Resources.windowMenu;
-                this.sideMenuIO.hidePanelSingle();
+                this.sideMenuIO.HidePanelSingle();
                 this.sideMenuOpen = false;
             }
         }
@@ -262,7 +261,7 @@ namespace arma3Launcher
         }
         public void minimizeWindow()
         {
-            this.windowIO.windowOut(false);
+            this.windowIO.WindowOut(false);
         }
 
         private void btn_windowClose_Click(object sender, EventArgs e)
@@ -272,9 +271,16 @@ namespace arma3Launcher
         #endregion
 
         #region MainForm Events
+        private void MainForm2_Activated(object sender, EventArgs e)
+        {
+            // Re-apply Material Skin Properties
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen700, Primary.LightGreen800, Primary.LightGreen500, Accent.Lime700, TextShade.WHITE);
+        }
+
         private void MainForm2_Shown(object sender, EventArgs e)
         {
-            windowIO.windowIn();
+            windowIO.WindowIn();
 
             flowpanel_addonPacks.Focus();
 
@@ -305,7 +311,7 @@ namespace arma3Launcher
                 {
                     SaveSettings();
                     GC.Collect(2, GCCollectionMode.Forced);
-                    windowIO.windowOut(true);
+                    windowIO.WindowOut(true);
                     e.Cancel = true;
                 }
             }
@@ -314,7 +320,7 @@ namespace arma3Launcher
         private void MainForm2_Resize(object sender, EventArgs e)
         {
             if (this.WindowState != FormWindowState.Minimized)
-                windowIO.windowIn();
+                windowIO.WindowIn();
         }
 
         private void MainForm2_Load(object sender, EventArgs e)
@@ -324,7 +330,7 @@ namespace arma3Launcher
             this.Location = new Point((Screen.FromControl(this).WorkingArea.Width - this.Width) / 2,
                           (Screen.FromControl(this).WorkingArea.Height - this.Height) / 2);
 
-            if (GlobalVar.isServer) { this.Text = WindowTitle.Text = AssemblyTitle + " | Server Edition"; }
+            if (GlobalVar.isServer) { this.Text = WindowTitle.Text = AssemblyTitle + " | Server Mode"; }
             else { this.Text = WindowTitle.Text = AssemblyTitle; }
             txt_versionNumber.Text = "version " + AssemblyVersion;
 
@@ -409,9 +415,9 @@ namespace arma3Launcher
                         btn_reinstallTFRPlugins.Enabled = false;
                 }
 
-                this.GetMalloc();
-                this.MachineSettings();
-                this.LoadSettings();
+                GetMalloc();
+                MachineSettings();
+                LoadSettings();
             }
             else
             {
@@ -432,21 +438,21 @@ namespace arma3Launcher
             if (!GlobalVar.isAnimating)
             {
                 this.btn_windowMenu.Image = Properties.Resources.windowMenu;
-                this.sideMenuIO.hidePanelSingle();
+                this.sideMenuIO.HidePanelSingle();
                 this.sideMenuOpen = false;
 
-                if (panel_addonPacks.Width > 0) {           panel_outterPanel.BackColor = Color.DimGray;    menu_addonPacks.ForeColor = Color.WhiteSmoke;           panel_outterPanel.Dock = DockStyle.Left;   panel_addonPacks.Dock = DockStyle.Left;            addonPacksPanelIO.hidePanelDual(); }
-                if (panel_launchOptions.Width > 0) {        panel_outterPanel.BackColor = Color.DimGray;    menu_launchOptions.ForeColor = Color.WhiteSmoke;        panel_outterPanel.Dock = DockStyle.Left;   panel_launchOptions.Dock = DockStyle.Left;         launchOptionsPanelIO.hidePanelDual(); }
-                if (panel_repositoryDownloads.Width > 0) {  panel_outterPanel.BackColor = Color.DimGray;    menu_repositoryDownloads.ForeColor = Color.WhiteSmoke;  panel_outterPanel.Dock = DockStyle.Left;   panel_repositoryDownloads.Dock = DockStyle.Left;   repositoryDownloadsPanelIO.hidePanelDual(); }
-                if (panel_preferences.Width > 0) {          panel_outterPanel.BackColor = Color.DimGray;    menu_preferences.ForeColor = Color.WhiteSmoke;          panel_outterPanel.Dock = DockStyle.Left;   panel_preferences.Dock = DockStyle.Left;           preferencesPanelIO.hidePanelDual(); }
+                if (panel_addonPacks.Width > 0) {           panel_outterPanel.BackColor = Color.DimGray;    menu_addonPacks.ForeColor = Color.WhiteSmoke;           panel_outterPanel.Dock = DockStyle.Left;   panel_addonPacks.Dock = DockStyle.Left;            addonPacksPanelIO.HidePanelDual(); }
+                if (panel_launchOptions.Width > 0) {        panel_outterPanel.BackColor = Color.DimGray;    menu_launchOptions.ForeColor = Color.WhiteSmoke;        panel_outterPanel.Dock = DockStyle.Left;   panel_launchOptions.Dock = DockStyle.Left;         launchOptionsPanelIO.HidePanelDual(); }
+                if (panel_repositoryDownloads.Width > 0) {  panel_outterPanel.BackColor = Color.DimGray;    menu_repositoryDownloads.ForeColor = Color.WhiteSmoke;  panel_outterPanel.Dock = DockStyle.Left;   panel_repositoryDownloads.Dock = DockStyle.Left;   repositoryDownloadsPanelIO.HidePanelDual(); }
+                if (panel_preferences.Width > 0) {          panel_outterPanel.BackColor = Color.DimGray;    menu_preferences.ForeColor = Color.WhiteSmoke;          panel_outterPanel.Dock = DockStyle.Left;   panel_preferences.Dock = DockStyle.Left;           preferencesPanelIO.HidePanelDual(); }
 
                 while (GlobalVar.isAnimating)
                     await taskDelay(400);
 
-                if (selectedOption == 0) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_addonPacks.ForeColor = Color.YellowGreen;              panel_outterPanel.Dock = DockStyle.Right;   panel_addonPacks.Dock = DockStyle.Right;            addonPacksPanelIO.showPanelDual(); }
-                if (selectedOption == 1) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_launchOptions.ForeColor = Color.YellowGreen;           panel_outterPanel.Dock = DockStyle.Right;   panel_launchOptions.Dock = DockStyle.Right;         launchOptionsPanelIO.showPanelDual(); }
-                if (selectedOption == 2) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_repositoryDownloads.ForeColor = Color.YellowGreen;     panel_outterPanel.Dock = DockStyle.Right;   panel_repositoryDownloads.Dock = DockStyle.Right;   repositoryDownloadsPanelIO.showPanelDual(); }
-                if (selectedOption == 3) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_preferences.ForeColor = Color.YellowGreen;             panel_outterPanel.Dock = DockStyle.Right;   panel_preferences.Dock = DockStyle.Right;           preferencesPanelIO.showPanelDual(); }
+                if (selectedOption == 0) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_addonPacks.ForeColor = Color.YellowGreen;              panel_outterPanel.Dock = DockStyle.Right;   panel_addonPacks.Dock = DockStyle.Right;            addonPacksPanelIO.ShowPanelDual(); }
+                if (selectedOption == 1) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_launchOptions.ForeColor = Color.YellowGreen;           panel_outterPanel.Dock = DockStyle.Right;   panel_launchOptions.Dock = DockStyle.Right;         launchOptionsPanelIO.ShowPanelDual(); }
+                if (selectedOption == 2) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_repositoryDownloads.ForeColor = Color.YellowGreen;     panel_outterPanel.Dock = DockStyle.Right;   panel_repositoryDownloads.Dock = DockStyle.Right;   repositoryDownloadsPanelIO.ShowPanelDual(); }
+                if (selectedOption == 3) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_preferences.ForeColor = Color.YellowGreen;             panel_outterPanel.Dock = DockStyle.Right;   panel_preferences.Dock = DockStyle.Right;           preferencesPanelIO.ShowPanelDual(); }
             }
         }
 
@@ -712,7 +718,7 @@ namespace arma3Launcher
         #region Addon Packs Panel
         private void btn_addonsOptionsOpen_Click(object sender, EventArgs e)
         {
-            this.addonOptionsPanelIO.showPanelSingle();
+            this.addonOptionsPanelIO.ShowPanelSingle();
         }
 
         private void btn_addonsOptionsOpen_MouseEnter(object sender, EventArgs e)
@@ -729,7 +735,7 @@ namespace arma3Launcher
 
         private void btn_addonsOptionsClose_Click(object sender, EventArgs e)
         {
-            this.addonOptionsPanelIO.hidePanelSingle();
+            this.addonOptionsPanelIO.HidePanelSingle();
         }
 
         private void btn_addonsOptionsClose_MouseEnter(object sender, EventArgs e)
@@ -1449,6 +1455,7 @@ namespace arma3Launcher
                     AddonsFolder = Properties.Settings.Default.OptionalAddonsFolder = dlg_folderBrowser.SelectedPath + @"\";
                     Properties.Settings.Default.Save();
                     txtb_pref_optionalDirectory.Text = dlg_folderBrowser.SelectedPath;
+                    GetOptionalAddons();
                 }
                 else
                 {
@@ -1465,8 +1472,23 @@ namespace arma3Launcher
             dlg_folderBrowser.ShowNewFolderButton = false;
         }
 
-        private void btn_reinstallTFRPlugins_Click(object sender, EventArgs e)
-        { installer.installTeamSpeakPlugin(); }
+        private async void btn_openWorkshop_Click(object sender, EventArgs e)
+        {
+            await taskDelay(1500);
+            Process.Start("https://steamcommunity.com/app/107410/workshop/");
+        }
+
+        private async void btn_openArmaholic_Click(object sender, EventArgs e)
+        {
+            await taskDelay(1500);
+            Process.Start("http://www.armaholic.com/");
+        }
+
+        private async void btn_reinstallTFRPlugins_Click(object sender, EventArgs e)
+        {
+            await taskDelay(1500);
+            installer.installTeamSpeakPlugin();
+        }
 
         public void updateCurrentPack(bool refreshPacks, bool revealPacks)
         { FetchRemoteSettings(refreshPacks, false); GetWorkshopAddons(); GetOptionalAddons(); if (revealPacks) { fetchAddonPacks.RevealPacks(flowpanel_addonPacks); } }
@@ -1484,10 +1506,10 @@ namespace arma3Launcher
         { return chb_pref_autoDownload.Checked; }
 
         public void showDownloadPanel()
-        { repoInfoPanelIO.hidePanelSingle(); }
+        { repoInfoPanelIO.HidePanelSingle(); }
 
         public void hideDownloadPanel()
-        { repoInfoPanelIO.showPanelSingle(); }
+        { repoInfoPanelIO.ShowPanelSingle(); }
 
         public void ReadRepo(bool showMessage, bool validateFiles)
         { repoReader.ReadRepo(showMessage, chb_pref_autoDownload.Checked, validateFiles); }
@@ -1693,6 +1715,8 @@ namespace arma3Launcher
 
         private void txtb_pref_armaDirectory_TextChanged(object sender, EventArgs e)
         {
+            txtb_pref_armaDirectory.Select();
+
             if (txtb_pref_armaDirectory.Text != "Set directory ->" && txtb_pref_armaDirectory.Text != string.Empty)
             {
                 txtb_pref_armaDirectory.ForeColor = Color.FromArgb(64, 64, 64);
@@ -1752,6 +1776,8 @@ namespace arma3Launcher
 
         private void txtb_pref_addonsDirectory_TextChanged(object sender, EventArgs e)
         {
+            txtb_pref_addonsDirectory.Select();
+
             if (txtb_pref_addonsDirectory.Text != "Set directory ->" && txtb_pref_addonsDirectory.Text != string.Empty)
             {
                 txtb_pref_addonsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
@@ -1810,6 +1836,8 @@ namespace arma3Launcher
 
         private void txtb_pref_optionalDirectory_TextChanged(object sender, EventArgs e)
         {
+            txtb_pref_optionalDirectory.Select();
+
             if (txtb_pref_optionalDirectory.Text != "Set directory ->" && txtb_pref_optionalDirectory.Text != string.Empty)
             {
                 txtb_pref_optionalDirectory.ForeColor = Color.FromArgb(64, 64, 64);
@@ -1873,6 +1901,8 @@ namespace arma3Launcher
 
         private void txtb_pref_tsDirectory_TextChanged(object sender, EventArgs e)
         {
+            txtb_pref_tsDirectory.Select();
+
             if (txtb_pref_tsDirectory.Text != "Set directory ->" && txtb_pref_tsDirectory.Text != string.Empty)
             {
                 txtb_pref_tsDirectory.ForeColor = Color.FromArgb(64, 64, 64);
@@ -2035,16 +2065,6 @@ namespace arma3Launcher
                 GlobalVar.disableAnimations = true;
             else
                 GlobalVar.disableAnimations = false;
-        }
-
-        private void btn_openWorkshop_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://steamcommunity.com/app/107410/workshop/");
-        }
-
-        private void btn_openArmaholic_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://www.armaholic.com/");
         }
 
         private void tsmi_openWorkshopFolder_Click(object sender, EventArgs e)

@@ -22,10 +22,9 @@ namespace arma3Launcher.Windows
         public AddonManager()
         {
             // Material Skin properties
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
+            MaterialSkinManager.AddFormToManage(this);
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
 
             InitializeComponent();
 
@@ -41,7 +40,7 @@ namespace arma3Launcher.Windows
 
         private void AddonManager_Shown(object sender, EventArgs e)
         {
-            windowIO.windowIn();
+            windowIO.WindowIn();
             lbl_buildStatus.Text = "Waiting for orders";
             prgb_repoBuild.Value = 0;
         }

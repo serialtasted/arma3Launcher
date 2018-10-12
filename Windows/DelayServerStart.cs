@@ -23,10 +23,9 @@ namespace arma3Launcher.Windows
         public DelayServerStart()
         {
             // Material Skin properties
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Red400, Primary.Red900, Primary.Red500, Accent.Lime200, TextShade.WHITE);
+            MaterialSkinManager.AddFormToManage(this);
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.Red400, Primary.Red900, Primary.Red500, Accent.Lime200, TextShade.WHITE);
 
             InitializeComponent();
 
@@ -58,7 +57,7 @@ namespace arma3Launcher.Windows
 
         private void DelayServerStart_Shown(object sender, EventArgs e)
         {
-            windowIO.windowIn();
+            windowIO.WindowIn();
             this.countdown.Start();
         }
 
@@ -66,7 +65,7 @@ namespace arma3Launcher.Windows
         {
             if ((string)this.Tag != "close")
             {
-                windowIO.windowOut(true);
+                windowIO.WindowOut(true);
                 e.Cancel = true;
             }
             else

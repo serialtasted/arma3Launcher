@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Net;
+using MaterialSkin.Controls;
 
 namespace arma3Launcher.Workers
 {
@@ -34,7 +35,7 @@ namespace arma3Launcher.Workers
         private PictureBox cancelButton;
         private Installer installer;
         private System.Windows.Forms.Timer totalSw;
-        private Button repoValidateBtn;
+        private MaterialFlatButton repoValidateBtn;
 
         // forms
         private MainForm2 mainForm;
@@ -179,7 +180,7 @@ namespace arma3Launcher.Workers
         /// <param name="progressText"></param>
         /// <param name="progressDetails"></param>
         /// <param name="launcherButton"></param>
-        public Downloader (MainForm2 mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, DoubleBufferFlowPanel flowpanelAddonPacks, PictureBox cancelButton, Button repoValidateBtn)
+        public Downloader (MainForm2 mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, DoubleBufferFlowPanel flowpanelAddonPacks, PictureBox cancelButton, MaterialFlatButton repoValidateBtn)
         {
             this.mainForm = mainForm;
             this.installer = installerWorker;

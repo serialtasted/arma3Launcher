@@ -24,12 +24,12 @@ namespace arma3Launcher.Workers
         private DoubleBufferFlowPanel flowpanelAddonPacks;
         private readonly PictureBox cancelButton;
         private readonly String activeForm;
-        private readonly Button repoValidateBtn;
+        private readonly MaterialFlatButton repoValidateBtn;
 
         // controls (directory fields)
-        private readonly TextBox gamePathBox;
-        private readonly TextBox ts3PathBox;
-        private readonly TextBox addonsPathBox;
+        private readonly MaterialSingleLineTextField gamePathBox;
+        private readonly MaterialSingleLineTextField ts3PathBox;
+        private readonly MaterialSingleLineTextField addonsPathBox;
         private readonly PictureBox gamePathErase;
         private readonly PictureBox ts3PathErase;
         private readonly PictureBox addonsPathErase;
@@ -167,8 +167,8 @@ namespace arma3Launcher.Workers
         /// <param name="progressCurFile"></param>
         /// <param name="launcherButton"></param>
         public Installer (MainForm2 mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, DoubleBufferFlowPanel flowpanelAddonPacks, PictureBox cancelButton,
-            TextBox gamePathBox, TextBox ts3PathBox, TextBox addonsPathBox, PictureBox gamePathErase, PictureBox ts3PathErase, PictureBox addonsPathErase, PictureBox gamePathFind, PictureBox ts3PathFind, PictureBox addonsPathFind,
-            MaterialRaisedButton ts3Plugin, Button repoValidateBtn)
+            MaterialSingleLineTextField gamePathBox, MaterialSingleLineTextField ts3PathBox, MaterialSingleLineTextField addonsPathBox, PictureBox gamePathErase, PictureBox ts3PathErase, PictureBox addonsPathErase, PictureBox gamePathFind, PictureBox ts3PathFind, PictureBox addonsPathFind,
+            MaterialRaisedButton ts3Plugin, MaterialFlatButton repoValidateBtn)
         {
             this.activeForm = "mainForm";
             this.mainForm = mainForm;

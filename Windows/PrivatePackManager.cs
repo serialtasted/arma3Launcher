@@ -15,10 +15,9 @@ namespace arma3Launcher.Windows
         public PrivatePackManager()
         {
             // Material Skin properties
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
+            MaterialSkinManager.AddFormToManage(this);
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
 
             InitializeComponent();
             windowIO = new WindowIO(this);
@@ -33,7 +32,7 @@ namespace arma3Launcher.Windows
 
         private void PrivatePackManager_Shown(object sender, EventArgs e)
         {
-            this.windowIO.windowIn();
+            this.windowIO.WindowIn();
         }
 
         private void link_clearKeys_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -41,14 +40,14 @@ namespace arma3Launcher.Windows
             Properties.Settings.Default.PrivateKeys = string.Empty;
             Properties.Settings.Default.Save();
             this.DialogResult = DialogResult.OK;
-            this.windowIO.windowOut(true);
+            this.windowIO.WindowOut(true);
         }
 
         private void PrivatePackManager_FormClosing(object sender, FormClosingEventArgs e)
         {
             if ((string)this.Tag != "close")
             {
-                windowIO.windowOut(true);
+                windowIO.WindowOut(true);
                 e.Cancel = true;
             }
             else

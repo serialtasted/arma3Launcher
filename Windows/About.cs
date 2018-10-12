@@ -20,26 +20,28 @@ namespace arma3Launcher.Windows
         public About(string Title, string Version)
         {
             // Material Skin properties
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
+            MaterialSkinManager.AddFormToManage(this);
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
 
             InitializeComponent();
 
             windowIO = new WindowIO(this);
+
+            lbl_Title.Text = Title;
+            lbl_Version.Text = "version " + Version;
         }
 
         private void About_Shown(object sender, EventArgs e)
         {
-            windowIO.windowIn();
+            windowIO.WindowIn();
         }
 
         private void About_FormClosing(object sender, FormClosingEventArgs e)
         {
             if ((string)this.Tag != "close")
             {
-                windowIO.windowOut(true);
+                windowIO.WindowOut(true);
                 e.Cancel = true;
             }
             else

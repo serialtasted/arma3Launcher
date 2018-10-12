@@ -83,6 +83,7 @@ namespace arma3Launcher.Effects
             else
             {
                 effectOut.Stop();
+
                 if (closeEnd)
                 {
                     if (formObject != Application.OpenForms[0])
@@ -106,12 +107,12 @@ namespace arma3Launcher.Effects
             }
         }
 
-        public void windowIn ()
+        public void WindowIn ()
         {
             effectIn.Start();
         }
 
-        public void windowOut (bool closeEnd)
+        public void WindowOut (bool closeEnd)
         {
             this.closeEnd = closeEnd;
             effectOut.Start();

@@ -113,6 +113,16 @@ namespace arma3Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap msg_none {
+            get {
+                object obj = ResourceManager.GetObject("msg_none", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap msg_question {
             get {
                 object obj = ResourceManager.GetObject("msg_question", resourceCulture);

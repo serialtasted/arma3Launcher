@@ -110,7 +110,7 @@ namespace arma3Launcher.Controls
                     }
                 }
 
-                this.moreInfoPanelIO.showPanelSingle();
+                this.moreInfoPanelIO.ShowPanelSingle();
             }
         }
 
@@ -195,7 +195,7 @@ namespace arma3Launcher.Controls
                 this.flowpanel_packContent.Controls.Add(addon);
             }
 
-            this.packInfoPanelIO.showPanelSingle();
+            this.packInfoPanelIO.ShowPanelSingle();
         }
 
         public void disablePlayButton()
@@ -233,7 +233,7 @@ namespace arma3Launcher.Controls
 
         private void btn_addonsOptionsClose_Click(object sender, EventArgs e)
         {
-            this.packInfoPanelIO.hidePanelSingle();
+            this.packInfoPanelIO.HidePanelSingle();
         }
 
         private void btn_addonsOptionsClose_MouseEnter(object sender, EventArgs e)
@@ -250,7 +250,7 @@ namespace arma3Launcher.Controls
 
         private void btn_addonsOptionsOpen_Click(object sender, EventArgs e)
         {
-            this.packInfoPanelIO.showPanelSingle();
+            this.packInfoPanelIO.ShowPanelSingle();
         }
 
         private void btn_addonsOptionsOpen_MouseEnter(object sender, EventArgs e)

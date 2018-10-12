@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessageBox));
             this.diagImg = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
             this.option_3 = new MaterialSkin.Controls.MaterialFlatButton();
             this.option_2 = new MaterialSkin.Controls.MaterialFlatButton();
             this.option_1 = new MaterialSkin.Controls.MaterialFlatButton();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel2 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.Message = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.diagImg)).BeginInit();
             this.panel1.SuspendLayout();
@@ -77,7 +77,6 @@
             this.option_3.Size = new System.Drawing.Size(93, 36);
             this.option_3.TabIndex = 2;
             this.option_3.Text = "%option 3%";
-            this.option_3.UseVisualStyleBackColor = true;
             this.option_3.Visible = false;
             // 
             // option_2
@@ -93,7 +92,6 @@
             this.option_2.Size = new System.Drawing.Size(93, 36);
             this.option_2.TabIndex = 1;
             this.option_2.Text = "%option 2%";
-            this.option_2.UseVisualStyleBackColor = true;
             this.option_2.Visible = false;
             // 
             // option_1
@@ -109,7 +107,6 @@
             this.option_1.Size = new System.Drawing.Size(93, 36);
             this.option_1.TabIndex = 0;
             this.option_1.Text = "%option 1%";
-            this.option_1.UseVisualStyleBackColor = true;
             this.option_1.Visible = false;
             // 
             // panel2
@@ -153,6 +150,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "%Title%";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MessageBox_FormClosing);
+            this.Shown += new System.EventHandler(this.MessageBox_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.diagImg)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -165,11 +163,11 @@
         #endregion
 
         private System.Windows.Forms.PictureBox diagImg;
-        private System.Windows.Forms.FlowLayoutPanel panel1;
-        private System.Windows.Forms.Panel panel2;
         private MaterialSkin.Controls.MaterialFlatButton option_1;
         private MaterialSkin.Controls.MaterialFlatButton option_2;
         private MaterialSkin.Controls.MaterialFlatButton option_3;
         private System.Windows.Forms.Label Message;
+        private Controls.DoubleBufferFlowPanel panel1;
+        private Controls.DoubleBufferPanel panel2;
     }
 }

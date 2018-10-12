@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +22,11 @@ namespace arma3Launcher.Windows
         private DialogResult holdResult;
         private Fonts customFont = new Fonts();
 
+        private async Task taskDelay(int delayMs)
+        {
+            await Task.Delay(delayMs);
+        }
+
         public MessageBox()
         {
             InitializeComponent();
@@ -31,22 +37,40 @@ namespace arma3Launcher.Windows
             this.Message.Font = this.customFont.getFont(Properties.Fonts.ClearSans_Light, 9F, FontStyle.Regular);
         }
 
-        public DialogResult Show(string Message)
+        private void MessageBox_Shown(object sender, EventArgs e)
         {
-            windowIO.windowIn();
+            windowIO.WindowIn();
 
             if (!GlobalVar.disableAnimations)
                 animatedImage.Start();
+        }
 
+        private void MessageBox_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ((string)this.Tag != "close")
+            {
+                holdResult = this.DialogResult;
+                windowIO.WindowOut(true);
+                e.Cancel = true;
+            }
+            else
+            {
+                this.DialogResult = holdResult;
+                GC.Collect(2, GCCollectionMode.Forced);
+                this.Dispose();
+            }
+        }
+
+        public DialogResult Show(string Message)
+        {
             this.Text = "";
             this.Message.Text = Message;
             diagImg.Image = Properties.MessageIcons.msg_info;
 
             // Material Skin properties
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen800, Primary.LightGreen900, Primary.LightGreen500, Accent.Lime200, TextShade.WHITE);
+            MaterialSkinManager.AddFormToManage(this);
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen800, Primary.LightGreen900, Primary.LightGreen500, Accent.Lime200, TextShade.WHITE);
 
             // Initialize buttons
             option_1.Text = "OK";
@@ -59,20 +83,14 @@ namespace arma3Launcher.Windows
 
         public DialogResult Show(string Message, string Title)
         {
-            windowIO.windowIn();
-
-            if (!GlobalVar.disableAnimations)
-                animatedImage.Start();
-
             this.Text = Title;
             this.Message.Text = Message;
             diagImg.Image = Properties.MessageIcons.msg_info;
 
             // Material Skin properties
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen800, Primary.LightGreen900, Primary.LightGreen500, Accent.Lime200, TextShade.WHITE);
+            MaterialSkinManager.AddFormToManage(this);
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen800, Primary.LightGreen900, Primary.LightGreen500, Accent.Lime200, TextShade.WHITE);
 
             // Initialize buttons
             option_1.Text = "OK";
@@ -85,11 +103,6 @@ namespace arma3Launcher.Windows
 
         public DialogResult Show(string Message, string Title, MessageBoxButtons Buttons, MessageIcon Icon )
         {
-            windowIO.windowIn();
-
-            if (!GlobalVar.disableAnimations)
-                animatedImage.Start();
-
             this.Text = Title;
             this.Message.Text = Message;
             Primary primeColor = Primary.LightGreen800;
@@ -99,36 +112,47 @@ namespace arma3Launcher.Windows
 
             // Initialize icon and set color for Form
             if (Icon == MessageIcon.None)
-            { }
+            {
+                diagImg.Image = Properties.MessageIcons.msg_none;
+            }
             else if (Icon == MessageIcon.Hand)
             {
+                primeColor = Primary.Orange800;
+                darkThemeColor = Primary.DeepOrange800;
+                lightThemeColor = Primary.DeepOrange500;
                 diagImg.Image = Properties.MessageIcons.msg_hand;
             }
             else if (Icon == MessageIcon.Question)
             {
-                primeColor = Primary.Blue800;
-                darkThemeColor = Primary.Blue900;
-                lightThemeColor = Primary.Blue500;
+                primeColor = Primary.Purple700;
+                darkThemeColor = Primary.Purple800;
+                lightThemeColor = Primary.Purple500;
                 diagImg.Image = Properties.MessageIcons.msg_question;
             }
             else if (Icon == MessageIcon.Exclamation)
             {
+                primeColor = Primary.Yellow700;
+                darkThemeColor = Primary.Yellow800;
+                lightThemeColor = Primary.Yellow500;
                 diagImg.Image = Properties.MessageIcons.msg_exclamation;
             }
             else if (Icon == MessageIcon.Asterisk)
-            {
+            { 
+                primeColor = Primary.BlueGrey800;
+                darkThemeColor = Primary.BlueGrey900;
+                lightThemeColor = Primary.BlueGrey500;
                 diagImg.Image = Properties.MessageIcons.msg_asterisk;
             }
             else if (Icon == MessageIcon.Stop)
             {
-                primeColor = Primary.Red400;
+                primeColor = Primary.Red600;
                 darkThemeColor = Primary.Red900;
                 lightThemeColor = Primary.Red500;
                 diagImg.Image = Properties.MessageIcons.msg_stop;
             }
             else if (Icon == MessageIcon.Error)
             {
-                primeColor = Primary.Red400;
+                primeColor = Primary.Red600;
                 darkThemeColor = Primary.Red900;
                 lightThemeColor = Primary.Red500;
                 diagImg.Image = Properties.MessageIcons.msg_error;
@@ -149,10 +173,9 @@ namespace arma3Launcher.Windows
             }
 
             // Material Skin properties
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            materialSkinManager.ColorScheme = new ColorScheme(primeColor, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE);
+            MaterialSkinManager.AddFormToManage(this);
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(primeColor, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE);
 
             // Initialize buttons
             switch (Buttons)
@@ -244,22 +267,6 @@ namespace arma3Launcher.Windows
                 {
                     diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y - 1);
                 }
-            }
-        }
-
-        private void MessageBox_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if ((string)this.Tag != "close")
-            {
-                holdResult = this.DialogResult;
-                windowIO.windowOut(true);
-                e.Cancel = true;
-            }
-            else
-            {
-                this.DialogResult = holdResult;
-                GC.Collect(2, GCCollectionMode.Forced);
-                this.Dispose();
             }
         }
     }

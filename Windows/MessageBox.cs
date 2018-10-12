@@ -131,8 +131,8 @@ namespace arma3Launcher.Windows
             }
             else if (Icon == MessageIcon.Exclamation)
             {
-                primeColor = Primary.Yellow700;
-                darkThemeColor = Primary.Yellow800;
+                primeColor = Primary.Yellow800;
+                darkThemeColor = Primary.Yellow900;
                 lightThemeColor = Primary.Yellow500;
                 diagImg.Image = Properties.MessageIcons.msg_exclamation;
             }

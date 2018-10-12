@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
 using arma3Launcher.Controls;
+using System.Threading.Tasks;
 
 namespace arma3Launcher.Workers
 {
@@ -27,7 +28,6 @@ namespace arma3Launcher.Workers
         private Process process;
         private MainForm2 mainForm;
         private DoubleBufferFlowPanel flowpanelAddonPacks;
-        private Label status;
 
         public LaunchCore(DoubleBufferFlowPanel launchOptions,
             string clientProfile,
@@ -165,7 +165,7 @@ namespace arma3Launcher.Workers
             if (exThreads && s_exThreads != string.Empty) auxCombinedArguments += "-exThreads=" + s_exThreads + " ";
             if (cpuCount && s_cpuCount != string.Empty) auxCombinedArguments += "-cpuCount=" + s_cpuCount + " ";
 
-            foreach (CheckBox option in launchOptions.Controls)
+            foreach (MaterialSkin.Controls.MaterialCheckBox option in launchOptions.Controls)
             {
                 try
                 {
@@ -183,7 +183,7 @@ namespace arma3Launcher.Workers
             return Arguments;
         }
 
-        public void LaunchGame(string Arguments, Label Status, DoubleBufferFlowPanel flowpanelAddonPacks, string[] serverInfo, string[] tsInfo, bool autoJoin, bool autoJoinTs)
+        public void LaunchGame(string Arguments, DoubleBufferFlowPanel flowpanelAddonPacks, string[] serverInfo, string[] tsInfo, bool autoJoin, bool autoJoinTs)
         {
             /* 
             Array content list:
@@ -203,7 +203,6 @@ namespace arma3Launcher.Workers
             waitEndGame.RunWorkerCompleted += WaitEndGame_RunWorkerCompleted;
 
             this.flowpanelAddonPacks = flowpanelAddonPacks;
-            this.status = Status;
 
             if (!GlobalVar.isServer)
             {
@@ -265,7 +264,7 @@ namespace arma3Launcher.Workers
                 {
                     try
                     {
-                        Status.Text = "Starting Steam...";
+                        mainForm.showSnackBar("Opening Steam...", 2000, false);
 
                         var fass = new ProcessStartInfo
                         {
@@ -296,7 +295,6 @@ namespace arma3Launcher.Workers
             {
                 try
                 {
-                    string whatsRunning = string.Empty;
                     var gameProcessInfo = new ProcessStartInfo();
                     var hcProcessInfo = new ProcessStartInfo();
                     gameProcessInfo.WorkingDirectory = hcProcessInfo.WorkingDirectory = GameFolder;
@@ -315,15 +313,11 @@ namespace arma3Launcher.Workers
                             };
                             hcProcess.Start();
                         }
-
-                        whatsRunning = "Server";
                     }
                     else
                     {
                         gameProcessInfo.FileName = GlobalVar.gameArtifact;
                         gameProcessInfo.Arguments = "2 1 " + Arguments;
-
-                        whatsRunning = "Game";
                     }
 
                     var gameProcess = new Process
@@ -337,7 +331,6 @@ namespace arma3Launcher.Workers
 
                     GC.Collect(2, GCCollectionMode.Forced);
 
-                    Status.Text = whatsRunning + " running...";
                     mainForm.minimizeWindow();
                     mainForm.Cursor = Cursors.Default;
                     waitEndGame.RunWorkerAsync();
@@ -362,7 +355,7 @@ namespace arma3Launcher.Workers
         {
             this.mainForm.WindowState = FormWindowState.Normal;
             this.mainForm.Focus();
-            this.status.Text = "Waiting for orders...";
+            mainForm.showSnackBar("Game closed", 2000, false);
 
             if (GlobalVar.autoPilot)
                 this.mainForm.reLaunchServer();

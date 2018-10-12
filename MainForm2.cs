@@ -75,6 +75,12 @@ namespace arma3Launcher
         private bool hasShown = false;
         private bool sideMenuOpen = false;
 
+        // MaterialSkin Colors
+        Primary primeColor = Primary.LightGreen700;
+        Primary darkThemeColor = Primary.LightGreen800;
+        Primary lightThemeColor = Primary.LightGreen500;
+        Accent accentColor = Accent.Lime700;
+
         // Move window stuff
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -95,7 +101,7 @@ namespace arma3Launcher
 
             // Init Material Skin Properties
             MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen700, Primary.LightGreen800, Primary.LightGreen500, Accent.Lime700, TextShade.WHITE);
+            MaterialSkinManager.ColorScheme = new ColorScheme(primeColor, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE);
 
             // Init Components
             InitializeComponent();
@@ -275,7 +281,7 @@ namespace arma3Launcher
         {
             // Re-apply Material Skin Properties
             MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
-            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.LightGreen700, Primary.LightGreen800, Primary.LightGreen500, Accent.Lime700, TextShade.WHITE);
+            MaterialSkinManager.ColorScheme = new ColorScheme(primeColor, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE);
         }
 
         private void MainForm2_Shown(object sender, EventArgs e)
@@ -384,10 +390,13 @@ namespace arma3Launcher
                 }
                 else if (Properties.Settings.Default.firstLaunch)
                 {
+                    Properties.Settings.Default.firstLaunch = false;
                     if (GlobalVar.isServer) { chb_pref_startGame.Checked = true; }
 
                     GlobalVar.menuSelected = 3;
                     HideUnhide(GlobalVar.menuSelected);
+
+                    new Windows.MessageBox().Show("Welcome!\nYou must setup the necessary directories before continuing.", "First Launch", MessageBoxButtons.OK, MessageIcon.Exclamation);
                 }
                 else if (Properties.Settings.Default.Arma3Folder.Equals(string.Empty) ||
                     Properties.Settings.Default.AddonsFolder.Equals(string.Empty) ||
@@ -398,6 +407,8 @@ namespace arma3Launcher
                 {
                     GlobalVar.menuSelected = 3;
                     HideUnhide(GlobalVar.menuSelected);
+
+                    new Windows.MessageBox().Show("You are missing some important directories!\nPlease fix it before continuing.", "Missing directories", MessageBoxButtons.OK, MessageIcon.Stop);
                 }
                 else
                 {
@@ -1163,7 +1174,7 @@ namespace arma3Launcher
                     if (isAutoRun)
                         packID = (string)cb_serverPack.SelectedItem;
                     else
-                        packID = Properties.Settings.Default.lastAddonPack;
+                        packID = Properties.Settings.Default.lastAddonPack.Split('*')[0];
 
                     XmlDocument RemoteXmlInfo = new XmlDocument();
                     RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
@@ -1291,14 +1302,17 @@ namespace arma3Launcher
                         Arguments = PrepareLaunch.GetArguments();
                         SaveSettings();
 
+                        while (GlobalVar.isReadingRepo)
+                            await taskDelay(500);
+
                         if (packID == "arma3" || GlobalVar.repoChecked)
                         {
                             hideDownloadPanel();
-                            await taskDelay(800);
+                            showSnackBar("Launching " + Properties.Settings.Default.lastAddonPack.Split('*')[1] + "...", 2000, true, true, Primary.LightGreen800);
+                            await taskDelay(2000);
 
                             PrepareLaunch.LaunchGame(
                                 Arguments,
-                                txt_progressStatus,
                                 flowpanel_addonPacks,
                                 remoteReader.ServerInfo(),
                                 remoteReader.TeamSpeakInfo(),
@@ -1486,8 +1500,37 @@ namespace arma3Launcher
 
         private async void btn_reinstallTFRPlugins_Click(object sender, EventArgs e)
         {
+            showSnackBar("Task Force Radio plugin installation...", 2500, true, true, Primary.LightGreen800);
             await taskDelay(1500);
             installer.installTeamSpeakPlugin();
+        }
+
+        public void showSnackBar(string Message, int Delay, bool Primary)
+        {
+            snackbar_mainWindow.Text = Message;
+            snackbar_mainWindow.Primary = Primary;
+            snackbar_mainWindow.ShowSnackbar(Delay);
+        }
+
+        public void showSnackBar (string Message, int Delay, bool Primary, bool SetCustomColor, Primary Color)
+        {
+            snackbar_mainWindow.Text = Message;
+            snackbar_mainWindow.Primary = Primary;
+
+            if(SetCustomColor)
+                MaterialSkinManager.ColorScheme = new ColorScheme(Color, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE);
+
+            snackbar_mainWindow.ShowSnackbar(Delay);
+        }
+
+        public void showSnackBar(string Message, bool Button, string ButtonText)
+        {
+            snackbar_mainWindow.Text = Message;
+            snackbar_mainWindow.Primary = false;
+            snackbar_mainWindow.ShowButton = true;
+            snackbar_mainWindow.ButtonText = ButtonText;
+
+            snackbar_mainWindow.ShowSnackbar();
         }
 
         public void updateCurrentPack(bool refreshPacks, bool revealPacks)

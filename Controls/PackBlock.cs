@@ -21,7 +21,7 @@ namespace arma3Launcher.Controls
         private List<string> addonsName = new List<string>();
         private bool isOptionalAllowed = false;
 
-        private PanelIO moreInfoPanelIO;
+        //private PanelIO moreInfoPanelIO;
         private PanelIO packInfoPanelIO;
 
         private Fonts customFont = new Fonts();
@@ -66,7 +66,7 @@ namespace arma3Launcher.Controls
         public async void fadeIn()
         {
             while (GlobalVar.isAnimating)
-                await taskDelay(100);
+                await taskDelay(200);
 
             await taskDelay(rnd.Next(350, 700));
             effectIn.Interval = 7;
@@ -110,7 +110,7 @@ namespace arma3Launcher.Controls
                     }
                 }
 
-                this.moreInfoPanelIO.ShowPanelSingle();
+                //this.moreInfoPanelIO.ShowPanelSingle();
             }
         }
 
@@ -129,7 +129,7 @@ namespace arma3Launcher.Controls
 
             this.flowpanel_packContent.Controls.Clear();
 
-            this.moreInfoPanelIO = new PanelIO(panel_moreInfo, 120, 33);
+            //this.moreInfoPanelIO = new PanelIO(panel_moreInfo, 120, 33);
             this.packInfoPanelIO = new PanelIO(panel_packInfo, 410, 33);
 
             this.packsPan = packsPanel;
@@ -337,7 +337,7 @@ namespace arma3Launcher.Controls
 
         private void playAction()
         {
-            Properties.Settings.Default.lastAddonPack = packID;
+            Properties.Settings.Default.lastAddonPack = packID + "*" + txt_title.Text;
             Properties.Settings.Default.Save();
             this.mainForm.LaunchGame(false);
         }

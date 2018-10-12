@@ -152,6 +152,8 @@ namespace arma3Launcher.Workers
 
         public bool ReadRepo(bool showMessage, bool autoDownload, bool validateFiles)
         {
+            mainForm.showSnackBar("Validating repository...", 2000, false);
+
             if (GlobalVar.isReadingRepo || GlobalVar.isDownloading || GlobalVar.isInstalling || GlobalVar.offlineMode)
                 return GlobalVar.isReadingRepo = false;
 
@@ -236,6 +238,8 @@ namespace arma3Launcher.Workers
 
         private void ValidateRepo_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            mainForm.showSnackBar("Finished repository validation", 2000, false);
+
             GlobalVar.isReadingRepo = false;
 
             if (needsUpdate == string.Empty)

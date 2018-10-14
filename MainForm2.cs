@@ -293,14 +293,18 @@ namespace arma3Launcher
             if (!isUpdate)
             {
                 fetchAddonPacks.RevealPacks(flowpanel_addonPacks);
-                ReadRepo(false);
-            }
 
-            if (!Properties.Settings.Default.firstLaunch && GlobalVar.isServer)
-                if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
-                    switchAutopilot(true);
-                else
-                    switchAutopilot(false);
+                if (!Properties.Settings.Default.firstLaunch && GlobalVar.isServer)
+                {
+                    if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
+                        switchAutopilot(true);
+                    else
+                        switchAutopilot(false);
+                }
+
+                if(!GlobalVar.autoPilot)
+                    ReadRepo(false);
+            }
 
             this.hasShown = true;
         }
@@ -399,10 +403,10 @@ namespace arma3Launcher
                 }
                 else if (Properties.Settings.Default.Arma3Folder.Equals(string.Empty) ||
                     Properties.Settings.Default.AddonsFolder.Equals(string.Empty) ||
-                    Properties.Settings.Default.TS3Folder.Equals(string.Empty) ||
+                    (Properties.Settings.Default.TS3Folder.Equals(string.Empty) && !GlobalVar.isServer) ||
                     !Directory.Exists(Properties.Settings.Default.Arma3Folder) ||
                     !Directory.Exists(Properties.Settings.Default.AddonsFolder) ||
-                    !Directory.Exists(Properties.Settings.Default.TS3Folder))
+                    (!Directory.Exists(Properties.Settings.Default.TS3Folder) && !GlobalVar.isServer))
                 {
                     GlobalVar.menuSelected = 3;
                     HideUnhide(GlobalVar.menuSelected);
@@ -1335,6 +1339,8 @@ namespace arma3Launcher
 
                         if (packID != "arma3")
                             ReadRepo(true, false, true);
+                        else
+                            ReadRepo(false, false, true);
 
                         while (GlobalVar.isReadingRepo)
                             await taskDelay(500);
@@ -1617,16 +1623,8 @@ namespace arma3Launcher
         public void hideDownloadPanel()
         { repoInfoPanelIO.ShowPanel(); }
 
-        public async void ReadRepo(bool validateFiles, bool showMessage = false, bool isLaunch = false)
-        {
-            if (GlobalVar.isReadingRepo)
-                repoReader.CancelRead();
-
-            while (GlobalVar.isReadingRepo)
-                await taskDelay(100);
-
-            repoReader.ReadRepo(showMessage, chb_pref_autoDownload.Checked, validateFiles, isLaunch);
-        }
+        public void ReadRepo(bool validateFiles, bool showMessage = false, bool isLaunch = false)
+        { repoReader.ReadRepo(showMessage, chb_pref_autoDownload.Checked, validateFiles, isLaunch); }
 
         #region Game Options Conditions
         private void chb_maxMem_CheckedChanged(object sender, EventArgs e)

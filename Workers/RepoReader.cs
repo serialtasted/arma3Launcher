@@ -132,7 +132,12 @@ namespace arma3Launcher.Workers
                 control.Text = text;
             }
         }
-        
+
+        private async Task taskDelay(int delayMs)
+        {
+            await Task.Delay(delayMs);
+        }
+
         // ONLY TO ACCESS THE CALCULATE FILE HASH!
         public RepoReader()
         { }
@@ -155,16 +160,16 @@ namespace arma3Launcher.Workers
             this.validateRepo.WorkerSupportsCancellation = true;
         }
 
-        public void CancelRead()
-        { validateRepo.CancelAsync(); }
-
-        public void ReadRepo(bool showMessage, bool autoDownload, bool validateFiles, bool isLaunch)
+        public async void ReadRepo(bool showMessage, bool autoDownload, bool validateFiles, bool isLaunch)
         {
             if (validateFiles)
                 mainForm.showSnackBar("Validating repository...", 2000, false);
 
-            if (GlobalVar.isReadingRepo || GlobalVar.isDownloading || GlobalVar.isInstalling || GlobalVar.offlineMode)
-                GlobalVar.isReadingRepo = false;
+            while (GlobalVar.isReadingRepo)
+                await taskDelay(100);
+
+            if (GlobalVar.isDownloading || GlobalVar.isInstalling || GlobalVar.offlineMode)
+                return;
 
             if (Properties.Settings.Default.AddonsFolder == string.Empty)
             {
@@ -177,6 +182,7 @@ namespace arma3Launcher.Workers
                 this.lbl_filesMISSING.Text = "N/A";
 
                 GlobalVar.isReadingRepo = false;
+                return;
             }
 
             this.repoTreeView.Nodes.Clear();
@@ -216,8 +222,8 @@ namespace arma3Launcher.Workers
             this.repoFile = GetRepoFile();
 
             // checks if repofile is different from last time and needs force validation
-            if (IsRepoDifferent(repoFile)) { this.needsUpdate = UpdateType.Validation; validateFiles = true; }
-            if (autoDownload) { validateFiles = true; }
+            if (IsRepoDifferent(repoFile) && Properties.Settings.Default.ServerPack != "arma3") { this.needsUpdate = UpdateType.Validation; validateFiles = true; }
+            if (autoDownload && Properties.Settings.Default.ServerPack != "arma3") { validateFiles = true; }
 
             if (validateFiles)
             {

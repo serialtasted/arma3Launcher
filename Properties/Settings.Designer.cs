@@ -338,12 +338,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("arma3")]
-        public string lastAddonPack {
+        public string LastAddonPack {
             get {
-                return ((string)(this["lastAddonPack"]));
+                return ((string)(this["LastAddonPack"]));
             }
             set {
-                this["lastAddonPack"] = value;
+                this["LastAddonPack"] = value;
             }
         }
         
@@ -542,18 +542,6 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ServerPack {
-            get {
-                return ((string)(this["ServerPack"]));
-            }
-            set {
-                this["ServerPack"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ServerMission {
             get {
                 return ((string)(this["ServerMission"]));
@@ -596,6 +584,18 @@ namespace arma3Launcher.Properties {
             }
             set {
                 this["OptionalAddonsFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ServerPack {
+            get {
+                return ((string)(this["ServerPack"]));
+            }
+            set {
+                this["ServerPack"] = value;
             }
         }
     }

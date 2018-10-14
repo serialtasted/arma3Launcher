@@ -41,11 +41,18 @@ namespace arma3Launcher.Workers
         private readonly BackgroundWorker validateRepo = new BackgroundWorker();
 
         private string repoFile = string.Empty;
-        private string needsUpdate = string.Empty;
+
+        private enum UpdateType {
+            None,
+            Validation,
+            Download
+        };
+        private UpdateType needsUpdate;
 
         private bool showMessage = false;
         private bool autoDownload = false;
         private bool validateFiles = false;
+        private bool isLaunch = false;
 
         // invokes
         private TreeNode addNode(string nodeKey, string nodeText)
@@ -86,21 +93,19 @@ namespace arma3Launcher.Workers
             }
         }
 
-        private void nodeImageIndex(string nodeKey, int imgIndex)
+        private void nodeImageIndex(TreeNode nodeKey, int imgIndex)
         {
             if (this.repoTreeView.InvokeRequired)
             {
                 this.repoTreeView.Invoke(new MethodInvoker(delegate {
-                    TreeNode[] nodes = this.repoTreeView.Nodes.Find(nodeKey, true);
-                    nodes[0].ImageIndex = imgIndex;
-                    nodes[0].SelectedImageIndex = imgIndex;
+                    nodeKey.ImageIndex = imgIndex;
+                    nodeKey.SelectedImageIndex = imgIndex;
                 }));
             }
             else
             {
-                TreeNode[] nodes = this.repoTreeView.Nodes.Find(nodeKey, true);
-                nodes[0].ImageIndex = imgIndex;
-                nodes[0].SelectedImageIndex = imgIndex;
+                nodeKey.ImageIndex = imgIndex;
+                nodeKey.SelectedImageIndex = imgIndex;
             }
         }
 
@@ -147,26 +152,31 @@ namespace arma3Launcher.Workers
             // define validation worker
             this.validateRepo.DoWork += ValidateRepo_DoWork;
             this.validateRepo.RunWorkerCompleted += ValidateRepo_RunWorkerCompleted;
-            this.validateRepo.WorkerSupportsCancellation = false;
+            this.validateRepo.WorkerSupportsCancellation = true;
         }
 
-        public bool ReadRepo(bool showMessage, bool autoDownload, bool validateFiles)
+        public void CancelRead()
+        { validateRepo.CancelAsync(); }
+
+        public void ReadRepo(bool showMessage, bool autoDownload, bool validateFiles, bool isLaunch)
         {
-            mainForm.showSnackBar("Validating repository...", 2000, false);
+            if (validateFiles)
+                mainForm.showSnackBar("Validating repository...", 2000, false);
 
             if (GlobalVar.isReadingRepo || GlobalVar.isDownloading || GlobalVar.isInstalling || GlobalVar.offlineMode)
-                return GlobalVar.isReadingRepo = false;
+                GlobalVar.isReadingRepo = false;
 
             if (Properties.Settings.Default.AddonsFolder == string.Empty)
             {
                 this.repoTreeView.Nodes.Clear();
                 this.repoTreeView.Nodes.Add("ERROR", "No addons folder selected!", 5, 5);
+                this.mainForm.showSnackBar("No addons folder selected!", 2000, true, true, MaterialSkin.Primary.Red800);
 
                 this.lbl_filesOK.Text = "N/A";
                 this.lbl_filesINVALID.Text = "N/A";
                 this.lbl_filesMISSING.Text = "N/A";
 
-                return GlobalVar.isReadingRepo = false;
+                GlobalVar.isReadingRepo = false;
             }
 
             this.repoTreeView.Nodes.Clear();
@@ -188,16 +198,17 @@ namespace arma3Launcher.Workers
             this.showMessage = showMessage;
             this.autoDownload = autoDownload;
             this.validateFiles = validateFiles;
+            this.isLaunch = isLaunch;
 
             GlobalVar.folders2Create.Clear();
             GlobalVar.files2Download.Clear();
 
-            this.needsUpdate = string.Empty;
+            this.needsUpdate = UpdateType.None;
 
             this.validateRepo.RunWorkerAsync();
 
             GlobalVar.repoChecked = false;
-            return GlobalVar.isReadingRepo = true;
+            GlobalVar.isReadingRepo = true;
         }
 
         private void ValidateRepo_DoWork(object sender, DoWorkEventArgs e)
@@ -205,7 +216,7 @@ namespace arma3Launcher.Workers
             this.repoFile = GetRepoFile();
 
             // checks if repofile is different from last time and needs force validation
-            if (IsRepoDifferent(repoFile)) { this.needsUpdate = "validation"; validateFiles = true; }
+            if (IsRepoDifferent(repoFile)) { this.needsUpdate = UpdateType.Validation; validateFiles = true; }
             if (autoDownload) { validateFiles = true; }
 
             if (validateFiles)
@@ -238,11 +249,12 @@ namespace arma3Launcher.Workers
 
         private void ValidateRepo_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            mainForm.showSnackBar("Finished repository validation", 2000, false);
-
             GlobalVar.isReadingRepo = false;
 
-            if (needsUpdate == string.Empty)
+            if (e.Cancelled)
+                return;
+
+            if (needsUpdate == UpdateType.None)
             {
                 foreach (PackBlock item in flowpanelAddonPacks.Controls)
                 {
@@ -251,15 +263,18 @@ namespace arma3Launcher.Workers
 
                 GlobalVar.repoChecked = true;
 
-                if (GlobalVar.autoPilot) { this.mainForm.LaunchGame(false); }
-
                 if (showMessage)
                     new Windows.MessageBox().Show("All files are synced with the repository!", "You're amazing", MessageBoxButtons.OK, MessageIcon.Information);
+                else if (validateFiles && !isLaunch)
+                    mainForm.showSnackBar("Finished repository validation", 2000, false);
             }
             else
             {
-                if (needsUpdate == "download")
+                if (needsUpdate == UpdateType.Download)
                 {
+                    if (!showMessage)
+                        mainForm.showSnackBar("Repository needs update!", 2000, false);
+
                     foreach (PackBlock item in flowpanelAddonPacks.Controls)
                     {
                         item.disablePlayButton();
@@ -274,25 +289,23 @@ namespace arma3Launcher.Workers
                     if (GlobalVar.autoPilot || autoDownload || (showMessage && new Windows.MessageBox().Show("Your local files are not in sync with the repository.\nDo you want to download the missing files?", "Repository has new updates", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes))
                         downloader.beginDownload(GlobalVar.files2Download, GlobalVar.autoPilot);
                 }
-                else
+                else if (needsUpdate == UpdateType.Validation)
                 {
-                    if (needsUpdate == "validation")
+                    mainForm.showSnackBar("Validating local storage...", 2000, false);
+
+                    foreach (PackBlock item in flowpanelAddonPacks.Controls)
                     {
-                        foreach (PackBlock item in flowpanelAddonPacks.Controls)
-                        {
-                            item.disablePlayButton();
-                        }
-
-                        if (GlobalVar.menuSelected != 2)
-                        {
-                            GlobalVar.menuSelected = 2;
-                            this.mainForm.HideUnhide(GlobalVar.menuSelected);
-                        }
-
-                        installer.ValidateLocalFiles();
+                        item.disablePlayButton();
                     }
+
+                    if (GlobalVar.menuSelected != 2)
+                    {
+                        GlobalVar.menuSelected = 2;
+                        this.mainForm.HideUnhide(GlobalVar.menuSelected);
+                    }
+
+                    installer.ValidateLocalFiles();
                 }
-                
             }
         }
 
@@ -379,9 +392,9 @@ namespace arma3Launcher.Workers
                         lastNode = nodes[0];
 
                     if (subPathAgg.EndsWith("\\"))
-                    { if (validateFiles) { ValidateFolder(subPath, subPathAgg, lastNode); } else { this.nodeImageIndex(subPathAgg, 3); } }
+                    { if (validateFiles) { ValidateFolder(subPath, subPathAgg, lastNode); } else { this.nodeImageIndex(lastNode, 3); } }
                     else
-                    { if (validateFiles) { ValidateFile(subPath, subPathAgg, lastNode, fileHash, fileEdit); } else { this.nodeImageIndex(subPathAgg, 0); updateFilesLabel(lbl_filesOK, Convert.ToString(this.filesOK++)); } }
+                    { if (validateFiles) { ValidateFile(subPath, subPathAgg, lastNode, fileHash, fileEdit); } else { this.nodeImageIndex(lastNode, 0); updateFilesLabel(lbl_filesOK, Convert.ToString(this.filesOK++)); } }
 
                     i++;
                 }
@@ -402,32 +415,35 @@ namespace arma3Launcher.Workers
 
                 if (localfileHash == remoteFileHash && localfileEdit > fileEdit)
                 {
-                    this.nodeImageIndex(fullPath, 0);
-                    updateFilesLabel(lbl_filesOK, Convert.ToString(this.filesOK++));
+                    this.nodeImageIndex(node, 0);
+                    this.filesOK++;
+                    updateFilesLabel(lbl_filesOK, Convert.ToString(this.filesOK));
                 }
                 else
                 {
-                    this.nodeImageIndex(fullPath, 1);
+                    this.nodeImageIndex(node, 1);
                     invalidFile = true;
-                    updateFilesLabel(lbl_filesINVALID, Convert.ToString(this.filesINVALID++));
+                    this.filesINVALID++;
+                    updateFilesLabel(lbl_filesINVALID, Convert.ToString(this.filesINVALID));
                 }
             }
             else
             {
-                this.nodeImageIndex(fullPath, 2);
+                this.nodeImageIndex(node, 2);
                 invalidFile = true;
-                updateFilesLabel(lbl_filesMISSING, Convert.ToString(this.filesMISSING++));
+                this.filesMISSING++;
+                updateFilesLabel(lbl_filesMISSING, Convert.ToString(this.filesMISSING));
             }
 
             if(invalidFile)
             {
                 GlobalVar.files2Download.Add(fullPath);
-                this.needsUpdate = "download";
+                this.needsUpdate = UpdateType.Download;
 
                 TreeNode auxNode = node;
                 while (auxNode.Parent != null)
                 {
-                    this.nodeImageIndex(fullPath, 4);
+                    this.nodeImageIndex(auxNode.Parent, 4);
                     auxNode = auxNode.Parent;
                 }
             }
@@ -442,24 +458,24 @@ namespace arma3Launcher.Workers
             {
                 if (node.ImageIndex != 4)
                 {
-                    this.nodeImageIndex(fullPath, 3);
+                    this.nodeImageIndex(node, 3);
                 }
             }
             else
             {
-                this.nodeImageIndex(fullPath, 5);
+                this.nodeImageIndex(node, 5);
                 invalidFolder = true;
             }
 
             if (invalidFolder)
             {
                 GlobalVar.folders2Create.Add(fullPath);
-                this.needsUpdate = "download";
+                this.needsUpdate = UpdateType.Download;
 
                 TreeNode auxNode = node;
                 while (auxNode.Parent != null)
                 {
-                    this.nodeImageIndex(fullPath, 4);
+                    this.nodeImageIndex(auxNode.Parent, 4);
                     auxNode = auxNode.Parent;
                 }
             }

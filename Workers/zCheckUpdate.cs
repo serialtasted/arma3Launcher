@@ -137,6 +137,10 @@ namespace arma3Launcher.Workers
 
                     txt_versiontag.Text = "Version " + NewVersionS + " available to downgrade!";
                 }
+                else
+                {
+                    txt_versiontag.Text = "Version " + CurVersionS;
+                }
             }
             catch { }
 

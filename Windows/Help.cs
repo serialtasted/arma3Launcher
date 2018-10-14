@@ -1,5 +1,6 @@
 ﻿using arma3Launcher.Effects;
 using MaterialSkin;
+using MaterialSkin.Animations;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace arma3Launcher.Windows
     public partial class Help : MaterialForm
     {
         private WindowIO windowIO;
+        private AnimationManager animationManager;
 
         public Help()
         {
@@ -24,9 +26,24 @@ namespace arma3Launcher.Windows
             MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             MaterialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
 
+            // Material Skin animations
+            animationManager = new AnimationManager
+            {
+                Increment = 0.03,
+                AnimationType = AnimationType.EaseOut
+            };
+
+            animationManager.OnAnimationProgress += sender => Invalidate();
+            Invalidated += Help_Invalidated;
+
             InitializeComponent();
 
             windowIO = new WindowIO(this);
+        }
+
+        private void Help_Invalidated(object sender, InvalidateEventArgs e)
+        {
+            
         }
 
         private void Help_Shown(object sender, EventArgs e)

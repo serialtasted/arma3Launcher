@@ -110,7 +110,7 @@ namespace arma3Launcher.Controls
                     }
                 }
 
-                //this.moreInfoPanelIO.ShowPanelSingle();
+                //this.moreInfoPanelIO..ShowPanel();
             }
         }
 
@@ -129,8 +129,8 @@ namespace arma3Launcher.Controls
 
             this.flowpanel_packContent.Controls.Clear();
 
-            //this.moreInfoPanelIO = new PanelIO(panel_moreInfo, 120, 33);
-            this.packInfoPanelIO = new PanelIO(panel_packInfo, 410, 33);
+            //this.moreInfoPanelIO = new PanelIO(panel_moreInfo, 33, 120);
+            this.packInfoPanelIO = new PanelIO(panel_packInfo, 33, 410);
 
             this.packsPan = packsPanel;
             this.txt_title.Text = packTitle;
@@ -195,7 +195,7 @@ namespace arma3Launcher.Controls
                 this.flowpanel_packContent.Controls.Add(addon);
             }
 
-            this.packInfoPanelIO.ShowPanelSingle();
+            this.packInfoPanelIO.ShowPanel();
         }
 
         public void disablePlayButton()
@@ -233,7 +233,7 @@ namespace arma3Launcher.Controls
 
         private void btn_addonsOptionsClose_Click(object sender, EventArgs e)
         {
-            this.packInfoPanelIO.HidePanelSingle();
+            this.packInfoPanelIO.HidePanel();
         }
 
         private void btn_addonsOptionsClose_MouseEnter(object sender, EventArgs e)
@@ -250,7 +250,7 @@ namespace arma3Launcher.Controls
 
         private void btn_addonsOptionsOpen_Click(object sender, EventArgs e)
         {
-            this.packInfoPanelIO.ShowPanelSingle();
+            this.packInfoPanelIO.ShowPanel();
         }
 
         private void btn_addonsOptionsOpen_MouseEnter(object sender, EventArgs e)
@@ -337,9 +337,15 @@ namespace arma3Launcher.Controls
 
         private void playAction()
         {
-            Properties.Settings.Default.lastAddonPack = packID + "*" + txt_title.Text;
+            if(GlobalVar.isServer)
+            {
+                Properties.Settings.Default.ServerPack = packID;
+                this.mainForm.updateServerPack(packID);
+            }
+
+            Properties.Settings.Default.LastAddonPack = packID;
             Properties.Settings.Default.Save();
-            this.mainForm.LaunchGame(false);
+            this.mainForm.LaunchGame();
         }
     }
 }

@@ -51,6 +51,22 @@ namespace arma3Launcher.Workers
             }
         }
 
+        public string GetPackName(string packID)
+        {
+            string packName = string.Empty;
+            XmlDocument RemoteXmlInfo = new XmlDocument();
+            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
+
+            XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSets//pack");
+            foreach (XmlNode xn in xnl)
+            {
+                if (xn.Attributes["id"].Value == packID)
+                { packName = xn.Attributes["name"].Value; break; }
+            }
+
+            return packName;
+        }
+
         public void Get ()
         {
             try

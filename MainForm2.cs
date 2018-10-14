@@ -142,16 +142,16 @@ namespace arma3Launcher
             this.windowIO = new WindowIO(this);
 
             // Init panel IO
-            this.sideMenuIO = new PanelIO(this.panel_sideMenu, 300, 42);
-            this.addonPacksPanelIO = new PanelIO(this.panel_addonPacks, this.panel_outterPanel, this, 161);
-            this.launchOptionsPanelIO = new PanelIO(this.panel_launchOptions, this.panel_outterPanel, this, 161);
-            this.repositoryDownloadsPanelIO = new PanelIO(this.panel_repositoryDownloads, this.panel_outterPanel, this, 161);
-            this.preferencesPanelIO = new PanelIO(this.panel_preferences, this.panel_outterPanel, this, 161);
-            this.addonOptionsPanelIO = new PanelIO(this.panel_addonOptions, this, 86);
-            this.repoInfoPanelIO = new PanelIO(this.panel_repoInfo, 1240, 86);
+            this.sideMenuIO = new PanelIO(this.panel_sideMenu, 42, 300);
+            this.addonPacksPanelIO = new PanelIO(this.panel_addonPacks, this.panel_outterPanel, 161, this.Width);
+            this.launchOptionsPanelIO = new PanelIO(this.panel_launchOptions, this.panel_outterPanel, 161, this.Width);
+            this.repositoryDownloadsPanelIO = new PanelIO(this.panel_repositoryDownloads, this.panel_outterPanel, 161, this.Width);
+            this.preferencesPanelIO = new PanelIO(this.panel_preferences, this.panel_outterPanel, 161, this.Width);
+            this.addonOptionsPanelIO = new PanelIO(this.panel_addonOptions, 86, this.Width);
+            this.repoInfoPanelIO = new PanelIO(this.panel_repoInfo, 86, 1240);
 
             // Position panel IO
-            this.repoInfoPanelIO.ShowPanelSingle();
+            this.repoInfoPanelIO.ShowPanel();
         }
 
         private void win_titleBar_MouseDown(object sender, MouseEventArgs e)
@@ -250,13 +250,13 @@ namespace arma3Launcher
             if (this.panel_sideMenu.Width < 300)
             {
                 this.btn_windowMenu.Image = Properties.Resources.windowCross;
-                this.sideMenuIO.ShowPanelSingle();
+                this.sideMenuIO.ShowPanel();
                 this.sideMenuOpen = true;
             }
             else
             {
                 this.btn_windowMenu.Image = Properties.Resources.windowMenu;
-                this.sideMenuIO.HidePanelSingle();
+                this.sideMenuIO.HidePanel();
                 this.sideMenuOpen = false;
             }
         }
@@ -293,8 +293,14 @@ namespace arma3Launcher
             if (!isUpdate)
             {
                 fetchAddonPacks.RevealPacks(flowpanel_addonPacks);
-                ReadRepo(false, false);
+                ReadRepo(false);
             }
+
+            if (!Properties.Settings.Default.firstLaunch && GlobalVar.isServer)
+                if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
+                    switchAutopilot(true);
+                else
+                    switchAutopilot(false);
 
             this.hasShown = true;
         }
@@ -374,13 +380,6 @@ namespace arma3Launcher
 
                         _idx++;
                     }
-
-                    if (!Properties.Settings.Default.firstLaunch)
-                        if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
-                            switchAutopilot(true);
-                        else
-                            switchAutopilot(false);
-
                 }
 
                 if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
@@ -437,7 +436,7 @@ namespace arma3Launcher
             }
 
             loadingSplash.Close();
-        } 
+        }
         #endregion
 
         #region Side Menu
@@ -446,25 +445,25 @@ namespace arma3Launcher
         -----------------------------------*/
         public async void HideUnhide(int selectedOption)
         {
-            if (!GlobalVar.isAnimating)
-            {
-                this.btn_windowMenu.Image = Properties.Resources.windowMenu;
-                this.sideMenuIO.HidePanelSingle();
-                this.sideMenuOpen = false;
+            while (GlobalVar.isAnimating)
+                await taskDelay(300);
 
-                if (panel_addonPacks.Width > 0) {           panel_outterPanel.BackColor = Color.DimGray;    menu_addonPacks.ForeColor = Color.WhiteSmoke;           panel_outterPanel.Dock = DockStyle.Left;   panel_addonPacks.Dock = DockStyle.Left;            addonPacksPanelIO.HidePanelDual(); }
-                if (panel_launchOptions.Width > 0) {        panel_outterPanel.BackColor = Color.DimGray;    menu_launchOptions.ForeColor = Color.WhiteSmoke;        panel_outterPanel.Dock = DockStyle.Left;   panel_launchOptions.Dock = DockStyle.Left;         launchOptionsPanelIO.HidePanelDual(); }
-                if (panel_repositoryDownloads.Width > 0) {  panel_outterPanel.BackColor = Color.DimGray;    menu_repositoryDownloads.ForeColor = Color.WhiteSmoke;  panel_outterPanel.Dock = DockStyle.Left;   panel_repositoryDownloads.Dock = DockStyle.Left;   repositoryDownloadsPanelIO.HidePanelDual(); }
-                if (panel_preferences.Width > 0) {          panel_outterPanel.BackColor = Color.DimGray;    menu_preferences.ForeColor = Color.WhiteSmoke;          panel_outterPanel.Dock = DockStyle.Left;   panel_preferences.Dock = DockStyle.Left;           preferencesPanelIO.HidePanelDual(); }
+            this.btn_windowMenu.Image = Properties.Resources.windowMenu;
+            this.sideMenuIO.HidePanel();
+            this.sideMenuOpen = false;
 
-                while (GlobalVar.isAnimating)
-                    await taskDelay(400);
+            if (panel_addonPacks.Width > 0) { panel_outterPanel.BackColor = Color.DimGray; menu_addonPacks.ForeColor = Color.WhiteSmoke; panel_outterPanel.Dock = DockStyle.Left; panel_addonPacks.Dock = DockStyle.Left; addonPacksPanelIO.HidePanel(); }
+            if (panel_launchOptions.Width > 0) { panel_outterPanel.BackColor = Color.DimGray; menu_launchOptions.ForeColor = Color.WhiteSmoke; panel_outterPanel.Dock = DockStyle.Left; panel_launchOptions.Dock = DockStyle.Left; launchOptionsPanelIO.HidePanel(); }
+            if (panel_repositoryDownloads.Width > 0) { panel_outterPanel.BackColor = Color.DimGray; menu_repositoryDownloads.ForeColor = Color.WhiteSmoke; panel_outterPanel.Dock = DockStyle.Left; panel_repositoryDownloads.Dock = DockStyle.Left; repositoryDownloadsPanelIO.HidePanel(); }
+            if (panel_preferences.Width > 0) { panel_outterPanel.BackColor = Color.DimGray; menu_preferences.ForeColor = Color.WhiteSmoke; panel_outterPanel.Dock = DockStyle.Left; panel_preferences.Dock = DockStyle.Left; preferencesPanelIO.HidePanel(); }
 
-                if (selectedOption == 0) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_addonPacks.ForeColor = Color.YellowGreen;              panel_outterPanel.Dock = DockStyle.Right;   panel_addonPacks.Dock = DockStyle.Right;            addonPacksPanelIO.ShowPanelDual(); }
-                if (selectedOption == 1) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_launchOptions.ForeColor = Color.YellowGreen;           panel_outterPanel.Dock = DockStyle.Right;   panel_launchOptions.Dock = DockStyle.Right;         launchOptionsPanelIO.ShowPanelDual(); }
-                if (selectedOption == 2) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_repositoryDownloads.ForeColor = Color.YellowGreen;     panel_outterPanel.Dock = DockStyle.Right;   panel_repositoryDownloads.Dock = DockStyle.Right;   repositoryDownloadsPanelIO.ShowPanelDual(); }
-                if (selectedOption == 3) { panel_outterPanel.BackColor = Color.OliveDrab;   menu_preferences.ForeColor = Color.YellowGreen;             panel_outterPanel.Dock = DockStyle.Right;   panel_preferences.Dock = DockStyle.Right;           preferencesPanelIO.ShowPanelDual(); }
-            }
+            while (GlobalVar.isAnimating)
+                await taskDelay(300);
+
+            if (selectedOption == 0) { panel_outterPanel.BackColor = Color.OliveDrab; menu_addonPacks.ForeColor = Color.YellowGreen; panel_outterPanel.Dock = DockStyle.Right; panel_addonPacks.Dock = DockStyle.Right; addonPacksPanelIO.ShowPanel(); }
+            if (selectedOption == 1) { panel_outterPanel.BackColor = Color.OliveDrab; menu_launchOptions.ForeColor = Color.YellowGreen; panel_outterPanel.Dock = DockStyle.Right; panel_launchOptions.Dock = DockStyle.Right; launchOptionsPanelIO.ShowPanel(); }
+            if (selectedOption == 2) { panel_outterPanel.BackColor = Color.OliveDrab; menu_repositoryDownloads.ForeColor = Color.YellowGreen; panel_outterPanel.Dock = DockStyle.Right; panel_repositoryDownloads.Dock = DockStyle.Right; repositoryDownloadsPanelIO.ShowPanel(); }
+            if (selectedOption == 3) { panel_outterPanel.BackColor = Color.OliveDrab; menu_preferences.ForeColor = Color.YellowGreen; panel_outterPanel.Dock = DockStyle.Right; panel_preferences.Dock = DockStyle.Right; preferencesPanelIO.ShowPanel(); }
         }
 
         /*-----------------------------------
@@ -602,6 +601,25 @@ namespace arma3Launcher
         {
             this.menu_about.ForeColor = Color.Silver;
         }
+
+        /*-----------------------------------
+            Version Tag
+        -----------------------------------*/
+        private void txt_versionNumber_Click(object sender, EventArgs e)
+        {
+            if (new Windows.MessageBox().Show("Do you really want to download this version of the launcher again?", "Reinstall", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes)
+                QuickUpdateMethod.StartUpdate();
+        }
+
+        private void txt_versionNumber_MouseEnter(object sender, EventArgs e)
+        {
+            this.txt_versionNumber.ForeColor = Color.OliveDrab;
+        }
+
+        private void txt_versionNumber_MouseLeave(object sender, EventArgs e)
+        {
+            this.txt_versionNumber.ForeColor = Color.DarkGray;
+        }
         #endregion
 
         #region Button States
@@ -729,7 +747,7 @@ namespace arma3Launcher
         #region Addon Packs Panel
         private void btn_addonsOptionsOpen_Click(object sender, EventArgs e)
         {
-            this.addonOptionsPanelIO.ShowPanelSingle();
+            this.addonOptionsPanelIO.ShowPanel();
         }
 
         private void btn_addonsOptionsOpen_MouseEnter(object sender, EventArgs e)
@@ -746,7 +764,7 @@ namespace arma3Launcher
 
         private void btn_addonsOptionsClose_Click(object sender, EventArgs e)
         {
-            this.addonOptionsPanelIO.HidePanelSingle();
+            this.addonOptionsPanelIO.HidePanel();
         }
 
         private void btn_addonsOptionsClose_MouseEnter(object sender, EventArgs e)
@@ -1162,7 +1180,7 @@ namespace arma3Launcher
             Properties.Settings.Default.Save();
         }
 
-        public void FetchRemoteSettings(bool refreshPacks, bool isAutoRun)
+        public void FetchRemoteSettings(bool refreshPacks)
         {
             AddonsFolder = Properties.Settings.Default.AddonsFolder;
             bool keepGoing = true;
@@ -1171,10 +1189,10 @@ namespace arma3Launcher
             {
                 try
                 {
-                    if (isAutoRun)
+                    if (GlobalVar.autoPilot)
                         packID = (string)cb_serverPack.SelectedItem;
                     else
-                        packID = Properties.Settings.Default.lastAddonPack.Split('*')[0];
+                        packID = Properties.Settings.Default.LastAddonPack;
 
                     XmlDocument RemoteXmlInfo = new XmlDocument();
                     RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
@@ -1247,12 +1265,29 @@ namespace arma3Launcher
             { }
         }
 
-        private void switchAutopilot(bool On)
+        private void switchAutopilot(bool On, bool wasCheckbox = false)
         {
+            // Set Visuals and Variables
             if (On && !GlobalVar.autoPilot)
-            { GlobalVar.autoPilot = true; oldVersionStatusText = WindowTitle.Text; WindowTitle.Text = WindowTitle.Text + " | Autopilot engaged"; chb_pref_serverAutopilot.Checked = true; }
+            {
+                GlobalVar.autoPilot = true;
+
+                oldVersionStatusText = WindowTitle.Text;
+                WindowTitle.Text = WindowTitle.Text + " | Autopilot engaged";
+                if (!chb_pref_serverAutopilot.Checked) { chb_pref_serverAutopilot.Checked = true; }
+            }
             else if (!On && GlobalVar.autoPilot)
-            { GlobalVar.autoPilot = false; oldVersionStatusText = WindowTitle.Text; WindowTitle.Text = oldVersionStatusText; chb_pref_serverAutopilot.Checked = false; }
+            {
+                GlobalVar.autoPilot = false;
+
+                oldVersionStatusText = WindowTitle.Text;
+                WindowTitle.Text = oldVersionStatusText;
+                chb_pref_serverAutopilot.Checked = false;
+            }
+
+            // Launch Game
+            if(GlobalVar.autoPilot)
+                LaunchGame();
         }
 
         public void reLaunchServer()
@@ -1261,15 +1296,11 @@ namespace arma3Launcher
                 switchAutopilot(true);
             else
                 switchAutopilot(false);
-
-            if (GlobalVar.autoPilot)
-                LaunchGame(true);
-                
         }
 
-        public async void LaunchGame(bool isAutoRun)
+        public async void LaunchGame()
         {
-            FetchRemoteSettings(false, isAutoRun);
+            FetchRemoteSettings(false);
 
             if ((Directory.Exists(TSFolder) && (File.Exists(TSFolder + "ts3client_win64.exe") || File.Exists(TSFolder + "ts3client_win32.exe")) || GlobalVar.isServer))
             {
@@ -1302,13 +1333,21 @@ namespace arma3Launcher
                         Arguments = PrepareLaunch.GetArguments();
                         SaveSettings();
 
+                        if (packID != "arma3")
+                            ReadRepo(true, false, true);
+
                         while (GlobalVar.isReadingRepo)
                             await taskDelay(500);
 
                         if (packID == "arma3" || GlobalVar.repoChecked)
                         {
                             hideDownloadPanel();
-                            showSnackBar("Launching " + Properties.Settings.Default.lastAddonPack.Split('*')[1] + "...", 2000, true, true, Primary.LightGreen800);
+                            string packName = fetchAddonPacks.GetPackName(Properties.Settings.Default.LastAddonPack);
+                            if (GlobalVar.isServer)
+                                packName = fetchAddonPacks.GetPackName(Properties.Settings.Default.ServerPack);
+
+                            showSnackBar("Launching " + packName + "...", 2000, true, true, Primary.LightGreen800);
+
                             await taskDelay(2000);
 
                             PrepareLaunch.LaunchGame(
@@ -1505,15 +1544,27 @@ namespace arma3Launcher
             installer.installTeamSpeakPlugin();
         }
 
-        public void showSnackBar(string Message, int Delay, bool Primary)
+        public async void showSnackBar(string Message, int Delay, bool Primary)
         {
+            if (snackbar_mainWindow.Visible)
+                snackbar_mainWindow.HideSnackbar();
+
+            while (snackbar_mainWindow.Visible)
+                await taskDelay(100);
+
             snackbar_mainWindow.Text = Message;
             snackbar_mainWindow.Primary = Primary;
             snackbar_mainWindow.ShowSnackbar(Delay);
         }
 
-        public void showSnackBar (string Message, int Delay, bool Primary, bool SetCustomColor, Primary Color)
+        public async void showSnackBar (string Message, int Delay, bool Primary, bool SetCustomColor, Primary Color)
         {
+            if (snackbar_mainWindow.Visible)
+                snackbar_mainWindow.HideSnackbar();
+
+            while (snackbar_mainWindow.Visible)
+                await taskDelay(100);
+
             snackbar_mainWindow.Text = Message;
             snackbar_mainWindow.Primary = Primary;
 
@@ -1521,10 +1572,19 @@ namespace arma3Launcher
                 MaterialSkinManager.ColorScheme = new ColorScheme(Color, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE);
 
             snackbar_mainWindow.ShowSnackbar(Delay);
+
+            if (SetCustomColor)
+            { await taskDelay(Delay + 2000); MaterialSkinManager.ColorScheme = new ColorScheme(primeColor, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE); }
         }
 
-        public void showSnackBar(string Message, bool Button, string ButtonText)
+        public async void showSnackBar(string Message, bool Button, string ButtonText)
         {
+            if (snackbar_mainWindow.Visible)
+                snackbar_mainWindow.HideSnackbar();
+
+            while (snackbar_mainWindow.Visible)
+                await taskDelay(100);
+
             snackbar_mainWindow.Text = Message;
             snackbar_mainWindow.Primary = false;
             snackbar_mainWindow.ShowButton = true;
@@ -1533,8 +1593,11 @@ namespace arma3Launcher
             snackbar_mainWindow.ShowSnackbar();
         }
 
+        public void updateServerPack(string packId)
+        { cb_serverPack.SelectedItem = packId; }
+
         public void updateCurrentPack(bool refreshPacks, bool revealPacks)
-        { FetchRemoteSettings(refreshPacks, false); GetWorkshopAddons(); GetOptionalAddons(); if (revealPacks) { fetchAddonPacks.RevealPacks(flowpanel_addonPacks); } }
+        { FetchRemoteSettings(refreshPacks); GetWorkshopAddons(); GetOptionalAddons(); if (revealPacks) { fetchAddonPacks.RevealPacks(flowpanel_addonPacks); } }
 
         public bool startGameAfterDownload()
         { return chb_pref_startGame.Checked; }
@@ -1549,13 +1612,21 @@ namespace arma3Launcher
         { return chb_pref_autoDownload.Checked; }
 
         public void showDownloadPanel()
-        { repoInfoPanelIO.HidePanelSingle(); }
+        { repoInfoPanelIO.HidePanel(); }
 
         public void hideDownloadPanel()
-        { repoInfoPanelIO.ShowPanelSingle(); }
+        { repoInfoPanelIO.ShowPanel(); }
 
-        public void ReadRepo(bool showMessage, bool validateFiles)
-        { repoReader.ReadRepo(showMessage, chb_pref_autoDownload.Checked, validateFiles); }
+        public async void ReadRepo(bool validateFiles, bool showMessage = false, bool isLaunch = false)
+        {
+            if (GlobalVar.isReadingRepo)
+                repoReader.CancelRead();
+
+            while (GlobalVar.isReadingRepo)
+                await taskDelay(100);
+
+            repoReader.ReadRepo(showMessage, chb_pref_autoDownload.Checked, validateFiles, isLaunch);
+        }
 
         #region Game Options Conditions
         private void chb_maxMem_CheckedChanged(object sender, EventArgs e)
@@ -1862,7 +1933,7 @@ namespace arma3Launcher
             }
 
             if (hasShown)
-                ReadRepo(false, true);
+                ReadRepo(true);
         }
 
         // OPTIONAL ADDONS DIR TEXTBOX
@@ -2002,14 +2073,14 @@ namespace arma3Launcher
 
         private void chb_pref_serverAutopilot_CheckedChanged(object sender, EventArgs e)
         {
-            if (chb_pref_serverAutopilot.Checked)
+            if (chb_pref_serverAutopilot.Checked && !GlobalVar.autoPilot)
             {
                 if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
-                    switchAutopilot(true);
+                    switchAutopilot(true, true);
                 else
                     chb_pref_serverAutopilot.Checked = false;
             }
-            else
+            else if (!chb_pref_serverAutopilot.Checked && GlobalVar.autoPilot)
             { switchAutopilot(false); }
         }
 
@@ -2140,7 +2211,6 @@ namespace arma3Launcher
                 }
             }
         }
-
         private void tsmi_reloadOptional_Click(object sender, EventArgs e)
         {
             GetOptionalAddons();

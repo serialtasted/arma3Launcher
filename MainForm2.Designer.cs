@@ -30,18 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm2));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath1 = new System.Drawing.Drawing2D.GraphicsPath();
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath2 = new System.Drawing.Drawing2D.GraphicsPath();
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath3 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath4 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath5 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath6 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
             this.imageListRepo = new System.Windows.Forms.ImageList(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
             this.dlg_folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.flowAddonsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_reloadPacks = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +59,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_workshopReload = new System.Windows.Forms.ToolStripMenuItem();
             this.win_mainWindow = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.snackbar_mainWindow = new MaterialSkin.Controls.MaterialSnackbar();
             this.panel_sideMenu = new arma3Launcher.Controls.DoubleBufferPanel();
             this.doubleBufferFlowPanel1 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
             this.doubleBufferPanel5 = new arma3Launcher.Controls.DoubleBufferPanel();
@@ -80,26 +80,6 @@
             this.txt_versionNumber = new System.Windows.Forms.Label();
             this.panel_mainPanel = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_outterPanel = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.panel_repositoryDownloads = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.panel_contentRepositoryDownloads = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.trv_repoContent = new arma3Launcher.Controls.DoubleBufferTreeView();
-            this.panel_repoBottom = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.panel_repoDownload = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.txt_curFile = new System.Windows.Forms.Label();
-            this.txt_percentageStatus = new System.Windows.Forms.Label();
-            this.txt_progressStatus = new System.Windows.Forms.Label();
-            this.panel_repoInfo = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.btn_checkRepo = new MaterialSkin.Controls.MaterialFlatButton();
-            this.lbl_repofileok = new System.Windows.Forms.Label();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.lbl_repofilemissing = new System.Windows.Forms.Label();
-            this.lbl_repofileinvalid = new System.Windows.Forms.Label();
-            this.lbl_repositoryDownloads = new System.Windows.Forms.Label();
             this.panel_launchOptions = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_contentLaunchOptions = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_serverOptions_vSep = new arma3Launcher.Controls.DoubleBufferPanel();
@@ -201,7 +181,6 @@
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.lbl_addonOptions = new System.Windows.Forms.Label();
             this.panel_preferences = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.snackbar_mainWindow = new MaterialSkin.Controls.MaterialSnackbar();
             this.panel_contentPreferences = new arma3Launcher.Controls.DoubleBufferPanel();
             this.flowLayoutPanel2 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
             this.txt_pref_gamePrefrences = new System.Windows.Forms.Label();
@@ -246,12 +225,32 @@
             this.txtb_pref_tsDirectory = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.lbl_pref_TeamSpeakDir = new System.Windows.Forms.Label();
             this.lbl_preferences = new System.Windows.Forms.Label();
+            this.panel_repositoryDownloads = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel_contentRepositoryDownloads = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.trv_repoContent = new arma3Launcher.Controls.DoubleBufferTreeView();
+            this.panel_repoBottom = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel_repoDownload = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
+            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
+            this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
+            this.txt_curFile = new System.Windows.Forms.Label();
+            this.txt_percentageStatus = new System.Windows.Forms.Label();
+            this.txt_progressStatus = new System.Windows.Forms.Label();
+            this.panel_repoInfo = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.btn_checkRepo = new MaterialSkin.Controls.MaterialFlatButton();
+            this.lbl_repofileok = new System.Windows.Forms.Label();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.lbl_repofilemissing = new System.Windows.Forms.Label();
+            this.lbl_repofileinvalid = new System.Windows.Forms.Label();
+            this.lbl_repositoryDownloads = new System.Windows.Forms.Label();
             this.win_titleBar = new arma3Launcher.Controls.DoubleBufferPanel();
             this.WindowTitle = new System.Windows.Forms.Label();
             this.btn_windowMenu = new System.Windows.Forms.PictureBox();
             this.btn_windowClose = new System.Windows.Forms.PictureBox();
             this.btn_windowMinimize = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.flowAddonsMenu.SuspendLayout();
             this.repositoryMenu.SuspendLayout();
             this.optionaladdonsMenu.SuspendLayout();
@@ -267,14 +266,6 @@
             this.doubleBufferPanel4.SuspendLayout();
             this.panel_mainPanel.SuspendLayout();
             this.panel_outterPanel.SuspendLayout();
-            this.panel_repositoryDownloads.SuspendLayout();
-            this.panel_contentRepositoryDownloads.SuspendLayout();
-            this.panel_repoBottom.SuspendLayout();
-            this.panel_repoDownload.SuspendLayout();
-            this.panel_repoInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panel_launchOptions.SuspendLayout();
             this.panel_contentLaunchOptions.SuspendLayout();
             this.panel_launchOptionsCenter.SuspendLayout();
@@ -321,6 +312,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseTSDir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openTS3Dir)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseTS3Dir)).BeginInit();
+            this.panel_repositoryDownloads.SuspendLayout();
+            this.panel_contentRepositoryDownloads.SuspendLayout();
+            this.panel_repoBottom.SuspendLayout();
+            this.panel_repoDownload.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
+            this.panel_repoInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.win_titleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).BeginInit();
@@ -337,20 +337,6 @@
             this.imageListRepo.Images.SetKeyName(3, "folder-checked.png");
             this.imageListRepo.Images.SetKeyName(4, "folder-error.png");
             this.imageListRepo.Images.SetKeyName(5, "folder-cancel.png");
-            // 
-            // btn_cancelDownload
-            // 
-            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
-            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_cancelDownload.Location = new System.Drawing.Point(1199, 27);
-            this.btn_cancelDownload.Name = "btn_cancelDownload";
-            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
-            this.btn_cancelDownload.TabIndex = 12;
-            this.btn_cancelDownload.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
-            this.btn_cancelDownload.Visible = false;
             // 
             // dlg_folderBrowser
             // 
@@ -508,6 +494,25 @@
             this.win_mainWindow.Name = "win_mainWindow";
             this.win_mainWindow.Size = new System.Drawing.Size(1300, 700);
             this.win_mainWindow.TabIndex = 2;
+            // 
+            // snackbar_mainWindow
+            // 
+            this.snackbar_mainWindow.ButtonText = "";
+            this.snackbar_mainWindow.Depth = 0;
+            this.snackbar_mainWindow.Font = new System.Drawing.Font("Roboto", 9F);
+            this.snackbar_mainWindow.FontSize = 9;
+            this.snackbar_mainWindow.Location = new System.Drawing.Point(505, 638);
+            this.snackbar_mainWindow.MouseState = MaterialSkin.MouseState.HOVER;
+            this.snackbar_mainWindow.Name = "snackbar_mainWindow";
+            this.snackbar_mainWindow.Primary = true;
+            this.snackbar_mainWindow.RoundedCornerRadius = 1;
+            this.snackbar_mainWindow.Shadow = null;
+            this.snackbar_mainWindow.ShadowShape = null;
+            this.snackbar_mainWindow.ShowButton = false;
+            this.snackbar_mainWindow.Size = new System.Drawing.Size(288, 48);
+            this.snackbar_mainWindow.TabIndex = 5;
+            this.snackbar_mainWindow.Text = "%Message%";
+            this.snackbar_mainWindow.Visible = false;
             // 
             // panel_sideMenu
             // 
@@ -726,7 +731,7 @@
             this.menu_about.BackColor = System.Drawing.Color.Transparent;
             this.menu_about.Font = new System.Drawing.Font("Lato", 9.5F);
             this.menu_about.ForeColor = System.Drawing.Color.Silver;
-            this.menu_about.Location = new System.Drawing.Point(-277, 38);
+            this.menu_about.Location = new System.Drawing.Point(-277, 40);
             this.menu_about.Name = "menu_about";
             this.menu_about.Size = new System.Drawing.Size(43, 16);
             this.menu_about.TabIndex = 7;
@@ -742,13 +747,16 @@
             this.txt_versionNumber.BackColor = System.Drawing.Color.Transparent;
             this.txt_versionNumber.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.txt_versionNumber.ForeColor = System.Drawing.Color.DarkGray;
-            this.txt_versionNumber.Location = new System.Drawing.Point(-196, 41);
+            this.txt_versionNumber.Location = new System.Drawing.Point(-198, 42);
             this.txt_versionNumber.MinimumSize = new System.Drawing.Size(200, 0);
             this.txt_versionNumber.Name = "txt_versionNumber";
             this.txt_versionNumber.Size = new System.Drawing.Size(200, 12);
             this.txt_versionNumber.TabIndex = 8;
             this.txt_versionNumber.Text = "%version%";
             this.txt_versionNumber.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.txt_versionNumber.Click += new System.EventHandler(this.txt_versionNumber_Click);
+            this.txt_versionNumber.MouseEnter += new System.EventHandler(this.txt_versionNumber_MouseEnter);
+            this.txt_versionNumber.MouseLeave += new System.EventHandler(this.txt_versionNumber_MouseLeave);
             // 
             // panel_mainPanel
             // 
@@ -763,10 +771,10 @@
             // panel_outterPanel
             // 
             this.panel_outterPanel.BackColor = System.Drawing.Color.DimGray;
-            this.panel_outterPanel.Controls.Add(this.panel_repositoryDownloads);
-            this.panel_outterPanel.Controls.Add(this.panel_launchOptions);
             this.panel_outterPanel.Controls.Add(this.panel_addonPacks);
             this.panel_outterPanel.Controls.Add(this.panel_preferences);
+            this.panel_outterPanel.Controls.Add(this.panel_repositoryDownloads);
+            this.panel_outterPanel.Controls.Add(this.panel_launchOptions);
             this.panel_outterPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_outterPanel.Location = new System.Drawing.Point(0, 0);
             this.panel_outterPanel.MinimumSize = new System.Drawing.Size(0, 670);
@@ -774,314 +782,13 @@
             this.panel_outterPanel.Size = new System.Drawing.Size(1300, 670);
             this.panel_outterPanel.TabIndex = 0;
             // 
-            // panel_repositoryDownloads
-            // 
-            this.panel_repositoryDownloads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.panel_repositoryDownloads.Controls.Add(this.panel_contentRepositoryDownloads);
-            this.panel_repositoryDownloads.Controls.Add(this.lbl_repositoryDownloads);
-            this.panel_repositoryDownloads.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_repositoryDownloads.Location = new System.Drawing.Point(3900, 0);
-            this.panel_repositoryDownloads.Name = "panel_repositoryDownloads";
-            this.panel_repositoryDownloads.Size = new System.Drawing.Size(1300, 670);
-            this.panel_repositoryDownloads.TabIndex = 2;
-            // 
-            // panel_contentRepositoryDownloads
-            // 
-            this.panel_contentRepositoryDownloads.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.panel_contentRepositoryDownloads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.panel_contentRepositoryDownloads.Controls.Add(this.trv_repoContent);
-            this.panel_contentRepositoryDownloads.Controls.Add(this.panel_repoBottom);
-            this.panel_contentRepositoryDownloads.Location = new System.Drawing.Point(32, 80);
-            this.panel_contentRepositoryDownloads.Name = "panel_contentRepositoryDownloads";
-            this.panel_contentRepositoryDownloads.Size = new System.Drawing.Size(1240, 560);
-            this.panel_contentRepositoryDownloads.TabIndex = 4;
-            // 
-            // trv_repoContent
-            // 
-            this.trv_repoContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.trv_repoContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.trv_repoContent.ContextMenuStrip = this.repositoryMenu;
-            this.trv_repoContent.Dock = System.Windows.Forms.DockStyle.Left;
-            this.trv_repoContent.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trv_repoContent.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.trv_repoContent.FullRowSelect = true;
-            this.trv_repoContent.ImageIndex = 0;
-            this.trv_repoContent.ImageList = this.imageListRepo;
-            this.trv_repoContent.Indent = 20;
-            this.trv_repoContent.ItemHeight = 30;
-            this.trv_repoContent.LineColor = System.Drawing.Color.Gainsboro;
-            this.trv_repoContent.Location = new System.Drawing.Point(0, 0);
-            this.trv_repoContent.MinimumSize = new System.Drawing.Size(1240, 0);
-            this.trv_repoContent.Name = "trv_repoContent";
-            treeNode1.ImageIndex = -2;
-            treeNode1.Name = "Node0";
-            treeNode1.SelectedImageIndex = -2;
-            treeNode1.Text = "Node0";
-            treeNode2.ImageIndex = 1;
-            treeNode2.Name = "Node2";
-            treeNode2.SelectedImageIndex = 1;
-            treeNode2.Text = "Node2";
-            treeNode3.ImageIndex = 2;
-            treeNode3.Name = "Node3";
-            treeNode3.SelectedImageIndex = 2;
-            treeNode3.Text = "Node3";
-            treeNode4.ImageIndex = 3;
-            treeNode4.Name = "Node0";
-            treeNode4.SelectedImageIndex = 3;
-            treeNode4.Text = "Node0";
-            treeNode5.ImageIndex = 4;
-            treeNode5.Name = "Node1";
-            treeNode5.SelectedImageIndex = 4;
-            treeNode5.Text = "Node1";
-            treeNode6.ImageIndex = 5;
-            treeNode6.Name = "Node2";
-            treeNode6.SelectedImageIndex = 5;
-            treeNode6.Text = "Node2";
-            this.trv_repoContent.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6});
-            this.trv_repoContent.SelectedImageIndex = 0;
-            this.trv_repoContent.ShowRootLines = false;
-            this.trv_repoContent.Size = new System.Drawing.Size(1240, 490);
-            this.trv_repoContent.TabIndex = 31;
-            // 
-            // panel_repoBottom
-            // 
-            this.panel_repoBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(45)))));
-            this.panel_repoBottom.Controls.Add(this.panel_repoDownload);
-            this.panel_repoBottom.Controls.Add(this.panel_repoInfo);
-            this.panel_repoBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel_repoBottom.Location = new System.Drawing.Point(0, 490);
-            this.panel_repoBottom.Name = "panel_repoBottom";
-            this.panel_repoBottom.Size = new System.Drawing.Size(1240, 70);
-            this.panel_repoBottom.TabIndex = 30;
-            // 
-            // panel_repoDownload
-            // 
-            this.panel_repoDownload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(45)))));
-            this.panel_repoDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel_repoDownload.Controls.Add(this.prb_progressBar_All);
-            this.panel_repoDownload.Controls.Add(this.btn_cancelDownload);
-            this.panel_repoDownload.Controls.Add(this.prb_progressBar_File);
-            this.panel_repoDownload.Controls.Add(this.txt_curFile);
-            this.panel_repoDownload.Controls.Add(this.txt_percentageStatus);
-            this.panel_repoDownload.Controls.Add(this.txt_progressStatus);
-            this.panel_repoDownload.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_repoDownload.Location = new System.Drawing.Point(1240, 0);
-            this.panel_repoDownload.MinimumSize = new System.Drawing.Size(1240, 0);
-            this.panel_repoDownload.Name = "panel_repoDownload";
-            this.panel_repoDownload.Size = new System.Drawing.Size(1240, 70);
-            this.panel_repoDownload.TabIndex = 13;
-            this.panel_repoDownload.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_repoDownload_Paint);
-            // 
-            // prb_progressBar_All
-            // 
-            this.prb_progressBar_All.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.prb_progressBar_All.ContainerControl = this;
-            this.prb_progressBar_All.Location = new System.Drawing.Point(20, 47);
-            this.prb_progressBar_All.Name = "prb_progressBar_All";
-            this.prb_progressBar_All.ShowInTaskbar = true;
-            this.prb_progressBar_All.Size = new System.Drawing.Size(1170, 5);
-            this.prb_progressBar_All.TabIndex = 11;
-            // 
-            // prb_progressBar_File
-            // 
-            this.prb_progressBar_File.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.prb_progressBar_File.ContainerControl = this;
-            this.prb_progressBar_File.Location = new System.Drawing.Point(20, 27);
-            this.prb_progressBar_File.Name = "prb_progressBar_File";
-            this.prb_progressBar_File.Size = new System.Drawing.Size(1170, 20);
-            this.prb_progressBar_File.TabIndex = 10;
-            // 
-            // txt_curFile
-            // 
-            this.txt_curFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_curFile.AutoSize = true;
-            this.txt_curFile.BackColor = System.Drawing.Color.Transparent;
-            this.txt_curFile.Font = new System.Drawing.Font("Clear Sans Light", 7F);
-            this.txt_curFile.ForeColor = System.Drawing.Color.LightGray;
-            this.txt_curFile.Location = new System.Drawing.Point(18, 51);
-            this.txt_curFile.MaximumSize = new System.Drawing.Size(0, 12);
-            this.txt_curFile.MinimumSize = new System.Drawing.Size(250, 12);
-            this.txt_curFile.Name = "txt_curFile";
-            this.txt_curFile.Size = new System.Drawing.Size(250, 12);
-            this.txt_curFile.TabIndex = 8;
-            this.txt_curFile.Text = "%CURFILE%";
-            // 
-            // txt_percentageStatus
-            // 
-            this.txt_percentageStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_percentageStatus.AutoSize = true;
-            this.txt_percentageStatus.BackColor = System.Drawing.Color.Transparent;
-            this.txt_percentageStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txt_percentageStatus.ForeColor = System.Drawing.Color.DarkGray;
-            this.txt_percentageStatus.Location = new System.Drawing.Point(993, 10);
-            this.txt_percentageStatus.MaximumSize = new System.Drawing.Size(200, 19);
-            this.txt_percentageStatus.MinimumSize = new System.Drawing.Size(200, 19);
-            this.txt_percentageStatus.Name = "txt_percentageStatus";
-            this.txt_percentageStatus.Size = new System.Drawing.Size(200, 19);
-            this.txt_percentageStatus.TabIndex = 7;
-            this.txt_percentageStatus.Text = "%speeeeeeeed%";
-            this.txt_percentageStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // txt_progressStatus
-            // 
-            this.txt_progressStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_progressStatus.AutoSize = true;
-            this.txt_progressStatus.BackColor = System.Drawing.Color.Transparent;
-            this.txt_progressStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txt_progressStatus.Location = new System.Drawing.Point(17, 8);
-            this.txt_progressStatus.MaximumSize = new System.Drawing.Size(650, 19);
-            this.txt_progressStatus.MinimumSize = new System.Drawing.Size(650, 19);
-            this.txt_progressStatus.Name = "txt_progressStatus";
-            this.txt_progressStatus.Size = new System.Drawing.Size(650, 19);
-            this.txt_progressStatus.TabIndex = 6;
-            this.txt_progressStatus.Text = "Waiting for orders";
-            // 
-            // panel_repoInfo
-            // 
-            this.panel_repoInfo.Controls.Add(this.btn_checkRepo);
-            this.panel_repoInfo.Controls.Add(this.lbl_repofileok);
-            this.panel_repoInfo.Controls.Add(this.pictureBox8);
-            this.panel_repoInfo.Controls.Add(this.label14);
-            this.panel_repoInfo.Controls.Add(this.pictureBox7);
-            this.panel_repoInfo.Controls.Add(this.pictureBox6);
-            this.panel_repoInfo.Controls.Add(this.lbl_repofilemissing);
-            this.panel_repoInfo.Controls.Add(this.lbl_repofileinvalid);
-            this.panel_repoInfo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_repoInfo.Location = new System.Drawing.Point(0, 0);
-            this.panel_repoInfo.MaximumSize = new System.Drawing.Size(1240, 0);
-            this.panel_repoInfo.Name = "panel_repoInfo";
-            this.panel_repoInfo.Size = new System.Drawing.Size(1240, 70);
-            this.panel_repoInfo.TabIndex = 0;
-            this.panel_repoInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_repoInfo_Paint);
-            // 
-            // btn_checkRepo
-            // 
-            this.btn_checkRepo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_checkRepo.AutoSize = true;
-            this.btn_checkRepo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btn_checkRepo.Depth = 0;
-            this.btn_checkRepo.Icon = null;
-            this.btn_checkRepo.Location = new System.Drawing.Point(1118, 17);
-            this.btn_checkRepo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btn_checkRepo.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btn_checkRepo.Name = "btn_checkRepo";
-            this.btn_checkRepo.Primary = false;
-            this.btn_checkRepo.Shadow = null;
-            this.btn_checkRepo.ShadowShape = null;
-            this.btn_checkRepo.Size = new System.Drawing.Size(122, 36);
-            this.btn_checkRepo.TabIndex = 38;
-            this.btn_checkRepo.Text = "Validate Files";
-            this.btn_checkRepo.Click += new System.EventHandler(this.btn_checkRepo_Click);
-            // 
-            // lbl_repofileok
-            // 
-            this.lbl_repofileok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_repofileok.AutoSize = true;
-            this.lbl_repofileok.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lbl_repofileok.ForeColor = System.Drawing.Color.DarkGray;
-            this.lbl_repofileok.Location = new System.Drawing.Point(30, 38);
-            this.lbl_repofileok.MinimumSize = new System.Drawing.Size(70, 13);
-            this.lbl_repofileok.Name = "lbl_repofileok";
-            this.lbl_repofileok.Size = new System.Drawing.Size(70, 13);
-            this.lbl_repofileok.TabIndex = 34;
-            this.lbl_repofileok.Text = "%OK%";
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox8.BackgroundImage = global::arma3Launcher.Properties.Resources.document_cancel;
-            this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox8.Location = new System.Drawing.Point(220, 36);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(16, 18);
-            this.pictureBox8.TabIndex = 30;
-            this.pictureBox8.TabStop = false;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.DarkGray;
-            this.label14.Location = new System.Drawing.Point(8, 16);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(73, 15);
-            this.label14.TabIndex = 30;
-            this.label14.Text = "Local Status:";
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox7.BackgroundImage = global::arma3Launcher.Properties.Resources.document_error;
-            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox7.Location = new System.Drawing.Point(116, 36);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(16, 18);
-            this.pictureBox7.TabIndex = 29;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox6.BackgroundImage = global::arma3Launcher.Properties.Resources.document_checked;
-            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox6.Location = new System.Drawing.Point(12, 36);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(16, 18);
-            this.pictureBox6.TabIndex = 28;
-            this.pictureBox6.TabStop = false;
-            // 
-            // lbl_repofilemissing
-            // 
-            this.lbl_repofilemissing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_repofilemissing.AutoSize = true;
-            this.lbl_repofilemissing.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lbl_repofilemissing.ForeColor = System.Drawing.Color.DarkGray;
-            this.lbl_repofilemissing.Location = new System.Drawing.Point(238, 38);
-            this.lbl_repofilemissing.MinimumSize = new System.Drawing.Size(70, 13);
-            this.lbl_repofilemissing.Name = "lbl_repofilemissing";
-            this.lbl_repofilemissing.Size = new System.Drawing.Size(70, 13);
-            this.lbl_repofilemissing.TabIndex = 36;
-            this.lbl_repofilemissing.Text = "%MISSING%";
-            // 
-            // lbl_repofileinvalid
-            // 
-            this.lbl_repofileinvalid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_repofileinvalid.AutoSize = true;
-            this.lbl_repofileinvalid.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lbl_repofileinvalid.ForeColor = System.Drawing.Color.DarkGray;
-            this.lbl_repofileinvalid.Location = new System.Drawing.Point(134, 38);
-            this.lbl_repofileinvalid.MinimumSize = new System.Drawing.Size(70, 13);
-            this.lbl_repofileinvalid.Name = "lbl_repofileinvalid";
-            this.lbl_repofileinvalid.Size = new System.Drawing.Size(70, 13);
-            this.lbl_repofileinvalid.TabIndex = 35;
-            this.lbl_repofileinvalid.Text = "%INVALID%";
-            // 
-            // lbl_repositoryDownloads
-            // 
-            this.lbl_repositoryDownloads.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lbl_repositoryDownloads.AutoSize = true;
-            this.lbl_repositoryDownloads.Font = new System.Drawing.Font("Bebas Neue Book", 36F);
-            this.lbl_repositoryDownloads.ForeColor = System.Drawing.Color.DimGray;
-            this.lbl_repositoryDownloads.Location = new System.Drawing.Point(10, 15);
-            this.lbl_repositoryDownloads.Name = "lbl_repositoryDownloads";
-            this.lbl_repositoryDownloads.Size = new System.Drawing.Size(373, 49);
-            this.lbl_repositoryDownloads.TabIndex = 3;
-            this.lbl_repositoryDownloads.Text = "Repository Downloads";
-            // 
             // panel_launchOptions
             // 
             this.panel_launchOptions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.panel_launchOptions.Controls.Add(this.panel_contentLaunchOptions);
             this.panel_launchOptions.Controls.Add(this.lbl_launchOptions);
             this.panel_launchOptions.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_launchOptions.Location = new System.Drawing.Point(2600, 0);
+            this.panel_launchOptions.Location = new System.Drawing.Point(0, 0);
             this.panel_launchOptions.Name = "panel_launchOptions";
             this.panel_launchOptions.Size = new System.Drawing.Size(1300, 670);
             this.panel_launchOptions.TabIndex = 1;
@@ -2026,7 +1733,7 @@
             this.panel_addonPacks.Controls.Add(this.panel_addonPacksFlow);
             this.panel_addonPacks.Controls.Add(this.panel_addonOptions);
             this.panel_addonPacks.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_addonPacks.Location = new System.Drawing.Point(1300, 0);
+            this.panel_addonPacks.Location = new System.Drawing.Point(3900, 0);
             this.panel_addonPacks.Name = "panel_addonPacks";
             this.panel_addonPacks.Size = new System.Drawing.Size(1300, 670);
             this.panel_addonPacks.TabIndex = 0;
@@ -2261,8 +1968,8 @@
             this.btn_openArmaholic.Primary = true;
             this.btn_openArmaholic.RoundedCornerRadius = 2;
             this.btn_openArmaholic.Shadow = null;
-            graphicsPath1.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_openArmaholic.ShadowShape = graphicsPath1;
+            graphicsPath4.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_openArmaholic.ShadowShape = graphicsPath4;
             this.btn_openArmaholic.Size = new System.Drawing.Size(150, 35);
             this.btn_openArmaholic.TabIndex = 6;
             this.btn_openArmaholic.Text = "Visit";
@@ -2323,8 +2030,8 @@
             this.btn_openWorkshop.Primary = true;
             this.btn_openWorkshop.RoundedCornerRadius = 2;
             this.btn_openWorkshop.Shadow = null;
-            graphicsPath2.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_openWorkshop.ShadowShape = graphicsPath2;
+            graphicsPath5.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_openWorkshop.ShadowShape = graphicsPath5;
             this.btn_openWorkshop.Size = new System.Drawing.Size(150, 35);
             this.btn_openWorkshop.TabIndex = 4;
             this.btn_openWorkshop.Text = "Visit";
@@ -2385,8 +2092,8 @@
             this.btn_reinstallTFRPlugins.Primary = true;
             this.btn_reinstallTFRPlugins.RoundedCornerRadius = 2;
             this.btn_reinstallTFRPlugins.Shadow = null;
-            graphicsPath3.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_reinstallTFRPlugins.ShadowShape = graphicsPath3;
+            graphicsPath6.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_reinstallTFRPlugins.ShadowShape = graphicsPath6;
             this.btn_reinstallTFRPlugins.Size = new System.Drawing.Size(150, 35);
             this.btn_reinstallTFRPlugins.TabIndex = 1;
             this.btn_reinstallTFRPlugins.Text = "Reinstall Plugins";
@@ -2672,29 +2379,10 @@
             this.panel_preferences.Controls.Add(this.panel_contentPreferences);
             this.panel_preferences.Controls.Add(this.lbl_preferences);
             this.panel_preferences.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_preferences.Location = new System.Drawing.Point(0, 0);
+            this.panel_preferences.Location = new System.Drawing.Point(2600, 0);
             this.panel_preferences.Name = "panel_preferences";
             this.panel_preferences.Size = new System.Drawing.Size(1300, 670);
             this.panel_preferences.TabIndex = 3;
-            // 
-            // snackbar_mainWindow
-            // 
-            this.snackbar_mainWindow.ButtonText = "";
-            this.snackbar_mainWindow.Depth = 0;
-            this.snackbar_mainWindow.Font = new System.Drawing.Font("Roboto", 9F);
-            this.snackbar_mainWindow.FontSize = 9;
-            this.snackbar_mainWindow.Location = new System.Drawing.Point(505, 638);
-            this.snackbar_mainWindow.MouseState = MaterialSkin.MouseState.HOVER;
-            this.snackbar_mainWindow.Name = "snackbar_mainWindow";
-            this.snackbar_mainWindow.Primary = true;
-            this.snackbar_mainWindow.RoundedCornerRadius = 1;
-            this.snackbar_mainWindow.Shadow = null;
-            this.snackbar_mainWindow.ShadowShape = null;
-            this.snackbar_mainWindow.ShowButton = false;
-            this.snackbar_mainWindow.Size = new System.Drawing.Size(288, 48);
-            this.snackbar_mainWindow.TabIndex = 5;
-            this.snackbar_mainWindow.Text = "%Message%";
-            this.snackbar_mainWindow.Visible = false;
             // 
             // panel_contentPreferences
             // 
@@ -3355,6 +3043,320 @@
             this.lbl_preferences.TabIndex = 3;
             this.lbl_preferences.Text = "Preferences";
             // 
+            // panel_repositoryDownloads
+            // 
+            this.panel_repositoryDownloads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.panel_repositoryDownloads.Controls.Add(this.panel_contentRepositoryDownloads);
+            this.panel_repositoryDownloads.Controls.Add(this.lbl_repositoryDownloads);
+            this.panel_repositoryDownloads.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_repositoryDownloads.Location = new System.Drawing.Point(1300, 0);
+            this.panel_repositoryDownloads.Name = "panel_repositoryDownloads";
+            this.panel_repositoryDownloads.Size = new System.Drawing.Size(1300, 670);
+            this.panel_repositoryDownloads.TabIndex = 2;
+            // 
+            // panel_contentRepositoryDownloads
+            // 
+            this.panel_contentRepositoryDownloads.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panel_contentRepositoryDownloads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.panel_contentRepositoryDownloads.Controls.Add(this.trv_repoContent);
+            this.panel_contentRepositoryDownloads.Controls.Add(this.panel_repoBottom);
+            this.panel_contentRepositoryDownloads.Location = new System.Drawing.Point(32, 80);
+            this.panel_contentRepositoryDownloads.Name = "panel_contentRepositoryDownloads";
+            this.panel_contentRepositoryDownloads.Size = new System.Drawing.Size(1240, 560);
+            this.panel_contentRepositoryDownloads.TabIndex = 4;
+            // 
+            // trv_repoContent
+            // 
+            this.trv_repoContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.trv_repoContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.trv_repoContent.ContextMenuStrip = this.repositoryMenu;
+            this.trv_repoContent.Dock = System.Windows.Forms.DockStyle.Left;
+            this.trv_repoContent.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trv_repoContent.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.trv_repoContent.FullRowSelect = true;
+            this.trv_repoContent.ImageIndex = 0;
+            this.trv_repoContent.ImageList = this.imageListRepo;
+            this.trv_repoContent.Indent = 20;
+            this.trv_repoContent.ItemHeight = 30;
+            this.trv_repoContent.LineColor = System.Drawing.Color.Gainsboro;
+            this.trv_repoContent.Location = new System.Drawing.Point(0, 0);
+            this.trv_repoContent.MinimumSize = new System.Drawing.Size(1240, 0);
+            this.trv_repoContent.Name = "trv_repoContent";
+            treeNode7.ImageIndex = -2;
+            treeNode7.Name = "Node0";
+            treeNode7.SelectedImageIndex = -2;
+            treeNode7.Text = "Node0";
+            treeNode8.ImageIndex = 1;
+            treeNode8.Name = "Node2";
+            treeNode8.SelectedImageIndex = 1;
+            treeNode8.Text = "Node2";
+            treeNode9.ImageIndex = 2;
+            treeNode9.Name = "Node3";
+            treeNode9.SelectedImageIndex = 2;
+            treeNode9.Text = "Node3";
+            treeNode10.ImageIndex = 3;
+            treeNode10.Name = "Node0";
+            treeNode10.SelectedImageIndex = 3;
+            treeNode10.Text = "Node0";
+            treeNode11.ImageIndex = 4;
+            treeNode11.Name = "Node1";
+            treeNode11.SelectedImageIndex = 4;
+            treeNode11.Text = "Node1";
+            treeNode12.ImageIndex = 5;
+            treeNode12.Name = "Node2";
+            treeNode12.SelectedImageIndex = 5;
+            treeNode12.Text = "Node2";
+            this.trv_repoContent.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12});
+            this.trv_repoContent.SelectedImageIndex = 0;
+            this.trv_repoContent.ShowRootLines = false;
+            this.trv_repoContent.Size = new System.Drawing.Size(1240, 490);
+            this.trv_repoContent.TabIndex = 31;
+            // 
+            // panel_repoBottom
+            // 
+            this.panel_repoBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(45)))));
+            this.panel_repoBottom.Controls.Add(this.panel_repoDownload);
+            this.panel_repoBottom.Controls.Add(this.panel_repoInfo);
+            this.panel_repoBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel_repoBottom.Location = new System.Drawing.Point(0, 490);
+            this.panel_repoBottom.Name = "panel_repoBottom";
+            this.panel_repoBottom.Size = new System.Drawing.Size(1240, 70);
+            this.panel_repoBottom.TabIndex = 30;
+            // 
+            // panel_repoDownload
+            // 
+            this.panel_repoDownload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(45)))));
+            this.panel_repoDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel_repoDownload.Controls.Add(this.prb_progressBar_All);
+            this.panel_repoDownload.Controls.Add(this.btn_cancelDownload);
+            this.panel_repoDownload.Controls.Add(this.prb_progressBar_File);
+            this.panel_repoDownload.Controls.Add(this.txt_curFile);
+            this.panel_repoDownload.Controls.Add(this.txt_percentageStatus);
+            this.panel_repoDownload.Controls.Add(this.txt_progressStatus);
+            this.panel_repoDownload.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_repoDownload.Location = new System.Drawing.Point(1240, 0);
+            this.panel_repoDownload.MinimumSize = new System.Drawing.Size(1240, 0);
+            this.panel_repoDownload.Name = "panel_repoDownload";
+            this.panel_repoDownload.Size = new System.Drawing.Size(1240, 70);
+            this.panel_repoDownload.TabIndex = 13;
+            this.panel_repoDownload.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_repoDownload_Paint);
+            // 
+            // prb_progressBar_All
+            // 
+            this.prb_progressBar_All.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.prb_progressBar_All.ContainerControl = this;
+            this.prb_progressBar_All.Location = new System.Drawing.Point(20, 47);
+            this.prb_progressBar_All.Name = "prb_progressBar_All";
+            this.prb_progressBar_All.ShowInTaskbar = true;
+            this.prb_progressBar_All.Size = new System.Drawing.Size(1170, 5);
+            this.prb_progressBar_All.TabIndex = 11;
+            // 
+            // btn_cancelDownload
+            // 
+            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
+            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_cancelDownload.Location = new System.Drawing.Point(1199, 27);
+            this.btn_cancelDownload.Name = "btn_cancelDownload";
+            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
+            this.btn_cancelDownload.TabIndex = 12;
+            this.btn_cancelDownload.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
+            this.btn_cancelDownload.Visible = false;
+            // 
+            // prb_progressBar_File
+            // 
+            this.prb_progressBar_File.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.prb_progressBar_File.ContainerControl = this;
+            this.prb_progressBar_File.Location = new System.Drawing.Point(20, 27);
+            this.prb_progressBar_File.Name = "prb_progressBar_File";
+            this.prb_progressBar_File.Size = new System.Drawing.Size(1170, 20);
+            this.prb_progressBar_File.TabIndex = 10;
+            // 
+            // txt_curFile
+            // 
+            this.txt_curFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_curFile.AutoSize = true;
+            this.txt_curFile.BackColor = System.Drawing.Color.Transparent;
+            this.txt_curFile.Font = new System.Drawing.Font("Clear Sans Light", 7F);
+            this.txt_curFile.ForeColor = System.Drawing.Color.LightGray;
+            this.txt_curFile.Location = new System.Drawing.Point(18, 51);
+            this.txt_curFile.MaximumSize = new System.Drawing.Size(0, 12);
+            this.txt_curFile.MinimumSize = new System.Drawing.Size(250, 12);
+            this.txt_curFile.Name = "txt_curFile";
+            this.txt_curFile.Size = new System.Drawing.Size(250, 12);
+            this.txt_curFile.TabIndex = 8;
+            this.txt_curFile.Text = "%CURFILE%";
+            // 
+            // txt_percentageStatus
+            // 
+            this.txt_percentageStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_percentageStatus.AutoSize = true;
+            this.txt_percentageStatus.BackColor = System.Drawing.Color.Transparent;
+            this.txt_percentageStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txt_percentageStatus.ForeColor = System.Drawing.Color.DarkGray;
+            this.txt_percentageStatus.Location = new System.Drawing.Point(993, 10);
+            this.txt_percentageStatus.MaximumSize = new System.Drawing.Size(200, 19);
+            this.txt_percentageStatus.MinimumSize = new System.Drawing.Size(200, 19);
+            this.txt_percentageStatus.Name = "txt_percentageStatus";
+            this.txt_percentageStatus.Size = new System.Drawing.Size(200, 19);
+            this.txt_percentageStatus.TabIndex = 7;
+            this.txt_percentageStatus.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // txt_progressStatus
+            // 
+            this.txt_progressStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_progressStatus.AutoSize = true;
+            this.txt_progressStatus.BackColor = System.Drawing.Color.Transparent;
+            this.txt_progressStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txt_progressStatus.Location = new System.Drawing.Point(17, 8);
+            this.txt_progressStatus.MaximumSize = new System.Drawing.Size(650, 19);
+            this.txt_progressStatus.MinimumSize = new System.Drawing.Size(650, 19);
+            this.txt_progressStatus.Name = "txt_progressStatus";
+            this.txt_progressStatus.Size = new System.Drawing.Size(650, 19);
+            this.txt_progressStatus.TabIndex = 6;
+            this.txt_progressStatus.Text = "Waiting for orders";
+            // 
+            // panel_repoInfo
+            // 
+            this.panel_repoInfo.Controls.Add(this.btn_checkRepo);
+            this.panel_repoInfo.Controls.Add(this.lbl_repofileok);
+            this.panel_repoInfo.Controls.Add(this.pictureBox8);
+            this.panel_repoInfo.Controls.Add(this.label14);
+            this.panel_repoInfo.Controls.Add(this.pictureBox7);
+            this.panel_repoInfo.Controls.Add(this.pictureBox6);
+            this.panel_repoInfo.Controls.Add(this.lbl_repofilemissing);
+            this.panel_repoInfo.Controls.Add(this.lbl_repofileinvalid);
+            this.panel_repoInfo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_repoInfo.Location = new System.Drawing.Point(0, 0);
+            this.panel_repoInfo.MaximumSize = new System.Drawing.Size(1240, 0);
+            this.panel_repoInfo.Name = "panel_repoInfo";
+            this.panel_repoInfo.Size = new System.Drawing.Size(1240, 70);
+            this.panel_repoInfo.TabIndex = 0;
+            this.panel_repoInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_repoInfo_Paint);
+            // 
+            // btn_checkRepo
+            // 
+            this.btn_checkRepo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_checkRepo.AutoSize = true;
+            this.btn_checkRepo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_checkRepo.Depth = 0;
+            this.btn_checkRepo.Icon = null;
+            this.btn_checkRepo.Location = new System.Drawing.Point(1109, 17);
+            this.btn_checkRepo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btn_checkRepo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btn_checkRepo.Name = "btn_checkRepo";
+            this.btn_checkRepo.Primary = false;
+            this.btn_checkRepo.Shadow = null;
+            this.btn_checkRepo.ShadowShape = null;
+            this.btn_checkRepo.Size = new System.Drawing.Size(122, 36);
+            this.btn_checkRepo.TabIndex = 38;
+            this.btn_checkRepo.Text = "Validate Files";
+            this.btn_checkRepo.Click += new System.EventHandler(this.btn_checkRepo_Click);
+            // 
+            // lbl_repofileok
+            // 
+            this.lbl_repofileok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_repofileok.AutoSize = true;
+            this.lbl_repofileok.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lbl_repofileok.ForeColor = System.Drawing.Color.DarkGray;
+            this.lbl_repofileok.Location = new System.Drawing.Point(32, 38);
+            this.lbl_repofileok.MinimumSize = new System.Drawing.Size(70, 13);
+            this.lbl_repofileok.Name = "lbl_repofileok";
+            this.lbl_repofileok.Size = new System.Drawing.Size(70, 13);
+            this.lbl_repofileok.TabIndex = 34;
+            this.lbl_repofileok.Text = "%OK%";
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox8.BackgroundImage = global::arma3Launcher.Properties.Resources.document_cancel;
+            this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox8.Location = new System.Drawing.Point(222, 36);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(16, 18);
+            this.pictureBox8.TabIndex = 30;
+            this.pictureBox8.TabStop = false;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.DarkGray;
+            this.label14.Location = new System.Drawing.Point(10, 16);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(73, 15);
+            this.label14.TabIndex = 30;
+            this.label14.Text = "Local Status:";
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox7.BackgroundImage = global::arma3Launcher.Properties.Resources.document_error;
+            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox7.Location = new System.Drawing.Point(118, 36);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(16, 18);
+            this.pictureBox7.TabIndex = 29;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox6.BackgroundImage = global::arma3Launcher.Properties.Resources.document_checked;
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox6.Location = new System.Drawing.Point(14, 36);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(16, 18);
+            this.pictureBox6.TabIndex = 28;
+            this.pictureBox6.TabStop = false;
+            // 
+            // lbl_repofilemissing
+            // 
+            this.lbl_repofilemissing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_repofilemissing.AutoSize = true;
+            this.lbl_repofilemissing.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lbl_repofilemissing.ForeColor = System.Drawing.Color.DarkGray;
+            this.lbl_repofilemissing.Location = new System.Drawing.Point(240, 38);
+            this.lbl_repofilemissing.MinimumSize = new System.Drawing.Size(70, 13);
+            this.lbl_repofilemissing.Name = "lbl_repofilemissing";
+            this.lbl_repofilemissing.Size = new System.Drawing.Size(70, 13);
+            this.lbl_repofilemissing.TabIndex = 36;
+            this.lbl_repofilemissing.Text = "%MISSING%";
+            // 
+            // lbl_repofileinvalid
+            // 
+            this.lbl_repofileinvalid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_repofileinvalid.AutoSize = true;
+            this.lbl_repofileinvalid.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.lbl_repofileinvalid.ForeColor = System.Drawing.Color.DarkGray;
+            this.lbl_repofileinvalid.Location = new System.Drawing.Point(136, 38);
+            this.lbl_repofileinvalid.MinimumSize = new System.Drawing.Size(70, 13);
+            this.lbl_repofileinvalid.Name = "lbl_repofileinvalid";
+            this.lbl_repofileinvalid.Size = new System.Drawing.Size(70, 13);
+            this.lbl_repofileinvalid.TabIndex = 35;
+            this.lbl_repofileinvalid.Text = "%INVALID%";
+            // 
+            // lbl_repositoryDownloads
+            // 
+            this.lbl_repositoryDownloads.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lbl_repositoryDownloads.AutoSize = true;
+            this.lbl_repositoryDownloads.Font = new System.Drawing.Font("Bebas Neue Book", 36F);
+            this.lbl_repositoryDownloads.ForeColor = System.Drawing.Color.DimGray;
+            this.lbl_repositoryDownloads.Location = new System.Drawing.Point(10, 15);
+            this.lbl_repositoryDownloads.Name = "lbl_repositoryDownloads";
+            this.lbl_repositoryDownloads.Size = new System.Drawing.Size(373, 49);
+            this.lbl_repositoryDownloads.TabIndex = 3;
+            this.lbl_repositoryDownloads.Text = "Repository Downloads";
+            // 
             // win_titleBar
             // 
             this.win_titleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -3446,7 +3448,6 @@
             this.Load += new System.EventHandler(this.MainForm2_Load);
             this.Shown += new System.EventHandler(this.MainForm2_Shown);
             this.Resize += new System.EventHandler(this.MainForm2_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.flowAddonsMenu.ResumeLayout(false);
             this.repositoryMenu.ResumeLayout(false);
             this.optionaladdonsMenu.ResumeLayout(false);
@@ -3467,17 +3468,6 @@
             this.doubleBufferPanel4.PerformLayout();
             this.panel_mainPanel.ResumeLayout(false);
             this.panel_outterPanel.ResumeLayout(false);
-            this.panel_repositoryDownloads.ResumeLayout(false);
-            this.panel_repositoryDownloads.PerformLayout();
-            this.panel_contentRepositoryDownloads.ResumeLayout(false);
-            this.panel_repoBottom.ResumeLayout(false);
-            this.panel_repoDownload.ResumeLayout(false);
-            this.panel_repoDownload.PerformLayout();
-            this.panel_repoInfo.ResumeLayout(false);
-            this.panel_repoInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panel_launchOptions.ResumeLayout(false);
             this.panel_launchOptions.PerformLayout();
             this.panel_contentLaunchOptions.ResumeLayout(false);
@@ -3548,6 +3538,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_pref_ereaseTSDir)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_pref_openTS3Dir)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_pref_browseTS3Dir)).EndInit();
+            this.panel_repositoryDownloads.ResumeLayout(false);
+            this.panel_repositoryDownloads.PerformLayout();
+            this.panel_contentRepositoryDownloads.ResumeLayout(false);
+            this.panel_repoBottom.ResumeLayout(false);
+            this.panel_repoDownload.ResumeLayout(false);
+            this.panel_repoDownload.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
+            this.panel_repoInfo.ResumeLayout(false);
+            this.panel_repoInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.win_titleBar.ResumeLayout(false);
             this.win_titleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).EndInit();

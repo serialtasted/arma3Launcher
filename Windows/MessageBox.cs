@@ -1,6 +1,7 @@
 ﻿using arma3Launcher.Effects;
 using arma3Launcher.Workers;
 using MaterialSkin;
+using MaterialSkin.Animations;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace arma3Launcher.Windows
 {
     public partial class MessageBox : MaterialForm
     {
-        private System.Timers.Timer animatedImage = new System.Timers.Timer();
         private WindowIO windowIO;
-        private DialogResult holdResult;
+        private AnimationManager animationManager;
         private Fonts customFont = new Fonts();
+
+        private DialogResult holdResult;
+        private bool goDown = true;
 
         private async Task taskDelay(int delayMs)
         {
@@ -29,12 +32,56 @@ namespace arma3Launcher.Windows
 
         public MessageBox()
         {
+            // Material Skin animations
+            animationManager = new AnimationManager
+            {
+                Increment = 0.03,
+                AnimationType = AnimationType.Linear
+            };
+
+            animationManager.OnAnimationProgress += sender => Invalidate();
+            Invalidated += MessageBox_Invalidated;
+
             InitializeComponent();
             windowIO = new WindowIO(this);
-            animatedImage.Interval = 40;
-            animatedImage.Elapsed += AnimatedImage_Elapsed;
 
             this.Message.Font = this.customFont.getFont(Properties.Fonts.ClearSans_Light, 9F, FontStyle.Regular);
+        }
+
+        private void MessageBox_Invalidated(object sender, InvalidateEventArgs e)
+        {
+            if (animationManager.IsAnimating())
+            {
+                var value = animationManager.GetProgress();
+
+                if (diagImg.Location.Y == -20)
+                { goDown = true; }
+                else if (diagImg.Location.Y == 20)
+                { goDown = false; }
+
+                if (goDown)
+                {
+                    if (diagImg.InvokeRequired)
+                    {
+                        diagImg.Invoke(new MethodInvoker(delegate { diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y * (int)value); }));
+                    }
+                    else
+                    {
+                        diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y + 1);
+                    }
+                }
+                else
+                {
+                    if (diagImg.InvokeRequired)
+                    {
+                        diagImg.Invoke(new MethodInvoker(delegate { diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y * (int)value); }));
+                    }
+                    else
+                    {
+                        diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y - 1);
+                    }
+                }
+            }
         }
 
         private void MessageBox_Shown(object sender, EventArgs e)
@@ -42,7 +89,7 @@ namespace arma3Launcher.Windows
             windowIO.WindowIn();
 
             if (!GlobalVar.disableAnimations)
-                animatedImage.Start();
+                animationManager.StartNewAnimation(AnimationDirection.InOutRepeatingIn);
         }
 
         private void MessageBox_FormClosing(object sender, FormClosingEventArgs e)
@@ -235,39 +282,6 @@ namespace arma3Launcher.Windows
 
             this.ShowDialog();
             return this.DialogResult;
-        }
-
-
-        private bool goDown = true;
-        private void AnimatedImage_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            if (diagImg.Location.Y == -20)
-            { goDown = true; }
-            else if (diagImg.Location.Y == 20)
-            { goDown = false; }
-
-            if (goDown)
-            {
-                if (diagImg.InvokeRequired)
-                {
-                    diagImg.Invoke(new MethodInvoker(delegate { diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y + 1); }));
-                }
-                else
-                {
-                    diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y + 1);
-                }
-            }
-            else
-            {
-                if (diagImg.InvokeRequired)
-                {
-                    diagImg.Invoke(new MethodInvoker(delegate { diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y - 1); }));
-                }
-                else
-                {
-                    diagImg.Location = new Point(diagImg.Location.X, diagImg.Location.Y - 1);
-                }
-            }
         }
     }
 }

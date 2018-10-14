@@ -348,7 +348,7 @@ namespace arma3Launcher.Workers
                 this.progressStatusText("Waiting for orders");
                 await this.taskDelay(1500);
                 this.mainForm.hideDownloadPanel();
-                mainForm.ReadRepo(false, true);
+                mainForm.ReadRepo(true);
             }
         }
 
@@ -478,7 +478,7 @@ namespace arma3Launcher.Workers
             if (Directory.Exists(TempFolder))
                 Directory.Delete(TempFolder, true);
 
-            mainForm.ReadRepo(false, true);
+            mainForm.ReadRepo(true);
         }
 
         /// <summary>
@@ -508,7 +508,7 @@ namespace arma3Launcher.Workers
         private void DelayLaunch_Tick(object sender, EventArgs e)
         {
             this.delayLaunch.Stop();
-            this.mainForm.LaunchGame(false);
+            this.mainForm.LaunchGame();
         }
 
         public void installTeamSpeakPlugin()

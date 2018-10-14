@@ -39,10 +39,14 @@
             this.lbl_text.BackColor = System.Drawing.Color.Transparent;
             this.lbl_text.Depth = 0;
             this.lbl_text.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lbl_text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lbl_text.FontSize = 11;
+            this.lbl_text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lbl_text.Location = new System.Drawing.Point(17, 33);
             this.lbl_text.MouseState = MaterialSkin.MouseState.HOVER;
             this.lbl_text.Name = "lbl_text";
+            this.lbl_text.Primary = false;
+            this.lbl_text.Shadow = null;
+            this.lbl_text.ShadowShape = null;
             this.lbl_text.Size = new System.Drawing.Size(243, 19);
             this.lbl_text.TabIndex = 2;
             this.lbl_text.Text = "Engaging autopilot in 10 seconds...";
@@ -53,6 +57,7 @@
             this.btn_cancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_cancel.BackColor = System.Drawing.Color.DarkRed;
             this.btn_cancel.Depth = 0;
+            this.btn_cancel.Icon = null;
             this.btn_cancel.Location = new System.Drawing.Point(279, 32);
             this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btn_cancel.MaximumSize = new System.Drawing.Size(75, 23);
@@ -60,10 +65,12 @@
             this.btn_cancel.MouseState = MaterialSkin.MouseState.HOVER;
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Primary = false;
+            this.btn_cancel.Shadow = null;
+            this.btn_cancel.ShadowShape = null;
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 3;
             this.btn_cancel.Text = "Cancel";
-            
+            this.btn_cancel.UseVisualStyleBackColor = false;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // DelayServerStart
@@ -81,6 +88,7 @@
             this.Name = "DelayServerStart";
             this.Padding = new System.Windows.Forms.Padding(0, 64, 0, 0);
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DelayServerStart_FormClosing);
             this.Shown += new System.EventHandler(this.DelayServerStart_Shown);

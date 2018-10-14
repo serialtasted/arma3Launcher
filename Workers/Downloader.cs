@@ -516,7 +516,7 @@ namespace arma3Launcher.Workers
 
             this.cancelProcess = true;
             this.client.CancelAsync();
-            this.mainForm.ReadRepo(false, true);
+            this.mainForm.ReadRepo(true);
         }
 
         /// <summary>

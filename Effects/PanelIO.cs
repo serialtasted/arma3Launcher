@@ -1,252 +1,147 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace arma3Launcher.Effects
 {
     class PanelIO
     {
-        private Timer effectInInner = new Timer();
-        private Timer effectOutInner = new Timer();
+        private System.Timers.Timer effectInInner = new System.Timers.Timer() { Interval = 1 };
+        private System.Timers.Timer effectOutInner = new System.Timers.Timer() { Interval = 1 };
 
-        private Timer effectInOutter = new Timer();
-        private Timer effectOutOutter = new Timer();
+        private System.Timers.Timer effectInOutter = new System.Timers.Timer() { Interval = 1 };
+        private System.Timers.Timer effectOutOutter = new System.Timers.Timer() { Interval = 1 };
 
-        private Panel innerPanelObject;
-        private Panel outterPanelObject;
+        private readonly Panel InnerPanelObject = null;
+        private readonly Panel OutterPanelObject = null;
 
-        private int originalInnerValue = 0;
-        private int originalOutterValue = 0;
+        private readonly int MaxInnerValue = 0;
+        private readonly int MaxOutterValue = 0;
 
-        private int baseInnerValue = 0;
-        private int baseOutterValue = 0;
+        private readonly int MinInnerValue = 0;
+        private readonly int MinOutterValue = 0;
 
         private bool isSide = false;
         private bool isDual = false;
 
-        private int velocity = 0;
+        private readonly int Increment = 0;
 
+        /// <summary>
+        /// Simple custom delay with fixed ammount
+        /// </summary>
+        /// <param name="delayMs"></param>
+        /// <returns></returns>
+        private async Task taskDelay()
+        {
+            await Task.Delay(250);
+        }
+
+        /// <summary>
+        /// Invoke required controls for threading
+        /// </summary>
+        private void setPanelWidth(Panel control, int width)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new MethodInvoker(delegate { control.Width = width; }));
+            }
+            else
+            {
+                control.Width = width;
+            }
+        }
+
+        private void setPanelHeight(Panel control, int height)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new MethodInvoker(delegate { control.Height = height; }));
+            }
+            else
+            {
+                control.Height = height;
+            }
+        }
+
+
+        //-------------
         // SINGLE PANEL
-
-        public PanelIO(Panel innerPanelObject, int velocity)
+        //-------------
+        public PanelIO(Panel innerPanelObject, int Increment, int MaxInnerValue, int MinInnerValue = 0)
         {
-            this.isDual = false;
+            effectInInner.Elapsed += EffectInInner_Tick;
+            effectOutInner.Elapsed += EffectOutInner_Tick;
 
-            effectInInner.Interval = 1;
-            effectOutInner.Interval = 1;
+            this.InnerPanelObject = innerPanelObject;
+            this.Increment = Increment;
 
-            effectInInner.Tick += EffectInInner_Tick;
-            effectOutInner.Tick += EffectOutInner_Tick;
+            this.MaxInnerValue = MaxInnerValue;
 
-            this.innerPanelObject = innerPanelObject;
-            this.velocity = velocity;
-
-            this.originalInnerValue = this.innerPanelObject.Height;
-
-            this.baseInnerValue = 0;
-
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
-            {
-                this.innerPanelObject.Width = 0;
+            if (InnerPanelObject.Dock == DockStyle.Left || InnerPanelObject.Dock == DockStyle.Right)
                 this.isSide = true;
-            }
+
+            if (this.isSide)
+                this.InnerPanelObject.Width = MinInnerValue;
             else
-            {
-                this.innerPanelObject.Height = 0;
-                this.isSide = false;
-            }
+                this.InnerPanelObject.Height = MinInnerValue;
         }
 
-        public PanelIO(Panel innerPanelObject, int originalInnerValue, int velocity)
-        {
-            this.isDual = false;
-
-            effectInInner.Interval = 1;
-            effectOutInner.Interval = 1;
-
-            effectInInner.Tick += EffectInInner_Tick;
-            effectOutInner.Tick += EffectOutInner_Tick;
-
-            this.innerPanelObject = innerPanelObject;
-            this.velocity = velocity;
-
-            this.originalInnerValue = originalInnerValue;
-
-            this.baseInnerValue = 0;
-
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
-            {
-                this.innerPanelObject.Width = 0;
-                this.isSide = true;
-            }
-            else
-            {
-                this.innerPanelObject.Height = 0;
-                this.isSide = false;
-            }
-        }
-
-        public PanelIO(Panel innerPanelObject, int originalInnerValue, int baseInnerValue, int velocity)
-        {
-            this.isDual = false;
-
-            effectInInner.Interval = 1;
-            effectOutInner.Interval = 1;
-
-            effectInInner.Tick += EffectInInner_Tick;
-            effectOutInner.Tick += EffectOutInner_Tick;
-
-            this.innerPanelObject = innerPanelObject;
-            this.velocity = velocity;
-
-            this.originalInnerValue = originalInnerValue;
-
-            this.baseInnerValue = baseInnerValue;
-
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
-            {
-                this.innerPanelObject.Width = baseInnerValue;
-                this.isSide = true;
-            }
-            else
-            {
-                this.innerPanelObject.Height = baseInnerValue;
-                this.isSide = false;
-            }
-        }
-
+        //-------------
         // DUAL PANEL
-
-        public PanelIO (Panel innerPanelObject, Panel outterPanelObject, int velocity)
+        //-------------
+        public PanelIO(Panel InnerPanelObject, Panel OutterPanelObject, int Increment, int MaxInnerValue, int MaxOutterValue = 0, int MinInnerValue = 0, int MinOutterValue = 0)
         {
-            this.isDual = true;
+            effectInInner.Elapsed += EffectInInner_Tick;
+            effectOutInner.Elapsed += EffectOutInner_Tick;
 
-            effectInInner.Interval = 1;
-            effectOutInner.Interval = 1;
+            effectInOutter.Elapsed += EffectInOutter_Tick;
+            effectOutOutter.Elapsed += EffectOutOutter_Tick;
 
-            effectInInner.Tick += EffectInInner_Tick;
-            effectOutInner.Tick += EffectOutInner_Tick;
+            this.InnerPanelObject = InnerPanelObject;
+            this.OutterPanelObject = OutterPanelObject;
+            this.Increment = Increment;
 
-            effectInOutter.Interval = 1;
-            effectOutOutter.Interval = 1;
+            this.MaxInnerValue = MaxInnerValue;
 
-            effectInOutter.Tick += EffectInOutter_Tick;
-            effectOutOutter.Tick += EffectOutOutter_Tick;
+            if (MaxOutterValue > 0)
+                this.MaxOutterValue = MaxOutterValue;
+            else
+                this.MaxOutterValue = MaxInnerValue;
 
-            this.innerPanelObject = innerPanelObject;
-            this.outterPanelObject = outterPanelObject;
-            this.velocity = velocity;
-
-            this.originalInnerValue = this.innerPanelObject.Height;
-            this.originalOutterValue = this.outterPanelObject.Height;
-
-            this.baseInnerValue = 0;
-            this.baseOutterValue = 0;
-
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
-            {
-                this.innerPanelObject.Width = 0;
-                this.outterPanelObject.Width = 0;
+            if (InnerPanelObject.Dock == DockStyle.Left || InnerPanelObject.Dock == DockStyle.Right)
                 this.isSide = true;
+
+            if (isSide)
+            {
+                this.InnerPanelObject.Width = MinInnerValue;
+                this.OutterPanelObject.Width = MinOutterValue;
             }
             else
             {
-                this.innerPanelObject.Height = 0;
-                this.outterPanelObject.Height = 0;
-                this.isSide = false;
+                this.InnerPanelObject.Height = MinOutterValue;
+                this.OutterPanelObject.Height = MinOutterValue;
             }
         }
 
-        public PanelIO(Panel innerPanelObject, Panel outterPanelObject, int originalInnerValue, int originalOutterValue, int velocity)
-        {
-            this.isDual = true;
-
-            effectInInner.Interval = 1;
-            effectOutInner.Interval = 1;
-
-            effectInInner.Tick += EffectInInner_Tick;
-            effectOutInner.Tick += EffectOutInner_Tick;
-
-            effectInOutter.Interval = 1;
-            effectOutOutter.Interval = 1;
-
-            effectInOutter.Tick += EffectInOutter_Tick;
-            effectOutOutter.Tick += EffectOutOutter_Tick;
-
-            this.innerPanelObject = innerPanelObject;
-            this.outterPanelObject = outterPanelObject;
-            this.velocity = velocity;
-
-            this.originalInnerValue = originalInnerValue;
-            this.originalOutterValue = originalOutterValue;
-
-            this.baseInnerValue = 0;
-            this.baseOutterValue = 0;
-
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
-            {
-                this.innerPanelObject.Width = 0;
-                this.outterPanelObject.Width = 0;
-                this.isSide = true;
-            }
-            else
-            {
-                this.innerPanelObject.Height = 0;
-                this.outterPanelObject.Height = 0;
-                this.isSide = false;
-            }
-        }
-
-        public PanelIO(Panel innerPanelObject, Panel outterPanelObject, int originalInnerValue, int originalOutterValue, int baseInnerValue, int baseOutterValue, int velocity)
-        {
-            this.isDual = true;
-
-            effectInInner.Interval = 1;
-            effectOutInner.Interval = 1;
-
-            effectInInner.Tick += EffectInInner_Tick;
-            effectOutInner.Tick += EffectOutInner_Tick;
-
-            effectInOutter.Interval = 1;
-            effectOutOutter.Interval = 1;
-
-            effectInOutter.Tick += EffectInOutter_Tick;
-            effectOutOutter.Tick += EffectOutOutter_Tick;
-
-            this.innerPanelObject = innerPanelObject;
-            this.outterPanelObject = outterPanelObject;
-            this.velocity = velocity;
-
-            this.originalInnerValue = originalInnerValue;
-            this.originalOutterValue = originalOutterValue;
-
-            this.baseInnerValue = baseInnerValue;
-            this.baseOutterValue = baseOutterValue;
-
-            if (innerPanelObject.Dock == DockStyle.Left || innerPanelObject.Dock == DockStyle.Right)
-            {
-                this.innerPanelObject.Width = baseInnerValue;
-                this.outterPanelObject.Width = baseOutterValue;
-                this.isSide = true;
-            }
-            else
-            {
-                this.innerPanelObject.Height = baseInnerValue;
-                this.outterPanelObject.Height = baseOutterValue;
-                this.isSide = false;
-            }
-        }
-
+        //-------------
+        // ANIMATION HANDLE
+        //-------------
         private void EffectInInner_Tick(object sender, EventArgs e)
         {
             if (this.isSide)
             {
-                if (innerPanelObject.Width < originalInnerValue)
+                if (InnerPanelObject.Width < MaxInnerValue)
                 {
-                    if (innerPanelObject.Width + velocity < originalInnerValue)
-                        innerPanelObject.Width = innerPanelObject.Width + velocity;
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (InnerPanelObject.Width + Increment < MaxInnerValue)
+                            setPanelWidth(InnerPanelObject, InnerPanelObject.Width + Increment);
+                        else
+                            setPanelWidth(InnerPanelObject, InnerPanelObject.Width + 1);
+                    }
                     else
-                        innerPanelObject.Width++;
+                    { setPanelWidth(InnerPanelObject, MaxInnerValue); }
                 }
                 else
                 {
@@ -256,12 +151,17 @@ namespace arma3Launcher.Effects
             }
             else
             {
-                if (innerPanelObject.Height < originalInnerValue)
+                if (InnerPanelObject.Height < MaxInnerValue)
                 {
-                    if (innerPanelObject.Height + velocity < originalInnerValue)
-                        innerPanelObject.Height = innerPanelObject.Height + velocity;
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (InnerPanelObject.Height + Increment < MaxInnerValue)
+                            setPanelHeight(InnerPanelObject, InnerPanelObject.Height + Increment);
+                        else
+                            setPanelHeight(InnerPanelObject, InnerPanelObject.Height + 1);
+                    }
                     else
-                        innerPanelObject.Height++;
+                    { setPanelHeight(InnerPanelObject, MaxInnerValue); }
                 }
                 else
                 {
@@ -275,12 +175,17 @@ namespace arma3Launcher.Effects
         {
             if (this.isSide)
             {
-                if (innerPanelObject.Width > baseInnerValue)
+                if (InnerPanelObject.Width > MinInnerValue)
                 {
-                    if (innerPanelObject.Width - velocity > baseInnerValue)
-                        innerPanelObject.Width = innerPanelObject.Width - velocity;
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (InnerPanelObject.Width - Increment > MinInnerValue)
+                            setPanelWidth(InnerPanelObject, InnerPanelObject.Width - Increment);
+                        else
+                            setPanelWidth(InnerPanelObject, InnerPanelObject.Width - 1);
+                    }
                     else
-                        innerPanelObject.Width--;
+                    { setPanelWidth(InnerPanelObject, MinInnerValue); }
                 }
                 else
                 {
@@ -290,17 +195,22 @@ namespace arma3Launcher.Effects
                     { GlobalVar.isAnimating = false; }
                 }
 
-                if (innerPanelObject.Width < 5 && this.isDual)
+                if ((Math.Round((double)(InnerPanelObject.Width)) / MaxOutterValue) * 100 < 10 && this.isDual)
                 { effectOutOutter.Start(); }
             }
             else
             {
-                if (innerPanelObject.Height > baseInnerValue)
+                if (InnerPanelObject.Height > MinInnerValue)
                 {
-                    if (innerPanelObject.Height - velocity > baseInnerValue)
-                        innerPanelObject.Height = innerPanelObject.Height - velocity;
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (InnerPanelObject.Height - Increment > MinInnerValue)
+                            setPanelHeight(InnerPanelObject, InnerPanelObject.Height - Increment);
+                        else
+                            setPanelHeight(InnerPanelObject, InnerPanelObject.Height - 1);
+                    }
                     else
-                        innerPanelObject.Height--;
+                    { setPanelHeight(InnerPanelObject, MinInnerValue); }
                 }
                 else
                 {
@@ -310,7 +220,7 @@ namespace arma3Launcher.Effects
                     { GlobalVar.isAnimating = false; }
                 }
 
-                if (innerPanelObject.Height < 5 && this.isDual)
+                if ((Math.Round((double)(InnerPanelObject.Height)) / MaxOutterValue) * 100 < 10 && this.isDual)
                 { effectOutOutter.Start(); }
             }
         }
@@ -319,32 +229,41 @@ namespace arma3Launcher.Effects
         {
             if (this.isSide)
             {
-                if (outterPanelObject.Width < originalOutterValue)
+                if (OutterPanelObject.Width < MaxOutterValue)
                 {
-                    if (outterPanelObject.Width + velocity < originalOutterValue)
-                        outterPanelObject.Width = outterPanelObject.Width + velocity;
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (OutterPanelObject.Width + Increment < MaxOutterValue)
+                            setPanelWidth(OutterPanelObject, OutterPanelObject.Width + Increment);
+                        else
+                            setPanelWidth(OutterPanelObject, OutterPanelObject.Width + 1);
+                    }
                     else
-                        outterPanelObject.Width++;
+                    { setPanelWidth(OutterPanelObject, MaxOutterValue); }
                 }
                 else
                 { effectInOutter.Stop(); }
-
-                if (Math.Round((double)(outterPanelObject.Width / originalOutterValue) * 100) > 10)
+                if ((Math.Round((double)(OutterPanelObject.Width)) / MaxOutterValue) * 100 > 90)
                 { effectInInner.Start(); }
             }
             else
             {
-                if (outterPanelObject.Height < originalOutterValue)
+                if (OutterPanelObject.Height < MaxOutterValue)
                 {
-                    if (outterPanelObject.Height + velocity < originalOutterValue)
-                        outterPanelObject.Height = outterPanelObject.Height + velocity;
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (OutterPanelObject.Height + Increment < MaxOutterValue)
+                            setPanelHeight(OutterPanelObject, OutterPanelObject.Height + Increment);
+                        else
+                            setPanelHeight(OutterPanelObject, OutterPanelObject.Height + 1);
+                    }
                     else
-                        outterPanelObject.Height++;
+                    { setPanelHeight(OutterPanelObject, MaxOutterValue); }
                 }
                 else
                 { effectInOutter.Stop(); }
 
-                if (Math.Round((double)(outterPanelObject.Height / originalOutterValue) * 100) > 10)
+                if ((Math.Round((double)(OutterPanelObject.Height)) / MaxOutterValue) * 100 > 90)
                 { effectInInner.Start(); }
             }
         }
@@ -353,12 +272,17 @@ namespace arma3Launcher.Effects
         {
             if (this.isSide)
             {
-                if (outterPanelObject.Width > baseOutterValue)
+                if (OutterPanelObject.Width > MinOutterValue)
                 {
-                    if (outterPanelObject.Width - velocity > baseOutterValue)
-                        outterPanelObject.Width = outterPanelObject.Width - velocity;
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (OutterPanelObject.Width - Increment > MinOutterValue)
+                            setPanelWidth(OutterPanelObject, OutterPanelObject.Width - Increment);
+                        else
+                            setPanelWidth(OutterPanelObject, OutterPanelObject.Width - 1);
+                    }
                     else
-                        outterPanelObject.Width--;
+                    { setPanelWidth(OutterPanelObject, MinOutterValue); }
                 }
                 else
                 {
@@ -368,12 +292,17 @@ namespace arma3Launcher.Effects
             }
             else
             {
-                if (outterPanelObject.Height > baseOutterValue)
+                if (OutterPanelObject.Height > MinOutterValue)
                 {
-                    if (outterPanelObject.Height - velocity > baseOutterValue)
-                        outterPanelObject.Height = outterPanelObject.Height - velocity;
+                    if (!GlobalVar.disableAnimations)
+                    {
+                        if (OutterPanelObject.Height - Increment > MinOutterValue)
+                            setPanelHeight(OutterPanelObject, OutterPanelObject.Height - Increment);
+                        else
+                            setPanelHeight(OutterPanelObject, OutterPanelObject.Height - 1);
+                    }
                     else
-                        outterPanelObject.Height--;
+                    { setPanelHeight(OutterPanelObject, MinOutterValue); }
                 }
                 else
                 {
@@ -383,25 +312,22 @@ namespace arma3Launcher.Effects
             }
         }
 
-        public void showPanelSingle()
+
+
+        /// <summary>
+        /// SHOW / HIDE Functions for panels
+        /// </summary>
+        public void ShowPanel()
         {
             GlobalVar.isAnimating = true;
-            effectInInner.Start();
+
+            if (OutterPanelObject != null)
+            { this.isDual = true; effectInOutter.Start(); }
+            else
+            { effectInInner.Start(); }
         }
 
-        public void hidePanelSingle()
-        {
-            GlobalVar.isAnimating = true;
-            effectOutInner.Start();
-        }
-
-        public void showPanelDual ()
-        {
-            GlobalVar.isAnimating = true;
-            effectInOutter.Start();
-        }
-
-        public void hidePanelDual ()
+        public void HidePanel()
         {
             GlobalVar.isAnimating = true;
             effectOutInner.Start();

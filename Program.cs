@@ -10,6 +10,19 @@ using System.Diagnostics;
 
 namespace arma3Launcher
 {
+    public enum MessageIcon
+    {
+        None,
+        Hand,
+        Question,
+        Exclamation,
+        Asterisk,
+        Stop,
+        Error,
+        Warning,
+        Information
+    }
+
     static class Program
     {
         /// <summary>
@@ -35,6 +48,12 @@ namespace arma3Launcher
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            /// <summary>
+            /// Load and apply custom fonts
+            /// Only needs to initialize once for all other windows and controls. It stores data on GlobalVar!
+            /// </summary>
+            new Fonts().InitFonts();
+
             try
             {
                 if (Properties.Settings.Default.isServerMode) { GlobalVar.isServer = true; }
@@ -47,7 +66,7 @@ namespace arma3Launcher
                 return;
             }
 
-            Application.Run(new MainForm());
+            Application.Run(new MainForm2());
 
             SingleInstance.Stop();
         }

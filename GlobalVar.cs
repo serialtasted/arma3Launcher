@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,18 @@ namespace arma3Launcher
     public static class GlobalVar
     {
         // INT
-
+        static int _menuSelected = 0;
+        public static int menuSelected
+        {
+            get
+            {
+                return _menuSelected;
+            }
+            set
+            {
+                _menuSelected = value;
+            }
+        }
 
         // STRING
         static string _gameArtifact = string.Empty;
@@ -104,6 +116,19 @@ namespace arma3Launcher
             }
         }
 
+        static bool _disableAnimations = false;
+        public static bool disableAnimations
+        {
+            get
+            {
+                return _disableAnimations;
+            }
+            set
+            {
+                _disableAnimations = value;
+            }
+        }
+
         static bool _isDebug = false;
         public static bool isDebug
         {
@@ -156,6 +181,19 @@ namespace arma3Launcher
             }
         }
 
+        static bool _repoChecked = false;
+        public static bool repoChecked
+        {
+            get
+            {
+                return _repoChecked;
+            }
+            set
+            {
+                _repoChecked = value;
+            }
+        }
+
         // LIST
         static List<string> _folders2Create = new List<string>();
         public static List<string> folders2Create
@@ -180,6 +218,33 @@ namespace arma3Launcher
             set
             {
                 _files2Download = value;
+            }
+        }
+
+        static List<byte[]> _fontsList = new List<byte[]>();
+        public static List<byte[]> fontsList
+        {
+            get
+            {
+                return _fontsList;
+            }
+            set
+            {
+                _fontsList = value;
+            }
+        }
+
+        // FONT FAMILY
+        static PrivateFontCollection _private_fonts = new PrivateFontCollection();
+        public static PrivateFontCollection private_fonts
+        {
+            get
+            {
+                return _private_fonts;
+            }
+            set
+            {
+                _private_fonts = value;
             }
         }
     }

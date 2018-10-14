@@ -10,54 +10,51 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using arma3Launcher.Workers;
-
+using MaterialSkin.Controls;
 namespace arma3Launcher.Workers
 {
     class Installer
     {
         // controls
-        private Windows7ProgressBar progressFile;
-        private Windows7ProgressBar progressAll;
-        private Label progressText;
-        private Label progressDetails;
-        private Label progressCurFile;
-        private PictureBox launcherButton;
-        private PictureBox cancelButton;
-        private String activeForm;
-        private Button repoValidateBtn;
+        private readonly Windows7ProgressBar progressFile;
+        private readonly Windows7ProgressBar progressAll;
+        private readonly Label progressText;
+        private readonly Label progressDetails;
+        private readonly Label progressCurFile;
+        private DoubleBufferFlowPanel flowpanelAddonPacks;
+        private readonly PictureBox cancelButton;
+        private readonly String activeForm;
+        private readonly MaterialFlatButton repoValidateBtn;
 
         // controls (directory fields)
-        private TextBox gamePathBox;
-        private TextBox ts3PathBox;
-        private TextBox addonsPathBox;
-        private Button gamePathErase;
-        private Button ts3PathErase;
-        private Button addonsPathErase;
-        private PictureBox gamePathFind;
-        private PictureBox ts3PathFind;
-        private PictureBox addonsPathFind;
+        private readonly MaterialSingleLineTextField gamePathBox;
+        private readonly MaterialSingleLineTextField ts3PathBox;
+        private readonly MaterialSingleLineTextField addonsPathBox;
+        private readonly PictureBox gamePathErase;
+        private readonly PictureBox ts3PathErase;
+        private readonly PictureBox addonsPathErase;
+        private readonly PictureBox gamePathFind;
+        private readonly PictureBox ts3PathFind;
+        private readonly PictureBox addonsPathFind;
 
         // workers
-        private RepoReader repoReader;
+        private RepoReader repoReader = new RepoReader();
 
         // controls (toolstrip menu items)
-        private ToolStripMenuItem ts3Plugin;
+        private readonly MaterialRaisedButton ts3Plugin;
 
         // forms
-        private MainForm mainForm;
-
-        // user controls
-        private PackBlock packBlock;
+        private MainForm2 mainForm;
 
         // background workers
-        private BackgroundWorker installFiles = new BackgroundWorker();
-        private BackgroundWorker validateFiles = new BackgroundWorker();
+        private readonly BackgroundWorker installFiles = new BackgroundWorker();
+        private readonly BackgroundWorker validateFiles = new BackgroundWorker();
 
         // timer
-        private Timer delayLaunch = new Timer();
+        private readonly Timer delayLaunch = new Timer();
 
         // folder paths
-        private string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
+        private readonly string TempFolder = Path.GetTempPath() + @"arma3Launcher\";
         private string GameFolder = string.Empty;
         private string TS3Folder = string.Empty;
         private string AddonsFolder = string.Empty;
@@ -66,14 +63,9 @@ namespace arma3Launcher.Workers
         private bool isLaunch = false;
 
         // controllers
-        private string configFile = string.Empty;
-        private string activePack = string.Empty;
         private bool installationRunning = false;
         private bool isTFR = false;
         private bool isInstall = false;
-
-        // error report
-        private EmailReporter reportError;
 
         // callbacks
         delegate void stringCallBack(string text);
@@ -174,16 +166,12 @@ namespace arma3Launcher.Workers
         /// <param name="progressDetails"></param>
         /// <param name="progressCurFile"></param>
         /// <param name="launcherButton"></param>
-        public Installer (MainForm mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, PictureBox launcherButton, PictureBox cancelButton,
-            TextBox gamePathBox, TextBox ts3PathBox, TextBox addonsPathBox, Button gamePathErase, Button ts3PathErase, Button addonsPathErase, PictureBox gamePathFind, PictureBox ts3PathFind, PictureBox addonsPathFind,
-            ToolStripMenuItem ts3Plugin, Button repoValidateBtn, RepoReader repoReader)
+        public Installer (MainForm2 mainForm, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressText, Label progressDetails, Label progressCurFile, DoubleBufferFlowPanel flowpanelAddonPacks, PictureBox cancelButton,
+            MaterialSingleLineTextField gamePathBox, MaterialSingleLineTextField ts3PathBox, MaterialSingleLineTextField addonsPathBox, PictureBox gamePathErase, PictureBox ts3PathErase, PictureBox addonsPathErase, PictureBox gamePathFind, PictureBox ts3PathFind, PictureBox addonsPathFind,
+            MaterialRaisedButton ts3Plugin, MaterialFlatButton repoValidateBtn)
         {
             this.activeForm = "mainForm";
             this.mainForm = mainForm;
-            this.repoReader = repoReader;
-
-            // construct error report
-            this.reportError = new EmailReporter();
 
             // define controls
             this.progressFile = progressFile;
@@ -191,7 +179,7 @@ namespace arma3Launcher.Workers
             this.progressText = progressText;
             this.progressDetails = progressDetails;
             this.progressCurFile = progressCurFile;
-            this.launcherButton = launcherButton;
+            this.flowpanelAddonPacks = flowpanelAddonPacks;
             this.cancelButton = cancelButton;
             this.repoValidateBtn = repoValidateBtn;
 
@@ -227,13 +215,10 @@ namespace arma3Launcher.Workers
         /// Begins the process of installation
         /// </summary>
         /// <param name="isConfig"></param>
-        public void beginInstall(bool isLaunch, string configFile, string activePack, bool isTFR)
+        public void beginInstall(bool isLaunch, bool isTFR)
         {
             // report status
             this.progressStatusText("Preparing the installation process...");
-
-            // define config file name
-            this.configFile = configFile;
 
             // reset progress bars
             this.progressFile.Value = 0;
@@ -244,9 +229,6 @@ namespace arma3Launcher.Workers
 
             // define if is TFR
             this.isTFR = isTFR;
-
-            // define active pack
-            this.activePack = activePack;
 
             // define paths
             this.GameFolder = Properties.Settings.Default.Arma3Folder;
@@ -364,10 +346,9 @@ namespace arma3Launcher.Workers
             {
                 this.progressBarFileStyle(ProgressBarStyle.Continuous);
                 this.progressStatusText("Waiting for orders");
-                this.mainForm.reSizeBarText("WaitingForOrders");
                 await this.taskDelay(1500);
                 this.mainForm.hideDownloadPanel();
-                mainForm.ReadRepo(false);
+                mainForm.ReadRepo(true);
             }
         }
 
@@ -420,7 +401,7 @@ namespace arma3Launcher.Workers
                 e.Cancel = true;
                 allFine = false;
                 this.progressStatusText("Something went wrong. Please try again.");
-                MessageBox.Show(ex.Message, "Installation failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                new Windows.MessageBox().Show(ex.Message, "Installation failed", MessageBoxButtons.OK, MessageIcon.Error);
             }
             finally
             {
@@ -444,14 +425,12 @@ namespace arma3Launcher.Workers
                         this.progressBarFileStyle(ProgressBarStyle.Marquee);
                         this.progressBarFileValue(50);
                         this.progressStatusText("Launching game...");
-                        this.mainForm.reSizeBarText("LaunchingGame");
                         this.delayLaunch.Start();
                     }
                     else if (!e.Cancelled && this.isLaunch && !this.mainForm.startGameAfterDownload())
                     {
                         this.progressBarFileStyle(ProgressBarStyle.Continuous);
                         this.progressStatusText("Game ready to launch...");
-                        this.mainForm.reSizeBarText("GameReady");
                         await this.taskDelay(1500);
                         this.mainForm.hideDownloadPanel();
                     }
@@ -459,7 +438,6 @@ namespace arma3Launcher.Workers
                     {
                         this.progressBarFileStyle(ProgressBarStyle.Continuous);
                         this.progressStatusText("Waiting for orders");
-                        this.mainForm.reSizeBarText("WaitingForOrders");
                         await this.taskDelay(1500);
                         this.mainForm.hideDownloadPanel();
                     }
@@ -488,7 +466,10 @@ namespace arma3Launcher.Workers
             this.progressBarFileStyle(ProgressBarStyle.Continuous);
 
             // unlock controls
-            this.launcherButton.Enabled = true;
+            foreach (PackBlock item in flowpanelAddonPacks.Controls)
+            {
+                item.enablePlayButton();
+            }
             this.repoValidateBtn.Enabled = true;
 
             this.installationRunning = false;
@@ -497,7 +478,7 @@ namespace arma3Launcher.Workers
             if (Directory.Exists(TempFolder))
                 Directory.Delete(TempFolder, true);
 
-            mainForm.ReadRepo(false);
+            mainForm.ReadRepo(true);
         }
 
         /// <summary>
@@ -551,11 +532,10 @@ namespace arma3Launcher.Workers
 
                 this.progressBarFileValue(0);
                 this.progressStatusText("Waiting for orders");
-                this.mainForm.reSizeBarText("WaitingForOrders");
             }
             else
             {
-                MessageBox.Show("No such directory \"" + AddonsFolder + @"@task_force_radio\plugins" + "\".", "No such file or directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                new Windows.MessageBox().Show("No such directory \"" + AddonsFolder + @"@task_force_radio\plugins" + "\".", "No such file or directory", MessageBoxButtons.OK, MessageIcon.Error);
             }
         }
     }

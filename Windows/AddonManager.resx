@@ -120,4 +120,21 @@
   <metadata name="dlg_folderBrowser.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btn_openRepoLocation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAH9JREFUOE9j
+        GBzg////LN+/f7cDYgcY/vr1qxFUmjAAKm4C4v/o+Nu3bzlQJfjBly9fVmIzAA/+C8SeUO0QA4B4L7IX
+        8GGg2n1AvAyqHW7AciiXIACqXQHCUO6oASBAsQHABFOEFs/E4EaodggAxq8tenzjwXag5A/VOqCAgQEA
+        4hNBrAcmHQUAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btn_ereaseRepoLocation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAHVJREFUKFNj
+        oB/Yv38/x44dO8ygXDjYuXOnOUgOykUAoITx9u3b3wGxA1SIAcQGGvIBiI2gQqgApgBEAw1wRTcAK4Bq
+        egvSCNRkBRXGDUAaQCaDNBHUADUd7CSYRhANlUYFoNBAVwBigwwAYkxPkxysNAIMDADZp2dl8IopLwAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
 </root>

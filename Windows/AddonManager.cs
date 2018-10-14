@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using arma3Launcher.Effects;
 using arma3Launcher.Workers;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace arma3Launcher.Windows
 {
-    public partial class AddonManager : Form
+    public partial class AddonManager : MaterialForm
     {
         private AddonsLooker aLooker;
         private WindowIO windowIO;
@@ -24,8 +21,14 @@ namespace arma3Launcher.Windows
 
         public AddonManager()
         {
+            // Material Skin properties
+            MaterialSkinManager.AddFormToManage(this);
+            MaterialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            MaterialSkinManager.ColorScheme = new ColorScheme(Primary.Grey700, Primary.Grey800, Primary.Grey500, Accent.Lime200, TextShade.WHITE);
+
             InitializeComponent();
-            aLooker = new AddonsLooker(chbl_repoContent);
+
+            aLooker = new AddonsLooker();
             windowIO = new WindowIO(this);
             repoBuilder = new BuildRepo(chbl_repoContent, lbl_buildStatus, prgb_repoBuild, buildLog, windowIO, btn_buildRepo, chb_checkAll);
 
@@ -37,7 +40,7 @@ namespace arma3Launcher.Windows
 
         private void AddonManager_Shown(object sender, EventArgs e)
         {
-            windowIO.windowIn();
+            windowIO.WindowIn();
             lbl_buildStatus.Text = "Waiting for orders";
             prgb_repoBuild.Value = 0;
         }
@@ -45,16 +48,6 @@ namespace arma3Launcher.Windows
         private void btn_close_Click(object sender, EventArgs e)
         {
             repoBuilder.CancelBuild();
-        }
-
-        private void btn_close_MouseHover(object sender, EventArgs e)
-        {
-            btn_close.Image = Properties.Resources.arrow_down_hover;
-        }
-
-        private void btn_close_MouseLeave(object sender, EventArgs e)
-        {
-            btn_close.Image = Properties.Resources.arrow_down;
         }
 
         private void btn_browseRepoLocation_Click(object sender, EventArgs e)
@@ -82,7 +75,7 @@ namespace arma3Launcher.Windows
 
         private void GetAddons()
         {
-            aLooker.getAddons(txtb_repoLocation.Text);
+            aLooker.getAddonsCheckListBox(chbl_repoContent, txtb_repoLocation.Text);
         }
 
         private void btn_ereaseRepoLocation_Click(object sender, EventArgs e)
@@ -135,6 +128,50 @@ namespace arma3Launcher.Windows
             if (Properties.Settings.Default.RepoFolder != string.Empty)
             {
                 repoBuilder.Run(Properties.Settings.Default.RepoFolder);
+            }
+        }
+
+        private void btn_ereaseRepoLocation_MouseEnter(object sender, EventArgs e)
+        {
+            btn_ereaseRepoLocation.Image = Properties.Resources.erase_hover;
+        }
+
+        private void btn_ereaseRepoLocation_MouseLeave(object sender, EventArgs e)
+        {
+            btn_ereaseRepoLocation.Image = Properties.Resources.erase_idle;
+        }
+
+        private void btn_browseRepoLocation_MouseEnter(object sender, EventArgs e)
+        {
+            btn_browseRepoLocation.Image = Properties.Resources.addfolder_hover;
+        }
+
+        private void btn_browseRepoLocation_MouseLeave(object sender, EventArgs e)
+        {
+            btn_browseRepoLocation.Image = Properties.Resources.addfolder_idle;
+        }
+
+        private void btn_openRepoLocation_MouseEnter(object sender, EventArgs e)
+        {
+            btn_openRepoLocation.Image = Properties.Resources.openfolder_hover;
+        }
+
+        private void btn_openRepoLocation_MouseLeave(object sender, EventArgs e)
+        {
+            btn_openRepoLocation.Image = Properties.Resources.openfolder_idle;
+        }
+
+        private void AddonManager_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if ((string)this.Tag != "close")
+            {
+                repoBuilder.CancelBuild();
+                e.Cancel = true;
+            }
+            else
+            {
+                GC.Collect(2, GCCollectionMode.Forced);
+                this.Dispose();
             }
         }
     }

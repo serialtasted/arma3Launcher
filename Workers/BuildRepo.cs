@@ -15,16 +15,14 @@ namespace arma3Launcher.Workers
     class BuildRepo
     {
         private CheckedListBox addonsList;
-        private Label progressText;
-        private Windows7ProgressBar progressFile;
-        private TextBox buildLog;
+        private readonly Label progressText;
+        private readonly Windows7ProgressBar progressFile;
+        private readonly TextBox buildLog;
         private WindowIO windowIO;
-        private Button buildBtn;
-        private CheckBox checkBtn;
+        private readonly Button buildBtn;
+        private readonly CheckBox checkBtn;
 
         private bool isBuilding = false;
-        private bool isCancel = false;
-        private bool closeAfter = false;
 
         private BackgroundWorker builder = new BackgroundWorker();
 
@@ -105,12 +103,11 @@ namespace arma3Launcher.Workers
         {
             if (this.isBuilding)
             {
-                this.closeAfter = true;
                 this.builder.CancelAsync();
             }
             else
             {
-                windowIO.windowOut(true);
+                windowIO.WindowOut(true);
             }
         }
 
@@ -175,7 +172,7 @@ namespace arma3Launcher.Workers
                     }
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Error while building repository", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { new Windows.MessageBox().Show(ex.Message, "Error while building repository", MessageBoxButtons.OK, MessageIcon.Error); }
             finally
             {
                 // Get the elapsed time as a TimeSpan value.

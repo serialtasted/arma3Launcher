@@ -97,7 +97,7 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ftp://ptrddns.dlinkddns.com/arma3Launcher/PackImgs/.
+        ///   Looks up a localized string similar to ftp://ptrddns.dlinkddns.com/arma3Launcher/PackImgs2/.
         /// </summary>
         internal static string S_PackImgsDir {
             get {

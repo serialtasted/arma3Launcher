@@ -130,7 +130,7 @@
     <value>https://www.youtube.com/serialtasted</value>
   </data>
   <data name="S_PackImgsDir" xml:space="preserve">
-    <value>ftp://ptrddns.dlinkddns.com/arma3Launcher/PackImgs/</value>
+    <value>ftp://ptrddns.dlinkddns.com/arma3Launcher/PackImgs2/</value>
   </data>
   <data name="S_RepoAddress" xml:space="preserve">
     <value>ftp://ptrddns.dlinkddns.com/arma3Launcher/Repo/</value>

@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Net;
+using MaterialSkin.Controls;
 
 namespace arma3Launcher.Workers
 {
@@ -30,18 +31,14 @@ namespace arma3Launcher.Workers
         private Label progressCurFile;
         private Label progressText;
         private Label progressDetails;
-        private PictureBox launcherButton;
+        private DoubleBufferFlowPanel flowpanelAddonPacks;
         private PictureBox cancelButton;
         private Installer installer;
-        private String activeForm;
         private System.Windows.Forms.Timer totalSw;
-        private Button repoValidateBtn;
+        private MaterialFlatButton repoValidateBtn;
 
         // forms
-        private MainForm mainForm;
-
-        // user controls
-        private PackBlock packBlock;
+        private MainForm2 mainForm;
 
         // background workers
         private BackgroundWorker calculateFiles = new BackgroundWorker();
@@ -66,8 +63,6 @@ namespace arma3Launcher.Workers
 
         // paramters
         private bool isLaunch = false;
-        private string configUrl = string.Empty;
-        private string activePack = string.Empty;
 
         // controllers
         private bool downloadRunning = false;
@@ -80,9 +75,6 @@ namespace arma3Launcher.Workers
         private string timeLeft = string.Empty;
         private bool isTFR = false;
         private bool cancelProcess = false;
-
-        // error report
-        private EmailReporter reportError;
 
         // converter
         static double ConvertBytesToMegabytes(long bytes)
@@ -188,15 +180,10 @@ namespace arma3Launcher.Workers
         /// <param name="progressText"></param>
         /// <param name="progressDetails"></param>
         /// <param name="launcherButton"></param>
-        public Downloader (MainForm mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, PictureBox launcherButton, PictureBox cancelButton, Button repoValidateBtn)
+        public Downloader (MainForm2 mainForm, Installer installerWorker, Windows7ProgressBar progressFile, Windows7ProgressBar progressAll, Label progressCurFile, Label progressText, Label progressDetails, DoubleBufferFlowPanel flowpanelAddonPacks, PictureBox cancelButton, MaterialFlatButton repoValidateBtn)
         {
-            this.activeForm = "mainForm";
-
             this.mainForm = mainForm;
             this.installer = installerWorker;
-
-            // construct error report
-            this.reportError = new EmailReporter();
 
             // define controls
             this.progressCurFile = progressCurFile;
@@ -206,7 +193,7 @@ namespace arma3Launcher.Workers
             this.progressDetails = progressDetails;
             this.cancelButton = cancelButton;
             this.repoValidateBtn = repoValidateBtn;
-            this.launcherButton = launcherButton;
+            this.flowpanelAddonPacks = flowpanelAddonPacks;
 
             // define calculate worker
             this.calculateFiles.DoWork += CalculateFiles_DoWork;
@@ -363,7 +350,7 @@ namespace arma3Launcher.Workers
                     this.downloadRunning = false;
                     GlobalVar.isDownloading = false;
 
-                    installer.beginInstall(this.isLaunch, this.configUrl, this.activePack, this.isTFR);
+                    installer.beginInstall(this.isLaunch, this.isTFR);
                 }
             }
             else
@@ -380,7 +367,10 @@ namespace arma3Launcher.Workers
                 this.downloadRunning = false;
                 GlobalVar.isDownloading = false;
 
-                this.launcherButton.Enabled = true;
+                foreach (PackBlock item in flowpanelAddonPacks.Controls)
+                {
+                    item.enablePlayButton();
+                }
                 this.repoValidateBtn.Enabled = true;
                 try { cancelButton.Visible = false; } catch { }
 
@@ -413,7 +403,6 @@ namespace arma3Launcher.Workers
                 { this.progressStatusText("Alright... Bye bye"); await taskDelay(2500); this.mainForm.Close(); }
 
                 await taskDelay(2000);
-                this.mainForm.reSizeBarText("WaitingForOrders");
                 this.mainForm.hideDownloadPanel();
             }
         }
@@ -442,8 +431,11 @@ namespace arma3Launcher.Workers
         /// </summary>
         /// <param name="urlsList"></param>
         /// <param name="isConfig"></param>
-        public async void beginDownload(IEnumerable<string> listUrls, bool isLaunch, string activePack)
+        public void beginDownload(IEnumerable<string> listUrls, bool isLaunch)
         {
+            // update addons folder
+            this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
+
             // reset cancel var
             this.cancelProcess = false;
 
@@ -456,7 +448,10 @@ namespace arma3Launcher.Workers
             this.totalSw.Tick += TotalSw_Tick;
 
             // lock controls
-            this.launcherButton.Enabled = false;
+            foreach (PackBlock item in flowpanelAddonPacks.Controls)
+            {
+                item.disablePlayButton();
+            }
             this.repoValidateBtn.Enabled = false;
 
             // report status
@@ -466,7 +461,6 @@ namespace arma3Launcher.Workers
 
             // define paramters
             this.isLaunch = isLaunch;
-            this.activePack = activePack;
             this.isTFR = false;
 
             // fill urls list
@@ -508,7 +502,7 @@ namespace arma3Launcher.Workers
         /// <summary>
         /// Cancel download
         /// </summary>
-        public async void cancelDownload()
+        public void cancelDownload()
         {
             this.totalSw.Stop();
             this.numTimesCancel++;
@@ -522,7 +516,7 @@ namespace arma3Launcher.Workers
 
             this.cancelProcess = true;
             this.client.CancelAsync();
-            this.mainForm.ReadRepo(false);
+            this.mainForm.ReadRepo(true);
         }
 
         /// <summary>

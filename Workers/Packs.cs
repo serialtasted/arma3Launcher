@@ -7,40 +7,72 @@ using System.Drawing;
 using arma3Launcher.Controls;
 using System.Net;
 using System.Xml;
+using System.Threading.Tasks;
+using MetroFramework.Controls;
 
 namespace arma3Launcher.Workers
 {
     class Packs
     {
-        private MainForm mainForm;
-        private readonly FlowLayoutPanel gflowpacks;
+        private MainForm2 mainForm;
+        private FlowLayoutPanel packsPanel;
+        private MetroComboBox cbServerPacks;
+
         private string title = string.Empty;
         private string id = string.Empty;
         private string description = string.Empty;
         private string addons = string.Empty;
 
-        public Packs(MainForm mainForm, FlowLayoutPanel packsPanel)
+        private List<string> addonsName = new List<string>();
+
+        public Packs(MainForm2 mainForm, FlowLayoutPanel packsPanel, MetroComboBox cbServerPacks)
         {
             this.mainForm = mainForm;
-            this.gflowpacks = packsPanel;
+            this.packsPanel = packsPanel;
+            this.cbServerPacks = cbServerPacks;
         }
 
         public void Search (string searchArgument)
         {
-            for (int i = 0; i < gflowpacks.Controls.Count-1; i++)
+            for (int i = 0; i < packsPanel.Controls.Count-1; i++)
             {
-                if (!gflowpacks.Controls[i].Tag.ToString().Contains(searchArgument) && searchArgument != string.Empty)
-                    gflowpacks.Controls[i].Visible = false;
+                if (!packsPanel.Controls[i].Tag.ToString().Contains(searchArgument) && searchArgument != string.Empty)
+                    packsPanel.Controls[i].Visible = false;
                 else
-                    gflowpacks.Controls[i].Visible = true;
+                    packsPanel.Controls[i].Visible = true;
             }
         }
 
-        public void Get (View viewMode)
+        public void RevealPacks(FlowLayoutPanel addonsPanel)
+        {
+            foreach (Controls.PackBlock item in addonsPanel.Controls)
+            {
+                item.fadeIn();
+            }
+        }
+
+        public string GetPackName(string packID)
+        {
+            string packName = string.Empty;
+            XmlDocument RemoteXmlInfo = new XmlDocument();
+            RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
+
+            XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSets//pack");
+            foreach (XmlNode xn in xnl)
+            {
+                if (xn.Attributes["id"].Value == packID)
+                { packName = xn.Attributes["name"].Value; break; }
+            }
+
+            return packName;
+        }
+
+        public void Get ()
         {
             try
             {
-                gflowpacks.Controls.Clear();
+                cbServerPacks.Items.Clear();
+                packsPanel.Controls.Clear();
 
                 XmlDocument RemoteXmlInfo = new XmlDocument();
                 RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
@@ -48,36 +80,35 @@ namespace arma3Launcher.Workers
                 XmlNodeList xnl = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSets//pack");
                 foreach (XmlNode xn in xnl)
                 {
-                    if (Convert.ToBoolean(xn.Attributes["enable"].Value) && (Convert.ToBoolean(xn.Attributes["public"].Value) || Properties.Settings.Default.privateKeys.Split(',').Contains(xn.Attributes["id"].Value)))
+                    if (Convert.ToBoolean(xn.Attributes["enable"].Value) && (Convert.ToBoolean(xn.Attributes["public"].Value) || Properties.Settings.Default.PrivateKeys.Split(',').Contains(xn.Attributes["id"].Value)))
                     {
                         title = xn.Attributes["name"].Value;
                         id = xn.Attributes["id"].Value;
                         description = xn.Attributes["description"].Value;
-                        addons = string.Empty;
 
-
-                        XmlNodeList xnl2 = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSetInfo//" + id + "//mod");
-                        foreach (XmlNode xn2 in xnl2)
+                        addonsName.Clear();
+                        if (id != "arma3")
                         {
-                            if (xn2.Attributes["name"].Value != "@dummy")
+                            XmlNodeList addonsList = RemoteXmlInfo.SelectNodes("//arma3Launcher//ModSetInfo//" + id + "//mod");
+                            foreach (XmlNode addon in addonsList)
                             {
-                                addons = addons +
-                                    " • " + xn2.Attributes["name"].Value +
-                                    "\n";
+                                addonsName.Add(addon.Attributes["name"].Value);
                             }
                         }
+
+                        cbServerPacks.Items.Add(id);
 
                         PackBlock auxPack = new PackBlock(
                             mainForm,
                             title,
                             id,
                             description,
-                            addons,
-                            gflowpacks,
+                            RemoteXmlInfo,
+                            packsPanel,
                             Convert.ToBoolean(RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + id).Attributes["optional"].Value),
-                            viewMode
-                            );
-                        auxPack.Tag = string.Format("{0} {1} {2} {3}", id, title, description, addons);
+                            addonsName
+                        );
+                        auxPack.Tag = string.Format("{0} {1} {2}", id, title, description);
                         Padding margin = auxPack.Margin;
                         margin.Left = 3;
                         margin.Right = 3;
@@ -85,34 +116,27 @@ namespace arma3Launcher.Workers
                         margin.Bottom = 8;
                         auxPack.Margin = margin;
 
-                        if (id == Properties.Settings.Default.lastAddonPack)
-                        {
-                            PictureBox btnUsePack = auxPack.Controls.Find("btn_useThis", true)[0] as PictureBox;
-                            btnUsePack.Enabled = false;
-                            btnUsePack.Image = Properties.Resources.useThis_active;
-                            mainForm.updateActivePack(title);
-                        }
+                        packsPanel.Controls.Add(auxPack);
 
-
-                        gflowpacks.Controls.Add(auxPack);
+                        GC.Collect(2, GCCollectionMode.Forced);
                     }
                 }
             }
             catch (Exception ex)
             {
                 TableLayoutPanel ErrorTable = new TableLayoutPanel();
-                ErrorTable.Size = new Size(gflowpacks.Size.Width - 10, gflowpacks.Size.Height - 15);
+                ErrorTable.Size = new Size(packsPanel.Size.Width, packsPanel.Size.Height);
 
                 Label ErrorRead = new Label();
                 ErrorRead.Anchor = AnchorStyles.None;
                 ErrorRead.ForeColor = Color.White;
-                ErrorRead.MinimumSize = new Size(595, 170);
+                ErrorRead.MinimumSize = new Size(400, 50);
                 ErrorRead.Font = new Font("Calibri", 9, FontStyle.Bold);
-                ErrorRead.TextAlign = ContentAlignment.BottomCenter;
+                ErrorRead.TextAlign = ContentAlignment.MiddleCenter;
                 ErrorRead.Text = "Unable to read the contents from the server!\n" + ex.Message;
 
                 ErrorTable.Controls.Add(ErrorRead);
-                gflowpacks.Controls.Add(ErrorTable);
+                packsPanel.Controls.Add(ErrorTable);
             }
         }
     }

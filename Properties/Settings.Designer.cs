@@ -12,7 +12,7 @@ namespace arma3Launcher.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -265,7 +265,7 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool firstLaunch {
             get {
                 return ((bool)(this["firstLaunch"]));
@@ -338,12 +338,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("arma3")]
-        public string lastAddonPack {
+        public string LastAddonPack {
             get {
-                return ((string)(this["lastAddonPack"]));
+                return ((string)(this["LastAddonPack"]));
             }
             set {
-                this["lastAddonPack"] = value;
+                this["LastAddonPack"] = value;
             }
         }
         
@@ -386,18 +386,6 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool allowErrorReport {
-            get {
-                return ((bool)(this["allowErrorReport"]));
-            }
-            set {
-                this["allowErrorReport"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool joinServerAutomatically {
             get {
                 return ((bool)(this["joinServerAutomatically"]));
@@ -410,12 +398,12 @@ namespace arma3Launcher.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string privateKeys {
+        public string PrivateKeys {
             get {
-                return ((string)(this["privateKeys"]));
+                return ((string)(this["PrivateKeys"]));
             }
             set {
-                this["privateKeys"] = value;
+                this["PrivateKeys"] = value;
             }
         }
         
@@ -553,13 +541,61 @@ namespace arma3Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int packsViewMode {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ServerMission {
             get {
-                return ((int)(this["packsViewMode"]));
+                return ((string)(this["ServerMission"]));
             }
             set {
-                this["packsViewMode"] = value;
+                this["ServerMission"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DisableAnimations {
+            get {
+                return ((bool)(this["DisableAnimations"]));
+            }
+            set {
+                this["DisableAnimations"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string optionalAddons {
+            get {
+                return ((string)(this["optionalAddons"]));
+            }
+            set {
+                this["optionalAddons"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OptionalAddonsFolder {
+            get {
+                return ((string)(this["OptionalAddonsFolder"]));
+            }
+            set {
+                this["OptionalAddonsFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ServerPack {
+            get {
+                return ((string)(this["ServerPack"]));
+            }
+            set {
+                this["ServerPack"] = value;
             }
         }
     }

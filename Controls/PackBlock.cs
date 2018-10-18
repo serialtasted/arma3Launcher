@@ -110,7 +110,7 @@ namespace arma3Launcher.Controls
                     }
                 }
 
-                //this.moreInfoPanelIO..ShowPanel();
+                //this.moreInfoPanelIO.ShowPanel();
             }
         }
 
@@ -223,12 +223,6 @@ namespace arma3Launcher.Controls
                 panel_packImage.BackgroundImage = panelBG.Image;
             }
             catch { }
-        }
-
-        private void setsize()
-        {
-            if (txt_content.Height > 57)
-                this.Height = txt_content.Height + 110;
         }
 
         private void btn_addonsOptionsClose_Click(object sender, EventArgs e)

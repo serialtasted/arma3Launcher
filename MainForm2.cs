@@ -784,15 +784,53 @@ namespace arma3Launcher
         }
         #endregion
 
-        private void GetWorkshopAddons()
+        private async void GetWorkshopAddons()
         {
             this.aLooker.getAddonsFlowPanel(flowpanel_steamworkshopAddonsList, Properties.Settings.Default.Arma3Folder + "!Workshop\\", steamworkshopMenu);
+
+            while (!hasShown)
+                await taskDelay(200);
+
+            if (flowpanel_steamworkshopAddonsList.VerticalScroll.Visible)
+            {
+                flowpanel_steamworkshopAddonsList.Width = flowpanel_steamworkshopAddonsList.MinimumSize.Width + SystemInformation.VerticalScrollBarWidth;
+
+                scroll_steamAddons.Visible = true;
+                scroll_steamAddons.Minimum = flowpanel_steamworkshopAddonsList.VerticalScroll.Minimum;
+                scroll_steamAddons.Maximum = flowpanel_steamworkshopAddonsList.VerticalScroll.Maximum;
+                scroll_steamAddons.LargeChange = flowpanel_steamworkshopAddonsList.VerticalScroll.LargeChange;
+            }
+            else
+            {
+                scroll_steamAddons.Visible = false;
+                flowpanel_steamworkshopAddonsList.Width = flowpanel_steamworkshopAddonsList.MinimumSize.Width;
+            }
+
             this.PropertiesWorkshopReader();
         }
 
-        private void GetOptionalAddons()
+        private async void GetOptionalAddons()
         {
             this.aLooker.getAddonsFlowPanel(flowpanel_optionalAddons, Properties.Settings.Default.OptionalAddonsFolder, optionaladdonsMenu);
+
+            while (!hasShown)
+                await taskDelay(200);
+
+            if (flowpanel_optionalAddons.VerticalScroll.Visible)
+            {
+                flowpanel_optionalAddons.Width = flowpanel_optionalAddons.MinimumSize.Width + SystemInformation.VerticalScrollBarWidth;
+
+                scroll_optionalAddons.Visible = true;
+                scroll_optionalAddons.Minimum = flowpanel_optionalAddons.VerticalScroll.Minimum;
+                scroll_optionalAddons.Maximum = flowpanel_optionalAddons.VerticalScroll.Maximum;
+                scroll_optionalAddons.LargeChange = flowpanel_optionalAddons.VerticalScroll.LargeChange;
+            }
+            else
+            {
+                scroll_optionalAddons.Visible = false;
+                flowpanel_optionalAddons.Width = flowpanel_optionalAddons.MinimumSize.Width;
+            }
+
             this.PropertiesOptionalAddonsReader();
         }
 
@@ -1603,7 +1641,7 @@ namespace arma3Launcher
         { cb_serverPack.SelectedItem = packId; }
 
         public void updateCurrentPack(bool refreshPacks, bool revealPacks)
-        { FetchRemoteSettings(refreshPacks); GetWorkshopAddons(); GetOptionalAddons(); if (revealPacks) { fetchAddonPacks.RevealPacks(flowpanel_addonPacks); } }
+        { FetchRemoteSettings(refreshPacks); if (revealPacks) { fetchAddonPacks.RevealPacks(flowpanel_addonPacks); } }
 
         public bool startGameAfterDownload()
         { return chb_pref_startGame.Checked; }
@@ -2212,6 +2250,28 @@ namespace arma3Launcher
         private void tsmi_reloadOptional_Click(object sender, EventArgs e)
         {
             GetOptionalAddons();
+        }
+
+        private void scroll_steamAddons_Scroll(object sender, ScrollEventArgs e)
+        {
+            flowpanel_steamworkshopAddonsList.Refresh();
+            flowpanel_steamworkshopAddonsList.AutoScrollPosition = new Point(flowpanel_steamworkshopAddonsList.AutoScrollPosition.Y, e.NewValue);
+        }
+
+        private void scroll_optionalAddons_Scroll(object sender, ScrollEventArgs e)
+        {
+            flowpanel_optionalAddons.Refresh();
+            flowpanel_optionalAddons.AutoScrollPosition = new Point(flowpanel_optionalAddons.AutoScrollPosition.Y, e.NewValue);
+        }
+
+        private void flowpanel_steamworkshopAddonsList_Paint(object sender, PaintEventArgs e)
+        {
+            scroll_steamAddons.Value = flowpanel_steamworkshopAddonsList.AutoScrollPosition.Y * -1;
+        }
+
+        private void flowpanel_optionalAddons_Paint(object sender, PaintEventArgs e)
+        {
+            scroll_optionalAddons.Value = flowpanel_optionalAddons.AutoScrollPosition.Y * -1;
         }
     }
 }

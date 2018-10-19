@@ -386,7 +386,7 @@ namespace arma3Launcher
                     }
                 }
 
-                if (!GlobalVar.autoPilot && !QuickUpdateMethod.QuickCheck())
+                if (!GlobalVar.autoPilot && QuickUpdateMethod.QuickCheck())
                 {
                     QuickUpdateMethod.StartUpdate();
                     isUpdate = true;
@@ -430,6 +430,7 @@ namespace arma3Launcher
                 }
 
                 GetMalloc();
+                GetOptionalAddons();
                 MachineSettings();
                 LoadSettings();
             }
@@ -611,7 +612,9 @@ namespace arma3Launcher
         -----------------------------------*/
         private void txt_versionNumber_Click(object sender, EventArgs e)
         {
-            if (new Windows.MessageBox().Show("Do you really want to download this version of the launcher again?", "Reinstall", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes)
+            if (QuickUpdateMethod.QuickCheck())
+                QuickUpdateMethod.StartUpdate();
+            else if (new Windows.MessageBox().Show("Do you really want to download this version of the launcher again?", "Reinstall", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes)
                 QuickUpdateMethod.StartUpdate();
         }
 
@@ -623,6 +626,11 @@ namespace arma3Launcher
         private void txt_versionNumber_MouseLeave(object sender, EventArgs e)
         {
             this.txt_versionNumber.ForeColor = Color.DarkGray;
+        }
+
+        private void txt_versionNumber_Paint(object sender, PaintEventArgs e)
+        {
+            txt_versionNumber.Location = new Point(sidemenu_botPanel.Width - txt_versionNumber.Width - 3, txt_versionNumber.Location.Y);
         }
         #endregion
 

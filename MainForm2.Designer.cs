@@ -30,17 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm2));
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath10 = new System.Drawing.Drawing2D.GraphicsPath();
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath11 = new System.Drawing.Drawing2D.GraphicsPath();
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath12 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath1 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath2 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath3 = new System.Drawing.Drawing2D.GraphicsPath();
             this.imageListRepo = new System.Windows.Forms.ImageList(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
             this.dlg_folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.flowAddonsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_reloadPacks = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,7 @@
             this.win_mainWindow = new arma3Launcher.Controls.DoubleBufferPanel();
             this.snackbar_mainWindow = new MaterialSkin.Controls.MaterialSnackbar();
             this.panel_sideMenu = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferFlowPanel1 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
+            this.sidemenu_menuList = new arma3Launcher.Controls.DoubleBufferFlowPanel();
             this.doubleBufferPanel5 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.menu_addonPacks = new System.Windows.Forms.Label();
             this.doubleBufferPanel6 = new arma3Launcher.Controls.DoubleBufferPanel();
@@ -74,7 +75,7 @@
             this.doubleBufferPanel10 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.doubleBufferPanel11 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.menu_preferences = new System.Windows.Forms.Label();
-            this.doubleBufferPanel4 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.sidemenu_botPanel = new arma3Launcher.Controls.DoubleBufferPanel();
             this.menu_help = new System.Windows.Forms.Label();
             this.menu_about = new System.Windows.Forms.Label();
             this.txt_versionNumber = new System.Windows.Forms.Label();
@@ -131,7 +132,6 @@
             this.panel_repoBottom = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_repoDownload = new arma3Launcher.Controls.DoubleBufferPanel();
             this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
             this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
@@ -235,6 +235,7 @@
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.doubleBufferPanel14 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.doubleBufferPanel2 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.scroll_steamAddons = new MetroFramework.Controls.MetroScrollBar();
             this.flowpanel_steamworkshopAddonsList = new arma3Launcher.Controls.DoubleBufferFlowPanel();
             this.doubleBufferPanel3 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
@@ -244,20 +245,20 @@
             this.btn_windowMenu = new System.Windows.Forms.PictureBox();
             this.btn_windowClose = new System.Windows.Forms.PictureBox();
             this.btn_windowMinimize = new System.Windows.Forms.PictureBox();
-            this.scroll_steamAddons = new MetroFramework.Controls.MetroScrollBar();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.flowAddonsMenu.SuspendLayout();
             this.repositoryMenu.SuspendLayout();
             this.optionaladdonsMenu.SuspendLayout();
             this.steamworkshopMenu.SuspendLayout();
             this.win_mainWindow.SuspendLayout();
             this.panel_sideMenu.SuspendLayout();
-            this.doubleBufferFlowPanel1.SuspendLayout();
+            this.sidemenu_menuList.SuspendLayout();
             this.doubleBufferPanel5.SuspendLayout();
             this.doubleBufferPanel7.SuspendLayout();
             this.doubleBufferPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.img_repoBusy)).BeginInit();
             this.doubleBufferPanel11.SuspendLayout();
-            this.doubleBufferPanel4.SuspendLayout();
+            this.sidemenu_botPanel.SuspendLayout();
             this.panel_mainPanel.SuspendLayout();
             this.panel_outterPanel.SuspendLayout();
             this.panel_preferences.SuspendLayout();
@@ -284,7 +285,6 @@
             this.panel_contentRepositoryDownloads.SuspendLayout();
             this.panel_repoBottom.SuspendLayout();
             this.panel_repoDownload.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.panel_repoInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -329,6 +329,20 @@
             this.imageListRepo.Images.SetKeyName(3, "folder-checked.png");
             this.imageListRepo.Images.SetKeyName(4, "folder-error.png");
             this.imageListRepo.Images.SetKeyName(5, "folder-cancel.png");
+            // 
+            // btn_cancelDownload
+            // 
+            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
+            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_cancelDownload.Location = new System.Drawing.Point(1199, 27);
+            this.btn_cancelDownload.Name = "btn_cancelDownload";
+            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
+            this.btn_cancelDownload.TabIndex = 12;
+            this.btn_cancelDownload.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
+            this.btn_cancelDownload.Visible = false;
             // 
             // dlg_folderBrowser
             // 
@@ -509,32 +523,32 @@
             // panel_sideMenu
             // 
             this.panel_sideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(83)))), ((int)(((byte)(83)))), ((int)(((byte)(83)))));
-            this.panel_sideMenu.Controls.Add(this.doubleBufferFlowPanel1);
-            this.panel_sideMenu.Controls.Add(this.doubleBufferPanel4);
+            this.panel_sideMenu.Controls.Add(this.sidemenu_menuList);
+            this.panel_sideMenu.Controls.Add(this.sidemenu_botPanel);
             this.panel_sideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_sideMenu.Location = new System.Drawing.Point(0, 30);
             this.panel_sideMenu.MaximumSize = new System.Drawing.Size(300, 0);
             this.panel_sideMenu.MinimumSize = new System.Drawing.Size(0, 670);
             this.panel_sideMenu.Name = "panel_sideMenu";
-            this.panel_sideMenu.Size = new System.Drawing.Size(10, 670);
+            this.panel_sideMenu.Size = new System.Drawing.Size(300, 670);
             this.panel_sideMenu.TabIndex = 1;
             // 
-            // doubleBufferFlowPanel1
+            // sidemenu_menuList
             // 
-            this.doubleBufferFlowPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel5);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel6);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel7);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel8);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel9);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel10);
-            this.doubleBufferFlowPanel1.Controls.Add(this.doubleBufferPanel11);
-            this.doubleBufferFlowPanel1.Location = new System.Drawing.Point(-290, 0);
-            this.doubleBufferFlowPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.doubleBufferFlowPanel1.Name = "doubleBufferFlowPanel1";
-            this.doubleBufferFlowPanel1.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
-            this.doubleBufferFlowPanel1.Size = new System.Drawing.Size(300, 599);
-            this.doubleBufferFlowPanel1.TabIndex = 11;
+            this.sidemenu_menuList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel5);
+            this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel6);
+            this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel7);
+            this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel8);
+            this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel9);
+            this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel10);
+            this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel11);
+            this.sidemenu_menuList.Location = new System.Drawing.Point(0, 0);
+            this.sidemenu_menuList.Margin = new System.Windows.Forms.Padding(0);
+            this.sidemenu_menuList.Name = "sidemenu_menuList";
+            this.sidemenu_menuList.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
+            this.sidemenu_menuList.Size = new System.Drawing.Size(300, 599);
+            this.sidemenu_menuList.TabIndex = 11;
             // 
             // doubleBufferPanel5
             // 
@@ -688,17 +702,17 @@
             this.menu_preferences.MouseEnter += new System.EventHandler(this.menu_preferences_MouseEnter);
             this.menu_preferences.MouseLeave += new System.EventHandler(this.menu_preferences_MouseLeave);
             // 
-            // doubleBufferPanel4
+            // sidemenu_botPanel
             // 
-            this.doubleBufferPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.doubleBufferPanel4.Controls.Add(this.menu_help);
-            this.doubleBufferPanel4.Controls.Add(this.menu_about);
-            this.doubleBufferPanel4.Controls.Add(this.txt_versionNumber);
-            this.doubleBufferPanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.doubleBufferPanel4.Location = new System.Drawing.Point(0, 597);
-            this.doubleBufferPanel4.Name = "doubleBufferPanel4";
-            this.doubleBufferPanel4.Size = new System.Drawing.Size(10, 73);
-            this.doubleBufferPanel4.TabIndex = 10;
+            this.sidemenu_botPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
+            this.sidemenu_botPanel.Controls.Add(this.menu_help);
+            this.sidemenu_botPanel.Controls.Add(this.menu_about);
+            this.sidemenu_botPanel.Controls.Add(this.txt_versionNumber);
+            this.sidemenu_botPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.sidemenu_botPanel.Location = new System.Drawing.Point(0, 597);
+            this.sidemenu_botPanel.Name = "sidemenu_botPanel";
+            this.sidemenu_botPanel.Size = new System.Drawing.Size(300, 73);
+            this.sidemenu_botPanel.TabIndex = 10;
             // 
             // menu_help
             // 
@@ -707,7 +721,7 @@
             this.menu_help.BackColor = System.Drawing.Color.Transparent;
             this.menu_help.Font = new System.Drawing.Font("Lato", 9.5F);
             this.menu_help.ForeColor = System.Drawing.Color.Silver;
-            this.menu_help.Location = new System.Drawing.Point(-277, 17);
+            this.menu_help.Location = new System.Drawing.Point(13, 17);
             this.menu_help.Name = "menu_help";
             this.menu_help.Size = new System.Drawing.Size(35, 16);
             this.menu_help.TabIndex = 6;
@@ -723,7 +737,7 @@
             this.menu_about.BackColor = System.Drawing.Color.Transparent;
             this.menu_about.Font = new System.Drawing.Font("Lato", 9.5F);
             this.menu_about.ForeColor = System.Drawing.Color.Silver;
-            this.menu_about.Location = new System.Drawing.Point(-277, 40);
+            this.menu_about.Location = new System.Drawing.Point(13, 40);
             this.menu_about.Name = "menu_about";
             this.menu_about.Size = new System.Drawing.Size(43, 16);
             this.menu_about.TabIndex = 7;
@@ -739,14 +753,13 @@
             this.txt_versionNumber.BackColor = System.Drawing.Color.Transparent;
             this.txt_versionNumber.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.txt_versionNumber.ForeColor = System.Drawing.Color.DarkGray;
-            this.txt_versionNumber.Location = new System.Drawing.Point(-198, 42);
-            this.txt_versionNumber.MinimumSize = new System.Drawing.Size(200, 0);
+            this.txt_versionNumber.Location = new System.Drawing.Point(242, 43);
             this.txt_versionNumber.Name = "txt_versionNumber";
-            this.txt_versionNumber.Size = new System.Drawing.Size(200, 12);
+            this.txt_versionNumber.Size = new System.Drawing.Size(50, 12);
             this.txt_versionNumber.TabIndex = 8;
             this.txt_versionNumber.Text = "%version%";
-            this.txt_versionNumber.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.txt_versionNumber.Click += new System.EventHandler(this.txt_versionNumber_Click);
+            this.txt_versionNumber.Paint += new System.Windows.Forms.PaintEventHandler(this.txt_versionNumber_Paint);
             this.txt_versionNumber.MouseEnter += new System.EventHandler(this.txt_versionNumber_MouseEnter);
             this.txt_versionNumber.MouseLeave += new System.EventHandler(this.txt_versionNumber_MouseLeave);
             // 
@@ -1483,37 +1496,37 @@
             this.trv_repoContent.Location = new System.Drawing.Point(0, 0);
             this.trv_repoContent.MinimumSize = new System.Drawing.Size(1240, 0);
             this.trv_repoContent.Name = "trv_repoContent";
-            treeNode7.ImageIndex = -2;
-            treeNode7.Name = "Node0";
-            treeNode7.SelectedImageIndex = -2;
-            treeNode7.Text = "Node0";
-            treeNode8.ImageIndex = 1;
-            treeNode8.Name = "Node2";
-            treeNode8.SelectedImageIndex = 1;
-            treeNode8.Text = "Node2";
-            treeNode9.ImageIndex = 2;
-            treeNode9.Name = "Node3";
-            treeNode9.SelectedImageIndex = 2;
-            treeNode9.Text = "Node3";
-            treeNode10.ImageIndex = 3;
-            treeNode10.Name = "Node0";
-            treeNode10.SelectedImageIndex = 3;
-            treeNode10.Text = "Node0";
-            treeNode11.ImageIndex = 4;
-            treeNode11.Name = "Node1";
-            treeNode11.SelectedImageIndex = 4;
-            treeNode11.Text = "Node1";
-            treeNode12.ImageIndex = 5;
-            treeNode12.Name = "Node2";
-            treeNode12.SelectedImageIndex = 5;
-            treeNode12.Text = "Node2";
+            treeNode1.ImageIndex = -2;
+            treeNode1.Name = "Node0";
+            treeNode1.SelectedImageIndex = -2;
+            treeNode1.Text = "Node0";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "Node2";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Node2";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "Node3";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Text = "Node3";
+            treeNode4.ImageIndex = 3;
+            treeNode4.Name = "Node0";
+            treeNode4.SelectedImageIndex = 3;
+            treeNode4.Text = "Node0";
+            treeNode5.ImageIndex = 4;
+            treeNode5.Name = "Node1";
+            treeNode5.SelectedImageIndex = 4;
+            treeNode5.Text = "Node1";
+            treeNode6.ImageIndex = 5;
+            treeNode6.Name = "Node2";
+            treeNode6.SelectedImageIndex = 5;
+            treeNode6.Text = "Node2";
             this.trv_repoContent.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.trv_repoContent.SelectedImageIndex = 0;
             this.trv_repoContent.ShowRootLines = false;
             this.trv_repoContent.Size = new System.Drawing.Size(1240, 490);
@@ -1557,20 +1570,6 @@
             this.prb_progressBar_All.ShowInTaskbar = true;
             this.prb_progressBar_All.Size = new System.Drawing.Size(1170, 5);
             this.prb_progressBar_All.TabIndex = 11;
-            // 
-            // btn_cancelDownload
-            // 
-            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
-            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_cancelDownload.Location = new System.Drawing.Point(1199, 27);
-            this.btn_cancelDownload.Name = "btn_cancelDownload";
-            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
-            this.btn_cancelDownload.TabIndex = 12;
-            this.btn_cancelDownload.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
-            this.btn_cancelDownload.Visible = false;
             // 
             // prb_progressBar_File
             // 
@@ -2944,8 +2943,8 @@
             this.btn_openArmaholic.Primary = true;
             this.btn_openArmaholic.RoundedCornerRadius = 2;
             this.btn_openArmaholic.Shadow = null;
-            graphicsPath10.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_openArmaholic.ShadowShape = graphicsPath10;
+            graphicsPath1.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_openArmaholic.ShadowShape = graphicsPath1;
             this.btn_openArmaholic.Size = new System.Drawing.Size(150, 35);
             this.btn_openArmaholic.TabIndex = 6;
             this.btn_openArmaholic.Text = "Visit";
@@ -3006,8 +3005,8 @@
             this.btn_openWorkshop.Primary = true;
             this.btn_openWorkshop.RoundedCornerRadius = 2;
             this.btn_openWorkshop.Shadow = null;
-            graphicsPath11.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_openWorkshop.ShadowShape = graphicsPath11;
+            graphicsPath2.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_openWorkshop.ShadowShape = graphicsPath2;
             this.btn_openWorkshop.Size = new System.Drawing.Size(150, 35);
             this.btn_openWorkshop.TabIndex = 4;
             this.btn_openWorkshop.Text = "Visit";
@@ -3068,8 +3067,8 @@
             this.btn_reinstallTFRPlugins.Primary = true;
             this.btn_reinstallTFRPlugins.RoundedCornerRadius = 2;
             this.btn_reinstallTFRPlugins.Shadow = null;
-            graphicsPath12.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_reinstallTFRPlugins.ShadowShape = graphicsPath12;
+            graphicsPath3.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_reinstallTFRPlugins.ShadowShape = graphicsPath3;
             this.btn_reinstallTFRPlugins.Size = new System.Drawing.Size(150, 35);
             this.btn_reinstallTFRPlugins.TabIndex = 1;
             this.btn_reinstallTFRPlugins.Text = "Reinstall Plugins";
@@ -3169,6 +3168,24 @@
             this.doubleBufferPanel2.Name = "doubleBufferPanel2";
             this.doubleBufferPanel2.Size = new System.Drawing.Size(460, 560);
             this.doubleBufferPanel2.TabIndex = 3;
+            // 
+            // scroll_steamAddons
+            // 
+            this.scroll_steamAddons.Dock = System.Windows.Forms.DockStyle.Right;
+            this.scroll_steamAddons.LargeChange = 10;
+            this.scroll_steamAddons.Location = new System.Drawing.Point(455, 30);
+            this.scroll_steamAddons.Maximum = 100;
+            this.scroll_steamAddons.MaximumSize = new System.Drawing.Size(5, 0);
+            this.scroll_steamAddons.Minimum = 0;
+            this.scroll_steamAddons.MouseWheelBarPartitions = 10;
+            this.scroll_steamAddons.Name = "scroll_steamAddons";
+            this.scroll_steamAddons.Orientation = MetroFramework.Controls.MetroScrollOrientation.Vertical;
+            this.scroll_steamAddons.ScrollbarSize = 5;
+            this.scroll_steamAddons.Size = new System.Drawing.Size(5, 530);
+            this.scroll_steamAddons.TabIndex = 4;
+            this.scroll_steamAddons.UseSelectable = true;
+            this.scroll_steamAddons.Visible = false;
+            this.scroll_steamAddons.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scroll_steamAddons_Scroll);
             // 
             // flowpanel_steamworkshopAddonsList
             // 
@@ -3295,24 +3312,6 @@
             this.btn_windowMinimize.MouseEnter += new System.EventHandler(this.btn_windowMinimize_MouseEnter);
             this.btn_windowMinimize.MouseLeave += new System.EventHandler(this.btn_windowMinimize_MouseLeave);
             // 
-            // scroll_steamAddons
-            // 
-            this.scroll_steamAddons.Dock = System.Windows.Forms.DockStyle.Right;
-            this.scroll_steamAddons.LargeChange = 10;
-            this.scroll_steamAddons.Location = new System.Drawing.Point(455, 30);
-            this.scroll_steamAddons.Maximum = 100;
-            this.scroll_steamAddons.MaximumSize = new System.Drawing.Size(5, 0);
-            this.scroll_steamAddons.Minimum = 0;
-            this.scroll_steamAddons.MouseWheelBarPartitions = 10;
-            this.scroll_steamAddons.Name = "scroll_steamAddons";
-            this.scroll_steamAddons.Orientation = MetroFramework.Controls.MetroScrollOrientation.Vertical;
-            this.scroll_steamAddons.ScrollbarSize = 5;
-            this.scroll_steamAddons.Size = new System.Drawing.Size(5, 530);
-            this.scroll_steamAddons.TabIndex = 4;
-            this.scroll_steamAddons.UseSelectable = true;
-            this.scroll_steamAddons.Visible = false;
-            this.scroll_steamAddons.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scroll_steamAddons_Scroll);
-            // 
             // MainForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -3334,13 +3333,14 @@
             this.Load += new System.EventHandler(this.MainForm2_Load);
             this.Shown += new System.EventHandler(this.MainForm2_Shown);
             this.Resize += new System.EventHandler(this.MainForm2_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.flowAddonsMenu.ResumeLayout(false);
             this.repositoryMenu.ResumeLayout(false);
             this.optionaladdonsMenu.ResumeLayout(false);
             this.steamworkshopMenu.ResumeLayout(false);
             this.win_mainWindow.ResumeLayout(false);
             this.panel_sideMenu.ResumeLayout(false);
-            this.doubleBufferFlowPanel1.ResumeLayout(false);
+            this.sidemenu_menuList.ResumeLayout(false);
             this.doubleBufferPanel5.ResumeLayout(false);
             this.doubleBufferPanel5.PerformLayout();
             this.doubleBufferPanel7.ResumeLayout(false);
@@ -3350,8 +3350,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.img_repoBusy)).EndInit();
             this.doubleBufferPanel11.ResumeLayout(false);
             this.doubleBufferPanel11.PerformLayout();
-            this.doubleBufferPanel4.ResumeLayout(false);
-            this.doubleBufferPanel4.PerformLayout();
+            this.sidemenu_botPanel.ResumeLayout(false);
+            this.sidemenu_botPanel.PerformLayout();
             this.panel_mainPanel.ResumeLayout(false);
             this.panel_outterPanel.ResumeLayout(false);
             this.panel_preferences.ResumeLayout(false);
@@ -3386,7 +3386,6 @@
             this.panel_repoBottom.ResumeLayout(false);
             this.panel_repoDownload.ResumeLayout(false);
             this.panel_repoDownload.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.panel_repoInfo.ResumeLayout(false);
             this.panel_repoInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -3601,8 +3600,8 @@
         private System.Windows.Forms.PictureBox btn_pref_ereaseTSDir;
         private System.Windows.Forms.PictureBox btn_pref_ereaseAddonsDir;
         private System.Windows.Forms.PictureBox btn_pref_ereaseArmaDir;
-        private Controls.DoubleBufferPanel doubleBufferPanel4;
-        private Controls.DoubleBufferFlowPanel doubleBufferFlowPanel1;
+        private Controls.DoubleBufferPanel sidemenu_botPanel;
+        private Controls.DoubleBufferFlowPanel sidemenu_menuList;
         private Controls.DoubleBufferPanel doubleBufferPanel5;
         private Controls.DoubleBufferPanel doubleBufferPanel6;
         private Controls.DoubleBufferPanel doubleBufferPanel7;

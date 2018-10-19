@@ -44,7 +44,7 @@ namespace arma3Launcher.Workers
             Version NewVersion = null;
             Version CurVersion = null;
 
-            bool ContinueStart = true;
+            bool isUpdate = false;
 
             NewVersionS = string.Empty;
             CurVersionS = string.Empty;
@@ -104,7 +104,6 @@ namespace arma3Launcher.Workers
                 catch
                 {
                     txt_versiontag.Text = "Unable to determinate installed version.";
-                    ContinueStart = false;
                 }
 
                 if (NewVersion > CurVersion)
@@ -116,9 +115,7 @@ namespace arma3Launcher.Workers
                         msgBtns = MessageBoxButtons.OKCancel;
 
                     if (new Windows.MessageBox().Show("There's a new launcher version available.", "Version " + NewVersionS + " available", msgBtns, MessageIcon.Information) == DialogResult.OK)
-                    { ContinueStart = false; }
-                    else
-                    { ContinueStart = true; }
+                        isUpdate = true;
 
                     txt_versiontag.Text = "Version " + NewVersionS + " available to update!";
                 }
@@ -131,9 +128,7 @@ namespace arma3Launcher.Workers
                         msgBtns = MessageBoxButtons.OKCancel;
 
                     if (new Windows.MessageBox().Show("The launcher needs to downgrade to a stable version.", "Version " + NewVersionS + " available", msgBtns, MessageIcon.Information) == DialogResult.OK)
-                    { ContinueStart = false; }
-                    else
-                    { ContinueStart = true; }
+                        isUpdate = true;
 
                     txt_versiontag.Text = "Version " + NewVersionS + " available to downgrade!";
                 }
@@ -144,7 +139,7 @@ namespace arma3Launcher.Workers
             }
             catch { }
 
-            return ContinueStart;
+            return isUpdate;
         }
 
         public void StartUpdate()

@@ -511,31 +511,42 @@ namespace arma3Launcher.Workers
             this.mainForm.LaunchGame();
         }
 
-        public void installTeamSpeakPlugin()
+        public void InstallTeamSpeakPlugin()
         {
             this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
-            this.progressBarFileStyle(ProgressBarStyle.Continuous);
-            this.progressBarFileValue(0);
 
             if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
             {
-
                 string sourcePath = AddonsFolder + @"@task_force_radio\plugins";
 
-                this.progressBarFileState(ProgressBarState.Normal);
-                this.progressStatusText("Installing TeamSpeak 3 plugins...");
-
-                sourcePath = AddonsFolder + @"@task_force_radio\plugins";
-
-                    foreach (string file in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                        if (file.EndsWith(".ts3_plugin")) { Process.Start(file).WaitForExit(); }
-
-                this.progressBarFileValue(0);
-                this.progressStatusText("Waiting for orders");
+                foreach (string file in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                    if (file.EndsWith(".ts3_plugin")) { Process.Start(file).WaitForExit(); }
             }
             else
             {
                 new Windows.MessageBox().Show("No such directory \"" + AddonsFolder + @"@task_force_radio\plugins" + "\".", "No such file or directory", MessageBoxButtons.OK, MessageIcon.Error);
+            }
+        }
+
+        public void InstallUserConfig()
+        {
+            this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
+
+            if (Directory.Exists(AddonsFolder + @"@task_force_radio\userconfig"))
+            {
+                string sourcePath = AddonsFolder + @"@task_force_radio\userconfig";
+                string destinationPath = Properties.Settings.Default.Arma3Folder + @"userconfig";
+
+                foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                    Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
+
+
+                foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                    File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
+            }
+            else
+            {
+                new Windows.MessageBox().Show("No such directory \"" + AddonsFolder + @"@task_force_radio\userconfig" + "\".", "No such file or directory", MessageBoxButtons.OK, MessageIcon.Error);
             }
         }
     }

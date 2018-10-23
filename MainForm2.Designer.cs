@@ -39,6 +39,7 @@
             System.Drawing.Drawing2D.GraphicsPath graphicsPath1 = new System.Drawing.Drawing2D.GraphicsPath();
             System.Drawing.Drawing2D.GraphicsPath graphicsPath2 = new System.Drawing.Drawing2D.GraphicsPath();
             System.Drawing.Drawing2D.GraphicsPath graphicsPath3 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath4 = new System.Drawing.Drawing2D.GraphicsPath();
             this.imageListRepo = new System.Windows.Forms.ImageList(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
@@ -245,6 +246,10 @@
             this.btn_windowMenu = new System.Windows.Forms.PictureBox();
             this.btn_windowClose = new System.Windows.Forms.PictureBox();
             this.btn_windowMinimize = new System.Windows.Forms.PictureBox();
+            this.doubleBufferPanel1 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.doubleBufferPanel4 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
+            this.btn_reinstallUserconfigFiles = new MaterialSkin.Controls.MaterialRaisedButton();
             ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.flowAddonsMenu.SuspendLayout();
             this.repositoryMenu.SuspendLayout();
@@ -317,6 +322,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMinimize)).BeginInit();
+            this.doubleBufferPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageListRepo
@@ -2889,6 +2895,8 @@
             this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel18);
             this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel20);
             this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel17);
+            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel1);
+            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel4);
             this.doubleBufferPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.doubleBufferPanel15.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.doubleBufferPanel15.Location = new System.Drawing.Point(925, 0);
@@ -3312,6 +3320,68 @@
             this.btn_windowMinimize.MouseEnter += new System.EventHandler(this.btn_windowMinimize_MouseEnter);
             this.btn_windowMinimize.MouseLeave += new System.EventHandler(this.btn_windowMinimize_MouseLeave);
             // 
+            // doubleBufferPanel1
+            // 
+            this.doubleBufferPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.doubleBufferPanel1.Location = new System.Drawing.Point(10, 244);
+            this.doubleBufferPanel1.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
+            this.doubleBufferPanel1.Name = "doubleBufferPanel1";
+            this.doubleBufferPanel1.Size = new System.Drawing.Size(295, 2);
+            this.doubleBufferPanel1.TabIndex = 15;
+            // 
+            // doubleBufferPanel4
+            // 
+            this.doubleBufferPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.doubleBufferPanel4.Controls.Add(this.materialLabel12);
+            this.doubleBufferPanel4.Controls.Add(this.btn_reinstallUserconfigFiles);
+            this.doubleBufferPanel4.Location = new System.Drawing.Point(5, 261);
+            this.doubleBufferPanel4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.doubleBufferPanel4.Name = "doubleBufferPanel4";
+            this.doubleBufferPanel4.Size = new System.Drawing.Size(305, 50);
+            this.doubleBufferPanel4.TabIndex = 14;
+            // 
+            // materialLabel12
+            // 
+            this.materialLabel12.AutoSize = true;
+            this.materialLabel12.Depth = 0;
+            this.materialLabel12.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel12.FontSize = 11;
+            this.materialLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel12.Location = new System.Drawing.Point(8, 16);
+            this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel12.Name = "materialLabel12";
+            this.materialLabel12.Primary = false;
+            this.materialLabel12.Shadow = null;
+            this.materialLabel12.ShadowShape = null;
+            this.materialLabel12.Size = new System.Drawing.Size(129, 19);
+            this.materialLabel12.TabIndex = 3;
+            this.materialLabel12.Text = "Userconfig folder:";
+            // 
+            // btn_reinstallUserconfigFiles
+            // 
+            this.btn_reinstallUserconfigFiles.AutoSize = true;
+            this.btn_reinstallUserconfigFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_reinstallUserconfigFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btn_reinstallUserconfigFiles.Depth = 0;
+            this.btn_reinstallUserconfigFiles.Font = new System.Drawing.Font("Roboto", 9F);
+            this.btn_reinstallUserconfigFiles.FontSize = 9;
+            this.btn_reinstallUserconfigFiles.Icon = null;
+            this.btn_reinstallUserconfigFiles.Location = new System.Drawing.Point(147, 8);
+            this.btn_reinstallUserconfigFiles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btn_reinstallUserconfigFiles.MaximumSize = new System.Drawing.Size(150, 35);
+            this.btn_reinstallUserconfigFiles.MinimumSize = new System.Drawing.Size(150, 35);
+            this.btn_reinstallUserconfigFiles.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btn_reinstallUserconfigFiles.Name = "btn_reinstallUserconfigFiles";
+            this.btn_reinstallUserconfigFiles.Primary = true;
+            this.btn_reinstallUserconfigFiles.RoundedCornerRadius = 2;
+            this.btn_reinstallUserconfigFiles.Shadow = null;
+            graphicsPath4.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_reinstallUserconfigFiles.ShadowShape = graphicsPath4;
+            this.btn_reinstallUserconfigFiles.Size = new System.Drawing.Size(150, 35);
+            this.btn_reinstallUserconfigFiles.TabIndex = 1;
+            this.btn_reinstallUserconfigFiles.Text = "Reinstall Files";
+            this.btn_reinstallUserconfigFiles.Click += new System.EventHandler(this.btn_reinstallUserconfigFiles_Click);
+            // 
             // MainForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -3434,6 +3504,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMinimize)).EndInit();
+            this.doubleBufferPanel4.ResumeLayout(false);
+            this.doubleBufferPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3646,5 +3718,9 @@
         private MaterialSkin.Controls.MaterialSnackbar snackbar_mainWindow;
         private MetroFramework.Controls.MetroScrollBar scroll_optionalAddons;
         private MetroFramework.Controls.MetroScrollBar scroll_steamAddons;
+        private Controls.DoubleBufferPanel doubleBufferPanel1;
+        private Controls.DoubleBufferPanel doubleBufferPanel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel12;
+        private MaterialSkin.Controls.MaterialRaisedButton btn_reinstallUserconfigFiles;
     }
 }

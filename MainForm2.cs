@@ -1593,7 +1593,14 @@ namespace arma3Launcher
         {
             showSnackBar("Task Force Radio plugin installation...", 2500, true, true, Primary.LightGreen800);
             await taskDelay(1500);
-            installer.installTeamSpeakPlugin();
+            installer.InstallTeamSpeakPlugin();
+        }
+
+        private async void btn_reinstallUserconfigFiles_Click(object sender, EventArgs e)
+        {
+            showSnackBar("Moving userconfig folder...", 2500, true, true, Primary.LightGreen800);
+            await taskDelay(1500);
+            installer.InstallUserConfig();
         }
 
         public async void showSnackBar(string Message, int Delay, bool Primary)

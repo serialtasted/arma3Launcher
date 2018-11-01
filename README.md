@@ -6,7 +6,7 @@ This launcher is used by the PTrangers community. The launcher enables us to lau
 [![GitHub source](https://img.shields.io/badge/Source-Download%20ZIP-orange.svg)](https://github.com/serialtasted/arma3Launcher/archive/master.zip)
 [![GitHub issues](https://img.shields.io/github/issues/serialtasted/arma3Launcher.svg?label=Issues)](https://github.com/serialtasted/arma3Launcher/issues)
 
-###Features
+### Features
 * Multiple addon packs
 * Auto update and download everything you need to play
 * Easy to use and to configure
@@ -19,7 +19,10 @@ This launcher is used by the PTrangers community. The launcher enables us to lau
 * User defines TeamSpeak 3 and Arma 3 directories
 * Delta patching based system that only downloads what you really need
 
-###Contributing
+### Contributing
 You can help out with the development of this launcher by reporting bugs or suggesting some new features. Or you can even contribute by forking this repository and submitting a pull request that will be later reviwed.
 
 Please, use our [Issue Tracker](https://github.com/serialtasted/arma3Launcher/issues) to report a bug, propose a feature, or suggest changes to the existing ones.
+
+### License
+This project is under the **GNU General Public License v3.0**. For more info please visit https://choosealicense.com/licenses/gpl-3.0/

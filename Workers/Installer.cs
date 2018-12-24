@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using arma3Launcher.Workers;
 using MaterialSkin.Controls;
+using MaterialSkin;
+
 namespace arma3Launcher.Workers
 {
     class Installer
@@ -249,7 +251,7 @@ namespace arma3Launcher.Workers
             this.addonsPathFind.Enabled = false;
 
             // hide cancel button
-            try { this.cancelButton.Visible = false; } catch { }
+            try { this.cancelButton.Enabled = false; this.cancelButton.Image = Properties.Resources.cancel_circle_big_inactive; } catch { }
 
             // begin installation
             this.isInstall = true;
@@ -265,13 +267,13 @@ namespace arma3Launcher.Workers
         public void ValidateLocalFiles()
         {
             // show download panel
-            this.mainForm.showDownloadPanel();
+            this.mainForm.ShowDownloadPanel();
 
             // define paths
             this.AddonsFolder = Properties.Settings.Default.AddonsFolder;
 
             // hide cancel button
-            try { this.cancelButton.Visible = false; } catch { }
+            try { this.cancelButton.Enabled = false; this.cancelButton.Image = Properties.Resources.cancel_circle_big_inactive; } catch { }
 
             // begin validation
             this.isInstall = false;
@@ -347,7 +349,7 @@ namespace arma3Launcher.Workers
                 this.progressBarFileStyle(ProgressBarStyle.Continuous);
                 this.progressStatusText("Waiting for orders");
                 await this.taskDelay(1500);
-                this.mainForm.hideDownloadPanel();
+                this.mainForm.HideDownloadPanel();
                 mainForm.ReadRepo(true);
             }
         }
@@ -420,26 +422,26 @@ namespace arma3Launcher.Workers
             switch (activeForm)
             {
                 case "mainForm":
-                    if (!e.Cancelled && this.isLaunch && this.mainForm.startGameAfterDownload())
+                    if (!e.Cancelled && this.isLaunch && this.mainForm.StartGameAfterDownload())
                     {
                         this.progressBarFileStyle(ProgressBarStyle.Marquee);
                         this.progressBarFileValue(50);
                         this.progressStatusText("Launching game...");
                         this.delayLaunch.Start();
                     }
-                    else if (!e.Cancelled && this.isLaunch && !this.mainForm.startGameAfterDownload())
+                    else if (!e.Cancelled && this.isLaunch && !this.mainForm.StartGameAfterDownload())
                     {
                         this.progressBarFileStyle(ProgressBarStyle.Continuous);
                         this.progressStatusText("Game ready to launch...");
                         await this.taskDelay(1500);
-                        this.mainForm.hideDownloadPanel();
+                        this.mainForm.HideDownloadPanel();
                     }
                     else if (!e.Cancelled)
                     {
                         this.progressBarFileStyle(ProgressBarStyle.Continuous);
                         this.progressStatusText("Waiting for orders");
                         await this.taskDelay(1500);
-                        this.mainForm.hideDownloadPanel();
+                        this.mainForm.HideDownloadPanel();
                     }
 
                     this.isLaunch = false;
@@ -521,6 +523,8 @@ namespace arma3Launcher.Workers
 
                 foreach (string file in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
                     if (file.EndsWith(".ts3_plugin")) { Process.Start(file).WaitForExit(); }
+
+                mainForm.ShowSnackBar("Task Force Radio plugins installed successfully", 2500, true, true, Primary.LightGreen800);
             }
             else
             {
@@ -543,6 +547,8 @@ namespace arma3Launcher.Workers
 
                 foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
                     File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
+
+                mainForm.ShowSnackBar("Userconfig files moved successfully", 2500, true, true, Primary.LightGreen800);
             }
             else
             {

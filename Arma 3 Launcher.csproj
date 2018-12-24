@@ -358,6 +358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ptrangers.ico" />
+    <None Include="Resources\cancel-circle-big-inactive.png" />
     <None Include="Resources\msg_none.png" />
     <None Include="Resources\msg_warning.png" />
     <None Include="Resources\msg_stop.png" />

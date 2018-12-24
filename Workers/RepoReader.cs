@@ -163,7 +163,7 @@ namespace arma3Launcher.Workers
         public async void ReadRepo(bool showMessage, bool autoDownload, bool validateFiles, bool isLaunch)
         {
             if (validateFiles)
-                mainForm.showSnackBar("Validating repository...", 2000, false);
+                mainForm.ShowSnackBar("Validating repository...", 2000, false);
 
             while (GlobalVar.isReadingRepo)
                 await taskDelay(100);
@@ -175,7 +175,7 @@ namespace arma3Launcher.Workers
             {
                 this.repoTreeView.Nodes.Clear();
                 this.repoTreeView.Nodes.Add("ERROR", "No addons folder selected!", 5, 5);
-                this.mainForm.showSnackBar("No addons folder selected!", 2000, true, true, MaterialSkin.Primary.Red800);
+                this.mainForm.ShowSnackBar("No addons folder selected!", 2000, true, true, MaterialSkin.Primary.Red800);
 
                 this.lbl_filesOK.Text = "N/A";
                 this.lbl_filesINVALID.Text = "N/A";
@@ -272,14 +272,14 @@ namespace arma3Launcher.Workers
                 if (showMessage)
                     new Windows.MessageBox().Show("All files are synced with the repository!", "You're amazing", MessageBoxButtons.OK, MessageIcon.Information);
                 else if (validateFiles && !isLaunch)
-                    mainForm.showSnackBar("Finished repository validation", 2000, false);
+                    mainForm.ShowSnackBar("Finished repository validation", 2000, false);
             }
             else
             {
                 if (needsUpdate == UpdateType.Download)
                 {
                     if (!showMessage)
-                        mainForm.showSnackBar("Repository needs update!", 2000, false);
+                        mainForm.ShowSnackBar("Repository needs update!", 2000, false);
 
                     foreach (PackBlock item in flowpanelAddonPacks.Controls)
                     {
@@ -297,7 +297,7 @@ namespace arma3Launcher.Workers
                 }
                 else if (needsUpdate == UpdateType.Validation)
                 {
-                    mainForm.showSnackBar("Validating local storage...", 2000, false);
+                    mainForm.ShowSnackBar("Validating local storage...", 2000, false);
 
                     foreach (PackBlock item in flowpanelAddonPacks.Controls)
                     {

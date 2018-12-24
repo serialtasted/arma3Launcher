@@ -372,7 +372,7 @@ namespace arma3Launcher.Workers
                     item.enablePlayButton();
                 }
                 this.repoValidateBtn.Enabled = true;
-                try { cancelButton.Visible = false; } catch { }
+                try { this.cancelButton.Enabled = false; this.cancelButton.Image = Properties.Resources.cancel_circle_big_inactive; } catch { }
 
                 await taskDelay(1500);
                 if (numTimesCancel == 1)
@@ -403,7 +403,7 @@ namespace arma3Launcher.Workers
                 { this.progressStatusText("Alright... Bye bye"); await taskDelay(2500); this.mainForm.Close(); }
 
                 await taskDelay(2000);
-                this.mainForm.hideDownloadPanel();
+                this.mainForm.HideDownloadPanel();
             }
         }
 
@@ -440,7 +440,7 @@ namespace arma3Launcher.Workers
             this.cancelProcess = false;
 
             // show download panel
-            this.mainForm.showDownloadPanel();
+            this.mainForm.ShowDownloadPanel();
 
             // initialize timer
             this.totalSw = new System.Windows.Forms.Timer();
@@ -482,7 +482,7 @@ namespace arma3Launcher.Workers
             this.calculateFiles.RunWorkerAsync();
 
             // show cancel button if possible
-            try { cancelButton.Visible = true; } catch { }
+            try { this.cancelButton.Enabled = true; this.cancelButton.Image = Properties.Resources.cancel_circle_big_white; } catch { }
         }
 
         /// <summary>

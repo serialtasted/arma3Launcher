@@ -42,7 +42,6 @@
             System.Drawing.Drawing2D.GraphicsPath graphicsPath4 = new System.Drawing.Drawing2D.GraphicsPath();
             this.imageListRepo = new System.Windows.Forms.ImageList(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
             this.dlg_folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.flowAddonsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_reloadPacks = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,6 +132,7 @@
             this.panel_repoBottom = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_repoDownload = new arma3Launcher.Controls.DoubleBufferPanel();
             this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
+            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
             this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
@@ -229,6 +229,10 @@
             this.doubleBufferPanel17 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
             this.btn_reinstallTFRPlugins = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.doubleBufferPanel1 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.doubleBufferPanel4 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
+            this.btn_reinstallUserconfigFiles = new MaterialSkin.Controls.MaterialRaisedButton();
             this.doubleBufferPanel12 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.scroll_optionalAddons = new MetroFramework.Controls.MetroScrollBar();
             this.flowpanel_optionalAddons = new arma3Launcher.Controls.DoubleBufferFlowPanel();
@@ -246,11 +250,6 @@
             this.btn_windowMenu = new System.Windows.Forms.PictureBox();
             this.btn_windowClose = new System.Windows.Forms.PictureBox();
             this.btn_windowMinimize = new System.Windows.Forms.PictureBox();
-            this.doubleBufferPanel1 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel4 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
-            this.btn_reinstallUserconfigFiles = new MaterialSkin.Controls.MaterialRaisedButton();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.flowAddonsMenu.SuspendLayout();
             this.repositoryMenu.SuspendLayout();
             this.optionaladdonsMenu.SuspendLayout();
@@ -290,6 +289,7 @@
             this.panel_contentRepositoryDownloads.SuspendLayout();
             this.panel_repoBottom.SuspendLayout();
             this.panel_repoDownload.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.panel_repoInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -314,6 +314,7 @@
             this.doubleBufferPanel16.SuspendLayout();
             this.doubleBufferPanel18.SuspendLayout();
             this.doubleBufferPanel17.SuspendLayout();
+            this.doubleBufferPanel4.SuspendLayout();
             this.doubleBufferPanel12.SuspendLayout();
             this.doubleBufferPanel13.SuspendLayout();
             this.doubleBufferPanel2.SuspendLayout();
@@ -322,7 +323,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMinimize)).BeginInit();
-            this.doubleBufferPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageListRepo
@@ -335,20 +335,6 @@
             this.imageListRepo.Images.SetKeyName(3, "folder-checked.png");
             this.imageListRepo.Images.SetKeyName(4, "folder-error.png");
             this.imageListRepo.Images.SetKeyName(5, "folder-cancel.png");
-            // 
-            // btn_cancelDownload
-            // 
-            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
-            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_cancelDownload.Location = new System.Drawing.Point(1199, 27);
-            this.btn_cancelDownload.Name = "btn_cancelDownload";
-            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
-            this.btn_cancelDownload.TabIndex = 12;
-            this.btn_cancelDownload.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
-            this.btn_cancelDownload.Visible = false;
             // 
             // dlg_folderBrowser
             // 
@@ -438,6 +424,7 @@
             this.optionaladdonsMenu.ShowImageMargin = false;
             this.optionaladdonsMenu.ShowItemToolTips = false;
             this.optionaladdonsMenu.Size = new System.Drawing.Size(150, 54);
+            this.optionaladdonsMenu.Opening += new System.ComponentModel.CancelEventHandler(this.optionaladdonsMenu_Opening);
             // 
             // tsmi_openOptionalFolder
             // 
@@ -472,6 +459,7 @@
             this.steamworkshopMenu.ShowImageMargin = false;
             this.steamworkshopMenu.ShowItemToolTips = false;
             this.steamworkshopMenu.Size = new System.Drawing.Size(150, 54);
+            this.steamworkshopMenu.Opening += new System.ComponentModel.CancelEventHandler(this.steamworkshopMenu_Opening);
             // 
             // tsmi_openWorkshopFolder
             // 
@@ -536,7 +524,7 @@
             this.panel_sideMenu.MaximumSize = new System.Drawing.Size(300, 0);
             this.panel_sideMenu.MinimumSize = new System.Drawing.Size(0, 670);
             this.panel_sideMenu.Name = "panel_sideMenu";
-            this.panel_sideMenu.Size = new System.Drawing.Size(300, 670);
+            this.panel_sideMenu.Size = new System.Drawing.Size(11, 670);
             this.panel_sideMenu.TabIndex = 1;
             // 
             // sidemenu_menuList
@@ -549,7 +537,7 @@
             this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel9);
             this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel10);
             this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel11);
-            this.sidemenu_menuList.Location = new System.Drawing.Point(0, 0);
+            this.sidemenu_menuList.Location = new System.Drawing.Point(-289, 0);
             this.sidemenu_menuList.Margin = new System.Windows.Forms.Padding(0);
             this.sidemenu_menuList.Name = "sidemenu_menuList";
             this.sidemenu_menuList.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
@@ -717,7 +705,7 @@
             this.sidemenu_botPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.sidemenu_botPanel.Location = new System.Drawing.Point(0, 597);
             this.sidemenu_botPanel.Name = "sidemenu_botPanel";
-            this.sidemenu_botPanel.Size = new System.Drawing.Size(300, 73);
+            this.sidemenu_botPanel.Size = new System.Drawing.Size(11, 73);
             this.sidemenu_botPanel.TabIndex = 10;
             // 
             // menu_help
@@ -727,7 +715,7 @@
             this.menu_help.BackColor = System.Drawing.Color.Transparent;
             this.menu_help.Font = new System.Drawing.Font("Lato", 9.5F);
             this.menu_help.ForeColor = System.Drawing.Color.Silver;
-            this.menu_help.Location = new System.Drawing.Point(13, 17);
+            this.menu_help.Location = new System.Drawing.Point(-276, 17);
             this.menu_help.Name = "menu_help";
             this.menu_help.Size = new System.Drawing.Size(35, 16);
             this.menu_help.TabIndex = 6;
@@ -743,7 +731,7 @@
             this.menu_about.BackColor = System.Drawing.Color.Transparent;
             this.menu_about.Font = new System.Drawing.Font("Lato", 9.5F);
             this.menu_about.ForeColor = System.Drawing.Color.Silver;
-            this.menu_about.Location = new System.Drawing.Point(13, 40);
+            this.menu_about.Location = new System.Drawing.Point(-276, 40);
             this.menu_about.Name = "menu_about";
             this.menu_about.Size = new System.Drawing.Size(43, 16);
             this.menu_about.TabIndex = 7;
@@ -759,7 +747,7 @@
             this.txt_versionNumber.BackColor = System.Drawing.Color.Transparent;
             this.txt_versionNumber.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.txt_versionNumber.ForeColor = System.Drawing.Color.DarkGray;
-            this.txt_versionNumber.Location = new System.Drawing.Point(242, 43);
+            this.txt_versionNumber.Location = new System.Drawing.Point(-47, 43);
             this.txt_versionNumber.Name = "txt_versionNumber";
             this.txt_versionNumber.Size = new System.Drawing.Size(50, 12);
             this.txt_versionNumber.TabIndex = 8;
@@ -1576,6 +1564,23 @@
             this.prb_progressBar_All.ShowInTaskbar = true;
             this.prb_progressBar_All.Size = new System.Drawing.Size(1170, 5);
             this.prb_progressBar_All.TabIndex = 11;
+            // 
+            // btn_cancelDownload
+            // 
+            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
+            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_cancelDownload.Image = global::arma3Launcher.Properties.Resources.cancel_circle_big_white;
+            this.btn_cancelDownload.Location = new System.Drawing.Point(1199, 27);
+            this.btn_cancelDownload.Name = "btn_cancelDownload";
+            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
+            this.btn_cancelDownload.TabIndex = 12;
+            this.btn_cancelDownload.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
+            this.btn_cancelDownload.Visible = false;
+            this.btn_cancelDownload.MouseEnter += new System.EventHandler(this.btn_cancelDownload_MouseEnter);
+            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
             // 
             // prb_progressBar_File
             // 
@@ -3082,6 +3087,68 @@
             this.btn_reinstallTFRPlugins.Text = "Reinstall Plugins";
             this.btn_reinstallTFRPlugins.Click += new System.EventHandler(this.btn_reinstallTFRPlugins_Click);
             // 
+            // doubleBufferPanel1
+            // 
+            this.doubleBufferPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.doubleBufferPanel1.Location = new System.Drawing.Point(10, 244);
+            this.doubleBufferPanel1.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
+            this.doubleBufferPanel1.Name = "doubleBufferPanel1";
+            this.doubleBufferPanel1.Size = new System.Drawing.Size(295, 2);
+            this.doubleBufferPanel1.TabIndex = 15;
+            // 
+            // doubleBufferPanel4
+            // 
+            this.doubleBufferPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.doubleBufferPanel4.Controls.Add(this.materialLabel12);
+            this.doubleBufferPanel4.Controls.Add(this.btn_reinstallUserconfigFiles);
+            this.doubleBufferPanel4.Location = new System.Drawing.Point(5, 261);
+            this.doubleBufferPanel4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.doubleBufferPanel4.Name = "doubleBufferPanel4";
+            this.doubleBufferPanel4.Size = new System.Drawing.Size(305, 50);
+            this.doubleBufferPanel4.TabIndex = 14;
+            // 
+            // materialLabel12
+            // 
+            this.materialLabel12.AutoSize = true;
+            this.materialLabel12.Depth = 0;
+            this.materialLabel12.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel12.FontSize = 11;
+            this.materialLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel12.Location = new System.Drawing.Point(8, 16);
+            this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel12.Name = "materialLabel12";
+            this.materialLabel12.Primary = false;
+            this.materialLabel12.Shadow = null;
+            this.materialLabel12.ShadowShape = null;
+            this.materialLabel12.Size = new System.Drawing.Size(129, 19);
+            this.materialLabel12.TabIndex = 3;
+            this.materialLabel12.Text = "Userconfig folder:";
+            // 
+            // btn_reinstallUserconfigFiles
+            // 
+            this.btn_reinstallUserconfigFiles.AutoSize = true;
+            this.btn_reinstallUserconfigFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_reinstallUserconfigFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btn_reinstallUserconfigFiles.Depth = 0;
+            this.btn_reinstallUserconfigFiles.Font = new System.Drawing.Font("Roboto", 9F);
+            this.btn_reinstallUserconfigFiles.FontSize = 9;
+            this.btn_reinstallUserconfigFiles.Icon = null;
+            this.btn_reinstallUserconfigFiles.Location = new System.Drawing.Point(147, 8);
+            this.btn_reinstallUserconfigFiles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btn_reinstallUserconfigFiles.MaximumSize = new System.Drawing.Size(150, 35);
+            this.btn_reinstallUserconfigFiles.MinimumSize = new System.Drawing.Size(150, 35);
+            this.btn_reinstallUserconfigFiles.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btn_reinstallUserconfigFiles.Name = "btn_reinstallUserconfigFiles";
+            this.btn_reinstallUserconfigFiles.Primary = true;
+            this.btn_reinstallUserconfigFiles.RoundedCornerRadius = 2;
+            this.btn_reinstallUserconfigFiles.Shadow = null;
+            graphicsPath4.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_reinstallUserconfigFiles.ShadowShape = graphicsPath4;
+            this.btn_reinstallUserconfigFiles.Size = new System.Drawing.Size(150, 35);
+            this.btn_reinstallUserconfigFiles.TabIndex = 1;
+            this.btn_reinstallUserconfigFiles.Text = "Reinstall Files";
+            this.btn_reinstallUserconfigFiles.Click += new System.EventHandler(this.btn_reinstallUserconfigFiles_Click);
+            // 
             // doubleBufferPanel12
             // 
             this.doubleBufferPanel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(44)))));
@@ -3320,68 +3387,6 @@
             this.btn_windowMinimize.MouseEnter += new System.EventHandler(this.btn_windowMinimize_MouseEnter);
             this.btn_windowMinimize.MouseLeave += new System.EventHandler(this.btn_windowMinimize_MouseLeave);
             // 
-            // doubleBufferPanel1
-            // 
-            this.doubleBufferPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.doubleBufferPanel1.Location = new System.Drawing.Point(10, 244);
-            this.doubleBufferPanel1.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
-            this.doubleBufferPanel1.Name = "doubleBufferPanel1";
-            this.doubleBufferPanel1.Size = new System.Drawing.Size(295, 2);
-            this.doubleBufferPanel1.TabIndex = 15;
-            // 
-            // doubleBufferPanel4
-            // 
-            this.doubleBufferPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.doubleBufferPanel4.Controls.Add(this.materialLabel12);
-            this.doubleBufferPanel4.Controls.Add(this.btn_reinstallUserconfigFiles);
-            this.doubleBufferPanel4.Location = new System.Drawing.Point(5, 261);
-            this.doubleBufferPanel4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.doubleBufferPanel4.Name = "doubleBufferPanel4";
-            this.doubleBufferPanel4.Size = new System.Drawing.Size(305, 50);
-            this.doubleBufferPanel4.TabIndex = 14;
-            // 
-            // materialLabel12
-            // 
-            this.materialLabel12.AutoSize = true;
-            this.materialLabel12.Depth = 0;
-            this.materialLabel12.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel12.FontSize = 11;
-            this.materialLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel12.Location = new System.Drawing.Point(8, 16);
-            this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel12.Name = "materialLabel12";
-            this.materialLabel12.Primary = false;
-            this.materialLabel12.Shadow = null;
-            this.materialLabel12.ShadowShape = null;
-            this.materialLabel12.Size = new System.Drawing.Size(129, 19);
-            this.materialLabel12.TabIndex = 3;
-            this.materialLabel12.Text = "Userconfig folder:";
-            // 
-            // btn_reinstallUserconfigFiles
-            // 
-            this.btn_reinstallUserconfigFiles.AutoSize = true;
-            this.btn_reinstallUserconfigFiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btn_reinstallUserconfigFiles.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btn_reinstallUserconfigFiles.Depth = 0;
-            this.btn_reinstallUserconfigFiles.Font = new System.Drawing.Font("Roboto", 9F);
-            this.btn_reinstallUserconfigFiles.FontSize = 9;
-            this.btn_reinstallUserconfigFiles.Icon = null;
-            this.btn_reinstallUserconfigFiles.Location = new System.Drawing.Point(147, 8);
-            this.btn_reinstallUserconfigFiles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btn_reinstallUserconfigFiles.MaximumSize = new System.Drawing.Size(150, 35);
-            this.btn_reinstallUserconfigFiles.MinimumSize = new System.Drawing.Size(150, 35);
-            this.btn_reinstallUserconfigFiles.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btn_reinstallUserconfigFiles.Name = "btn_reinstallUserconfigFiles";
-            this.btn_reinstallUserconfigFiles.Primary = true;
-            this.btn_reinstallUserconfigFiles.RoundedCornerRadius = 2;
-            this.btn_reinstallUserconfigFiles.Shadow = null;
-            graphicsPath4.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_reinstallUserconfigFiles.ShadowShape = graphicsPath4;
-            this.btn_reinstallUserconfigFiles.Size = new System.Drawing.Size(150, 35);
-            this.btn_reinstallUserconfigFiles.TabIndex = 1;
-            this.btn_reinstallUserconfigFiles.Text = "Reinstall Files";
-            this.btn_reinstallUserconfigFiles.Click += new System.EventHandler(this.btn_reinstallUserconfigFiles_Click);
-            // 
             // MainForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -3403,7 +3408,6 @@
             this.Load += new System.EventHandler(this.MainForm2_Load);
             this.Shown += new System.EventHandler(this.MainForm2_Shown);
             this.Resize += new System.EventHandler(this.MainForm2_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.flowAddonsMenu.ResumeLayout(false);
             this.repositoryMenu.ResumeLayout(false);
             this.optionaladdonsMenu.ResumeLayout(false);
@@ -3456,6 +3460,7 @@
             this.panel_repoBottom.ResumeLayout(false);
             this.panel_repoDownload.ResumeLayout(false);
             this.panel_repoDownload.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.panel_repoInfo.ResumeLayout(false);
             this.panel_repoInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -3493,6 +3498,8 @@
             this.doubleBufferPanel18.PerformLayout();
             this.doubleBufferPanel17.ResumeLayout(false);
             this.doubleBufferPanel17.PerformLayout();
+            this.doubleBufferPanel4.ResumeLayout(false);
+            this.doubleBufferPanel4.PerformLayout();
             this.doubleBufferPanel12.ResumeLayout(false);
             this.doubleBufferPanel13.ResumeLayout(false);
             this.doubleBufferPanel13.PerformLayout();
@@ -3504,8 +3511,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMinimize)).EndInit();
-            this.doubleBufferPanel4.ResumeLayout(false);
-            this.doubleBufferPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }

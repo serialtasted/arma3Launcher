@@ -421,7 +421,7 @@ namespace arma3Launcher
 
                 if (!isUpdate)
                 {
-                    updateCurrentPack(true, false);
+                    UpdateCurrentPack(true, false);
 
                     if (Directory.Exists(AddonsFolder + @"@task_force_radio\plugins"))
                         btn_reinstallTFRPlugins.Enabled = true;
@@ -1358,7 +1358,7 @@ namespace arma3Launcher
                 {
                     if (Directory.Exists(AddonsFolder))
                     {
-                        updateCurrentPack(false, true);
+                        UpdateCurrentPack(false, true);
 
                         PrepareLaunch = new LaunchCore(flowpanel_launchOptionsChb,
                             (string)cb_clientProfile.SelectedItem,
@@ -1393,12 +1393,12 @@ namespace arma3Launcher
 
                         if (packID == "arma3" || GlobalVar.repoChecked)
                         {
-                            hideDownloadPanel();
+                            HideDownloadPanel();
                             string packName = fetchAddonPacks.GetPackName(Properties.Settings.Default.LastAddonPack);
                             if (GlobalVar.isServer)
                                 packName = fetchAddonPacks.GetPackName(Properties.Settings.Default.ServerPack);
 
-                            showSnackBar("Launching " + packName + "...", 2000, true, true, Primary.LightGreen800);
+                            ShowSnackBar("Launching " + packName + "...", 2000, true, true, Primary.LightGreen800);
 
                             await taskDelay(2000);
 
@@ -1591,19 +1591,19 @@ namespace arma3Launcher
 
         private async void btn_reinstallTFRPlugins_Click(object sender, EventArgs e)
         {
-            showSnackBar("Task Force Radio plugin installation...", 2500, true, true, Primary.LightGreen800);
+            ShowSnackBar("Task Force Radio plugins installation...", 2500, true, true, Primary.LightGreen800);
             await taskDelay(1500);
             installer.InstallTeamSpeakPlugin();
         }
 
         private async void btn_reinstallUserconfigFiles_Click(object sender, EventArgs e)
         {
-            showSnackBar("Moving userconfig folder...", 2500, true, true, Primary.LightGreen800);
+            ShowSnackBar("Moving userconfig files...", 2500, true, true, Primary.LightGreen800);
             await taskDelay(1500);
             installer.InstallUserConfig();
         }
 
-        public async void showSnackBar(string Message, int Delay, bool Primary)
+        public async void ShowSnackBar(string Message, int Delay, bool Primary)
         {
             if (snackbar_mainWindow.Visible)
                 snackbar_mainWindow.HideSnackbar();
@@ -1616,7 +1616,7 @@ namespace arma3Launcher
             snackbar_mainWindow.ShowSnackbar(Delay);
         }
 
-        public async void showSnackBar (string Message, int Delay, bool Primary, bool SetCustomColor, Primary Color)
+        public async void ShowSnackBar (string Message, int Delay, bool Primary, bool SetCustomColor, Primary Color)
         {
             if (snackbar_mainWindow.Visible)
                 snackbar_mainWindow.HideSnackbar();
@@ -1636,7 +1636,7 @@ namespace arma3Launcher
             { await taskDelay(Delay + 2000); MaterialSkinManager.ColorScheme = new ColorScheme(primeColor, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE); }
         }
 
-        public async void showSnackBar(string Message, bool Button, string ButtonText)
+        public async void ShowSnackBar(string Message, bool Button, string ButtonText)
         {
             if (snackbar_mainWindow.Visible)
                 snackbar_mainWindow.HideSnackbar();
@@ -1652,28 +1652,28 @@ namespace arma3Launcher
             snackbar_mainWindow.ShowSnackbar();
         }
 
-        public void updateServerPack(string packId)
+        public void UpdateServerPack(string packId)
         { cb_serverPack.SelectedItem = packId; }
 
-        public void updateCurrentPack(bool refreshPacks, bool revealPacks)
+        public void UpdateCurrentPack(bool refreshPacks, bool revealPacks)
         { FetchRemoteSettings(refreshPacks); if (revealPacks) { fetchAddonPacks.RevealPacks(flowpanel_addonPacks); } }
 
-        public bool startGameAfterDownload()
+        public bool StartGameAfterDownload()
         { return chb_pref_startGame.Checked; }
 
-        public bool runLauncherStartup()
+        public bool RunLauncherStartup()
         { return chb_pref_runLauncherStartup.Checked; }
 
-        public bool allowNotifications()
+        public bool AllowNotifications()
         { return chb_pref_allowNotifications.Checked; }
 
-        public bool autoDownloadUpdates()
+        public bool AutoDownloadUpdates()
         { return chb_pref_autoDownload.Checked; }
 
-        public void showDownloadPanel()
+        public void ShowDownloadPanel()
         { repoInfoPanelIO.HidePanel(); }
 
-        public void hideDownloadPanel()
+        public void HideDownloadPanel()
         { repoInfoPanelIO.ShowPanel(); }
 
         public void ReadRepo(bool validateFiles, bool showMessage = false, bool isLaunch = false)
@@ -1724,7 +1724,7 @@ namespace arma3Launcher
 
         private void reloadPacksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            updateCurrentPack(true, true);
+            UpdateCurrentPack(true, true);
         }
 
         private void btn_memIncrease_Click(object sender, EventArgs e)
@@ -2250,6 +2250,12 @@ namespace arma3Launcher
             GetWorkshopAddons();
         }
 
+        private void steamworkshopMenu_Opening(object sender, CancelEventArgs e)
+        {
+            if (!Directory.Exists(Properties.Settings.Default.Arma3Folder + "!Workshop\\"))
+                e.Cancel = true;
+        }
+
         private void tsmi_openOptionalFolder_Click(object sender, EventArgs e)
         {
             ToolStripItem item = (sender as ToolStripItem);
@@ -2265,6 +2271,12 @@ namespace arma3Launcher
         private void tsmi_reloadOptional_Click(object sender, EventArgs e)
         {
             GetOptionalAddons();
+        }
+
+        private void optionaladdonsMenu_Opening(object sender, CancelEventArgs e)
+        {
+            if (!Directory.Exists(Properties.Settings.Default.OptionalAddonsFolder))
+                e.Cancel = true;
         }
 
         private void scroll_steamAddons_Scroll(object sender, ScrollEventArgs e)
@@ -2287,6 +2299,20 @@ namespace arma3Launcher
         private void flowpanel_optionalAddons_Paint(object sender, PaintEventArgs e)
         {
             scroll_optionalAddons.Value = flowpanel_optionalAddons.AutoScrollPosition.Y * -1;
+        }
+
+        private void btn_cancelDownload_MouseEnter(object sender, EventArgs e)
+        {
+            if (btn_cancelDownload.Enabled)
+                btn_cancelDownload.Image = Properties.Resources.cancel_circle_big_red;
+        }
+
+        private void btn_cancelDownload_MouseLeave(object sender, EventArgs e)
+        {
+            if (btn_cancelDownload.Enabled)
+                btn_cancelDownload.Image = Properties.Resources.cancel_circle_big_white;
+            else
+                btn_cancelDownload.Image = Properties.Resources.cancel_circle_big_inactive;
         }
     }
 }

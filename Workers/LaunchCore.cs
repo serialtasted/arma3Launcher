@@ -264,7 +264,7 @@ namespace arma3Launcher.Workers
                 {
                     try
                     {
-                        mainForm.showSnackBar("Opening Steam...", 2000, false);
+                        mainForm.ShowSnackBar("Opening Steam...", 2000, false);
 
                         var fass = new ProcessStartInfo
                         {
@@ -355,7 +355,7 @@ namespace arma3Launcher.Workers
         {
             this.mainForm.WindowState = FormWindowState.Normal;
             this.mainForm.Focus();
-            mainForm.showSnackBar("Game closed", 2000, false);
+            mainForm.ShowSnackBar("Game closed", 2000, false);
 
             if (GlobalVar.autoPilot)
                 this.mainForm.reLaunchServer();

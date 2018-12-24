@@ -127,9 +127,6 @@
   <data name="document-error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="windowCloseHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\windowCloseHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="document-cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -144,6 +141,9 @@
   </data>
   <data name="nopackimg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nopackimg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="windowToTaskbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\windowToTaskbar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cancel-circle-big-red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancel-circle-big-red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,8 +202,8 @@
   <data name="folder-error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder-error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="windowToTaskbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\windowToTaskbar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="windowCloseHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\windowCloseHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="windowCrossHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\windowCrossHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -213,5 +213,8 @@
   </data>
   <data name="sidemenu_busy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sidemenu_busy_32.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel-circle-big-inactive" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel-circle-big-inactive.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

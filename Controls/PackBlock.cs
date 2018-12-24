@@ -334,7 +334,7 @@ namespace arma3Launcher.Controls
             if(GlobalVar.isServer)
             {
                 Properties.Settings.Default.ServerPack = packID;
-                this.mainForm.updateServerPack(packID);
+                this.mainForm.UpdateServerPack(packID);
             }
 
             Properties.Settings.Default.LastAddonPack = packID;

@@ -524,7 +524,7 @@
             this.panel_sideMenu.MaximumSize = new System.Drawing.Size(300, 0);
             this.panel_sideMenu.MinimumSize = new System.Drawing.Size(0, 670);
             this.panel_sideMenu.Name = "panel_sideMenu";
-            this.panel_sideMenu.Size = new System.Drawing.Size(11, 670);
+            this.panel_sideMenu.Size = new System.Drawing.Size(263, 670);
             this.panel_sideMenu.TabIndex = 1;
             // 
             // sidemenu_menuList
@@ -537,7 +537,7 @@
             this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel9);
             this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel10);
             this.sidemenu_menuList.Controls.Add(this.doubleBufferPanel11);
-            this.sidemenu_menuList.Location = new System.Drawing.Point(-289, 0);
+            this.sidemenu_menuList.Location = new System.Drawing.Point(-37, 0);
             this.sidemenu_menuList.Margin = new System.Windows.Forms.Padding(0);
             this.sidemenu_menuList.Name = "sidemenu_menuList";
             this.sidemenu_menuList.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
@@ -565,7 +565,7 @@
             this.menu_addonPacks.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.menu_addonPacks.Location = new System.Drawing.Point(10, 1);
             this.menu_addonPacks.Name = "menu_addonPacks";
-            this.menu_addonPacks.Size = new System.Drawing.Size(122, 28);
+            this.menu_addonPacks.Size = new System.Drawing.Size(125, 32);
             this.menu_addonPacks.TabIndex = 2;
             this.menu_addonPacks.Text = "Addon Packs";
             this.menu_addonPacks.Click += new System.EventHandler(this.menu_addonPacks_Click);
@@ -602,7 +602,7 @@
             this.menu_launchOptions.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_launchOptions.Location = new System.Drawing.Point(10, 1);
             this.menu_launchOptions.Name = "menu_launchOptions";
-            this.menu_launchOptions.Size = new System.Drawing.Size(143, 28);
+            this.menu_launchOptions.Size = new System.Drawing.Size(146, 32);
             this.menu_launchOptions.TabIndex = 3;
             this.menu_launchOptions.Text = "Launch Options";
             this.menu_launchOptions.Click += new System.EventHandler(this.menu_launchOptions_Click);
@@ -640,7 +640,7 @@
             this.menu_repositoryDownloads.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_repositoryDownloads.Location = new System.Drawing.Point(10, 1);
             this.menu_repositoryDownloads.Name = "menu_repositoryDownloads";
-            this.menu_repositoryDownloads.Size = new System.Drawing.Size(207, 28);
+            this.menu_repositoryDownloads.Size = new System.Drawing.Size(210, 32);
             this.menu_repositoryDownloads.TabIndex = 4;
             this.menu_repositoryDownloads.Text = "Repository Downloads";
             this.menu_repositoryDownloads.Click += new System.EventHandler(this.menu_repositoryDownloads_Click);
@@ -689,7 +689,7 @@
             this.menu_preferences.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_preferences.Location = new System.Drawing.Point(10, 1);
             this.menu_preferences.Name = "menu_preferences";
-            this.menu_preferences.Size = new System.Drawing.Size(118, 28);
+            this.menu_preferences.Size = new System.Drawing.Size(121, 32);
             this.menu_preferences.TabIndex = 5;
             this.menu_preferences.Text = "Preferences";
             this.menu_preferences.Click += new System.EventHandler(this.menu_preferences_Click);
@@ -705,7 +705,7 @@
             this.sidemenu_botPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.sidemenu_botPanel.Location = new System.Drawing.Point(0, 597);
             this.sidemenu_botPanel.Name = "sidemenu_botPanel";
-            this.sidemenu_botPanel.Size = new System.Drawing.Size(11, 73);
+            this.sidemenu_botPanel.Size = new System.Drawing.Size(263, 73);
             this.sidemenu_botPanel.TabIndex = 10;
             // 
             // menu_help
@@ -715,7 +715,7 @@
             this.menu_help.BackColor = System.Drawing.Color.Transparent;
             this.menu_help.Font = new System.Drawing.Font("Lato", 9.5F);
             this.menu_help.ForeColor = System.Drawing.Color.Silver;
-            this.menu_help.Location = new System.Drawing.Point(-276, 17);
+            this.menu_help.Location = new System.Drawing.Point(-24, 17);
             this.menu_help.Name = "menu_help";
             this.menu_help.Size = new System.Drawing.Size(35, 16);
             this.menu_help.TabIndex = 6;
@@ -731,7 +731,7 @@
             this.menu_about.BackColor = System.Drawing.Color.Transparent;
             this.menu_about.Font = new System.Drawing.Font("Lato", 9.5F);
             this.menu_about.ForeColor = System.Drawing.Color.Silver;
-            this.menu_about.Location = new System.Drawing.Point(-276, 40);
+            this.menu_about.Location = new System.Drawing.Point(-24, 40);
             this.menu_about.Name = "menu_about";
             this.menu_about.Size = new System.Drawing.Size(43, 16);
             this.menu_about.TabIndex = 7;
@@ -747,7 +747,7 @@
             this.txt_versionNumber.BackColor = System.Drawing.Color.Transparent;
             this.txt_versionNumber.Font = new System.Drawing.Font("Consolas", 7.25F);
             this.txt_versionNumber.ForeColor = System.Drawing.Color.DarkGray;
-            this.txt_versionNumber.Location = new System.Drawing.Point(-47, 43);
+            this.txt_versionNumber.Location = new System.Drawing.Point(205, 43);
             this.txt_versionNumber.Name = "txt_versionNumber";
             this.txt_versionNumber.Size = new System.Drawing.Size(50, 12);
             this.txt_versionNumber.TabIndex = 8;
@@ -1109,10 +1109,10 @@
             // lbl_pref_Arma3Dir
             // 
             this.lbl_pref_Arma3Dir.AutoSize = true;
-            this.lbl_pref_Arma3Dir.Font = new System.Drawing.Font("Clear Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_pref_Arma3Dir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_pref_Arma3Dir.Location = new System.Drawing.Point(7, 16);
             this.lbl_pref_Arma3Dir.Name = "lbl_pref_Arma3Dir";
-            this.lbl_pref_Arma3Dir.Size = new System.Drawing.Size(112, 18);
+            this.lbl_pref_Arma3Dir.Size = new System.Drawing.Size(108, 16);
             this.lbl_pref_Arma3Dir.TabIndex = 0;
             this.lbl_pref_Arma3Dir.Text = "Arma 3 directory:";
             // 
@@ -1169,10 +1169,10 @@
             // 
             this.lbl_pref_AddonsDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_pref_AddonsDir.AutoSize = true;
-            this.lbl_pref_AddonsDir.Font = new System.Drawing.Font("Clear Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_pref_AddonsDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_pref_AddonsDir.Location = new System.Drawing.Point(7, 16);
             this.lbl_pref_AddonsDir.Name = "lbl_pref_AddonsDir";
-            this.lbl_pref_AddonsDir.Size = new System.Drawing.Size(111, 18);
+            this.lbl_pref_AddonsDir.Size = new System.Drawing.Size(113, 16);
             this.lbl_pref_AddonsDir.TabIndex = 12;
             this.lbl_pref_AddonsDir.Text = "Addons directory:";
             // 
@@ -1334,10 +1334,10 @@
             // lbl_pref_OptionalDir
             // 
             this.lbl_pref_OptionalDir.AutoSize = true;
-            this.lbl_pref_OptionalDir.Font = new System.Drawing.Font("Clear Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_pref_OptionalDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_pref_OptionalDir.Location = new System.Drawing.Point(7, 16);
             this.lbl_pref_OptionalDir.Name = "lbl_pref_OptionalDir";
-            this.lbl_pref_OptionalDir.Size = new System.Drawing.Size(162, 18);
+            this.lbl_pref_OptionalDir.Size = new System.Drawing.Size(165, 16);
             this.lbl_pref_OptionalDir.TabIndex = 1;
             this.lbl_pref_OptionalDir.Text = "Optional addons directory:";
             // 
@@ -1432,10 +1432,10 @@
             // lbl_pref_TeamSpeakDir
             // 
             this.lbl_pref_TeamSpeakDir.AutoSize = true;
-            this.lbl_pref_TeamSpeakDir.Font = new System.Drawing.Font("Clear Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_pref_TeamSpeakDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_pref_TeamSpeakDir.Location = new System.Drawing.Point(7, 16);
             this.lbl_pref_TeamSpeakDir.Name = "lbl_pref_TeamSpeakDir";
-            this.lbl_pref_TeamSpeakDir.Size = new System.Drawing.Size(149, 18);
+            this.lbl_pref_TeamSpeakDir.Size = new System.Drawing.Size(152, 16);
             this.lbl_pref_TeamSpeakDir.TabIndex = 1;
             this.lbl_pref_TeamSpeakDir.Text = "TeamSpeak 3 directory:";
             // 
@@ -1447,7 +1447,7 @@
             this.lbl_preferences.ForeColor = System.Drawing.Color.DimGray;
             this.lbl_preferences.Location = new System.Drawing.Point(10, 15);
             this.lbl_preferences.Name = "lbl_preferences";
-            this.lbl_preferences.Size = new System.Drawing.Size(217, 49);
+            this.lbl_preferences.Size = new System.Drawing.Size(220, 58);
             this.lbl_preferences.TabIndex = 3;
             this.lbl_preferences.Text = "Preferences";
             // 
@@ -1596,7 +1596,7 @@
             this.txt_curFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_curFile.AutoSize = true;
             this.txt_curFile.BackColor = System.Drawing.Color.Transparent;
-            this.txt_curFile.Font = new System.Drawing.Font("Clear Sans Light", 7F);
+            this.txt_curFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.txt_curFile.ForeColor = System.Drawing.Color.LightGray;
             this.txt_curFile.Location = new System.Drawing.Point(18, 51);
             this.txt_curFile.MaximumSize = new System.Drawing.Size(0, 12);
@@ -1764,7 +1764,7 @@
             this.lbl_repositoryDownloads.ForeColor = System.Drawing.Color.DimGray;
             this.lbl_repositoryDownloads.Location = new System.Drawing.Point(10, 15);
             this.lbl_repositoryDownloads.Name = "lbl_repositoryDownloads";
-            this.lbl_repositoryDownloads.Size = new System.Drawing.Size(373, 49);
+            this.lbl_repositoryDownloads.Size = new System.Drawing.Size(376, 58);
             this.lbl_repositoryDownloads.TabIndex = 3;
             this.lbl_repositoryDownloads.Text = "Repository Downloads";
             // 
@@ -1847,7 +1847,7 @@
             this.btn_memDecrease.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_memDecrease.Depth = 0;
             this.btn_memDecrease.Enabled = false;
-            this.btn_memDecrease.Font = new System.Drawing.Font("Clear Sans Medium", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_memDecrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btn_memDecrease.Icon = null;
             this.btn_memDecrease.Location = new System.Drawing.Point(278, 55);
             this.btn_memDecrease.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -2057,7 +2057,7 @@
             this.btn_memIncrease.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_memIncrease.Depth = 0;
             this.btn_memIncrease.Enabled = false;
-            this.btn_memIncrease.Font = new System.Drawing.Font("Clear Sans Medium", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_memIncrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btn_memIncrease.Icon = null;
             this.btn_memIncrease.Location = new System.Drawing.Point(308, 55);
             this.btn_memIncrease.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -2306,7 +2306,7 @@
             this.btn_decreaseHcInstances.AutoSize = true;
             this.btn_decreaseHcInstances.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_decreaseHcInstances.Depth = 0;
-            this.btn_decreaseHcInstances.Font = new System.Drawing.Font("Clear Sans Medium", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_decreaseHcInstances.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btn_decreaseHcInstances.Icon = null;
             this.btn_decreaseHcInstances.Location = new System.Drawing.Point(245, 50);
             this.btn_decreaseHcInstances.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -2363,7 +2363,7 @@
             this.btn_increaseHcInstances.AutoSize = true;
             this.btn_increaseHcInstances.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btn_increaseHcInstances.Depth = 0;
-            this.btn_increaseHcInstances.Font = new System.Drawing.Font("Clear Sans Medium", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_increaseHcInstances.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.btn_increaseHcInstances.Icon = null;
             this.btn_increaseHcInstances.Location = new System.Drawing.Point(275, 50);
             this.btn_increaseHcInstances.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -2709,7 +2709,7 @@
             this.lbl_launchOptions.ForeColor = System.Drawing.Color.DimGray;
             this.lbl_launchOptions.Location = new System.Drawing.Point(10, 15);
             this.lbl_launchOptions.Name = "lbl_launchOptions";
-            this.lbl_launchOptions.Size = new System.Drawing.Size(253, 49);
+            this.lbl_launchOptions.Size = new System.Drawing.Size(256, 58);
             this.lbl_launchOptions.TabIndex = 3;
             this.lbl_launchOptions.Text = "Launch Options";
             // 
@@ -3313,7 +3313,7 @@
             this.lbl_addonOptions.ForeColor = System.Drawing.Color.DimGray;
             this.lbl_addonOptions.Location = new System.Drawing.Point(10, 15);
             this.lbl_addonOptions.Name = "lbl_addonOptions";
-            this.lbl_addonOptions.Size = new System.Drawing.Size(236, 49);
+            this.lbl_addonOptions.Size = new System.Drawing.Size(239, 58);
             this.lbl_addonOptions.TabIndex = 1;
             this.lbl_addonOptions.Text = "Addon Options";
             // 
@@ -3338,12 +3338,12 @@
             // 
             this.WindowTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.WindowTitle.AutoSize = true;
-            this.WindowTitle.Font = new System.Drawing.Font("Leelawadee", 12F);
+            this.WindowTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.WindowTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(125)))));
             this.WindowTitle.Location = new System.Drawing.Point(250, 6);
             this.WindowTitle.MinimumSize = new System.Drawing.Size(800, 0);
             this.WindowTitle.Name = "WindowTitle";
-            this.WindowTitle.Size = new System.Drawing.Size(800, 19);
+            this.WindowTitle.Size = new System.Drawing.Size(800, 20);
             this.WindowTitle.TabIndex = 4;
             this.WindowTitle.Text = "%window title%";
             this.WindowTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;

@@ -1096,7 +1096,10 @@ namespace arma3Launcher
             chb_pref_autoDownload.Checked = Properties.Settings.Default.autoDownload;
             chb_pref_joinServer.Checked = Properties.Settings.Default.joinServerAutomatically;
             chb_pref_joinTSServer.Checked = Properties.Settings.Default.joinTsServerAutomatically;
-            chb_pref_disableAnimations.Checked = Properties.Settings.Default.DisableAnimations;
+            //chb_pref_disableAnimations.Checked = Properties.Settings.Default.DisableAnimations;
+            // force disable animations
+            chb_pref_disableAnimations.Checked = true;
+            chb_pref_disableAnimations.Enabled = false;
 
             // preference run on startup
             chb_pref_runLauncherStartup.Checked = false;

@@ -1115,9 +1115,11 @@ namespace arma3Launcher
             }
 
             // workshop addons
+            chb_workshopEnabled.Checked = Properties.Settings.Default.workshopEnabled;
             this.PropertiesWorkshopReader();
 
             // optional addons
+            chb_optionalEnabled.Checked = Properties.Settings.Default.optionalEnabled;
             this.PropertiesOptionalAddonsReader();
 
             // server-client specific settings
@@ -1207,9 +1209,11 @@ namespace arma3Launcher
             Properties.Settings.Default.DisableAnimations = chb_pref_disableAnimations.Checked;
 
             // workshop addons
+            Properties.Settings.Default.workshopEnabled = chb_workshopEnabled.Checked;
             this.PropertiesWorkshopSaver();
 
             // optional addons
+            Properties.Settings.Default.optionalEnabled = chb_optionalEnabled.Checked;
             this.PropertiesOptionalAddonsSaver();
 
             // server-client specific settings
@@ -2229,10 +2233,7 @@ namespace arma3Launcher
 
         private void chb_pref_disableAnimations_CheckedChanged(object sender, EventArgs e)
         {
-            if (chb_pref_disableAnimations.Checked)
-                GlobalVar.disableAnimations = true;
-            else
-                GlobalVar.disableAnimations = false;
+            GlobalVar.disableAnimations = chb_pref_disableAnimations.Checked;
         }
 
         private void tsmi_openWorkshopFolder_Click(object sender, EventArgs e)
@@ -2316,6 +2317,16 @@ namespace arma3Launcher
                 btn_cancelDownload.Image = Properties.Resources.cancel_circle_big_white;
             else
                 btn_cancelDownload.Image = Properties.Resources.cancel_circle_big_inactive;
+        }
+
+        private void chb_workshopEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVar.workshopEnabled = chb_workshopEnabled.Checked;
+        }
+
+        private void chb_optionalEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVar.optionalEnabled = chb_optionalEnabled.Checked;
         }
     }
 }

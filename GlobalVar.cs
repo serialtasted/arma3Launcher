@@ -194,6 +194,32 @@ namespace arma3Launcher
             }
         }
 
+        static bool _workshopEnabled = false;
+        public static bool workshopEnabled
+        {
+            get
+            {
+                return _workshopEnabled;
+            }
+            set
+            {
+                _workshopEnabled = value;
+            }
+        }
+
+        static bool _optionalEnabled = false;
+        public static bool optionalEnabled
+        {
+            get
+            {
+                return _optionalEnabled;
+            }
+            set
+            {
+                _optionalEnabled = value;
+            }
+        }
+
         // LIST
         static List<string> _folders2Create = new List<string>();
         public static List<string> folders2Create

@@ -133,15 +133,10 @@ namespace arma3Launcher.Effects
             {
                 if (InnerPanelObject.Width < MaxInnerValue)
                 {
-                    if (!GlobalVar.disableAnimations)
-                    {
-                        if (InnerPanelObject.Width + Increment < MaxInnerValue)
-                            setPanelWidth(InnerPanelObject, InnerPanelObject.Width + Increment);
-                        else
-                            setPanelWidth(InnerPanelObject, InnerPanelObject.Width + 1);
-                    }
+                    if (InnerPanelObject.Width + Increment < MaxInnerValue)
+                        setPanelWidth(InnerPanelObject, InnerPanelObject.Width + Increment);
                     else
-                    { setPanelWidth(InnerPanelObject, MaxInnerValue); }
+                        setPanelWidth(InnerPanelObject, InnerPanelObject.Width + 1);
                 }
                 else
                 {
@@ -153,15 +148,10 @@ namespace arma3Launcher.Effects
             {
                 if (InnerPanelObject.Height < MaxInnerValue)
                 {
-                    if (!GlobalVar.disableAnimations)
-                    {
-                        if (InnerPanelObject.Height + Increment < MaxInnerValue)
-                            setPanelHeight(InnerPanelObject, InnerPanelObject.Height + Increment);
-                        else
-                            setPanelHeight(InnerPanelObject, InnerPanelObject.Height + 1);
-                    }
+                    if (InnerPanelObject.Height + Increment < MaxInnerValue)
+                        setPanelHeight(InnerPanelObject, InnerPanelObject.Height + Increment);
                     else
-                    { setPanelHeight(InnerPanelObject, MaxInnerValue); }
+                        setPanelHeight(InnerPanelObject, InnerPanelObject.Height + 1);
                 }
                 else
                 {
@@ -177,15 +167,10 @@ namespace arma3Launcher.Effects
             {
                 if (InnerPanelObject.Width > MinInnerValue)
                 {
-                    if (!GlobalVar.disableAnimations)
-                    {
-                        if (InnerPanelObject.Width - Increment > MinInnerValue)
-                            setPanelWidth(InnerPanelObject, InnerPanelObject.Width - Increment);
-                        else
-                            setPanelWidth(InnerPanelObject, InnerPanelObject.Width - 1);
-                    }
+                    if (InnerPanelObject.Width - Increment > MinInnerValue)
+                        setPanelWidth(InnerPanelObject, InnerPanelObject.Width - Increment);
                     else
-                    { setPanelWidth(InnerPanelObject, MinInnerValue); }
+                        setPanelWidth(InnerPanelObject, InnerPanelObject.Width - 1);
                 }
                 else
                 {
@@ -202,15 +187,10 @@ namespace arma3Launcher.Effects
             {
                 if (InnerPanelObject.Height > MinInnerValue)
                 {
-                    if (!GlobalVar.disableAnimations)
-                    {
-                        if (InnerPanelObject.Height - Increment > MinInnerValue)
-                            setPanelHeight(InnerPanelObject, InnerPanelObject.Height - Increment);
-                        else
-                            setPanelHeight(InnerPanelObject, InnerPanelObject.Height - 1);
-                    }
+                    if (InnerPanelObject.Height - Increment > MinInnerValue)
+                        setPanelHeight(InnerPanelObject, InnerPanelObject.Height - Increment);
                     else
-                    { setPanelHeight(InnerPanelObject, MinInnerValue); }
+                        setPanelHeight(InnerPanelObject, InnerPanelObject.Height - 1);
                 }
                 else
                 {
@@ -231,15 +211,10 @@ namespace arma3Launcher.Effects
             {
                 if (OutterPanelObject.Width < MaxOutterValue)
                 {
-                    if (!GlobalVar.disableAnimations)
-                    {
-                        if (OutterPanelObject.Width + Increment < MaxOutterValue)
-                            setPanelWidth(OutterPanelObject, OutterPanelObject.Width + Increment);
-                        else
-                            setPanelWidth(OutterPanelObject, OutterPanelObject.Width + 1);
-                    }
+                    if (OutterPanelObject.Width + Increment < MaxOutterValue)
+                        setPanelWidth(OutterPanelObject, OutterPanelObject.Width + Increment);
                     else
-                    { setPanelWidth(OutterPanelObject, MaxOutterValue); }
+                        setPanelWidth(OutterPanelObject, OutterPanelObject.Width + 1);
                 }
                 else
                 { effectInOutter.Stop(); }
@@ -250,15 +225,10 @@ namespace arma3Launcher.Effects
             {
                 if (OutterPanelObject.Height < MaxOutterValue)
                 {
-                    if (!GlobalVar.disableAnimations)
-                    {
-                        if (OutterPanelObject.Height + Increment < MaxOutterValue)
-                            setPanelHeight(OutterPanelObject, OutterPanelObject.Height + Increment);
-                        else
-                            setPanelHeight(OutterPanelObject, OutterPanelObject.Height + 1);
-                    }
+                    if (OutterPanelObject.Height + Increment < MaxOutterValue)
+                        setPanelHeight(OutterPanelObject, OutterPanelObject.Height + Increment);
                     else
-                    { setPanelHeight(OutterPanelObject, MaxOutterValue); }
+                        setPanelHeight(OutterPanelObject, OutterPanelObject.Height + 1);
                 }
                 else
                 { effectInOutter.Stop(); }
@@ -274,15 +244,10 @@ namespace arma3Launcher.Effects
             {
                 if (OutterPanelObject.Width > MinOutterValue)
                 {
-                    if (!GlobalVar.disableAnimations)
-                    {
-                        if (OutterPanelObject.Width - Increment > MinOutterValue)
-                            setPanelWidth(OutterPanelObject, OutterPanelObject.Width - Increment);
-                        else
-                            setPanelWidth(OutterPanelObject, OutterPanelObject.Width - 1);
-                    }
+                    if (OutterPanelObject.Width - Increment > MinOutterValue)
+                        setPanelWidth(OutterPanelObject, OutterPanelObject.Width - Increment);
                     else
-                    { setPanelWidth(OutterPanelObject, MinOutterValue); }
+                        setPanelWidth(OutterPanelObject, OutterPanelObject.Width - 1);
                 }
                 else
                 {
@@ -294,15 +259,10 @@ namespace arma3Launcher.Effects
             {
                 if (OutterPanelObject.Height > MinOutterValue)
                 {
-                    if (!GlobalVar.disableAnimations)
-                    {
-                        if (OutterPanelObject.Height - Increment > MinOutterValue)
-                            setPanelHeight(OutterPanelObject, OutterPanelObject.Height - Increment);
-                        else
-                            setPanelHeight(OutterPanelObject, OutterPanelObject.Height - 1);
-                    }
+                    if (OutterPanelObject.Height - Increment > MinOutterValue)
+                        setPanelHeight(OutterPanelObject, OutterPanelObject.Height - Increment);
                     else
-                    { setPanelHeight(OutterPanelObject, MinOutterValue); }
+                        setPanelHeight(OutterPanelObject, OutterPanelObject.Height - 1);
                 }
                 else
                 {
@@ -319,18 +279,54 @@ namespace arma3Launcher.Effects
         /// </summary>
         public void ShowPanel()
         {
-            GlobalVar.isAnimating = true;
+            if (!GlobalVar.disableAnimations || OutterPanelObject == null)
+            {
+                GlobalVar.isAnimating = true;
 
-            if (OutterPanelObject != null)
-            { this.isDual = true; effectInOutter.Start(); }
+                if (OutterPanelObject != null)
+                { this.isDual = true; effectInOutter.Start(); }
+                else
+                { effectInInner.Start(); }
+            }
             else
-            { effectInInner.Start(); }
+            {
+                if (this.isSide)
+                {
+                    InnerPanelObject.Width = MaxInnerValue;
+                    if (OutterPanelObject != null)
+                        OutterPanelObject.Width = MaxOutterValue;
+                }
+                else
+                {
+                    InnerPanelObject.Height = MaxInnerValue;
+                    if (OutterPanelObject != null)
+                        OutterPanelObject.Height = MaxOutterValue;
+                }
+            }
         }
 
         public void HidePanel()
         {
-            GlobalVar.isAnimating = true;
-            effectOutInner.Start();
+            if (!GlobalVar.disableAnimations || OutterPanelObject == null)
+            {
+                GlobalVar.isAnimating = true;
+                effectOutInner.Start();
+            }
+            else
+            {
+                if (this.isSide)
+                {
+                    InnerPanelObject.Width = MinInnerValue;
+                    if (OutterPanelObject != null)
+                        OutterPanelObject.Width = MinOutterValue;
+                }
+                else
+                {
+                    InnerPanelObject.Height = MinInnerValue;
+                    if (OutterPanelObject != null)
+                        OutterPanelObject.Height = MinOutterValue;
+                }
+            }
         }
     }
 }

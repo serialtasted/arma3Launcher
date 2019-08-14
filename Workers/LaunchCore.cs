@@ -90,7 +90,7 @@ namespace arma3Launcher.Workers
 
             if (auxCombinedArguments != string.Empty) Arguments = auxCombinedArguments.Remove(auxCombinedArguments.Length - 1);
 
-            if (workshopAddons.Controls.Count > 0 && isOptionalAllowed)
+            if (workshopAddons.Controls.Count > 0 && isOptionalAllowed && GlobalVar.workshopEnabled)
             {
                 try
                 {
@@ -106,7 +106,7 @@ namespace arma3Launcher.Workers
                 catch { }
         }
 
-            if (optionalAddons.Controls.Count > 0 && isOptionalAllowed)
+            if (optionalAddons.Controls.Count > 0 && isOptionalAllowed && GlobalVar.optionalEnabled)
             {
                 try
                 {

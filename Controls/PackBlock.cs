@@ -21,7 +21,7 @@ namespace arma3Launcher.Controls
         private List<string> addonsName = new List<string>();
         private bool isOptionalAllowed = false;
 
-        //private PanelIO moreInfoPanelIO;
+        private PanelIO moreInfoPanelIO;
         private PanelIO packInfoPanelIO;
 
         private Fonts customFont = new Fonts();
@@ -76,7 +76,7 @@ namespace arma3Launcher.Controls
 
         private void EffectIn_Tick(object sender, EventArgs e)
         {
-            if (panel_effectFade.BackColor.A > 0 && !GlobalVar.disableAnimations)
+            if (panel_effectFade.BackColor.A > 0 /*&& !GlobalVar.disableAnimations*/)
             {
                 alpha = alpha - 5;
                 int flash = rnd.Next(50, 150);
@@ -110,7 +110,7 @@ namespace arma3Launcher.Controls
                     }
                 }
 
-                //this.moreInfoPanelIO.ShowPanel();
+                this.moreInfoPanelIO.ShowPanel();
             }
         }
 
@@ -129,7 +129,7 @@ namespace arma3Launcher.Controls
 
             this.flowpanel_packContent.Controls.Clear();
 
-            //this.moreInfoPanelIO = new PanelIO(panel_moreInfo, 33, 120);
+            this.moreInfoPanelIO = new PanelIO(panel_moreInfo, 33, 120);
             this.packInfoPanelIO = new PanelIO(panel_packInfo, 33, 410);
 
             this.packsPan = packsPanel;

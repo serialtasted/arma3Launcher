@@ -219,6 +219,19 @@ namespace arma3Launcher
                 _optionalEnabled = value;
             }
         }
+        
+        static bool _failedStart = false;
+        public static bool failedStart
+        {
+            get
+            {
+                return _failedStart;
+            }
+            set
+            {
+                _failedStart = value;
+            }
+        }
 
         // LIST
         static List<string> _folders2Create = new List<string>();

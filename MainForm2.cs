@@ -294,7 +294,7 @@ namespace arma3Launcher
             {
                 fetchAddonPacks.RevealPacks(flowpanel_addonPacks);
 
-                if (!Properties.Settings.Default.firstLaunch && GlobalVar.isServer)
+                if (!Properties.Settings.Default.firstLaunch && GlobalVar.isServer && !GlobalVar.failedStart)
                 {
                     if (new Windows.DelayServerStart().ShowDialog() == DialogResult.OK)
                         switchAutopilot(true);
@@ -362,11 +362,15 @@ namespace arma3Launcher
                     panel_serverOptions_hSep.Visible = true;
                     tsmi_manageRepository.Visible = true;
 
-                    btn_addonsOptionsOpen.Visible = false;
                     chb_pref_joinServer.Visible = false;
                     chb_pref_joinTSServer.Visible = false;
                     chb_pref_serverAutopilot.Visible = true;
                     chb_battleye.Enabled = false;
+
+                    // Addon Options
+                    sideAOP_taskforceradio.Visible = false;
+                    sideAOP_separator3.Visible = false;
+                    panel_steamworkshopAddons.Visible = false;
 
                     chb_pref_startGame.Text = "Start server when ready";
 
@@ -408,6 +412,8 @@ namespace arma3Launcher
                     !Directory.Exists(Properties.Settings.Default.AddonsFolder) ||
                     (!Directory.Exists(Properties.Settings.Default.TS3Folder) && !GlobalVar.isServer))
                 {
+                    GlobalVar.failedStart = true;
+
                     GlobalVar.menuSelected = 3;
                     HideUnhide(GlobalVar.menuSelected);
 

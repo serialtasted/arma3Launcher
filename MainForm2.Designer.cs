@@ -30,18 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm2));
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath5 = new System.Drawing.Drawing2D.GraphicsPath();
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath6 = new System.Drawing.Drawing2D.GraphicsPath();
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath7 = new System.Drawing.Drawing2D.GraphicsPath();
-            System.Drawing.Drawing2D.GraphicsPath graphicsPath8 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0", -2, -2);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node3", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node0", 3, 3);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node1", 4, 4);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node2", 5, 5);
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath1 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath2 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath4 = new System.Drawing.Drawing2D.GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath graphicsPath3 = new System.Drawing.Drawing2D.GraphicsPath();
             this.imageListRepo = new System.Windows.Forms.ImageList(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
             this.dlg_folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.flowAddonsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_reloadPacks = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,7 +133,6 @@
             this.panel_repoBottom = new arma3Launcher.Controls.DoubleBufferPanel();
             this.panel_repoDownload = new arma3Launcher.Controls.DoubleBufferPanel();
             this.prb_progressBar_All = new arma3Launcher.Controls.Windows7ProgressBar();
-            this.btn_cancelDownload = new System.Windows.Forms.PictureBox();
             this.prb_progressBar_File = new arma3Launcher.Controls.Windows7ProgressBar();
             this.txt_curFile = new System.Windows.Forms.Label();
             this.txt_percentageStatus = new System.Windows.Forms.Label();
@@ -217,30 +217,27 @@
             this.panel_addonOptions = new arma3Launcher.Controls.DoubleBufferPanel();
             this.btn_addonsOptionsClose = new System.Windows.Forms.Label();
             this.panel_contentAddonOptions = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel15 = new arma3Launcher.Controls.DoubleBufferFlowPanel();
-            this.doubleBufferPanel16 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel_sideAddonOptions = new arma3Launcher.Controls.DoubleBufferFlowPanel();
+            this.sideAOP_armaholic = new arma3Launcher.Controls.DoubleBufferPanel();
             this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
             this.btn_openArmaholic = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.doubleBufferPanel19 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel18 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.sideAOP_separator1 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.sideAOP_steamworkshop = new arma3Launcher.Controls.DoubleBufferPanel();
             this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.btn_openWorkshop = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.doubleBufferPanel20 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel17 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
-            this.btn_reinstallTFRPlugins = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.doubleBufferPanel1 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel4 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.sideAOP_separator2 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.sideAOP_separator3 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.sideAOP_userconfig = new arma3Launcher.Controls.DoubleBufferPanel();
             this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
             this.btn_reinstallUserconfigFiles = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.doubleBufferPanel12 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel_optionalAddons = new arma3Launcher.Controls.DoubleBufferPanel();
             this.scroll_optionalAddons = new MetroFramework.Controls.MetroScrollBar();
             this.flowpanel_optionalAddons = new arma3Launcher.Controls.DoubleBufferFlowPanel();
             this.doubleBufferPanel13 = new arma3Launcher.Controls.DoubleBufferPanel();
             this.chb_optionalEnabled = new MaterialSkin.Controls.MaterialCheckBox();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.doubleBufferPanel14 = new arma3Launcher.Controls.DoubleBufferPanel();
-            this.doubleBufferPanel2 = new arma3Launcher.Controls.DoubleBufferPanel();
+            this.panel_steamworkshopAddons = new arma3Launcher.Controls.DoubleBufferPanel();
             this.scroll_steamAddons = new MetroFramework.Controls.MetroScrollBar();
             this.flowpanel_steamworkshopAddonsList = new arma3Launcher.Controls.DoubleBufferFlowPanel();
             this.doubleBufferPanel3 = new arma3Launcher.Controls.DoubleBufferPanel();
@@ -252,6 +249,10 @@
             this.btn_windowMenu = new System.Windows.Forms.PictureBox();
             this.btn_windowClose = new System.Windows.Forms.PictureBox();
             this.btn_windowMinimize = new System.Windows.Forms.PictureBox();
+            this.btn_reinstallTFRPlugins = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.sideAOP_taskforceradio = new arma3Launcher.Controls.DoubleBufferPanel();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.flowAddonsMenu.SuspendLayout();
             this.repositoryMenu.SuspendLayout();
             this.optionaladdonsMenu.SuspendLayout();
@@ -291,7 +292,6 @@
             this.panel_contentRepositoryDownloads.SuspendLayout();
             this.panel_repoBottom.SuspendLayout();
             this.panel_repoDownload.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).BeginInit();
             this.panel_repoInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -312,19 +312,19 @@
             this.flowpanel_addonPacks.SuspendLayout();
             this.panel_addonOptions.SuspendLayout();
             this.panel_contentAddonOptions.SuspendLayout();
-            this.doubleBufferPanel15.SuspendLayout();
-            this.doubleBufferPanel16.SuspendLayout();
-            this.doubleBufferPanel18.SuspendLayout();
-            this.doubleBufferPanel17.SuspendLayout();
-            this.doubleBufferPanel4.SuspendLayout();
-            this.doubleBufferPanel12.SuspendLayout();
+            this.panel_sideAddonOptions.SuspendLayout();
+            this.sideAOP_armaholic.SuspendLayout();
+            this.sideAOP_steamworkshop.SuspendLayout();
+            this.sideAOP_userconfig.SuspendLayout();
+            this.panel_optionalAddons.SuspendLayout();
             this.doubleBufferPanel13.SuspendLayout();
-            this.doubleBufferPanel2.SuspendLayout();
+            this.panel_steamworkshopAddons.SuspendLayout();
             this.doubleBufferPanel3.SuspendLayout();
             this.win_titleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMinimize)).BeginInit();
+            this.sideAOP_taskforceradio.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageListRepo
@@ -337,6 +337,23 @@
             this.imageListRepo.Images.SetKeyName(3, "folder-checked.png");
             this.imageListRepo.Images.SetKeyName(4, "folder-error.png");
             this.imageListRepo.Images.SetKeyName(5, "folder-cancel.png");
+            // 
+            // btn_cancelDownload
+            // 
+            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
+            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_cancelDownload.Image = global::arma3Launcher.Properties.Resources.cancel_circle_big_white;
+            this.btn_cancelDownload.Location = new System.Drawing.Point(1199, 27);
+            this.btn_cancelDownload.Name = "btn_cancelDownload";
+            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
+            this.btn_cancelDownload.TabIndex = 12;
+            this.btn_cancelDownload.TabStop = false;
+            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
+            this.btn_cancelDownload.Visible = false;
+            this.btn_cancelDownload.MouseEnter += new System.EventHandler(this.btn_cancelDownload_MouseEnter);
+            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
             // 
             // dlg_folderBrowser
             // 
@@ -565,11 +582,11 @@
             this.menu_addonPacks.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.menu_addonPacks.AutoSize = true;
             this.menu_addonPacks.BackColor = System.Drawing.Color.Transparent;
-            this.menu_addonPacks.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_addonPacks.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_addonPacks.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.menu_addonPacks.Location = new System.Drawing.Point(10, 1);
             this.menu_addonPacks.Name = "menu_addonPacks";
-            this.menu_addonPacks.Size = new System.Drawing.Size(125, 32);
+            this.menu_addonPacks.Size = new System.Drawing.Size(174, 31);
             this.menu_addonPacks.TabIndex = 2;
             this.menu_addonPacks.Text = "Addon Packs";
             this.menu_addonPacks.Click += new System.EventHandler(this.menu_addonPacks_Click);
@@ -603,10 +620,10 @@
             this.menu_launchOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.menu_launchOptions.AutoSize = true;
             this.menu_launchOptions.BackColor = System.Drawing.Color.Transparent;
-            this.menu_launchOptions.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_launchOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_launchOptions.Location = new System.Drawing.Point(10, 1);
             this.menu_launchOptions.Name = "menu_launchOptions";
-            this.menu_launchOptions.Size = new System.Drawing.Size(146, 32);
+            this.menu_launchOptions.Size = new System.Drawing.Size(204, 31);
             this.menu_launchOptions.TabIndex = 3;
             this.menu_launchOptions.Text = "Launch Options";
             this.menu_launchOptions.Click += new System.EventHandler(this.menu_launchOptions_Click);
@@ -641,10 +658,10 @@
             this.menu_repositoryDownloads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.menu_repositoryDownloads.AutoSize = true;
             this.menu_repositoryDownloads.BackColor = System.Drawing.Color.Transparent;
-            this.menu_repositoryDownloads.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_repositoryDownloads.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_repositoryDownloads.Location = new System.Drawing.Point(10, 1);
             this.menu_repositoryDownloads.Name = "menu_repositoryDownloads";
-            this.menu_repositoryDownloads.Size = new System.Drawing.Size(210, 32);
+            this.menu_repositoryDownloads.Size = new System.Drawing.Size(287, 31);
             this.menu_repositoryDownloads.TabIndex = 4;
             this.menu_repositoryDownloads.Text = "Repository Downloads";
             this.menu_repositoryDownloads.Click += new System.EventHandler(this.menu_repositoryDownloads_Click);
@@ -690,10 +707,10 @@
             this.menu_preferences.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.menu_preferences.AutoSize = true;
             this.menu_preferences.BackColor = System.Drawing.Color.Transparent;
-            this.menu_preferences.Font = new System.Drawing.Font("Bebas Neue Book", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menu_preferences.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menu_preferences.Location = new System.Drawing.Point(10, 1);
             this.menu_preferences.Name = "menu_preferences";
-            this.menu_preferences.Size = new System.Drawing.Size(121, 32);
+            this.menu_preferences.Size = new System.Drawing.Size(161, 31);
             this.menu_preferences.TabIndex = 5;
             this.menu_preferences.Text = "Preferences";
             this.menu_preferences.Click += new System.EventHandler(this.menu_preferences_Click);
@@ -1448,11 +1465,11 @@
             // 
             this.lbl_preferences.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_preferences.AutoSize = true;
-            this.lbl_preferences.Font = new System.Drawing.Font("Bebas Neue Book", 36F);
+            this.lbl_preferences.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F);
             this.lbl_preferences.ForeColor = System.Drawing.Color.DimGray;
             this.lbl_preferences.Location = new System.Drawing.Point(10, 15);
             this.lbl_preferences.Name = "lbl_preferences";
-            this.lbl_preferences.Size = new System.Drawing.Size(220, 58);
+            this.lbl_preferences.Size = new System.Drawing.Size(284, 55);
             this.lbl_preferences.TabIndex = 3;
             this.lbl_preferences.Text = "Preferences";
             // 
@@ -1495,37 +1512,37 @@
             this.trv_repoContent.Location = new System.Drawing.Point(0, 0);
             this.trv_repoContent.MinimumSize = new System.Drawing.Size(1240, 0);
             this.trv_repoContent.Name = "trv_repoContent";
-            treeNode7.ImageIndex = -2;
-            treeNode7.Name = "Node0";
-            treeNode7.SelectedImageIndex = -2;
-            treeNode7.Text = "Node0";
-            treeNode8.ImageIndex = 1;
-            treeNode8.Name = "Node2";
-            treeNode8.SelectedImageIndex = 1;
-            treeNode8.Text = "Node2";
-            treeNode9.ImageIndex = 2;
-            treeNode9.Name = "Node3";
-            treeNode9.SelectedImageIndex = 2;
-            treeNode9.Text = "Node3";
-            treeNode10.ImageIndex = 3;
-            treeNode10.Name = "Node0";
-            treeNode10.SelectedImageIndex = 3;
-            treeNode10.Text = "Node0";
-            treeNode11.ImageIndex = 4;
-            treeNode11.Name = "Node1";
-            treeNode11.SelectedImageIndex = 4;
-            treeNode11.Text = "Node1";
-            treeNode12.ImageIndex = 5;
-            treeNode12.Name = "Node2";
-            treeNode12.SelectedImageIndex = 5;
-            treeNode12.Text = "Node2";
+            treeNode1.ImageIndex = -2;
+            treeNode1.Name = "Node0";
+            treeNode1.SelectedImageIndex = -2;
+            treeNode1.Text = "Node0";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "Node2";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Node2";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "Node3";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Text = "Node3";
+            treeNode4.ImageIndex = 3;
+            treeNode4.Name = "Node0";
+            treeNode4.SelectedImageIndex = 3;
+            treeNode4.Text = "Node0";
+            treeNode5.ImageIndex = 4;
+            treeNode5.Name = "Node1";
+            treeNode5.SelectedImageIndex = 4;
+            treeNode5.Text = "Node1";
+            treeNode6.ImageIndex = 5;
+            treeNode6.Name = "Node2";
+            treeNode6.SelectedImageIndex = 5;
+            treeNode6.Text = "Node2";
             this.trv_repoContent.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.trv_repoContent.SelectedImageIndex = 0;
             this.trv_repoContent.ShowRootLines = false;
             this.trv_repoContent.Size = new System.Drawing.Size(1240, 490);
@@ -1569,23 +1586,6 @@
             this.prb_progressBar_All.ShowInTaskbar = true;
             this.prb_progressBar_All.Size = new System.Drawing.Size(1170, 5);
             this.prb_progressBar_All.TabIndex = 11;
-            // 
-            // btn_cancelDownload
-            // 
-            this.btn_cancelDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cancelDownload.BackColor = System.Drawing.Color.Transparent;
-            this.btn_cancelDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_cancelDownload.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_cancelDownload.Image = global::arma3Launcher.Properties.Resources.cancel_circle_big_white;
-            this.btn_cancelDownload.Location = new System.Drawing.Point(1199, 27);
-            this.btn_cancelDownload.Name = "btn_cancelDownload";
-            this.btn_cancelDownload.Size = new System.Drawing.Size(24, 24);
-            this.btn_cancelDownload.TabIndex = 12;
-            this.btn_cancelDownload.TabStop = false;
-            this.toolTip.SetToolTip(this.btn_cancelDownload, "Cancel download");
-            this.btn_cancelDownload.Visible = false;
-            this.btn_cancelDownload.MouseEnter += new System.EventHandler(this.btn_cancelDownload_MouseEnter);
-            this.btn_cancelDownload.MouseLeave += new System.EventHandler(this.btn_cancelDownload_MouseLeave);
             // 
             // prb_progressBar_File
             // 
@@ -1765,11 +1765,11 @@
             // 
             this.lbl_repositoryDownloads.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_repositoryDownloads.AutoSize = true;
-            this.lbl_repositoryDownloads.Font = new System.Drawing.Font("Bebas Neue Book", 36F);
+            this.lbl_repositoryDownloads.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F);
             this.lbl_repositoryDownloads.ForeColor = System.Drawing.Color.DimGray;
             this.lbl_repositoryDownloads.Location = new System.Drawing.Point(10, 15);
             this.lbl_repositoryDownloads.Name = "lbl_repositoryDownloads";
-            this.lbl_repositoryDownloads.Size = new System.Drawing.Size(376, 58);
+            this.lbl_repositoryDownloads.Size = new System.Drawing.Size(506, 55);
             this.lbl_repositoryDownloads.TabIndex = 3;
             this.lbl_repositoryDownloads.Text = "Repository Downloads";
             // 
@@ -2710,11 +2710,11 @@
             // 
             this.lbl_launchOptions.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_launchOptions.AutoSize = true;
-            this.lbl_launchOptions.Font = new System.Drawing.Font("Bebas Neue Book", 36F);
+            this.lbl_launchOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F);
             this.lbl_launchOptions.ForeColor = System.Drawing.Color.DimGray;
             this.lbl_launchOptions.Location = new System.Drawing.Point(10, 15);
             this.lbl_launchOptions.Name = "lbl_launchOptions";
-            this.lbl_launchOptions.Size = new System.Drawing.Size(256, 58);
+            this.lbl_launchOptions.Size = new System.Drawing.Size(361, 55);
             this.lbl_launchOptions.TabIndex = 3;
             this.lbl_launchOptions.Text = "Launch Options";
             // 
@@ -2734,7 +2734,7 @@
             this.panel_addonPacksFlow.Controls.Add(this.btn_addonsOptionsOpen);
             this.panel_addonPacksFlow.Controls.Add(this.flowpanel_addonPacks);
             this.panel_addonPacksFlow.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_addonPacksFlow.Location = new System.Drawing.Point(1300, 0);
+            this.panel_addonPacksFlow.Location = new System.Drawing.Point(1265, 0);
             this.panel_addonPacksFlow.Name = "panel_addonPacksFlow";
             this.panel_addonPacksFlow.Size = new System.Drawing.Size(1300, 670);
             this.panel_addonPacksFlow.TabIndex = 2;
@@ -2861,7 +2861,7 @@
             this.panel_addonOptions.Location = new System.Drawing.Point(0, 0);
             this.panel_addonOptions.MaximumSize = new System.Drawing.Size(1300, 0);
             this.panel_addonOptions.Name = "panel_addonOptions";
-            this.panel_addonOptions.Size = new System.Drawing.Size(1300, 670);
+            this.panel_addonOptions.Size = new System.Drawing.Size(1265, 670);
             this.panel_addonOptions.TabIndex = 1;
             // 
             // btn_addonsOptionsClose
@@ -2872,7 +2872,7 @@
             this.btn_addonsOptionsClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.btn_addonsOptionsClose.Font = new System.Drawing.Font("Consolas", 14F);
             this.btn_addonsOptionsClose.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_addonsOptionsClose.Location = new System.Drawing.Point(1278, 307);
+            this.btn_addonsOptionsClose.Location = new System.Drawing.Point(1243, 307);
             this.btn_addonsOptionsClose.MaximumSize = new System.Drawing.Size(16, 57);
             this.btn_addonsOptionsClose.MinimumSize = new System.Drawing.Size(16, 57);
             this.btn_addonsOptionsClose.Name = "btn_addonsOptionsClose";
@@ -2889,42 +2889,42 @@
             // 
             this.panel_contentAddonOptions.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel_contentAddonOptions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.panel_contentAddonOptions.Controls.Add(this.doubleBufferPanel15);
-            this.panel_contentAddonOptions.Controls.Add(this.doubleBufferPanel12);
+            this.panel_contentAddonOptions.Controls.Add(this.panel_sideAddonOptions);
+            this.panel_contentAddonOptions.Controls.Add(this.panel_optionalAddons);
             this.panel_contentAddonOptions.Controls.Add(this.doubleBufferPanel14);
-            this.panel_contentAddonOptions.Controls.Add(this.doubleBufferPanel2);
-            this.panel_contentAddonOptions.Location = new System.Drawing.Point(32, 80);
+            this.panel_contentAddonOptions.Controls.Add(this.panel_steamworkshopAddons);
+            this.panel_contentAddonOptions.Location = new System.Drawing.Point(14, 80);
             this.panel_contentAddonOptions.Name = "panel_contentAddonOptions";
             this.panel_contentAddonOptions.Size = new System.Drawing.Size(1240, 560);
             this.panel_contentAddonOptions.TabIndex = 2;
             // 
-            // doubleBufferPanel15
+            // panel_sideAddonOptions
             // 
-            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel16);
-            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel19);
-            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel18);
-            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel20);
-            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel17);
-            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel1);
-            this.doubleBufferPanel15.Controls.Add(this.doubleBufferPanel4);
-            this.doubleBufferPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.doubleBufferPanel15.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.doubleBufferPanel15.Location = new System.Drawing.Point(925, 0);
-            this.doubleBufferPanel15.Name = "doubleBufferPanel15";
-            this.doubleBufferPanel15.Padding = new System.Windows.Forms.Padding(0, 15, 0, 15);
-            this.doubleBufferPanel15.Size = new System.Drawing.Size(315, 560);
-            this.doubleBufferPanel15.TabIndex = 7;
+            this.panel_sideAddonOptions.Controls.Add(this.sideAOP_armaholic);
+            this.panel_sideAddonOptions.Controls.Add(this.sideAOP_separator1);
+            this.panel_sideAddonOptions.Controls.Add(this.sideAOP_steamworkshop);
+            this.panel_sideAddonOptions.Controls.Add(this.sideAOP_separator2);
+            this.panel_sideAddonOptions.Controls.Add(this.sideAOP_taskforceradio);
+            this.panel_sideAddonOptions.Controls.Add(this.sideAOP_separator3);
+            this.panel_sideAddonOptions.Controls.Add(this.sideAOP_userconfig);
+            this.panel_sideAddonOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_sideAddonOptions.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panel_sideAddonOptions.Location = new System.Drawing.Point(925, 0);
+            this.panel_sideAddonOptions.Name = "panel_sideAddonOptions";
+            this.panel_sideAddonOptions.Padding = new System.Windows.Forms.Padding(0, 15, 0, 15);
+            this.panel_sideAddonOptions.Size = new System.Drawing.Size(315, 560);
+            this.panel_sideAddonOptions.TabIndex = 7;
             // 
-            // doubleBufferPanel16
+            // sideAOP_armaholic
             // 
-            this.doubleBufferPanel16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.doubleBufferPanel16.Controls.Add(this.materialLabel11);
-            this.doubleBufferPanel16.Controls.Add(this.btn_openArmaholic);
-            this.doubleBufferPanel16.Location = new System.Drawing.Point(5, 15);
-            this.doubleBufferPanel16.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.doubleBufferPanel16.Name = "doubleBufferPanel16";
-            this.doubleBufferPanel16.Size = new System.Drawing.Size(305, 50);
-            this.doubleBufferPanel16.TabIndex = 8;
+            this.sideAOP_armaholic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.sideAOP_armaholic.Controls.Add(this.materialLabel11);
+            this.sideAOP_armaholic.Controls.Add(this.btn_openArmaholic);
+            this.sideAOP_armaholic.Location = new System.Drawing.Point(5, 15);
+            this.sideAOP_armaholic.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.sideAOP_armaholic.Name = "sideAOP_armaholic";
+            this.sideAOP_armaholic.Size = new System.Drawing.Size(305, 50);
+            this.sideAOP_armaholic.TabIndex = 8;
             // 
             // materialLabel11
             // 
@@ -2961,32 +2961,32 @@
             this.btn_openArmaholic.Primary = true;
             this.btn_openArmaholic.RoundedCornerRadius = 2;
             this.btn_openArmaholic.Shadow = null;
-            graphicsPath5.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_openArmaholic.ShadowShape = graphicsPath5;
+            graphicsPath1.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_openArmaholic.ShadowShape = graphicsPath1;
             this.btn_openArmaholic.Size = new System.Drawing.Size(150, 35);
             this.btn_openArmaholic.TabIndex = 6;
             this.btn_openArmaholic.Text = "Visit";
             this.btn_openArmaholic.Click += new System.EventHandler(this.btn_openArmaholic_Click);
             // 
-            // doubleBufferPanel19
+            // sideAOP_separator1
             // 
-            this.doubleBufferPanel19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.doubleBufferPanel19.Location = new System.Drawing.Point(10, 80);
-            this.doubleBufferPanel19.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
-            this.doubleBufferPanel19.Name = "doubleBufferPanel19";
-            this.doubleBufferPanel19.Size = new System.Drawing.Size(295, 2);
-            this.doubleBufferPanel19.TabIndex = 12;
+            this.sideAOP_separator1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.sideAOP_separator1.Location = new System.Drawing.Point(10, 80);
+            this.sideAOP_separator1.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
+            this.sideAOP_separator1.Name = "sideAOP_separator1";
+            this.sideAOP_separator1.Size = new System.Drawing.Size(295, 2);
+            this.sideAOP_separator1.TabIndex = 12;
             // 
-            // doubleBufferPanel18
+            // sideAOP_steamworkshop
             // 
-            this.doubleBufferPanel18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.doubleBufferPanel18.Controls.Add(this.materialLabel10);
-            this.doubleBufferPanel18.Controls.Add(this.btn_openWorkshop);
-            this.doubleBufferPanel18.Location = new System.Drawing.Point(5, 97);
-            this.doubleBufferPanel18.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.doubleBufferPanel18.Name = "doubleBufferPanel18";
-            this.doubleBufferPanel18.Size = new System.Drawing.Size(305, 50);
-            this.doubleBufferPanel18.TabIndex = 10;
+            this.sideAOP_steamworkshop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.sideAOP_steamworkshop.Controls.Add(this.materialLabel10);
+            this.sideAOP_steamworkshop.Controls.Add(this.btn_openWorkshop);
+            this.sideAOP_steamworkshop.Location = new System.Drawing.Point(5, 97);
+            this.sideAOP_steamworkshop.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.sideAOP_steamworkshop.Name = "sideAOP_steamworkshop";
+            this.sideAOP_steamworkshop.Size = new System.Drawing.Size(305, 50);
+            this.sideAOP_steamworkshop.TabIndex = 10;
             // 
             // materialLabel10
             // 
@@ -3023,94 +3023,41 @@
             this.btn_openWorkshop.Primary = true;
             this.btn_openWorkshop.RoundedCornerRadius = 2;
             this.btn_openWorkshop.Shadow = null;
-            graphicsPath6.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_openWorkshop.ShadowShape = graphicsPath6;
+            graphicsPath2.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_openWorkshop.ShadowShape = graphicsPath2;
             this.btn_openWorkshop.Size = new System.Drawing.Size(150, 35);
             this.btn_openWorkshop.TabIndex = 4;
             this.btn_openWorkshop.Text = "Visit";
             this.btn_openWorkshop.Click += new System.EventHandler(this.btn_openWorkshop_Click);
             // 
-            // doubleBufferPanel20
+            // sideAOP_separator2
             // 
-            this.doubleBufferPanel20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.doubleBufferPanel20.Location = new System.Drawing.Point(10, 162);
-            this.doubleBufferPanel20.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
-            this.doubleBufferPanel20.Name = "doubleBufferPanel20";
-            this.doubleBufferPanel20.Size = new System.Drawing.Size(295, 2);
-            this.doubleBufferPanel20.TabIndex = 13;
+            this.sideAOP_separator2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.sideAOP_separator2.Location = new System.Drawing.Point(10, 162);
+            this.sideAOP_separator2.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
+            this.sideAOP_separator2.Name = "sideAOP_separator2";
+            this.sideAOP_separator2.Size = new System.Drawing.Size(295, 2);
+            this.sideAOP_separator2.TabIndex = 13;
             // 
-            // doubleBufferPanel17
+            // sideAOP_separator3
             // 
-            this.doubleBufferPanel17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.doubleBufferPanel17.Controls.Add(this.materialLabel9);
-            this.doubleBufferPanel17.Controls.Add(this.btn_reinstallTFRPlugins);
-            this.doubleBufferPanel17.Location = new System.Drawing.Point(5, 179);
-            this.doubleBufferPanel17.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.doubleBufferPanel17.Name = "doubleBufferPanel17";
-            this.doubleBufferPanel17.Size = new System.Drawing.Size(305, 50);
-            this.doubleBufferPanel17.TabIndex = 11;
+            this.sideAOP_separator3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
+            this.sideAOP_separator3.Location = new System.Drawing.Point(10, 244);
+            this.sideAOP_separator3.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
+            this.sideAOP_separator3.Name = "sideAOP_separator3";
+            this.sideAOP_separator3.Size = new System.Drawing.Size(295, 2);
+            this.sideAOP_separator3.TabIndex = 15;
             // 
-            // materialLabel9
+            // sideAOP_userconfig
             // 
-            this.materialLabel9.AutoSize = true;
-            this.materialLabel9.Depth = 0;
-            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel9.FontSize = 11;
-            this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel9.Location = new System.Drawing.Point(8, 16);
-            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel9.Name = "materialLabel9";
-            this.materialLabel9.Primary = false;
-            this.materialLabel9.Shadow = null;
-            this.materialLabel9.ShadowShape = null;
-            this.materialLabel9.Size = new System.Drawing.Size(130, 19);
-            this.materialLabel9.TabIndex = 3;
-            this.materialLabel9.Text = "Task Force Radio:";
-            // 
-            // btn_reinstallTFRPlugins
-            // 
-            this.btn_reinstallTFRPlugins.AutoSize = true;
-            this.btn_reinstallTFRPlugins.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btn_reinstallTFRPlugins.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btn_reinstallTFRPlugins.Depth = 0;
-            this.btn_reinstallTFRPlugins.Font = new System.Drawing.Font("Roboto", 9F);
-            this.btn_reinstallTFRPlugins.FontSize = 9;
-            this.btn_reinstallTFRPlugins.Icon = null;
-            this.btn_reinstallTFRPlugins.Location = new System.Drawing.Point(147, 8);
-            this.btn_reinstallTFRPlugins.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btn_reinstallTFRPlugins.MaximumSize = new System.Drawing.Size(150, 35);
-            this.btn_reinstallTFRPlugins.MinimumSize = new System.Drawing.Size(150, 35);
-            this.btn_reinstallTFRPlugins.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btn_reinstallTFRPlugins.Name = "btn_reinstallTFRPlugins";
-            this.btn_reinstallTFRPlugins.Primary = true;
-            this.btn_reinstallTFRPlugins.RoundedCornerRadius = 2;
-            this.btn_reinstallTFRPlugins.Shadow = null;
-            graphicsPath7.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_reinstallTFRPlugins.ShadowShape = graphicsPath7;
-            this.btn_reinstallTFRPlugins.Size = new System.Drawing.Size(150, 35);
-            this.btn_reinstallTFRPlugins.TabIndex = 1;
-            this.btn_reinstallTFRPlugins.Text = "Reinstall Plugins";
-            this.btn_reinstallTFRPlugins.Click += new System.EventHandler(this.btn_reinstallTFRPlugins_Click);
-            // 
-            // doubleBufferPanel1
-            // 
-            this.doubleBufferPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(48)))));
-            this.doubleBufferPanel1.Location = new System.Drawing.Point(10, 244);
-            this.doubleBufferPanel1.Margin = new System.Windows.Forms.Padding(10, 15, 20, 15);
-            this.doubleBufferPanel1.Name = "doubleBufferPanel1";
-            this.doubleBufferPanel1.Size = new System.Drawing.Size(295, 2);
-            this.doubleBufferPanel1.TabIndex = 15;
-            // 
-            // doubleBufferPanel4
-            // 
-            this.doubleBufferPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.doubleBufferPanel4.Controls.Add(this.materialLabel12);
-            this.doubleBufferPanel4.Controls.Add(this.btn_reinstallUserconfigFiles);
-            this.doubleBufferPanel4.Location = new System.Drawing.Point(5, 261);
-            this.doubleBufferPanel4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.doubleBufferPanel4.Name = "doubleBufferPanel4";
-            this.doubleBufferPanel4.Size = new System.Drawing.Size(305, 50);
-            this.doubleBufferPanel4.TabIndex = 14;
+            this.sideAOP_userconfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.sideAOP_userconfig.Controls.Add(this.materialLabel12);
+            this.sideAOP_userconfig.Controls.Add(this.btn_reinstallUserconfigFiles);
+            this.sideAOP_userconfig.Location = new System.Drawing.Point(5, 261);
+            this.sideAOP_userconfig.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.sideAOP_userconfig.Name = "sideAOP_userconfig";
+            this.sideAOP_userconfig.Size = new System.Drawing.Size(305, 50);
+            this.sideAOP_userconfig.TabIndex = 14;
             // 
             // materialLabel12
             // 
@@ -3147,25 +3094,25 @@
             this.btn_reinstallUserconfigFiles.Primary = true;
             this.btn_reinstallUserconfigFiles.RoundedCornerRadius = 2;
             this.btn_reinstallUserconfigFiles.Shadow = null;
-            graphicsPath8.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
-            this.btn_reinstallUserconfigFiles.ShadowShape = graphicsPath8;
+            graphicsPath4.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_reinstallUserconfigFiles.ShadowShape = graphicsPath4;
             this.btn_reinstallUserconfigFiles.Size = new System.Drawing.Size(150, 35);
             this.btn_reinstallUserconfigFiles.TabIndex = 1;
             this.btn_reinstallUserconfigFiles.Text = "Reinstall Files";
             this.btn_reinstallUserconfigFiles.Click += new System.EventHandler(this.btn_reinstallUserconfigFiles_Click);
             // 
-            // doubleBufferPanel12
+            // panel_optionalAddons
             // 
-            this.doubleBufferPanel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(44)))));
-            this.doubleBufferPanel12.Controls.Add(this.scroll_optionalAddons);
-            this.doubleBufferPanel12.Controls.Add(this.flowpanel_optionalAddons);
-            this.doubleBufferPanel12.Controls.Add(this.doubleBufferPanel13);
-            this.doubleBufferPanel12.Dock = System.Windows.Forms.DockStyle.Left;
-            this.doubleBufferPanel12.Location = new System.Drawing.Point(465, 0);
-            this.doubleBufferPanel12.MaximumSize = new System.Drawing.Size(460, 0);
-            this.doubleBufferPanel12.Name = "doubleBufferPanel12";
-            this.doubleBufferPanel12.Size = new System.Drawing.Size(460, 560);
-            this.doubleBufferPanel12.TabIndex = 6;
+            this.panel_optionalAddons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(44)))));
+            this.panel_optionalAddons.Controls.Add(this.scroll_optionalAddons);
+            this.panel_optionalAddons.Controls.Add(this.flowpanel_optionalAddons);
+            this.panel_optionalAddons.Controls.Add(this.doubleBufferPanel13);
+            this.panel_optionalAddons.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_optionalAddons.Location = new System.Drawing.Point(465, 0);
+            this.panel_optionalAddons.MaximumSize = new System.Drawing.Size(460, 0);
+            this.panel_optionalAddons.Name = "panel_optionalAddons";
+            this.panel_optionalAddons.Size = new System.Drawing.Size(460, 560);
+            this.panel_optionalAddons.TabIndex = 6;
             // 
             // scroll_optionalAddons
             // 
@@ -3255,18 +3202,18 @@
             this.doubleBufferPanel14.Size = new System.Drawing.Size(5, 560);
             this.doubleBufferPanel14.TabIndex = 5;
             // 
-            // doubleBufferPanel2
+            // panel_steamworkshopAddons
             // 
-            this.doubleBufferPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(44)))));
-            this.doubleBufferPanel2.Controls.Add(this.scroll_steamAddons);
-            this.doubleBufferPanel2.Controls.Add(this.flowpanel_steamworkshopAddonsList);
-            this.doubleBufferPanel2.Controls.Add(this.doubleBufferPanel3);
-            this.doubleBufferPanel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.doubleBufferPanel2.Location = new System.Drawing.Point(0, 0);
-            this.doubleBufferPanel2.MaximumSize = new System.Drawing.Size(460, 0);
-            this.doubleBufferPanel2.Name = "doubleBufferPanel2";
-            this.doubleBufferPanel2.Size = new System.Drawing.Size(460, 560);
-            this.doubleBufferPanel2.TabIndex = 3;
+            this.panel_steamworkshopAddons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(44)))));
+            this.panel_steamworkshopAddons.Controls.Add(this.scroll_steamAddons);
+            this.panel_steamworkshopAddons.Controls.Add(this.flowpanel_steamworkshopAddonsList);
+            this.panel_steamworkshopAddons.Controls.Add(this.doubleBufferPanel3);
+            this.panel_steamworkshopAddons.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_steamworkshopAddons.Location = new System.Drawing.Point(0, 0);
+            this.panel_steamworkshopAddons.MaximumSize = new System.Drawing.Size(460, 0);
+            this.panel_steamworkshopAddons.Name = "panel_steamworkshopAddons";
+            this.panel_steamworkshopAddons.Size = new System.Drawing.Size(460, 560);
+            this.panel_steamworkshopAddons.TabIndex = 3;
             // 
             // scroll_steamAddons
             // 
@@ -3352,11 +3299,11 @@
             // 
             this.lbl_addonOptions.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_addonOptions.AutoSize = true;
-            this.lbl_addonOptions.Font = new System.Drawing.Font("Bebas Neue Book", 36F);
+            this.lbl_addonOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F);
             this.lbl_addonOptions.ForeColor = System.Drawing.Color.DimGray;
-            this.lbl_addonOptions.Location = new System.Drawing.Point(10, 15);
+            this.lbl_addonOptions.Location = new System.Drawing.Point(-8, 15);
             this.lbl_addonOptions.Name = "lbl_addonOptions";
-            this.lbl_addonOptions.Size = new System.Drawing.Size(239, 58);
+            this.lbl_addonOptions.Size = new System.Drawing.Size(342, 55);
             this.lbl_addonOptions.TabIndex = 1;
             this.lbl_addonOptions.Text = "Addon Options";
             // 
@@ -3430,6 +3377,59 @@
             this.btn_windowMinimize.MouseEnter += new System.EventHandler(this.btn_windowMinimize_MouseEnter);
             this.btn_windowMinimize.MouseLeave += new System.EventHandler(this.btn_windowMinimize_MouseLeave);
             // 
+            // btn_reinstallTFRPlugins
+            // 
+            this.btn_reinstallTFRPlugins.AutoSize = true;
+            this.btn_reinstallTFRPlugins.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_reinstallTFRPlugins.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btn_reinstallTFRPlugins.Depth = 0;
+            this.btn_reinstallTFRPlugins.Font = new System.Drawing.Font("Roboto", 9F);
+            this.btn_reinstallTFRPlugins.FontSize = 9;
+            this.btn_reinstallTFRPlugins.Icon = null;
+            this.btn_reinstallTFRPlugins.Location = new System.Drawing.Point(147, 8);
+            this.btn_reinstallTFRPlugins.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btn_reinstallTFRPlugins.MaximumSize = new System.Drawing.Size(150, 35);
+            this.btn_reinstallTFRPlugins.MinimumSize = new System.Drawing.Size(150, 35);
+            this.btn_reinstallTFRPlugins.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btn_reinstallTFRPlugins.Name = "btn_reinstallTFRPlugins";
+            this.btn_reinstallTFRPlugins.Primary = true;
+            this.btn_reinstallTFRPlugins.RoundedCornerRadius = 2;
+            this.btn_reinstallTFRPlugins.Shadow = null;
+            graphicsPath3.FillMode = System.Drawing.Drawing2D.FillMode.Alternate;
+            this.btn_reinstallTFRPlugins.ShadowShape = graphicsPath3;
+            this.btn_reinstallTFRPlugins.Size = new System.Drawing.Size(150, 35);
+            this.btn_reinstallTFRPlugins.TabIndex = 1;
+            this.btn_reinstallTFRPlugins.Text = "Reinstall Plugins";
+            this.btn_reinstallTFRPlugins.Click += new System.EventHandler(this.btn_reinstallTFRPlugins_Click);
+            // 
+            // materialLabel9
+            // 
+            this.materialLabel9.AutoSize = true;
+            this.materialLabel9.Depth = 0;
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel9.FontSize = 11;
+            this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel9.Location = new System.Drawing.Point(8, 16);
+            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel9.Name = "materialLabel9";
+            this.materialLabel9.Primary = false;
+            this.materialLabel9.Shadow = null;
+            this.materialLabel9.ShadowShape = null;
+            this.materialLabel9.Size = new System.Drawing.Size(130, 19);
+            this.materialLabel9.TabIndex = 3;
+            this.materialLabel9.Text = "Task Force Radio:";
+            // 
+            // sideAOP_taskforceradio
+            // 
+            this.sideAOP_taskforceradio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.sideAOP_taskforceradio.Controls.Add(this.materialLabel9);
+            this.sideAOP_taskforceradio.Controls.Add(this.btn_reinstallTFRPlugins);
+            this.sideAOP_taskforceradio.Location = new System.Drawing.Point(5, 179);
+            this.sideAOP_taskforceradio.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.sideAOP_taskforceradio.Name = "sideAOP_taskforceradio";
+            this.sideAOP_taskforceradio.Size = new System.Drawing.Size(305, 50);
+            this.sideAOP_taskforceradio.TabIndex = 11;
+            // 
             // MainForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -3451,6 +3451,7 @@
             this.Load += new System.EventHandler(this.MainForm2_Load);
             this.Shown += new System.EventHandler(this.MainForm2_Shown);
             this.Resize += new System.EventHandler(this.MainForm2_Resize);
+            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.flowAddonsMenu.ResumeLayout(false);
             this.repositoryMenu.ResumeLayout(false);
             this.optionaladdonsMenu.ResumeLayout(false);
@@ -3503,7 +3504,6 @@
             this.panel_repoBottom.ResumeLayout(false);
             this.panel_repoDownload.ResumeLayout(false);
             this.panel_repoDownload.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_cancelDownload)).EndInit();
             this.panel_repoInfo.ResumeLayout(false);
             this.panel_repoInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -3534,19 +3534,17 @@
             this.panel_addonOptions.ResumeLayout(false);
             this.panel_addonOptions.PerformLayout();
             this.panel_contentAddonOptions.ResumeLayout(false);
-            this.doubleBufferPanel15.ResumeLayout(false);
-            this.doubleBufferPanel16.ResumeLayout(false);
-            this.doubleBufferPanel16.PerformLayout();
-            this.doubleBufferPanel18.ResumeLayout(false);
-            this.doubleBufferPanel18.PerformLayout();
-            this.doubleBufferPanel17.ResumeLayout(false);
-            this.doubleBufferPanel17.PerformLayout();
-            this.doubleBufferPanel4.ResumeLayout(false);
-            this.doubleBufferPanel4.PerformLayout();
-            this.doubleBufferPanel12.ResumeLayout(false);
+            this.panel_sideAddonOptions.ResumeLayout(false);
+            this.sideAOP_armaholic.ResumeLayout(false);
+            this.sideAOP_armaholic.PerformLayout();
+            this.sideAOP_steamworkshop.ResumeLayout(false);
+            this.sideAOP_steamworkshop.PerformLayout();
+            this.sideAOP_userconfig.ResumeLayout(false);
+            this.sideAOP_userconfig.PerformLayout();
+            this.panel_optionalAddons.ResumeLayout(false);
             this.doubleBufferPanel13.ResumeLayout(false);
             this.doubleBufferPanel13.PerformLayout();
-            this.doubleBufferPanel2.ResumeLayout(false);
+            this.panel_steamworkshopAddons.ResumeLayout(false);
             this.doubleBufferPanel3.ResumeLayout(false);
             this.doubleBufferPanel3.PerformLayout();
             this.win_titleBar.ResumeLayout(false);
@@ -3554,6 +3552,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_windowMinimize)).EndInit();
+            this.sideAOP_taskforceradio.ResumeLayout(false);
+            this.sideAOP_taskforceradio.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3705,11 +3705,10 @@
         private System.Windows.Forms.Label txt_curFile;
         private System.Windows.Forms.PictureBox img_repoBusy;
         private Controls.DoubleBufferFlowPanel flowpanel_steamworkshopAddonsList;
-        private MaterialSkin.Controls.MaterialRaisedButton btn_reinstallTFRPlugins;
         private System.Windows.Forms.ToolStripMenuItem tsmi_openAddonFolder;
         private System.Windows.Forms.ToolStripSeparator repositorymenu_separator;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
-        private Controls.DoubleBufferPanel doubleBufferPanel2;
+        private Controls.DoubleBufferPanel panel_steamworkshopAddons;
         private Controls.DoubleBufferPanel doubleBufferPanel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MetroFramework.Controls.MetroComboBox cb_serverPack;
@@ -3730,13 +3729,12 @@
         private Controls.DoubleBufferPanel doubleBufferPanel10;
         private Controls.DoubleBufferPanel doubleBufferPanel11;
         private MaterialSkin.Controls.MaterialCheckBox chb_pref_disableAnimations;
-        private arma3Launcher.Controls.DoubleBufferFlowPanel doubleBufferPanel15;
-        private Controls.DoubleBufferPanel doubleBufferPanel12;
+        private arma3Launcher.Controls.DoubleBufferFlowPanel panel_sideAddonOptions;
+        private Controls.DoubleBufferPanel panel_optionalAddons;
         private Controls.DoubleBufferFlowPanel flowpanel_optionalAddons;
         private Controls.DoubleBufferPanel doubleBufferPanel13;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
         private Controls.DoubleBufferPanel doubleBufferPanel14;
-        private MaterialSkin.Controls.MaterialLabel materialLabel9;
         private MaterialSkin.Controls.MaterialLabel materialLabel11;
         private MaterialSkin.Controls.MaterialRaisedButton btn_openArmaholic;
         private MaterialSkin.Controls.MaterialLabel materialLabel10;
@@ -3749,11 +3747,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_openOptionalFolder;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmi_reloadOptional;
-        private Controls.DoubleBufferPanel doubleBufferPanel16;
-        private Controls.DoubleBufferPanel doubleBufferPanel18;
-        private Controls.DoubleBufferPanel doubleBufferPanel17;
-        private Controls.DoubleBufferPanel doubleBufferPanel19;
-        private Controls.DoubleBufferPanel doubleBufferPanel20;
+        private Controls.DoubleBufferPanel sideAOP_armaholic;
+        private Controls.DoubleBufferPanel sideAOP_steamworkshop;
+        private Controls.DoubleBufferPanel sideAOP_separator1;
+        private Controls.DoubleBufferPanel sideAOP_separator2;
         private Controls.DoubleBufferPanel panel_optionalAddonsDir;
         private System.Windows.Forms.PictureBox btn_pref_ereaseOptionalDir;
         private System.Windows.Forms.PictureBox btn_pref_openOptionalDir;
@@ -3766,11 +3763,14 @@
         private MaterialSkin.Controls.MaterialSnackbar snackbar_mainWindow;
         private MetroFramework.Controls.MetroScrollBar scroll_optionalAddons;
         private MetroFramework.Controls.MetroScrollBar scroll_steamAddons;
-        private Controls.DoubleBufferPanel doubleBufferPanel1;
-        private Controls.DoubleBufferPanel doubleBufferPanel4;
+        private Controls.DoubleBufferPanel sideAOP_separator3;
+        private Controls.DoubleBufferPanel sideAOP_userconfig;
         private MaterialSkin.Controls.MaterialLabel materialLabel12;
         private MaterialSkin.Controls.MaterialRaisedButton btn_reinstallUserconfigFiles;
         private MaterialSkin.Controls.MaterialCheckBox chb_workshopEnabled;
         private MaterialSkin.Controls.MaterialCheckBox chb_optionalEnabled;
+        private Controls.DoubleBufferPanel sideAOP_taskforceradio;
+        private MaterialSkin.Controls.MaterialLabel materialLabel9;
+        private MaterialSkin.Controls.MaterialRaisedButton btn_reinstallTFRPlugins;
     }
 }

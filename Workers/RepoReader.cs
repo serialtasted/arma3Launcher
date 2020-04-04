@@ -163,7 +163,7 @@ namespace arma3Launcher.Workers
         public async void ReadRepo(bool showMessage, bool autoDownload, bool validateFiles, bool isLaunch)
         {
             if (validateFiles)
-                mainForm.ShowSnackBar("Validating repository...", 2000, false);
+                mainForm.ShowSnackBar("Looking for updates...", 2000, false);
 
             while (GlobalVar.isReadingRepo)
                 await taskDelay(100);
@@ -220,6 +220,9 @@ namespace arma3Launcher.Workers
         private void ValidateRepo_DoWork(object sender, DoWorkEventArgs e)
         {
             this.repoFile = GetRepoFile();
+
+            if (this.repoFile == null)
+                return;
 
             // checks if repofile is different from last time and needs force validation
             if (IsRepoDifferent(repoFile) && Properties.Settings.Default.ServerPack != "arma3") { this.needsUpdate = UpdateType.Validation; validateFiles = true; }
@@ -317,6 +320,9 @@ namespace arma3Launcher.Workers
 
         public bool IsRepoDifferent(string repoFile)
         {
+            if (repoFile == null)
+                return false;
+
             if (this.CalculateFileHash(repoFile) != Properties.Settings.Default.LastRepoFileHash)
                 return true;
             else
@@ -340,6 +346,7 @@ namespace arma3Launcher.Workers
             }
             catch (WebException e)
             {
+                tempFile = null;
                 new Windows.MessageBox().Show(e.Message, "Unable to get repository info");
             }
 

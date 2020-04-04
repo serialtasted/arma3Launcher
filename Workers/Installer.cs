@@ -350,7 +350,7 @@ namespace arma3Launcher.Workers
                 this.progressStatusText("Waiting for orders");
                 await this.taskDelay(1500);
                 this.mainForm.HideDownloadPanel();
-                mainForm.ReadRepo(true);
+                mainForm.ReadRepo(true, true);
             }
         }
 

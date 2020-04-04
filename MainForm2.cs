@@ -302,7 +302,7 @@ namespace arma3Launcher
                         switchAutopilot(false);
                 }
 
-                if(!GlobalVar.autoPilot)
+                if (!GlobalVar.autoPilot)
                     ReadRepo(false);
             }
 
@@ -380,7 +380,7 @@ namespace arma3Launcher
                     int _idx = 0;
                     foreach (Panel panel in flowpanel_preferencesDirectories.Controls)
                     {
-                        if(panel.Name == panel_TeamSpeakDir.Name)
+                        if (panel.Name == panel_TeamSpeakDir.Name)
                         {
                             if (_idx > 0) flowpanel_preferencesDirectories.Controls[_idx - 1].Visible = false;
                             panel.Visible = false;
@@ -1153,7 +1153,7 @@ namespace arma3Launcher
                     cb_serverPack.SelectedItem = Properties.Settings.Default.ServerPack;
                 else
                     cb_serverPack.SelectedIndex = 0;
-                if(cb_serverPack.SelectedItem == null)
+                if (cb_serverPack.SelectedItem == null)
                     cb_serverPack.SelectedIndex = 0;
 
                 if (Properties.Settings.Default.ServerMission != string.Empty && File.Exists(this.missionsFolder + "\\" + Properties.Settings.Default.ServerMission))
@@ -1260,6 +1260,12 @@ namespace arma3Launcher
                     XmlDocument RemoteXmlInfo = new XmlDocument();
                     RemoteXmlInfo.Load(Properties.GlobalValues.S_VersionXML);
 
+                    // check if packID exists and if not falls back to arma3
+                    XmlNode packIDNode = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + packID);
+                    if (packIDNode == null)
+                        packID = "arma 3";
+
+                    // get addons for pack
                     addonsName.Clear();
                     if (packID != "arma3")
                     {
@@ -1349,7 +1355,7 @@ namespace arma3Launcher
             }
 
             // Launch Game
-            if(GlobalVar.autoPilot)
+            if (GlobalVar.autoPilot)
                 LaunchGame();
         }
 
@@ -1629,7 +1635,7 @@ namespace arma3Launcher
             snackbar_mainWindow.ShowSnackbar(Delay);
         }
 
-        public async void ShowSnackBar (string Message, int Delay, bool Primary, bool SetCustomColor, Primary Color)
+        public async void ShowSnackBar(string Message, int Delay, bool Primary, bool SetCustomColor, Primary Color)
         {
             if (snackbar_mainWindow.Visible)
                 snackbar_mainWindow.HideSnackbar();
@@ -1640,7 +1646,7 @@ namespace arma3Launcher
             snackbar_mainWindow.Text = Message;
             snackbar_mainWindow.Primary = Primary;
 
-            if(SetCustomColor)
+            if (SetCustomColor)
                 MaterialSkinManager.ColorScheme = new ColorScheme(Color, darkThemeColor, lightThemeColor, accentColor, TextShade.WHITE);
 
             snackbar_mainWindow.ShowSnackbar(Delay);
@@ -1691,6 +1697,9 @@ namespace arma3Launcher
 
         public void ReadRepo(bool validateFiles, bool showMessage = false, bool isLaunch = false)
         { repoReader.ReadRepo(showMessage, chb_pref_autoDownload.Checked, validateFiles, isLaunch); }
+
+        public void ValidateLocalRepo()
+        { installer.ValidateLocalFiles(); }
 
         #region Game Options Conditions
         private void chb_maxMem_CheckedChanged(object sender, EventArgs e)
@@ -1748,7 +1757,7 @@ namespace arma3Launcher
                 long increasedValue = curValue + 256;
                 num_maxMem.Text = increasedValue.ToString();
             }
-                    
+
         }
 
         private void btn_memDecrease_Click(object sender, EventArgs e)
@@ -1788,6 +1797,11 @@ namespace arma3Launcher
         }
 
         private void btn_checkRepo_Click(object sender, EventArgs e)
+        {
+            ValidateLocalRepo();
+        }
+
+        private void btn_updateRepo_Click(object sender, EventArgs e)
         {
             ReadRepo(true, true);
         }
@@ -2120,7 +2134,7 @@ namespace arma3Launcher
                     txtb_pref_tsDirectory.ForeColor = Color.DarkGray; txtb_pref_tsDirectory.Text = "Set directory ->";
                 }
             }
-        } 
+        }
         #endregion
 
         private void panel_repoDownload_Paint(object sender, PaintEventArgs e)
@@ -2160,16 +2174,27 @@ namespace arma3Launcher
 
         private void repositoryMenu_Opening(object sender, CancelEventArgs e)
         {
-            TreeNode auxNode = trv_repoContent.SelectedNode;
-            while (auxNode.Parent != null)
-                auxNode = auxNode.Parent;
-
-            if (Directory.Exists(Properties.Settings.Default.AddonsFolder + auxNode.Text))
+            if (trv_repoContent.SelectedNode != null)
             {
-                tsmi_openAddonFolder.Enabled = true;
+                TreeNode auxNode = trv_repoContent.SelectedNode;
+                while (auxNode.Parent != null)
+                    auxNode = auxNode.Parent;
+
+                tsmi_selectedAddonName.Visible = true;
+                tsmi_selectedAddonName.Text = auxNode.Text;
+
+                if (Directory.Exists(Properties.Settings.Default.AddonsFolder + auxNode.Text))
+                {
+                    tsmi_openAddonFolder.Enabled = true;
+                }
+                else
+                {
+                    tsmi_openAddonFolder.Enabled = false;
+                }
             }
             else
             {
+                tsmi_selectedAddonName.Visible = false;
                 tsmi_openAddonFolder.Enabled = false;
             }
         }
@@ -2181,6 +2206,19 @@ namespace arma3Launcher
                 auxNode = auxNode.Parent;
 
             Process.Start(Properties.Settings.Default.AddonsFolder + auxNode.Text);
+        }
+
+        private void tsmi_openLocalFolder_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Properties.Settings.Default.AddonsFolder))
+                Process.Start(Properties.Settings.Default.AddonsFolder);
+            else
+            {
+                GlobalVar.menuSelected = 3;
+                HideUnhide(GlobalVar.menuSelected);
+
+                new Windows.MessageBox().Show("You are missing some important directories!\nPlease fix it before continuing.", "Missing directories", MessageBoxButtons.OK, MessageIcon.Stop);
+            }
         }
 
         private void chb_battleye_CheckedChanged(object sender, EventArgs e)
@@ -2227,13 +2265,17 @@ namespace arma3Launcher
         {
             if (chb_pref_serverMode.Checked && !Properties.Settings.Default.isServerMode)
             {
-                if (new Windows.MessageBox().Show("Requires the launcher to be restarted to activate Server Mode.\nSelecting \"YES\" will make the launcher close.", "Switch to Server Mode?", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes)
+                if (new Windows.MessageBox().Show("Requires the launcher to be restarted to activate Server Mode.\nSelecting \"YES\" will make the launcher close.", "Switch to Server Mode? (ADVANCED FEATURE)", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes)
                 { Properties.Settings.Default.isServerMode = true; this.Close(); }
+                else
+                { chb_pref_serverMode.Checked = false; }
             }
             else if (!chb_pref_serverMode.Checked && Properties.Settings.Default.isServerMode)
             {
                 if (new Windows.MessageBox().Show("Requires the launcher to be restarted to activate Client Mode.\nSelecting \"YES\" will make the launcher close.", "Switch to Client Mode?", MessageBoxButtons.YesNo, MessageIcon.Question) == DialogResult.Yes)
                 { Properties.Settings.Default.isServerMode = false; this.Close(); }
+                else
+                { chb_pref_serverMode.Checked = true; }
             }
         }
 
@@ -2311,6 +2353,12 @@ namespace arma3Launcher
             scroll_optionalAddons.Value = flowpanel_optionalAddons.AutoScrollPosition.Y * -1;
         }
 
+        private void btn_cancelDownload_Click(object sender, EventArgs e)
+        {
+            if (btn_cancelDownload.Enabled)
+                downloader.cancelDownload();
+        }
+
         private void btn_cancelDownload_MouseEnter(object sender, EventArgs e)
         {
             if (btn_cancelDownload.Enabled)
@@ -2328,11 +2376,31 @@ namespace arma3Launcher
         private void chb_workshopEnabled_CheckedChanged(object sender, EventArgs e)
         {
             GlobalVar.workshopEnabled = chb_workshopEnabled.Checked;
+
+            if (GlobalVar.workshopEnabled)
+                flowpanel_steamworkshopAddonsList.Enabled = true;
+            else
+                flowpanel_steamworkshopAddonsList.Enabled = false;
         }
 
         private void chb_optionalEnabled_CheckedChanged(object sender, EventArgs e)
         {
             GlobalVar.optionalEnabled = chb_optionalEnabled.Checked;
+
+            if (GlobalVar.optionalEnabled)
+                flowpanel_optionalAddons.Enabled = true;
+            else
+                flowpanel_optionalAddons.Enabled = false;
+        }
+
+        private void tsmi_reloadRepository_Click(object sender, EventArgs e)
+        {
+            ReadRepo(false);
+        }
+
+        private void trv_repoContent_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            trv_repoContent.SelectedNode = e.Node;
         }
     }
 }

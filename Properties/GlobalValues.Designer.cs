@@ -19,7 +19,7 @@ namespace arma3Launcher.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class GlobalValues {
@@ -97,7 +97,7 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net/arma3Launcher/PackImgs2/.
+        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net:22/arma3Launcher/PackImgs2/.
         /// </summary>
         internal static string S_PackImgsDir {
             get {
@@ -106,7 +106,7 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net/arma3Launcher/Repo/.
+        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net:22/arma3Launcher/Repo/.
         /// </summary>
         internal static string S_RepoAddress {
             get {
@@ -115,7 +115,7 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net/arma3Launcher/Repo/repoList.a3l.
+        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net:22/arma3Launcher/Repo/repoList.a3l.
         /// </summary>
         internal static string S_RepoList {
             get {
@@ -124,7 +124,7 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net/arma3Launcher/Releases/zUpdator.exe.
+        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net:22/arma3Launcher/Releases/zUpdator.exe.
         /// </summary>
         internal static string S_UpdateUrl {
             get {
@@ -142,7 +142,7 @@ namespace arma3Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net/arma3Launcher/Configs/config.xml.
+        ///   Looks up a localized string similar to ftp://ptrserver.ddns.net:22/arma3Launcher/Configs/config.xml.
         /// </summary>
         internal static string S_VersionXML {
             get {

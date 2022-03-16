@@ -1263,7 +1263,7 @@ namespace arma3Launcher
                     // check if packID exists and if not falls back to arma3
                     XmlNode packIDNode = RemoteXmlInfo.SelectSingleNode("//arma3Launcher//ModSetInfo//" + packID);
                     if (packIDNode == null)
-                        packID = "arma 3";
+                        packID = "arma3";
 
                     // get addons for pack
                     addonsName.Clear();

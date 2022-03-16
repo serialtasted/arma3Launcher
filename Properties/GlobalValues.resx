@@ -130,21 +130,21 @@
     <value>https://www.youtube.com/serialtasted</value>
   </data>
   <data name="S_PackImgsDir" xml:space="preserve">
-    <value>ftp://ptrserver.ddns.net/arma3Launcher/PackImgs2/</value>
+    <value>ftp://ptrserver.ddns.net:22/arma3Launcher/PackImgs2/</value>
   </data>
   <data name="S_RepoAddress" xml:space="preserve">
-    <value>ftp://ptrserver.ddns.net/arma3Launcher/Repo/</value>
+    <value>ftp://ptrserver.ddns.net:22/arma3Launcher/Repo/</value>
   </data>
   <data name="S_RepoList" xml:space="preserve">
-    <value>ftp://ptrserver.ddns.net/arma3Launcher/Repo/repoList.a3l</value>
+    <value>ftp://ptrserver.ddns.net:22/arma3Launcher/Repo/repoList.a3l</value>
   </data>
   <data name="S_UpdateUrl" xml:space="preserve">
-    <value>ftp://ptrserver.ddns.net/arma3Launcher/Releases/zUpdator.exe</value>
+    <value>ftp://ptrserver.ddns.net:22/arma3Launcher/Releases/zUpdator.exe</value>
   </data>
   <data name="S_VersionTag" xml:space="preserve">
     <value />
   </data>
   <data name="S_VersionXML" xml:space="preserve">
-    <value>ftp://ptrserver.ddns.net/arma3Launcher/Configs/config.xml</value>
+    <value>ftp://ptrserver.ddns.net:22/arma3Launcher/Configs/config.xml</value>
   </data>
 </root>
